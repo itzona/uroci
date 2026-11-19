@@ -1,1 +1,529 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eef1fa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Информатика и информационни технологии – начало</title>
+<style>
+/* ==========================================================
+   Уроци по уеб дизайн – рафиниран, сдържан дизайн
+   ========================================================== */
+:root{
+  --bg:#f7f8fa;
+  --card:#ffffff;
+  --ink:#1c2333;
+  --text:#566073;
+  --muted:#6b7487;
+  --faint:#9aa3b5;
+  --line:#eceef2;
+  --line-strong:#dde1e8;
+  --soft:#fbfbfd;
+  --accent:#2f4a73;
+  --accent-hover:#263f60;
+  --accent-soft:#eff3f9;
+  --shadow-xs:0 1px 2px rgba(16,24,40,.04);
+  --shadow-sm:0 1px 2px rgba(16,24,40,.03),0 4px 14px rgba(16,24,40,.04);
+  --shadow-md:0 1px 2px rgba(16,24,40,.03),0 18px 44px rgba(16,24,40,.06);
+  --mono:'JetBrains Mono',Consolas,'Courier New',monospace;
+}
+*{box-sizing:border-box}
+button{font-family:inherit}
+::selection{background:#dbe5f3}
+button:focus-visible,textarea:focus-visible{outline:2px solid #9db3d3;outline-offset:2px}
 
+/* ---------- Фон: светъл, с едва доловими нюанси в ъглите ---------- */
+html{
+  scroll-behavior:smooth;
+  background:
+    radial-gradient(56rem 34rem at 0% 100%,rgba(205,218,240,.34),transparent 64%),
+    radial-gradient(50rem 32rem at 100% 100%,rgba(226,235,226,.32),transparent 64%),
+    var(--bg);
+  background-attachment:fixed
+}
+body{
+  margin:0;min-height:100vh;
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  font-size:.9375rem;line-height:1.75;color:var(--text);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility
+}
+/* почти невидими водни знаци – тагове и думи, които бавно „плуват“ */
+body::before,body::after{content:"";position:fixed;pointer-events:none;z-index:-1;will-change:transform}
+body::before{inset:-320px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Ctext x='14' y='38' font-size='16' font-family='Consolas,Menlo,monospace' font-weight='600' fill='%236b7fa3' fill-opacity='0.3' transform='rotate(-6 14 38)'%3E%26lt%3Bdiv%26gt%3B%3C/text%3E%3Ctext x='130' y='30' font-size='15' font-family='Consolas,Menlo,monospace' font-weight='600' fill='%236a9a92' fill-opacity='0.3' transform='rotate(5 130 30)'%3E%26lt%3B/p%26gt%3B%3C/text%3E%3Ctext x='226' y='44' font-size='18' font-family='Consolas,Menlo,monospace' font-weight='600' fill='%236b7fa3' fill-opacity='0.3' transform='rotate(-4 226 44)'%3E%26lt%3Bh1%26gt%3B%3C/text%3E%3Ctext x='20' y='104' font-size='22' font-family='Consolas,Menlo,monospace' font-weight='600' fill='%236a9a92' fill-opacity='0.3' transform='rotate(6 20 104)'%3E%7B %7D%3C/text%3E%3Ctext x='128' y='98' font-size='14' font-family='Consolas,Menlo,monospace' font-weight='600' fill='%236b7fa3' fill-opacity='0.3' transform='rotate(4 128 98)'%3E%26lt%3Bli%26gt%3B%3C/text%3E%3Ctext x='214' y='106' font-size='15' font-family='Consolas,Menlo,monospace' font-weight='600' fill='%236a9a92' fill-opacity='0.3' transform='rotate(-5 214 106)'%3E%26lt%3B/div%26gt%3B%3C/text%3E%3Ctext x='24' y='170' font-size='16' font-family='Consolas,Menlo,monospace' font-weight='600' fill='%236b7fa3' fill-opacity='0.3' transform='rotate(6 24 170)'%3E%26lt%3Bp%26gt%3B%3C/text%3E%3Ctext x='122' y='164' font-size='22' font-family='Consolas,Menlo,monospace' font-weight='600' fill='%236a9a92' fill-opacity='0.3' transform='rotate(-8 122 164)'%3E%26lt%3B/%26gt%3B%3C/text%3E%3Ctext x='232' y='172' font-size='15' font-family='Consolas,Menlo,monospace' font-weight='600' fill='%236b7fa3' fill-opacity='0.3' transform='rotate(4 232 172)'%3E%23id%3C/text%3E%3Ctext x='16' y='236' font-size='15' font-family='Consolas,Menlo,monospace' font-weight='600' fill='%236a9a92' fill-opacity='0.3' transform='rotate(-4 16 236)'%3E%26lt%3Ba%26gt%3B%3C/text%3E%3Ctext x='118' y='232' font-size='14' font-family='Consolas,Menlo,monospace' font-weight='600' fill='%236b7fa3' fill-opacity='0.3' transform='rotate(5 118 232)'%3E.class%3C/text%3E%3Ctext x='226' y='238' font-size='14' font-family='Consolas,Menlo,monospace' font-weight='600' fill='%236a9a92' fill-opacity='0.3' transform='rotate(-6 226 238)'%3E%26lt%3Bspan%26gt%3B%3C/text%3E%3Ctext x='22' y='298' font-size='15' font-family='Consolas,Menlo,monospace' font-weight='600' fill='%236b7fa3' fill-opacity='0.3' transform='rotate(5 22 298)'%3E%26lt%3B/h1%26gt%3B%3C/text%3E%3Ctext x='140' y='292' font-size='18' font-family='Consolas,Menlo,monospace' font-weight='600' fill='%236a9a92' fill-opacity='0.3' transform='rotate(-5 140 292)'%3E=%26gt%3B%3C/text%3E%3Ctext x='222' y='300' font-size='15' font-family='Consolas,Menlo,monospace' font-weight='600' fill='%236b7fa3' fill-opacity='0.3' transform='rotate(4 222 300)'%3E%26lt%3B/div%26gt%3B%3C/text%3E%3C/svg%3E");animation:drift-a 90s linear infinite}
+body::after{inset:-560px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='560'%3E%3Ctext x='40' y='110' font-size='42' font-family='Arial,Helvetica,sans-serif' font-weight='800' fill='%236b7fa3' fill-opacity='0.17' transform='rotate(-8 40 110)'%3EHTML%3C/text%3E%3Ctext x='290' y='70' font-size='34' font-family='Arial,Helvetica,sans-serif' font-weight='800' fill='%236a9a92' fill-opacity='0.17' transform='rotate(5 290 70)'%3EJavaScript%3C/text%3E%3Ctext x='400' y='250' font-size='46' font-family='Arial,Helvetica,sans-serif' font-weight='800' fill='%236b7fa3' fill-opacity='0.17' transform='rotate(-6 400 250)'%3ECSS%3C/text%3E%3Ctext x='30' y='330' font-size='36' font-family='Arial,Helvetica,sans-serif' font-weight='800' fill='%236a9a92' fill-opacity='0.17' transform='rotate(-4 30 330)'%3EJavaScript%3C/text%3E%3Ctext x='330' y='430' font-size='36' font-family='Arial,Helvetica,sans-serif' font-weight='800' fill='%236b7fa3' fill-opacity='0.17' transform='rotate(7 330 430)'%3EHTML%3C/text%3E%3Ctext x='170' y='520' font-size='34' font-family='Arial,Helvetica,sans-serif' font-weight='800' fill='%236a9a92' fill-opacity='0.17' transform='rotate(3 170 520)'%3ECSS%3C/text%3E%3Ctext x='470' y='530' font-size='38' font-family='Arial,Helvetica,sans-serif' font-weight='800' fill='%236b7fa3' fill-opacity='0.17' transform='rotate(-6 470 530)'%3EJS%3C/text%3E%3Ctext x='200' y='400' font-size='30' font-family='Arial,Helvetica,sans-serif' font-weight='800' fill='%236a9a92' fill-opacity='0.17' transform='rotate(4 200 400)'%3EHTML%3C/text%3E%3C/svg%3E");animation:drift-b 150s linear infinite}
+
+/* ---------- Хедър: нежен пастелен градиент + фини илюстрации ---------- */
+header{
+  position:relative;isolation:isolate;display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"g t c";
+  align-items:end;column-gap:clamp(16px,3vw,48px);color:var(--ink);
+  padding:clamp(22px,2.8vw,36px) max(clamp(20px,4vw,56px),calc((100% - 1180px)/2)) 0
+}
+header::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:
+    radial-gradient(38rem 17rem at 6% 30%,rgba(210,224,250,.95),transparent 66%),
+    radial-gradient(34rem 16rem at 50% -8%,rgba(232,226,248,.95),transparent 66%),
+    radial-gradient(38rem 17rem at 100% 40%,rgba(210,236,238,.95),transparent 66%),
+    radial-gradient(28rem 14rem at 76% 105%,rgba(250,232,224,.80),transparent 66%),
+    linear-gradient(120deg,#f2effa 0%,#e9f0fb 50%,#ebf5f1 100%);
+  -webkit-mask-image:linear-gradient(to bottom,#000 0,#000 70%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0,#000 70%,transparent 100%)
+}
+.ht{grid-area:t;align-self:center;text-align:center;padding-bottom:clamp(22px,3vw,44px)}
+header .ht h1{
+  margin:0;cursor:pointer;font-weight:650;letter-spacing:-.015em;line-height:1.25;
+  font-size:clamp(1.8rem,2.8vw,2.3rem);color:var(--ink);text-wrap:balance
+}
+header .ht p{
+  margin:8px 0 0;color:var(--muted);font-weight:450;letter-spacing:.01em;
+  font-size:clamp(.74rem,.9vw,.84rem);text-wrap:balance
+}
+.ht-row{display:flex;align-items:center;justify-content:center;gap:clamp(10px,1.6vw,18px)}
+
+.footer-school{display:block;font-weight:600;color:var(--ink);font-size:.86rem;margin-top:12px}
+.footer-teacher{display:block;margin-top:3px;font-size:.78rem}
+.hd-art{display:flex;align-items:flex-end}
+.hd-art svg{display:block;width:auto;max-width:100%;overflow:visible}
+.hd-girl{grid-area:g;cursor:pointer;justify-self:start}
+.hd-class{grid-area:c;justify-self:end;pointer-events:none}
+.hd-girl svg,.hd-class svg{height:clamp(84px,8.4vw,108px)}
+
+/* ---------- Оформление ---------- */
+.wrap{display:flex;flex-direction:column;gap:28px;max-width:1200px;margin:20px auto 0;padding:0 20px}
+
+/* ---------- Навигация: HTML · CSS · JavaScript ---------- */
+nav{
+  align-self:center;display:flex;flex-wrap:wrap;justify-content:center;gap:2px;
+  position:sticky;top:12px;z-index:20;padding:4px;border-radius:12px;
+  background:rgba(255,255,255,.9);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border:1px solid var(--line);box-shadow:var(--shadow-sm)
+}
+nav button{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;margin:0;
+  padding:8px 18px;border:0;border-radius:9px;cursor:pointer;
+  background:transparent;color:var(--text);font-size:.84rem;font-weight:550;letter-spacing:.005em;
+  transition:background .2s,color .2s
+}
+nav button:hover{background:#f2f4f7;color:var(--ink)}
+nav button.on{background:var(--accent);color:#fff}
+nav button.grp{font-size:.86rem;font-weight:600;padding:9px 20px}
+
+.dd{position:relative}
+.menu{
+  position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);z-index:30;
+  min-width:288px;max-width:88vw;padding:6px;border-radius:12px;
+  background:#fff;border:1px solid var(--line);box-shadow:0 18px 44px rgba(16,24,40,.12);
+  animation:pop .18s ease both
+}
+.menu button{
+  display:flex;align-items:baseline;justify-content:flex-start;gap:10px;width:100%;text-align:left;
+  margin:0;padding:9px 12px;border-radius:8px;background:transparent;
+  color:var(--text);font-size:.84rem;font-weight:450;line-height:1.45
+}
+.menu button .n{flex:0 0 1.5em;color:var(--faint);font-variant-numeric:tabular-nums}
+.menu button .t{flex:1}
+.menu button:hover{background:#f5f6f9;color:var(--ink)}
+.menu button.done .n{color:var(--accent)}
+.menu button.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.menu button.on .n{color:var(--accent)}
+
+/* ---------- Основна бяла карта ---------- */
+main {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  flex: 1;
+  min-width: 0;
+  padding: 40px 24px;
+  border-radius: 18px;
+  background-color: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+  animation: rise .45s ease both;
+}
+
+@media(max-width: 800px) {
+  main {
+    padding: 24px 16px;
+    border-radius: 14px;
+  }
+}
+
+/* main е с 25% по-голямо (като 125% zoom само за основното съдържание) */
+@media(min-width: 801px) {
+  main { zoom: 1.25; }
+}
+
+main p{margin:1em 0}
+h2{margin:0 0 1em;color:var(--ink);font-weight:650;letter-spacing:-.02em;line-height:1.25;font-size:clamp(1.3rem,2.3vw,1.6rem)}
+h3{margin:2.8em 0 .8em;color:var(--ink);font-weight:650;font-size:1rem;letter-spacing:-.005em}
+b{color:var(--ink);font-weight:600}
+code{background:#f2f4f7;color:#27324a;padding:2px 6px;border-radius:5px;font-family:var(--mono);font-size:.86em;font-weight:500}
+
+/* ---------- Списък с тагове ---------- */
+.tg{list-style:none;padding:0;margin:20px 0}
+.tg li{
+  display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:12px 18px;margin:10px 0;
+  background:var(--soft);border:1px solid var(--line);border-radius:10px
+}
+.tg li code{font-size:1.02em;min-width:150px;background:var(--accent);color:#fff;border-radius:6px;padding:3px 10px;font-weight:550}
+.tg li .r{margin-left:auto;background:#fff;border:1px dashed var(--line-strong);border-radius:6px;padding:3px 10px;font-size:.95em}
+
+.fig{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:22px;margin:28px 0;text-align:center}
+.fig small{display:block;color:var(--muted);margin-top:10px;font-size:.82rem}
+.bar{height:22px;border-radius:5px;margin:4px 0}
+.box{
+  margin:26px 0;padding:16px 20px;border-radius:10px;color:var(--text);font-size:.9rem;
+  background:#f9fafc;border:1px solid var(--line);border-left:2px solid var(--accent)
+}
+
+/* ---------- Лаборатория (код + резултат) ---------- */
+.lab{--h:260px;--c:50%;display:grid;grid-template-columns:minmax(0,var(--c)) 14px minmax(0,1fr);gap:0}
+.lab .pane{min-width:0;height:var(--h);display:flex;flex-direction:column}
+.lab textarea{
+  flex:1;min-height:0;width:100%;resize:none;padding:16px;border:0;border-radius:10px;
+  background:#161c2a;color:#e3e7ee;font:12.5px/1.7 var(--mono)
+}
+.lab pre{flex:1;min-height:0;margin:0;overflow:auto;font-size:13px}
+.lab iframe{flex:1;min-height:0;width:100%;border:1px solid var(--line);border-radius:10px;background:#fff}
+.lab .split{cursor:col-resize;touch-action:none;position:relative}
+.lab .split::after{content:"";position:absolute;left:5px;top:30px;bottom:6px;width:4px;border-radius:4px;background:var(--line-strong)}
+.lab .split:hover::after{background:var(--accent)}
+.grip{cursor:row-resize;touch-action:none;text-align:center;color:var(--faint);font-size:.7rem;letter-spacing:.08em;padding:5px 0;margin:2px 0 0;border-radius:8px;user-select:none}
+.grip:hover{background:var(--soft);color:var(--accent)}
+body.dragging{user-select:none}
+body.dragging iframe{pointer-events:none}
+.lab small{display:block;color:var(--faint);margin-bottom:8px;font-weight:600;font-size:.68rem;letter-spacing:.09em;text-transform:uppercase}
+
+/* ---------- Задача за Notepad++ ---------- */
+.task{margin:14px 0 26px;padding:18px 22px;border-radius:12px;background:#fffbeb;border:1px solid #fcd34d;border-left:3px solid #f59e0b}
+.task .tt{font-weight:600;margin:0 0 8px;color:var(--ink)}
+.task ol{margin:8px 0 8px 20px;padding:0}
+.task li{margin:5px 0}
+.task .tb{margin:10px 0 6px}
+.task .tf{margin:8px 0 4px;font-size:.88rem}
+.task details{margin-top:10px;font-size:.88rem}
+.task summary{cursor:pointer;color:var(--accent);font-weight:600}
+
+/* ---------- Тест ---------- */
+.q{padding:20px 22px;margin:18px 0;border-radius:12px;background:var(--soft);border:1px solid var(--line)}
+.q p{margin:0 0 12px;font-weight:600;color:var(--ink);font-size:.92rem}
+.q button{
+  display:block;width:100%;text-align:left;margin:6px 0;padding:10px 14px;
+  border:1px solid var(--line-strong);border-radius:8px;background:#fff;color:var(--text);
+  font-size:.86rem;cursor:pointer;transition:border-color .2s,box-shadow .2s
+}
+.q button:not(:disabled):hover{border-color:var(--accent);box-shadow:0 0 0 3px rgba(47,74,115,.07)}
+.q button:disabled{cursor:default}
+.q button.good{background:#f1faf5;border-color:#7ccba3;color:#0f5a3e}
+.q button.bad{background:#fdf4f4;border-color:#eaa3a3;color:#8a2a2a}
+.q .why{display:none;margin-top:10px;font-size:.84rem;color:var(--text)}
+.score{margin-top:14px;font-weight:600;color:var(--ink);font-size:.9rem}
+.score:empty{display:none}
+
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:52px;padding-top:28px;border-top:1px solid var(--line)}
+.pager button{
+  padding:10px 20px;border-radius:9px;cursor:pointer;font-size:.84rem;font-weight:550;
+  border:1px solid var(--accent);background:var(--accent);color:#fff;transition:background .2s,border-color .2s
+}
+.pager button:first-child{background:#fff;color:var(--accent);border-color:var(--line-strong)}
+.pager button:first-child:not(:disabled):hover{border-color:var(--accent)}
+.pager button:last-child:not(:disabled):hover{background:var(--accent-hover)}
+.pager button:disabled{opacity:.35;cursor:default}
+
+svg{max-width:100%;height:auto}
+main svg{display:block;margin:0 auto;max-width:min(100%,400px)}
+main>svg{margin:24px auto}
+main svg.w{max-width:min(100%,600px)}
+pre{
+  margin:18px 0;padding:16px 18px;overflow:auto;border-radius:10px;
+  background:#161c2a;color:#e3e7ee;font:500 12.5px/1.75 var(--mono);
+  white-space:pre-wrap;word-break:break-word
+}
+table.t{
+  border-collapse:separate;border-spacing:0;width:100%;margin:18px 0;overflow:hidden;
+  border:1px solid var(--line);border-radius:10px;background:#fff;font-size:.86rem
+}
+table.t td,table.t th{border-bottom:1px solid var(--line);padding:10px 14px;text-align:left}
+table.t th{background:var(--soft);color:var(--ink);font-weight:600}
+table.t tr:last-child td{border-bottom:0}
+
+/* ---------- Начална страница ---------- */
+.hero{
+  position:relative;overflow:hidden;text-align:center;border-radius:14px;
+  padding:clamp(40px,6vw,76px) clamp(24px,5vw,60px);
+  background:
+    radial-gradient(26rem 14rem at 0% 0%,rgba(210,224,250,.42),transparent 70%),
+    radial-gradient(24rem 14rem at 100% 100%,rgba(226,238,230,.42),transparent 70%),
+    var(--soft);
+  border:1px solid var(--line);color:var(--text)
+}
+.hero h2{margin:0 0 14px;font-size:clamp(1.3rem,2.5vw,1.7rem);color:var(--ink)}
+.hero p{max-width:56ch;margin:0 auto;font-size:.92rem}
+.hero button{
+  margin-top:28px;padding:11px 24px;border:0;border-radius:9px;cursor:pointer;
+  background:var(--accent);color:#fff;font-weight:550;font-size:.86rem;
+  transition:background .2s,transform .2s
+}
+.hero button:hover{background:var(--accent-hover);transform:translateY(-1px)}
+
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin:22px 0}
+.sc{
+  overflow:hidden;border-radius:12px;background:#fff;border:1px solid var(--line);
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s
+}
+.sc:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm);border-color:var(--line-strong)}
+.mk{height:96px;padding:12px;background:var(--soft);border-bottom:1px solid var(--line)}
+.sc .tx{padding:16px 18px;font-size:.86rem;line-height:1.65}
+.sc .tx b{display:block;color:var(--ink);font-size:.92rem;margin-bottom:4px}
+
+.lay{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.lay button{
+  padding:8px 16px;border:1px solid var(--line-strong);border-radius:8px;cursor:pointer;
+  background:#fff;color:var(--text);font-weight:550;font-size:.84rem;transition:all .2s
+}
+.lay button:hover{border-color:var(--accent);color:var(--accent)}
+.lay button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.fact{
+  margin:12px 0;padding:14px 20px;font-size:.88rem;border-radius:10px;
+  background:#fffdf9;border:1px solid var(--line);border-left:2px solid #dcb25c
+}
+.mp{display:grid;grid-template-areas:"h h" "n n" "m s" "f f";grid-template-columns:2fr 1fr;gap:8px;font:550 12px var(--mono)}
+.mp div{padding:10px;border-radius:6px;text-align:center}
+
+.sc{cursor:default}
+.sc[onclick]{cursor:pointer}
+.sc.sel{border-color:var(--accent);box-shadow:0 0 0 3px rgba(47,74,115,.1)}
+.sc small{color:var(--muted);line-height:1.6;display:block;margin-top:6px}
+.ck{display:flex;gap:12px;align-items:flex-start;padding:10px 14px;margin:8px 0;border:1px solid var(--line);border-radius:10px;background:var(--soft);cursor:pointer;font-size:.88rem;line-height:1.55}
+.ck input{margin-top:5px;accent-color:var(--accent)}
+.ck small{color:var(--muted)}
+.pts{font-size:1.05rem}
+/* ---------- Анимации ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:translateX(-50%) translateY(-4px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes drift-a{to{transform:translate3d(320px,320px,0)}}
+@keyframes drift-b{to{transform:translate3d(-560px,560px,0)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes tap{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes steam{0%{opacity:0;transform:translateY(3px)}50%{opacity:.9}100%{opacity:0;transform:translateY(-5px)}}
+@keyframes glow{0%,100%{opacity:.55}50%{opacity:1}}
+.hd-girl .head{animation:bob 3s ease-in-out infinite}
+.hd-girl .eye{animation:blink 4s infinite;transform-box:fill-box;transform-origin:center}
+.hd-girl .steam{animation:steam 2s ease-in-out infinite}
+.hd-girl .hd,.hd-class .hd{animation:tap .5s infinite}
+.hd-girl .hd2{animation-delay:.25s}
+.hd-girl .glow,.hd-class .glow{animation:glow 1.8s ease-in-out infinite}
+.hd-class .kh{animation:bob 3s ease-in-out infinite}
+
+/* ---------- Футър ---------- */
+footer{margin-top:72px;padding:30px 20px 40px;text-align:center;color:var(--muted);font-weight:500;font-size:.8rem;letter-spacing:.01em;border-top:1px solid var(--line);background:rgba(255,255,255,.86)}
+footer .content{position:relative}
+footer small{display:block;font-weight:400;opacity:.75;margin-top:4px;font-size:.74rem}
+
+/* ---------- Адаптивност ---------- */
+@media(max-width:780px){
+  header{grid-template-columns:1fr 1fr;grid-template-areas:"t t" "g c";row-gap:6px}
+  .ht{padding-bottom:6px}
+  .hd-art{width:100%}
+  .hd-girl{max-width:132px}
+  .hd-class{max-width:150px}
+  .hd-girl svg,.hd-class svg{width:100%;height:auto}
+}
+@media(max-width:800px){
+  .wrap{margin-top:14px;padding:0 14px;gap:22px}
+  nav{position:relative;top:auto;width:100%;border-radius:12px;padding:4px;gap:2px}
+  nav .dd{flex:1 1 45%;position:static}
+  nav button.grp{width:100%;font-size:.8rem;padding:9px 4px;white-space:nowrap}
+  .menu{left:8px;right:8px;top:calc(100% + 8px);transform:none;min-width:0;max-width:none;animation:none}
+  main{border-radius:14px}
+  .lab{grid-template-columns:minmax(0,1fr)}
+  .lab .split{display:none}
+  .lab .pane{height:auto}
+  .lab .pane textarea,.lab .pane pre,.lab .pane iframe{flex:none;height:calc(var(--h) - 30px)}
+  .lab .pane+.pane{margin-top:14px}
+}
+@media(max-width:700px){
+  header{padding-top:18px}
+  .tg li code{min-width:0}
+  .tg li .r{margin-left:0}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+
+/* ---------- Начална страница: допълнения ---------- */
+.hd-girl{cursor:default}
+header .ht h1{cursor:default}
+nav a{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;margin:0;
+  padding:9px 20px;border-radius:9px;text-decoration:none;
+  color:var(--text);font-size:.86rem;font-weight:600;letter-spacing:.005em;
+  transition:background .2s,color .2s
+}
+nav a:hover{background:#f2f4f7;color:var(--ink)}
+nav a.on{background:var(--accent);color:#fff}
+.intro{
+  position:relative;overflow:hidden;text-align:center;border-radius:14px;
+  padding:clamp(32px,5vw,56px) clamp(24px,5vw,60px);
+  background:
+    radial-gradient(26rem 14rem at 0% 0%,rgba(210,224,250,.42),transparent 70%),
+    radial-gradient(24rem 14rem at 100% 100%,rgba(226,238,230,.42),transparent 70%),
+    var(--soft);
+  border:1px solid var(--line)
+}
+.intro h2{margin:0 0 12px;font-size:clamp(1.3rem,2.5vw,1.7rem);color:var(--ink)}
+.intro p{max-width:62ch;margin:0 auto;font-size:.94rem}
+.sec-title{margin:10px 0 -8px;text-align:center;font-size:1.1rem;font-weight:650;color:var(--ink);letter-spacing:-.01em}
+.sec-sub{margin:0 0 4px;text-align:center;font-size:.84rem;color:var(--muted)}
+.courses{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px}
+.course{
+  display:flex;flex-direction:column;gap:12px;padding:28px 26px;border-radius:14px;
+  background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm);
+  text-decoration:none;color:var(--text);
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s;animation:rise .5s ease both
+}
+.course:nth-child(2){animation-delay:.08s}
+.course:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--line-strong)}
+.course .ic{
+  width:48px;height:48px;border-radius:12px;display:grid;place-items:center;
+  background:var(--accent-soft);color:var(--accent);font-family:var(--mono);font-weight:600;font-size:1.05rem
+}
+.course h3{margin:2px 0 0;font-size:1.12rem;color:var(--ink);font-weight:650;letter-spacing:-.01em}
+.course p{margin:0;font-size:.9rem;line-height:1.65}
+.course .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.course .tags span{padding:3px 10px;border-radius:99px;background:var(--soft);border:1px solid var(--line);font-size:.74rem;color:var(--muted);font-weight:500}
+.course .go{margin-top:auto;padding-top:8px;font-weight:600;font-size:.86rem;color:var(--accent)}
+.course:hover .go{color:var(--accent-hover)}
+.profiles{
+  padding:26px clamp(20px,4vw,36px);border-radius:14px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-xs)
+}
+.profiles h3{margin:0 0 10px;font-size:1.05rem;color:var(--ink);font-weight:650}
+.profiles p{margin:0 0 10px;font-size:.92rem}
+.profiles p:last-child{margin-bottom:0}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.fact{
+  padding:20px 22px;border-radius:12px;background:#fff;border:1px solid var(--line);
+  box-shadow:var(--shadow-xs);transition:transform .25s ease,box-shadow .25s ease
+}
+.fact:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.fact .yr{display:inline-block;margin-bottom:8px;padding:2px 10px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-family:var(--mono);font-size:.76rem;font-weight:600}
+.fact b{display:block;margin-bottom:6px;color:var(--ink);font-size:.95rem;font-weight:650;line-height:1.4}
+.fact p{margin:0;font-size:.86rem;line-height:1.65}
+</style>
+</head>
+<body>
+<header>
+  <div class="hd-art hd-girl" role="img" aria-label="Учителка работи на лаптоп">
+    <svg viewBox="4 6 172 112" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gBl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b86f5"/><stop offset="1" stop-color="#3b57cf"/></linearGradient>
+<linearGradient id="gLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient>
+<linearGradient id="gDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient>
+</defs>
+<ellipse cx="90" cy="114" rx="80" ry="3.5" fill="#1e1b4b" opacity=".14"/>
+<rect x="24" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="151" y="96" width="5" height="17" rx="2" fill="#c8843c"/>
+<path d="M58 92 Q60 56 90 54 Q120 56 122 92Z" fill="url(#gBl)"/>
+<line x1="66" y1="66" x2="58" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<line x1="114" y1="66" x2="122" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<g transform="translate(90,38)"><g class="head">
+<path d="M-14 6 Q-17 -26 0 -28 Q17 -26 14 6 L19 32 Q8 28 6 16 L-6 16 Q-8 28 -19 32Z" fill="#c0392b"/>
+<rect x="-3.5" y="10" width="7" height="9" fill="#f2c9a5"/>
+<ellipse cx="0" cy="0" rx="11.5" ry="13" fill="#f7d3b2"/>
+<path d="M-12 -3 Q-12 -19 0 -18 Q12 -19 12 -3 Q7 -11 -2 -11 Q-8 -10 -12 -3Z" fill="#e0523f"/>
+<g class="eye"><ellipse cx="-4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/><ellipse cx="4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/></g>
+<circle cx="-8" cy="7" r="2" fill="#fda4af" opacity=".6"/><circle cx="8" cy="7" r="2" fill="#fda4af" opacity=".6"/>
+<path d="M-3.5 7 Q0 10.5 3.5 7" stroke="#be123c" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+</g></g>
+<rect x="63" y="60" width="54" height="30" rx="4" fill="url(#gLid)" stroke="#64748b" stroke-width="1.5"/>
+<text class="glow" x="90" y="80" font-size="13" font-family="Consolas,monospace" font-weight="bold" fill="#0891b2" text-anchor="middle">&lt;/&gt;</text>
+<circle class="hd" cx="58" cy="88" r="4.2" fill="#f7d3b2"/><circle class="hd hd2" cx="122" cy="88" r="4.2" fill="#f7d3b2"/>
+<rect x="148" y="78" width="13" height="13" rx="2.5" fill="#f43f5e"/>
+<path d="M161 81 Q167 84 161 89" stroke="#f43f5e" stroke-width="2.2" fill="none"/>
+<path class="steam" d="M152 74 Q149 70 152 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<path class="steam" style="animation-delay:.8s" d="M157 74 Q160 70 157 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<rect x="18" y="80" width="14" height="11" rx="2" fill="#ea580c"/>
+<ellipse cx="25" cy="76" rx="4" ry="8" fill="#22c55e"/><ellipse cx="19" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(-30 19 79)"/><ellipse cx="31" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(30 31 79)"/>
+<rect x="8" y="90" width="164" height="8" rx="4" fill="url(#gDk)"/>
+</svg>
+  </div>
+  <div class="ht">
+    <div class="ht-row"><h1 align="center">Информатика и информационни технологии</h1></div>
+    <p align="center">Уроци, упражнения, игри и тестове – на едно място</p>
+  </div>
+  <div class="hd-art hd-class" role="img" aria-label="Група ученици работят на лаптопи">
+    <svg viewBox="0 8 192 110" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient><linearGradient id="sDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient></defs><ellipse cx="95" cy="114" rx="90" ry="3.5" fill="#1e1b4b" opacity=".14"/><rect x="12" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="174" y="96" width="5" height="17" rx="2" fill="#c8843c"/><g transform="translate(55,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#a78bfa"/><g class="kh" style="animation-delay:0.5s"><circle cx="0" cy="40" r="12.5" fill="#9a4a14"/><circle cx="0" cy="42" r="10" fill="#d9a679"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#9a4a14"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fbbf24" style="animation-delay:0.5s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.5s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.75s"/></g><g transform="translate(109,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fbbf24"/><g class="kh" style="animation-delay:1.1s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#111827"/><circle cx="0" cy="40" r="12.5" fill="#111827"/><circle cx="0" cy="42" r="10" fill="#8d5a3b"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#111827"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#38bdf8" style="animation-delay:1.1s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.1s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.35s"/></g><g transform="translate(163,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#2dd4bf"/><g class="kh" style="animation-delay:1.7s"><circle cx="0" cy="40" r="12.5" fill="#7c2d12"/><circle cx="0" cy="42" r="10" fill="#f2c9a5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#7c2d12"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fb7185" style="animation-delay:1.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.95s"/></g><rect x="28" y="68" width="160" height="5.5" rx="2.75" fill="#e2ae6c"/><g transform="translate(28,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fb7185"/><g class="kh" style="animation-delay:0.0s"><circle cx="0" cy="40" r="12.5" fill="#5b3a29"/><circle cx="0" cy="42" r="10" fill="#f7d3b2"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#5b3a29"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#22d3ee" style="animation-delay:0.0s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.0s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.25s"/></g><g transform="translate(82,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#34d399"/><g class="kh" style="animation-delay:0.7s"><circle cx="0" cy="40" r="12.5" fill="#1f2937"/><circle cx="0" cy="42" r="10" fill="#c68863"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#1f2937"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#f472b6" style="animation-delay:0.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.95s"/></g><g transform="translate(136,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#60a5fa"/><g class="kh" style="animation-delay:1.3s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#f2c14e"/><circle cx="0" cy="40" r="12.5" fill="#f2c14e"/><circle cx="0" cy="42" r="10" fill="#fde0c5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#f2c14e"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#a3e635" style="animation-delay:1.3s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.3s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.55s"/></g><rect x="2" y="90" width="186" height="8" rx="4" fill="url(#sDk)"/></svg>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <a href="index.html" class="on">Начало</a>
+    <a href="web.html">Уеб дизайн</a>
+    <a href="ikt.html">Решаване на проблеми с ИКТ</a>
+	<a href="multimedia.html">Мултимедия</a>
+	<a href="Code_hunters.html">Състезание Code_Hunters</a>
+	<a href="Igra-12.html">Игра</a>
+	<a href="krizisen-shtab.html">Екипи</a>
+	<a href="mrezhi-1.html">Мрежи</a>
+  </nav>
+
+  <section class="intro">
+    <h2>Добре дошли!</h2>
+    <p>Тук са събрани учебните материали по информатика и информационни технологии – уроци със стъпка по стъпка обяснения, примери, които можеш да пробваш веднага, и тестове за проверка на наученото. Избери раздел и започни от където желаеш.</p>
+  </section>
+
+  <h2 class="sec-title">Учебни раздели</h2>
+  <div class="courses">
+    <a class="course" href="web.html">
+      <div class="ic">&lt;/&gt;</div>
+      <h3>Уеб дизайн</h3>
+      <p>Как се прави уеб страница от нулата – структура с HTML, оформление с CSS и интерактивност с JavaScript.</p>
+      <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+      <div class="go">Към уроците →</div>
+    </a>
+    <a class="course" href="ikt.html">
+      <div class="ic">{ }</div>
+      <h3>Решаване на проблеми с ИКТ</h3>
+      <p>Управление на проекти, компютърни системи и приложен софтуер – как да анализираме задача и да я решим с подходящи средства.</p>
+      <div class="tags"><span>Проекти</span><span>Системи</span><span>Софтуер</span></div>
+      <div class="go">Към уроците →</div>
+    </a>
+  </div>
+
+  <section class="profiles">
+    <h3>За профилите</h3>
+    <p>Обучението по информатика и информационни технологии развива умения, които са полезни във всяка професия: логическо мислене, работа с данни, цифрова грамотност и умение да се довърши един проект докрай.</p>
+    <p>Във всеки урок има кратко обяснение, пример и задачи за самостоятелна работа, така че материалите да са подходящи както за работа в клас, така и за учене у дома.</p>
+  </section>
+
+  <h2 class="sec-title">Интересни факти от света на технологиите</h2>
+  <p class="sec-sub">Малко история, която прави компютрите по-близки</p>
+  <div class="facts">
+<div class="fact"><span class="yr">1947</span><b>Първият „бъг“ – буквално</b><p>В дневника на изчислителната машина Harvard Mark II е залепен молец, намерен в реле. Записът „първи случай на реален бъг“ е най-известният пример за термина.</p></div>
+<div class="fact"><span class="yr">1969</span><b>„LO“ вместо „LOGIN“</b><p>При първия опит за връзка по ARPANET – предшественика на интернет – са изпратени само първите две букви и системата се срива.</p></div>
+<div class="fact"><span class="yr">1985</span><b>Първият домейн</b><p>На 15 март 1985 г. е регистриран symbolics.com – първото име в днешния .com.</p></div>
+<div class="fact"><span class="yr">1991</span><b>Първата уеб страница</b><p>Тим Бърнърс-Ли публикува първия сайт в CERN. Той обяснява какво е World Wide Web и как се прави страница.</p></div>
+<div class="fact"><span class="yr">1995</span><b>JavaScript за дни</b><p>Брендън Айк създава първата версия на JavaScript за около десет дни. Днес езикът работи във всеки браузър.</p></div>
+<div class="fact"><span class="yr">1969</span><b>Лунният компютър</b><p>Управляващият компютър на Аполо 11 е имал около 4 KB оперативна и 72 KB постоянна памет – по-малко от една снимка от телефон.</p></div>
+<div class="fact"><span class="yr">1937–1942</span><b>Българско присъствие</b><p>Джон Атанасов, син на български имигрант, създава заедно с Клифърд Бери един от първите електронни цифрови компютри – Atanasoff–Berry Computer.</p></div>
+<div class="fact"><span class="yr">80-те</span><b>Правец</b><p>През 80-те години България е сред основните производители на компютри в страните от СИВ, а „Правец“ е познат на цяло поколение ученици.</p></div>
+<div class="fact"><span class="yr">1980</span><b>1 GB тежи над 200 кг</b><p>Първият твърд диск с капацитет 1 GB – IBM 3380 – е бил голям колкото хладилник и струвал десетки хиляди долари.</p></div>
+  </div>
+</div>
+
+<footer>
+  <div class="content">
+    Информатика и информационни технологии
+    <span class="footer-teacher">Петя Петрова – учител по информатика, КМИТ и ИТ</span>
+  </div>
+</footer>
+</body>
+</html>
