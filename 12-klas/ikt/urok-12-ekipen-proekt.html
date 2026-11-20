@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eef1fa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Част от съдържанието е адаптирано по презентации на проект „Отворено учебно съдържание по програмиране и ИТ“, СофтУни Фондация, лиценз CC BY-NC-SA (https://github.com/BG-IT-Edu) -->
+<title>Урок 12: Задание за екипен проект – Решаване на проблеми с ИКТ</title>
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="theme-12klas page-ikt">
+<header>
+  <a class="home-btn" href="../index.html" title="Към началната страница">← Начална страница</a>
+  <div class="hd-art hd-girl" onclick="go(-1)" title="Начална страница" role="img" aria-label="Учителка работи на лаптоп">
+    <svg viewBox="4 6 172 112" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gBl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b86f5"/><stop offset="1" stop-color="#3b57cf"/></linearGradient>
+<linearGradient id="gLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient>
+<linearGradient id="gDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient>
+</defs>
+<ellipse cx="90" cy="114" rx="80" ry="3.5" fill="#1e1b4b" opacity=".14"/>
+<rect x="24" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="151" y="96" width="5" height="17" rx="2" fill="#c8843c"/>
+<path d="M58 92 Q60 56 90 54 Q120 56 122 92Z" fill="url(#gBl)"/>
+<line x1="66" y1="66" x2="58" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<line x1="114" y1="66" x2="122" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<g transform="translate(90,38)"><g class="head">
+<path d="M-14 6 Q-17 -26 0 -28 Q17 -26 14 6 L19 32 Q8 28 6 16 L-6 16 Q-8 28 -19 32Z" fill="#c0392b"/>
+<rect x="-3.5" y="10" width="7" height="9" fill="#f2c9a5"/>
+<ellipse cx="0" cy="0" rx="11.5" ry="13" fill="#f7d3b2"/>
+<path d="M-12 -3 Q-12 -19 0 -18 Q12 -19 12 -3 Q7 -11 -2 -11 Q-8 -10 -12 -3Z" fill="#e0523f"/>
+<g class="eye"><ellipse cx="-4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/><ellipse cx="4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/></g>
+<circle cx="-8" cy="7" r="2" fill="#fda4af" opacity=".6"/><circle cx="8" cy="7" r="2" fill="#fda4af" opacity=".6"/>
+<path d="M-3.5 7 Q0 10.5 3.5 7" stroke="#be123c" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+</g></g>
+<rect x="63" y="60" width="54" height="30" rx="4" fill="url(#gLid)" stroke="#64748b" stroke-width="1.5"/>
+<text class="glow" x="90" y="80" font-size="13" font-family="Consolas,monospace" font-weight="bold" fill="#0891b2" text-anchor="middle">&lt;/&gt;</text>
+<circle class="hd" cx="58" cy="88" r="4.2" fill="#f7d3b2"/><circle class="hd hd2" cx="122" cy="88" r="4.2" fill="#f7d3b2"/>
+<rect x="148" y="78" width="13" height="13" rx="2.5" fill="#f43f5e"/>
+<path d="M161 81 Q167 84 161 89" stroke="#f43f5e" stroke-width="2.2" fill="none"/>
+<path class="steam" d="M152 74 Q149 70 152 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<path class="steam" style="animation-delay:.8s" d="M157 74 Q160 70 157 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<rect x="18" y="80" width="14" height="11" rx="2" fill="#ea580c"/>
+<ellipse cx="25" cy="76" rx="4" ry="8" fill="#22c55e"/><ellipse cx="19" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(-30 19 79)"/><ellipse cx="31" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(30 31 79)"/>
+<rect x="8" y="90" width="164" height="8" rx="4" fill="url(#gDk)"/>
+</svg>
+  </div>
+  <div class="ht">
+        <h1 align="center" onclick="go(-1)" title="Към началната страница">Решаване на проблеми с ИКТ</h1>
+    <p align="center">Управление на проекти, системи и приложен софтуер</p>
+  </div>
+  <div class="hd-art hd-class" role="img" aria-label="Група ученици работят на лаптопи">
+    <svg viewBox="0 8 192 110" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient><linearGradient id="sDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient></defs><ellipse cx="95" cy="114" rx="90" ry="3.5" fill="#1e1b4b" opacity=".14"/><rect x="12" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="174" y="96" width="5" height="17" rx="2" fill="#c8843c"/><g transform="translate(55,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#a78bfa"/><g class="kh" style="animation-delay:0.5s"><circle cx="0" cy="40" r="12.5" fill="#9a4a14"/><circle cx="0" cy="42" r="10" fill="#d9a679"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#9a4a14"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fbbf24" style="animation-delay:0.5s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.5s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.75s"/></g><g transform="translate(109,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fbbf24"/><g class="kh" style="animation-delay:1.1s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#111827"/><circle cx="0" cy="40" r="12.5" fill="#111827"/><circle cx="0" cy="42" r="10" fill="#8d5a3b"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#111827"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#38bdf8" style="animation-delay:1.1s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.1s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.35s"/></g><g transform="translate(163,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#2dd4bf"/><g class="kh" style="animation-delay:1.7s"><circle cx="0" cy="40" r="12.5" fill="#7c2d12"/><circle cx="0" cy="42" r="10" fill="#f2c9a5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#7c2d12"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fb7185" style="animation-delay:1.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.95s"/></g><rect x="28" y="68" width="160" height="5.5" rx="2.75" fill="#e2ae6c"/><g transform="translate(28,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fb7185"/><g class="kh" style="animation-delay:0.0s"><circle cx="0" cy="40" r="12.5" fill="#5b3a29"/><circle cx="0" cy="42" r="10" fill="#f7d3b2"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#5b3a29"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#22d3ee" style="animation-delay:0.0s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.0s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.25s"/></g><g transform="translate(82,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#34d399"/><g class="kh" style="animation-delay:0.7s"><circle cx="0" cy="40" r="12.5" fill="#1f2937"/><circle cx="0" cy="42" r="10" fill="#c68863"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#1f2937"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#f472b6" style="animation-delay:0.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.95s"/></g><g transform="translate(136,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#60a5fa"/><g class="kh" style="animation-delay:1.3s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#f2c14e"/><circle cx="0" cy="40" r="12.5" fill="#f2c14e"/><circle cx="0" cy="42" r="10" fill="#fde0c5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#f2c14e"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#a3e635" style="animation-delay:1.3s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.3s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.55s"/></g><rect x="2" y="90" width="186" height="8" rx="4" fill="url(#sDk)"/></svg>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav id="nav"></nav>
+  <main id="main">
+<h2>Урок 12: Задание за екипен проект</h2><p>Работете в екипи от <b>3–4 ученици</b>. Задачата е да планирате и представите (не е нужно да изработите) софтуерен проект, като приложите наученото в раздела.</p>
+ <h3>Избери тема</h3>
+ <ul class="tg"><li><code>Библиотека</code><span>информационна система за училищна библиотека</span></li>
+ <li><code>Разписание</code><span>мобилно приложение за училищно разписание и известия</span></li>
+ <li><code>Ученическа фирма</code><span>сайт с онлайн поръчки</span></li>
+ <li><code>Състезание</code><span>система за регистрация и класиране на участници</span></li>
+ <li><code>Своя идея</code><span>по съгласуване с учителя</span></li></ul>
+ <h3>Какво трябва да предадете?</h3>
+ <ol style="line-height:1.9"><li><b>Устав на проекта:</b> цел, обхват, срок, бюджет, роли.</li>
+ <li><b>Структура на задачите:</b> разбиване на работните пакети и график (Gantt или таблица).</li>
+ <li><b>Избор на модел</b> (линеен или цикличен) с обосновка.</li>
+ <li><b>Регистър на рисковете</b> – поне 5 риска с оценка и реакция.</li>
+ <li><b>Kanban табло</b> – снимка с разпределени задачи.</li>
+ <li><b>План за комуникация</b> – срещи, канали, правила.</li>
+ <li><b>Заключителен доклад</b> и кратка презентация (5–7 минути) с научени уроци.</li></ol>
+ <div class="fig"><svg viewBox="0 0 440 156" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="13" text-anchor="middle" font-size="10">
+<g stroke="#94a3b8" stroke-width="1.6"><line x1="220" y1="34" x2="220" y2="48"/><line x1="48" y1="48" x2="392" y2="48"/><line x1="48" y1="48" x2="48" y2="60"/><line x1="134" y1="48" x2="134" y2="60"/><line x1="220" y1="48" x2="220" y2="60"/><line x1="306" y1="48" x2="306" y2="60"/><line x1="392" y1="48" x2="392" y2="60"/></g>
+<rect x="150" y="6" width="140" height="28" rx="8" fill="#fde68a" stroke="#3a5a8c"/><text x="220" y="25" font-weight="bold" font-size="11.5">Екипен проект</text>
+<rect x="6" y="60" width="84" height="26" rx="6" fill="#fde68a" stroke="#3a5a8c"/><text x="48" y="77" font-weight="bold" font-size="9">Анализ</text><rect x="92" y="60" width="84" height="26" rx="6" fill="#a5f3fc" stroke="#3a5a8c"/><text x="134" y="77" font-weight="bold" font-size="9">Дизайн</text><rect x="178" y="60" width="84" height="26" rx="6" fill="#d1fae5" stroke="#3a5a8c"/><text x="220" y="77" font-weight="bold" font-size="9">Разработка</text><rect x="264" y="60" width="84" height="26" rx="6" fill="#c7d2fe" stroke="#3a5a8c"/><text x="306" y="77" font-weight="bold" font-size="9">Тестване</text><rect x="350" y="60" width="84" height="26" rx="6" fill="#e9d5ff" stroke="#3a5a8c"/><text x="392" y="77" font-weight="bold" font-size="9">Документация</text>
+<g fill="#334155"><text x="48" y="104">изисквания</text><text x="48" y="116">роли</text><text x="134" y="104">екрани</text><text x="134" y="116">данни</text><text x="220" y="104">функции</text><text x="220" y="116">код</text><text x="306" y="104">тестови</text><text x="306" y="116">случаи</text><text x="392" y="104">доклад</text><text x="392" y="116">презентация</text></g>
+<text x="220" y="146" fill="#475569" font-size="10">Структура на работните пакети – проектът се разбива на задачи</text>
+</svg></div><h3>Критерии за оценяване</h3>
+ <table class="t"><tr><th>Критерий</th><th>Точки</th></tr>
+ <tr><td>Устав, цел и обхват</td><td>15</td></tr><tr><td>Задачи и график</td><td>15</td></tr>
+ <tr><td>Избор на модел и обосновка</td><td>10</td></tr><tr><td>Анализ на риска</td><td>15</td></tr>
+ <tr><td>Организация на екипа и средства</td><td>15</td></tr><tr><td>Доклад и научени уроци</td><td>15</td></tr>
+ <tr><td>Презентация</td><td>15</td></tr><tr><th>Общо</th><th>100</th></tr></table>
+ <h3>Подготовка на устава</h3>
+ <p>В полето „Пробвай сам“ по-долу попълни основните данни и натисни бутона – ще получиш текст, който можеш да копираш в документа на екипа.</p>
+<h3>🧮 Пробвай сам – променяй числата и стойностите</h3><div class="lab one"><div class="pane"><small>Промени числата или избери стойности и виж резултата</small><iframe id="pv" sandbox="allow-scripts allow-modals" title="Упражнение" srcdoc="<meta charset=&quot;UTF-8&quot;><body style=&quot;font-family:Arial;margin:10px&quot;><style>body{font:13px Arial}label{display:block;margin-top:5px;font-weight:bold}input{width:100%;font:13px Arial;padding:3px;box-sizing:border-box}#o{white-space:pre-wrap;background:#f1f5f9;padding:8px;border-radius:6px;margin-top:8px;font:12.5px Consolas,monospace}</style>
+<label>Име на проекта</label><input id=&quot;a&quot; value=&quot;Информационна система за училищна библиотека&quot;>
+<label>Цел</label><input id=&quot;b&quot; value=&quot;Електронен каталог и заемане на книги&quot;>
+<label>Срок</label><input id=&quot;c&quot; value=&quot;4 седмици&quot;>
+<label>Екип и роли</label><input id=&quot;d&quot; value=&quot;Ръководител, анализатор, разработчик, тестер&quot;>
+<label>Избран модел</label><input id=&quot;e&quot; value=&quot;Цикличен (Scrum, спринтове по една седмица)&quot;>
+<label>Основен риск</label><input id=&quot;f&quot; value=&quot;Недостатъчно време за тестване&quot;>
+<button onclick=&quot;gen()&quot; style=&quot;margin-top:6px&quot;>Генерирай устав на проекта</button>
+<div id=&quot;o&quot;></div>
+<script>
+function v(i){ return document.getElementById(i).value; }
+function gen(){
+  const NL=String.fromCharCode(10);
+  document.getElementById('o').textContent=[
+    'УСТАВ НА ПРОЕКТА','',
+    'Проект: '+v('a'),'Цел: '+v('b'),'Срок: '+v('c'),
+    'Екип и роли: '+v('d'),'Модел на работа: '+v('e'),
+    'Основен риск: '+v('f'),'',
+    'Критерий за успех: целта е постигната в срока и е приета от възложителя.'
+  ].join(NL);
+}
+gen();
+</script>"></iframe></div></div><div class="grip" title="Дръпни за височина">⋯⋯ дръпни нагоре/надолу, за да промениш височината ⋯⋯</div>
+<h3>📝 Задача за изпълнение</h3><div class="task"><p class="tt">Подготви план за комуникация и график на вашия екипен проект.</p><p class="tw">Изпълни в: <b>Word, Excel или PowerPoint</b></p><ol><li>Запиши темата на екипа и разбий проекта на 5–6 работни пакета.</li><li>Направи таблица-график (Gantt) за 4 седмици: пакети по редове, седмици по колони – оцвети кога се изпълнява всеки.</li><li>Напиши план за комуникация: кога са срещите, по кой канал си пишете, къде са файловете и как се записват решенията.</li><li>Подготви план на презентацията от 5–7 минути: кой какво представя.</li></ol><p class="tb">⭐ <b>Бонус:</b> Определи кога ще направите междинна проверка и какво ще проверите.</p><p class="tf">📁 Запази като: <code>komunikaciya-grafik.docx</code></p></div>
+<div id="quiz"></div><div class="score" id="sc"></div>
+<div class="pager"><a href="urok-11-test-upravlenie-na-proekti.html">← Назад</a><a href="urok-13-konfiguracii-1-nuzhdi.html">Напред →</a></div>
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p class="sf-title">Уроци по информатика и информационни технологии</p>
+  <p class="sf-teacher">Петя Петрова – учител по информатика, КМИТ и ИТ</p>
+  <p class="sf-school">127. СУ „Иван Николаевич Денкоглу“</p>
+  <p class="sf-links"><a href="../../index.html">Начало</a><a href="../../9-klas/index.html">9. клас</a><a href="../../12-klas/index.html">12. клас</a></p>
+</footer>
+<script>const CUR=11,QUIZ=[];</script>
+<script src="ikt.js"></script>
+</body>
+</html>

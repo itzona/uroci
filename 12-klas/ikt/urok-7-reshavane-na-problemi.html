@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eef1fa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Част от съдържанието е адаптирано по презентации на проект „Отворено учебно съдържание по програмиране и ИТ“, СофтУни Фондация, лиценз CC BY-NC-SA (https://github.com/BG-IT-Edu) -->
+<title>Урок 7: Решаване на проблеми – Решаване на проблеми с ИКТ</title>
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="theme-12klas page-ikt">
+<header>
+  <a class="home-btn" href="../index.html" title="Към началната страница">← Начална страница</a>
+  <div class="hd-art hd-girl" onclick="go(-1)" title="Начална страница" role="img" aria-label="Учителка работи на лаптоп">
+    <svg viewBox="4 6 172 112" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gBl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b86f5"/><stop offset="1" stop-color="#3b57cf"/></linearGradient>
+<linearGradient id="gLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient>
+<linearGradient id="gDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient>
+</defs>
+<ellipse cx="90" cy="114" rx="80" ry="3.5" fill="#1e1b4b" opacity=".14"/>
+<rect x="24" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="151" y="96" width="5" height="17" rx="2" fill="#c8843c"/>
+<path d="M58 92 Q60 56 90 54 Q120 56 122 92Z" fill="url(#gBl)"/>
+<line x1="66" y1="66" x2="58" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<line x1="114" y1="66" x2="122" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<g transform="translate(90,38)"><g class="head">
+<path d="M-14 6 Q-17 -26 0 -28 Q17 -26 14 6 L19 32 Q8 28 6 16 L-6 16 Q-8 28 -19 32Z" fill="#c0392b"/>
+<rect x="-3.5" y="10" width="7" height="9" fill="#f2c9a5"/>
+<ellipse cx="0" cy="0" rx="11.5" ry="13" fill="#f7d3b2"/>
+<path d="M-12 -3 Q-12 -19 0 -18 Q12 -19 12 -3 Q7 -11 -2 -11 Q-8 -10 -12 -3Z" fill="#e0523f"/>
+<g class="eye"><ellipse cx="-4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/><ellipse cx="4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/></g>
+<circle cx="-8" cy="7" r="2" fill="#fda4af" opacity=".6"/><circle cx="8" cy="7" r="2" fill="#fda4af" opacity=".6"/>
+<path d="M-3.5 7 Q0 10.5 3.5 7" stroke="#be123c" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+</g></g>
+<rect x="63" y="60" width="54" height="30" rx="4" fill="url(#gLid)" stroke="#64748b" stroke-width="1.5"/>
+<text class="glow" x="90" y="80" font-size="13" font-family="Consolas,monospace" font-weight="bold" fill="#0891b2" text-anchor="middle">&lt;/&gt;</text>
+<circle class="hd" cx="58" cy="88" r="4.2" fill="#f7d3b2"/><circle class="hd hd2" cx="122" cy="88" r="4.2" fill="#f7d3b2"/>
+<rect x="148" y="78" width="13" height="13" rx="2.5" fill="#f43f5e"/>
+<path d="M161 81 Q167 84 161 89" stroke="#f43f5e" stroke-width="2.2" fill="none"/>
+<path class="steam" d="M152 74 Q149 70 152 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<path class="steam" style="animation-delay:.8s" d="M157 74 Q160 70 157 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<rect x="18" y="80" width="14" height="11" rx="2" fill="#ea580c"/>
+<ellipse cx="25" cy="76" rx="4" ry="8" fill="#22c55e"/><ellipse cx="19" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(-30 19 79)"/><ellipse cx="31" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(30 31 79)"/>
+<rect x="8" y="90" width="164" height="8" rx="4" fill="url(#gDk)"/>
+</svg>
+  </div>
+  <div class="ht">
+        <h1 align="center" onclick="go(-1)" title="Към началната страница">Решаване на проблеми с ИКТ</h1>
+    <p align="center">Управление на проекти, системи и приложен софтуер</p>
+  </div>
+  <div class="hd-art hd-class" role="img" aria-label="Група ученици работят на лаптопи">
+    <svg viewBox="0 8 192 110" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient><linearGradient id="sDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient></defs><ellipse cx="95" cy="114" rx="90" ry="3.5" fill="#1e1b4b" opacity=".14"/><rect x="12" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="174" y="96" width="5" height="17" rx="2" fill="#c8843c"/><g transform="translate(55,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#a78bfa"/><g class="kh" style="animation-delay:0.5s"><circle cx="0" cy="40" r="12.5" fill="#9a4a14"/><circle cx="0" cy="42" r="10" fill="#d9a679"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#9a4a14"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fbbf24" style="animation-delay:0.5s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.5s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.75s"/></g><g transform="translate(109,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fbbf24"/><g class="kh" style="animation-delay:1.1s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#111827"/><circle cx="0" cy="40" r="12.5" fill="#111827"/><circle cx="0" cy="42" r="10" fill="#8d5a3b"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#111827"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#38bdf8" style="animation-delay:1.1s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.1s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.35s"/></g><g transform="translate(163,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#2dd4bf"/><g class="kh" style="animation-delay:1.7s"><circle cx="0" cy="40" r="12.5" fill="#7c2d12"/><circle cx="0" cy="42" r="10" fill="#f2c9a5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#7c2d12"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fb7185" style="animation-delay:1.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.95s"/></g><rect x="28" y="68" width="160" height="5.5" rx="2.75" fill="#e2ae6c"/><g transform="translate(28,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fb7185"/><g class="kh" style="animation-delay:0.0s"><circle cx="0" cy="40" r="12.5" fill="#5b3a29"/><circle cx="0" cy="42" r="10" fill="#f7d3b2"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#5b3a29"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#22d3ee" style="animation-delay:0.0s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.0s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.25s"/></g><g transform="translate(82,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#34d399"/><g class="kh" style="animation-delay:0.7s"><circle cx="0" cy="40" r="12.5" fill="#1f2937"/><circle cx="0" cy="42" r="10" fill="#c68863"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#1f2937"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#f472b6" style="animation-delay:0.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.95s"/></g><g transform="translate(136,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#60a5fa"/><g class="kh" style="animation-delay:1.3s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#f2c14e"/><circle cx="0" cy="40" r="12.5" fill="#f2c14e"/><circle cx="0" cy="42" r="10" fill="#fde0c5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#f2c14e"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#a3e635" style="animation-delay:1.3s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.3s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.55s"/></g><rect x="2" y="90" width="186" height="8" rx="4" fill="url(#sDk)"/></svg>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav id="nav"></nav>
+  <main id="main">
+<h2>Урок 7: Решаване на проблеми</h2><p>В хода на всеки проект възникват проблеми: закъснения, грешки, конфликти, промени в изискванията. Добрият ръководител не търси виновен, а <b>системно намира причината и най-доброто решение</b>.</p>
+ <h3>Стъпки</h3>
+ <table class="t"><tr><th>Стъпка</th><th>Въпрос</th></tr>
+ <tr><td>1. Определи проблема</td><td>Какво точно не е наред и откога?</td></tr>
+ <tr><td>2. Намери причините</td><td>Защо се случва? Кое е първопричината?</td></tr>
+ <tr><td>3. Генерирай варианти</td><td>Какви решения са възможни?</td></tr>
+ <tr><td>4. Избери решение</td><td>Кой вариант е най-добър според критериите?</td></tr>
+ <tr><td>5. Приложи</td><td>Кой, какво и кога прави?</td></tr>
+ <tr><td>6. Оцени</td><td>Решен ли е проблемът? Какво научихме?</td></tr></table>
+ <h3>Методи</h3>
+ <ul class="tg"><li><code>Мозъчна атака</code><span>събираме много идеи без критика, после ги групираме и оценяваме</span></li>
+ <li><code>5 защо</code><span>питаме „Защо?“, докато стигнем до причината</span></li>
+ <li><code>Ишикава</code><span>диаграма „причина – следствие“ по категории причини</span></li>
+ <li><code>Парето</code><span>малък брой причини обикновено дават по-голямата част от проблемите (приблизително правило 80/20)</span></li>
+ <li><code>Матрица на решението</code><span>оценяваме вариантите по тегловни критерии</span></li></ul>
+ <div class="fig"><svg viewBox="0 0 440 192" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="13" text-anchor="middle" font-size="11"><line x1="50" y1="150" x2="420" y2="150" stroke="#475569"/><line x1="50" y1="10" x2="50" y2="150" stroke="#475569"/><rect x="60" y="91.2" width="40" height="58.8" fill="#a5b4fc" stroke="#3a5a8c"/><rect x="118" y="115" width="40" height="35" fill="#a5b4fc" stroke="#3a5a8c"/><rect x="176" y="129" width="40" height="21" fill="#cbd5e1" stroke="#3a5a8c"/><rect x="234" y="137.4" width="40" height="12.6" fill="#cbd5e1" stroke="#3a5a8c"/><rect x="292" y="143" width="40" height="7" fill="#cbd5e1" stroke="#3a5a8c"/><rect x="350" y="145.8" width="40" height="4.199999999999999" fill="#cbd5e1" stroke="#3a5a8c"/><polyline points="80,91.2 138,56.2 196,35.2 254,22.60000000000001 312,15.600000000000023 370,11.400000000000006" fill="none" stroke="#dc2626" stroke-width="2"/><circle cx="80" cy="91.2" r="3.5" fill="#dc2626"/><circle cx="138" cy="56.2" r="3.5" fill="#dc2626"/><circle cx="196" cy="35.2" r="3.5" fill="#dc2626"/><circle cx="254" cy="22.60000000000001" r="3.5" fill="#dc2626"/><circle cx="312" cy="15.600000000000023" r="3.5" fill="#dc2626"/><circle cx="370" cy="11.400000000000006" r="3.5" fill="#dc2626"/><line x1="50" y1="38" x2="420" y2="38" stroke="#16a34a" stroke-dasharray="5 4"/><text x="425" y="42" font-size="10" fill="#16a34a" text-anchor="end">80%</text><text x="80" y="166" font-size="10">Прич. 1</text><text x="138" y="166" font-size="10">Прич. 2</text><text x="196" y="166" font-size="10">Прич. 3</text><text x="254" y="166" font-size="10">Прич. 4</text><text x="312" y="166" font-size="10">Прич. 5</text><text x="370" y="166" font-size="10">Прич. 6</text><text x="220" y="184" fill="#475569" font-size="10.5">малка част от причините дава по-голямата част от проблемите</text></svg><small>Диаграма на Парето: стълбове – честота, линия – натрупан дял</small></div><h3>Пример: „Проектът закъснява“</h3><div class="fig"><svg viewBox="0 0 440 190" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="13" text-anchor="middle" font-size="10.5"><defs><marker id="mf" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3a5a8c"/></marker></defs>
+<line x1="14" y1="96" x2="326" y2="96" stroke="#3a5a8c" stroke-width="2.4" marker-end="url(#mf)"/>
+<g stroke="#3a5a8c" stroke-width="1.6"><line x1="60" y1="34" x2="100" y2="96"/><line x1="160" y1="34" x2="200" y2="96"/><line x1="260" y1="34" x2="300" y2="96"/><line x1="60" y1="158" x2="100" y2="96"/><line x1="160" y1="158" x2="200" y2="96"/><line x1="260" y1="158" x2="300" y2="96"/></g>
+<g font-weight="bold"><text x="60" y="26">Хора</text><text x="160" y="26">Методи</text><text x="260" y="26">Изисквания</text><text x="60" y="176">Инструменти</text><text x="160" y="176">Комуникация</text><text x="260" y="176">Време, бюджет</text></g>
+<rect x="330" y="76" width="104" height="40" rx="8" fill="#fecaca" stroke="#3a5a8c"/><text x="382" y="94" font-weight="bold">Проектът</text><text x="382" y="108" font-weight="bold">закъснява</text>
+</svg><small>Диаграма на Ишикава („рибена кост“): причините се групират по категории около проблема</small></div>
+ <table class="t"><tr><th>Категория</th><th>Възможни причини</th><th>Действие</th></tr>
+ <tr><td>Хора</td><td>липса на опит, прекалено натоварване</td><td>обучение, преразпределяне на задачите</td></tr>
+ <tr><td>Методи</td><td>няма ясен план</td><td>разбиване на задачите, срокове за всяка</td></tr>
+ <tr><td>Изисквания</td><td>чести промени</td><td>договаряне на правила за промени</td></tr>
+ <tr><td>Комуникация</td><td>рядко се срещаме</td><td>кратка ежедневна среща</td></tr></table>
+ <h3>Непрекъснато подобряване</h3><div class="fig"><svg viewBox="0 0 440 52" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="13" text-anchor="middle" font-size="11"><rect x="0" y="4" width="104" height="44" rx="8" fill="#fde68a" stroke="#3a5a8c"/><text x="52" y="23.5" font-weight="bold">Plan</text><text x="52" y="36.5">Планирай</text><rect x="112" y="4" width="104" height="44" rx="8" fill="#a5f3fc" stroke="#3a5a8c"/><text x="164" y="23.5" font-weight="bold">Do</text><text x="164" y="36.5">Изпълни</text><rect x="224" y="4" width="104" height="44" rx="8" fill="#d1fae5" stroke="#3a5a8c"/><text x="276" y="23.5" font-weight="bold">Check</text><text x="276" y="36.5">Провери</text><rect x="336" y="4" width="104" height="44" rx="8" fill="#c7d2fe" stroke="#3a5a8c"/><text x="388" y="23.5" font-weight="bold">Act</text><text x="388" y="36.5">Действай</text></svg><small>Цикъл на непрекъснато подобряване (PDCA)</small></div>
+ <p><b>Задача:</b> Начертай диаграма на Ишикава за проблема „Екипът не си предава задачите навреме“ и избери две действия.</p>
+<h3>📝 Задача за изпълнение</h3><div class="task"><p class="tt">Намери причината за проблем с методите „5 защо“ и Парето.</p><p class="tw">Изпълни в: <b>Word, Excel или Notepad++</b></p><ol><li>Избери проблем: „Учениците не предават домашните си навреме“.</li><li>Приложи „5 защо“: задай въпроса „Защо?“ пет пъти един след друг и стигни до първопричина.</li><li>Състави списък от 8–10 причини с измислен брой случаи за всяка. Подреди ги от най-голям към най-малък и пресметни кои 2–3 дават около 80% от случаите (Парето).</li><li>Запиши решение по шестте стъпки от урока – кой, какво и кога прави и как ще оцениш резултата.</li></ol><p class="tb">⭐ <b>Бонус:</b> Начертай стълбовидна диаграма на Парето в Excel.</p><p class="tf">📁 Запази като: <code>5-zashto-parreto.docx</code></p></div>
+<h3>📝 Кратък тест</h3><div id="quiz"></div><div class="score" id="sc"></div>
+<div class="pager"><a href="urok-6-ekipna-rabota.html">← Назад</a><a href="urok-8-sredstva-za-upravlenie.html">Напред →</a></div>
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p class="sf-title">Уроци по информатика и информационни технологии</p>
+  <p class="sf-teacher">Петя Петрова – учител по информатика, КМИТ и ИТ</p>
+  <p class="sf-school">127. СУ „Иван Николаевич Денкоглу“</p>
+  <p class="sf-links"><a href="../../index.html">Начало</a><a href="../../9-klas/index.html">9. клас</a><a href="../../12-klas/index.html">12. клас</a></p>
+</footer>
+<script>const CUR=6,QUIZ=[{"q":"За какво служи диаграмата на Ишикава?","o":["За намиране на причините за даден проблем","За рисуване на логото","За съхранение на данни"],"a":0,"w":"Тя подрежда възможните причини по категории около проблема."},{"q":"Какво е важно при мозъчната атака?","o":["Събираме идеи без критика, после ги оценяваме","Всеки критикува идеите веднага","Мислим само един човек"],"a":0,"w":"Критиката в началото спира идеите."},{"q":"Какво означава Check в цикъла PDCA?","o":["Провери резултата","Планирай","Изпълни"],"a":0,"w":"Plan – Do – Check – Act: планирай, изпълни, провери, действай."},{"q":"Какво казва приблизителното правило на Парето?","o":["Малка част от причините дава по-голямата част от проблемите","Всички причини са еднакви","Проблемите нямат причини"],"a":0,"w":"Затова най-напред работим върху най-значимите причини."}];</script>
+<script src="ikt.js"></script>
+</body>
+</html>
