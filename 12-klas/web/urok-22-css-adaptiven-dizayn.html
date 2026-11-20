@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <title>Урок 22: CSS: адаптивен дизайн, преходи и анимации – Уроци по уеб дизайн</title>
-<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../style.css?v=20261120b">
 </head>
 <body class="theme-12klas page-web">
 <header>
@@ -97,15 +97,24 @@
 <footer class="site-footer">
   <div class="sf-inner">
     <div class="sf-top">
-      <a class="sf-brand" href="https://itzona.github.io/">
-        <span class="sf-logo" aria-hidden="true">&lt;/&gt;</span>
-        <span class="sf-brand-text"><span class="sf-name">IT Зона</span><span class="sf-tagline">Образователен портал по информационни технологии</span></span>
-      </a>
-      <div class="sf-links" role="navigation" aria-label="Навигация във футъра"><a href="https://itzona.github.io/">Начало</a><a href="../../9-klas/index.html">9. клас</a><a href="../../12-klas/web/index.html">Уеб дизайн</a><a href="../../12-klas/ikt/index.html">Решаване на проблеми с ИКТ</a></div>
+      <div class="sf-brand">
+        <div class="sf-logo" aria-hidden="true">&lt;/&gt;</div>
+        <div class="sf-brand-text">
+          <div class="sf-name">IT Зона</div>
+          <div class="sf-tagline">Образователен портал по информационни технологии</div>
+        </div>
+      </div>
+      <ul class="sf-links" aria-label="Навигация във футъра">
+        <li><a href="https://itzona.github.io/">Начало</a></li>
+        <li><a href="../../9-klas/index.html">9. клас</a></li>
+        <li><a href="../../12-klas/web/index.html">Уеб дизайн</a></li>
+        <li><a href="../../12-klas/ikt/index.html">Решаване на проблеми с ИКТ</a></li>
+      </ul>
     </div>
-    <p class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</p>
+    <div class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</div>
   </div>
 </footer>
+
 
 <script>const CUR=11,RAW=false,QUIZ=[{"q":"Какво определя @media (max-width:600px)?","o":["Размера на шрифта","Правила само за екрани до 600px","Скоростта на сайта"],"a":1,"w":"Media query прилага стиловете при определени условия."},{"q":"Кое прави промяната при hover плавна?","o":["border","float","transition"],"a":2,"w":"transition определя продължителността на промяната."},{"q":"За какво е meta viewport?","o":["Телефонът да показва страницата в реалната ѝ ширина","За кодировката на буквите","За цвета на фона"],"a":0,"w":"Без него мобилният браузър смалява страницата."},{"q":"Коя мерна единица е относителна?","o":["px","cm","rem"],"a":2,"w":"rem зависи от размера на шрифта на страницата."},{"q":"Как се нарича анимация на етапи в CSS?","o":["@keyframes","@media","@import"],"a":0,"w":"@keyframes описва етапите, а animation я пуска."}];</script>
 <script src="web.js"></script>

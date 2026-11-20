@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <title>Урок 25: JavaScript: DOM и събития – малка апликация – Уроци по уеб дизайн</title>
-<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../style.css?v=20261120b">
 </head>
 <body class="theme-12klas page-web">
 <header>
@@ -106,15 +106,24 @@
 <footer class="site-footer">
   <div class="sf-inner">
     <div class="sf-top">
-      <a class="sf-brand" href="https://itzona.github.io/">
-        <span class="sf-logo" aria-hidden="true">&lt;/&gt;</span>
-        <span class="sf-brand-text"><span class="sf-name">IT Зона</span><span class="sf-tagline">Образователен портал по информационни технологии</span></span>
-      </a>
-      <div class="sf-links" role="navigation" aria-label="Навигация във футъра"><a href="https://itzona.github.io/">Начало</a><a href="../../9-klas/index.html">9. клас</a><a href="../../12-klas/web/index.html">Уеб дизайн</a><a href="../../12-klas/ikt/index.html">Решаване на проблеми с ИКТ</a></div>
+      <div class="sf-brand">
+        <div class="sf-logo" aria-hidden="true">&lt;/&gt;</div>
+        <div class="sf-brand-text">
+          <div class="sf-name">IT Зона</div>
+          <div class="sf-tagline">Образователен портал по информационни технологии</div>
+        </div>
+      </div>
+      <ul class="sf-links" aria-label="Навигация във футъра">
+        <li><a href="https://itzona.github.io/">Начало</a></li>
+        <li><a href="../../9-klas/index.html">9. клас</a></li>
+        <li><a href="../../12-klas/web/index.html">Уеб дизайн</a></li>
+        <li><a href="../../12-klas/ikt/index.html">Решаване на проблеми с ИКТ</a></li>
+      </ul>
     </div>
-    <p class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</p>
+    <div class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</div>
   </div>
 </footer>
+
 
 <script>const CUR=13,RAW=false,QUIZ=[{"q":"Коя команда намира елемент по CSS селектор?","o":["document.write()","document.querySelector()","alert()"],"a":1,"w":"querySelector приема CSS селектор."},{"q":"Какво прави classList.toggle(\"gotovo\")?","o":["Изтрива елемента","Сменя таг","Добавя класа, ако го няма, и го маха, ако го има"],"a":2,"w":"toggle превключва класа."},{"q":"Кое създава нов елемент от JavaScript?","o":["document.createElement()","document.getElementById()","alert()"],"a":0,"w":"createElement създава елемента, appendChild го вмъква."},{"q":"Коя команда вмъква създаден елемент в страницата?","o":["appendChild()","querySelector()","alert()"],"a":0,"w":"createElement го създава, appendChild го поставя в родителя."},{"q":"Кое събитие се случва при кликване върху елемент?","o":["onload","onclick","oninput"],"a":1,"w":"onclick реагира на клик, oninput – на въвеждане."}];</script>
 <script src="web.js"></script>
