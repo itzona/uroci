@@ -5,59 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Дигитална агенция – игра за 4 часа</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Unbounded:wght@600;800&family=JetBrains+Mono:wght@400;600&display=swap">
-<style>
-:root{--bg:#e9f0fa;--grid:#c9d8ee;--card:#fff;--fg:#14233d;--mut:#51607c;--ac:#1d4ed8;--hl:#ffd23f;--ok:#15803d;--bad:#c2410c;--bd:#b9c9e3;--code:#0e1a30;--cf:#dbe7ff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1a2f;--grid:#16294a;--card:#14233d;--fg:#e8eefb;--mut:#9fb0d0;--ac:#7aa2ff;--ok:#4ade80;--bad:#fb923c;--bd:#2a3f66;--code:#07101f}}
-:root[data-theme="dark"]{--bg:#0d1a2f;--grid:#16294a;--card:#14233d;--fg:#e8eefb;--mut:#9fb0d0;--ac:#7aa2ff;--ok:#4ade80;--bad:#fb923c;--bd:#2a3f66;--code:#07101f}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;color:var(--fg);font:400 16px/1.6 Manrope,system-ui,sans-serif}
-main{max-width:920px;margin:0 auto;padding:16px 14px 110px}
-@media(min-width:801px){main{zoom:1.25}}
-h1,h2,h3{font-family:Unbounded,Manrope,sans-serif;line-height:1.25;margin:.2em 0 .5em}
-h1{font-size:clamp(24px,5vw,38px)}h2{font-size:clamp(19px,3.4vw,25px)}h3{font-size:16px}
-header{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
-.score{background:var(--hl);color:#14233d;font-weight:800;border-radius:999px;padding:6px 16px;transition:transform .2s}
-.score.pop{transform:scale(1.25)}
-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-nav button{flex:1;min-width:84px;border:2px solid var(--bd);background:var(--card);color:var(--fg);border-radius:10px;padding:8px 6px;font:600 13px Manrope,sans-serif;cursor:pointer}
-nav button.on{border-color:var(--ac);background:var(--ac);color:#fff}
-nav button:disabled{opacity:.45;cursor:not-allowed}
-.card{background:var(--card);border:2px solid var(--bd);border-radius:14px;padding:16px 18px;margin:14px 0}
-.note{background:var(--hl);color:#14233d;border-radius:4px;padding:12px 14px;transform:rotate(-.6deg);box-shadow:3px 4px 0 rgba(0,0,0,.18);margin:12px 0}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
-.mini{border:2px dashed var(--bd);border-radius:10px;padding:10px 12px}
-pre,textarea{font:400 14px/1.5 "JetBrains Mono",monospace;background:var(--code);color:var(--cf);border-radius:10px;padding:12px;margin:8px 0;overflow-x:auto;width:100%;border:0}
-textarea{min-height:170px;resize:vertical}
-code{font-family:"JetBrains Mono",monospace;background:var(--code);color:var(--cf);padding:1px 6px;border-radius:5px;font-size:.9em}
-pre code{padding:0;background:none}
-iframe{width:100%;height:230px;border:2px solid var(--bd);border-radius:10px;background:#fff}
-button.b{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:800 15px Manrope,sans-serif;cursor:pointer}
-button.b:disabled{opacity:.45;cursor:not-allowed}
-button.alt{background:transparent;color:var(--fg);border:2px solid var(--bd)}
-.opts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
-.opts button{border:2px solid var(--bd);background:var(--card);color:var(--fg);border-radius:10px;padding:8px 12px;font:600 14px Manrope,sans-serif;cursor:pointer;text-align:left}
-.opts button.sel{border-color:var(--ac);background:var(--ac);color:#fff}
-.opts button.good{border-color:var(--ok);background:var(--ok);color:#fff}
-.opts button.wrong{border-color:var(--bad);background:var(--bad);color:#fff}
-select{font:600 15px Manrope,sans-serif;padding:6px;border-radius:8px;border:2px solid var(--bd);background:var(--card);color:var(--fg)}
-.row{display:flex;gap:16px;flex-wrap:wrap;margin:8px 0}
-.fb{margin:10px 0;padding:10px 12px;border-left:5px solid var(--ac);background:rgba(120,150,210,.15);border-radius:6px}
-.fb.ok{border-color:var(--ok)}.fb.no{border-color:var(--bad)}
-.matrix{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;max-width:340px}
-.matrix div{aspect-ratio:1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#14233d;gap:2px;font-size:13px}
-.ev{font:800 18px Manrope,sans-serif}
-.word{font:800 30px "JetBrains Mono",monospace;letter-spacing:.3em;margin:6px 0}
-.tasks{list-style:none;padding:0;margin:8px 0}
-.tasks li{padding:5px 0}
-.tasks li.done{color:var(--ok);font-weight:700}
-.bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:2px solid var(--bd);padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:12px;align-items:center;justify-content:space-between;z-index:5}
-.bar span{color:var(--mut);font-size:14px}
-.step[hidden]{display:none}
-:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
-</style>
+<link rel="stylesheet" href="../style.css">
 </head>
-<body>
+<body class="theme-12klas page-igra">
 <main>
 <header><h1>Дигитална агенция</h1><div class="score">Кредити: <span id="score">0</span></div></header>
 <nav id="nav"></nav>
