@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="bg"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Кризисен щаб – екипна игра</title>
+<style>
+:root{--ink:#0f1b2d;--bg:#eef2f6;--red:#e5383b;--ok:#0d9488;--hi:#ffd166;--line:#c5d0dc}
+*{box-sizing:border-box}
+body{margin:0;font:17px/1.55 "Segoe UI",Trebuchet MS,sans-serif;color:var(--ink);background:var(--bg)}
+.w{max-width:1280px;margin:auto;padding:14px 22px}
+header{background:var(--ink);color:#fff;padding:12px 16px;border-radius:6px;border-bottom:5px solid var(--red);display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:center}
+h1{margin:0;font-size:1.45rem;letter-spacing:.3px}h2{margin:0 0 6px}h3{margin:12px 0 4px}
+.sc{font-weight:700;background:var(--hi);color:var(--ink);padding:3px 12px;border-radius:4px}
+button{font:inherit;cursor:pointer;border:1px solid var(--ink);background:#fff;color:var(--ink);border-radius:4px;padding:5px 12px}
+button:hover{background:var(--hi)}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--red);outline-offset:1px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.tabs button.on{background:var(--ink);color:#fff}
+.go{background:var(--red);color:#fff;border-color:var(--red);font-weight:700}.go:hover{background:#b92b2d;color:#fff}
+.card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--red);border-radius:6px;padding:20px 30px;margin:12px 0}
+.d{background:#fff6dc;border-left:4px solid var(--hi);padding:8px 12px;font-size:.93rem;margin:8px 0}
+.it{border-top:1px solid var(--line);padding-top:10px;margin-top:12px}
+.it>b{display:block}.pp{float:right;font-size:.85rem;background:var(--bg);padding:0 8px;border-radius:4px}
+input[type=text],input[type=number],select,textarea{font:inherit;padding:5px 8px;border:1px solid #8a9bb0;border-radius:4px;background:#fff;color:var(--ink)}
+textarea{width:100%;min-height:70px}input[type=number]{width:64px}
+.ch{display:inline-block;background:#dbe5f0;border-radius:4px;padding:1px 9px;margin:2px;font-size:.88rem}
+.ok{color:var(--ok);font-weight:700}.no{color:var(--red);font-weight:700}
+label{margin-right:12px;display:inline-block}
+.bar{height:9px;background:var(--bg);border-radius:4px;min-width:90px}.bar i{display:block;height:100%;background:var(--ok);border-radius:4px}
+table{border-collapse:collapse;max-width:100%}td,th{border:1px solid var(--line);padding:4px 8px;text-align:left}
+.t{background:#e6f6f4;border:2px dashed var(--ok);padding:8px 12px;margin-top:12px}
+.big{font-size:1.1rem;font-weight:700}
+.tmr{font-weight:700;font-variant-numeric:tabular-nums}
+details{margin:8px 0}summary{cursor:pointer;font-weight:700}
+header{background:linear-gradient(120deg,#0f1b2d,#1d3557)}
+.sir{display:inline-block;animation:sr 1s infinite alternate}@keyframes sr{to{transform:scale(1.25) rotate(-12deg);filter:drop-shadow(0 0 8px #e5383b)}}
+.pg{height:10px;background:#cfd9e4;border-radius:6px;margin:8px 0;overflow:hidden}.pg i{display:block;height:100%;background:linear-gradient(90deg,var(--ok),var(--hi),var(--red));transition:width .6s}
+.gr{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:10px 0}.bx{background:#f4f8fc;border:2px solid var(--line);border-radius:10px;padding:10px 14px}
+.ice>div{padding:10px 14px}.ice>div:first-child{background:#e8f4ff;border-radius:10px 10px 0 0}.ice>div:last-child{background:#1d4e89;color:#fff;border-radius:0 0 10px 10px}
+.st{display:flex;align-items:flex-end;gap:6px;margin:10px 0}.st div{flex:1;background:var(--ink);color:#fff;border-radius:8px 8px 0 0;padding:8px;font-size:.88rem}
+.bb{padding:8px 12px;border-radius:14px;background:#e9eef5;margin:6px 0;max-width:85%}.bb.me{background:#d7f3ee;margin-left:auto}
+.cf{position:fixed;top:-30px;font-size:26px;pointer-events:none;animation:fl 2.4s linear forwards;z-index:9}@keyframes fl{to{transform:translateY(110vh) rotate(540deg)}}
+@media print{.tabs,header button,.go,.nop{display:none}}
+</style></head><body><div class="w">
+<header><h1><span class="sir">🚨</span> Кризисен щаб</h1><span class="sc" id="tot"></span></header><div class="pg nop"><i id="pgb" style="width:0"></i></div>
+<div class="card nop" style="margin:10px 0"><b>Екип:</b> <input type="text" placeholder="Име 1" oninput="nm(0,this.value)"> <input type="text" placeholder="Име 2" oninput="nm(1,this.value)"> <input type="text" placeholder="Име 3" oninput="nm(2,this.value)"> <input type="text" placeholder="Име 4" oninput="nm(3,this.value)"> <button onclick="dice()">🎲 Тегли роли</button></div>
+<div class="tabs" id="tabs"></div><div id="m"></div></div>
+<script>
+const $=s=>document.querySelector(s),r5=x=>Math.round(x*2)/2;
+const RL=['Ръководител','Анализатор','Говорител','Секретар-скептик'],W=[3,3,2,1],CR=['Полезност','Възможност за срока','Интересно','Лекота на изработка'],ID=['Викторина','Дежурства'];
+const PN=['Мария','Иво','Деси','Калоян'],TK=[['Съдържание',6],['Тестване',5],['Презентация',5],['Дизайн',4]],H=[14,3,2,1];
+const S=[
+{t:'Файлът изчезна',e:'💾',min:8,
+ s:'Проектът е сайт за училищен фестивал със срок петък. В четвъртък сутрин откривате, че общият файл е стар и работата от два дни липсва. Ники: „Не съм аз!“. Дара: „Все някой го е презаписал!“.',
+ d:'Вт 18:10 – Дара качва версия 3 · Ср 21:40 – Ники качва версия 4 от стар файл на своя компютър · В „Архив“ има копие от вторник · Мария има снимки на екрана от сряда.',
+ a:'Факти: 1, 3, 5. Мнения: 2, 4, 6. Цел напр.: „Сайтът да е готов до петък с работата от двата дни.“ Връщане: копие от вторник + промените по снимките на Мария + нова версия. Правило: дата и инициали в името на файла, теглим последната версия, копие всяка вечер. Идея: проблемът е в процеса, не в човека.',
+ it:[{k:'cls',p:3,q:'1. Факт или мнение? Отдели ги.',l:[['Версия 4 е качена в сряда в 21:40','f'],['Ники е небрежен','m'],['В „Архив“ има копие от вторник','f'],['Все някой го е презаписал','m'],['Мария има снимки на екрана от сряда','f'],['Дара винаги работи накрая','m']]},
+ {k:'txt',p:2,q:'2. Обща цел в едно изречение – БЕЗ имена на виновни.',min:15,no:['Ники','Дара'],ex:'Сайтът да е готов до петък с работата от двата дни.'},
+ {k:'multi',p:3,q:'3. Как връщате загубеното? Отбележи верните стъпки.',o:['Отваряме копието от вторник от „Архив“','Повтаряме промените от сряда по снимките на Мария','Ники поправя всичко сам, за наказание','Започваме проекта отначало','Записваме резултата като нова версия'],c:[0,1,4]},
+ {k:'txt',p:2,q:'4. Едно правило, което пази от повторение.',min:15,ex:'Преди работа всеки тегли последната версия, името на файла е с дата и инициали, а всяка вечер се прави копие в „Архив“.'}]},
+{t:'Неравният товар',e:'⚖️',min:8,
+ s:'До срока има 4 дни. Часовете досега са: Мария 14, Иво 3, Деси 2, Калоян 1. Мария е изтощена и ядосана. Скрити факти: Иво е бил болен 3 дни; Деси не знае коя е нейната задача; Калоян е чакал Мария да му каже какво да прави.',
+ d:'Оставащи задачи: Съдържание 6 ч, Тестване 5 ч, Презентация 5 ч, Дизайн 4 ч (общо 20 ч).',
+ a:'Дялове: 70%, 15%, 10%, 5%. Първопричина: няма ясно разпределение и ежедневна проверка. Пример: Иво – Съдържание, Деси – Тестване, Калоян – Презентация, Мария – Дизайн; Мария пада от 70% на 45% (18 от 40 ч). Правило: задача с име и срок на видимо място, 5-минутна проверка всеки ден, при отсъствие задачата се прехвърля същия ден.',
+ it:[{k:'pct',p:2,q:'1. Какъв процент от първите 20 часа е направил всеки?'},
+ {k:'pick',p:2,q:'2. Каква е първопричината?',o:['Иво, Деси и Калоян са мързеливи','Няма ясно разпределение и ежедневна проверка','Мария работи твърде бързо'],c:1},
+ {k:'asg',p:4,q:'3. Разпредели оставащите задачи. Цел: всеки има задача и Мария да не е над 50% от всички 40 часа.'},
+ {k:'txt',p:2,q:'4. Правило, което пази от повторение.',min:15,ex:'Всяка задача е с име и срок на видимо място, всеки ден правим 5-минутна проверка, а при отсъствие задачата се прехвърля още същия ден.'}]},
+{t:'Две идеи, един срок',e:'🧪',min:10,
+ s:'До фестивала има 3 дни. Половината екип иска викторина по информатика, другата половина – приложение за график на дежурствата. Решете с матрица, а не с надвикване.',
+ d:'Теглата са: полезност ×3, възможност за срока ×3, интересно ×2, лекота на изработка ×1. Оценките са от 1 до 5 (5 е най-добре).',
+ a:'Примерни оценки – Викторина: 3, 5, 4, 5 → 37; Дежурства: 5, 2, 3, 2 → 29. С полезност ×4: 40 срещу 34, решението е устойчиво. Оценките може да са други – проверявай дали сумите са верни и решението е обосновано. „Губещата“ идея става бъдещо разширение или хората ѝ помагат в избраната.',
+ it:[{k:'mx',p:4,q:'1. Оцени двете идеи. Сумите се смятат сами.'},
+ {k:'str',p:2,q:'2. Тест за устойчивост: променя ли се победителят, ако едно тегло стане с 1 по-голямо или по-малко?'},
+ {k:'pick',p:2,q:'3. Какво правите с „губещата“ идея?',o:['Дават ѝ роля в избраната идея или я пазят като разширение','Забравят я','Гласуват пак, докато спечели тяхната'],c:0},
+ {k:'txt',p:2,q:'4. Запиши решението: кой, какво, до кога.',min:20,ex:'Избираме викторината. Ръководителят разпределя задачите днес, въпросите са готови до сряда, дизайнът до четвъртък, а в петък тестваме заедно. Идеята с дежурствата остава за по-късно.'}]},
+{t:'Мълчаливият',e:'🤐',min:8,
+ s:'Милен е най-добрият програмист, но на срещите мълчи. Стефан говори през цялото време и екипът винаги приема неговите идеи. Последните две негови идеи се оказаха трудни и проектът се бави. Милен казва тихо на секретаря: „Имах по-проста идея, но никой не ме питаше.“',
+ d:'Подсказка: мълчанието също е сигнал. Гледай какво липсва в екипа – не кой е виновен.',
+ a:'Етап: бурна фаза със скрит конфликт. Верни правила: минута мълчаливо писане, питане поименно, идеи без имена. Добро „аз-послание“: „Аз се притеснявам, че пропускаме идеи, и искам да чуем всички.“ Провери дали екипът наистина е разиграл срещата.',
+ it:[{k:'pick',p:2,q:'1. На кой етап е екипът?',o:['Формиране – всички се опознават','Бурна фаза – конфликтът е скрит','Изпълнение – всичко върви гладко'],c:1},
+ {k:'multi',p:4,q:'2. Кои правила помагат? Отбележи.',o:['1 минута мълчаливо писане на идеи, после всеки по ред','Ръководителят пита всеки поименно','Идеите се записват без имена и се оценяват по критерии','Говори най-опитният, останалите се съгласяват','Който мълчи, значи е съгласен'],c:[0,1,2]},
+ {k:'txt',p:2,q:'3. Секретарят-скептик казва на Стефан „аз-послание“ (започва с „Аз…“).',min:15,ex:'Аз се притеснявам, че пропускаме идеи, и искам да чуем всички, преди да решим.'},
+ {k:'chk',p:2,q:'4. Разиграйте 3-минутна среща по новите правила.',t:'Разиграхме я'}]},
+{t:'Обратът',e:'🌪️',min:8,
+ s:'Задачите са: Дизайн (Мария), Тестване (Иво), Съдържание – 6 ч (Деси), Презентация (Калоян). Учителят обявява: Деси напуска екипа до края на деня. Остават 2 дни.',
+ d:'Тройно ограничение: обхват, срок, ресурси. Когато ресурсите намалеят, нещо друго трябва да се промени.',
+ a:'Съдържанието се дели между двама–трима; ако не стига времето, намаляват обхвата. Етап: връща се към бурна фаза (или формиране). Първият час: списък на задачите на Деси, вземат файловете ѝ, ново разпределение със срокове. Благодарността е лична и конкретна.',
+ it:[{k:'multi',p:4,q:'1. Какво правите със задачите на Деси?',o:['Делим съдържанието между двама–трима','Ако времето не стига, намаляваме обхвата','Качваме всичко на Мария – тя е най-бърза','Оставяме задачата без отговорник'],c:[0,1]},
+ {k:'pick',p:2,q:'2. Какво става с екипа според Тъкман?',o:['Връща се към бурна фаза – нови роли и ново разпределение','Остава в изпълнение – нищо не се променя'],c:0},
+ {k:'multi',p:2,q:'3. Какво правите през първия час?',o:['Списък на задачите на Деси','Вземаме файловете ѝ още днес','Чакаме до сряда да видим какво ще стане','Не казваме на никого'],c:[0,1]},
+ {k:'txt',p:2,q:'4. Напиши по едно изречение благодарност към Деси за работата ѝ.',min:15,ex:'Деси, благодарим ти за свършеното съдържание – то ще ни помогне много и ще го довършим заедно.'}]},
+{t:'Чатът гори',e:'💬',min:8,
+ s:'Два дни преди срока груповият чат е в пламъци. Прочетете съобщенията и помогнете на екипа да се успокои, преди да е станало късно.',
+ d:'Фактът може да се провери. Мнението е оценка или усещане. Обвинението говори за човека („ти винаги…“).',
+ a:'Факти: 1 и 4. Мнения: 3 и 6. Обвинения: 2 и 5. Най-силно разпалва пожара съобщение 2. Аз-послание: „Аз се притеснявам, че закъсняваме с тестването, и искам да разберем как да помогнем.“ Първо съобщение на ръководителя: спира спора, казва факт и обща цел.',
+ it:[{k:'cht',p:3,q:'1. Какво е всяко съобщение? Отбележи.',l:[['Дара','Снощи качих версия 5, виж папката.','f'],['Ники','Ти винаги всичко разваляш, Дара!','b'],['Мими','Според мен дизайнът е грозен.','m'],['Тео','До петък остават 2 дни, а тестването още не е започнало.','f'],['Дара','Ники е мързелив и затова закъсняваме.','b'],['Мими','Никой не слуша никого – този екип е безнадежден.','m']]},
+ {k:'pick',p:2,q:'2. Кое съобщение най-много разпалва пожара?',o:['„Снощи качих версия 5, виж папката.“','„Ти винаги всичко разваляш, Дара!“','„Според мен дизайнът е грозен.“'],c:1},
+ {k:'txt',p:3,q:'3. Преправи съобщение 5 като „аз-послание“ – без обвинение.',min:20,no:['мързелив','виновен'],ex:'Аз се притеснявам, че закъсняваме с тестването, и искам да разберем какво пречи и как да помогнем.'},
+ {k:'txt',p:2,q:'4. Първото съобщение на ръководителя, което успокоява чата (спри, факт, цел).',min:20,ex:'Спираме за 5 минути. Фактът е, че остават 2 дни. Целта ни е сайтът да е готов в петък – да видим кой с какво може да помогне.'}]}];
+let cur=-2,ts=0,T=false,names=['','','',''],st=S.map(()=>({})),ck=S.map(()=>0),ip=S.map(()=>[]),pt=S.map(()=>0),left=480,tm=null;
+const g=(j,x)=>st[cur]['i'+j+'_'+x],s=(j,x,v)=>{st[cur]['i'+j+'_'+x]=v};
+const nm=(i,v)=>{names[i]=v;chips()},dice=()=>{names.sort(()=>Math.random()-.5);document.querySelectorAll('.card input[type=text]').forEach((e,i)=>e.value=names[i]);chips()};
+const tch=()=>{if(T){T=false}else if((prompt('Код за учител:')||'').trim().toLowerCase()=='учител')T=true;draw()};
+function chips(){const e=$('#ch');if(e)e.innerHTML=RL.map((r,k)=>`<span class="ch">${r}: <b>${names[(k+cur)%4]||'?'}</b></span>`).join('')}
+function sums(){const a=[0,0];for(let o=0;o<2;o++)CR.forEach((c,i)=>a[o]+=W[i]*(+g(0,'m'+i+o)||0));return a}
+function mxOk(){return CR.every((c,i)=>[0,1].every(o=>{const v=g(0,'m'+i+o);return v>=1&&v<=5&&v==Math.round(v)}))}
+function win(w){const a=[0,0];[0,1].forEach(o=>CR.forEach((c,i)=>a[o]+=w[i]*g(0,'m'+i+o)));return a[0]>a[1]?0:a[1]>a[0]?1:-1}
+function asgI(j){const t=H.slice();let all=true;TK.forEach((k,i)=>{const a=g(j,i);if(a===undefined||a==='')all=false;else t[+a]+=k[1]});const ev=PN.every((n,p)=>TK.some((k,i)=>g(j,i)==p));return{t,all,ev,sh:t[0]/40}}
+function asgT(j){const a=asgI(j);return `<table><tr>${PN.map((n,p)=>`<th>${n}</th>`).join('')}</tr><tr>${a.t.map(x=>`<td>${x} ч (${Math.round(x/(a.all?40:Math.max(1,a.t.reduce((u,v)=>u+v))*1)*100)}%)</td>`).join('')}</tr><tr>${a.t.map(x=>`<td><div class="bar"><i style="width:${Math.min(100,x*2.5)}%"></i></div></td>`).join('')}</tr></table>`}
+function mxT(){const a=sums(),m=mxOk();return `Суми: <b>${ID[0]} ${a[0]}</b> · <b>${ID[1]} ${a[1]}</b>${m?' → печели <b>'+(a[0]>a[1]?ID[0]:a[1]>a[0]?ID[1]:'равенство')+'</b>':''}`}
+function hint(j){const q=S[cur].it[j],v=(g(j,'t')||'').trim();return v.length<q.min?'Напиши поне '+q.min+' знака.':q.no&&q.no.some(n=>v.includes(n))?'Махни имената – търсим причина, не виновен!':''}
+function sc(j){const q=S[cur].it[j],p=q.p;
+ if(q.k=='cls'){let n=0;q.l.forEach((r,i)=>{if(g(j,i)==r[1])n++});return r5(p*n/q.l.length)}
+ if(q.k=='cht'){let n=0;q.l.forEach((r,i)=>{if(g(j,i)==r[2])n++});return r5(p*n/q.l.length)}
+ if(q.k=='pick')return g(j,'a')===q.c?p:0;
+ if(q.k=='multi'){let a=0,b=0;q.o.forEach((o,i)=>{if(g(j,i))q.c.includes(i)?a++:b++});return r5(Math.max(0,a-b)/q.c.length*p)}
+ if(q.k=='txt')return g(j,'sg')??0;
+ if(q.k=='chk')return g(j,'k')?p:0;
+ if(q.k=='pct'){let n=0;[70,15,10,5].forEach((a,i)=>{if(Math.abs(g(j,i)-a)<=1)n++});return r5(p*n/4)}
+ if(q.k=='asg'){const a=asgI(j);return !a.all?0:a.ev?p:a.sh<=.5?p/2:0}
+ if(q.k=='mx')return mxOk()?p:0;
+ if(q.k=='str')return g(j,'r')&&mxOk()?p:0;return 0}
+function item(j){const q=S[cur].it[j],c=ck[cur],f=c?` <span class="pp ${ip[cur][j]==q.p?'ok':'no'}">${ip[cur][j]}/${q.p}</span>`:`<span class="pp">${q.p} т.</span>`;let h=`<div class="it"><b>${q.q}</b>${f}`;
+ if(q.k=='cls')q.l.forEach((r,i)=>{const v=g(j,i);h+=`<div>${r[0]}: <label><input type="radio" name="c${j}_${i}" ${v=='f'?'checked':''} onchange="s(${j},${i},'f')"> Факт</label><label><input type="radio" name="c${j}_${i}" ${v=='m'?'checked':''} onchange="s(${j},${i},'m')"> Мнение</label>${c&&v?(v==r[1]?'<span class="ok">✓</span>':'<span class="no">✗</span>'):''}</div>`});
+ if(q.k=='cht')q.l.forEach((r,i)=>{const v=g(j,i);h+=`<div class="bb ${i%2?'me':''}"><b>${r[0]}:</b> ${r[1]}<br><select onchange="s(${j},${i},this.value)"><option value="">– какво е? –</option>${[['f','Факт'],['m','Мнение'],['b','Обвинение']].map(o=>`<option value="${o[0]}" ${v==o[0]?'selected':''}>${o[1]}</option>`).join('')}</select>${c&&v?(v==r[2]?' <span class="ok">✓</span>':' <span class="no">✗</span>'):''}</div>`});
+ if(q.k=='pick')q.o.forEach((o,i)=>{h+=`<div><label><input type="radio" name="p${j}" ${g(j,'a')===i?'checked':''} onchange="s(${j},'a',${i})"> ${o}</label>${c&&g(j,'a')===i?(i==q.c?' <span class="ok">✓</span>':' <span class="no">✗</span>'):''}</div>`});
+ if(q.k=='multi')q.o.forEach((o,i)=>{const v=g(j,i);h+=`<div><label><input type="checkbox" ${v?'checked':''} onchange="s(${j},${i},this.checked)"> ${o}</label>${c&&v?(q.c.includes(i)?' <span class="ok">✓</span>':' <span class="no">✗</span>'):''}</div>`});
+ if(q.k=='txt')h+=`<textarea rows="3" oninput="s(${j},'t',this.value)">${(g(j,'t')||'').replace(/</g,'&lt;')}</textarea>${c&&hint(j)?`<div class="no">${hint(j)}</div>`:''}${c?`<div class="t">✍ <b>Какво трябваше да напишете (пример):</b> ${q.ex}</div><div class="d">✍ <b>Сравни с примера и си дай точки:</b> ${[0,q.p/2,q.p].map(v=>`<label><input type="radio" name="sg${j}" ${g(j,'sg')===v?'checked':''} onchange="s(${j},'sg',${v});chk()"> ${v} т.</label>`).join('')}</div>`:''}`;
+ if(q.k=='chk')h+=`<label><input type="checkbox" ${g(j,'k')?'checked':''} onchange="s(${j},'k',this.checked)"> ${q.t}</label>`;
+ if(q.k=='pct')h+=PN.map((n,i)=>`<label>${n}: <input type="number" value="${g(j,i)??''}" oninput="s(${j},${i},this.value)"> %</label>`).join('')+(c?`<div class="t">✍ <b>Верни отговори:</b> Мария 70%, Иво 15%, Деси 10%, Калоян 5% (часовете се делят на 20).</div>`:'');
+ if(q.k=='asg'){h+=TK.map((k,i)=>`<label>${k[0]} (${k[1]} ч): <select onchange="s(${j},${i},this.value);$('#as').innerHTML=asgT(${j})"><option value="">–</option>${PN.map((n,p)=>`<option value="${p}" ${g(j,i)==p?'selected':''}>${n}</option>`).join('')}</select></label>`).join('')+`<div id="as">${asgT(j)}</div><small>Общо часове с вече направените (14, 3, 2, 1).</small>${c?`<div class="t">✍ <b>Пример:</b> Иво – Съдържание, Деси – Тестване, Калоян – Презентация, Мария – Дизайн. Така Мария пада от 70% на 45% от всички 40 часа.</div>`:''}`}
+ if(q.k=='mx'){h+=`<table><tr><th>Критерий (тегло)</th><th>${ID[0]}</th><th>${ID[1]}</th></tr>${CR.map((n,i)=>`<tr><td>${n} ×${W[i]}</td>${[0,1].map(o=>`<td><input type="number" min="1" max="5" value="${g(0,'m'+i+o)??''}" oninput="s(0,'m${i}${o}',+this.value);$('#mx').innerHTML=mxT()"></td>`).join('')}</tr>`).join('')}</table><div id="mx">${mxT()}</div>${c?`<div class="t">✍ <b>Пример:</b> Викторина 3, 5, 4, 5 → 37; Дежурства 5, 2, 3, 2 → 29. Печели викторината. Твоите оценки може да са други – важното е да са обосновани.</div>`:''}`}
+ if(q.k=='str'){h+=`<button onclick="if(!mxOk())return alert('Първо попълни матрицата от задача 1.');s(${j},'r',1);draw()">🔬 Пусни теста</button>`;if(g(j,'r')&&mxOk()){const b=win(W),bad=[];W.forEach((w,i)=>[-1,1].forEach(d=>{if(w+d>=1){const x=W.slice();x[i]+=d;if(win(x)!=b)bad.push(CR[i]+(d>0?' +1':' −1'))}}));h+=bad.length?`<p class="no">⚠ Крехко решение! Победителят се променя при: ${bad.join(', ')}. Защо все пак избирате този вариант?</p>`:`<p class="ok">✅ Устойчиво – победителят е същият при всяка промяна.</p>`}}
+ return h+'</div>'}
+function draw(){
+ $('#tabs').innerHTML=`<button class="${cur==-2?'on':''}" onclick="go(-2)">📚 Теория</button><button class="${cur==-1?'on':''}" onclick="go(-1)">📖 Как се играе</button>`+S.map((x,i)=>`<button class="${cur==i?'on':''}" onclick="go(${i})">${x.e} ${'АБВГДЕ'[i]}${ck[i]?' · '+pt[i]:''}</button>`).join('')+`<button class="${cur>5?'on':''}" onclick="go(6)">🏁 Резултат</button>`;
+ const tot=pt.reduce((a,b)=>a+b,0);$('#tot').textContent=tot+' / 60 т.';$('#pgb').style.width=tot/60*100+'%';
+ let h='';
+ if(cur==-2)h=th();else if(cur==-1)h=`<div class="card"><h2>🎮 Как се играе</h2><p>Вие сте екип от 4 души. Теглете роли с 🎲 – във всяка ситуация ролите се въртят. Решете шестте ситуации, натиснете „Провери“ и вземете до <b>10 точки</b> за всяка (общо 60). Нямате право да обвинявате хора – търсите добро решение.</p>
+ <details open><summary>▶ Пример с всичките стъпки: училищен подкаст</summary><p>Лина иска запис в петък, Борис – в понеделник; епизодът трябва да е качен до сряда.</p><ol><li><b>Роли:</b> Лина – Ръководител, Борис – Анализатор, Мими – Говорител, Тео – Секретар-скептик.</li><li><b>Спрете:</b> Лина казва: „Имаме два варианта и срок. Да ги сравним, а не да се доказваме.“</li><li><b>Факти и мнения:</b> факт – в петък двама са на състезание, кабинетът е свободен и в двата дни; мнение – „В понеделник ще сме уморени“.</li><li><b>Обща цел:</b> епизод, качен до сряда, в който участват всички.</li><li><b>Варианти и матрица</b> (присъстват всички ×3, тих кабинет ×2, време за монтаж ×1):<table><tr><th></th><th>Петък</th><th>Понеделник</th><th>Събота</th></tr><tr><td>Присъстват (×3)</td><td>1→3</td><td>5→15</td><td>2→6</td></tr><tr><td>Тих кабинет (×2)</td><td>5→10</td><td>3→6</td><td>4→8</td></tr><tr><td>Монтаж (×1)</td><td>2→2</td><td>4→4</td><td>5→5</td></tr><tr><td><b>Сума</b></td><td>15</td><td><b>25</b></td><td>19</td></tr></table></li><li><b>Тест за устойчивост:</b> тих кабинет ×3 → 20, 28, 23. Печели пак понеделник, значи решението е устойчиво.</li><li><b>Запис на решението:</b> „Записваме в понеделник. Лина резервира кабинета до петък. Борис пише текста до понеделник. Във вторник вечер всеки казва дали е готов.“</li></ol></details><h3>Роли</h3><p><b>Ръководител</b> води срещата и следи времето. <b>Анализатор</b> отделя фактите от мненията. <b>Говорител</b> обявява решението. <b>Секретар-скептик</b> записва и пита „Какво може да се обърка?“.</p>
+ <h3>Етапи на екипа (Тъкман)</h3><p>Формиране → Бурна фаза → Нормиране → Изпълнение. Споровете в бурната фаза са нормални.</p>
+ <h3>Метод в 5 стъпки</h3><ol><li><b>Спрете</b> и кажете „имаме проблем“ – без обвинения.</li><li><b>Факти и мнения</b> – фактът може да се провери.</li><li><b>Обща цел</b> в едно изречение.</li><li><b>Варианти и матрица</b> – критерии с тегла, оценки 1–5, оценка × тегло, сума.</li><li><b>Запис на решението</b> – кой, какво, до кога.</li></ol>
+ 
+ <button class="go" onclick="go(0)">Към първата ситуация</button></div>`;
+ else if(cur>5){const rk=tot<18?'Новобранец 🐣':tot<36?'Екипен играч 🤝':tot<50?'Кризисен експерт 🧯':'Легенда на екипа 🏆';h=`<div class="card"><h2>🏁 Резултат</h2><table>${S.map((x,i)=>`<tr><td>${x.e} ${x.t}</td><td>${ck[i]?pt[i]+' / 10':'–'}</td></tr>`).join('')}</table><p class="big">Общо: ${tot} / 60 – ${rk}</p><p>Какво беше най-трудно? Кое правило бихте взели в реален проект?</p><button onclick="print()">🖨 Принтирай</button></div>`}
+ else{const x=S[cur];h=`<div class="card"><h2>${x.e} Ситуация ${'АБВГД'[cur]} – ${x.t}</h2><div id="ch"></div><p>${x.s}</p><div class="d">${x.d}</div><p>⏱ <span class="tmr" id="tmr"></span> <button onclick="tgl()">Старт / Стоп</button></p>${x.it.map((q,j)=>item(j)).join('')}<p><button class="go" onclick="chk()">✅ Провери и вземи точки</button> <span class="big" id="res">${ck[cur]?'Точки: '+pt[cur]+' / 10 '+(pt[cur]>=9?'🏆':pt[cur]>=6?'⭐':'💪')+(S[cur].it.filter((q,j)=>q.k=='txt'&&g(j,'sg')===undefined).length?' · ✍ Дай си точки на отворените въпроси':''):''}</span></p>${T?`<div class="t">👩‍🏫 <b>Отговори:</b> ${x.a}</div>`:''}</div>`}
+ $('#m').innerHTML=h;chips();tmu()}
+function chk(){ck[cur]=1;let t=0;S[cur].it.forEach((q,j)=>{ip[cur][j]=sc(j);t+=ip[cur][j]});pt[cur]=t;draw();if(t>=9)boom()}
+function go(i){cur=i;clearInterval(tm);tm=null;if(i>=0&&i<6)left=S[i].min*60;draw();scrollTo(0,0)}
+function tgl(){if(tm){clearInterval(tm);tm=null}else tm=setInterval(()=>{left--;tmu();if(left<=0){clearInterval(tm);tm=null}},1000)}
+function tmu(){const e=$('#tmr');if(e)e.textContent=left>0?Math.floor(left/60)+':'+String(left%60).padStart(2,'0'):'⏰ Времето изтече!'}
+const THS=[`<h2>🚨 Какво е кризисен щаб?</h2><p>Проблеми има във всеки екип – изчезнал файл, закъснение, спор. <b>Кризата</b> започва, когато търсим кого да обвиним, вместо какво да поправим. <b>Кризисният щаб</b> е кратка спокойна среща, на която екипът намира причината и решава какво да прави.</p><div class="ice"><div>👀 <b>Видимо:</b> „Файлът изчезна“ · „Закъсняваме“ · „Ники мълчи“</div><div>🌊 <b>Под водата (причините):</b> няма правила за версиите · няма ясно разпределение на задачите · никой не казва какво мисли</div></div><p>Правило на играта: <b>търсим причина, не виновен.</b></p>`,
+`<h2>🎭 Четири роли</h2><div class="gr"><div class="bx">🧭 <b>Ръководител</b><br>води срещата и следи времето</div><div class="bx">🔍 <b>Анализатор</b><br>отделя фактите от мненията</div><div class="bx">📣 <b>Говорител</b><br>обявява решението</div><div class="bx">🤔 <b>Секретар-скептик</b><br>записва и пита „Какво може да се обърка?“</div></div><p>Във всяка ситуация ролите се въртят – така всеки опитва всичко.</p>`,
+`<h2>📈 Как расте един екип (Тъкман)</h2><div class="st"><div style="height:100px">1. Формиране<br>опознават се</div><div style="height:130px;background:var(--red)">2. Бурна фаза<br>спорове, скрити конфликти</div><div style="height:160px">3. Нормиране<br>правила и доверие</div><div style="height:190px;background:var(--ok)">4. Изпълнение<br>работят гладко</div></div><p>Споровете във втората стъпка са <b>нормални</b>. Когато в екипа дойде или си тръгне човек, екипът често се връща назад.</p>`,
+`<h2>🔎 Факт, мнение, обвинение</h2><div class="gr"><div class="bx">✅ <b>Факт</b><br>може да се провери<br><small>„Файлът е качен във вторник.“</small></div><div class="bx">💭 <b>Мнение</b><br>оценка или усещане<br><small>„Дизайнът е грозен.“</small></div><div class="bx">🔥 <b>Обвинение</b><br>говори за човека<br><small>„Ти винаги всичко разваляш!“</small></div></div><h3>„Аз-послание“</h3><p><i>Аз се притеснявам, че… защото… и искам…</i></p><div class="t">⚡ <b>Бърза проверка 1:</b> „Тестването още не е започнало, а остават 2 дни.“ <button onclick="qk(this,1)">Факт</button> <button onclick="qk(this,0)">Мнение</button> <button onclick="qk(this,0)">Обвинение</button> <b></b></div><div class="t">⚡ <b>Бърза проверка 2:</b> „Ти винаги закъсняваш!“ <button onclick="qk(this,0)">Факт</button> <button onclick="qk(this,0)">Мнение</button> <button onclick="qk(this,1)">Обвинение</button> <b></b></div>`,
+`<h2>⚖️ Решаваме с матрица</h2><p>Когато две идеи спорят, не надвиквайте. Дайте критерии с <b>тегла</b> (колко е важен критерият), оценете от 1 до 5, умножете <b>оценка × тегло</b> и съберете.</p><table><tr><th></th><th>Идея А</th><th>Идея Б</th></tr><tr><td>Полезност (×3)</td><td>4 → 12</td><td>2 → 6</td></tr><tr><td>Лекота (×1)</td><td>2 → 2</td><td>5 → 5</td></tr><tr><td><b>Сума</b></td><td><b>14</b></td><td>11</td></tr></table><h3>Тройно ограничение</h3><p><span class="ch">📦 Обхват</span><span class="ch">⏰ Срок</span><span class="ch">👥 Ресурси</span> Ако се промени едно от трите, друго трябва да се промени. Напуснал човек означава по-малко ресурси, значи по-малък обхват или по-дълъг срок.</p>`];
+const th=()=>`<div class="card"><div class="pg"><i style="width:${(ts+1)*20}%"></i></div>${THS[ts]}<p>${ts?'<button onclick="tn(-1)">← Назад</button> ':''}${ts<4?'<button class="go" onclick="tn(1)">Напред →</button>':'<button class="go" onclick="go(-1)">🎮 Към играта</button>'} <small>${ts+1} / 5</small></p></div>`;
+const tn=d=>{ts=Math.max(0,Math.min(4,ts+d));draw();scrollTo(0,0)},qk=(b,ok)=>{b.parentNode.lastElementChild.innerHTML=ok?'✅ Точно!':'❌ Опитай пак'};
+function boom(){for(let i=0;i<30;i++){const e=document.createElement('span');e.className='cf';e.textContent=['🎉','⭐','🏆','✨'][i%4];e.style.left=Math.random()*100+'vw';e.style.animationDelay=Math.random()*.8+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),3500)}}
+addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&e.key=='U')tch()});
+draw();
+</script></body></html>
