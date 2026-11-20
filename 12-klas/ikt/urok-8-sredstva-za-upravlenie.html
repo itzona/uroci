@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eef1fa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Част от съдържанието е адаптирано по презентации на проект „Отворено учебно съдържание по програмиране и ИТ“, СофтУни Фондация, лиценз CC BY-NC-SA (https://github.com/BG-IT-Edu) -->
+<title>Урок 8: Софтуерни средства за управление на проекти (Упражнение) – Решаване на проблеми с ИКТ</title>
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="theme-12klas page-ikt">
+<header>
+  <a class="home-btn" href="../index.html" title="Към началната страница">← Начална страница</a>
+  <div class="hd-art hd-girl" onclick="go(-1)" title="Начална страница" role="img" aria-label="Учителка работи на лаптоп">
+    <svg viewBox="4 6 172 112" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gBl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b86f5"/><stop offset="1" stop-color="#3b57cf"/></linearGradient>
+<linearGradient id="gLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient>
+<linearGradient id="gDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient>
+</defs>
+<ellipse cx="90" cy="114" rx="80" ry="3.5" fill="#1e1b4b" opacity=".14"/>
+<rect x="24" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="151" y="96" width="5" height="17" rx="2" fill="#c8843c"/>
+<path d="M58 92 Q60 56 90 54 Q120 56 122 92Z" fill="url(#gBl)"/>
+<line x1="66" y1="66" x2="58" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<line x1="114" y1="66" x2="122" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<g transform="translate(90,38)"><g class="head">
+<path d="M-14 6 Q-17 -26 0 -28 Q17 -26 14 6 L19 32 Q8 28 6 16 L-6 16 Q-8 28 -19 32Z" fill="#c0392b"/>
+<rect x="-3.5" y="10" width="7" height="9" fill="#f2c9a5"/>
+<ellipse cx="0" cy="0" rx="11.5" ry="13" fill="#f7d3b2"/>
+<path d="M-12 -3 Q-12 -19 0 -18 Q12 -19 12 -3 Q7 -11 -2 -11 Q-8 -10 -12 -3Z" fill="#e0523f"/>
+<g class="eye"><ellipse cx="-4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/><ellipse cx="4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/></g>
+<circle cx="-8" cy="7" r="2" fill="#fda4af" opacity=".6"/><circle cx="8" cy="7" r="2" fill="#fda4af" opacity=".6"/>
+<path d="M-3.5 7 Q0 10.5 3.5 7" stroke="#be123c" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+</g></g>
+<rect x="63" y="60" width="54" height="30" rx="4" fill="url(#gLid)" stroke="#64748b" stroke-width="1.5"/>
+<text class="glow" x="90" y="80" font-size="13" font-family="Consolas,monospace" font-weight="bold" fill="#0891b2" text-anchor="middle">&lt;/&gt;</text>
+<circle class="hd" cx="58" cy="88" r="4.2" fill="#f7d3b2"/><circle class="hd hd2" cx="122" cy="88" r="4.2" fill="#f7d3b2"/>
+<rect x="148" y="78" width="13" height="13" rx="2.5" fill="#f43f5e"/>
+<path d="M161 81 Q167 84 161 89" stroke="#f43f5e" stroke-width="2.2" fill="none"/>
+<path class="steam" d="M152 74 Q149 70 152 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<path class="steam" style="animation-delay:.8s" d="M157 74 Q160 70 157 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<rect x="18" y="80" width="14" height="11" rx="2" fill="#ea580c"/>
+<ellipse cx="25" cy="76" rx="4" ry="8" fill="#22c55e"/><ellipse cx="19" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(-30 19 79)"/><ellipse cx="31" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(30 31 79)"/>
+<rect x="8" y="90" width="164" height="8" rx="4" fill="url(#gDk)"/>
+</svg>
+  </div>
+  <div class="ht">
+        <h1 align="center" onclick="go(-1)" title="Към началната страница">Решаване на проблеми с ИКТ</h1>
+    <p align="center">Управление на проекти, системи и приложен софтуер</p>
+  </div>
+  <div class="hd-art hd-class" role="img" aria-label="Група ученици работят на лаптопи">
+    <svg viewBox="0 8 192 110" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient><linearGradient id="sDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient></defs><ellipse cx="95" cy="114" rx="90" ry="3.5" fill="#1e1b4b" opacity=".14"/><rect x="12" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="174" y="96" width="5" height="17" rx="2" fill="#c8843c"/><g transform="translate(55,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#a78bfa"/><g class="kh" style="animation-delay:0.5s"><circle cx="0" cy="40" r="12.5" fill="#9a4a14"/><circle cx="0" cy="42" r="10" fill="#d9a679"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#9a4a14"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fbbf24" style="animation-delay:0.5s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.5s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.75s"/></g><g transform="translate(109,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fbbf24"/><g class="kh" style="animation-delay:1.1s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#111827"/><circle cx="0" cy="40" r="12.5" fill="#111827"/><circle cx="0" cy="42" r="10" fill="#8d5a3b"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#111827"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#38bdf8" style="animation-delay:1.1s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.1s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.35s"/></g><g transform="translate(163,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#2dd4bf"/><g class="kh" style="animation-delay:1.7s"><circle cx="0" cy="40" r="12.5" fill="#7c2d12"/><circle cx="0" cy="42" r="10" fill="#f2c9a5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#7c2d12"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fb7185" style="animation-delay:1.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.95s"/></g><rect x="28" y="68" width="160" height="5.5" rx="2.75" fill="#e2ae6c"/><g transform="translate(28,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fb7185"/><g class="kh" style="animation-delay:0.0s"><circle cx="0" cy="40" r="12.5" fill="#5b3a29"/><circle cx="0" cy="42" r="10" fill="#f7d3b2"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#5b3a29"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#22d3ee" style="animation-delay:0.0s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.0s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.25s"/></g><g transform="translate(82,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#34d399"/><g class="kh" style="animation-delay:0.7s"><circle cx="0" cy="40" r="12.5" fill="#1f2937"/><circle cx="0" cy="42" r="10" fill="#c68863"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#1f2937"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#f472b6" style="animation-delay:0.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.95s"/></g><g transform="translate(136,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#60a5fa"/><g class="kh" style="animation-delay:1.3s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#f2c14e"/><circle cx="0" cy="40" r="12.5" fill="#f2c14e"/><circle cx="0" cy="42" r="10" fill="#fde0c5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#f2c14e"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#a3e635" style="animation-delay:1.3s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.3s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.55s"/></g><rect x="2" y="90" width="186" height="8" rx="4" fill="url(#sDk)"/></svg>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav id="nav"></nav>
+  <main id="main">
+<h2>Урок 8: Софтуерни средства за управление на проекти (Упражнение)</h2><p>Планирането и проследяването на проекти днес се прави със специализирани софтуерни средства. Те помагат на екипа да вижда <b>кой какво прави, до кога и в какво състояние е</b> всяка задача.</p>
+ <h3>Видове средства</h3>
+ <table class="t"><tr><th>Вид</th><th>За какво служи</th><th>Примери</th></tr>
+ <tr><td>Табла със задачи (Kanban)</td><td>визуално проследяване на задачите</td><td>Trello, Microsoft Planner, Jira, GitHub Projects</td></tr>
+ <tr><td>Графици (Gantt)</td><td>планиране на срокове и зависимости</td><td>GanttProject, Microsoft Project, електронна таблица</td></tr>
+ <tr><td>Комуникация</td><td>съобщения, срещи, обсъждания</td><td>Microsoft Teams, Slack, Discord, Google Meet</td></tr>
+ <tr><td>Съвместни документи</td><td>общо писане и коментари</td><td>Google Документи, Microsoft 365, LibreOffice (споделени файлове)</td></tr>
+ <tr><td>Контрол на версиите</td><td>история на кода и съвместна разработка</td><td>Git, GitHub, GitLab</td></tr>
+ <tr><td>Диаграми</td><td>блок-схеми и схеми</td><td>diagrams.net (draw.io), Lucidchart</td></tr></table>
+ <p>Част от инструментите са платени, други – безплатни или с отворен код. При избора ползвай критерии: цена, лекота на използване, достъпност за целия екип, сигурност и интеграция.</p>
+ <h3>Упражнение 1: Kanban табло</h3>
+ <p>В полето „Пробвай сам“ по-долу има Kanban табло за проекта „Информационна система за библиотека“. Премествай задачите с бутоните ◀ ▶ и следи процента на изпълнение. Добави поне пет свои задачи.</p>
+ <h3>Упражнение 2: график на задачите</h3>
+ <div class="box">Създай в електронна таблица таблица със задачи: <b>име – отговорник – начало – край – продължителност</b>. С условно форматиране оцвети клетките по дати, за да получиш проста диаграма на Гант. Отбележи кои задачи зависят от други (например „Тестване“ не започва преди „Реализация“).</div>
+ <p><b>Задача за оценка:</b> Направи снимка на таблото и графика и ги добави към проектния ти доклад.</p><h3>Диаграма на Гант</h3><div class="fig"><svg viewBox="0 0 440 192" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="13" text-anchor="middle" font-size="10.5"><defs><marker id="mg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3a5a8c"/></marker></defs><line x1="110" y1="26" x2="110" y2="162" stroke="#e2e8f0"/><text x="123.5" y="18" font-size="9" fill="#64748b">1</text><line x1="137" y1="26" x2="137" y2="162" stroke="#e2e8f0"/><text x="150.5" y="18" font-size="9" fill="#64748b">2</text><line x1="164" y1="26" x2="164" y2="162" stroke="#e2e8f0"/><text x="177.5" y="18" font-size="9" fill="#64748b">3</text><line x1="191" y1="26" x2="191" y2="162" stroke="#e2e8f0"/><text x="204.5" y="18" font-size="9" fill="#64748b">4</text><line x1="218" y1="26" x2="218" y2="162" stroke="#e2e8f0"/><text x="231.5" y="18" font-size="9" fill="#64748b">5</text><line x1="245" y1="26" x2="245" y2="162" stroke="#e2e8f0"/><text x="258.5" y="18" font-size="9" fill="#64748b">6</text><line x1="272" y1="26" x2="272" y2="162" stroke="#e2e8f0"/><text x="285.5" y="18" font-size="9" fill="#64748b">7</text><line x1="299" y1="26" x2="299" y2="162" stroke="#e2e8f0"/><text x="312.5" y="18" font-size="9" fill="#64748b">8</text><line x1="326" y1="26" x2="326" y2="162" stroke="#e2e8f0"/><text x="339.5" y="18" font-size="9" fill="#64748b">9</text><line x1="353" y1="26" x2="353" y2="162" stroke="#e2e8f0"/><text x="366.5" y="18" font-size="9" fill="#64748b">10</text><line x1="380" y1="26" x2="380" y2="162" stroke="#e2e8f0"/><text x="393.5" y="18" font-size="9" fill="#64748b">11</text><line x1="407" y1="26" x2="407" y2="162" stroke="#e2e8f0"/><text x="6" y="18" text-anchor="start" font-weight="bold" font-size="10">Задача</text><text x="110" y="9" text-anchor="start" font-size="9" fill="#64748b">седмици</text><text x="6" y="48" text-anchor="start">Анализ</text><rect x="110" y="34" width="54" height="20" rx="5" fill="#fde68a" stroke="#3a5a8c"/><path d="M160 54 L160 64 L166 64" stroke="#3a5a8c" fill="none" marker-end="url(#mg)"/><text x="6" y="74" text-anchor="start">Проектиране</text><rect x="164" y="60" width="54" height="20" rx="5" fill="#a5f3fc" stroke="#3a5a8c"/><path d="M214 80 L214 90 L220 90" stroke="#3a5a8c" fill="none" marker-end="url(#mg)"/><text x="6" y="100" text-anchor="start">Реализация</text><rect x="218" y="86" width="108" height="20" rx="5" fill="#d1fae5" stroke="#3a5a8c"/><path d="M322 106 L322 116 L328 116" stroke="#3a5a8c" fill="none" marker-end="url(#mg)"/><text x="6" y="126" text-anchor="start">Тестване</text><rect x="326" y="112" width="54" height="20" rx="5" fill="#c7d2fe" stroke="#3a5a8c"/><path d="M376 132 L376 142 L382 142" stroke="#3a5a8c" fill="none" marker-end="url(#mg)"/><text x="6" y="152" text-anchor="start">Внедряване</text><rect x="380" y="138" width="27" height="20" rx="5" fill="#e9d5ff" stroke="#3a5a8c"/><text x="220" y="184" fill="#475569" font-size="10">лентите показват начало, продължителност и зависимости между задачите</text></svg><small>Диаграма на Гант</small></div>
+ <p>Изобразява задачите и връзките между тях върху времева линия – показва последователността и продължителността им. Създадена е от Хенри Гант през 1910 г., първоначално за производствени процеси, а по-късно навлиза в управлението на проекти. Използва се за <b>планиране и проследяване</b> на задачите, за <b>визуализация на напредъка</b> и за <b>откриване на забавяния</b>.</p>
+ <h3>Канбан табло</h3><div class="fig"><svg viewBox="0 0 440 176" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="13" text-anchor="middle" font-size="10">
+<g><rect x="6" y="4" width="136" height="168" rx="8" fill="#f1f5f9" stroke="#94a3b8"/><rect x="152" y="4" width="136" height="168" rx="8" fill="#f1f5f9" stroke="#94a3b8"/><rect x="298" y="4" width="136" height="168" rx="8" fill="#f1f5f9" stroke="#94a3b8"/></g>
+<rect x="6" y="4" width="136" height="24" rx="8" fill="#fecaca"/><rect x="152" y="4" width="136" height="24" rx="8" fill="#fde68a"/><rect x="298" y="4" width="136" height="24" rx="8" fill="#bbf7d0"/>
+<g font-weight="bold" font-size="11"><text x="74" y="21">To Do</text><text x="220" y="21">In Progress</text><text x="366" y="21">Done</text></g>
+<g fill="#fff" stroke="#cbd5e1"><rect x="16" y="38" width="116" height="30" rx="5"/><rect x="16" y="76" width="116" height="30" rx="5"/><rect x="16" y="114" width="116" height="30" rx="5"/><rect x="162" y="38" width="116" height="30" rx="5"/><rect x="162" y="76" width="116" height="30" rx="5"/><rect x="308" y="38" width="116" height="30" rx="5"/><rect x="308" y="76" width="116" height="30" rx="5"/></g>
+<g fill="#1e293b"><text x="74" y="57">Дизайн на екраните</text><text x="74" y="95">Таблици в базата</text><text x="74" y="133">План за тестове</text><text x="220" y="57">Писане на кода</text><text x="220" y="95">Проверка на форма</text><text x="366" y="57">Събрани изисквания</text><text x="366" y="95">Избрани технологии</text></g>
+</svg><small>Канбан табло: задачите „пътуват“ отляво надясно</small></div>
+ <p>Визуална схема за управление на задачите: помага на екипите да следят напредъка. Обикновено съдържа колоните <b>To Do</b> (предстоящи), <b>In Progress</b> (в процес) и <b>Done</b> (готово), а членовете на екипа местят задачите според етапа, на който се намират.</p>
+ <h3>Най-известни средства</h3><div class="fig"><svg viewBox="0 0 440 98" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="13" text-anchor="middle" font-size="11.0"><rect x="0" y="3" width="104" height="92" rx="12" fill="#fde68a" stroke="#3a5a8c"/><text x="52" y="39" font-size="26">📋</text><text x="52" y="58" font-weight="bold" font-size="11.0">Trello</text><text x="52" y="73" font-size="9" fill="#334155">канбан табло,</text><text x="52" y="84" font-size="9" fill="#334155">малки екипи</text><rect x="112" y="3" width="104" height="92" rx="12" fill="#a5f3fc" stroke="#3a5a8c"/><text x="164" y="39" font-size="26">🐞</text><text x="164" y="58" font-weight="bold" font-size="11.0">Jira</text><text x="164" y="73" font-size="9" fill="#334155">Scrum, Kanban,</text><text x="164" y="84" font-size="9" fill="#334155">бъгове</text><rect x="224" y="3" width="104" height="92" rx="12" fill="#d1fae5" stroke="#3a5a8c"/><text x="276" y="39" font-size="26">🧩</text><text x="276" y="58" font-weight="bold" font-size="11.0">Asana</text><text x="276" y="73" font-size="9" fill="#334155">средни и</text><text x="276" y="84" font-size="9" fill="#334155">големи екипи</text><rect x="336" y="3" width="104" height="92" rx="12" fill="#c7d2fe" stroke="#3a5a8c"/><text x="388" y="39" font-size="26">📈</text><text x="388" y="58" font-weight="bold" font-size="11.0">MS Project</text><text x="388" y="73" font-size="9" fill="#334155">Гант, ресурси,</text><text x="388" y="84" font-size="9" fill="#334155">сложни проекти</text></svg></div>
+ <table class="t"><tr><th>Средство</th><th>Особености</th></tr>
+ <tr><td>Trello</td><td>канбан табло; лесен за използване, подходящ за малки екипи; задачи, срокове, коментари и файлове</td></tr>
+ <tr><td>Jira</td><td>специализиран за софтуерни проекти и Agile/Scrum екипи; Scrum, Kanban, проследяване на бъгове, подробни отчети</td></tr>
+ <tr><td>Asana</td><td>подходящ за средни и големи екипи; гъвкаво планиране; интеграции със Slack, Google Drive и др.</td></tr>
+ <tr><td>Microsoft Project</td><td>за сложни проекти и големи екипи; диаграми на Гант и автоматизация на срокове; проследяване на ресурсите</td></tr></table>
+ <h3>Упражнение 3: Waterfall проект в Asana</h3>
+ <ol style="line-height:1.8"><li>Влез в asana.com, избери <b>Get started</b> и продължи с e-mail; създай профил и попълни името си.</li>
+ <li>Задай име на проекта, разпиши няколко задачи и няколко етапа, и избери изглед <b>Timeline</b>.</li>
+ <li>Добави e-mail адресите на хората от екипа.</li>
+ <li>С <b>Add section</b> добави секция за етапа „Приключване“.</li>
+ <li>В секцията „Планиране“ добави задача, например „Избор на технологии“, и я отвори за редактиране.</li>
+ <li>Задай отговорник, срок, зависимост между задачите, приоритет и описание.</li>
+ <li>Добави задачи към всеки етап. Всяка трябва да започва след приключването на предишната – задай зависимостите.</li></ol>
+ <div class="fig"><svg viewBox="0 0 440 150" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="13" text-anchor="middle" font-size="10">
+<rect x="4" y="4" width="432" height="142" rx="8" fill="#fff" stroke="#94a3b8"/><rect x="4" y="4" width="432" height="22" rx="8" fill="#fecaca"/><text x="14" y="19" text-anchor="start" font-weight="bold">Проект: Нов уебсайт – изглед Timeline</text>
+<g fill="#f1f5f9"><rect x="4" y="30" width="432" height="16"/><rect x="4" y="82" width="432" height="16"/><rect x="4" y="124" width="432" height="16"/></g>
+<g font-weight="bold" text-anchor="start"><text x="12" y="42">Иницииране</text><text x="12" y="94">Планиране</text><text x="12" y="136">Приключване</text></g>
+<g text-anchor="start"><text x="22" y="62">Определяне на целите</text><text x="22" y="76">Одобрение от клиента</text><text x="22" y="112">Избор на технологии</text></g>
+<rect x="170" y="52" width="80" height="12" rx="4" fill="#a5f3fc"/><rect x="250" y="66" width="70" height="12" rx="4" fill="#a5f3fc"/><rect x="280" y="102" width="96" height="12" rx="4" fill="#d1fae5"/><rect x="376" y="126" width="50" height="10" rx="4" fill="#e9d5ff"/>
+</svg><small>Примерен изглед на времевата линия в софтуер за управление</small></div><h3>Упражнение 4: Scrum табло в Trello</h3>
+ <ol style="line-height:1.8"><li>Влез в trello.com, въведи e-mail и избери <b>Sign up</b>.</li>
+ <li>Избери <b>Create → Create Board</b>, задай фон, видимост и име на проекта.</li>
+ <li>С <b>Add List</b> създай колоните: <b>Backlog, To Do, In Progress, Review / Testing, Done</b>.</li>
+ <li>С <b>Add a card</b> добави задачите във всяка колона.</li>
+ <li>За всяка карта задай начална и крайна дата на спринта (например 2 седмици) от <b>Dates</b>.</li></ol>
+ <p>В полето „Пробвай сам“ по-долу можеш да изпробваш канбан таблото и диаграмата на Гант.</p><div class="fig"><svg viewBox="0 0 440 150" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="13" text-anchor="middle" font-size="9.5"><rect x="0" y="0" width="440" height="150" rx="8" fill="#1d4ed8"/><rect x="6" y="8" width="80" height="136" rx="6" fill="#ebecf0"/><text x="46" y="22" font-weight="bold" font-size="8.6">Backlog</text><rect x="12" y="30" width="68" height="28" rx="4" fill="#fff" stroke="#cbd5e1"/><rect x="18" y="38" width="40" height="3" fill="#94a3b8"/><rect x="18" y="46" width="28" height="3" fill="#cbd5e1"/><rect x="12" y="64" width="68" height="28" rx="4" fill="#fff" stroke="#cbd5e1"/><rect x="18" y="72" width="40" height="3" fill="#94a3b8"/><rect x="18" y="80" width="28" height="3" fill="#cbd5e1"/><rect x="12" y="98" width="68" height="28" rx="4" fill="#fff" stroke="#cbd5e1"/><rect x="18" y="106" width="40" height="3" fill="#94a3b8"/><rect x="18" y="114" width="28" height="3" fill="#cbd5e1"/><rect x="92" y="8" width="80" height="136" rx="6" fill="#ebecf0"/><text x="132" y="22" font-weight="bold" font-size="8.6">To Do</text><rect x="98" y="30" width="68" height="28" rx="4" fill="#fff" stroke="#cbd5e1"/><rect x="104" y="38" width="40" height="3" fill="#94a3b8"/><rect x="104" y="46" width="28" height="3" fill="#cbd5e1"/><rect x="98" y="64" width="68" height="28" rx="4" fill="#fff" stroke="#cbd5e1"/><rect x="104" y="72" width="40" height="3" fill="#94a3b8"/><rect x="104" y="80" width="28" height="3" fill="#cbd5e1"/><rect x="178" y="8" width="80" height="136" rx="6" fill="#ebecf0"/><text x="218" y="22" font-weight="bold" font-size="8.6">In Progress</text><rect x="184" y="30" width="68" height="28" rx="4" fill="#fff" stroke="#cbd5e1"/><rect x="190" y="38" width="40" height="3" fill="#94a3b8"/><rect x="190" y="46" width="28" height="3" fill="#cbd5e1"/><rect x="184" y="64" width="68" height="28" rx="4" fill="#fff" stroke="#cbd5e1"/><rect x="190" y="72" width="40" height="3" fill="#94a3b8"/><rect x="190" y="80" width="28" height="3" fill="#cbd5e1"/><rect x="264" y="8" width="80" height="136" rx="6" fill="#ebecf0"/><text x="304" y="22" font-weight="bold" font-size="8.6">Review/Test</text><rect x="270" y="30" width="68" height="28" rx="4" fill="#fff" stroke="#cbd5e1"/><rect x="276" y="38" width="40" height="3" fill="#94a3b8"/><rect x="276" y="46" width="28" height="3" fill="#cbd5e1"/><rect x="270" y="64" width="68" height="28" rx="4" fill="#fff" stroke="#cbd5e1"/><rect x="276" y="72" width="40" height="3" fill="#94a3b8"/><rect x="276" y="80" width="28" height="3" fill="#cbd5e1"/><rect x="350" y="8" width="80" height="136" rx="6" fill="#ebecf0"/><text x="390" y="22" font-weight="bold" font-size="8.6">Done</text><rect x="356" y="30" width="68" height="28" rx="4" fill="#fff" stroke="#cbd5e1"/><rect x="362" y="38" width="40" height="3" fill="#94a3b8"/><rect x="362" y="46" width="28" height="3" fill="#cbd5e1"/><rect x="356" y="64" width="68" height="28" rx="4" fill="#fff" stroke="#cbd5e1"/><rect x="362" y="72" width="40" height="3" fill="#94a3b8"/><rect x="362" y="80" width="28" height="3" fill="#cbd5e1"/></svg><small>Примерно Scrum табло с колони и карти</small></div>
+<h3>🧮 Пробвай сам – променяй числата и стойностите</h3><div class="lab one"><div class="pane"><small>Промени числата или избери стойности и виж резултата</small><iframe id="pv" sandbox="allow-scripts allow-modals" title="Упражнение" srcdoc="<meta charset=&quot;UTF-8&quot;><body style=&quot;font-family:Arial;margin:10px&quot;><style>
+body{font:13px Arial;margin:0}.tabs button{padding:5px 10px;border:1px solid #cbd5e1;background:#fff;border-radius:8px 8px 0 0;cursor:pointer}.tabs button.on{background:#2f4a73;color:#fff}
+.cols{display:flex;gap:6px}.col{flex:1;background:#f1f5f9;border-radius:8px;padding:5px;min-height:130px}.col h4{margin:0 0 5px;font-size:11px}
+.card{background:#fff;border:1px solid #cbd5e1;border-radius:6px;padding:4px 5px;margin-bottom:4px;font-size:12px}.card button{border:0;background:#e2e8f0;border-radius:4px;cursor:pointer;margin-right:2px}
+.pb{height:8px;background:#e2e8f0;border-radius:4px;margin:6px 0}.pb div{height:8px;background:#22c55e;border-radius:4px;transition:.3s}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid #e2e8f0;padding:2px 4px;font-size:12px}td.g{padding:0;position:relative;height:22px}.bar{position:absolute;top:4px;height:14px;background:#6366f1;border-radius:4px}
+input[type=number]{width:44px}
+</style>
+<div class=&quot;tabs&quot;><button id=&quot;b1&quot; class=&quot;on&quot; onclick=&quot;tab(1)&quot;>Kanban табло</button><button id=&quot;b2&quot; onclick=&quot;tab(2)&quot;>Диаграма на Гант</button></div>
+<div id=&quot;v1&quot;>
+<p style=&quot;margin:6px 0&quot;><input id=&quot;n&quot; placeholder=&quot;Нова задача...&quot; style=&quot;width:55%&quot;> <button onclick=&quot;add()&quot;>Добави</button></p>
+<div class=&quot;pb&quot;><div id=&quot;p&quot;></div></div><div id=&quot;s&quot; style=&quot;margin-bottom:6px&quot;></div>
+<div class=&quot;cols&quot; id=&quot;b&quot;></div>
+</div>
+<div id=&quot;v2&quot; style=&quot;display:none&quot;>
+<p style=&quot;margin:6px 0&quot;>Задай начален ден и продължителност. ⚠ означава, че задачата започва преди предишната да е приключила.</p>
+<table id=&quot;g&quot;></table><p id=&quot;gs&quot; style=&quot;font-weight:bold&quot;></p>
+</div>
+<script>
+function tab(n){
+  document.getElementById('v1').style.display=n==1?'block':'none';
+  document.getElementById('v2').style.display=n==2?'block':'none';
+  document.getElementById('b1').className=n==1?'on':'';
+  document.getElementById('b2').className=n==2?'on':'';
+}
+const C=['To Do','In Progress','Review / Testing','Done'];
+let T=[['Събиране на изисквания',3],['Проектиране на базата',2],['Прототип на екраните',1],['Планиране на тестове',0],['Писане на кода',0]];
+function draw(){
+  document.getElementById('b').innerHTML=C.map((c,ci)=>'<div class=&quot;col&quot;><h4>'+c+' ('+T.filter(t=>t[1]==ci).length+')</h4>'+T.map((t,i)=>t[1]==ci?'<div class=&quot;card&quot;>'+t[0]+'<br>'+(ci>0?'<button onclick=&quot;mv('+i+',-1)&quot;>◀</button>':'')+(ci<3?'<button onclick=&quot;mv('+i+',1)&quot;>▶</button>':'')+'</div>':'').join('')+'</div>').join('');
+  const d=T.filter(t=>t[1]==3).length, pc=T.length?Math.round(d*100/T.length):0;
+  document.getElementById('p').style.width=pc+'%';
+  document.getElementById('s').textContent='Изпълнение: '+pc+'% ('+d+' от '+T.length+' задачи)';
+}
+function mv(i,d){ T[i][1]+=d; draw(); }
+function add(){
+  const v=document.getElementById('n').value.trim().replace(/</g,'&amp;lt;');
+  if(v){ T.push([v,0]); document.getElementById('n').value=''; draw(); }
+}
+const DAYS=20;
+let G=[['Анализ',0,3],['Проектиране',3,4],['Реализация',7,6],['Тестване',13,4],['Внедряване',17,3]];
+function drawG(){
+  let h='<tr><th>Задача</th><th>Начало (ден)</th><th>Дни</th><th style=&quot;width:50%&quot;>Времева линия (20 дни)</th></tr>';
+  G.forEach((t,i)=>{
+    const warn=i>0 &amp;&amp; t[1]<G[i-1][1]+G[i-1][2];
+    h+='<tr><td>'+(warn?'⚠ ':'')+t[0]+'</td><td><input type=&quot;number&quot; min=&quot;0&quot; max=&quot;19&quot; value=&quot;'+t[1]+'&quot; onchange=&quot;G['+i+'][1]=+this.value;setTimeout(drawG,0)&quot;></td><td><input type=&quot;number&quot; min=&quot;1&quot; max=&quot;20&quot; value=&quot;'+t[2]+'&quot; onchange=&quot;G['+i+'][2]=+this.value;setTimeout(drawG,0)&quot;></td><td class=&quot;g&quot;><div class=&quot;bar&quot; style=&quot;left:'+(t[1]*100/DAYS)+'%;width:'+(Math.max(0,Math.min(t[2],DAYS-t[1]))*100/DAYS)+'%&quot;></div></td></tr>';
+  });
+  document.getElementById('g').innerHTML=h;
+  document.getElementById('gs').textContent='Проектът завършва в ден '+Math.max(...G.map(t=>t[1]+t[2]))+'.';
+}
+draw(); drawG();
+</script>"></iframe></div></div><div class="grip" title="Дръпни за височина">⋯⋯ дръпни нагоре/надолу, за да промениш височината ⋯⋯</div>
+<h3>📝 Задача за изпълнение</h3><div class="task"><p class="tt">Направи табло със задачи за свой учебен проект.</p><p class="tw">Изпълни в: <b>Trello, Microsoft Planner или таблица в Word</b></p><ol><li>Избери безплатно средство (Trello или Microsoft Planner) или направи таблица с четири колони в Word.</li><li>Добави поне 8 задачи с отговорник и срок и ги разпредели по колоните.</li><li>Премести три задачи в следващата колона и запиши коя и защо.</li><li>Направи екранна снимка на таблото (Win+Shift+S) и я постави в документ.</li><li>Допиши по едно изречение: кое средство от урока би ползвал за график, комуникация и контрол на версиите.</li></ol><p class="tb">⭐ <b>Бонус:</b> Направи прост график на проекта в Excel – задачи по редове, седмици по колони, оцветени клетки за срока.</p><p class="tf">📁 Запази като: <code>tablo-zadachi.docx</code></p></div>
+<h3>📝 Кратък тест</h3><div id="quiz"></div><div class="score" id="sc"></div>
+<div class="pager"><a href="urok-7-reshavane-na-problemi.html">← Назад</a><a href="urok-9-priklyuchvane-na-proekta.html">Напред →</a></div>
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p class="sf-title">Уроци по информатика и информационни технологии</p>
+  <p class="sf-teacher">Петя Петрова – учител по информатика, КМИТ и ИТ</p>
+  <p class="sf-school">127. СУ „Иван Николаевич Денкоглу“</p>
+  <p class="sf-links"><a href="../../index.html">Начало</a><a href="../../9-klas/index.html">9. клас</a><a href="../../12-klas/index.html">12. клас</a></p>
+</footer>
+<script>const CUR=7,QUIZ=[{"q":"Кое средство е предназначено за визуализиране на задачите върху дъска с колони?","o":["Kanban табло","Антивирусна програма","Текстов редактор"],"a":0,"w":"Колоните показват състоянието на задачите."},{"q":"Каква информация показва диаграмата на Гант?","o":["Задачи, срокове и зависимости във времето","Цената на софтуера","Структурата на базата от данни"],"a":0,"w":"Лентите показват кога започва и свършва всяка задача."},{"q":"За какво се използва Git?","o":["За контрол на версиите на кода","За рисуване","За изпращане на писма"],"a":0,"w":"Git пази историята на промените и улеснява съвместната работа."},{"q":"Кой инструмент е специализиран за софтуерни проекти и Agile/Scrum екипи?","o":["Jira","Trello","Notepad"],"a":0,"w":"Jira поддържа Scrum, Kanban и проследяване на бъгове."},{"q":"За какво се използва диаграмата на Гант?","o":["За планиране, проследяване и откриване на забавяния","За рисуване на логота","За архивиране"],"a":0,"w":"Показва задачите и продължителността им във времето."}];</script>
+<script src="ikt.js"></script>
+</body>
+</html>

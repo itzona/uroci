@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eef1fa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Част от съдържанието е адаптирано по презентации на проект „Отворено учебно съдържание по програмиране и ИТ“, СофтУни Фондация, лиценз CC BY-NC-SA (https://github.com/BG-IT-Edu) -->
+<title>Урок 5: Анализ на риска – Решаване на проблеми с ИКТ</title>
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="theme-12klas page-ikt">
+<header>
+  <a class="home-btn" href="../index.html" title="Към началната страница">← Начална страница</a>
+  <div class="hd-art hd-girl" onclick="go(-1)" title="Начална страница" role="img" aria-label="Учителка работи на лаптоп">
+    <svg viewBox="4 6 172 112" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gBl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b86f5"/><stop offset="1" stop-color="#3b57cf"/></linearGradient>
+<linearGradient id="gLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient>
+<linearGradient id="gDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient>
+</defs>
+<ellipse cx="90" cy="114" rx="80" ry="3.5" fill="#1e1b4b" opacity=".14"/>
+<rect x="24" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="151" y="96" width="5" height="17" rx="2" fill="#c8843c"/>
+<path d="M58 92 Q60 56 90 54 Q120 56 122 92Z" fill="url(#gBl)"/>
+<line x1="66" y1="66" x2="58" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<line x1="114" y1="66" x2="122" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<g transform="translate(90,38)"><g class="head">
+<path d="M-14 6 Q-17 -26 0 -28 Q17 -26 14 6 L19 32 Q8 28 6 16 L-6 16 Q-8 28 -19 32Z" fill="#c0392b"/>
+<rect x="-3.5" y="10" width="7" height="9" fill="#f2c9a5"/>
+<ellipse cx="0" cy="0" rx="11.5" ry="13" fill="#f7d3b2"/>
+<path d="M-12 -3 Q-12 -19 0 -18 Q12 -19 12 -3 Q7 -11 -2 -11 Q-8 -10 -12 -3Z" fill="#e0523f"/>
+<g class="eye"><ellipse cx="-4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/><ellipse cx="4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/></g>
+<circle cx="-8" cy="7" r="2" fill="#fda4af" opacity=".6"/><circle cx="8" cy="7" r="2" fill="#fda4af" opacity=".6"/>
+<path d="M-3.5 7 Q0 10.5 3.5 7" stroke="#be123c" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+</g></g>
+<rect x="63" y="60" width="54" height="30" rx="4" fill="url(#gLid)" stroke="#64748b" stroke-width="1.5"/>
+<text class="glow" x="90" y="80" font-size="13" font-family="Consolas,monospace" font-weight="bold" fill="#0891b2" text-anchor="middle">&lt;/&gt;</text>
+<circle class="hd" cx="58" cy="88" r="4.2" fill="#f7d3b2"/><circle class="hd hd2" cx="122" cy="88" r="4.2" fill="#f7d3b2"/>
+<rect x="148" y="78" width="13" height="13" rx="2.5" fill="#f43f5e"/>
+<path d="M161 81 Q167 84 161 89" stroke="#f43f5e" stroke-width="2.2" fill="none"/>
+<path class="steam" d="M152 74 Q149 70 152 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<path class="steam" style="animation-delay:.8s" d="M157 74 Q160 70 157 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<rect x="18" y="80" width="14" height="11" rx="2" fill="#ea580c"/>
+<ellipse cx="25" cy="76" rx="4" ry="8" fill="#22c55e"/><ellipse cx="19" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(-30 19 79)"/><ellipse cx="31" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(30 31 79)"/>
+<rect x="8" y="90" width="164" height="8" rx="4" fill="url(#gDk)"/>
+</svg>
+  </div>
+  <div class="ht">
+        <h1 align="center" onclick="go(-1)" title="Към началната страница">Решаване на проблеми с ИКТ</h1>
+    <p align="center">Управление на проекти, системи и приложен софтуер</p>
+  </div>
+  <div class="hd-art hd-class" role="img" aria-label="Група ученици работят на лаптопи">
+    <svg viewBox="0 8 192 110" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient><linearGradient id="sDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient></defs><ellipse cx="95" cy="114" rx="90" ry="3.5" fill="#1e1b4b" opacity=".14"/><rect x="12" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="174" y="96" width="5" height="17" rx="2" fill="#c8843c"/><g transform="translate(55,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#a78bfa"/><g class="kh" style="animation-delay:0.5s"><circle cx="0" cy="40" r="12.5" fill="#9a4a14"/><circle cx="0" cy="42" r="10" fill="#d9a679"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#9a4a14"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fbbf24" style="animation-delay:0.5s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.5s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.75s"/></g><g transform="translate(109,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fbbf24"/><g class="kh" style="animation-delay:1.1s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#111827"/><circle cx="0" cy="40" r="12.5" fill="#111827"/><circle cx="0" cy="42" r="10" fill="#8d5a3b"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#111827"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#38bdf8" style="animation-delay:1.1s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.1s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.35s"/></g><g transform="translate(163,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#2dd4bf"/><g class="kh" style="animation-delay:1.7s"><circle cx="0" cy="40" r="12.5" fill="#7c2d12"/><circle cx="0" cy="42" r="10" fill="#f2c9a5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#7c2d12"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fb7185" style="animation-delay:1.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.95s"/></g><rect x="28" y="68" width="160" height="5.5" rx="2.75" fill="#e2ae6c"/><g transform="translate(28,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fb7185"/><g class="kh" style="animation-delay:0.0s"><circle cx="0" cy="40" r="12.5" fill="#5b3a29"/><circle cx="0" cy="42" r="10" fill="#f7d3b2"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#5b3a29"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#22d3ee" style="animation-delay:0.0s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.0s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.25s"/></g><g transform="translate(82,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#34d399"/><g class="kh" style="animation-delay:0.7s"><circle cx="0" cy="40" r="12.5" fill="#1f2937"/><circle cx="0" cy="42" r="10" fill="#c68863"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#1f2937"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#f472b6" style="animation-delay:0.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.95s"/></g><g transform="translate(136,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#60a5fa"/><g class="kh" style="animation-delay:1.3s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#f2c14e"/><circle cx="0" cy="40" r="12.5" fill="#f2c14e"/><circle cx="0" cy="42" r="10" fill="#fde0c5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#f2c14e"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#a3e635" style="animation-delay:1.3s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.3s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.55s"/></g><rect x="2" y="90" width="186" height="8" rx="4" fill="url(#sDk)"/></svg>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav id="nav"></nav>
+  <main id="main">
+<h2>Урок 5: Анализ на риска</h2><p><b>Рискът</b> е събитие или условие с несигурна поява, което ако настъпи, влияе на целите на проекта – на срока, цената, обхвата или качеството. Анализът на риска не премахва всички проблеми, но помага да сме подготвени.</p>
+ <h3>Процес</h3>
+ <ul class="tg"><li><code>1. Идентифициране</code><span>какво може да се обърка? (мозъчна атака, опит от други проекти)</span></li>
+ <li><code>2. Оценка</code><span>каква е вероятността и колко голямо е влиянието?</span></li>
+ <li><code>3. Реакция</code><span>какво ще направим?</span></li>
+ <li><code>4. Наблюдение</code><span>следим рисковете и обновяваме оценките</span></li></ul>
+ <h3>Матрица на риска</h3><div class="fig"><svg viewBox="0 0 440 205" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="13" text-anchor="middle" font-size="12">
+<g stroke="#fff" stroke-width="2"><rect x="100" y="10" width="96" height="48" fill="#fef08a"/><rect x="196" y="10" width="96" height="48" fill="#fed7aa"/><rect x="292" y="10" width="96" height="48" fill="#fecaca"/>
+<rect x="100" y="58" width="96" height="48" fill="#bbf7d0"/><rect x="196" y="58" width="96" height="48" fill="#fef08a"/><rect x="292" y="58" width="96" height="48" fill="#fed7aa"/>
+<rect x="100" y="106" width="96" height="48" fill="#bbf7d0"/><rect x="196" y="106" width="96" height="48" fill="#bbf7d0"/><rect x="292" y="106" width="96" height="48" fill="#fef08a"/></g>
+<g font-weight="bold"><text x="148" y="38">3</text><text x="244" y="38">6</text><text x="340" y="38">9</text><text x="148" y="86">2</text><text x="244" y="86">4</text><text x="340" y="86">6</text><text x="148" y="134">1</text><text x="244" y="134">2</text><text x="340" y="134">3</text></g>
+<g font-size="11" fill="#475569"><text x="94" y="38" text-anchor="end">висока</text><text x="94" y="86" text-anchor="end">средна</text><text x="94" y="134" text-anchor="end">ниска</text>
+<text x="148" y="172">малко</text><text x="244" y="172">средно</text><text x="340" y="172">голямо</text></g>
+<text x="46" y="16" font-size="11" font-weight="bold">Вероятност</text><text x="244" y="194" font-size="11" font-weight="bold">Влияние →</text>
+</svg><small>Матрица на риска: оценка = вероятност × влияние</small></div>
+ <p>Всеки риск получава оценка <b>= вероятност × влияние</b>. Рисковете с най-висока оценка обработваме първи.</p>
+ <h3>Стратегии за реакция</h3><div class="fig"><svg viewBox="0 0 440 98" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="13" text-anchor="middle" font-size="11.0"><rect x="0" y="3" width="104" height="92" rx="12" fill="#fde68a" stroke="#3a5a8c"/><text x="52" y="39" font-size="26">🚫</text><text x="52" y="58" font-weight="bold" font-size="11.0">Избягване</text><text x="52" y="73" font-size="9" fill="#334155">премахваме</text><text x="52" y="84" font-size="9" fill="#334155">причината</text><rect x="112" y="3" width="104" height="92" rx="12" fill="#a5f3fc" stroke="#3a5a8c"/><text x="164" y="39" font-size="26">⬇️</text><text x="164" y="58" font-weight="bold" font-size="11.0">Намаляване</text><text x="164" y="73" font-size="9" fill="#334155">по-малка</text><text x="164" y="84" font-size="9" fill="#334155">вероятност</text><rect x="224" y="3" width="104" height="92" rx="12" fill="#d1fae5" stroke="#3a5a8c"/><text x="276" y="39" font-size="26">🤝</text><text x="276" y="58" font-weight="bold" font-size="11.0">Приемане</text><text x="276" y="73" font-size="9" fill="#334155">подготвени</text><text x="276" y="84" font-size="9" fill="#334155">сме</text><rect x="336" y="3" width="104" height="92" rx="12" fill="#c7d2fe" stroke="#3a5a8c"/><text x="388" y="39" font-size="26">➡️</text><text x="388" y="58" font-weight="bold" font-size="11.0">Прехвърляне</text><text x="388" y="73" font-size="9" fill="#334155">застраховка,</text><text x="388" y="84" font-size="9" fill="#334155">външна фирма</text></svg></div>
+ <table class="t"><tr><th>Стратегия</th><th>Какво означава</th><th>Пример</th></tr>
+ <tr><td>Избягване</td><td>променяме плана, за да премахнем риска</td><td>ползваме познат инструмент вместо нов</td></tr>
+ <tr><td>Намаляване</td><td>ограничаваме вероятността или влиянието</td><td>ежедневно резервно копие на кода</td></tr>
+ <tr><td>Прехвърляне</td><td>отговорността минава към друг</td><td>външна услуга или застраховка</td></tr>
+ <tr><td>Приемане</td><td>осъзнато поемаме риска</td><td>малка забава на второстепенна функция</td></tr></table>
+ <h3>Типични рискове в софтуерен проект</h3>
+ <p>Неясни или променящи се изисквания • напускане на ключов член на екипа • нереалистични срокове • нова или непозната технология • липса на резервни копия • проблеми със сигурността.</p>
+ <h3>Четирите етапа на анализа на риска</h3><div class="fig"><svg viewBox="0 0 440 98" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="13" text-anchor="middle" font-size="10.7"><rect x="0" y="3" width="104" height="92" rx="12" fill="#fde68a" stroke="#3a5a8c"/><text x="52" y="39" font-size="26">🔍</text><text x="52" y="58" font-weight="bold" font-size="10.7">Идентифициране</text><text x="52" y="73" font-size="9" fill="#334155">какво може</text><text x="52" y="84" font-size="9" fill="#334155">да се случи</text><rect x="112" y="3" width="104" height="92" rx="12" fill="#a5f3fc" stroke="#3a5a8c"/><text x="164" y="39" font-size="26">⚖️</text><text x="164" y="58" font-weight="bold" font-size="10.7">Оценяване</text><text x="164" y="73" font-size="9" fill="#334155">вероятност и</text><text x="164" y="84" font-size="9" fill="#334155">последствия</text><rect x="224" y="3" width="104" height="92" rx="12" fill="#d1fae5" stroke="#3a5a8c"/><text x="276" y="39" font-size="26">🛡️</text><text x="276" y="58" font-weight="bold" font-size="10.7">Стратегии</text><text x="276" y="73" font-size="9" fill="#334155">как реагираме</text><rect x="336" y="3" width="104" height="92" rx="12" fill="#c7d2fe" stroke="#3a5a8c"/><text x="388" y="39" font-size="26">👁️</text><text x="388" y="58" font-weight="bold" font-size="10.7">Мониторинг</text><text x="388" y="73" font-size="9" fill="#334155">следим и</text><text x="388" y="84" font-size="9" fill="#334155">обновяваме</text></svg></div>
+ <p>Идентифициране → Оценяване → Разработване на стратегии → Мониторинг и преглед. Анализът се използва в бизнеса, технологиите, здравеопазването и др., а в проектите помага да се открият проблемите още в ранните етапи.</p>
+ <h3>Методи за идентифициране на рискове</h3>
+ <ul class="tg"><li><code>Въпросници</code><span>предварително подготвени въпроси към ключови членове на екипа – структурирани и обективни отговори; подходящи за големи проекти</span></li>
+ <li><code>Мозъчна атака</code><span>екипът предлага възможни рискове без критика – подходяща за креативни екипи</span></li>
+ <li><code>SWOT анализ</code><span>силни и слаби страни, възможности и заплахи</span></li>
+ <li><code>Исторически данни</code><span>опит от предишни проекти</span></li>
+ <li><code>Интервюта и анализ на документация</code><span>разговори с експерти и преглед на документите</span></li></ul>
+ <p><b>Примерни въпроси:</b> Кои са най-големите технически предизвикателства? Какви са зависимостите на проекта (трети страни, библиотеки)?</p>
+ <h3>Качествена оценка и таблица на рисковете</h3>
+ <p>Вероятността може да е <b>ниска, средна или висока</b>, а последствията – <b>малки, средни или тежки</b>. Рисковете се записват в таблица (матрица на риска) с план за действие.</p>
+ <table class="t"><tr><th>Риск</th><th>Вероятност</th><th>Последствия</th><th>План за действие</th></tr>
+ <tr><td>Закъснение на етап от проекта</td><td>средна</td><td>високи</td><td>редовни статус срещи, резерв от време</td></tr>
+ <tr><td>Загуба на данни</td><td>ниска</td><td>високи</td><td>архивиране, облачно копие, политики за сигурност</td></tr>
+ <tr><td>Недостиг на ресурси (хора, финанси)</td><td>висока</td><td>високи</td><td>преразпределяне на ресурси, допълнителен бюджет</td></tr>
+ <tr><td>Технически проблеми</td><td>средна</td><td>средни</td><td>план за аварийно възстановяване, мониторинг</td></tr></table>
+ <h3>Основни рискове в софтуерното инженерство</h3><div class="fig"><svg viewBox="0 0 440 98" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="13" text-anchor="middle" font-size="10.0"><rect x="0" y="3" width="81.6" height="92" rx="12" fill="#fde68a" stroke="#3a5a8c"/><text x="40.8" y="39" font-size="26">🧩</text><text x="40.8" y="58" font-weight="bold" font-size="10.0">Технически</text><text x="40.8" y="73" font-size="9" fill="#334155">код, архитектура</text><rect x="89.6" y="3" width="81.6" height="92" rx="12" fill="#a5f3fc" stroke="#3a5a8c"/><text x="130.39999999999998" y="39" font-size="26">📅</text><text x="130.39999999999998" y="58" font-weight="bold" font-size="10.0">Проектни</text><text x="130.39999999999998" y="73" font-size="9" fill="#334155">забавяния</text><rect x="179.2" y="3" width="81.6" height="92" rx="12" fill="#d1fae5" stroke="#3a5a8c"/><text x="220" y="39" font-size="26">⚙️</text><text x="220" y="58" font-weight="bold" font-size="10.0">Операционни</text><text x="220" y="73" font-size="9" fill="#334155">сривове</text><rect x="268.79999999999995" y="3" width="81.6" height="92" rx="12" fill="#c7d2fe" stroke="#3a5a8c"/><text x="309.59999999999997" y="39" font-size="26">💰</text><text x="309.59999999999997" y="58" font-weight="bold" font-size="10.0">Финансови</text><text x="309.59999999999997" y="73" font-size="9" fill="#334155">бюджет</text><rect x="358.4" y="3" width="81.6" height="92" rx="12" fill="#e9d5ff" stroke="#3a5a8c"/><text x="399.2" y="39" font-size="26">🔐</text><text x="399.2" y="58" font-weight="bold" font-size="10.0">Сигурност</text><text x="399.2" y="73" font-size="9" fill="#334155">атаки, данни</text></svg></div>
+ <ul class="tg"><li><code>Технически</code><span>неизправности в кода, несъвместимости, грешки в архитектурата</span></li>
+ <li><code>Проектни</code><span>забавяния, липса на ресурси, неправилно зададени изисквания</span></li>
+ <li><code>Операционни</code><span>сривове, проблеми със сигурността, липса на поддръжка</span></li>
+ <li><code>Финансови</code><span>недостатъчен бюджет, грешни финансови прогнози</span></li>
+ <li><code>Киберсигурност</code><span>уязвимости, хакерски атаки, изтичане на данни</span></li></ul>
+ <h3>Пример: матрица на риска на Google Classroom</h3>
+ <table class="t"><tr><th>Риск</th><th>Вероятност</th><th>Последствия</th><th>План за действие</th></tr>
+ <tr><td>Прекъсване на достъпа до платформата</td><td>средна</td><td>високи</td><td>предварително изпращане на важни материали по имейл</td></tr>
+ <tr><td>Загуба на подадени задачи</td><td>ниска</td><td>средни</td><td>учениците пазят копие на задачите си</td></tr>
+ <tr><td>Грешно изпратени материали</td><td>средна</td><td>средни</td><td>внимателна проверка преди качване</td></tr>
+ <tr><td>Неактивност на учениците</td><td>висока</td><td>средни</td><td>напомняния по други канали</td></tr>
+ <tr><td>Нарушаване на поверителността</td><td>средна</td><td>високи</td><td>достъп само за регистрирани потребители</td></tr></table>
+ <h3>SWOT анализ</h3><div class="fig"><svg viewBox="0 0 440 190" xmlns="http://www.w3.org/2000/svg" font-family="Arial" font-size="13" text-anchor="middle" font-size="11">
+<rect x="20" y="4" width="196" height="84" rx="10" fill="#bbf7d0" stroke="#3a5a8c"/><rect x="224" y="4" width="196" height="84" rx="10" fill="#fed7aa" stroke="#3a5a8c"/>
+<rect x="20" y="96" width="196" height="84" rx="10" fill="#bae6fd" stroke="#3a5a8c"/><rect x="224" y="96" width="196" height="84" rx="10" fill="#fecaca" stroke="#3a5a8c"/>
+<g font-size="34" font-weight="bold" fill="#334155" fill-opacity=".3"><text x="44" y="64">S</text><text x="248" y="64">W</text><text x="44" y="156">O</text><text x="248" y="156">T</text></g>
+<g font-weight="bold" font-size="12"><text x="130" y="32">Силни страни</text><text x="334" y="32">Слаби страни</text><text x="130" y="124">Възможности</text><text x="334" y="124">Заплахи</text></g>
+<g font-size="10" fill="#334155"><text x="130" y="52">предимства на проекта</text><text x="334" y="52">недостатъци и слабости</text><text x="130" y="144">благоприятни външни фактори</text><text x="334" y="144">външни рискове</text>
+<text x="130" y="72" fill="#15803d" font-weight="bold">вътрешни</text><text x="334" y="72" fill="#c2410c" font-weight="bold">вътрешни</text><text x="130" y="164" fill="#0369a1" font-weight="bold">външни</text><text x="334" y="164" fill="#b91c1c" font-weight="bold">външни</text></g>
+</svg><small>SWOT анализ – два вътрешни и два външни фактора</small></div>
+ <p><b>S</b>trengths – силни страни • <b>W</b>eaknesses – слаби страни • <b>O</b>pportunities – възможности • <b>T</b>hreats – заплахи. Първите две са вътрешни, вторите две – от външната среда.</p>
+ <table class="t"><tr><th>Силни страни – YouTube</th><th>Слаби страни – YouTube</th></tr>
+ <tr><td>голям брой потребители; разнообразно съдържание; печалба от реклами</td><td>трудно популяризиране на нови създатели; проблеми с авторските права; натрапчиви реклами</td></tr>
+ <tr><th>Възможности</th><th>Заплахи</th></tr>
+ <tr><td>образователни видеа; подобрени инструменти за създатели; интерактивно и VR съдържание</td><td>конкуренция (напр. TikTok); регулации на съдържанието; дезинформация</td></tr></table>
+ <p><b>Мониторинг:</b> проверяваме дали рисковете от първоначалния анализ се материализират, и обновяваме плана чрез таблици, отчети за напредък и постоянна комуникация.</p><p><b>Задача:</b> В таблицата отдясно променяй вероятността и влиянието на всеки риск. Добави два свои риска и ги подреди по приоритет.</p>
+<h3>🧮 Пробвай сам – променяй числата и стойностите</h3><div class="lab one"><div class="pane"><small>Промени числата или избери стойности и виж резултата</small><iframe id="pv" sandbox="allow-scripts allow-modals" title="Упражнение" srcdoc="<meta charset=&quot;UTF-8&quot;><body style=&quot;font-family:Arial;margin:10px&quot;><style>body{font:13px Arial}table{border-collapse:collapse;width:100%}td,th{border:1px solid #cbd5e1;padding:4px 6px;text-align:center}td:first-child{text-align:left}input[type=number]{width:44px}</style>
+<table id=&quot;t&quot;></table>
+<p><input id=&quot;n&quot; type=&quot;text&quot; placeholder=&quot;Нов риск...&quot; style=&quot;width:55%&quot;> <button onclick=&quot;add()&quot;>Добави риск</button> <button onclick=&quot;sortR()&quot;>Подреди по приоритет</button></p>
+<script>
+let R=[['Напуска ключов член на екипа',3,5],['Неясни изисквания от клиента',4,4],['Закъснява доставката на техника',2,3],['Загуба на данни без резервно копие',2,5]];
+function lvl(s){ return s>=15?['Критичен','#fecaca']:s>=8?['Висок','#fed7aa']:s>=4?['Среден','#fef08a']:['Нисък','#bbf7d0']; }
+function draw(){
+  let h='<tr><th>Риск</th><th>Вероятност (1–5)</th><th>Влияние (1–5)</th><th>Оценка</th><th>Ниво</th></tr>';
+  R.forEach((r,i)=>{
+    const s=r[1]*r[2], l=lvl(s);
+    h+='<tr><td>'+r[0]+'</td><td><input type=&quot;number&quot; min=&quot;1&quot; max=&quot;5&quot; value=&quot;'+r[1]+'&quot; onchange=&quot;R['+i+'][1]=+this.value;setTimeout(draw,0)&quot;></td><td><input type=&quot;number&quot; min=&quot;1&quot; max=&quot;5&quot; value=&quot;'+r[2]+'&quot; onchange=&quot;R['+i+'][2]=+this.value;setTimeout(draw,0)&quot;></td><td><b>'+s+'</b></td><td style=&quot;background:'+l[1]+'&quot;>'+l[0]+'</td></tr>';
+  });
+  document.getElementById('t').innerHTML=h;
+}
+function add(){
+  const v=document.getElementById('n').value.trim().replace(/</g,'&amp;lt;');
+  if(v){ R.push([v,3,3]); document.getElementById('n').value=''; draw(); }
+}
+function sortR(){ R.sort((a,b)=>b[1]*b[2]-a[1]*a[2]); draw(); }
+draw();
+</script>"></iframe></div></div><div class="grip" title="Дръпни за височина">⋯⋯ дръпни нагоре/надолу, за да промениш височината ⋯⋯</div>
+<h3>📝 Задача за изпълнение</h3><div class="task"><p class="tt">Направи регистър на рисковете за различен проект – внедряване на нова програма в компютърния кабинет.</p><p class="tw">Изпълни в: <b>Excel (или таблица в Word)</b></p><ol><li>Запиши 6 риска (напр. несъвместимост с компютрите, липса на лицензи, ученици без опит).</li><li>За всеки задай вероятност (1–5) и влияние (1–5). В Excel направи колона „Оценка“ с формула, която ги умножава (напр. <code>=B2*C2</code>).</li><li>Определи нивото (нисък, среден, висок, критичен) по оценката и подреди рисковете от най-висока към най-ниска.</li><li>За двата най-опасни риска избери стратегия (избягване, намаляване, прехвърляне или приемане) и запиши конкретно действие.</li></ol><p class="tb">⭐ <b>Бонус:</b> Оцвети нивата с условно форматиране (Conditional Formatting) в Excel.</p><p class="tf">📁 Запази като: <code>riskove.xlsx</code></p></div>
+<h3>📝 Кратък тест</h3><div id="quiz"></div><div class="score" id="sc"></div>
+<div class="pager"><a href="urok-4-vodopaden-model.html">← Назад</a><a href="urok-6-ekipna-rabota.html">Напред →</a></div>
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p class="sf-title">Уроци по информатика и информационни технологии</p>
+  <p class="sf-teacher">Петя Петрова – учител по информатика, КМИТ и ИТ</p>
+  <p class="sf-school">127. СУ „Иван Николаевич Денкоглу“</p>
+  <p class="sf-links"><a href="../../index.html">Начало</a><a href="../../9-klas/index.html">9. клас</a><a href="../../12-klas/index.html">12. клас</a></p>
+</footer>
+<script>const CUR=4,QUIZ=[{"q":"Как се изчислява оценката на риска?","o":["Вероятност × влияние","Вероятност + цена","Срок ÷ бюджет"],"a":0,"w":"Произведението показва колко сериозен е рискът."},{"q":"Ежедневното резервно копие на кода е пример за...","o":["Намаляване на риска","Избягване на проекта","Приемане на риска"],"a":0,"w":"То не пречи на загубата, но намалява влиянието ѝ."},{"q":"Кои рискове обработваме първи?","o":["Тези с най-висока оценка","Най-краткото описание","Тези, които са най-лесни"],"a":0,"w":"Най-високата оценка означава най-голяма заплаха за проекта."},{"q":"Какво означава „прехвърляне“ на риск?","o":["Отговорността минава към друг, напр. външен изпълнител или застраховка","Игнорираме го","Изтриваме го от списъка"],"a":0,"w":"Рискът не изчезва, но последствията се поемат от друга страна."},{"q":"Кой е четвъртият етап на анализа на риска?","o":["Мониторинг и преглед","Идентифициране","Оценяване"],"a":0,"w":"Идентифициране, оценяване, стратегии, мониторинг."},{"q":"Кой метод разглежда силни и слаби страни, възможности и заплахи?","o":["SWOT анализ","Диаграма на Гант","Канбан"],"a":0,"w":"SWOT е аналитичен метод за стратегическо планиране."},{"q":"Към кой вид риск спада изтичането на данни?","o":["Киберсигурност","Финансов риск","Проектен риск"],"a":0,"w":"Уязвимостите, атаките и изтичането на данни са рискове за киберсигурността."}];</script>
+<script src="ikt.js"></script>
+</body>
+</html>

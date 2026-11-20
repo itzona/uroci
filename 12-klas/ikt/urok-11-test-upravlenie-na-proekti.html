@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eef1fa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Част от съдържанието е адаптирано по презентации на проект „Отворено учебно съдържание по програмиране и ИТ“, СофтУни Фондация, лиценз CC BY-NC-SA (https://github.com/BG-IT-Edu) -->
+<title>Урок 11: Тест върху раздел „Управление на проекти“ – Решаване на проблеми с ИКТ</title>
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="theme-12klas page-ikt">
+<header>
+  <a class="home-btn" href="../index.html" title="Към началната страница">← Начална страница</a>
+  <div class="hd-art hd-girl" onclick="go(-1)" title="Начална страница" role="img" aria-label="Учителка работи на лаптоп">
+    <svg viewBox="4 6 172 112" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gBl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b86f5"/><stop offset="1" stop-color="#3b57cf"/></linearGradient>
+<linearGradient id="gLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient>
+<linearGradient id="gDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient>
+</defs>
+<ellipse cx="90" cy="114" rx="80" ry="3.5" fill="#1e1b4b" opacity=".14"/>
+<rect x="24" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="151" y="96" width="5" height="17" rx="2" fill="#c8843c"/>
+<path d="M58 92 Q60 56 90 54 Q120 56 122 92Z" fill="url(#gBl)"/>
+<line x1="66" y1="66" x2="58" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<line x1="114" y1="66" x2="122" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<g transform="translate(90,38)"><g class="head">
+<path d="M-14 6 Q-17 -26 0 -28 Q17 -26 14 6 L19 32 Q8 28 6 16 L-6 16 Q-8 28 -19 32Z" fill="#c0392b"/>
+<rect x="-3.5" y="10" width="7" height="9" fill="#f2c9a5"/>
+<ellipse cx="0" cy="0" rx="11.5" ry="13" fill="#f7d3b2"/>
+<path d="M-12 -3 Q-12 -19 0 -18 Q12 -19 12 -3 Q7 -11 -2 -11 Q-8 -10 -12 -3Z" fill="#e0523f"/>
+<g class="eye"><ellipse cx="-4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/><ellipse cx="4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/></g>
+<circle cx="-8" cy="7" r="2" fill="#fda4af" opacity=".6"/><circle cx="8" cy="7" r="2" fill="#fda4af" opacity=".6"/>
+<path d="M-3.5 7 Q0 10.5 3.5 7" stroke="#be123c" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+</g></g>
+<rect x="63" y="60" width="54" height="30" rx="4" fill="url(#gLid)" stroke="#64748b" stroke-width="1.5"/>
+<text class="glow" x="90" y="80" font-size="13" font-family="Consolas,monospace" font-weight="bold" fill="#0891b2" text-anchor="middle">&lt;/&gt;</text>
+<circle class="hd" cx="58" cy="88" r="4.2" fill="#f7d3b2"/><circle class="hd hd2" cx="122" cy="88" r="4.2" fill="#f7d3b2"/>
+<rect x="148" y="78" width="13" height="13" rx="2.5" fill="#f43f5e"/>
+<path d="M161 81 Q167 84 161 89" stroke="#f43f5e" stroke-width="2.2" fill="none"/>
+<path class="steam" d="M152 74 Q149 70 152 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<path class="steam" style="animation-delay:.8s" d="M157 74 Q160 70 157 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<rect x="18" y="80" width="14" height="11" rx="2" fill="#ea580c"/>
+<ellipse cx="25" cy="76" rx="4" ry="8" fill="#22c55e"/><ellipse cx="19" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(-30 19 79)"/><ellipse cx="31" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(30 31 79)"/>
+<rect x="8" y="90" width="164" height="8" rx="4" fill="url(#gDk)"/>
+</svg>
+  </div>
+  <div class="ht">
+        <h1 align="center" onclick="go(-1)" title="Към началната страница">Решаване на проблеми с ИКТ</h1>
+    <p align="center">Управление на проекти, системи и приложен софтуер</p>
+  </div>
+  <div class="hd-art hd-class" role="img" aria-label="Група ученици работят на лаптопи">
+    <svg viewBox="0 8 192 110" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient><linearGradient id="sDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient></defs><ellipse cx="95" cy="114" rx="90" ry="3.5" fill="#1e1b4b" opacity=".14"/><rect x="12" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="174" y="96" width="5" height="17" rx="2" fill="#c8843c"/><g transform="translate(55,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#a78bfa"/><g class="kh" style="animation-delay:0.5s"><circle cx="0" cy="40" r="12.5" fill="#9a4a14"/><circle cx="0" cy="42" r="10" fill="#d9a679"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#9a4a14"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fbbf24" style="animation-delay:0.5s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.5s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.75s"/></g><g transform="translate(109,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fbbf24"/><g class="kh" style="animation-delay:1.1s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#111827"/><circle cx="0" cy="40" r="12.5" fill="#111827"/><circle cx="0" cy="42" r="10" fill="#8d5a3b"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#111827"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#38bdf8" style="animation-delay:1.1s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.1s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.35s"/></g><g transform="translate(163,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#2dd4bf"/><g class="kh" style="animation-delay:1.7s"><circle cx="0" cy="40" r="12.5" fill="#7c2d12"/><circle cx="0" cy="42" r="10" fill="#f2c9a5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#7c2d12"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fb7185" style="animation-delay:1.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.95s"/></g><rect x="28" y="68" width="160" height="5.5" rx="2.75" fill="#e2ae6c"/><g transform="translate(28,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fb7185"/><g class="kh" style="animation-delay:0.0s"><circle cx="0" cy="40" r="12.5" fill="#5b3a29"/><circle cx="0" cy="42" r="10" fill="#f7d3b2"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#5b3a29"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#22d3ee" style="animation-delay:0.0s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.0s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.25s"/></g><g transform="translate(82,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#34d399"/><g class="kh" style="animation-delay:0.7s"><circle cx="0" cy="40" r="12.5" fill="#1f2937"/><circle cx="0" cy="42" r="10" fill="#c68863"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#1f2937"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#f472b6" style="animation-delay:0.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.95s"/></g><g transform="translate(136,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#60a5fa"/><g class="kh" style="animation-delay:1.3s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#f2c14e"/><circle cx="0" cy="40" r="12.5" fill="#f2c14e"/><circle cx="0" cy="42" r="10" fill="#fde0c5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#f2c14e"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#a3e635" style="animation-delay:1.3s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.3s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.55s"/></g><rect x="2" y="90" width="186" height="8" rx="4" fill="url(#sDk)"/></svg>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav id="nav"></nav>
+  <main id="main">
+<h2>Урок 11: Тест върху раздел „Управление на проекти“</h2><p>Тестът проверява знанията ти от раздела „Управление на проекти“. Всеки въпрос има само един верен отговор. След отговор виждаш обяснение. Можеш да повториш теста колкото пъти искаш – резултатът се показва накрая.</p>
+ <div class="box"><b>Теми в теста:</b> дефиниране на проект, етапи, линейни и циклични модели, водопаден модел, риск, екип, решаване на проблеми, средства за управление, приключване.</div>
+<h3>📝 Задача за изпълнение</h3><div class="task"><p class="tt">Съставете свой тест – така най-добре се учи.</p><p class="tw">Изпълни в: <b>Word, Google Документи или Notepad++</b></p><ol><li>Избери три теми от раздела.</li><li>По всяка тема напиши по 2 въпроса с три отговора и означи верния.</li><li>До всеки въпрос напиши кратко обяснение защо отговорът е верен.</li><li>Размени теста със съученик, решете си ги и обсъдете грешните отговори.</li></ol><p class="tb">⭐ <b>Бонус:</b> Направи един въпрос, в който търсиш твърдението, което НЕ е вярно.</p><p class="tf">📁 Запази като: <code>moi-test.docx</code></p></div>
+<h3>📝 Тест</h3><div id="quiz"></div><div class="score" id="sc"></div>
+<div class="pager"><a href="urok-10-obobshtenie.html">← Назад</a><a href="urok-12-ekipen-proekt.html">Напред →</a></div>
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p class="sf-title">Уроци по информатика и информационни технологии</p>
+  <p class="sf-teacher">Петя Петрова – учител по информатика, КМИТ и ИТ</p>
+  <p class="sf-school">127. СУ „Иван Николаевич Денкоглу“</p>
+  <p class="sf-links"><a href="../../index.html">Начало</a><a href="../../9-klas/index.html">9. клас</a><a href="../../12-klas/index.html">12. клас</a></p>
+</footer>
+<script>const CUR=10,QUIZ=[{"q":"Кое описание е на проект?","o":["Временна дейност с начало, край и уникален резултат","Ежедневна поддръжка без край","Съвкупност от компютри"],"a":0,"w":"Проектът е ограничен във времето и създава нещо уникално."},{"q":"Кои са елементите на тройното ограничение?","o":["Обхват, време, цена","Автор, дата, формат","Хардуер, софтуер, мрежа"],"a":0,"w":"Те определят границите на проекта."},{"q":"На кой етап се пише кодът?","o":["Реализация","Анализ","Приемане"],"a":0,"w":"На етапа на реализацията се изгражда продуктът."},{"q":"За каква ситуация е най-подходящ водопадният модел?","o":["Ясни и стабилни изисквания","Постоянно променящи се изисквания","Проект без клиент"],"a":0,"w":"Линейното планиране е надеждно при стабилни изисквания."},{"q":"Какво добавя V-моделът?","o":["Етап на тестване за всеки етап на проектиране","Повече членове на екипа","Премахва тестването"],"a":0,"w":"Тестването се планира още при проектирането."},{"q":"Какво е инкремент?","o":["Работеща част от продукта, добавена в края на цикъла","Цената на проекта","Роля в екипа"],"a":0,"w":"Продуктът расте с нови инкременти."},{"q":"Кой представя интересите на клиента в Scrum?","o":["Product Owner","Тестерът","Системният администратор"],"a":0,"w":"Той подрежда и обяснява Product Backlog."},{"q":"Риск с вероятност 4 и влияние 5 има оценка...","o":["9","20","45"],"a":1,"w":"4 × 5 = 20."},{"q":"Кое е пример за прехвърляне на риск?","o":["Поверяване на хостинга на външна фирма по договор","Игнориране на проблема","Спиране на проекта"],"a":0,"w":"Част от отговорността минава към договорен партньор."},{"q":"За какво служи диаграмата на Ишикава?","o":["За намиране на причини за проблем","За изчисляване на цената","За записване на пароли"],"a":0,"w":"Причините се групират по категории около проблема."},{"q":"Каква е целта на ретроспекцията?","o":["Да се определи какво да се подобри","Да се търси виновен","Да се изтрие документацията"],"a":0,"w":"Тя е част от научените уроци."},{"q":"Кое е част от приключването на проекта?","o":["Приемане от клиента и архивиране на материалите","Започване на анализа","Избор на цветове"],"a":0,"w":"Приключването включва приемане, документация, архив и научени уроци."},{"q":"Как се нарича етапът от модела на Тъкман, свързан с конфликти и напрежение?","o":["Буря (Storming)","Формиране","Разпадане"],"a":0,"w":"Обикновено е вторият етап."},{"q":"Кои са колоните на класическо канбан табло?","o":["To Do, In Progress, Done","Анализ, Дизайн, Реклама","Червено, Зелено, Синьо"],"a":0,"w":"Предстоящи, в процес, готово."},{"q":"Какво показва диаграмата на Гант?","o":["Задачите и продължителността им върху времева линия","Структурата на базата от данни","Резервните копия"],"a":0,"w":"Помага за планиране, проследяване и откриване на забавяния."},{"q":"Какво означава буквата S в SWOT?","o":["Strengths – силни страни","Security – сигурност","Sprint – спринт"],"a":0,"w":"Strengths, Weaknesses, Opportunities, Threats."}];</script>
+<script src="ikt.js"></script>
+</body>
+</html>

@@ -7,6 +7,8 @@
      <body class="theme-12klas page-web">        – 12. клас, уеб дизайн (12-klas/web/)
      <body class="theme-12klas page-ikt">        – 12. клас, ИКТ
      <body class="theme-12klas page-igra">       – 12. клас, игра
+     <body class="site-home">                    – обща начална страница (index.html)
+   Всички страници завършват с един и същ учебен футър <footer class="site-footer">.
    Правилата, общи за страниците на 12. клас, са само с .theme-12klas;
    правилата само за някои от тях са ограничени с :where(.page-...),
    който не променя тежестта (specificity) на селектора.
@@ -138,8 +140,6 @@ body.theme-9klas{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6
 .theme-9klas .fb{margin:6px 0 0;font-size:.95rem}
 .theme-9klas .result{margin-top:18px;padding:16px 20px;border-radius:10px;background:var(--ink);color:#fff;display:none}
 .theme-9klas .result b{font-size:1.4rem}
-.theme-9klas footer{max-width:960px;margin:0 auto 30px;padding:14px 20px;text-align:center;color:var(--muted);font-size:.95rem}
-.theme-9klas footer strong{color:var(--ink)}
 .theme-9klas .ans{display:none;background:var(--ok-l);border-left:5px solid var(--ok);border-radius:6px;padding:8px 16px;margin:10px 0 4px;font-size:.96rem}
 .theme-9klas .ans b.t{display:block;color:var(--ok);margin-bottom:2px}
 .theme-9klas .ans p,
@@ -283,8 +283,6 @@ body.theme-12klas:where(.page-ikt)::after{inset:-560px;background:url("data:imag
 .theme-12klas:where(.page-index,.page-web,.page-ikt) header .ht p{margin:8px 0 0;color:var(--muted);font-weight:450;letter-spacing:.01em;
   font-size:clamp(.74rem,.9vw,.84rem);text-wrap:balance}
 .theme-12klas:where(.page-index,.page-web) .ht-row{display:flex;align-items:center;justify-content:center;gap:clamp(10px,1.6vw,18px)}
-.theme-12klas:where(.page-index,.page-web) .footer-school{display:block;font-weight:600;color:var(--ink);font-size:.86rem;margin-top:12px}
-.theme-12klas:where(.page-index,.page-web,.page-ikt) .footer-teacher{display:block;margin-top:3px;font-size:.78rem}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) .hd-art{display:flex;align-items:flex-end}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) .hd-art svg{display:block;width:auto;max-width:100%;overflow:visible}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) .hd-girl{grid-area:g;cursor:pointer;justify-self:start}
@@ -490,10 +488,6 @@ body.theme-12klas:where(.page-index,.page-web,.page-ikt).dragging iframe{pointer
 .theme-12klas:where(.page-index,.page-web,.page-ikt) .hd-girl .glow,
 .theme-12klas:where(.page-index,.page-web,.page-ikt) .hd-class .glow{animation:glow 1.8s ease-in-out infinite}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) .hd-class .kh{animation:bob 3s ease-in-out infinite}
-/* ---------- Футър ---------- */
-.theme-12klas:where(.page-index,.page-web,.page-ikt) footer{margin-top:72px;padding:30px 20px 40px;text-align:center;color:var(--muted);font-weight:500;font-size:.8rem;letter-spacing:.01em;border-top:1px solid var(--line);background:rgba(255,255,255,.86)}
-.theme-12klas:where(.page-index,.page-web,.page-ikt) footer .content{position:relative}
-.theme-12klas:where(.page-index,.page-web,.page-ikt) footer small{display:block;font-weight:400;opacity:.75;margin-top:4px;font-size:.74rem}
 @media(max-width:780px){
 /* ---------- Адаптивност ---------- */
 .theme-12klas:where(.page-index,.page-web,.page-ikt) header{grid-template-columns:1fr 1fr;grid-template-areas:"t t" "g c";row-gap:6px}
@@ -644,3 +638,47 @@ body.theme-12klas:where(.page-igra){margin:0;background:var(--bg);background-ima
 .theme-12klas:where(.page-igra) .bar span{color:var(--mut);font-size:14px}
 .theme-12klas:where(.page-igra) .step[hidden]{display:none}
 .theme-12klas:where(.page-igra) :focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+
+/* =====================================================================
+   ОБЩ УЧЕБЕН ФУТЪР – еднакъв на всички страници
+   <footer class="site-footer"> … </footer>
+   ===================================================================== */
+.site-footer{position:relative;z-index:1;clear:both;margin:64px 0 0;padding:28px 20px 34px;
+  background:#fff;border-top:1px solid #dfe3ea;
+  color:#566073;text-align:center;font:500 13px/1.6 'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:.01em}
+.site-footer p{margin:0}
+.site-footer .sf-title{color:#1c2333;font-weight:650;font-size:14px}
+.site-footer .sf-teacher{margin-top:4px}
+.site-footer .sf-school{margin-top:2px;font-size:12px;opacity:.85}
+.site-footer .sf-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:14px}
+.site-footer .sf-links a{padding:4px 12px;border:1px solid #dfe3ea;border-radius:999px;background:#fff;color:#2f4a73;text-decoration:none;font-weight:600;font-size:12.5px;line-height:1.6}
+.site-footer .sf-links a:hover,
+.site-footer .sf-links a:focus-visible{border-color:#2f4a73;outline:none}
+/* играта има неподвижна лента най-долу – футърът се отмества над нея */
+.theme-12klas:where(.page-igra) main:has(+ .site-footer){padding-bottom:16px}
+.theme-12klas:where(.page-igra) .site-footer{margin-top:24px;padding-bottom:120px}
+
+/* =====================================================================
+   ОБЩА НАЧАЛНА СТРАНИЦА  (body.site-home)
+   ===================================================================== */
+:root:has(> .site-home){color-scheme:light}
+body.site-home{margin:0;min-height:100vh;display:flex;flex-direction:column;color:#1c2333;
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;line-height:1.6;
+  background:radial-gradient(60rem 36rem at 0% 0%,#dfe7fb,transparent 60%),radial-gradient(56rem 34rem at 100% 0%,#dff1ec,transparent 60%),#f7f8fa}
+.site-home .sh-head{text-align:center;padding:clamp(48px,8vw,96px) 16px 8px}
+.site-home .sh-kick{display:inline-block;margin:0 0 14px;padding:4px 14px;border-radius:999px;background:#fff;border:1px solid #dfe3ea;color:#566073;font-size:.8rem;font-weight:600}
+.site-home h1{margin:0;font-size:clamp(1.7rem,4.4vw,2.7rem);font-weight:750;letter-spacing:-.02em;line-height:1.2}
+.site-home .sh-lead{max-width:620px;margin:14px auto 0;color:#566073;font-size:1rem}
+.site-home main{flex:1;width:100%;max-width:980px;margin:0 auto;padding:36px 16px 0;box-sizing:border-box}
+.site-home .sh-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:22px}
+.site-home .sh-card{display:flex;flex-direction:column;gap:10px;padding:28px 26px;border-radius:18px;background:#fff;border:1px solid #dfe3ea;
+  box-shadow:0 1px 2px rgba(16,24,40,.05),0 10px 30px rgba(16,24,40,.06);color:inherit;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s}
+.site-home .sh-card:hover,
+.site-home .sh-card:focus-visible{transform:translateY(-3px);border-color:var(--c);box-shadow:0 18px 40px rgba(16,24,40,.12);outline:none}
+.site-home .sh-num{display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:16px;background:var(--c);color:#fff;font-size:1.6rem;font-weight:800}
+.site-home .sh-card h2{margin:6px 0 0;font-size:1.35rem;letter-spacing:-.01em}
+.site-home .sh-card p{margin:0;color:#566073;font-size:.93rem}
+.site-home .sh-card ul{margin:2px 0 0;padding-left:1.1em;color:#3b4558;font-size:.9rem}
+.site-home .sh-go{margin-top:auto;padding-top:10px;color:var(--c);font-weight:700}
+.site-home .c9{--c:#0e6b8c}
+.site-home .c12{--c:#2f4a73}
