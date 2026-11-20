@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eef1fa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Урок 20: CSS: div, span, класове и селектори – Уроци по уеб дизайн</title>
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="theme-12klas page-web">
+<header>
+  <a class="home-btn" href="../index.html" title="Към началната страница">← Начална страница</a>
+  <div class="hd-art hd-girl" onclick="go(-1)" title="Начална страница" role="img" aria-label="Учителка работи на лаптоп">
+    <svg viewBox="4 6 172 112" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gBl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b86f5"/><stop offset="1" stop-color="#3b57cf"/></linearGradient>
+<linearGradient id="gLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient>
+<linearGradient id="gDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient>
+</defs>
+<ellipse cx="90" cy="114" rx="80" ry="3.5" fill="#1e1b4b" opacity=".14"/>
+<rect x="24" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="151" y="96" width="5" height="17" rx="2" fill="#c8843c"/>
+<path d="M58 92 Q60 56 90 54 Q120 56 122 92Z" fill="url(#gBl)"/>
+<line x1="66" y1="66" x2="58" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<line x1="114" y1="66" x2="122" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<g transform="translate(90,38)"><g class="head">
+<path d="M-14 6 Q-17 -26 0 -28 Q17 -26 14 6 L19 32 Q8 28 6 16 L-6 16 Q-8 28 -19 32Z" fill="#c0392b"/>
+<rect x="-3.5" y="10" width="7" height="9" fill="#f2c9a5"/>
+<ellipse cx="0" cy="0" rx="11.5" ry="13" fill="#f7d3b2"/>
+<path d="M-12 -3 Q-12 -19 0 -18 Q12 -19 12 -3 Q7 -11 -2 -11 Q-8 -10 -12 -3Z" fill="#e0523f"/>
+<g class="eye"><ellipse cx="-4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/><ellipse cx="4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/></g>
+<circle cx="-8" cy="7" r="2" fill="#fda4af" opacity=".6"/><circle cx="8" cy="7" r="2" fill="#fda4af" opacity=".6"/>
+<path d="M-3.5 7 Q0 10.5 3.5 7" stroke="#be123c" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+</g></g>
+<rect x="63" y="60" width="54" height="30" rx="4" fill="url(#gLid)" stroke="#64748b" stroke-width="1.5"/>
+<text class="glow" x="90" y="80" font-size="13" font-family="Consolas,monospace" font-weight="bold" fill="#0891b2" text-anchor="middle">&lt;/&gt;</text>
+<circle class="hd" cx="58" cy="88" r="4.2" fill="#f7d3b2"/><circle class="hd hd2" cx="122" cy="88" r="4.2" fill="#f7d3b2"/>
+<rect x="148" y="78" width="13" height="13" rx="2.5" fill="#f43f5e"/>
+<path d="M161 81 Q167 84 161 89" stroke="#f43f5e" stroke-width="2.2" fill="none"/>
+<path class="steam" d="M152 74 Q149 70 152 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<path class="steam" style="animation-delay:.8s" d="M157 74 Q160 70 157 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<rect x="18" y="80" width="14" height="11" rx="2" fill="#ea580c"/>
+<ellipse cx="25" cy="76" rx="4" ry="8" fill="#22c55e"/><ellipse cx="19" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(-30 19 79)"/><ellipse cx="31" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(30 31 79)"/>
+<rect x="8" y="90" width="164" height="8" rx="4" fill="url(#gDk)"/>
+</svg>
+  </div>
+  <div class="ht">
+    <div class="ht-row">
+      <h1 align="center" onclick="go(-1)" title="Към началната страница">Уроци по уеб дизайн</h1>
+    </div>
+    <p align="center">HTML • CSS • JavaScript – от нулата, стъпка по стъпка</p>
+  </div>
+  <div class="hd-art hd-class" role="img" aria-label="Група ученици работят на лаптопи">
+    <svg viewBox="0 8 192 110" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient><linearGradient id="sDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient></defs><ellipse cx="95" cy="114" rx="90" ry="3.5" fill="#1e1b4b" opacity=".14"/><rect x="12" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="174" y="96" width="5" height="17" rx="2" fill="#c8843c"/><g transform="translate(55,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#a78bfa"/><g class="kh" style="animation-delay:0.5s"><circle cx="0" cy="40" r="12.5" fill="#9a4a14"/><circle cx="0" cy="42" r="10" fill="#d9a679"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#9a4a14"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fbbf24" style="animation-delay:0.5s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.5s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.75s"/></g><g transform="translate(109,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fbbf24"/><g class="kh" style="animation-delay:1.1s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#111827"/><circle cx="0" cy="40" r="12.5" fill="#111827"/><circle cx="0" cy="42" r="10" fill="#8d5a3b"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#111827"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#38bdf8" style="animation-delay:1.1s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.1s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.35s"/></g><g transform="translate(163,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#2dd4bf"/><g class="kh" style="animation-delay:1.7s"><circle cx="0" cy="40" r="12.5" fill="#7c2d12"/><circle cx="0" cy="42" r="10" fill="#f2c9a5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#7c2d12"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fb7185" style="animation-delay:1.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.95s"/></g><rect x="28" y="68" width="160" height="5.5" rx="2.75" fill="#e2ae6c"/><g transform="translate(28,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fb7185"/><g class="kh" style="animation-delay:0.0s"><circle cx="0" cy="40" r="12.5" fill="#5b3a29"/><circle cx="0" cy="42" r="10" fill="#f7d3b2"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#5b3a29"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#22d3ee" style="animation-delay:0.0s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.0s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.25s"/></g><g transform="translate(82,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#34d399"/><g class="kh" style="animation-delay:0.7s"><circle cx="0" cy="40" r="12.5" fill="#1f2937"/><circle cx="0" cy="42" r="10" fill="#c68863"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#1f2937"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#f472b6" style="animation-delay:0.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.95s"/></g><g transform="translate(136,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#60a5fa"/><g class="kh" style="animation-delay:1.3s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#f2c14e"/><circle cx="0" cy="40" r="12.5" fill="#f2c14e"/><circle cx="0" cy="42" r="10" fill="#fde0c5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#f2c14e"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#a3e635" style="animation-delay:1.3s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.3s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.55s"/></g><rect x="2" y="90" width="186" height="8" rx="4" fill="url(#sDk)"/></svg>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav id="nav"></nav>
+  <main id="main">
+<h2>Урок 20: CSS: div, span, класове и селектори</h2><p><code>&lt;div&gt;</code> е универсален <b>блок-контейнер</b>: започва на нов ред и заема цялата ширина. Вътре може да има текст, картинки и други елементи. <br> <code>&lt;span&gt;</code> е <b>вграден</b> контейнер – стои в реда на текста и служи за оформяне на малка част от него.</p>
+ <h3>Селектори – как CSS намира елемента</h3>
+ <table class="t"><tr><th>Селектор</th><th>Как се пише</th><th>Кога се ползва</th></tr>
+ <tr><td>По таг</td><td><code>p { … }</code></td><td>за всички абзаци</td></tr>
+ <tr><td>По <b>клас</b></td><td><code>.karta { … }</code> (точка пред името)</td><td>за много елементи; в HTML: <code>class="karta"</code></td></tr>
+ <tr><td>По <b>id</b></td><td><code>#glavno { … }</code> (диез пред името)</td><td>за един уникален елемент; в HTML: <code>id="glavno"</code></td></tr>
+ <tr><td>Група</td><td><code>h1, h2 { … }</code></td><td>едни стилове за няколко тага</td></tr>
+ <tr><td>Вложен</td><td><code>div p { … }</code></td><td>само абзаците вътре в div</td></tr>
+ <tr><td>Състояние</td><td><code>.btn:hover { … }</code></td><td>когато мишката е върху елемента</td></tr></table>
+ <div class="box"><b>Клас или id?</b> Класът може да се ползва много пъти и един елемент може да има няколко класа (<code>class="karta cherven"</code>). Id е само един на страница. Имената се пишат на латиница, без интервали.</div>
+ 
+<div class="fig"><svg class="w" viewBox="0 0 520 160" font-family="Arial" font-size="14" text-anchor="middle"><rect x="16" y="36" width="108" height="76" rx="10" fill="#bfdbfe" stroke="#3b82f6" stroke-width="2"/><text x="70" y="66" font-size="16" fill="#1c2333" font-weight="bold" >Карта</text><text x="70" y="92" font-size="11" fill="#1d4ed8" font-weight="normal" font-family="Consolas,monospace" >class=&quot;karta&quot;</text><rect x="136" y="36" width="108" height="76" rx="10" fill="#bfdbfe" stroke="#3b82f6" stroke-width="2"/><text x="190" y="66" font-size="16" fill="#1c2333" font-weight="bold" >Карта</text><text x="190" y="92" font-size="11" fill="#1d4ed8" font-weight="normal" font-family="Consolas,monospace" >class=&quot;karta&quot;</text><rect x="256" y="36" width="108" height="76" rx="10" fill="#bfdbfe" stroke="#3b82f6" stroke-width="2"/><text x="310" y="66" font-size="16" fill="#1c2333" font-weight="bold" >Карта</text><text x="310" y="92" font-size="11" fill="#1d4ed8" font-weight="normal" font-family="Consolas,monospace" >class=&quot;karta&quot;</text><rect x="376" y="36" width="128" height="76" rx="10" fill="#fed7aa" stroke="#f97316" stroke-width="2"/><text x="440" y="66" font-size="16" fill="#1c2333" font-weight="bold" >Главна</text><text x="440" y="92" font-size="11" fill="#c2410c" font-weight="normal" font-family="Consolas,monospace" >id=&quot;glavno&quot;</text><text x="190" y="22" font-size="15" fill="#1d4ed8" font-weight="bold" font-family="Consolas,monospace" >.karta { … }</text><text x="440" y="22" font-size="15" fill="#c2410c" font-weight="bold" font-family="Consolas,monospace" >#glavno { … }</text><line x1="16" y1="128" x2="352" y2="128" stroke="#3b82f6" stroke-width="2"/><text x="184" y="150" font-size="12.5" fill="#1d4ed8" >точка = клас → важи за много елементи</text><line x1="376" y1="128" x2="504" y2="128" stroke="#f97316" stroke-width="2"/><text x="440" y="150" font-size="12.5" fill="#c2410c" >диез = id → само за един</text></svg><small>Класът е като „униформа“ за много хора, а id – като име на един човек</small></div>
+<h3>id или class – кога кое и защо</h3>
+<p>И двата атрибута „закачат име“ на таг, за да могат CSS и JavaScript да го намерят. Разликата е в едно просто правило: <b>id е уникален, а class се повтаря</b>.</p>
+<div style="display:flex;gap:14px;flex-wrap:wrap;margin:14px 0">
+<div style="flex:1 1 260px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:14px 16px"><b style="color:#1e40af">id – като факултетен номер</b><br>В университета всеки студент има свой номер и два еднакви няма. По него се намира <b>точно един</b> човек. Така и <code>id</code> сочи точно един елемент в страницата.</div>
+<div style="flex:1 1 260px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:14px 16px"><b style="color:#166534">class – като роля или група</b><br>Всички в групата „Модератори“ имат еднакви права. В групата има <b>много</b> хора, а един човек може да е в няколко групи. Така <code>class</code> описва вид елементи, които изглеждат или се държат еднакво.</div></div>
+
+<p><b>Кога ползваме id – и защо</b></p>
+<ul>
+<li><b>Елемент, който е само един в страницата</b> – логото, главното меню, футърът. Името му е като адрес – не може да се обърка с друг.</li>
+<li><b>Връзка към място в същата страница.</b> Връзката <code>&lt;a href="#kontakti"&gt;</code> води до елемента с <code>id="kontakti"</code>. Адресът трябва да е уникален, иначе браузърът не знае къде да отиде.</li>
+<li><b>JavaScript.</b> Скриптът трябва да намери точно един елемент: <code>document.getElementById("kontakti")</code>.</li>
+<li><b>Поле и неговият надпис:</b> <code>&lt;label for="email"&gt;</code> се свързва с <code>&lt;input id="email"&gt;</code>.</li></ul>
+<pre>&lt;header id="logo"&gt;TechShop&lt;/header&gt;
+&lt;a href="#kontakti"&gt;Към контактите&lt;/a&gt;
+…
+&lt;footer id="kontakti"&gt;© 2026 TechShop&lt;/footer&gt;
+
+/* CSS: диез пред името */
+#logo { font-size: 28px; }</pre>
+
+<p><b>Кога ползваме class – и защо</b></p>
+<ul>
+<li><b>Много елементи, които изглеждат еднакво</b> – карти на продукти, цени, бутони, новини в списък.</li>
+<li><b>Промяна на едно място.</b> Стилът е записан веднъж и важи за всички – ако промениш рамката, тя се сменя навсякъде едновременно.</li>
+<li><b>Няколко класа на един елемент</b>, разделени с интервал: общото е в единия клас, различното – в другия.</li></ul>
+<pre>&lt;div class="produkt"&gt;Слушалки Pro &lt;span class="cena"&gt;89 лв.&lt;/span&gt;&lt;/div&gt;
+&lt;div class="produkt promo"&gt;Слушалки Lite &lt;span class="cena"&gt;49 лв.&lt;/span&gt;&lt;/div&gt;
+&lt;div class="produkt"&gt;Слушалки Max &lt;span class="cena"&gt;129 лв.&lt;/span&gt;&lt;/div&gt;
+
+/* CSS: точка пред името */
+.produkt { border: 1px solid #cbd5e1; padding: 12px; border-radius: 10px; }
+.promo   { background: #fef3c7; }
+.cena    { font-weight: bold; color: #15803d; }</pre>
+<p>Така изглежда резултатът – един стил за трите карти, а втората има още един клас за различния фон:</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 16px"><div style="border:1px solid #cbd5e1;padding:12px;border-radius:10px;background:#fff">Слушалки Pro <b style="color:#15803d">89 лв.</b></div><div style="border:1px solid #cbd5e1;padding:12px;border-radius:10px;background:#fef3c7">Слушалки Lite <b style="color:#15803d">49 лв.</b></div><div style="border:1px solid #cbd5e1;padding:12px;border-radius:10px;background:#fff">Слушалки Max <b style="color:#15803d">129 лв.</b></div></div>
+
+<p><b>Какво избирам?</b></p>
+<table class="t"><tr><th>Елемент в сайта</th><th>Избор</th><th>Защо</th></tr>
+<tr><td>Логото на сайта</td><td><code>id="logo"</code></td><td>има само едно</td></tr>
+<tr><td>Секция „Контакти“, към която води връзка от менюто</td><td><code>id="kontakti"</code></td><td>връзката иска уникален адрес</td></tr>
+<tr><td>Полето за имейл, свързано с <code>label</code></td><td><code>id="email"</code></td><td><code>for</code> сочи към един id</td></tr>
+<tr><td>Броячът, който скриптът променя</td><td><code>id="broyach"</code></td><td>скриптът търси точно един елемент</td></tr>
+<tr><td>Бутонът „Купи“ във всяка карта</td><td><code>class="btn"</code></td><td>повтаря се</td></tr>
+<tr><td>Всяка новина в списъка с новини</td><td><code>class="novina"</code></td><td>повтаря се</td></tr>
+<tr><td>Надпис „Изчерпано“ само при някои продукти</td><td><code>class="izcherpano"</code></td><td>слага се на няколко елемента</td></tr></table>
+<div class="box"><b>Как да избера:</b> попитай се „Ще има ли второ такова?“. Ако да – <b>class</b>. Ако е само един и ми трябва уникален адрес за връзка или за скрипт – <b>id</b>. При колебание за оформление избирай <b>class</b>: в реалните проекти оформлението почти винаги е с класове, а id се пази за връзки вътре в страницата и за JavaScript.</div>
+<div class="box"><b>Приоритет:</b> ако един елемент е оформен и с <code>#id</code>, и с <code>.class</code> и стиловете си противоречат, печели id, защото е по-конкретен.<br><b>Чести грешки:</b> един и същ <code>id</code> на два елемента (JavaScript намира само първия); объркани знаци – <code>#</code> е за id, <code>.</code> е за class, а в HTML не се пише точка: <code>class="btn"</code>; интервал в <code>id</code>; различни главни и малки букви (<code>Menu</code> и <code>menu</code> са различни имена).</div>
+
+<h3>Кутийният модел</h3>
+ <p>Всеки елемент е кутия: <b>content</b> (съдържание) → <b>padding</b> (вътрешен отстъп) → <b>border</b> (рамка) → <b>margin</b> (външен отстъп).</p>
+ <div class="fig"><svg viewBox="0 0 360 230" font-family="Arial" font-size="14" text-anchor="middle"><rect x="5" y="5" width="350" height="220" rx="6" fill="#fed7aa" stroke="#f97316"/><text x="180" y="24" font-weight="bold">margin (външен отстъп)</text><rect x="40" y="35" width="280" height="160" fill="#fde68a" stroke="#111" stroke-width="3"/><text x="180" y="54" font-weight="bold">border (рамка)</text><rect x="65" y="65" width="230" height="110" fill="#bbf7d0" stroke="#22c55e"/><text x="180" y="83" font-weight="bold">padding (вътрешен отстъп)</text><rect x="100" y="95" width="160" height="55" rx="4" fill="#bfdbfe" stroke="#3b82f6"/><text x="180" y="127" font-weight="bold">content</text></svg><small>Всеки елемент в страницата е кутия с четири слоя</small></div>
+ <p><b>Опитай:</b> направи трета карта с класовете <code>karta zelena</code>, смени ширината и закръглението.</p>
+<h3>🧪 Пробвай сам</h3><div class="lab"><div class="pane"><small>Код (можеш да го променяш)</small><textarea id="ed" spellcheck="false">&lt;style>
+  .karta { width: 220px; padding: 14px; margin: 10px;
+           border: 2px solid #3a5a8c; border-radius: 12px;
+           background: #f1f7fc; display: inline-block; }
+  .cherven { background: #fee2e2; border-color: crimson; }
+  #glavno { font-size: 22px; text-align: center; }
+  .karta span { color: #3a5a8c; font-weight: bold; }
+  .karta:hover { box-shadow: 0 4px 12px #0004; }
+&lt;/style>
+&lt;div id="glavno">Моите карти&lt;/div>
+&lt;div class="karta">Обикновена &lt;span>карта&lt;/span>&lt;/div>
+&lt;div class="karta cherven">Червена &lt;span>карта&lt;/span> (два класа)&lt;/div></textarea></div><div class="split" title="Дръпни за ширина"></div><div class="pane"><small>Резултат</small><iframe id="pv" sandbox="allow-scripts allow-modals allow-popups allow-popups-to-escape-sandbox"></iframe></div></div><div class="grip" title="Дръпни за височина">⋯⋯ дръпни нагоре/надолу, за да промениш височината ⋯⋯</div>
+<h3>💻 Задача за Notepad++</h3><div class="task"><p class="tt">Направи меню на кафене с карти за напитките.</p><ol><li>Три <code>div</code> с клас <code>napitka</code> – всяка с име, цена и описание.</li><li>Цената да е в <code>span</code> с клас <code>cena</code> – удебелена и в друг цвят.</li><li>Втората карта да има два класа (<code>class="napitka specialno"</code>) и различен фон.</li><li>Заглавието „Нашето меню“ оформи със селектор по <code>id</code>.</li><li>При <code>:hover</code> картите да получават сянка.</li></ol><p class="tb">⭐ <b>Бонус:</b> Задай <code>padding</code>, <code>margin</code> и <code>border</code> на картите и с CSS коментар обясни кой слой на кутийния модел е кой.</p><p class="tb" style="margin-top:16px"><b>🖼️ Как трябва да изглежда готовата страница</b> <span style="color:var(--muted);font-size:.85rem">(пример за основната задача – без бонуса)</span></p><div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Меню на кафене</span></div><iframe class="pvf" id="pvx" srcdoc="<meta charset=&quot;UTF-8&quot;><body style=&quot;margin:0;padding:0&quot;><style>body{font-family:Arial;margin:12px;background:#fdf8f3}#zaglavie{text-align:center;color:#5b3a1e}.napitka{background:#fff;border:1px solid #e7d9c8;border-radius:10px;padding:10px 14px;margin:10px 0;transition:box-shadow .2s}.napitka:hover{box-shadow:0 6px 16px rgba(0,0,0,.18)}.specialno{background:#fff1d6}.cena{font-weight:bold;color:#b45309;float:right}</style><h1 id=&quot;zaglavie&quot;>Нашето меню</h1><div class=&quot;napitka&quot;><b>Еспресо</b><span class=&quot;cena&quot;>2.20 лв.</span><br>Силно и ароматно кафе.</div><div class=&quot;napitka specialno&quot;><b>Айс лате</b><span class=&quot;cena&quot;>4.50 лв.</span><br>Специалитет на деня – със сладолед.</div><div class=&quot;napitka&quot;><b>Горещ шоколад</b><span class=&quot;cena&quot;>3.80 лв.</span><br>Гъст, с лека нотка канела.</div>" style="height:330px" sandbox="allow-scripts allow-modals" title="Примерен изглед"></iframe></div><p class="tf">📁 Запази като: <code>menu-kafene.html</code></p><details><summary>Как да работя в Notepad++?</summary><ol><li>Отвори Notepad++ → <b>File → New</b> (Ctrl+N).</li><li>Напиши кода на задачата.</li><li><b>File → Save as…</b> (Ctrl+Alt+S) → в „Save as type“ избери <b>Hypertext Markup Language file</b> → напиши името от задачата (с <code>.html</code>) → <b>Save</b>. Запазвай всичко в една папка за уроците.</li><li>Отвори файла с двоен клик – ще се отвори в браузъра.</li><li>След всяка промяна: <b>Ctrl+S</b> в Notepad++ и <b>F5</b> в браузъра. Ако кирилицата е счупена – <b>Encoding → UTF-8</b>.</li></ol></details></div>
+<h3>📝 Кратък тест</h3><div id="quiz"></div><div class="score" id="sc"></div>
+<div class="pager"><a href="urok-19-css-stilove-i-cvetove.html">← Назад</a><a href="urok-21-css-flexbox.html">Напред →</a></div>
+  </main>
+</div>
+
+<footer>
+  <div class="content">
+    HTML · CSS · JavaScript — от първия таг до първия проект
+    <small>Уроци по уеб дизайн</small>
+    <span class="footer-teacher">Петя Петрова – учител по информатика, КМИТ и ИТ</span>
+  </div>
+</footer>
+<script>const CUR=7,RAW=false,QUIZ=[{"q":"Как се записва селектор за клас с име karta?","o":[".karta","#karta","karta()"],"a":0,"w":"Класът в CSS започва с точка, id – с диез."},{"q":"Каква е разликата между div и span?","o":["div е блок и започва на нов ред, span е вграден в текста","Няма разлика","span е по-голям от div"],"a":0,"w":"div е блоков елемент, span е inline."},{"q":"Кое може да се повтаря на много елементи?","o":["id","class","и двете са уникални"],"a":1,"w":"Класът може да се ползва многократно, id трябва да е уникален."},{"q":"Кой селектор се отнася за елемент с id равно на glavno?","o":[".glavno","#glavno","glavno"],"a":1,"w":"Id се записва с диез, клас с точка."},{"q":"Кое свойство задава вътрешния отстъп между съдържанието и рамката?","o":["margin","border","padding"],"a":2,"w":"padding е вътре в рамката, margin е извън нея."},{"q":"Страницата на ученическа фирма има три карти с продукти, оформени еднакво. Какво е правилно?","o":["Да получат един и същ id","Да им се даде общ клас, напр. class=\"produkt\"","На всяка – различен id със същите стилове"],"a":1,"w":"Повтарящите се елементи се оформят с клас. Един и същ id на няколко елемента е грешка."},{"q":"Коя връзка води до елемент в същата страница?","o":["<a href=\"#kontakti\"> към елемент с id=\"kontakti\"","<a href=\".kontakti\"> към елемент с class=\"kontakti\"","<a href=\"kontakti\"> към елемент с name=\"kontakti\""],"a":0,"w":"Връзките във вътрешността на страницата сочат към id и започват с диез."},{"q":"Какво става, ако два елемента имат един и същ id?","o":["Нищо – id и class са еднакви","Браузърът ги слива в един елемент","Грешка в HTML – JavaScript намира само първия"],"a":2,"w":"id трябва да е уникален; за много елементи се ползва class."}];</script>
+<script src="web.js"></script>
+</body>
+</html>

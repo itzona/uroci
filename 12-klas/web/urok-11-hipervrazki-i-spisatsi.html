@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eef1fa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Урок 11: Хипервръзки и списъци – Уроци по уеб дизайн</title>
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body class="theme-12klas page-web">
+<header>
+  <a class="home-btn" href="../index.html" title="Към началната страница">← Начална страница</a>
+  <div class="hd-art hd-girl" onclick="go(-1)" title="Начална страница" role="img" aria-label="Учителка работи на лаптоп">
+    <svg viewBox="4 6 172 112" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gBl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b86f5"/><stop offset="1" stop-color="#3b57cf"/></linearGradient>
+<linearGradient id="gLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient>
+<linearGradient id="gDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient>
+</defs>
+<ellipse cx="90" cy="114" rx="80" ry="3.5" fill="#1e1b4b" opacity=".14"/>
+<rect x="24" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="151" y="96" width="5" height="17" rx="2" fill="#c8843c"/>
+<path d="M58 92 Q60 56 90 54 Q120 56 122 92Z" fill="url(#gBl)"/>
+<line x1="66" y1="66" x2="58" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<line x1="114" y1="66" x2="122" y2="86" stroke="#4a66dd" stroke-width="7" stroke-linecap="round"/>
+<g transform="translate(90,38)"><g class="head">
+<path d="M-14 6 Q-17 -26 0 -28 Q17 -26 14 6 L19 32 Q8 28 6 16 L-6 16 Q-8 28 -19 32Z" fill="#c0392b"/>
+<rect x="-3.5" y="10" width="7" height="9" fill="#f2c9a5"/>
+<ellipse cx="0" cy="0" rx="11.5" ry="13" fill="#f7d3b2"/>
+<path d="M-12 -3 Q-12 -19 0 -18 Q12 -19 12 -3 Q7 -11 -2 -11 Q-8 -10 -12 -3Z" fill="#e0523f"/>
+<g class="eye"><ellipse cx="-4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/><ellipse cx="4.5" cy="2.5" rx="1.5" ry="1.7" fill="#1f2937"/></g>
+<circle cx="-8" cy="7" r="2" fill="#fda4af" opacity=".6"/><circle cx="8" cy="7" r="2" fill="#fda4af" opacity=".6"/>
+<path d="M-3.5 7 Q0 10.5 3.5 7" stroke="#be123c" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+</g></g>
+<rect x="63" y="60" width="54" height="30" rx="4" fill="url(#gLid)" stroke="#64748b" stroke-width="1.5"/>
+<text class="glow" x="90" y="80" font-size="13" font-family="Consolas,monospace" font-weight="bold" fill="#0891b2" text-anchor="middle">&lt;/&gt;</text>
+<circle class="hd" cx="58" cy="88" r="4.2" fill="#f7d3b2"/><circle class="hd hd2" cx="122" cy="88" r="4.2" fill="#f7d3b2"/>
+<rect x="148" y="78" width="13" height="13" rx="2.5" fill="#f43f5e"/>
+<path d="M161 81 Q167 84 161 89" stroke="#f43f5e" stroke-width="2.2" fill="none"/>
+<path class="steam" d="M152 74 Q149 70 152 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<path class="steam" style="animation-delay:.8s" d="M157 74 Q160 70 157 66" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<rect x="18" y="80" width="14" height="11" rx="2" fill="#ea580c"/>
+<ellipse cx="25" cy="76" rx="4" ry="8" fill="#22c55e"/><ellipse cx="19" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(-30 19 79)"/><ellipse cx="31" cy="79" rx="3" ry="6" fill="#16a34a" transform="rotate(30 31 79)"/>
+<rect x="8" y="90" width="164" height="8" rx="4" fill="url(#gDk)"/>
+</svg>
+  </div>
+  <div class="ht">
+    <div class="ht-row">
+      <h1 align="center" onclick="go(-1)" title="Към началната страница">Уроци по уеб дизайн</h1>
+    </div>
+    <p align="center">HTML • CSS • JavaScript – от нулата, стъпка по стъпка</p>
+  </div>
+  <div class="hd-art hd-class" role="img" aria-label="Група ученици работят на лаптопи">
+    <svg viewBox="0 8 192 110" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="1" stop-color="#a9b4c6"/></linearGradient><linearGradient id="sDk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b46a"/><stop offset="1" stop-color="#c8843c"/></linearGradient></defs><ellipse cx="95" cy="114" rx="90" ry="3.5" fill="#1e1b4b" opacity=".14"/><rect x="12" y="96" width="5" height="17" rx="2" fill="#c8843c"/><rect x="174" y="96" width="5" height="17" rx="2" fill="#c8843c"/><g transform="translate(55,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#a78bfa"/><g class="kh" style="animation-delay:0.5s"><circle cx="0" cy="40" r="12.5" fill="#9a4a14"/><circle cx="0" cy="42" r="10" fill="#d9a679"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#9a4a14"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fbbf24" style="animation-delay:0.5s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.5s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#d9a679" style="animation-delay:0.75s"/></g><g transform="translate(109,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fbbf24"/><g class="kh" style="animation-delay:1.1s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#111827"/><circle cx="0" cy="40" r="12.5" fill="#111827"/><circle cx="0" cy="42" r="10" fill="#8d5a3b"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#111827"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#38bdf8" style="animation-delay:1.1s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.1s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#8d5a3b" style="animation-delay:1.35s"/></g><g transform="translate(163,-4.8) scale(.82)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#2dd4bf"/><g class="kh" style="animation-delay:1.7s"><circle cx="0" cy="40" r="12.5" fill="#7c2d12"/><circle cx="0" cy="42" r="10" fill="#f2c9a5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#7c2d12"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#fb7185" style="animation-delay:1.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f2c9a5" style="animation-delay:1.95s"/></g><rect x="28" y="68" width="160" height="5.5" rx="2.75" fill="#e2ae6c"/><g transform="translate(28,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#fb7185"/><g class="kh" style="animation-delay:0.0s"><circle cx="0" cy="40" r="12.5" fill="#5b3a29"/><circle cx="0" cy="42" r="10" fill="#f7d3b2"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#5b3a29"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#22d3ee" style="animation-delay:0.0s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.0s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#f7d3b2" style="animation-delay:0.25s"/></g><g transform="translate(82,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#34d399"/><g class="kh" style="animation-delay:0.7s"><circle cx="0" cy="40" r="12.5" fill="#1f2937"/><circle cx="0" cy="42" r="10" fill="#c68863"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#1f2937"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#f472b6" style="animation-delay:0.7s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.7s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#c68863" style="animation-delay:0.95s"/></g><g transform="translate(136,0)"><path d="M-21 92 Q-19 58 0 56 Q19 58 21 92Z" fill="#60a5fa"/><g class="kh" style="animation-delay:1.3s"><path d="M-12.5 40 Q-15 60 -10 66 L10 66 Q15 60 12.5 40Z" fill="#f2c14e"/><circle cx="0" cy="40" r="12.5" fill="#f2c14e"/><circle cx="0" cy="42" r="10" fill="#fde0c5"/><path d="M-11 38 Q-8 26 0 28 Q9 26 11 38 Q3 32 -11 38Z" fill="#f2c14e"/><circle cx="-3.8" cy="44" r="1.3" fill="#1f2937"/><circle cx="3.8" cy="44" r="1.3" fill="#1f2937"/><path d="M-3 48 Q0 51.5 3 48" stroke="#be123c" stroke-width="1.2" fill="none" stroke-linecap="round"/></g><rect x="-22" y="61" width="44" height="29" rx="3" fill="url(#sLid)" stroke="#64748b" stroke-width="1.5"/><circle class="glow" cx="0" cy="75" r="5" fill="#a3e635" style="animation-delay:1.3s"/><circle class="hd" cx="-25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.3s"/><circle class="hd hd2" cx="25" cy="88" r="3.8" fill="#fde0c5" style="animation-delay:1.55s"/></g><rect x="2" y="90" width="186" height="8" rx="4" fill="url(#sDk)"/></svg>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav id="nav"></nav>
+  <main id="main">
+<h2>Урок 11: Хипервръзки и списъци</h2><h3>Хипервръзка</h3>
+<ul class="tg"><li><code>&lt;a href="адрес"&gt;текст&lt;/a&gt;</code><span>връзка към друга страница</span></li><li><code>target="_blank"</code><span>отваря връзката в нов раздел</span></li></ul>
+<div class="fig"><svg viewBox="0 0 520 90" font-family="Consolas,monospace" font-size="19" font-weight="bold"><text x="10" y="40" fill="#3a5a8c">&lt;a</text><text x="52" y="40" fill="#dc2626">href="https://abv.bg" </text><text x="262" y="40" fill="#3a5a8c">&gt;</text><text x="282" y="40" fill="#16a34a">Поща</text><text x="345" y="40" fill="#3a5a8c">&lt;/a&gt;</text><text x="52" y="75" font-size="13" font-family="Arial" fill="#dc2626">↑ атрибут: КЪДЕ води</text><text x="282" y="75" font-size="13" font-family="Arial" fill="#16a34a">↑ текст: какво се вижда</text></svg></div>
+
+<div class="fig"><svg class="w" viewBox="0 0 520 206" font-family="Arial" font-size="14" text-anchor="middle"><rect x="8" y="8" width="240" height="190" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/><text x="128" y="34" font-size="14" fill="#3a5a8c" font-weight="bold" font-family="Consolas,monospace" >&lt;ul&gt; – точки</text><circle cx="48" cy="65" r="6" fill="#3a5a8c" stroke="#3a5a8c" stroke-width="1.5"/><text x="70" y="70" font-size="17" fill="#1c2333" text-anchor="start" >Хляб</text><circle cx="48" cy="101" r="6" fill="#3a5a8c" stroke="#3a5a8c" stroke-width="1.5"/><text x="70" y="106" font-size="17" fill="#1c2333" text-anchor="start" >Мляко</text><circle cx="48" cy="137" r="6" fill="#3a5a8c" stroke="#3a5a8c" stroke-width="1.5"/><text x="70" y="142" font-size="17" fill="#1c2333" text-anchor="start" >Сирене</text><text x="128" y="186" font-size="12.5" fill="#566073" >редът няма значение</text><rect x="272" y="8" width="240" height="190" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/><text x="392" y="34" font-size="14" fill="#16a34a" font-weight="bold" font-family="Consolas,monospace" >&lt;ol&gt; – номера</text><circle cx="304" cy="65" r="12" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/><text x="304" y="70" font-size="14" fill="#166534" font-weight="bold" >1</text><text x="326" y="70" font-size="16" fill="#1c2333" text-anchor="start" >Включи</text><circle cx="304" cy="101" r="12" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/><text x="304" y="106" font-size="14" fill="#166534" font-weight="bold" >2</text><text x="326" y="106" font-size="16" fill="#1c2333" text-anchor="start" >Отвори редактора</text><circle cx="304" cy="137" r="12" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/><text x="304" y="142" font-size="14" fill="#166534" font-weight="bold" >3</text><text x="326" y="142" font-size="16" fill="#1c2333" text-anchor="start" >Пиши код</text><text x="392" y="186" font-size="12.5" fill="#566073" >редът е важен</text></svg><small>Всеки ред в списък е &lt;li&gt;. Ако редът е важен – ol, ако не – ul</small></div>
+<h3>Списъци</h3>
+<ul class="tg"><li><code>&lt;ul&gt;…&lt;/ul&gt;</code><span>списък с точки (unordered)</span><span class="r"><ul style="margin:0;padding-left:18px"><li style="all:revert">Ябълка</li><li style="all:revert">Круша</li></ul></span></li><li><code>&lt;ol&gt;…&lt;/ol&gt;</code><span>номериран списък (ordered)</span><span class="r"><ol style="margin:0;padding-left:20px"><li style="all:revert">Първо</li><li style="all:revert">Второ</li></ol></span></li><li><code>&lt;li&gt;…&lt;/li&gt;</code><span>един елемент (list item) – винаги вътре в ul или ol</span></li></ul>
+ <p><b>Опитай:</b> смени адреса на връзката и добави още един елемент в списъка. (Кликни върху връзката в прегледа – тя ще се отвори в нов раздел на браузъра.)</p>
+<h3>🧪 Пробвай сам</h3><div class="lab"><div class="pane"><small>Код (можеш да го променяш)</small><textarea id="ed" spellcheck="false">&lt;p>Любим сайт: &lt;a href="https://bg.wikipedia.org" target="_blank">Уикипедия&lt;/a>&lt;/p>
+
+&lt;p>Отличници на випуска:&lt;/p>
+&lt;ul>
+  &lt;li>Алекс Иванов&lt;/li>
+  &lt;li>Светослав Петров&lt;/li>
+&lt;/ul>
+
+&lt;p>Стъпки:&lt;/p>
+&lt;ol>
+  &lt;li>Отвори редактор&lt;/li>
+  &lt;li>Напиши кода&lt;/li>
+  &lt;li>Запази като .html&lt;/li>
+&lt;/ol></textarea></div><div class="split" title="Дръпни за ширина"></div><div class="pane"><small>Резултат</small><iframe id="pv" sandbox="allow-scripts allow-modals allow-popups allow-popups-to-escape-sandbox"></iframe></div></div><div class="grip" title="Дръпни за височина">⋯⋯ дръпни нагоре/надолу, за да промениш височината ⋯⋯</div>
+<h3>💻 Задача за Notepad++</h3><div class="task"><p class="tt">Направи страница „Моите любими неща“ с връзки и два списъка.</p><ol><li>Списък с точки <code>ul</code> с 4 любими храни.</li><li>Номериран списък <code>ol</code> с 3 стъпки как се прави чай или кафе.</li><li>Връзка към сайт по избор, която се отваря в нов раздел (<code>target="_blank"</code>).</li><li>Създай втори файл <code>vtora.html</code> в същата папка и направи връзка към него: <code>href="vtora.html"</code>. Във втория файл направи връзка обратно.</li></ol><p class="tb">⭐ <b>Бонус:</b> Вложи списък в списък – добави подточки към една от храните.</p><p class="tb" style="margin-top:16px"><b>🖼️ Как трябва да изглежда готовата страница</b> <span style="color:var(--muted);font-size:.85rem">(пример за основната задача – без бонуса)</span></p><div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Моите любими неща</span></div><iframe class="pvf" id="pvx" srcdoc="<meta charset=&quot;UTF-8&quot;><body style=&quot;margin:0;padding:0&quot;><h1>Моите любими неща</h1><h3>Любими храни</h3><ul><li>Пица</li><li>Палачинки</li><li>Шопска салата</li><li>Лютеница с хляб</li></ul><h3>Как се прави чай</h3><ol><li>Завари водата.</li><li>Сложи торбичката за 3 минути.</li><li>Подсладѝ и пий.</li></ol><p><a href=&quot;#&quot; onclick=&quot;return false&quot;>Любимият ми сайт (в нов раздел)</a></p><p><a href=&quot;#&quot; onclick=&quot;return false&quot;>Към втората страница →</a></p>" style="height:360px" sandbox="allow-scripts allow-modals" title="Примерен изглед"></iframe></div><p class="tf">📁 Запази като: <code>favorite.html</code></p><details><summary>Как да работя в Notepad++?</summary><ol><li>Отвори Notepad++ → <b>File → New</b> (Ctrl+N).</li><li>Напиши кода на задачата.</li><li><b>File → Save as…</b> (Ctrl+Alt+S) → в „Save as type“ избери <b>Hypertext Markup Language file</b> → напиши името от задачата (с <code>.html</code>) → <b>Save</b>. Запазвай всичко в една папка за уроците.</li><li>Отвори файла с двоен клик – ще се отвори в браузъра.</li><li>След всяка промяна: <b>Ctrl+S</b> в Notepad++ и <b>F5</b> в браузъра. Ако кирилицата е счупена – <b>Encoding → UTF-8</b>.</li></ol></details></div>
+<h3>📝 Кратък тест</h3><div id="quiz"></div><div class="score" id="sc"></div>
+<div class="pager"><a href="urok-10-tekst-i-formatirane.html">← Назад</a><a href="urok-12-izobrazheniya.html">Напред →</a></div>
+  </main>
+</div>
+
+<footer>
+  <div class="content">
+    HTML · CSS · JavaScript — от първия таг до първия проект
+    <small>Уроци по уеб дизайн</small>
+    <span class="footer-teacher">Петя Петрова – учител по информатика, КМИТ и ИТ</span>
+  </div>
+</footer>
+<script>const CUR=3,RAW=false,QUIZ=[{"q":"Кой атрибут съдържа адреса на връзката?","o":["src","href","alt"],"a":1,"w":"href = hypertext reference."},{"q":"Кой таг прави номериран списък?","o":["<ul>","<ol>","<li>"],"a":1,"w":"<ol> е подреден списък (ordered list)."},{"q":"Какво прави target=\"_blank\"?","o":["Изтрива връзката","Отваря в нов раздел","Оцветява връзката"],"a":1,"w":"Страницата се отваря в нов раздел."},{"q":"Кой таг е един елемент от списък?","o":["<ul>","<a>","<li>"],"a":2,"w":"li = list item."},{"q":"Какво се вижда на екрана при връзка с href и текст Поща?","o":["Само текстът Поща, като връзка","Адресът в скобите","Нищо"],"a":0,"w":"Адресът е в href, а на екрана се вижда текстът на връзката."}];</script>
+<script src="web.js"></script>
+</body>
+</html>
