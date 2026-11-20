@@ -643,17 +643,28 @@ body.theme-12klas:where(.page-igra){margin:0;background:var(--bg);background-ima
    ОБЩ УЧЕБЕН ФУТЪР – еднакъв на всички страници
    <footer class="site-footer"> … </footer>
    ===================================================================== */
-.site-footer{position:relative;z-index:1;clear:both;margin:64px 0 0;padding:28px 20px 34px;
-  background:#fff;border-top:1px solid #dfe3ea;
-  color:#566073;text-align:center;font:500 13px/1.6 'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:.01em}
+.site-footer{position:relative;z-index:1;clear:both;margin:64px 0 0;padding:36px 20px 26px;
+  background:#1e1b4b;color:#c7c2f2;text-align:left;
+  font:500 15px/1.5 'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:.005em}
+.site-footer *{box-sizing:border-box}
 .site-footer p{margin:0}
-.site-footer .sf-title{color:#1c2333;font-weight:650;font-size:14px}
-.site-footer .sf-teacher{margin-top:4px}
-.site-footer .sf-school{margin-top:2px;font-size:12px;opacity:.85}
-.site-footer .sf-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:14px}
-.site-footer .sf-links a{padding:4px 12px;border:1px solid #dfe3ea;border-radius:999px;background:#fff;color:#2f4a73;text-decoration:none;font-weight:600;font-size:12.5px;line-height:1.6}
+.site-footer .sf-inner{max-width:1360px;margin:0 auto}
+.site-footer .sf-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 32px;padding:0 0 30px;border-bottom:1px solid rgba(199,194,242,.16)}
+.site-footer .sf-brand{display:flex;align-items:center;gap:14px;color:inherit;text-decoration:none}
+.site-footer .sf-logo{flex:none;display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:12px;
+  background:linear-gradient(135deg,#6d5df6,#a855f7);color:#fff;font:700 15px/1 'JetBrains Mono',Consolas,monospace;letter-spacing:-.04em}
+.site-footer .sf-brand-text{display:flex;flex-direction:column;gap:4px}
+.site-footer .sf-name{color:#fff;font-weight:700;font-size:19px;line-height:1.2}
+.site-footer .sf-tagline{color:#c7c2f2;font-size:15.5px}
+.site-footer .sf-links{display:flex;flex-wrap:wrap;gap:8px 25px}
+.site-footer .sf-links a{margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;white-space:normal;color:#dcd8ff;text-decoration:none;font-weight:500;font-size:16.5px;line-height:1.5}
 .site-footer .sf-links a:hover,
-.site-footer .sf-links a:focus-visible{border-color:#2f4a73;outline:none}
+.site-footer .sf-links a:focus-visible{background:none;color:#fff;text-decoration:underline;text-underline-offset:4px;outline:none}
+.site-footer .sf-copy{padding-top:26px;text-align:center;color:#b3aee0;font-size:15px}
+@media (max-width:640px){
+  .site-footer .sf-top{flex-direction:column;align-items:flex-start}
+  .site-footer .sf-links{gap:8px 18px}
+}
 /* играта има неподвижна лента най-долу – футърът се отмества над нея */
 .theme-12klas:where(.page-igra) main:has(+ .site-footer){padding-bottom:16px}
 .theme-12klas:where(.page-igra) .site-footer{margin-top:24px;padding-bottom:120px}
