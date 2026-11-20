@@ -49,7 +49,7 @@ function tg(g,e){e.stopPropagation();og=og==g?-1:g;nav()}
 document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest(".menu a"))return;if(og!=-1){og=-1;nav()}});
 document.addEventListener("keydown",e=>{if(e.key=="Escape"&&og!=-1){og=-1;nav()}});
 function nav(){
-  $("#nav").innerHTML=G.map((g,gi)=>{
+  $("#nav").innerHTML='<a class="grp home" href="https://itzona.github.io/">🏠 Начало</a>'+G.map((g,gi)=>{
     const act=g.r.includes(cur);
     return `<div class="dd"><button class="grp ${act?'on':''}" onclick="tg(${gi},event)" aria-expanded="${og==gi}">${g.ic} ${g.n} ▾</button><div class="menu" style="display:${og==gi?'block':'none'}">${g.r.map(i=>`<a class="${i==cur?'on':''}${done[i]!=null?' done':''}" href="${P[i][0]}"${i==cur?' aria-current="page"':''}><span class="n">${i>=100?"•":ORD.indexOf(i)+1+"."}</span><span class="t">${T(i)}</span></a>`).join("")}</div></div>`}).join("");
 }

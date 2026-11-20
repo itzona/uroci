@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <title>Урок 14: Оформление с атрибута style – Уроци по уеб дизайн</title>
-<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../style.css?v=20261120b">
 </head>
 <body class="theme-12klas page-web">
 <header>
@@ -138,17 +138,26 @@
 <footer class="site-footer">
   <div class="sf-inner">
     <div class="sf-top">
-      <a class="sf-brand" href="https://itzona.github.io/">
-        <span class="sf-logo" aria-hidden="true">&lt;/&gt;</span>
-        <span class="sf-brand-text"><span class="sf-name">IT Зона</span><span class="sf-tagline">Образователен портал по информационни технологии</span></span>
-      </a>
-      <div class="sf-links" role="navigation" aria-label="Навигация във футъра"><a href="https://itzona.github.io/">Начало</a><a href="../../9-klas/index.html">9. клас</a><a href="../../12-klas/web/index.html">Уеб дизайн</a><a href="../../12-klas/ikt/index.html">Решаване на проблеми с ИКТ</a></div>
+      <div class="sf-brand">
+        <div class="sf-logo" aria-hidden="true">&lt;/&gt;</div>
+        <div class="sf-brand-text">
+          <div class="sf-name">IT Зона</div>
+          <div class="sf-tagline">Образователен портал по информационни технологии</div>
+        </div>
+      </div>
+      <ul class="sf-links" aria-label="Навигация във футъра">
+        <li><a href="https://itzona.github.io/">Начало</a></li>
+        <li><a href="../../9-klas/index.html">9. клас</a></li>
+        <li><a href="../../12-klas/web/index.html">Уеб дизайн</a></li>
+        <li><a href="../../12-klas/ikt/index.html">Решаване на проблеми с ИКТ</a></li>
+      </ul>
     </div>
-    <p class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</p>
+    <div class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</div>
   </div>
 </footer>
 
+
 <script>const CUR=23,RAW=true,QUIZ=[{"q":"Кой запис на style е правилен?","o":["style=\"color=red, font-size=20px\"","style=\"color:red; font-size:20px;\"","style=\"color:red font-size:20px\""],"a":1,"w":"Свойство и стойност се делят с „:“, а свойствата помежду си – с „;“."},{"q":"Кое оформление центрира текста в абзац?","o":["text-align:center","align-text:middle","text-center:yes"],"a":0,"w":"text-align подравнява текста: left, center, right или justify."},{"q":"Body е със color:blue, а един абзац – с color:red. Какъв е цветът на абзаца?","o":["Син – body е по-важен","Лилав – цветовете се смесват","Червен – печели по-вътрешният таг"],"a":2,"w":"Оформлението на самия таг е с по-голям приоритет от наследеното."}];</script>
-<script src="web.js"></script>
+<script src="web.js?v=20261120b"></script>
 </body>
 </html>

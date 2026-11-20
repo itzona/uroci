@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <title>Урок 20: CSS: div, span, класове и селектори – Уроци по уеб дизайн</title>
-<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../style.css?v=20261120b">
 </head>
 <body class="theme-12klas page-web">
 <header>
@@ -146,17 +146,26 @@
 <footer class="site-footer">
   <div class="sf-inner">
     <div class="sf-top">
-      <a class="sf-brand" href="https://itzona.github.io/">
-        <span class="sf-logo" aria-hidden="true">&lt;/&gt;</span>
-        <span class="sf-brand-text"><span class="sf-name">IT Зона</span><span class="sf-tagline">Образователен портал по информационни технологии</span></span>
-      </a>
-      <div class="sf-links" role="navigation" aria-label="Навигация във футъра"><a href="https://itzona.github.io/">Начало</a><a href="../../9-klas/index.html">9. клас</a><a href="../../12-klas/web/index.html">Уеб дизайн</a><a href="../../12-klas/ikt/index.html">Решаване на проблеми с ИКТ</a></div>
+      <div class="sf-brand">
+        <div class="sf-logo" aria-hidden="true">&lt;/&gt;</div>
+        <div class="sf-brand-text">
+          <div class="sf-name">IT Зона</div>
+          <div class="sf-tagline">Образователен портал по информационни технологии</div>
+        </div>
+      </div>
+      <ul class="sf-links" aria-label="Навигация във футъра">
+        <li><a href="https://itzona.github.io/">Начало</a></li>
+        <li><a href="../../9-klas/index.html">9. клас</a></li>
+        <li><a href="../../12-klas/web/index.html">Уеб дизайн</a></li>
+        <li><a href="../../12-klas/ikt/index.html">Решаване на проблеми с ИКТ</a></li>
+      </ul>
     </div>
-    <p class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</p>
+    <div class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</div>
   </div>
 </footer>
 
+
 <script>const CUR=7,RAW=false,QUIZ=[{"q":"Как се записва селектор за клас с име karta?","o":[".karta","#karta","karta()"],"a":0,"w":"Класът в CSS започва с точка, id – с диез."},{"q":"Каква е разликата между div и span?","o":["div е блок и започва на нов ред, span е вграден в текста","Няма разлика","span е по-голям от div"],"a":0,"w":"div е блоков елемент, span е inline."},{"q":"Кое може да се повтаря на много елементи?","o":["id","class","и двете са уникални"],"a":1,"w":"Класът може да се ползва многократно, id трябва да е уникален."},{"q":"Кой селектор се отнася за елемент с id равно на glavno?","o":[".glavno","#glavno","glavno"],"a":1,"w":"Id се записва с диез, клас с точка."},{"q":"Кое свойство задава вътрешния отстъп между съдържанието и рамката?","o":["margin","border","padding"],"a":2,"w":"padding е вътре в рамката, margin е извън нея."},{"q":"Страницата на ученическа фирма има три карти с продукти, оформени еднакво. Какво е правилно?","o":["Да получат един и същ id","Да им се даде общ клас, напр. class=\"produkt\"","На всяка – различен id със същите стилове"],"a":1,"w":"Повтарящите се елементи се оформят с клас. Един и същ id на няколко елемента е грешка."},{"q":"Коя връзка води до елемент в същата страница?","o":["<a href=\"#kontakti\"> към елемент с id=\"kontakti\"","<a href=\".kontakti\"> към елемент с class=\"kontakti\"","<a href=\"kontakti\"> към елемент с name=\"kontakti\""],"a":0,"w":"Връзките във вътрешността на страницата сочат към id и започват с диез."},{"q":"Какво става, ако два елемента имат един и същ id?","o":["Нищо – id и class са еднакви","Браузърът ги слива в един елемент","Грешка в HTML – JavaScript намира само първия"],"a":2,"w":"id трябва да е уникален; за много елементи се ползва class."}];</script>
-<script src="web.js"></script>
+<script src="web.js?v=20261120b"></script>
 </body>
 </html>

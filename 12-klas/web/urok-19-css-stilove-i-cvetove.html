@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <title>Урок 19: CSS – стилове и цветове – Уроци по уеб дизайн</title>
-<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../../style.css?v=20261120b">
 </head>
 <body class="theme-12klas page-web">
 <header>
@@ -124,17 +124,26 @@ p { color: red; }</pre>
 <footer class="site-footer">
   <div class="sf-inner">
     <div class="sf-top">
-      <a class="sf-brand" href="https://itzona.github.io/">
-        <span class="sf-logo" aria-hidden="true">&lt;/&gt;</span>
-        <span class="sf-brand-text"><span class="sf-name">IT Зона</span><span class="sf-tagline">Образователен портал по информационни технологии</span></span>
-      </a>
-      <div class="sf-links" role="navigation" aria-label="Навигация във футъра"><a href="https://itzona.github.io/">Начало</a><a href="../../9-klas/index.html">9. клас</a><a href="../../12-klas/web/index.html">Уеб дизайн</a><a href="../../12-klas/ikt/index.html">Решаване на проблеми с ИКТ</a></div>
+      <div class="sf-brand">
+        <div class="sf-logo" aria-hidden="true">&lt;/&gt;</div>
+        <div class="sf-brand-text">
+          <div class="sf-name">IT Зона</div>
+          <div class="sf-tagline">Образователен портал по информационни технологии</div>
+        </div>
+      </div>
+      <ul class="sf-links" aria-label="Навигация във футъра">
+        <li><a href="https://itzona.github.io/">Начало</a></li>
+        <li><a href="../../9-klas/index.html">9. клас</a></li>
+        <li><a href="../../12-klas/web/index.html">Уеб дизайн</a></li>
+        <li><a href="../../12-klas/ikt/index.html">Решаване на проблеми с ИКТ</a></li>
+      </ul>
     </div>
-    <p class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</p>
+    <div class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</div>
   </div>
 </footer>
 
+
 <script>const CUR=6,RAW=false,QUIZ=[{"q":"Кое свойство променя цвета на текста?","o":["background-color","color","font-size"],"a":1,"w":"color = цвят на текста."},{"q":"Кой е валиден HEX цвят?","o":["#0000FF","rgb(0,0,255)","hsl(240)"],"a":0,"w":"HEX започва с # и има 6 цифри."},{"q":"Защо е добре CSS да е във външен файл?","o":["За да се променя стилът на всички страници наведнъж","Защото така е по-красиво","Няма разлика"],"a":0,"w":"Един файл управлява външния вид на целия сайт."},{"q":"Какво означава L в HSL?","o":["Line","Lightness – светлина","Link"],"a":1,"w":"H = нюанс, S = наситеност, L = светлина."},{"q":"Кой начин на включване на CSS важи само за един елемент?","o":["Вграден (атрибут style)","Външен файл","Вътрешен <style>"],"a":0,"w":"Вграденият стил е в самия таг и засяга само него."}];</script>
-<script src="web.js"></script>
+<script src="web.js?v=20261120b"></script>
 </body>
 </html>

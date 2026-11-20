@@ -304,6 +304,12 @@ body.theme-12klas:where(.page-ikt)::after{inset:-560px;background:url("data:imag
 .theme-12klas:where(.page-index,.page-web,.page-ikt) nav button:hover{background:#f2f4f7;color:var(--ink)}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) nav button.on{background:var(--accent);color:#fff}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) nav button.grp{font-size:.86rem;font-weight:600;padding:9px 20px}
+/* „Начало“ в менюто – връща към https://itzona.github.io/ */
+.theme-12klas:where(.page-web,.page-ikt) nav a.home{display:inline-flex;align-items:center;justify-content:center;gap:7px;margin:0;
+  padding:9px 20px;border-radius:9px;text-decoration:none;
+  color:var(--text);font-size:.86rem;font-weight:600;letter-spacing:.005em;transition:background .2s,color .2s}
+.theme-12klas:where(.page-web,.page-ikt) nav a.home:hover,
+.theme-12klas:where(.page-web,.page-ikt) nav a.home:focus-visible{background:#f2f4f7;color:var(--ink);outline:none}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) .dd{position:relative}
 .theme-12klas:where(.page-index,.page-web) .menu{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);z-index:30;
   min-width:288px;max-width:88vw;padding:6px;border-radius:12px;
@@ -505,6 +511,7 @@ body.theme-12klas:where(.page-index,.page-web,.page-ikt).dragging iframe{pointer
 .theme-12klas:where(.page-index,.page-web) nav button.grp{width:100%;font-size:.8rem;padding:9px 4px;white-space:nowrap}
 .theme-12klas:where(.page-ikt) nav .dd{flex:1 1 30%;position:static}
 .theme-12klas:where(.page-ikt) nav button.grp{width:100%;font-size:.72rem;padding:9px 2px;gap:4px;white-space:nowrap}
+.theme-12klas:where(.page-web,.page-ikt) nav a.home{flex:1 1 100%;font-size:.8rem;padding:9px 4px}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) .menu{left:8px;right:8px;top:calc(100% + 8px);transform:none;min-width:0;max-width:none;animation:none}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) main{border-radius:14px}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) .lab{grid-template-columns:minmax(0,1fr)}
@@ -637,31 +644,35 @@ body.theme-12klas:where(.page-igra){margin:0;background:var(--bg);background-ima
    ОБЩ УЧЕБЕН ФУТЪР – еднакъв на всички страници
    <footer class="site-footer"> … </footer>
    ===================================================================== */
-.site-footer{position:relative;z-index:1;clear:both;margin:64px 0 0;padding:36px 20px 26px;
-  background:#1e1b4b;color:#c7c2f2;text-align:left;
-  font:500 15px/1.5 'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:.005em}
-.site-footer *{box-sizing:border-box}
-.site-footer p{margin:0}
-.site-footer .sf-inner{max-width:1360px;margin:0 auto}
-.site-footer .sf-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 32px;padding:0 0 30px;border-bottom:1px solid rgba(199,194,242,.16)}
-.site-footer .sf-brand{display:flex;align-items:center;gap:14px;color:inherit;text-decoration:none}
-.site-footer .sf-logo{flex:none;display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:12px;
+footer.site-footer{position:relative;z-index:1;clear:both;display:block;margin:64px 0 0;padding:36px 20px 26px;
+  background:#1a1d3a;color:#c4c7dc;text-align:left;border:0;
+  font:400 15px/1.5 'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:.005em}
+footer.site-footer *{box-sizing:border-box}
+footer.site-footer .sf-inner{max-width:1360px;margin:0 auto}
+footer.site-footer .sf-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 32px;
+  padding:0 0 30px;border-bottom:1px solid rgba(255,255,255,.12)}
+footer.site-footer .sf-brand{display:flex;align-items:center;gap:14px;min-width:0}
+footer.site-footer .sf-logo{flex:none;display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:12px;
   background:linear-gradient(135deg,#6d5df6,#a855f7);color:#fff;font:700 15px/1 'JetBrains Mono',Consolas,monospace;letter-spacing:-.04em}
-.site-footer .sf-brand-text{display:flex;flex-direction:column;gap:4px}
-.site-footer .sf-name{color:#fff;font-weight:700;font-size:19px;line-height:1.2}
-.site-footer .sf-tagline{color:#c7c2f2;font-size:15.5px}
-.site-footer .sf-links{display:flex;flex-wrap:wrap;gap:8px 25px}
-.site-footer .sf-links a{margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;white-space:normal;color:#dcd8ff;text-decoration:none;font-weight:500;font-size:16.5px;line-height:1.5}
-.site-footer .sf-links a:hover,
-.site-footer .sf-links a:focus-visible{background:none;color:#fff;text-decoration:underline;text-underline-offset:4px;outline:none}
-.site-footer .sf-copy{padding-top:26px;text-align:center;color:#b3aee0;font-size:15px}
+footer.site-footer .sf-brand-text{display:flex;flex-direction:column;gap:4px;min-width:0}
+footer.site-footer .sf-name{display:block;margin:0;color:#fff;font-weight:700;font-size:19px;line-height:1.2}
+footer.site-footer .sf-tagline{display:block;margin:0;color:#c4c7dc;font-size:15px;line-height:1.4}
+footer.site-footer .sf-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 26px;margin:0;padding:0;list-style:none}
+footer.site-footer .sf-links li{margin:0;padding:0;list-style:none}
+footer.site-footer .sf-links li::before,footer.site-footer .sf-links li::marker{content:none}
+footer.site-footer .sf-links a,
+footer.site-footer .sf-links a:visited{display:inline;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;
+  color:#fff;text-decoration:none;font-weight:500;font-size:16px;line-height:1.5;white-space:nowrap}
+footer.site-footer .sf-links a:hover,
+footer.site-footer .sf-links a:focus-visible{background:none;color:#fff;text-decoration:underline;text-underline-offset:4px;outline:none}
+footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a9adc6;font-size:14.5px}
 @media (max-width:640px){
-  .site-footer .sf-top{flex-direction:column;align-items:flex-start}
-  .site-footer .sf-links{gap:8px 18px}
+  footer.site-footer .sf-top{flex-direction:column;align-items:flex-start}
+  footer.site-footer .sf-links{gap:8px 20px}
 }
 /* играта има неподвижна лента най-долу – футърът се отмества над нея */
-.theme-12klas:where(.page-igra) main:has(+ .site-footer){padding-bottom:16px}
-.theme-12klas:where(.page-igra) .site-footer{margin-top:24px;padding-bottom:120px}
+.theme-12klas:where(.page-igra) main:has(+ footer.site-footer){padding-bottom:16px}
+.theme-12klas:where(.page-igra) footer.site-footer{margin-top:24px;padding-bottom:120px}
 
 /* =====================================================================
    ОБЩА НАЧАЛНА СТРАНИЦА  (body.site-home)
