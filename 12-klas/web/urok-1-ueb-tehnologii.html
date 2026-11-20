@@ -14,7 +14,6 @@
 </head>
 <body class="theme-12klas page-web">
 <header>
-  <a class="home-btn" href="../index.html" title="Към началната страница">← Начална страница</a>
   <div class="hd-art hd-girl" onclick="go(-1)" title="Начална страница" role="img" aria-label="Учителка работи на лаптоп">
     <svg viewBox="4 6 172 112" xmlns="http://www.w3.org/2000/svg">
 <defs>
@@ -98,11 +97,18 @@
 </div>
 
 <footer class="site-footer">
-  <p class="sf-title">Уроци по информатика и информационни технологии</p>
-  <p class="sf-teacher">Петя Петрова – учител по информатика, КМИТ и ИТ</p>
-  <p class="sf-school">127. СУ „Иван Николаевич Денкоглу“</p>
-  <p class="sf-links"><a href="../../index.html">Начало</a><a href="../../9-klas/index.html">9. клас</a><a href="../../12-klas/index.html">12. клас</a></p>
+  <div class="sf-inner">
+    <div class="sf-top">
+      <a class="sf-brand" href="https://itzona.github.io/">
+        <span class="sf-logo" aria-hidden="true">&lt;/&gt;</span>
+        <span class="sf-brand-text"><span class="sf-name">IT Зона</span><span class="sf-tagline">Образователен портал по информационни технологии</span></span>
+      </a>
+      <div class="sf-links" role="navigation" aria-label="Навигация във футъра"><a href="https://itzona.github.io/">Начало</a><a href="../../9-klas/index.html">9. клас</a><a href="../../12-klas/web/index.html">Уеб дизайн</a><a href="../../12-klas/ikt/index.html">Решаване на проблеми с ИКТ</a></div>
+    </div>
+    <p class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</p>
+  </div>
 </footer>
+
 <script>const CUR=19,RAW=false,QUIZ=[{"q":"Коя технология описва външния вид на страницата?","o":["HTML","CSS","HTTP"],"a":1,"w":"HTML е структурата, CSS – визията, JavaScript – поведението."},{"q":"Кое е вярно за HTML?","o":["Маркиращ език е, не е програмен език","Програмен език е","Служи само за анимации"],"a":0,"w":"HTML описва съдържанието с тагове."},{"q":"Какво връща сървърът на браузъра?","o":["Само снимки","Нищо – всичко е в браузъра","HTML, CSS и други файлове"],"a":2,"w":"Браузърът праща HTTP заявка, а сървърът връща файловете на сайта."},{"q":"Коя организация разработва уеб стандартите?","o":["HTTP","W3C","Apache"],"a":1,"w":"World Wide Web Consortium е основната организация за уеб стандарти."},{"q":"Кой е визуален редактор за сайтове?","o":["WordPress","Notepad++","Visual Studio Code"],"a":0,"w":"Визуалните редактори (WordPress, Wix) работят без писане на код."}];</script>
 <script src="web.js"></script>
 </body>

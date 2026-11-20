@@ -14,7 +14,6 @@
 </head>
 <body class="theme-12klas page-web">
 <header>
-  <a class="home-btn" href="../index.html" title="Към началната страница">← Начална страница</a>
   <div class="hd-art hd-girl" onclick="go(-1)" title="Начална страница" role="img" aria-label="Учителка работи на лаптоп">
     <svg viewBox="4 6 172 112" xmlns="http://www.w3.org/2000/svg">
 <defs>
@@ -123,11 +122,18 @@
 </div>
 
 <footer class="site-footer">
-  <p class="sf-title">Уроци по информатика и информационни технологии</p>
-  <p class="sf-teacher">Петя Петрова – учител по информатика, КМИТ и ИТ</p>
-  <p class="sf-school">127. СУ „Иван Николаевич Денкоглу“</p>
-  <p class="sf-links"><a href="../../index.html">Начало</a><a href="../../9-klas/index.html">9. клас</a><a href="../../12-klas/index.html">12. клас</a></p>
+  <div class="sf-inner">
+    <div class="sf-top">
+      <a class="sf-brand" href="https://itzona.github.io/">
+        <span class="sf-logo" aria-hidden="true">&lt;/&gt;</span>
+        <span class="sf-brand-text"><span class="sf-name">IT Зона</span><span class="sf-tagline">Образователен портал по информационни технологии</span></span>
+      </a>
+      <div class="sf-links" role="navigation" aria-label="Навигация във футъра"><a href="https://itzona.github.io/">Начало</a><a href="../../9-klas/index.html">9. клас</a><a href="../../12-klas/web/index.html">Уеб дизайн</a><a href="../../12-klas/ikt/index.html">Решаване на проблеми с ИКТ</a></div>
+    </div>
+    <p class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</p>
+  </div>
 </footer>
+
 <script src="media.js"></script>
 <script>const CUR=24,RAW=false,QUIZ=[{"q":"Кой атрибут показва бутоните за управление на плейъра?","o":["buttons","controls","player"],"a":1,"w":"Без controls потребителят не вижда бутони за пускане и спиране."},{"q":"Кой таг се слага вътре в video или audio, за да посочиш файл и негов формат?","o":["<link>","<src>","<source>"],"a":2,"w":"source има атрибути src (файлът) и type (форматът)."},{"q":"Какво е нужно, за да тръгне видеото само при зареждане в повечето браузъри?","o":["autoplay заедно с muted","само loop","preload=\"none\""],"a":0,"w":"Браузърите блокират автоматично пускане със звук, затова видеото трябва да е без звук."}];</script>
 <script src="web.js"></script>
