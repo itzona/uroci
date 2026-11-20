@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Кръстословица – Уроци по ИТ, 9. клас</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body class="theme-9klas">
+<div class="bg" id="bg" aria-hidden="true"></div>
+<nav class="top" id="menu" aria-label="Меню"><div class="nav-in"><a href="index.html">Начало</a><a href="kompyutarni-mreji.html">1. Компютърни мрежи</a><a href="ustroystva-i-sredi.html">2. Устройства и среди</a><a href="krastoslovica.html" class="on" aria-current="page">3. Кръстословица</a></div></nav>
+<header style="background-image:linear-gradient(90deg,rgba(20,38,61,.97) 35%,rgba(20,38,61,.5)),var(--hdimg)"><div class="head-in"><img src="лого.png" alt="Лого на 127. СУ „Иван Николаевич Денкоглу“" onerror="this.style.display='none'"><div><p class="kick">Информационни технологии · 9. клас</p><h1>Кръстословица</h1><p class="sub">Попълни кръстословицата, като използваш английските термини.</p></div></div></header>
+<main><section id="cw1"><h2>Кръстословица по компютърни мрежи</h2>
+<p class="lead">Пиши с <b>латински букви</b> (английската клавиатура), по една буква във всяко квадратче. Натисни „Провери“, за да видиш кое е вярно и кое – грешно.</p>
+<div class="cwwrap"><div class="cw" id="cwgrid"></div></div>
+<p class="cwbtns"><button type="button" class="btn" id="cwCheck">Провери</button> <button type="button" class="btn alt" id="cwShow">Покажи отговорите</button> <button type="button" class="btn alt" id="cwClear">Изчисти</button></p>
+<div class="cwstat" id="cwStat" role="status" aria-live="polite"></div>
+<div class="grid2"><div><h3>Хоризонтално</h3><ol class="cl" id="clH" start="1"></ol></div><div><h3>Вертикално</h3><ol class="cl" id="clV" start="6"></ol></div></div>
+</section></main>
+<footer><p>Информационни технологии – 9. клас</p><p>Петя Петрова, учител по информатика, КМИТ и ИТ</p></footer>
+<script>
+(function(){
+  var W=[{n:1,r:1,c:1,d:'h',a:'COMPUTERNETWORK'},{n:2,r:2,c:5,d:'h',a:'NETWORKPROTOCOLS'},{n:3,r:4,c:3,d:'h',a:'SERVER'},{n:4,r:5,c:5,d:'h',a:'WORKSTATION'},{n:5,r:8,c:5,d:'h',a:'NETWORKTOPOLOGY'},
+  {n:6,r:1,c:18,d:'v',a:'ROUTER'},{n:7,r:2,c:20,d:'v',a:'STAR'},{n:8,r:1,c:7,d:'v',a:'ETHERNET'},{n:9,r:1,c:1,d:'v',a:'CLIENT'}];
+  var CL=["Два или повече компютъра, свързани с помощта на необходимия за целта хардуер.", "Софтуерно реализирани правила за предаване на данни в компютърна мрежа (множествено число).", "Компютър, който предоставя на други компютри включени в мрежата данни, услуги и периферни устройства.", "Потребителски компютър, който е свързан в мрежата и по този начин може да използва услугите, предоставени от нея.", "Начин на физическо разположение и връзка между устройствата в мрежата.", "Мрежово устройство за свързване на мрежи от различен тип.", "Мрежова топология, при която всички устройства са свързани към устройство, разпределящо сигналите между отделните компютри.", "Най-популярната мрежова архитектура.", "Компютър в мрежа, изискващ информация и използващ услугите, предоставени в нея."];
+  var grid=document.getElementById('cwgrid'),cells={},nums={},dir='h',stat=document.getElementById('cwStat');
+  function key(r,c){return r+'_'+c}
+  W.forEach(function(w){
+    var dr=w.d==='v'?1:0,dc=w.d==='h'?1:0;
+    nums[key(w.r-dr,w.c-dc)]=w.n;w.cells=[];
+    for(var i=0;i<w.a.length;i++){var k=key(w.r+dr*i,w.c+dc*i);if(!cells[k])cells[k]={r:w.r+dr*i,c:w.c+dc*i,ch:w.a[i],w:[]};cells[k].w.push(w);w.cells.push(cells[k]);}
+  });
+  Object.keys(nums).forEach(function(k){var p=k.split('_'),d=document.createElement('div');d.className='cn';d.textContent=nums[k];d.style.gridRow=+p[0]+1;d.style.gridColumn=+p[1]+1;grid.appendChild(d);});
+  function go(o,s){var dd=o.w.length>1?dir:o.w[0].d,t=cells[key(o.r+(dd==='v'?s:0),o.c+(dd==='h'?s:0))];if(t)t.el.focus();}
+  Object.keys(cells).forEach(function(k){
+    var o=cells[k],inp=document.createElement('input');inp.maxLength=1;inp.autocomplete='off';inp.setAttribute('aria-label','Ред '+(o.r+1)+', колона '+(o.c+1));
+    inp.style.gridRow=o.r+1;inp.style.gridColumn=o.c+1;o.el=inp;grid.appendChild(inp);
+    inp.addEventListener('focus',function(){inp.select();if(o.w.length===1)dir=o.w[0].d;});
+    inp.addEventListener('click',function(){if(o.w.length>1&&inp._f){dir=dir==='h'?'v':'h';}inp._f=1;});
+    inp.addEventListener('blur',function(){inp._f=0;});
+    inp.addEventListener('input',function(){
+      var v=inp.value.slice(-1);inp.className='';
+      if(/[А-Яа-я]/.test(v)){inp.value='';stat.textContent='Превключи на английска клавиатура и пиши с латински букви.';return;}
+      if(!/[A-Za-z]/.test(v)){inp.value='';return;}
+      inp.value=v.toUpperCase();stat.textContent='';go(o,1);
+    });
+    inp.addEventListener('keydown',function(e){
+      var m={ArrowRight:[0,1],ArrowLeft:[0,-1],ArrowDown:[1,0],ArrowUp:[-1,0]}[e.key];
+      if(m){var t=cells[key(o.r+m[0],o.c+m[1])];if(t){t.el.focus();e.preventDefault();}}
+      else if(e.key==='Backspace'&&!inp.value){go(o,-1);}
+    });
+  });
+  function build(id,list,off){var ol=document.getElementById(id);list.forEach(function(t,i){var li=document.createElement('li');li.innerHTML='<span>'+t+'</span> <b class="st"></b>';li.onclick=function(){var w=W[off+i];dir=w.d;w.cells[0].el.focus();};ol.appendChild(li);});}
+  build('clH',CL.slice(0,5),0);build('clV',CL.slice(5),5);
+  var lis=document.querySelectorAll('#clH li,#clV li');
+  function setSt(i,t,c){var s=lis[i].querySelector('.st');s.textContent=t;s.className='st '+c;}
+  document.getElementById('cwCheck').onclick=function(){
+    var good=0;
+    Object.keys(cells).forEach(function(k){var o=cells[k],v=o.el.value;o.el.className=!v?'':(v===o.ch?'ok':'bad');});
+    W.forEach(function(w,i){
+      var f=0,ok=0;w.cells.forEach(function(o){if(o.el.value)f++;if(o.el.value===o.ch)ok++;});
+      if(ok===w.a.length){good++;setSt(i,'✓ Вярно','y');}
+      else if(f===0)setSt(i,'Не е попълнена','');
+      else setSt(i,'✗ Грешно или непълно','n');
+    });
+    stat.innerHTML='Верни думи: <b>'+good+' от '+W.length+'</b>. '+(good===W.length?'Браво, кръстословицата е решена!':'Поправи червените квадратчета и провери отново.');
+  };
+  document.getElementById('cwShow').onclick=function(){Object.keys(cells).forEach(function(k){cells[k].el.value=cells[k].ch;cells[k].el.className='ok';});W.forEach(function(w,i){setSt(i,'✓','y');});stat.textContent='Показани са верните отговори.';};
+  document.getElementById('cwClear').onclick=function(){Object.keys(cells).forEach(function(k){cells[k].el.value='';cells[k].el.className='';});W.forEach(function(w,i){setSt(i,'','');});stat.textContent='';};
+})();
+</script>
+<script>
+/* плаващи теми в фона: компютри, глобус, облак, сървър, Wi-Fi, поща и др. */
+(function(){
+  var icons=['<path d="M22 8v14M42 8v14M16 22h32v10a16 16 0 0 1-32 0zM32 48v10"/>','<path d="M32 30v26M24 56h16M20 18a17 17 0 0 0 0 24M44 18a17 17 0 0 1 0 24M26 24a8 8 0 0 0 0 12M38 24a8 8 0 0 1 0 12"/><circle cx="32" cy="30" r="3"/>','<path d="M8 50C24 50 20 14 36 14s12 36 20 36M8 40C24 40 20 24 36 24"/>','<rect x="8" y="20" width="48" height="26" rx="2"/><path d="M14 46v8M22 46v8M30 46v8M38 46v8M16 28h12v10H16z"/>',
+    '<rect x="8" y="10" width="48" height="32" rx="3"/><path d="M24 54h16M32 42v12"/>',
+    '<circle cx="32" cy="32" r="22"/><ellipse cx="32" cy="32" rx="9" ry="22"/><path d="M10 32h44M14 20h36M14 44h36"/>',
+    '<path d="M18 46a10 10 0 0 1-1-20 14 14 0 0 1 27-3 11 11 0 0 1 2 23z"/>',
+    '<rect x="8" y="34" width="48" height="14" rx="3"/><path d="M18 41h.01M26 41h.01M34 41h.01M22 34l-6-14M42 34l6-14"/>',
+    '<rect x="12" y="8" width="40" height="14" rx="2"/><rect x="12" y="25" width="40" height="14" rx="2"/><rect x="12" y="42" width="40" height="14" rx="2"/><path d="M19 15h.01M19 32h.01M19 49h.01"/>',
+    '<path d="M8 26a34 34 0 0 1 48 0M15 34a23 23 0 0 1 34 0M23 42a12 12 0 0 1 18 0"/><circle cx="32" cy="50" r="2"/>',
+    '<rect x="8" y="14" width="48" height="36" rx="3"/><path d="M8 18l24 18 24-18"/>',
+    '<circle cx="32" cy="14" r="6"/><circle cx="12" cy="48" r="6"/><circle cx="52" cy="48" r="6"/><path d="M28 19L15 43M36 19l13 24M18 48h28"/>',
+    '<path d="M8 18h18l5 6h25v26H8z"/>',
+    '<rect x="14" y="28" width="36" height="26" rx="3"/><path d="M22 28v-8a10 10 0 0 1 20 0v8"/>'
+  ];
+  var seed=20261108;
+  function rnd(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}
+  var host=document.getElementById('bg'),N=window.innerWidth<700?14:38;
+  for(var i=0;i<N;i++){
+    var el=document.createElement('i'),s=Math.round(40+rnd()*50);
+    el.style.cssText='left:'+(function(){var r=rnd();return r<.32?rnd()*20:r<.64?80+rnd()*16:rnd()*96;})().toFixed(1)+'%;top:'+(rnd()*92).toFixed(1)+'%;width:'+s+'px;height:'+s+'px;'+
+      '--t:'+(32+rnd()*38).toFixed(0)+'s;--d:-'+(rnd()*60).toFixed(0)+'s;'+
+      '--dx:'+((rnd()-.5)*90).toFixed(0)+'px;--dy:'+((rnd()-.5)*110).toFixed(0)+'px;'+
+      '--r0:'+((rnd()-.5)*24).toFixed(0)+'deg;--r1:'+((rnd()-.5)*24).toFixed(0)+'deg';
+    el.innerHTML='<svg viewBox="0 0 64 64">'+icons[Math.floor(rnd()*icons.length)]+'</svg>';
+    host.appendChild(el);
+  }
+})();
+</script>
+</body>
+</html>
