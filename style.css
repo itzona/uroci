@@ -304,6 +304,12 @@ body.theme-12klas:where(.page-ikt)::after{inset:-560px;background:url("data:imag
 .theme-12klas:where(.page-index,.page-web,.page-ikt) nav button:hover{background:#f2f4f7;color:var(--ink)}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) nav button.on{background:var(--accent);color:#fff}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) nav button.grp{font-size:.86rem;font-weight:600;padding:9px 20px}
+/* „Начало“ в менюто – връща към https://itzona.github.io/ */
+.theme-12klas:where(.page-web,.page-ikt) nav a.home{display:inline-flex;align-items:center;justify-content:center;gap:7px;margin:0;
+  padding:9px 20px;border-radius:9px;text-decoration:none;
+  color:var(--text);font-size:.86rem;font-weight:600;letter-spacing:.005em;transition:background .2s,color .2s}
+.theme-12klas:where(.page-web,.page-ikt) nav a.home:hover,
+.theme-12klas:where(.page-web,.page-ikt) nav a.home:focus-visible{background:#f2f4f7;color:var(--ink);outline:none}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) .dd{position:relative}
 .theme-12klas:where(.page-index,.page-web) .menu{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);z-index:30;
   min-width:288px;max-width:88vw;padding:6px;border-radius:12px;
@@ -505,6 +511,7 @@ body.theme-12klas:where(.page-index,.page-web,.page-ikt).dragging iframe{pointer
 .theme-12klas:where(.page-index,.page-web) nav button.grp{width:100%;font-size:.8rem;padding:9px 4px;white-space:nowrap}
 .theme-12klas:where(.page-ikt) nav .dd{flex:1 1 30%;position:static}
 .theme-12klas:where(.page-ikt) nav button.grp{width:100%;font-size:.72rem;padding:9px 2px;gap:4px;white-space:nowrap}
+.theme-12klas:where(.page-web,.page-ikt) nav a.home{flex:1 1 100%;font-size:.8rem;padding:9px 4px}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) .menu{left:8px;right:8px;top:calc(100% + 8px);transform:none;min-width:0;max-width:none;animation:none}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) main{border-radius:14px}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) .lab{grid-template-columns:minmax(0,1fr)}
