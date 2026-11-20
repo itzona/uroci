@@ -4,7 +4,7 @@
    Всяка страница избира своята визия чрез клас на <body>:
      <body class="theme-9klas">                  – 9. клас
      <body class="theme-12klas page-index">      – 12. клас, начална страница
-     <body class="theme-12klas page-web">        – 12. клас, уеб дизайн
+     <body class="theme-12klas page-web">        – 12. клас, уеб дизайн (12-klas/web/)
      <body class="theme-12klas page-ikt">        – 12. клас, ИКТ
      <body class="theme-12klas page-igra">       – 12. клас, игра
    Правилата, общи за страниците на 12. клас, са само с .theme-12klas;
@@ -315,15 +315,15 @@ body.theme-12klas:where(.page-ikt)::after{inset:-560px;background:url("data:imag
   min-width:360px;max-width:88vw;padding:6px;border-radius:12px;
   background:#fff;border:1px solid var(--line);box-shadow:0 18px 44px rgba(16,24,40,.12);
   animation:pop .18s ease both}
-.theme-12klas:where(.page-index,.page-web,.page-ikt) .menu button{display:flex;align-items:baseline;justify-content:flex-start;gap:10px;width:100%;text-align:left;
+.theme-12klas:where(.page-index,.page-web,.page-ikt) .menu :is(button,a){display:flex;box-sizing:border-box;text-decoration:none;align-items:baseline;justify-content:flex-start;gap:10px;width:100%;text-align:left;
   margin:0;padding:9px 12px;border-radius:8px;background:transparent;
   color:var(--text);font-size:.84rem;font-weight:450;line-height:1.45}
-.theme-12klas:where(.page-index,.page-web,.page-ikt) .menu button .n{flex:0 0 1.5em;color:var(--faint);font-variant-numeric:tabular-nums}
-.theme-12klas:where(.page-index,.page-web,.page-ikt) .menu button .t{flex:1}
-.theme-12klas:where(.page-index,.page-web,.page-ikt) .menu button:hover{background:#f5f6f9;color:var(--ink)}
-.theme-12klas:where(.page-index,.page-web,.page-ikt) .menu button.done .n{color:var(--accent)}
-.theme-12klas:where(.page-index,.page-web,.page-ikt) .menu button.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
-.theme-12klas:where(.page-index,.page-web,.page-ikt) .menu button.on .n{color:var(--accent)}
+.theme-12klas:where(.page-index,.page-web,.page-ikt) .menu :is(button,a) .n{flex:0 0 1.5em;color:var(--faint);font-variant-numeric:tabular-nums}
+.theme-12klas:where(.page-index,.page-web,.page-ikt) .menu :is(button,a) .t{flex:1}
+.theme-12klas:where(.page-index,.page-web,.page-ikt) .menu :is(button,a):hover{background:#f5f6f9;color:var(--ink)}
+.theme-12klas:where(.page-index,.page-web,.page-ikt) .menu :is(button,a).done .n{color:var(--accent)}
+.theme-12klas:where(.page-index,.page-web,.page-ikt) .menu :is(button,a).on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.theme-12klas:where(.page-index,.page-web,.page-ikt) .menu :is(button,a).on .n{color:var(--accent)}
 .theme-12klas:where(.page-ikt) .menu .mh{padding:8px 12px 6px;font-size:.72rem;color:var(--faint);font-weight:600;line-height:1.4;border-bottom:1px solid var(--line);margin-bottom:4px}
 /* ---------- Основна бяла карта ---------- */
 .theme-12klas:where(.page-index,.page-web,.page-ikt) main{width: 100%;
@@ -413,12 +413,12 @@ body.theme-12klas:where(.page-index,.page-web,.page-ikt).dragging iframe{pointer
 .theme-12klas:where(.page-index,.page-web,.page-ikt) .score{margin-top:14px;font-weight:600;color:var(--ink);font-size:.9rem}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) .score:empty{display:none}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) .pager{display:flex;justify-content:space-between;gap:12px;margin-top:52px;padding-top:28px;border-top:1px solid var(--line)}
-.theme-12klas:where(.page-index,.page-web,.page-ikt) .pager button{padding:10px 20px;border-radius:9px;cursor:pointer;font-size:.84rem;font-weight:550;
+.theme-12klas:where(.page-index,.page-web,.page-ikt) .pager :is(button,a){display:inline-block;text-decoration:none;padding:10px 20px;border-radius:9px;cursor:pointer;font-size:.84rem;font-weight:550;
   border:1px solid var(--accent);background:var(--accent);color:#fff;transition:background .2s,border-color .2s}
-.theme-12klas:where(.page-index,.page-web,.page-ikt) .pager button:first-child{background:#fff;color:var(--accent);border-color:var(--line-strong)}
-.theme-12klas:where(.page-index,.page-web,.page-ikt) .pager button:first-child:not(:disabled):hover{border-color:var(--accent)}
-.theme-12klas:where(.page-index,.page-web,.page-ikt) .pager button:last-child:not(:disabled):hover{background:var(--accent-hover)}
-.theme-12klas:where(.page-index,.page-web,.page-ikt) .pager button:disabled{opacity:.35;cursor:default}
+.theme-12klas:where(.page-index,.page-web,.page-ikt) .pager :is(button,a):first-child{background:#fff;color:var(--accent);border-color:var(--line-strong)}
+.theme-12klas:where(.page-index,.page-web,.page-ikt) .pager :is(button,a):first-child:not(:disabled):hover{border-color:var(--accent)}
+.theme-12klas:where(.page-index,.page-web,.page-ikt) .pager :is(button,a):last-child:not(:disabled):hover{background:var(--accent-hover)}
+.theme-12klas:where(.page-index,.page-web,.page-ikt) .pager :is(button,a):disabled{opacity:.35;cursor:default}
 .theme-12klas:where(.page-index,.page-web,.page-ikt) svg{max-width:100%;height:auto}
 .theme-12klas:where(.page-index,.page-web) main svg{display:block;margin:0 auto;max-width:min(100%,400px)}
 .theme-12klas:where(.page-ikt) main svg{display:block;margin:0 auto;width:100%;max-width:100%}
