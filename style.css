@@ -698,3 +698,15 @@ body.site-home{margin:0;min-height:100vh;display:flex;flex-direction:column;colo
 .site-home .sh-go{margin-top:auto;padding-top:10px;color:var(--c);font-weight:700}
 .site-home .c9{--c:#0e6b8c}
 .site-home .c12{--c:#2f4a73}
+.theme-9klas .ctabs{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0;border-bottom:2px solid var(--sea)}
+.theme-9klas .ctabs button{font:inherit;font-size:.95rem;font-weight:600;background:var(--sea-l);color:var(--sea-d);border:1px solid var(--sea);border-bottom:none;border-radius:8px 8px 0 0;padding:6px 14px;cursor:pointer}
+.theme-9klas .ctabs button:hover{background:#c9e8ea}
+.theme-9klas .ctabs button[aria-selected="true"]{background:var(--sea);color:#fff}
+.theme-9klas .ctabs button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.theme-9klas .cpanel{border:1px solid #c7d6e2;border-top:none;border-radius:0 0 10px 10px;background:#fff;padding:4px 18px 12px;margin-bottom:18px}
+.theme-9klas .cpanel>h3{margin-top:12px}
+.theme-9klas .cpanel .split{margin:8px 0}
+.theme-9klas .cpanel .thumbs{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+.theme-9klas .cpanel .thumbs .mini{margin:4px 0}
+.theme-9klas .cpanel .thumbs .mini img{max-height:110px}
+@media(max-width:560px){.theme-9klas .ctabs button{padding:6px 10px;font-size:.88rem}.theme-9klas .cpanel{padding:2px 12px 10px}}
