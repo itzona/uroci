@@ -130,6 +130,14 @@ body.theme-9klas{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6
 .theme-9klas .task input:checked~span{text-decoration:line-through}
 .theme-9klas details{margin:8px 0;background:#f6f9fb;border:1px solid var(--line);border-radius:6px;padding:6px 12px}
 .theme-9klas summary{cursor:pointer;font-weight:600;color:var(--sea-d)}
+.theme-9klas details.more{background:none;border:0;padding:0;margin:6px 0}
+.theme-9klas details.more[open]{background:#f6f9fb;border:1px solid var(--line);border-radius:6px;padding:8px 12px}
+.theme-9klas details.more>summary{list-style:none;display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid var(--sea);background:var(--sea-l);color:var(--sea-d);font:700 1.3rem/1 "Segoe UI",system-ui,sans-serif;user-select:none;transition:transform .2s,background .2s,color .2s}
+.theme-9klas details.more>summary::-webkit-details-marker{display:none}
+.theme-9klas details.more>summary:hover,
+.theme-9klas details.more[open]>summary{background:var(--sea);color:#fff}
+.theme-9klas details.more[open]>summary{transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.theme-9klas details.more>summary{transition:none}}
 .theme-9klas .q{border:1px solid var(--line);border-radius:8px;padding:10px 16px 14px;margin:14px 0}
 .theme-9klas .q p.qt{font-weight:600;margin-top:4px}
 .theme-9klas .opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid #9fb1c1;border-radius:6px;padding:8px 12px;margin:6px 0;color:var(--ink)}
