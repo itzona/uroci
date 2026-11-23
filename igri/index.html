@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eef1fa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Образователни игри – IT Зона</title>
+<link rel="stylesheet" href="../style.css?v=20261120b">
+<style>
+/* една игра да не се разтяга на цял ред; следващите се нареждат до нея */
+.theme-12klas.page-index .courses{grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+/* футърът стои долу и при къса страница */
+body.page-index{display:flex;flex-direction:column;min-height:100vh}
+body.page-index .site-footer{margin-top:auto}
+/* шестте карти „Защо образователни игри?“ – по 3 на ред */
+.theme-12klas.page-index .facts{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+</style>
+<link rel="icon" type="image/svg+xml" href="../icons/igra.svg">
+</head>
+<body class="theme-12klas page-index">
+<header>
+  <div class="ht">
+    <div class="ht-row"><h1 align="center">🎮 Образователни игри</h1></div>
+    <p align="center">Игри по информационни технологии за всички класове</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav aria-label="Меню с игри">
+    <a href="https://itzona.github.io/">🏠 Начало</a>
+    <a href="../9-klas/index.html">9. клас</a>
+    <a href="../12-klas/index.html">12 клас</a>
+    <a href="it-impostor.html">🛸 IT Impostor</a>
+  </nav>
+
+  <section class="intro">
+    <h2>Учим, докато играем</h2>
+    <p>Тук са събрани образователни игри по информационни технологии. Всяка игра преговаря понятия от уроците и се играе от целия клас заедно – на един телефон, на компютър или на проектора. На всяка карта пише за кой клас е играта.</p>
+  </section>
+
+  <h2 class="sec-title">Избери игра</h2>
+  <div class="courses">
+    <a class="course" href="it-impostor.html">
+      <div class="ic">🛸</div>
+      <h3>IT Impostor</h3>
+      <p>Всички знаят една IT дума, освен Impostor-а. Давайте подсказки и открийте кой се преструва.</p>
+      <div class="tags"><span>12 клас</span><span>4–30 играчи</span><span>10 теми, 220 думи</span><span>~10 мин</span></div>
+      <div class="go">Играй →</div>
+    </a>
+  </div>
+
+  <h2 class="sec-title">Защо образователни игри?</h2>
+  <p class="sec-sub">Какво печелим, когато урокът е игра</p>
+  <div class="facts">
+    <div class="fact"><span class="yr">🧠</span><b>Преговор без зубрене</b><p>За да даде добра подсказка, ученикът трябва наистина да разбира понятието, а не само да го помни.</p></div>
+    <div class="fact"><span class="yr">🗣️</span><b>Говорим на ИТ език</b><p>Термините се използват на глас, в разговор – така се запомнят по-лесно и звучат по-естествено.</p></div>
+    <div class="fact"><span class="yr">🤝</span><b>Целият клас участва</b><p>Всеки има роля и ход. Игрите включват и учениците, които рядко вдигат ръка.</p></div>
+    <div class="fact"><span class="yr">🎯</span><b>Мислене и внимание</b><p>Слушане, анализ на чуждите отговори и логически изводи – същите умения, които трябват при решаване на проблеми.</p></div>
+    <div class="fact"><span class="yr">⏱️</span><b>Кратки и гъвкави</b><p>Един рунд отнема няколко минути – подходящ за начало на часа, за преговор или за последните минути.</p></div>
+    <div class="fact"><span class="yr">📱</span><b>Без инсталация</b><p>Игрите се отварят в браузъра на телефон, компютър или интерактивна дъска.</p></div>
+  </div>
+
+  <section class="profiles">
+    <h3>Как да използваме игрите в час</h3>
+    <p>Изберете тема, която съвпада с текущия урок, и пуснете играта на проектора или подавайте телефона от ученик на ученик. След всеки рунд отделете минута да обсъдите думата – какво означава и къде се среща.</p>
+    <p>Предстоят още игри за различните класове. Всяка нова ще се появи в менюто горе и като карта в „Избери игра“.</p>
+  </section>
+</div>
+
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-top">
+      <div class="sf-brand">
+        <div class="sf-logo" aria-hidden="true">&lt;/&gt;</div>
+        <div class="sf-brand-text">
+          <div class="sf-name">IT Зона</div>
+          <div class="sf-tagline">Образователен портал по информационни технологии</div>
+        </div>
+      </div>
+      <ul class="sf-links" aria-label="Навигация във футъра">
+        <li><a href="https://itzona.github.io/">Начало</a></li>
+        <li><a href="../9-klas/index.html">9. клас</a></li>
+        <li><a href="../12-klas/web/index.html">Уеб дизайн</a></li>
+        <li><a href="../12-klas/ikt/index.html">Решаване на проблеми с ИКТ</a></li>
+        <li><a href="index.html">Игри</a></li>
+      </ul>
+    </div>
+    <div class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</div>
+  </div>
+</footer>
+
+</body>
+</html>
