@@ -187,6 +187,16 @@ select{
         <label class="field" for="theme">Тема</label>
         <select id="theme"></select>
 
+        <label class="field" for="impostorCount">Брой Impostor-и</label>
+        <select id="impostorCount">
+            <option value="auto" selected>Автоматично</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <p class="hint">Автоматично: 1, а при 15 или повече играчи – 2. Impostor-ите трябва да са по-малко от половината.</p>
+
         <label class="field" for="mode">Impostor-ът</label>
         <select id="mode">
             <option value="similar" selected>Получава близка дума</option>
@@ -614,6 +624,15 @@ function startGame(){
         return;
     }
 
+    const countChoice = $("impostorCount").value;
+    const impostorCount = countChoice === "auto" ? (playerCount >= 15 ? 2 : 1) : parseInt(countChoice, 10);
+    // Impostor-ите трябва да са по-малко от половината играчи, иначе не могат да бъдат открити
+    if(impostorCount * 2 >= playerCount){
+        const max = Math.ceil(playerCount / 2) - 1;
+        alert("При " + playerCount + " играчи може да има най-много " + max + " Impostor" + (max > 1 ? "-и" : "") + ".");
+        return;
+    }
+
     const names = Object.keys(themes);
     const chosen = $("theme").value;
     secretTheme = chosen === ALL ? names[Math.floor(Math.random() * names.length)] : chosen;
@@ -622,8 +641,6 @@ function startGame(){
     decoyWord = decoys[secretWord];
     mode = $("mode").value;
 
-    // При 15 или повече играчи има двама Impostor-и
-    const impostorCount = playerCount >= 15 ? 2 : 1;
     impostors = [];
     while(impostors.length < impostorCount){
         const p = Math.floor(Math.random() * playerCount) + 1;
@@ -652,7 +669,10 @@ function showRole(){
         // Всички виждат еднакъв екран – Impostor-ът просто има друга дума
         $("role").textContent = "🤫 Запомни думата си";
         $("topic").textContent = "Думата е: " + (isImpostor ? decoyWord : secretWord);
-        $("roleHint").textContent = "Внимание: един от вас има различна, но близка дума – и може би не знае, че е Impostor. Възможно е това да си ти!";
+        $("roleHint").textContent = (impostors.length > 1
+            ? "Внимание: " + impostors.length + " от вас имат различна, но близка дума – и може би не знаят, че са Impostor-и."
+            : "Внимание: един от вас има различна, но близка дума – и може би не знае, че е Impostor.")
+            + " Възможно е това да си ти!";
         $("roleHint").classList.remove("hidden");
     } else if(isImpostor){
         $("role").textContent = "🕵️ Ти си IMPOSTOR!";
@@ -713,14 +733,15 @@ function renderTime(s){
 
 function revealImpostor(){
     clearInterval(timerId);
-    const list = impostors.sort(function(a, b){ return a - b; }).join(" и ");
+    const sorted = impostors.slice().sort(function(a, b){ return a - b; });
+    const list = sorted.length > 1 ? sorted.slice(0, -1).join(", ") + " и " + sorted[sorted.length - 1] : String(sorted[0]);
     $("result").textContent = (impostors.length > 1 ? "Impostor-ите бяха играчи " : "Impostor беше играч ") + list;
     $("resultWord").textContent = "Думата беше: " + secretWord + " (" + secretTheme + ")"
-        + (mode === "similar" ? "\nДумата на Impostor-а: " + decoyWord : "");
+        + (mode === "similar" ? "\nДумата на " + (impostors.length > 1 ? "Impostor-ите: " : "Impostor-а: ") + decoyWord : "");
     $("explain").innerHTML = "";
     addExplanation("📘 Какво означава „" + secretWord + "“?", secretWord);
     if(mode === "similar"){
-        addExplanation("📙 А какво е „" + decoyWord + "“ – думата на Impostor-а?", decoyWord);
+        addExplanation("📙 А какво е „" + decoyWord + "“ – думата на " + (impostors.length > 1 ? "Impostor-ите" : "Impostor-а") + "?", decoyWord);
     }
 
     $("votePhase").classList.add("hidden");
