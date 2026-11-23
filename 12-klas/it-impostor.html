@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Impostor - 12 клас</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f172a,#020617);
+    color:white;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    width:90%;
+    max-width:800px;
+    text-align:center;
+}
+
+h1{
+    margin-bottom:20px;
+    font-size:3rem;
+    color:#38bdf8;
+}
+
+.card{
+    background:#111827;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 0 25px rgba(56,189,248,.3);
+}
+
+input{
+    width:100%;
+    padding:15px;
+    margin:10px 0;
+    border:none;
+    border-radius:10px;
+    font-size:1rem;
+}
+
+button{
+    padding:15px 30px;
+    border:none;
+    border-radius:10px;
+    background:#0ea5e9;
+    color:white;
+    font-weight:bold;
+    font-size:1rem;
+    cursor:pointer;
+    transition:.3s;
+    margin:8px;
+}
+
+button:hover{
+    background:#0284c7;
+    transform:scale(1.05);
+}
+
+.hidden{
+    display:none;
+}
+
+.role{
+    font-size:2rem;
+    margin:20px 0;
+    color:#facc15;
+}
+
+.topic{
+    font-size:1.3rem;
+    color:#22c55e;
+    margin-bottom:15px;
+}
+
+.timer{
+    font-size:3rem;
+    color:#ef4444;
+    margin-top:20px;
+}
+
+.instructions{
+    margin-top:15px;
+    color:#cbd5e1;
+}
+
+.back{
+    position:fixed;
+    top:16px;
+    left:16px;
+    padding:10px 18px;
+    border-radius:10px;
+    background:#1e293b;
+    color:#e2e8f0;
+    text-decoration:none;
+    font-weight:bold;
+    box-shadow:0 0 12px rgba(56,189,248,.25);
+    transition:.3s;
+    z-index:10;
+}
+
+.back:hover{
+    background:#334155;
+    color:#38bdf8;
+}
+</style>
+</head>
+<body>
+
+<a class="back" href="index.html">← Назад</a>
+
+<div class="container">
+
+    <h1>🛸 IT IMPOSTOR</h1>
+
+    <div class="card" id="setup">
+
+        <h2>Настройки</h2>
+
+        <input type="number" id="players" min="4" max="30" value="10">
+
+        <button onclick="startGame()">
+            Стартирай игра
+        </button>
+
+    </div>
+
+    <div class="card hidden" id="roleScreen">
+
+        <h2 id="playerTitle"></h2>
+
+        <button id="showBtn" onclick="showRole()">
+            Покажи ролята
+        </button>
+
+        <div class="role hidden" id="role"></div>
+        <div class="topic hidden" id="topic"></div>
+
+        <button class="hidden" id="nextBtn" onclick="nextPlayer()">
+            Следващ играч
+        </button>
+
+    </div>
+
+    <div class="card hidden" id="discussion">
+
+        <h2>💬 Време за обсъждане</h2>
+
+        <p class="instructions">
+            Всеки казва по една подсказка.
+            Impostor-ът не знае думата и трябва да се преструва, че я знае.
+            След това гласувайте кой е Impostor.
+        </p>
+
+        <div class="timer" id="timer">03:00</div>
+
+        <button onclick="revealImpostor()">
+            Покажи Impostor
+        </button>
+
+        <div class="role hidden" id="result"></div>
+        <div class="topic hidden" id="resultWord"></div>
+
+        <button onclick="newGame()">
+            Нова игра
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+const words = [
+    "Процесор", "RAM памет", "Твърд диск", "Видеокарта", "Дънна платка",
+    "Рутер", "Wi-Fi", "Облак", "Парола", "Вирус", "Антивирус", "Firewall",
+    "HTML", "CSS", "JavaScript", "Python", "Браузър", "Уебсайт", "Домейн",
+    "Сървър", "База данни", "Алгоритъм", "Цикъл", "Променлива", "Бъг",
+    "Клавиатура", "Мишка", "Монитор", "Принтер", "USB флашка",
+    "Изкуствен интелект", "Робот", "Смартфон", "Операционна система",
+    "Имейл", "Социална мрежа", "Хакер", "Бекъп", "Лаптоп", "Bluetooth"
+];
+
+let playerCount = 0;
+let currentPlayer = 1;
+let impostors = [];
+let secretWord = "";
+let timerId = null;
+
+function $(id){
+    return document.getElementById(id);
+}
+
+function startGame(){
+    playerCount = parseInt($("players").value, 10);
+
+    if(isNaN(playerCount) || playerCount < 4 || playerCount > 30){
+        alert("Въведи брой играчи между 4 и 30.");
+        return;
+    }
+
+    secretWord = words[Math.floor(Math.random() * words.length)];
+
+    // При 15 или повече играчи има двама Impostor-и
+    const impostorCount = playerCount >= 15 ? 2 : 1;
+    impostors = [];
+    while(impostors.length < impostorCount){
+        const p = Math.floor(Math.random() * playerCount) + 1;
+        if(!impostors.includes(p)) impostors.push(p);
+    }
+
+    currentPlayer = 1;
+    $("setup").classList.add("hidden");
+    $("roleScreen").classList.remove("hidden");
+    showPlayer();
+}
+
+function showPlayer(){
+    $("playerTitle").textContent = "Играч " + currentPlayer + " от " + playerCount;
+    $("showBtn").classList.remove("hidden");
+    $("role").classList.add("hidden");
+    $("topic").classList.add("hidden");
+    $("nextBtn").classList.add("hidden");
+}
+
+function showRole(){
+    if(impostors.includes(currentPlayer)){
+        $("role").textContent = "🕵️ Ти си IMPOSTOR!";
+        $("topic").textContent = "Не знаеш думата – слушай другите и се престори.";
+    } else {
+        $("role").textContent = "👨‍💻 Ти си програмист";
+        $("topic").textContent = "Думата е: " + secretWord;
+    }
+
+    $("showBtn").classList.add("hidden");
+    $("role").classList.remove("hidden");
+    $("topic").classList.remove("hidden");
+    $("nextBtn").textContent = currentPlayer < playerCount ? "Следващ играч" : "Към обсъждането";
+    $("nextBtn").classList.remove("hidden");
+}
+
+function nextPlayer(){
+    if(currentPlayer < playerCount){
+        currentPlayer++;
+        showPlayer();
+    } else {
+        $("roleScreen").classList.add("hidden");
+        $("discussion").classList.remove("hidden");
+        startTimer(180);
+    }
+}
+
+function startTimer(seconds){
+    clearInterval(timerId);
+    let left = seconds;
+    renderTime(left);
+
+    timerId = setInterval(function(){
+        left--;
+        renderTime(left);
+        if(left <= 0){
+            clearInterval(timerId);
+            $("timer").textContent = "⏰ Гласувайте!";
+        }
+    }, 1000);
+}
+
+function renderTime(s){
+    const m = String(Math.floor(s / 60)).padStart(2, "0");
+    const sec = String(s % 60).padStart(2, "0");
+    $("timer").textContent = m + ":" + sec;
+}
+
+function revealImpostor(){
+    clearInterval(timerId);
+    const list = impostors.sort(function(a, b){ return a - b; }).join(" и ");
+    $("result").textContent = (impostors.length > 1 ? "Impostor-ите бяха играчи " : "Impostor беше играч ") + list;
+    $("resultWord").textContent = "Думата беше: " + secretWord;
+    $("result").classList.remove("hidden");
+    $("resultWord").classList.remove("hidden");
+}
+
+function newGame(){
+    clearInterval(timerId);
+    $("discussion").classList.add("hidden");
+    $("result").classList.add("hidden");
+    $("resultWord").classList.add("hidden");
+    $("setup").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
