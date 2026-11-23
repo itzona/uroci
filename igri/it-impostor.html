@@ -124,8 +124,23 @@ select{
     color:#e2e8f0;
 }
 
+.explain p:last-child{
+    margin-bottom:0 !important;
+}
+
 .explain b{
     color:#38bdf8;
+}
+
+.hint{
+    text-align:left;
+    color:#94a3b8;
+    font-size:.85rem;
+    margin:-2px 0 4px;
+}
+
+#resultWord{
+    white-space:pre-line;
 }
 
 .instructions{
@@ -172,6 +187,23 @@ select{
         <label class="field" for="theme">Тема</label>
         <select id="theme"></select>
 
+        <label class="field" for="impostorCount">Брой Impostor-и</label>
+        <select id="impostorCount">
+            <option value="auto" selected>Автоматично</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <p class="hint">Автоматично: 1, а при 15 или повече играчи – 2. Impostor-ите трябва да са по-малко от половината.</p>
+
+        <label class="field" for="mode">Impostor-ът</label>
+        <select id="mode">
+            <option value="similar" selected>Получава близка дума</option>
+            <option value="none">Не получава дума</option>
+        </select>
+        <p class="hint" id="modeHint"></p>
+
         <label class="field" for="voteTime">Време за познаване на Impostor-а</label>
         <select id="voteTime">
             <option value="120">2 минути</option>
@@ -196,6 +228,7 @@ select{
         <div class="theme-name hidden" id="themeName"></div>
         <div class="role hidden" id="role"></div>
         <div class="topic hidden" id="topic"></div>
+        <p class="instructions hidden" id="roleHint"></p>
 
         <button class="hidden" id="nextBtn" onclick="nextPlayer()">
             Следващ играч
@@ -209,8 +242,9 @@ select{
             <h2>💬 Подсказки</h2>
 
             <p class="instructions">
-                Всеки по ред казва по една подсказка за думата – достатъчно ясна за своите,
+                Всеки по ред казва по една подсказка за думата си – достатъчно ясна за своите,
                 но не толкова, че Impostor-ът да я познае.
+                Слушайте внимателно: ако нечия подсказка не пасва, може би той има друга дума.
                 Няма ограничение на времето – помислете спокойно.
                 Може да направите и втори кръг подсказки.
             </p>
@@ -492,6 +526,64 @@ const themes = {
         "Тема на презентацията": "Набор от цветове, шрифтове и фон, приложен към цялата презентация."
     }
 };
+// Близка дума за Impostor-а (от същата тема) – за режима „с близка дума“
+const decoys = {
+    "Процесор": "Видеокарта", "RAM памет": "SSD", "Твърд диск": "SSD", "SSD": "Твърд диск",
+    "Видеокарта": "Процесор", "Дънна платка": "Видеокарта", "Захранване": "Охладител", "Охладител": "Захранване",
+    "Клавиатура": "Мишка", "Мишка": "Тъчпад", "Монитор": "Проектор", "Принтер": "Скенер",
+    "Скенер": "Принтер", "USB флашка": "SSD", "Лаптоп": "Таблет", "Таблет": "Смартфон",
+    "Смартфон": "Таблет", "Уебкамера": "Микрофон", "Слушалки": "Микрофон", "Микрофон": "Слушалки",
+    "Тъчпад": "Мишка", "Проектор": "Монитор", "Рутер": "Модем", "Wi-Fi": "Bluetooth",
+    "Bluetooth": "Wi-Fi", "Облак": "Сървър", "Сървър": "Облак", "Браузър": "Търсачка",
+    "Уебсайт": "Домейн", "Домейн": "IP адрес", "Имейл": "Чат", "Социална мрежа": "Чат",
+    "IP адрес": "Домейн", "Мрежов кабел": "Wi-Fi", "Суич": "Рутер", "Модем": "Рутер",
+    "Хотспот": "Wi-Fi", "Търсачка": "Браузър", "Линк": "Уебсайт", "Сваляне на файл": "Стрийминг",
+    "Стрийминг": "Сваляне на файл", "5G": "Wi-Fi", "Чат": "Имейл", "Видеоразговор": "Чат",
+    "HTML": "CSS", "CSS": "HTML", "JavaScript": "HTML", "Таг": "Атрибут",
+    "Атрибут": "Таг", "Заглавие": "Параграф", "Параграф": "Заглавие", "Хипервръзка": "Бутон",
+    "Таблица": "Формуляр", "Изображение": "Иконка", "Формуляр": "Таблица", "Бутон": "Хипервръзка",
+    "Меню": "Хипервръзка", "Шрифт": "Цвят на фона", "Цвят на фона": "Шрифт", "Flexbox": "Адаптивен дизайн",
+    "Адаптивен дизайн": "Flexbox", "Wireframe": "Макет", "Макет": "Wireframe", "Лого": "Иконка",
+    "Иконка": "Лого", "Анимация": "Изображение", "Python": "Програмен код", "Алгоритъм": "Блок-схема",
+    "Цикъл": "Условие", "Променлива": "Масив", "Функция": "Клас", "Условие": "Цикъл",
+    "Масив": "Променлива", "Бъг": "Дебъгване", "Компилатор": "Програмен код", "Програмен код": "Коментар в кода",
+    "Програмист": "Програмен код", "Блок-схема": "Алгоритъм", "Дебъгване": "Бъг", "Коментар в кода": "Програмен код",
+    "Низ": "Число", "Число": "Низ", "Обект": "Клас", "Клас": "Обект",
+    "Робот": "Изкуствен интелект", "Изкуствен интелект": "Робот", "Компютърна игра": "Мобилно приложение", "Мобилно приложение": "Компютърна игра",
+    "Парола": "Пръстов отпечатък", "Вирус": "Троянски кон", "Антивирус": "Firewall", "Firewall": "Антивирус",
+    "Хакер": "Вирус", "Бекъп": "Актуализация", "Фишинг": "Спам", "Спам": "Фишинг",
+    "Шифроване": "Сигурна връзка (HTTPS)", "Двуфакторна защита": "Парола", "Бисквитки": "Лични данни", "Лични данни": "Поверителност",
+    "Троянски кон": "Вирус", "Рансъмуер": "Вирус", "Актуализация": "Бекъп", "Потребителски профил": "Парола",
+    "Поверителност": "Лични данни", "Кибертормоз": "Фалшива новина", "Пръстов отпечатък": "Лицево разпознаване", "Лицево разпознаване": "Пръстов отпечатък",
+    "Фалшива новина": "Спам", "Сигурна връзка (HTTPS)": "Шифроване", "Операционна система": "Драйвер", "Windows": "Android",
+    "Android": "Windows", "Текстообработка": "Електронна таблица", "Електронна таблица": "Текстообработка", "Презентация": "Текстообработка",
+    "Видеоредактор": "Фоторедактор", "Фоторедактор": "Видеоредактор", "Драйвер": "Операционна система", "Инсталация": "Актуализация на системата",
+    "Лиценз": "Софтуерно пиратство", "Софтуерно пиратство": "Лиценз", "Отворен код": "Лиценз", "Папка": "Файл",
+    "Файл": "Папка", "Кошче": "Папка", "Работен плот": "Пряк път", "Пряк път": "Работен плот",
+    "Копиране и поставяне": "Пряк път", "Архив (ZIP)": "Папка", "Магазин за приложения": "Инсталация", "Актуализация на системата": "Инсталация",
+    "Проект": "Задание", "Екип": "Ръководител на проекта", "Срок": "Бюджет", "Бюджет": "Ресурси",
+    "Клиент": "Ръководител на проекта", "Задание": "Документация", "Риск": "Бюджет", "Етап": "Спринт",
+    "Тестване": "Прототип", "Прототип": "Тестване", "Водопаден модел": "Agile", "Agile": "Водопаден модел",
+    "Спринт": "Етап", "Диаграма на Гант": "Срок", "Ръководител на проекта": "Екип", "Среща на екипа": "Мозъчна атака",
+    "Обратна връзка": "Отчет", "Документация": "Отчет", "Цел на проекта": "Задание", "Ресурси": "Бюджет",
+    "Отчет": "Документация", "Мозъчна атака": "Среща на екипа", "Данни": "Информация", "Информация": "Данни",
+    "Клетка": "Колона", "Ред": "Колона", "Колона": "Ред", "Формула": "Функция SUM",
+    "Функция SUM": "Средна стойност", "Средна стойност": "Функция SUM", "Процент": "Средна стойност", "Сортиране": "Филтър",
+    "Филтър": "Сортиране", "Кръгова диаграма": "Стълбовидна диаграма", "Стълбовидна диаграма": "Кръгова диаграма", "Обобщаваща таблица": "Филтър",
+    "Excel": "CSV файл", "Анкета": "Статистика", "Статистика": "Анкета", "Заявка към база данни": "Запис",
+    "Запис": "Ред", "CSV файл": "Excel", "Големи данни": "Данни", "Визуализация на данни": "Кръгова диаграма",
+    "Звук": "Звуков ефект", "Видео": "Снимка", "Снимка": "Видео", "Пиксел": "Мегапиксел",
+    "Резолюция": "Мегапиксел", "Мегапиксел": "Резолюция", "Кадър": "Снимка", "Монтаж": "Зелен екран",
+    "Субтитри": "Видео", "Подкаст": "Аудиозапис", "Аудиозапис": "Подкаст", "MP3": "MP4",
+    "MP4": "MP3", "JPEG": "GIF", "GIF": "JPEG", "Компресия": "MP3",
+    "Звуков ефект": "Звук", "Филтър за снимка": "Снимка", "Камера": "Мегапиксел", "Зелен екран": "Монтаж",
+    "3D модел": "Виртуална реалност", "Виртуална реалност": "3D модел", "Слайд": "Оформление на слайд", "Шаблон": "Тема на презентацията",
+    "Преход": "Анимация на обект", "Анимация на обект": "Преход", "Бутон за действие": "Нелинейна навигация", "PowerPoint": "Google Слайдове",
+    "Google Слайдове": "PowerPoint", "Canva": "Prezi", "Prezi": "Canva", "Слайдшоу": "Слайд",
+    "Бележки на лектора": "Слайдшоу", "Лазерна показалка": "Интерактивна дъска", "Викторина": "Kahoot", "Kahoot": "Викторина",
+    "QR код": "Kahoot", "Вграден видеоклип": "Анимация на обект", "Аудитория": "Слайдшоу", "Интерактивна дъска": "Лазерна показалка",
+    "Нелинейна навигация": "Бутон за действие", "Оформление на слайд": "Мастър слайд", "Мастър слайд": "Шаблон", "Тема на презентацията": "Шаблон"
+};
 
 const ALL = "Всички теми (случайна)";
 
@@ -500,6 +592,8 @@ let currentPlayer = 1;
 let impostors = [];
 let secretWord = "";
 let secretTheme = "";
+let decoyWord = "";
+let mode = "similar";
 let timerId = null;
 
 function $(id){
@@ -514,6 +608,14 @@ function $(id){
     $("theme").appendChild(opt);
 });
 
+function updateModeHint(){
+    $("modeHint").textContent = $("mode").value === "similar"
+        ? "Impostor-ът вижда друга дума от същата тема и не знае, че е Impostor."
+        : "Impostor-ът вижда само, че е Impostor, и трябва да се преструва.";
+}
+$("mode").addEventListener("change", updateModeHint);
+updateModeHint();
+
 function startGame(){
     playerCount = parseInt($("players").value, 10);
 
@@ -522,14 +624,23 @@ function startGame(){
         return;
     }
 
+    const countChoice = $("impostorCount").value;
+    const impostorCount = countChoice === "auto" ? (playerCount >= 15 ? 2 : 1) : parseInt(countChoice, 10);
+    // Impostor-ите трябва да са по-малко от половината играчи, иначе не могат да бъдат открити
+    if(impostorCount * 2 >= playerCount){
+        const max = Math.ceil(playerCount / 2) - 1;
+        alert("При " + playerCount + " играчи може да има най-много " + max + " Impostor" + (max > 1 ? "-и" : "") + ".");
+        return;
+    }
+
     const names = Object.keys(themes);
     const chosen = $("theme").value;
     secretTheme = chosen === ALL ? names[Math.floor(Math.random() * names.length)] : chosen;
     const list = Object.keys(themes[secretTheme]);
     secretWord = list[Math.floor(Math.random() * list.length)];
+    decoyWord = decoys[secretWord];
+    mode = $("mode").value;
 
-    // При 15 или повече играчи има двама Impostor-и
-    const impostorCount = playerCount >= 15 ? 2 : 1;
     impostors = [];
     while(impostors.length < impostorCount){
         const p = Math.floor(Math.random() * playerCount) + 1;
@@ -548,11 +659,22 @@ function showPlayer(){
     $("themeName").classList.add("hidden");
     $("role").classList.add("hidden");
     $("topic").classList.add("hidden");
+    $("roleHint").classList.add("hidden");
     $("nextBtn").classList.add("hidden");
 }
 
 function showRole(){
-    if(impostors.includes(currentPlayer)){
+    const isImpostor = impostors.includes(currentPlayer);
+    if(mode === "similar"){
+        // Всички виждат еднакъв екран – Impostor-ът просто има друга дума
+        $("role").textContent = "🤫 Запомни думата си";
+        $("topic").textContent = "Думата е: " + (isImpostor ? decoyWord : secretWord);
+        $("roleHint").textContent = (impostors.length > 1
+            ? "Внимание: " + impostors.length + " от вас имат различна, но близка дума – и може би не знаят, че са Impostor-и."
+            : "Внимание: един от вас има различна, но близка дума – и може би не знае, че е Impostor.")
+            + " Възможно е това да си ти!";
+        $("roleHint").classList.remove("hidden");
+    } else if(isImpostor){
         $("role").textContent = "🕵️ Ти си IMPOSTOR!";
         $("topic").textContent = "Не знаеш думата – слушай другите и се престори.";
     } else {
@@ -611,22 +733,31 @@ function renderTime(s){
 
 function revealImpostor(){
     clearInterval(timerId);
-    const list = impostors.sort(function(a, b){ return a - b; }).join(" и ");
+    const sorted = impostors.slice().sort(function(a, b){ return a - b; });
+    const list = sorted.length > 1 ? sorted.slice(0, -1).join(", ") + " и " + sorted[sorted.length - 1] : String(sorted[0]);
     $("result").textContent = (impostors.length > 1 ? "Impostor-ите бяха играчи " : "Impostor беше играч ") + list;
-    $("resultWord").textContent = "Думата беше: " + secretWord + " (" + secretTheme + ")";
+    $("resultWord").textContent = "Думата беше: " + secretWord + " (" + secretTheme + ")"
+        + (mode === "similar" ? "\nДумата на " + (impostors.length > 1 ? "Impostor-ите: " : "Impostor-а: ") + decoyWord : "");
     $("explain").innerHTML = "";
-    const title = document.createElement("b");
-    title.textContent = "📘 Какво означава „" + secretWord + "“?";
-    const text = document.createElement("p");
-    text.style.marginTop = "8px";
-    text.textContent = themes[secretTheme][secretWord];
-    $("explain").append(title, text);
+    addExplanation("📘 Какво означава „" + secretWord + "“?", secretWord);
+    if(mode === "similar"){
+        addExplanation("📙 А какво е „" + decoyWord + "“ – думата на " + (impostors.length > 1 ? "Impostor-ите" : "Impostor-а") + "?", decoyWord);
+    }
 
     $("votePhase").classList.add("hidden");
     $("result").classList.remove("hidden");
     $("resultWord").classList.remove("hidden");
     $("explain").classList.remove("hidden");
     $("newGameBtn").classList.remove("hidden");
+}
+
+function addExplanation(heading, word){
+    const title = document.createElement("b");
+    title.textContent = heading;
+    const text = document.createElement("p");
+    text.style.margin = "6px 0 14px";
+    text.textContent = themes[secretTheme][word];
+    $("explain").append(title, text);
 }
 
 function newGame(){
