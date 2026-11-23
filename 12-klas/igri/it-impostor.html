@@ -41,7 +41,8 @@ h1{
     box-shadow:0 0 25px rgba(56,189,248,.3);
 }
 
-input{
+input,
+select{
     width:100%;
     padding:15px;
     margin:10px 0;
@@ -90,6 +91,26 @@ button:hover{
     margin-top:20px;
 }
 
+.field{
+    display:block;
+    text-align:left;
+    margin-top:12px;
+    color:#cbd5e1;
+    font-size:.95rem;
+}
+
+select{
+    background:white;
+    color:#0f172a;
+    cursor:pointer;
+}
+
+.theme-name{
+    color:#38bdf8;
+    font-size:1.1rem;
+    margin-bottom:10px;
+}
+
 .instructions{
     margin-top:15px;
     color:#cbd5e1;
@@ -128,7 +149,11 @@ button:hover{
 
         <h2>Настройки</h2>
 
+        <label class="field" for="players">Брой играчи</label>
         <input type="number" id="players" min="4" max="30" value="10">
+
+        <label class="field" for="theme">Тема</label>
+        <select id="theme"></select>
 
         <button onclick="startGame()">
             Стартирай игра
@@ -144,6 +169,7 @@ button:hover{
             Покажи ролята
         </button>
 
+        <div class="theme-name hidden" id="themeName"></div>
         <div class="role hidden" id="role"></div>
         <div class="topic hidden" id="topic"></div>
 
@@ -181,25 +207,71 @@ button:hover{
 </div>
 
 <script>
-const words = [
-    "Процесор", "RAM памет", "Твърд диск", "Видеокарта", "Дънна платка",
-    "Рутер", "Wi-Fi", "Облак", "Парола", "Вирус", "Антивирус", "Firewall",
-    "HTML", "CSS", "JavaScript", "Python", "Браузър", "Уебсайт", "Домейн",
-    "Сървър", "База данни", "Алгоритъм", "Цикъл", "Променлива", "Бъг",
-    "Клавиатура", "Мишка", "Монитор", "Принтер", "USB флашка",
-    "Изкуствен интелект", "Робот", "Смартфон", "Операционна система",
-    "Имейл", "Социална мрежа", "Хакер", "Бекъп", "Лаптоп", "Bluetooth"
-];
+const themes = {
+    "Хардуер": [
+        "Процесор", "RAM памет", "Твърд диск", "SSD", "Видеокарта", "Дънна платка",
+        "Захранване", "Охладител", "Клавиатура", "Мишка", "Монитор", "Принтер",
+        "Скенер", "USB флашка", "Лаптоп", "Таблет", "Смартфон", "Уебкамера",
+        "Слушалки", "Микрофон", "Тъчпад", "Проектор"
+    ],
+    "Мрежи и интернет": [
+        "Рутер", "Wi-Fi", "Bluetooth", "Облак", "Сървър", "Браузър",
+        "Уебсайт", "Домейн", "Имейл", "Социална мрежа", "IP адрес", "Мрежов кабел",
+        "Суич", "Модем", "Хотспот", "Търсачка", "Линк", "Сваляне на файл",
+        "Стрийминг", "5G", "Чат", "Видеоразговор"
+    ],
+    "Уеб дизайн": [
+        "HTML", "CSS", "JavaScript", "Таг", "Атрибут", "Заглавие",
+        "Параграф", "Хипервръзка", "Таблица", "Изображение", "Формуляр", "Бутон",
+        "Меню", "Шрифт", "Цвят на фона", "Flexbox", "Адаптивен дизайн", "Wireframe",
+        "Макет", "Лого", "Иконка", "Анимация"
+    ],
+    "Програмиране": [
+        "Python", "Алгоритъм", "Цикъл", "Променлива", "Функция", "Условие",
+        "Масив", "Бъг", "Компилатор", "Програмен код", "Програмист", "Блок-схема",
+        "Дебъгване", "Коментар в кода", "Низ", "Число", "Обект", "Клас",
+        "Робот", "Изкуствен интелект", "Компютърна игра", "Мобилно приложение"
+    ],
+    "Киберсигурност": [
+        "Парола", "Вирус", "Антивирус", "Firewall", "Хакер", "Бекъп",
+        "Фишинг", "Спам", "Шифроване", "Двуфакторна защита", "Бисквитки", "Лични данни",
+        "Троянски кон", "Рансъмуер", "Актуализация", "Потребителски профил", "Поверителност", "Кибертормоз",
+        "Пръстов отпечатък", "Лицево разпознаване", "Фалшива новина", "Сигурна връзка (HTTPS)"
+    ],
+    "Софтуер": [
+        "Операционна система", "Windows", "Android", "Текстообработка", "Електронна таблица", "Презентация",
+        "Видеоредактор", "Фоторедактор", "Драйвер", "Инсталация", "Лиценз", "Софтуерно пиратство",
+        "Отворен код", "Папка", "Файл", "Кошче", "Работен плот", "Пряк път",
+        "Копиране и поставяне", "Архив (ZIP)", "Магазин за приложения", "Актуализация на системата"
+    ],
+    "Управление на проекти": [
+        "Проект", "Екип", "Срок", "Бюджет", "Клиент", "Задание",
+        "Риск", "Етап", "Тестване", "Прототип", "Водопаден модел", "Agile",
+        "Спринт", "Диаграма на Гант", "Ръководител на проекта", "Среща на екипа", "Обратна връзка", "Документация",
+        "Цел на проекта", "Ресурси", "Отчет", "Мозъчна атака"
+    ]
+};
+
+const ALL = "Всички теми (случайна)";
 
 let playerCount = 0;
 let currentPlayer = 1;
 let impostors = [];
 let secretWord = "";
+let secretTheme = "";
 let timerId = null;
 
 function $(id){
     return document.getElementById(id);
 }
+
+// Попълва списъка с теми
+[ALL].concat(Object.keys(themes)).forEach(function(name){
+    const opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = name === ALL ? name : name + " (" + themes[name].length + " думи)";
+    $("theme").appendChild(opt);
+});
 
 function startGame(){
     playerCount = parseInt($("players").value, 10);
@@ -209,7 +281,11 @@ function startGame(){
         return;
     }
 
-    secretWord = words[Math.floor(Math.random() * words.length)];
+    const names = Object.keys(themes);
+    const chosen = $("theme").value;
+    secretTheme = chosen === ALL ? names[Math.floor(Math.random() * names.length)] : chosen;
+    const list = themes[secretTheme];
+    secretWord = list[Math.floor(Math.random() * list.length)];
 
     // При 15 или повече играчи има двама Impostor-и
     const impostorCount = playerCount >= 15 ? 2 : 1;
@@ -228,6 +304,7 @@ function startGame(){
 function showPlayer(){
     $("playerTitle").textContent = "Играч " + currentPlayer + " от " + playerCount;
     $("showBtn").classList.remove("hidden");
+    $("themeName").classList.add("hidden");
     $("role").classList.add("hidden");
     $("topic").classList.add("hidden");
     $("nextBtn").classList.add("hidden");
@@ -242,7 +319,9 @@ function showRole(){
         $("topic").textContent = "Думата е: " + secretWord;
     }
 
+    $("themeName").textContent = "Тема: " + secretTheme;
     $("showBtn").classList.add("hidden");
+    $("themeName").classList.remove("hidden");
     $("role").classList.remove("hidden");
     $("topic").classList.remove("hidden");
     $("nextBtn").textContent = currentPlayer < playerCount ? "Следващ играч" : "Към обсъждането";
@@ -285,7 +364,7 @@ function revealImpostor(){
     clearInterval(timerId);
     const list = impostors.sort(function(a, b){ return a - b; }).join(" и ");
     $("result").textContent = (impostors.length > 1 ? "Impostor-ите бяха играчи " : "Impostor беше играч ") + list;
-    $("resultWord").textContent = "Думата беше: " + secretWord;
+    $("resultWord").textContent = "Думата беше: " + secretWord + " (" + secretTheme + ")";
     $("result").classList.remove("hidden");
     $("resultWord").classList.remove("hidden");
 }
