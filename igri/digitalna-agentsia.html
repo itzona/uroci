@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Дигитална агенция – игра за 4 часа</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Unbounded:wght@600;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../style.css?v=20261120b">
+<link rel="icon" type="image/svg+xml" href="../icons/igra.svg">
+</head>
+<body class="theme-12klas page-igra">
+<main>
+<header><h1>Дигитална агенция</h1><div class="score">Кредити: <span id="score">0</span></div></header>
+<nav id="nav"></nav>
+
+<!-- СТАРТ -->
+<section class="step">
+<div class="card">
+<h2>Добре дошли в агенцията</h2>
+<p>През следващите минути вашият екип е уеб агенция. Имате клиент, срок и проблеми, които никой не е предвидил. Ще научите как се оценява риск, как се пише първият HTML код и как двете неща работят заедно в един проект.</p>
+<div class="note"><b>Клиентът:</b> училищният клуб по информатика иска сайт – заглавие, кратко описание, списък с дейности, лого и връзка към социална мрежа.</div>
+<h3>Ролите в екипа (сменяйте ги всеки час)</h3>
+<div class="grid2">
+<div class="mini"><b>Проектен мениджър</b><br>следи времето и решава спорове</div>
+<div class="mini"><b>Разработчик</b><br>пише кода</div>
+<div class="mini"><b>Дизайнер</b><br>пази скицата и външния вид</div>
+<div class="mini"><b>Тестер</b><br>проверява и търси грешки</div>
+</div>
+<h3 style="margin-top:16px">Как се печелят кредити</h3>
+<p>Точни оценки на рисковете, поправени грешки в кода, изпълнени задачи, умни решения в кризи и верни отговори във финалния тест. Следващата стъпка се отключва, когато изпълните задачата на текущата.</p>
+<p>Запишете резултата на екипа си на дъската след всяка стъпка. Печели екипът с най-много кредити.</p>
+</div>
+</section>
+
+<!-- ЧАС 1 -->
+<section class="step" hidden>
+<div class="card">
+<h2>Час 1: Анализ на риска</h2>
+<p><b>Риск</b> е нещо, което може да се случи и да навреди на проекта. Всеки риск оценяваме по две неща: колко вероятно е да се случи и колко голяма щета ще направи, и двете от 1 до 5. Ако ги умножим, получаваме нивото на риска.</p>
+<pre><code>Риск: „Разработчикът се разболява“
+Вероятност = 3, Въздействие = 4
+Ниво = 3 × 4 = 12 → висок приоритет</code></pre>
+<h3>Четирите отговора на един риск</h3>
+<div class="grid2">
+<div class="mini"><b>Избягвам</b><br>махаме причината. Пример: не обещаваме функция, която не можем да направим.</div>
+<div class="mini"><b>Намалявам</b><br>правим го по-малко вероятен или по-малко вреден. Пример: резервно копие на файловете.</div>
+<div class="mini"><b>Прехвърлям</b><br>отговорността отива към друг. Пример: договор с хостинг фирма за гарантирана наличност.</div>
+<div class="mini"><b>Приемам</b><br>оставяме го, защото е дребен. Пример: клиентът не харесва нюанс на бутона.</div>
+</div>
+</div>
+<div class="card">
+<h2>Игра: кризисни карти</h2>
+<p>Изтеглете карта, оценете вероятността и въздействието, изберете отговор и натиснете „Провери“. Точките са до 6 на карта.</p>
+<div id="rc"></div>
+<h3>Рискова матрица на екипа</h3>
+<p style="color:var(--mut);margin:0 0 6px">Вероятността расте надясно, въздействието расте нагоре.</p>
+<div class="matrix" id="mx"></div>
+</div>
+</section>
+
+<!-- ЧАС 2 -->
+<section class="step" hidden>
+<div class="card">
+<h2>Час 2: Първи стъпки в HTML</h2>
+<p>HTML описва какво има на страницата. Всичко е изградено от <b>тагове</b>. Повечето имат начало и край и затварят съдържанието между тях: <code>&lt;p&gt;текст&lt;/p&gt;</code>. Таговете се влагат един в друг като кутии.</p>
+<div class="grid2">
+<div class="mini"><code>&lt;h1&gt;</code> главно заглавие</div>
+<div class="mini"><code>&lt;p&gt;</code> абзац</div>
+<div class="mini"><code>&lt;ul&gt;&lt;li&gt;</code> списък</div>
+<div class="mini"><code>&lt;img&gt;</code> картинка с <code>alt</code></div>
+<div class="mini"><code>&lt;a href&gt;</code> връзка</div>
+<div class="mini"><code>&lt;title&gt;</code> име в раздела на браузъра</div>
+</div>
+<p>Променете кода долу и гледайте резултата веднага:</p>
+<textarea id="demo" spellcheck="false"></textarea>
+<iframe id="demoPv" sandbox title="Резултат"></iframe>
+</div>
+<div class="card">
+<h2>Игра: код детективи</h2>
+<p>Във всяка страница има грешка. Поправете я и натиснете „Провери“. Всяка поправка открива буква от тайната дума.</p>
+<div class="opts" id="ptabs"></div>
+<p id="pt" style="font-weight:700"></p>
+<textarea id="pc" spellcheck="false"></textarea>
+<div class="opts"><button class="b" id="pchk">Провери</button><button class="b alt" id="phint">Подсказка</button></div>
+<div id="pfb"></div>
+<div class="word" id="pword">_ _ _ _</div>
+</div>
+</section>
+
+<!-- ЧАС 3 -->
+<section class="step" hidden>
+<div class="card">
+<h2>Час 3: Строим сайта в криза</h2>
+<p>Свържете двете теми. Напишете страницата на клиента и изпълнете задачите. Когато поискате, тегленето на кризисна карта обърква плановете, така както в истинските проекти. Нужни са поне 4 изпълнени задачи и 3 решени кризи.</p>
+<ul class="tasks" id="tasks"></ul>
+<textarea id="ed" spellcheck="false" style="min-height:230px"></textarea>
+<iframe id="edPv" sandbox title="Страницата на клиента"></iframe>
+</div>
+<div class="card">
+<h2>Кризисни карти</h2>
+<div id="cr"><button class="b" id="cdraw">Изтегли кризисна карта</button></div>
+<p id="cstat" style="color:var(--mut)"></p>
+</div>
+</section>
+
+<!-- ЧАС 4 -->
+<section class="step" hidden>
+<div class="card">
+<h2>Час 4: Финален тест и презентации</h2>
+<p>Преди презентациите на екипите – финален тест с пет въпроса. После всеки екип показва страницата си за 2 минути и останалите гласуват.</p>
+<div id="qz"></div>
+</div>
+<div class="card" id="res" hidden>
+<h2 id="rank"></h2>
+<p id="rtxt"></p>
+<div class="note">Какво се обърка у вас и как рискът можеше да се предвиди? Обсъдете в екипа по 2 минути.</div>
+<button class="b" onclick="location.reload()">Нова игра</button>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-top">
+      <div class="sf-brand">
+        <div class="sf-logo" aria-hidden="true">&lt;/&gt;</div>
+        <div class="sf-brand-text">
+          <div class="sf-name">IT Зона</div>
+          <div class="sf-tagline">Образователен портал по информационни технологии</div>
+        </div>
+      </div>
+      <ul class="sf-links" aria-label="Навигация във футъра">
+        <li><a href="https://itzona.github.io/">Начало</a></li>
+        <li><a href="../9-klas/index.html">9. клас</a></li>
+        <li><a href="../11-klas/index.html">11. клас</a></li>
+        <li><a href="../12-klas/index.html">12. клас</a></li>
+      </ul>
+    </div>
+    <div class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</div>
+  </div>
+</footer>
+
+
+
+<div class="bar"><span id="hint"></span><button class="b" id="next">Напред</button></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const names=["Старт","Час 1: Риск","Час 2: HTML","Час 3: Криза","Час 4: Финал"];
+let score=0,step=0,reached=0;const done=[true,false,false,false,false];
+function add(n){score+=n;const s=$("#score");s.textContent=score;const b=s.parentElement;b.classList.remove("pop");void b.offsetWidth;b.classList.add("pop");setTimeout(()=>b.classList.remove("pop"),250)}
+function unlock(i){done[i]=true;draw()}
+function go(n){step=n;reached=Math.max(reached,n);$$(".step").forEach((s,i)=>s.hidden=i!==n);draw();window.scrollTo(0,0)}
+function draw(){
+ $("#nav").innerHTML="";
+ names.forEach((t,i)=>{const b=document.createElement("button");b.textContent=t;b.className=i===step?"on":"";b.disabled=i>reached;b.onclick=()=>go(i);$("#nav").appendChild(b)});
+ const last=step===4;$("#next").hidden=last;
+ $("#next").disabled=!done[step];
+ $("#hint").textContent=last?"":(done[step]?"Готово! Продължи нататък.":"Изпълни задачата, за да отключиш следващата стъпка.");
+ $("#next").textContent=step===0?"Започваме":"Следваща стъпка";
+}
+$("#next").onclick=()=>go(step+1);
+
+/* Час 1 – рискове */
+const R=[
+{t:"Разработчикът се разболява в последната седмица преди срока.",p:3,i:4,r:"red",h:"Нужен е резервен човек, който познава кода."},
+{t:"Клиентът променя изискванията в последния ден.",p:4,i:4,r:"red",h:"Намаляваме го с писмено съгласувани изисквания и ясни срокове за промени."},
+{t:"Изтрит е файл, а няма резервно копие.",p:2,i:5,r:"red",h:"Редовни копия правят загубата малка."},
+{t:"Хостинг фирмата спира сървъра за един ден.",p:2,i:3,r:"tra",h:"Отговорността се прехвърля с договор за гарантирана наличност."},
+{t:"Клиентът не е сигурен дали му харесва нюансът на един бутон.",p:4,i:1,r:"acc",h:"Дребен проблем – приемаме го и го оправяме при нужда."},
+{t:"Клиентът иска сложна функция, която не се събира в срока.",p:3,i:4,r:"avo",h:"Договаряме да я оставим за по-късна версия, тоест я избягваме."}];
+const RL={avo:"Избягвам",red:"Намалявам",tra:"Прехвърлям",acc:"Приемам"};
+let ri=0,rsel=null,rdone=false;const placed=[];
+function lvl(p,i){const v=p*i;return v>=12?"rgba(220,38,38,.55)":v>=6?"rgba(245,158,11,.6)":"rgba(34,197,94,.55)"}
+function mx(){const m=$("#mx");m.innerHTML="";for(let i=5;i>=1;i--)for(let p=1;p<=5;p++){const d=document.createElement("div");d.style.background=lvl(p,i);d.textContent=placed.filter(x=>x.p===p&&x.i===i).map(x=>x.n).join(" ");m.appendChild(d)}}
+function opts(id){return `<select id="${id}">${[1,2,3,4,5].map(n=>`<option>${n}</option>`).join("")}</select>`}
+function rShow(){
+ const c=R[ri];rsel=null;rdone=false;
+ $("#rc").innerHTML=`<p class="ev">Карта ${ri+1} от ${R.length}: ${c.t}</p>
+ <div class="row"><label>Вероятност ${opts("rp")}</label><label>Въздействие ${opts("rim")}</label></div>
+ <div class="opts" id="ro">${Object.entries(RL).map(([k,v])=>`<button data-k="${k}">${v}</button>`).join("")}</div>
+ <button class="b" id="rchk">Провери</button><div id="rfb"></div>`;
+ $$("#ro button").forEach(b=>b.onclick=()=>{if(rdone)return;rsel=b.dataset.k;$$("#ro button").forEach(x=>x.classList.toggle("sel",x===b))});
+ $("#rchk").onclick=rCheck;
+}
+function rCheck(){
+ const c=R[ri];if(rdone)return;
+ if(!rsel){$("#rfb").innerHTML='<div class="fb no">Първо избери отговор на риска.</div>';return}
+ rdone=true;
+ const P=+$("#rp").value,I=+$("#rim").value;
+ const pts=Math.max(0,3-Math.abs(P-c.p)-Math.abs(I-c.i))+(rsel===c.r?3:0);
+ add(pts);placed.push({p:P,i:I,n:ri+1});mx();
+ $("#rfb").innerHTML=`<div class="fb ${pts>=5?"ok":"no"}"><b>+${pts} кредита.</b> Според нас вероятността е ${c.p}, въздействието е ${c.i} (ниво ${c.p*c.i}). Най-добър отговор: ${RL[c.r]}. ${c.h}</div>
+ <button class="b" id="rn">${ri<R.length-1?"Следваща карта":"Приключи играта"}</button>`;
+ $("#rn").onclick=()=>{if(ri<R.length-1){ri++;rShow()}else{$("#rc").innerHTML='<div class="fb ok">Всички карти са решени. Твоята матрица показва кои рискове са най-важни. Продължи към HTML.</div>';unlock(1)}};
+}
+
+/* Час 2 – HTML */
+const sample=`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Моят сайт</title>
+</head>
+<body>
+  <h1>Здравей, свят!</h1>
+  <p>Това е първият ми абзац.</p>
+  <ul>
+    <li>Първо</li>
+    <li>Второ</li>
+  </ul>
+</body>
+</html>`;
+$("#demo").value=sample;
+const upd=()=>{$("#demoPv").srcdoc=$("#demo").value};$("#demo").oninput=upd;upd();
+const P=[
+{t:"Заглавието не е затворено правилно.",c:`<h1>Добре дошли<h1>\n<p>Сайт на клуба</p>`,ok:s=>(s.match(/<h1>/gi)||[]).length===1&&/<\/h1>/i.test(s),hint:"Краят на тага започва с наклонена черта: </h1>.",l:"С"},
+{t:"В списъка липсват краища на елементите.",c:`<ul>\n  <li>Начало\n  <li>Дейности\n</ul>`,ok:s=>(s.match(/<\/li>/gi)||[]).length>=2,hint:"Всеки <li> се затваря с </li>.",l:"А"},
+{t:"Картинката няма алтернативен текст.",c:`<img src="logo.png">`,ok:s=>/<img[^>]*\salt\s*=\s*"[^"]+"/i.test(s),hint:"Добави alt=\"Лого на клуба\" в тага.",l:"Й"},
+{t:"Страницата няма име в раздела на браузъра.",c:`<!DOCTYPE html>\n<html>\n<head>\n  <meta charset="utf-8">\n</head>\n<body>\n  <p>Здравей</p>\n</body>\n</html>`,ok:s=>/<title>[^<]+<\/title>/i.test(s),hint:"Вътре в <head> сложи <title>текст</title>.",l:"Т"}];
+let pi=0;const solved=[];
+function pShow(){
+ $("#ptabs").innerHTML="";
+ P.forEach((x,i)=>{const b=document.createElement("button");b.textContent="Грешка "+(i+1)+(solved[i]?" ✓":"");b.className=i===pi?"sel":"";b.onclick=()=>{pi=i;pShow()};$("#ptabs").appendChild(b)});
+ $("#pt").textContent=P[pi].t;$("#pc").value=P[pi].c;$("#pfb").innerHTML="";
+ $("#pword").textContent=P.map((x,i)=>solved[i]?x.l:"_").join(" ");
+}
+$("#pchk").onclick=()=>{
+ const x=P[pi];
+ if(solved[pi]){$("#pfb").innerHTML='<div class="fb ok">Тази грешка вече е поправена.</div>';return}
+ if(x.ok($("#pc").value)){solved[pi]=true;add(4);pShow();$("#pfb").innerHTML='<div class="fb ok"><b>+4 кредита!</b> Отключена е буква от тайната дума.</div>';
+  if(solved.filter(Boolean).length===P.length){$("#pfb").innerHTML='<div class="fb ok"><b>Тайната дума е САЙТ!</b> Всички грешки са поправени.</div>';unlock(2)}}
+ else $("#pfb").innerHTML='<div class="fb no">Още не е вярно. Прочети кода ред по ред или натисни „Подсказка“.</div>';
+};
+$("#phint").onclick=()=>{$("#pfb").innerHTML='<div class="fb">'+P[pi].hint+'</div>'};
+pShow();
+
+/* Час 3 – строеж и кризи */
+const T=[
+["Заглавие <h1> с текст",d=>d.querySelector("h1")&&d.querySelector("h1").textContent.trim()],
+["Абзац <p> с текст",d=>d.querySelector("p")&&d.querySelector("p").textContent.trim()],
+["Списък <ul> с поне 2 елемента <li>",d=>d.querySelectorAll("ul>li").length>=2],
+["Картинка <img> с alt",d=>d.querySelector('img[alt]:not([alt=""])')],
+["Връзка <a> с href",d=>d.querySelector("a[href]")],
+["<title> с текст в <head>",d=>d.querySelector("head>title")&&d.querySelector("head>title").textContent.trim()]];
+const tdone=new Set();
+$("#ed").value=`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <!-- Строй тук сайта на клуба -->
+</body>
+</html>`;
+function tUpd(){
+ const code=$("#ed").value;$("#edPv").srcdoc=code;
+ const d=new DOMParser().parseFromString(code,"text/html");
+ $("#tasks").innerHTML=T.map((t,i)=>{const ok=!!t[1](d);if(ok&&!tdone.has(i)){tdone.add(i);add(2)}return `<li class="${ok?"done":""}">${ok?"✓":"○"} ${t[0].replace(/</g,"&lt;")}</li>`}).join("");
+ stat();
+}
+$("#ed").oninput=tUpd;
+const C=[
+{t:"Колега изтри половината от кода и записа файла.",o:[["Връщам файла от резервното копие, което съм направил",3,"Точно за това служи намаляването на риска: загубата е само няколко минути."],["Пренаписвам всичко от нулата",1,"Работи, но губите много време, защото няма резервно копие."],["Обвинявам колегата и спираме работа",0,"Проблемът не се решава и екипът губи време и настроение."]]},
+{t:"Клиентът звъни: срокът се скъсява наполовина!",o:[["Оставяме най-важното (заглавие, текст, връзка) и договаряме останалото за по-късно",3,"Приоритизираме и избягваме непосилното."],["Работим без почивка и надяваме на късмета",0,"Умората води до нови грешки, а рискът остава."],["Изпращаме недовършена страница без предупреждение",1,"Клиентът трябва да знае какво ще получи."]]},
+{t:"Клиентът иска нов раздел „Контакти“ точно преди предаването.",o:[["Оценяваме колко време е нужно и го добавяме като отделна, платена промяна",3,"Промените се договарят, а не се правят мълчаливо."],["Казваме „не“ без обяснение",1,"Клиентът остава недоволен, а можехме да предложим решение."],["Добавяме го веднага и без договорка",2,"Става, но срокът и качеството могат да пострадат."]]}];
+let ci=0,cres=0;
+function stat(){
+ const t=tdone.size,msg=`Изпълнени задачи: ${t} от ${T.length}. Решени кризи: ${cres} от ${C.length}.`;
+ $("#cstat").textContent=msg;
+ if(t>=4&&cres>=C.length&&!done[3])unlock(3);
+}
+$("#cdraw").onclick=drawCrisis;
+function drawCrisis(){
+ if(ci>=C.length){$("#cr").innerHTML='<div class="fb ok">Всички кризи са преминати.</div>';return}
+ const c=C[ci];
+ $("#cr").innerHTML=`<p class="ev">${c.t}</p><div class="opts" id="co">${c.o.map((o,k)=>`<button data-k="${k}">${o[0]}</button>`).join("")}</div><div id="cfb"></div>`;
+ $$("#co button").forEach(b=>b.onclick=()=>{
+  const o=c.o[+b.dataset.k];$$("#co button").forEach(x=>x.disabled=true);
+  b.classList.add(o[1]>=3?"good":"wrong");add(o[1]);cres++;ci++;
+  $("#cfb").innerHTML=`<div class="fb ${o[1]>=3?"ok":"no"}"><b>+${o[1]} кредита.</b> ${o[2]}</div>`+(ci<C.length?'<button class="b" id="cn">Следваща криза</button>':"");
+  if($("#cn"))$("#cn").onclick=drawCrisis;stat();
+ });
+}
+stat();
+
+/* Час 4 – тест */
+const Q=[
+{q:"Какво описва нивото на риска?",o:["Само цената на проекта","Вероятност, умножена по въздействие","Броя на хората в екипа"],a:1},
+{q:"Резервното копие на файловете е пример за…",o:["Избягване","Приемане","Намаляване"],a:2},
+{q:"Кой таг дава име на страницата в раздела на браузъра?",o:["<title>","<h1>","<p>"],a:0},
+{q:"За какво служи атрибутът alt на картинка?",o:["Задава размера","Показва текст, ако картинката не се зареди","Добавя рамка"],a:1},
+{q:"Риск с вероятност 5 и въздействие 5 е…",o:["Най-висок приоритет","Може да се пренебрегне","Винаги е избегнат"],a:0}];
+let qi=0;
+function qShow(){
+ const c=Q[qi];
+ $("#qz").innerHTML=`<p class="ev">Въпрос ${qi+1} от ${Q.length}: ${c.q.replace(/</g,"&lt;")}</p><div class="opts" id="qo">${c.o.map((o,k)=>`<button data-k="${k}">${o.replace(/</g,"&lt;")}</button>`).join("")}</div><div id="qfb"></div>`;
+ $$("#qo button").forEach(b=>b.onclick=()=>{
+  const k=+b.dataset.k,ok=k===c.a;$$("#qo button").forEach((x,j)=>{x.disabled=true;if(j===c.a)x.classList.add("good")});
+  if(!ok)b.classList.add("wrong");else add(2);
+  $("#qfb").innerHTML=`<div class="fb ${ok?"ok":"no"}">${ok?"<b>+2 кредита!</b> Вярно.":"Не точно. Верният отговор е оцветен в зелено."}</div><button class="b" id="qn">${qi<Q.length-1?"Следващ въпрос":"Виж резултата"}</button>`;
+  $("#qn").onclick=()=>{if(qi<Q.length-1){qi++;qShow()}else finish()};
+ });
+}
+function finish(){
+ $("#qz").innerHTML='<div class="fb ok">Тестът е приключил.</div>';
+ const r=score>=65?"Директор на агенцията":score>=45?"Старши екип":score>=25?"Млад екип с потенциал":"Начинаещи – опитайте пак";
+ $("#rank").textContent=r;$("#rtxt").textContent=`Вашите кредити: ${score}. Сравнете ги с другите екипи на дъската и покажете сайта си на класа.`;
+ $("#res").hidden=false;window.scrollTo(0,document.body.scrollHeight);
+}
+qShow();
+rShow();mx();
+go(0);
+</script>
+<script src="../totop.js?v=20261126" defer></script>
+</body>
+</html>
