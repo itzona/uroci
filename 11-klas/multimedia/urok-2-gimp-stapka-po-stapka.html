@@ -480,16 +480,19 @@ function table(){const c=cv(1000,640),x=c.getContext('2d');let g=x.createLinearG
  return noise(c,6,9).toDataURL('image/jpeg',.9)}
 
 /* render evidence */
+/* надпис „ОБРАЗЕЦ“ върху демонстрациите, за да не се предават като собствена работа */
+const wmk=(c,lbl)=>{const x=c.getContext('2d');x.save();x.translate(c.width/2,c.height/2);x.rotate(-.42);x.font=`800 ${Math.round(c.width/11)}px Manrope, sans-serif`;x.textAlign='center';x.textBaseline='middle';x.fillStyle='rgba(255,255,255,.3)';x.strokeStyle='rgba(0,0,0,.22)';x.lineWidth=Math.max(1.5,c.width/400);
+ for(let k=-1;k<=1;k++){x.fillText(lbl||'ОБРАЗЕЦ',0,k*c.height*.45);x.strokeText(lbl||'ОБРАЗЕЦ',0,k*c.height*.45)}x.restore()};
 const setImg=(n,url)=>{$('#i'+n).src=url;$('#d'+n).href=url};
 const fontsReady=document.fonts?Promise.all([document.fonts.load('800 50px Manrope'),document.fonts.load('600 40px Caveat')]).catch(()=>{}):Promise.resolve();
 fontsReady.then(async()=>{
  const N=night();setImg(1,N.toDataURL('image/png'));
- const hA=$('#heroA').getContext('2d'),hB=$('#heroB').getContext('2d');hA.drawImage(levels(N,0,30,1.2),0,0);hB.drawImage(N,0,0);
+ const hA=$('#heroA').getContext('2d'),hB=$('#heroB').getContext('2d');hA.drawImage(levels(N,0,30,1.2),0,0);wmk($('#heroA'));hB.drawImage(N,0,0);
  const hero=()=>{$('#heroB').style.clipPath=`inset(0 ${100-$('#heroR').value}% 0 0)`};$('#heroR').addEventListener('input',hero);hero();
  const small=cv(400,250);small.getContext('2d').drawImage(N,0,0,400,250);
  const hist=new Array(256).fill(0);{const p=small.getContext('2d').getImageData(0,0,400,250).data;for(let i=0;i<p.length;i+=4)hist[Math.round((p[i]+p[i+1]+p[i+2])/3)]++}
  const drawLv=()=>{const b=+$('#lvB').value,w=Math.max(b+5,+$('#lvW').value),g=$('#lvG').value/100;$('#oB').textContent=b;$('#oW').textContent=w;$('#oG').textContent=g.toFixed(2).replace('.',',');
-  $('#lvC').getContext('2d').drawImage(levels(small,b,w,g),0,0);
+  $('#lvC').getContext('2d').drawImage(levels(small,b,w,g),0,0);wmk($('#lvC'),'ДЕМОНСТРАЦИЯ');
   const hc=$('#hist'),x=hc.getContext('2d'),mx=Math.max(...hist.slice(1));x.clearRect(0,0,400,70);x.fillStyle='#bbb';for(let v=0;v<256;v++){const h=Math.min(66,66*Math.sqrt(hist[v]/mx));x.fillRect(v*400/256,70-h,1.6,h)}
   x.fillStyle='#e59a52';x.fillRect(b*400/256-1,0,3,70);x.fillStyle='#fff';x.fillRect(w*400/256-1,0,3,70);
   const nv=v=>Math.round(255*Math.pow(Math.min(1,Math.max(0,(v-b)/Math.max(1,w-b))),1/g));$('#lvX').textContent=`Пиксел 10 → ${nv(10)} · пиксел 20 → ${nv(20)} · пиксел 30 → ${nv(30)}`};
@@ -504,9 +507,10 @@ fontsReady.then(async()=>{
    if(ms.s){x.fillStyle='rgba(0,0,0,.35)';x.filter='blur(5px)';x.beginPath();x.ellipse(226,198,32,6,0,0,7);x.fill();x.filter='none'}
    const L=cv(400,250),l=L.getContext('2d');l.drawImage(ap,190,112,90,90);
    if(ms.m){l.globalCompositeOperation='destination-out';l.beginPath();l.moveTo(228,120);l.lineTo(292,120);l.lineTo(288,200);l.quadraticCurveTo(260,208,232,200);l.closePath();l.fill();l.beginPath();l.ellipse(260,120,32,7,0,0,7);l.fill()}
-   x.drawImage(L,0,0);$('#bMask').textContent='Маска: '+(ms.m?'включена':'изключена');$('#bShadow').textContent='Сянка: '+(ms.s?'включена':'изключена');$('#bMask').setAttribute('aria-pressed',!!ms.m);$('#bShadow').setAttribute('aria-pressed',!!ms.s)};
+   x.drawImage(L,0,0);wmk($('#mkC'),'ДЕМОНСТРАЦИЯ');$('#bMask').textContent='Маска: '+(ms.m?'включена':'изключена');$('#bShadow').textContent='Сянка: '+(ms.s?'включена':'изключена');$('#bMask').setAttribute('aria-pressed',!!ms.m);$('#bShadow').setAttribute('aria-pressed',!!ms.s)};
   $('#bMask').onclick=()=>{ms.m^=1;drawMk()};$('#bShadow').onclick=()=>{ms.s^=1;drawMk()};drawMk()};timg.src=T;
  setImg(3,await postcard());
+ document.querySelectorAll('.ba,.demo canvas,.flipbox').forEach(n=>{n.addEventListener('contextmenu',e=>e.preventDefault());n.addEventListener('dragstart',e=>e.preventDefault());n.style.webkitTouchCallout='none';n.style.userSelect='none'});
  /* образци на готовото – само за гледане */
  {const wm=c=>{const x=c.getContext('2d');x.save();x.translate(c.width/2,c.height/2);x.rotate(-.42);x.font=`800 ${Math.round(c.width/11)}px Manrope, sans-serif`;x.textAlign='center';x.fillStyle='rgba(255,255,255,.28)';x.strokeStyle='rgba(0,0,0,.18)';x.lineWidth=2;
    for(let k=-1;k<=1;k++){x.fillText('ОБРАЗЕЦ',0,k*c.height*.45);x.strokeText('ОБРАЗЕЦ',0,k*c.height*.45)}x.restore()};
