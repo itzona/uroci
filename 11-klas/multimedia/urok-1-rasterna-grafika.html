@@ -67,6 +67,13 @@ body::after{inset:-560px;background:url("data:image/svg+xml,%3Csvg xmlns='http:/
 @keyframes bgA{to{transform:translate3d(320px,320px,0)}}
 @keyframes bgB{to{transform:translate3d(-560px,560px,0)}}
 @media(prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+
+/* Текстът стои върху плътен фон, а плаващите думи се виждат само по краищата */
+header.band>.wrap,main>.band>.wrap{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(16px,3vw,34px);box-shadow:0 10px 30px -22px rgba(0,0,0,.35)}
+main>.band{border-top:0}
+main>.band+.band{padding-top:0}
+.note-band{background:var(--card);border-radius:12px;max-width:1140px;margin:0 auto 0;padding:12px 16px!important}
+@media(max-width:600px){header.band>.wrap,main>.band>.wrap{padding:14px;border-radius:12px}}
 /* Общ футър на сайта – същият като в style.css */
 footer.site-footer{position:relative;z-index:1;clear:both;display:block;margin:64px 0 0;padding:36px 20px 26px;
   background:#1a1d3a;color:#c4c7dc;text-align:left;border:0;
@@ -325,7 +332,7 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
  <p style="margin-top:22px"><a class="next" href="urok-2-gimp-stapka-po-stapka.html">Към урок 2: GIMP стъпка по стъпка →</a></p>
 </div></section>
 </main>
-<p class="band small" style="margin:0;padding-block:18px 0;text-align:center">Всички изображения в урока са генерирани за него и могат свободно да се използват в час.</p>
+<p class="small note-band" style="text-align:center">Всички изображения в урока са генерирани за него и могат свободно да се използват в час.</p>
 <footer class="site-footer">
   <div class="sf-inner">
     <div class="sf-top">
