@@ -94,10 +94,8 @@
 /* Модул „Обработка и анализ на данни“ (11. клас). Уроците предстоят – когато се добавят,
    скриптът ще стане като ../multimedia/mm.js. Засега менюто показва, че уроците предстоят. */
 (function(){let og=-1;const n=document.getElementById("nav");
-const M=[["../multimedia/urok-1-rasterna-grafika.html","Растерна графика, цветове и формати"],["../multimedia/urok-2-gimp-stapka-po-stapka.html","GIMP стъпка по стъпка: от тъмна снимка до фотомонтаж"]];
 const dd=(k,cls,lbl,head,links)=>`<div class="dd"><button class="grp ${cls}" data-g="${k}" aria-expanded="${og==k}">${lbl} ▾</button><div class="menu" style="display:${og==k?'block':'none'}"><div class="mh">${head}</div>${links}</div></div>`;
 function r(){n.innerHTML='<a class="grp home" href="https://itzona.github.io/">🏠 Начало</a>'+
- dd(0,'','🎨 Компютърна графика','Мултимедия – растерна графика и обработка на изображения',M.map((m,i)=>`<a href="${m[0]}"><span class="n">${i+1}.</span><span class="t">${m[1]}</span></a>`).join(''))+
  dd(1,'on','📊 Обработка и анализ на данни','Обработка и анализ на данни','<a class="on" href="index.html" aria-current="page"><span class="n">·</span><span class="t">Уроците предстоят</span></a>');
  n.querySelectorAll("button").forEach(b=>b.onclick=e=>{e.stopPropagation();const k=+b.dataset.g;og=og==k?-1:k;r()})}
 document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest(".menu a"))return;if(og!=-1){og=-1;r()}});
