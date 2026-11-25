@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 1: Растерна графика, цветове и формати – Мултимедия, 11 клас</title>
+<link rel="icon" type="image/svg+xml" href="../../icons/multimedia.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+/* VOICE: ясен учебник за 11 клас – обяснява с опити, не с дефиниции
+   IDEA: лупа над пикселите – всяка тема се „увеличава“ на живо
+   PICTURE: интерактивно увеличение на снимка до отделни пиксели срещу векторен кръг
+   COLOUR and TYPE: бял лист, графитено мастило, тъмен панел #2b2b2e, охра за акцент (като урок 2); Manrope + PT Mono за числа
+   LAYOUT: заглавие и лупа, лепкав ред с темите, всяка тема: обяснение вляво, опит вдясно */
+:root{color-scheme:light dark;--bg:light-dark(#fbfaf7,#141416);--card:light-dark(#fff,#1e1e21);--ink:light-dark(#1c1d21,#ecebe6);--mute:light-dark(#5b5d66,#a6a7ad);--line:light-dark(#e3e1da,#333338);--acc:light-dark(#a65a1c,#e59a52);--scr:#2b2b2e}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Manrope,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{line-height:1.08;margin:0 0 .45em;text-wrap:balance;font-weight:800}
+h1{font-size:clamp(32px,5.5vw,50px)}h2{font-size:clamp(26px,3.6vw,36px)}h3{font-size:20px;margin-top:1.3em}
+.band{padding:clamp(28px,4vw,60px) max(5vw,16px)}.wrap{max-width:1140px;margin:0 auto}
+header .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:36px;align-items:center}
+.lead{color:var(--mute);max-width:56ch}
+.num{font:700 14px "PT Mono",monospace;color:var(--acc)}
+.lessons{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.lessons a,.lessons span{font-weight:700;font-size:14px;padding:6px 12px;border-radius:20px;border:1px solid var(--line);color:var(--ink);text-decoration:none}.lessons span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.scr{background:var(--scr);border-radius:12px;padding:12px;color:#ddd;box-shadow:0 18px 40px -20px rgba(0,0,0,.5)}
+.scr canvas,.scr img{width:100%;display:block;border-radius:6px;background:#000}
+.scr b{color:#fff}
+nav{position:sticky;top:0;z-index:5;background:var(--card);border-block:1px solid var(--line)}
+nav .scroll{display:flex;gap:4px;max-width:1140px;margin:0 auto;padding:6px max(5vw,16px);overflow-x:auto}
+nav a{flex:none;color:var(--ink);text-decoration:none;font-weight:700;font-size:15px;padding:10px 12px;border-radius:8px}nav a:hover{background:var(--line)}
+.ex{border-top:1px solid var(--line)}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+.why{border-left:4px solid var(--acc);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;margin:14px 0}
+.term{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:10px 0}.term b{color:var(--acc)}
+.sticky{position:sticky;top:70px}
+.ctl{display:grid;gap:8px;margin-top:10px;font-size:14px}.ctl label{display:grid;grid-template-columns:7.5em 1fr 4.5em;gap:8px;align-items:center}
+.ctl output,.mono{font-family:"PT Mono",monospace}.ctl output{text-align:right}
+input[type=range]{accent-color:var(--acc);min-height:32px}
+input[type=number],select{font:16px Manrope,sans-serif;min-height:44px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 10px;width:100%}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.duo p{margin:4px 0 0;font-size:13px;color:#aaa;text-align:center}
+.swatch{height:90px;border-radius:8px;margin-top:10px;display:grid;place-items:center;font:700 20px "PT Mono",monospace}
+.big{font:800 clamp(26px,4vw,34px) Manrope,sans-serif;color:#fff}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:10px;margin-top:10px}.calc label{font-size:14px;color:#ccc}
+.res{margin-top:12px;display:grid;gap:4px;font-size:15px}.res span{font-family:"PT Mono",monospace;color:#fff}
+.diag{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.diag svg{width:100%;border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:15px;background:var(--card)}
+th,td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}th{background:var(--line)}td:first-child{font-weight:800;white-space:nowrap}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:10px}summary{cursor:pointer;font-weight:700}details p{margin:8px 0 0;color:var(--mute)}
+ol.steps{padding-left:22px}ol.steps li{margin:6px 0}
+kbd{font:14px "PT Mono",monospace;background:var(--card);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;white-space:nowrap}
+.next{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:10px;background:var(--acc);color:#fff;font-weight:800;text-decoration:none}
+.small{font-size:14px;color:var(--mute)}
+footer{color:var(--mute);font-size:14px}
+@media(max-width:820px){header .wrap,.cols{grid-template-columns:1fr}.sticky{position:static}}
+@media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 12px;padding-inline-start:8em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;font-weight:700}.stack td:empty{display:none}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<header class="band"><div class="wrap">
+ <div>
+  <div class="lessons"><a href="index.html">← Мултимедия</a><span>Урок 1 · Растерна графика</span><a href="urok-2-gimp-stapka-po-stapka.html">Урок 2 · GIMP →</a></div>
+  <p class="num">Мултимедия · 11 клас</p>
+  <h1>Растерна графика, цветове и формати</h1>
+  <p class="lead">Всяка снимка на екрана е мозайка от малки цветни квадратчета. Тук ще видите как са устроени: колко са, как се смесват цветовете им и защо един и същ кадър може да е 6 MB или 200 KB. Всеки опит е на живо.</p>
+ </div>
+ <div class="scr"><canvas id="zoomC" width="640" height="400" aria-label="Увеличение на снимка до пиксели"></canvas>
+  <div class="ctl"><label>Увеличение <input type="range" id="zoomR" min="1" max="40" value="1"><output id="zoomO">1×</output></label></div>
+  <p class="small" style="color:#aaa;margin:4px 0 0">Увеличете слънцето. Някъде след 8× започват да се виждат отделните пиксели.</p></div>
+</div></header>
+
+<nav><div class="scroll"><a href="#t1">Пиксели</a><a href="#t2">Растер или вектор</a><a href="#t3">Разделителна способност</a><a href="#t4">RGB и CMYK</a><a href="#t5">Битова дълбочина</a><a href="#t6">Размер и компресия</a><a href="#t7">Формати</a><a href="#t8">Практика</a><a href="#test">Провери се</a></div></nav>
+
+<main>
+<section class="band ex" id="t1"><div class="wrap cols">
+ <div><p class="num">Тема 1</p><h2>Пикселът: най-малката част от изображението</h2>
+  <p><b>Растерното изображение</b> е таблица (растер) от пиксели. Всеки пиксел е квадратче с <i>един-единствен</i> цвят. Компютърът помни за всеки пиксел само числа – колко червено, зелено и синьо има в него.</p>
+  <div class="term"><b>Пиксел</b> (picture element) – най-малкият елемент на растерното изображение.<br><b>Размер в пиксели</b> – ширина × височина, например 1920 × 1080.<br><b>Мегапиксел (MP)</b> – един милион пиксела: 4000 × 3000 = 12 MP.</div>
+  <div class="why"><b>Защо е важно?</b> Броят на пикселите е фиксиран. Когато увеличавате изображението, GIMP не измисля нови детайли, а само „разтяга“ съществуващите пиксели. Затова увеличената растерна снимка изглежда размазана или на квадратчета.</div>
+ </div>
+ <div class="sticky scr"><b>Една снимка – три размера</b><div class="duo"><div><canvas id="res1" width="300" height="190"></canvas><p>480 × 300 px</p></div><div><canvas id="res2" width="300" height="190"></canvas><p>60 × 38 px, разтегната</p></div></div>
+  <p class="small" style="color:#aaa">Двете картинки са показани с еднакъв размер на екрана, но дясната има 64 пъти по-малко пиксели.</p></div>
+</div></section>
+
+<section class="band ex" id="t2"><div class="wrap cols">
+ <div><p class="num">Тема 2</p><h2>Растерна или векторна графика</h2>
+  <p><b>Векторната графика</b> не помни пиксели. Тя пази <i>описание</i> на фигурите: „кръг с център (50; 50), радиус 40, оранжев“. При всяко показване компютърът рисува фигурата наново, затова тя е остра при всяко увеличение.</p>
+  <table class="stack"><thead><tr><th></th><th>Растерна</th><th>Векторна</th></tr></thead><tbody>
+   <tr><td>Пази</td><td>цвета на всеки пиксел</td><td>формули на фигури</td></tr>
+   <tr><td>При увеличение</td><td>губи качество</td><td>остава остра</td></tr>
+   <tr><td>Подходяща за</td><td>снимки, плавни преходи</td><td>лога, икони, схеми, шрифтове</td></tr>
+   <tr><td>Програми</td><td>GIMP, Photoshop, Krita</td><td>Inkscape, Illustrator, CorelDRAW</td></tr>
+   <tr><td>Формати</td><td>JPG, PNG, GIF, WebP, TIFF</td><td>SVG, AI, EPS, PDF</td></tr>
+  </tbody></table>
+ </div>
+ <div class="sticky scr"><b>Еднакво увеличение – различен резултат</b><div class="duo"><div><canvas id="vecR" width="300" height="300"></canvas><p>растерен кръг</p></div><div><svg id="vecS" viewBox="0 0 100 100" style="width:100%;background:#fff;border-radius:6px;display:block"><circle cx="50" cy="50" r="40" fill="#e59a52"/></svg><p>векторен кръг</p></div></div>
+  <div class="ctl"><label>Увеличение <input type="range" id="vecZ" min="1" max="16" value="1"><output id="vecO">1×</output></label></div></div>
+</div></section>
+
+<section class="band ex" id="t3"><div class="wrap cols">
+ <div><p class="num">Тема 3</p><h2>Разделителна способност: px, ppi и dpi</h2>
+  <p>Пикселите нямат определен физически размер. Колко голяма ще излезе снимката, зависи от това колко пиксела се събират в един инч (2,54 см).</p>
+  <div class="term"><b>ppi</b> (pixels per inch) – пиксели на инч, за екрани и файлове.<br><b>dpi</b> (dots per inch) – точки мастило на инч, за принтери. В практиката двата термина често се използват като синоними.</div>
+  <div class="why"><b>Правило:</b> за екран е важен само размерът в пиксели. За качествен печат са нужни около <b>300 dpi</b>. Формулата е: <span class="mono">размер в см = пиксели ÷ dpi × 2,54</span>.</div>
+  <p>В GIMP: <kbd>Image → Print Size</kbd> променя dpi, без да пипа пикселите. <kbd>Image → Scale Image</kbd> променя броя на пикселите.</p>
+ </div>
+ <div class="sticky scr"><b>Калкулатор за печат</b>
+  <div class="calc"><label>Ширина, px<input type="number" id="pw" value="4000" min="1"></label><label>Височина, px<input type="number" id="ph" value="3000" min="1"></label><label>dpi<select id="pd"><option>72</option><option>150</option><option selected>300</option><option>600</option></select></label></div>
+  <div class="res"><div>Мегапиксели: <span id="rMP"></span></div><div>Размер при печат: <span id="rCM"></span></div><div class="big" id="rVerdict"></div></div></div>
+</div></section>
+
+<section class="band ex" id="t4"><div class="wrap cols">
+ <div><p class="num">Тема 4</p><h2>Цветови модели: RGB и CMYK</h2>
+  <p><b>RGB</b> е модел за екрани. Екранът свети с три цвята – червено (Red), зелено (Green) и синьо (Blue). Всеки канал има стойност от 0 до 255. Когато светлините се събират, се получава по-светъл цвят: червено + зелено = жълто, а трите на максимум дават бяло. Затова моделът се нарича <i>адитивен</i> (събирателен).</p>
+  <p><b>CMYK</b> е модел за печат: Cyan (синьозелено), Magenta (пурпурно), Yellow (жълто) и Key (черно). Мастилото поглъща светлина, затова при смесване цветът става по-тъмен. Моделът се нарича <i>субтрактивен</i> (изваждащ).</p>
+  <div class="term"><b>HEX код</b> – RGB стойностите, записани в шестнайсетична бройна система: #FF8000 = R 255, G 128, B 0. Използва се в уеб дизайна и в GIMP.<br><b>HSV</b> – друг начин да се опише същият цвят: тон (Hue), наситеност (Saturation) и яркост (Value). Удобен е, когато избирате цвят на ръка.</div>
+  <div class="why"><b>Защо отпечатаната снимка е по-бледа от екрана?</b> С RGB се получават по-ярки цветове, отколкото с CMYK. Наситеното неоново зелено на екрана просто не може да се отпечата с мастило.</div>
+ </div>
+ <div class="sticky scr"><b>Смесете цвят в RGB</b>
+  <div class="ctl"><label>R (червено) <input type="range" id="cR" min="0" max="255" value="255"><output id="oR"></output></label><label>G (зелено) <input type="range" id="cG" min="0" max="255" value="128"><output id="oG"></output></label><label>B (синьо) <input type="range" id="cB" min="0" max="255" value="0"><output id="oBl"></output></label></div>
+  <div class="swatch" id="sw"></div>
+  <div class="diag">
+   <svg viewBox="0 0 120 110" style="background:#000" role="img" aria-label="Адитивно смесване RGB"><g style="mix-blend-mode:screen;isolation:isolate"><circle cx="45" cy="42" r="30" fill="#f00" style="mix-blend-mode:screen"/><circle cx="75" cy="42" r="30" fill="#0f0" style="mix-blend-mode:screen"/><circle cx="60" cy="68" r="30" fill="#00f" style="mix-blend-mode:screen"/></g></svg>
+   <svg viewBox="0 0 120 110" style="background:#fff" role="img" aria-label="Субтрактивно смесване CMYK"><circle cx="45" cy="42" r="30" fill="#0ff" style="mix-blend-mode:multiply"/><circle cx="75" cy="42" r="30" fill="#f0f" style="mix-blend-mode:multiply"/><circle cx="60" cy="68" r="30" fill="#ff0" style="mix-blend-mode:multiply"/></svg>
+  </div><div class="duo" style="margin-top:0"><p>RGB – светлина (екран)</p><p>CMY(K) – мастило (печат)</p></div></div>
+</div></section>
+
+<section class="band ex" id="t5"><div class="wrap cols">
+ <div><p class="num">Тема 5</p><h2>Битова дълбочина: колко цвята има</h2>
+  <p>Битовата дълбочина показва с колко бита се записва цветът на един пиксел. Повече битове значи повече възможни цветове.</p>
+  <table><thead><tr><th>Битове на пиксел</th><th>Цветове</th><th>Пример</th></tr></thead><tbody>
+   <tr><td>1 бит</td><td>2</td><td>черно-бяло, факс</td></tr>
+   <tr><td>8 бита</td><td>256</td><td>нюанси на сивото или GIF с палитра</td></tr>
+   <tr><td>24 бита</td><td>16 777 216</td><td>обикновена снимка: 8 бита × 3 канала (R, G, B)</td></tr>
+   <tr><td>32 бита</td><td>16,7 млн. + прозрачност</td><td>PNG с алфа канал</td></tr>
+  </tbody></table>
+  <div class="why"><b>Какво става при малко цветове?</b> Плавните преходи (небе, залез) се превръщат в ивици. Това се нарича <i>постеризация</i>. В GIMP: <kbd>Colors → Posterize</kbd> или <kbd>Image → Mode → Indexed</kbd> (палитра до 256 цвята).</div>
+  <div class="term"><b>Алфа канал</b> – четвърти канал, който пази <i>прозрачността</i> на всеки пиксел: от 0 (напълно прозрачен) до 255 (плътен).</div>
+ </div>
+ <div class="sticky scr"><b>Намалете цветовете</b><canvas id="postC" width="480" height="300" style="margin-top:10px"></canvas>
+  <div class="ctl"><label>Нива на канал <input type="range" id="postR" min="2" max="64" value="64"><output id="postO"></output></label></div>
+  <div class="res"><div>Възможни цветове: <span id="postN"></span></div></div></div>
+</div></section>
+
+<section class="band ex" id="t6"><div class="wrap cols">
+ <div><p class="num">Тема 6</p><h2>Размер на файла и компресия</h2>
+  <p>Некомпресираният размер се смята така: <span class="mono">ширина × височина × битове ÷ 8</span> байта. Снимка 1920 × 1080 при 24 бита заема 1920 × 1080 × 3 = 6 220 800 байта, около <b>6,2 MB</b>. Затова файловете се компресират.</p>
+  <div class="term"><b>Компресия без загуба</b> (PNG, GIF, TIFF) – данните се записват по-кратко, но след отваряне всеки пиксел е точно същият. Например вместо „синьо, синьо, синьо…“ се записва „200 × синьо“.<br><b>Компресия със загуба</b> (JPG) – премахват се детайли, които окото трудно забелязва. Файлът става много по-малък, но изгубеното не може да се върне.</div>
+  <div class="why"><b>Внимание:</b> всяко ново записване на JPG отново губи качество. Работете в XCF или PNG и изнасяйте в JPG само накрая.</div>
+  <p>Около текста и острите ръбове JPG оставя „квадратчета“ и „шум“. Това са <b>артефакти</b>, получени от блоковете 8 × 8 пиксела, на които JPG разделя снимката.</p>
+ </div>
+ <div class="sticky scr"><b>Опит: качество на JPG</b><canvas id="jpgC" width="480" height="300" style="margin-top:10px"></canvas>
+  <div class="ctl"><label>Качество <input type="range" id="jpgR" min="1" max="100" value="80"><output id="jpgO"></output></label></div>
+  <div class="res"><div>Размер на JPG: <span id="jpgS"></span></div><div>Същата картинка като PNG: <span id="pngS"></span></div><div>Без компресия: <span id="rawS"></span></div></div>
+  <p class="small" style="color:#aaa">Вдясно изображението е увеличено 2× около надписа, за да се виждат артефактите.</p></div>
+</div></section>
+
+<section class="band ex" id="t7"><div class="wrap">
+ <p class="num">Тема 7</p><h2>Графични формати: кой кога</h2>
+ <table class="stack"><thead><tr><th>Формат</th><th>Вид</th><th>Компресия</th><th>Прозрачност</th><th>Анимация</th><th>Кога се използва</th></tr></thead><tbody>
+  <tr><td>JPG / JPEG</td><td>растерен</td><td>със загуба</td><td>не</td><td>не</td><td>Снимки за уеб, телефон, имейл</td></tr>
+  <tr><td>PNG</td><td>растерен</td><td>без загуба</td><td>да (алфа)</td><td>не</td><td>Лога без фон, екранни снимки, текст, графики</td></tr>
+  <tr><td>GIF</td><td>растерен, до 256 цвята</td><td>без загуба</td><td>да (вкл./изкл.)</td><td>да</td><td>Кратки анимации, прости икони</td></tr>
+  <tr><td>WebP</td><td>растерен</td><td>и двата вида</td><td>да</td><td>да</td><td>Модерен формат за уеб, по-малки файлове</td></tr>
+  <tr><td>BMP</td><td>растерен</td><td>обикновено без</td><td>рядко</td><td>не</td><td>Стар формат на Windows, много големи файлове</td></tr>
+  <tr><td>TIFF</td><td>растерен</td><td>без загуба</td><td>да</td><td>не</td><td>Печат, сканиране, архив</td></tr>
+  <tr><td>RAW</td><td>растерен</td><td>без загуба</td><td>не</td><td>не</td><td>„Суровите“ данни от сензора на фотоапарата</td></tr>
+  <tr><td>XCF / PSD</td><td>работен (GIMP / Photoshop)</td><td>без загуба</td><td>да</td><td>не</td><td>Незавършена работа: пазят слоеве и маски</td></tr>
+  <tr><td>SVG</td><td>векторен</td><td>текст (XML)</td><td>да</td><td>да</td><td>Лога, икони, графики за уеб</td></tr>
+ </tbody></table>
+ <div class="cols" style="margin-top:22px">
+  <div class="why" style="margin:0"><b>Бърз избор:</b> снимка → JPG · нужна е прозрачност или остър текст → PNG · анимация → GIF или WebP · лого, което ще се уголемява → SVG · работата не е завършена → XCF.</div>
+  <div class="scr"><b>Как изглежда прозрачността</b><div class="duo"><div><canvas id="trA" width="200" height="150"></canvas><p>JPG – фонът остава бял</p></div><div><canvas id="trB" width="200" height="150"></canvas><p>PNG – шахматът означава прозрачно</p></div></div></div>
+ </div>
+</div></section>
+
+<section class="band ex" id="t8"><div class="wrap cols">
+ <div><p class="num">Практика</p><h2>Задача в GIMP</h2>
+  <p>Изтеглете примерната снимка и проверете в GIMP всичко от урока.</p>
+  <ol class="steps">
+   <li>Отворете <i>peizazh.png</i>. Разберете размера ѝ в пиксели: <kbd>Image → Canvas Size</kbd> или долу в лентата на прозореца.</li>
+   <li><kbd>Image → Print Size</kbd>: задайте 300 dpi. Колко сантиметра ще е при печат?</li>
+   <li><kbd>Image → Scale Image</kbd>: намалете до 120 px ширина, после увеличете обратно до 480. Какво се случи и защо?</li>
+   <li>Отворете отново оригинала. <kbd>Image → Mode → Indexed</kbd> с 8 цвята. Какво стана с небето?</li>
+   <li>Отворете отново оригинала и изнесете три файла: <kbd>File → Export As</kbd> → PNG, JPG с качество 90, JPG с качество 10.</li>
+   <li>Сравнете размерите на трите файла в папката. Запишете ги в таблица и обяснете разликата.</li>
+  </ol>
+ </div>
+ <div class="scr"><b>peizazh.png</b><img id="dlImg" alt="Пейзаж за практиката" style="margin-top:10px"><a class="next" id="dlA" download="peizazh.png" style="margin-top:10px">Изтегли peizazh.png</a><p class="small" style="color:#aaa">Ако бутонът не работи: десен бутон върху картинката → „Запазване на изображението“.</p></div>
+</div></section>
+
+<section class="band ex" id="test"><div class="wrap">
+ <h2>Провери се</h2>
+ <details><summary>1. Защо снимка с размер 300 × 200 px става размазана, когато я разпънете на целия екран?</summary><p>Броят на пикселите е фиксиран. При увеличение всеки пиксел се разтяга на голяма площ, а нови детайли не се появяват.</p></details>
+ <details><summary>2. Кое ще остане остро при увеличение 10 пъти: лого в SVG или в PNG?</summary><p>SVG, защото е векторно. Фигурите се рисуват наново по формулите им.</p></details>
+ <details><summary>3. Какво ще получите в RGB при R 255, G 255, B 0?</summary><p>Жълто. Червената и зелената светлина се събират.</p></details>
+ <details><summary>4. Колко сантиметра е широка снимка 3000 px при печат с 300 dpi?</summary><p>3000 ÷ 300 = 10 инча × 2,54 = 25,4 см.</p></details>
+ <details><summary>5. Колко байта заема некомпресирана снимка 1000 × 1000 px с 24 бита на пиксел?</summary><p>1000 × 1000 × 3 = 3 000 000 байта, около 3 MB.</p></details>
+ <details><summary>6. Трябва ви лого без фон за сайт. JPG или PNG?</summary><p>PNG, защото пази прозрачността. JPG ще направи фона бял.</p></details>
+ <details><summary>7. Защо JPG не е подходящ за работен файл, който ще редактирате многократно?</summary><p>Компресията е със загуба и всяко ново записване влошава качеството. Освен това JPG не пази слоеве.</p></details>
+ <p style="margin-top:22px"><a class="next" href="urok-2-gimp-stapka-po-stapka.html">Към урок 2: GIMP стъпка по стъпка →</a></p>
+</div></section>
+</main>
+<footer class="band ex"><div class="wrap">Всички изображения в урока са генерирани за него и могат свободно да се използват в час.<p class="small" style="margin-top:10px"><a href="https://itzona.github.io/" style="color:inherit">IT Зона</a> · <a href="../index.html" style="color:inherit">11. клас</a> · <a href="index.html" style="color:inherit">Мултимедия</a> · <a href="../danni/index.html" style="color:inherit">Обработка и анализ на данни</a> · © 2026 IT Зона · Учебни материали с образователна цел</p></div></footer>
+
+<script>
+{
+const $=s=>document.querySelector(s);
+const cv=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c};
+const fmtB=b=>b>1048576?(b/1048576).toFixed(2).replace('.',',')+' MB':(b/1024).toFixed(1).replace('.',',')+' KB';
+
+/* sample landscape 480×300 */
+function land(){const c=cv(480,300),x=c.getContext('2d');let g=x.createLinearGradient(0,0,0,190);g.addColorStop(0,'#1b2a6b');g.addColorStop(.5,'#c0577a');g.addColorStop(1,'#ffb35c');x.fillStyle=g;x.fillRect(0,0,480,200);
+ g=x.createRadialGradient(330,150,4,330,150,60);g.addColorStop(0,'#fff6c9');g.addColorStop(.35,'#ffd23f');g.addColorStop(1,'rgba(255,190,80,0)');x.fillStyle=g;x.fillRect(250,80,170,140);
+ x.fillStyle='#ffe066';x.beginPath();x.arc(330,150,22,0,7);x.fill();
+ x.fillStyle='#4b2e5e';x.beginPath();x.moveTo(0,190);x.lineTo(90,120);x.lineTo(170,175);x.lineTo(250,110);x.lineTo(360,185);x.lineTo(430,140);x.lineTo(480,170);x.lineTo(480,210);x.lineTo(0,210);x.fill();
+ g=x.createLinearGradient(0,200,0,300);g.addColorStop(0,'#e58a5c');g.addColorStop(1,'#2a3f7a');x.fillStyle=g;x.fillRect(0,200,480,100);
+ x.fillStyle='rgba(255,230,120,.6)';for(let i=0;i<7;i++)x.fillRect(310-i*3,212+i*11,40+i*6,3);
+ x.fillStyle='#1d2b3a';x.fillRect(40,232,6,52);x.fillStyle='#f4f1e8';x.fillRect(14,212,134,34);x.fillStyle='#1d2b3a';x.font='800 17px Manrope, sans-serif';x.fillText('ЕЗЕРО 1,2 км',20,235);
+ return c}
+
+const fontsReady=document.fonts?document.fonts.load('800 17px Manrope').catch(()=>{}):Promise.resolve();
+fontsReady.then(()=>{
+ const L=land();
+ /* hero zoom */
+ const zc=$('#zoomC'),zx=zc.getContext('2d');
+ const drawZoom=()=>{const z=+$('#zoomR').value;$('#zoomO').textContent=z+'×';const w=480/z,h=300/z,sx=Math.min(480-w,Math.max(0,350-w/2)),sy=Math.min(300-h,Math.max(0,162-h/2));
+  zx.imageSmoothingEnabled=false;zx.drawImage(L,sx,sy,w,h,0,0,640,400);
+  if(z>=10){const px=640/w;zx.strokeStyle='rgba(0,0,0,.25)';zx.lineWidth=1;zx.beginPath();const ox=-(sx%1)*px,oy=-(sy%1)*px;for(let X=ox;X<640;X+=px){zx.moveTo(X,0);zx.lineTo(X,400)}for(let Y=oy;Y<400;Y+=px){zx.moveTo(0,Y);zx.lineTo(640,Y)}zx.stroke()}};
+ $('#zoomR').addEventListener('input',drawZoom);drawZoom();
+ /* resolution compare */
+ $('#res1').getContext('2d').drawImage(L,0,0,300,190);
+ const sm=cv(60,38);sm.getContext('2d').drawImage(L,0,0,60,38);const r2=$('#res2').getContext('2d');r2.imageSmoothingEnabled=false;r2.drawImage(sm,0,0,300,190);
+ /* vector vs raster */
+ const rc=cv(40,40),rx=rc.getContext('2d');rx.fillStyle='#fff';rx.fillRect(0,0,40,40);rx.fillStyle='#e59a52';rx.beginPath();rx.arc(20,20,16,0,7);rx.fill();
+ const drawVec=()=>{const z=+$('#vecZ').value;$('#vecO').textContent=z+'×';const v=$('#vecR').getContext('2d');v.imageSmoothingEnabled=false;
+  const cl=(t,w,M)=>Math.min(M-w,Math.max(0,t-w/2));const w=40/z;v.drawImage(rc,cl(36,w,40),cl(20,w,40),w,w,0,0,300,300);
+  const s=100/z;$('#vecS').setAttribute('viewBox',`${cl(90,s,100)} ${cl(50,s,100)} ${s} ${s}`)};
+ $('#vecZ').addEventListener('input',drawVec);drawVec();
+ /* print calc */
+ const calc=()=>{const w=Math.max(1,+$('#pw').value||1),h=Math.max(1,+$('#ph').value||1),d=+$('#pd').value;$('#rMP').textContent=(w*h/1e6).toFixed(1).replace('.',',')+' MP';
+  const cw=w/d*2.54,ch=h/d*2.54;$('#rCM').textContent=`${cw.toFixed(1).replace('.',',')} × ${ch.toFixed(1).replace('.',',')} см`;
+  $('#rVerdict').textContent=d>=300?(cw>=21?'Става за A4 и по-голямо':'Отпечатък с високо качество'):d>=150?'Става за плакат, гледан отдалеч':'Само за екран'};
+ ['pw','ph','pd'].forEach(id=>$('#'+id).addEventListener('input',calc));calc();
+ /* RGB mixer */
+ const mix=()=>{const r=+$('#cR').value,g=+$('#cG').value,b=+$('#cB').value;$('#oR').textContent=r;$('#oG').textContent=g;$('#oBl').textContent=b;
+  const hex='#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('').toUpperCase();const sw=$('#sw');sw.style.background=hex;sw.style.color=(r*.3+g*.59+b*.11)>140?'#111':'#fff';sw.textContent=hex};
+ ['cR','cG','cB'].forEach(id=>$('#'+id).addEventListener('input',mix));mix();
+ /* posterize */
+ const base=L.getContext('2d').getImageData(0,0,480,300);
+ const post=()=>{const n=+$('#postR').value,d=new ImageData(new Uint8ClampedArray(base.data),480,300),p=d.data,st=255/(n-1);for(let i=0;i<p.length;i++){if(i%4!==3)p[i]=Math.round(Math.round(p[i]/st)*st)}
+  $('#postC').getContext('2d').putImageData(d,0,0);$('#postO').textContent=n;$('#postN').textContent=(n**3).toLocaleString('bg-BG')+(n===64?' (тук по-малко от 24-битовите 16,7 млн.)':'')};
+ $('#postR').addEventListener('input',post);post();
+ /* jpg */
+ const jc=$('#jpgC').getContext('2d'),png=L.toDataURL('image/png'),bytes=u=>Math.round((u.length-u.indexOf(',')-1)*3/4);
+ $('#pngS').textContent=fmtB(bytes(png));$('#rawS').textContent=fmtB(480*300*3);
+ const jpg=()=>{const q=+$('#jpgR').value;$('#jpgO').textContent=q;const u=L.toDataURL('image/jpeg',q/100);$('#jpgS').textContent=fmtB(bytes(u));const im=new Image();im.onload=()=>{jc.imageSmoothingEnabled=false;jc.drawImage(im,0,0,240,300,0,0,240,300);jc.drawImage(im,10,150,120,150,240,0,240,300);jc.fillStyle='rgba(0,0,0,.6)';jc.fillRect(244,4,60,22);jc.fillStyle='#fff';jc.font='13px "PT Mono",monospace';jc.fillText('2× лупа',248,20)};im.src=u};
+ $('#jpgR').addEventListener('input',jpg);jpg();
+ /* transparency */
+ const star=(x,cx,cy)=>{x.fillStyle='#e59a52';x.beginPath();for(let i=0;i<10;i++){const r=i%2?22:50,a=i*Math.PI/5-Math.PI/2;x.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a))}x.closePath();x.fill()};
+ const a=$('#trA').getContext('2d');a.fillStyle='#4a6b8a';a.fillRect(0,0,200,150);a.fillStyle='#fff';a.fillRect(45,20,110,110);star(a,100,78);
+ const b2=$('#trB').getContext('2d');for(let y=0;y<150;y+=12)for(let X=0;X<200;X+=12){b2.fillStyle=((X+y)/12)%2?'#cfcfcf':'#9a9a9a';b2.fillRect(X,y,12,12)}star(b2,100,78);
+ /* download */
+ $('#dlImg').src=png;$('#dlA').href=png;
+});
+}
+</script>
+<script>const CUR=0;</script>
+<script src="mm.js?v=20261125a"></script>
+</body>
+</html>

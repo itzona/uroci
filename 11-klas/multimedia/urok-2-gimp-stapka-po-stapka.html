@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 2: GIMP стъпка по стъпка – Мултимедия, 11 клас</title>
+<link rel="icon" type="image/svg+xml" href="../../icons/multimedia.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=PT+Mono&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: ясен учебник за 11 клас – спокоен, практичен, с „защо“ на всяка стъпка
+   IDEA: работната маса на GIMP – тъмен „екран“ с изображение, до него тетрадка с инструкции
+   PICTURE: интерактивно „преди/след“ с Нива; живи демонстрации на хистограма, обръщане и маска
+   COLOUR and TYPE: бял лист, графитено мастило, тъмен панел #2b2b2e като GIMP, охра на Wilber за акцент; Manrope + PT Mono за менюта
+   LAYOUT: заглавие и демонстрация, лепкав ред с упражненията, всяко упражнение: цел/защо → стъпки → картинка → проверка */
+:root{color-scheme:light dark;--bg:light-dark(#fbfaf7,#141416);--card:light-dark(#fff,#1e1e21);--ink:light-dark(#1c1d21,#ecebe6);--mute:light-dark(#5b5d66,#a6a7ad);--line:light-dark(#e3e1da,#333338);--acc:light-dark(#a65a1c,#e59a52);--scr:#2b2b2e;--ok:light-dark(#22703f,#6fcf8f)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Manrope,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{line-height:1.08;margin:0 0 .45em;text-wrap:balance;font-weight:800}
+h1{font-size:clamp(32px,5.5vw,50px)}h2{font-size:clamp(26px,3.6vw,36px)}h3{font-size:20px;margin-top:1.4em}
+.band{padding:clamp(28px,4vw,60px) max(5vw,16px)}.wrap{max-width:1140px;margin:0 auto}
+header .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:36px;align-items:center}
+.lead{color:var(--mute);max-width:56ch}
+.lessons{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.lessons a,.lessons span{font-weight:700;font-size:14px;padding:6px 12px;border-radius:20px;border:1px solid var(--line);color:var(--ink);text-decoration:none}.lessons span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+.scr{background:var(--scr);border-radius:12px;padding:12px;color:#ddd;box-shadow:0 18px 40px -20px rgba(0,0,0,.5)}
+.scr .bar{display:flex;gap:6px;margin-bottom:10px}.scr .bar i{width:11px;height:11px;border-radius:50%;background:#555}
+.ba{position:relative;aspect-ratio:8/5;border-radius:6px;overflow:hidden;background:#000}
+.ba canvas{position:absolute;inset:0;width:100%;height:100%}
+.ba .lbl{position:absolute;top:8px;font:13px "PT Mono",monospace;background:rgba(0,0,0,.6);color:#fff;padding:2px 8px;border-radius:4px}
+.ba input{position:absolute;inset:auto 0 0 0;width:100%;margin:0}
+nav{position:sticky;top:0;z-index:5;background:var(--card);border-block:1px solid var(--line)}
+nav .scroll{display:flex;gap:4px;max-width:1140px;margin:0 auto;padding:6px max(5vw,16px);overflow-x:auto}
+nav a{flex:none;color:var(--ink);text-decoration:none;font-weight:700;font-size:15px;padding:10px 12px;border-radius:8px}
+nav a:hover{background:var(--line)}
+.ex{border-top:1px solid var(--line)}
+.num{font:700 14px "PT Mono",monospace;color:var(--acc)}
+.cols{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:32px;align-items:start}
+.why{border-left:4px solid var(--acc);padding:10px 16px;background:var(--card);border-radius:0 10px 10px 0;margin:14px 0}
+ol.steps{padding-left:0;list-style:none;counter-reset:s;margin:0}
+ol.steps>li{counter-increment:s;position:relative;padding:12px 0 12px 46px;border-bottom:1px solid var(--line)}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:12px;width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-weight:800;font-size:15px}
+ol.steps em{display:block;font-style:normal;color:var(--mute);font-size:15px;margin-top:4px}
+kbd{font:14px "PT Mono",monospace;background:var(--card);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;white-space:nowrap}
+.sticky{position:sticky;top:70px}
+.ev img{width:100%;height:auto;display:block;border-radius:6px}
+.dl{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;margin-top:10px;border-radius:8px;background:var(--acc);color:#fff;font-weight:700;text-decoration:none}
+.small{font-size:14px;color:var(--mute)}
+.check{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-top:18px}
+.check li{margin:4px 0}
+.demo{margin-top:16px}.demo canvas{width:100%;display:block;border-radius:6px;background:#000}
+.ctl{display:grid;gap:8px;margin-top:10px;font-size:14px}.ctl label{display:grid;grid-template-columns:7.5em 1fr 3em;gap:8px;align-items:center}
+.ctl output{font-family:"PT Mono",monospace;text-align:right}
+input[type=range]{accent-color:var(--acc);min-height:32px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btns button{min-height:44px;padding:0 14px;border-radius:8px;border:1px solid #555;background:#3a3a3e;color:#eee;font:600 15px Manrope,sans-serif;cursor:pointer}
+.btns button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.flipbox{aspect-ratio:8/5;overflow:hidden;border-radius:6px;background:#000;display:grid;place-items:center}
+.flipbox img{width:100%;transition:transform .4s}
+table{border-collapse:collapse;width:100%;font-size:15px;background:var(--card);border-radius:10px;overflow:hidden}
+th,td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}th{background:var(--line)}
+td:first-child{font-weight:800;white-space:nowrap}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700}details p{margin:8px 0 0;color:var(--mute)}
+footer{color:var(--mute);font-size:14px}
+@media(max-width:820px){header .wrap,.cols{grid-template-columns:1fr}.sticky{position:static}}
+@media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 12px;padding-inline-start:8em;text-align:start;white-space:normal}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;font-weight:700}}
+@media(prefers-reduced-motion:reduce){.flipbox img{transition:none}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<header class="band"><div class="wrap">
+ <div>
+  <div class="lessons"><a href="urok-1-rasterna-grafika.html">← Урок 1 · Растерна графика</a><span>Урок 2 · GIMP стъпка по стъпка</span><a href="index.html">Мултимедия</a></div>
+  <p class="num">Мултимедия · 11 клас · GIMP 2.10 / 3.0</p>
+  <h1>GIMP стъпка по стъпка: от тъмна снимка до фотомонтаж</h1>
+  <p class="lead">Шест упражнения: как се прави и защо се прави точно така. Всяко има изображение за практика. Изтеглете го, отворете го в GIMP и следвайте стъпките. Накрая проверете резултата по списъка.</p>
+  <p class="small">Преди този урок вижте <a href="urok-1-rasterna-grafika.html" style="color:var(--acc)">урок 1</a> за пикселите, цветовете и форматите. Менютата са дадени на английски, както са в повечето инсталации. В българския интерфейс имената може леко да се различават.</p>
+ </div>
+ <div class="scr"><div class="bar"><i></i><i></i><i></i></div>
+  <div class="ba"><canvas id="heroA" width="800" height="500" aria-label="Изображение след Нива"></canvas><canvas id="heroB" width="800" height="500" aria-label="Тъмно изображение преди обработка"></canvas><span class="lbl" style="left:8px">преди</span><span class="lbl" style="right:8px">след Нива</span><input type="range" id="heroR" min="0" max="100" value="50" aria-label="Плъзгач преди и след"></div>
+  <p class="small" style="color:#aaa;margin:8px 0 0">Плъзнете, за да сравните. Информацията винаги е била в снимката.</p>
+ </div>
+</div></header>
+
+<nav><div class="scroll"><a href="#ex1">1 · Нива</a><a href="#ex2">2 · Обръщане и завъртане</a><a href="#ex3">3 · Слоеве</a><a href="#ex4">4 · Премахване на фон</a><a href="#ex5">5 · Фотомонтаж с маска</a><a href="#ex6">6 · Формати</a><a href="#test">Провери се</a></div></nav>
+
+<main>
+<section class="band ex" id="ex1"><div class="wrap cols">
+ <div>
+  <p class="num">Упражнение 1</p><h2>Изсветляване на тъмна снимка с Нива</h2>
+  <p><b>Цел:</b> да направите видими детайлите в нощна снимка на пекарна: надписа, котката и прозореца.</p>
+  <div class="why"><b>Защо Нива, а не Яркост/Контраст?</b> Яркостта добавя една и съща стойност към всеки пиксел. Черното става сиво, а светлото прегаря. Нивата <i>разтягат</i> обхвата: казвате на GIMP „стойност 30 вече е бяло“ и всички тонове между 0 и 30 се разпределят по цялата скала от 0 до 255.</div>
+  <ol class="steps">
+   <li>Отворете <i>noshtna_pekarna.png</i>: <kbd>File → Open</kbd>.<em>Работете с PNG. JPG компресията унищожава точно тези фини разлики в сенките.</em></li>
+   <li>Отворете <kbd>Colors → Levels</kbd> и погледнете хистограмата.<em>Хистограмата показва колко пиксела има от всяка яркост. Тук всички стълбчета са струпани вляво. Значи снимката е тъмна, но пикселите се различават помежду си, а това значи, че има информация.</em></li>
+   <li>Плъзнете <b>белия триъгълник</b> под хистограмата наляво, до края на „планината“ от стълбчета (около 25–35).<em>Така най-светлият реален пиксел става бял.</em></li>
+   <li>Ако снимката изглежда сива и мътна, плъзнете <b>черния триъгълник</b> надясно, до началото на стълбчетата.</li>
+   <li>Средният <b>сив триъгълник</b> (гама) изсветлява или потъмнява средните тонове, без да пипа черното и бялото. Нагласете го на око и натиснете <kbd>OK</kbd>.</li>
+   <li>По желание: <kbd>Filters → Enhance → Noise Reduction</kbd>.<em>Когато изсветлите тъмна снимка, шумът (зърното) също се усилва.</em></li>
+  </ol>
+  <div class="why"><b>Алтернатива:</b> <kbd>Colors → Curves</kbd>. Издърпайте горната дясна точка на кривата наляво и ще получите същото като с Нивата. С кривите имате повече контрол, защото можете да добавяте точки.</div>
+  <div class="check"><b>Проверка</b><ul><li>Надписът се чете, котката и прозорецът се виждат.</li><li>Черното е черно, а не сиво.</li><li>Хистограмата вече се простира по цялата ширина.</li></ul></div>
+ </div>
+ <div class="sticky">
+  <div class="scr ev"><img id="i1" alt="Тъмна нощна снимка на пекарна"><a class="dl" id="d1" download="noshtna_pekarna.png">Изтегли noshtna_pekarna.png</a></div>
+  <div class="scr demo"><b>Опитайте тук какво правят плъзгачите</b><canvas id="lvC" width="400" height="250"></canvas><canvas id="hist" width="400" height="70" style="margin-top:8px;background:#1d1d20"></canvas>
+   <div class="ctl"><label>Черна точка <input type="range" id="lvB" min="0" max="60" value="0"><output id="oB">0</output></label><label>Бяла точка <input type="range" id="lvW" min="20" max="255" value="255"><output id="oW">255</output></label><label>Гама <input type="range" id="lvG" min="30" max="300" value="100"><output id="oG">1,00</output></label></div></div>
+ </div>
+</div></section>
+
+<section class="band ex" id="ex2"><div class="wrap cols">
+ <div>
+  <p class="num">Упражнение 2</p><h2>Обръщане, изправяне и изрязване</h2>
+  <p><b>Цел:</b> снимката на плаката е огледална и наклонена. Направете я да се чете нормално и я изправете.</p>
+  <div class="why"><b>Как разпознавате огледален образ?</b> По текста: буквите са обърнати и се четат отдясно наляво. Завъртане на 180° <i>не</i> оправя огледален образ, защото само обръща картината с главата надолу.</div>
+  <ol class="steps">
+   <li>Отворете <i>plakat.png</i>.</li>
+   <li><kbd>Image → Transform → Flip Horizontally</kbd>.<em>Защо от менюто <b>Image</b>, а не <b>Layer</b>: Image обръща цялото изображение с всичките му слоеве, а Layer обръща само активния слой. Това ще ви трябва в упражнение 3.</em></li>
+   <li>Изберете <b>Measure</b> <kbd>Shift+M</kbd> и прекарайте линия по ръба на рамката, който трябва да е хоризонтален. После натиснете <b>Straighten</b> в настройките на инструмента.<em>GIMP сам изчислява ъгъла. Иначе с инструмента Rotate <kbd>Shift+R</kbd> пробвате ъгъла на ръка.</em></li>
+   <li>След завъртането в ъглите се появяват празни триъгълници. Изберете <b>Crop</b> <kbd>Shift+C</kbd>, начертайте правоъгълник само върху снимката и натиснете <kbd>Enter</kbd>.</li>
+   <li>Запазете: <kbd>File → Export As</kbd> → <i>plakat_opraven.png</i>.</li>
+  </ol>
+  <div class="check"><b>Проверка</b><ul><li>Текстът се чете отляво надясно.</li><li>Рамката е успоредна на краищата на снимката.</li><li>Няма празни ъгли.</li></ul></div>
+ </div>
+ <div class="sticky">
+  <div class="scr ev"><img id="i2" alt="Огледален и наклонен плакат"><a class="dl" id="d2" download="plakat.png">Изтегли plakat.png</a></div>
+  <div class="scr demo"><b>Разликата между обръщане и завъртане</b><div class="flipbox" style="margin-top:10px"><img id="flipImg" alt="Демонстрация на обръщане"></div>
+   <div class="btns"><button id="bF" aria-pressed="false">Обърни хоризонтално</button><button id="bR180" aria-pressed="false">Завърти 180°</button><button id="bR9" aria-pressed="false">Завърти 9°</button></div></div>
+ </div>
+</div></section>
+
+<section class="band ex" id="ex3"><div class="wrap cols">
+ <div>
+  <p class="num">Упражнение 3</p><h2>Слоеве: сглобете скъсана картичка</h2>
+  <p><b>Цел:</b> картичката е скъсана на 3 парчета. Разделете ги на отделни слоеве, завъртете ги и ги наредете обратно.</p>
+  <div class="why"><b>Защо слоеве?</b> Слоевете са като прозрачни фолиа едно върху друго. Ако всички парчета са в един слой, всяко завъртане върти всичко наведнъж. В отделни слоеве всяко парче се мести и върти само.</div>
+  <ol class="steps">
+   <li>Отворете <i>kartichka.png</i> и прозореца Layers: <kbd>Windows → Dockable Dialogs → Layers</kbd> (<kbd>Ctrl+L</kbd>).</li>
+   <li>Изберете <b>Free Select</b> (ласо) <kbd>F</kbd>. Кликайте точка по точка около първото парче, с малко тъмен фон около него. Затворете контура с клик върху първата точка и натиснете <kbd>Enter</kbd>.</li>
+   <li><kbd>Edit → Copy</kbd>, после <kbd>Edit → Paste as → New Layer</kbd>.<em>Парчето вече е самостоятелен слой. Вижте го в прозореца Layers.</em></li>
+   <li>Повторете за другите две парчета: изберете отново фоновия слой и изрежете следващото.</li>
+   <li>Скрийте фоновия слой, като кликнете окото до него. Сега виждате само парчетата.</li>
+   <li>Изберете слоя на парче и го завъртете: <kbd>Layer → Transform → Rotate 90°</kbd> / <kbd>180°</kbd>. За произволен ъгъл използвайте Rotate <kbd>Shift+R</kbd>. Огледалното парче оправяте с <kbd>Layer → Transform → Flip Horizontally</kbd>.<em>Сега е <b>Layer</b>, не Image, защото искате да промените само това парче.</em></li>
+   <li>Наредете парчетата с <b>Move</b> <kbd>M</kbd>. В настройките изберете „Move the active layer“. Увеличете изгледа и местете с точност до пиксел със стрелките.</li>
+   <li>Отдолу добавете бял фон: <kbd>Layer → New Layer</kbd> → Fill with: White. Свалете го най-отдолу със стрелките в прозореца Layers.</li>
+   <li>Запазете като <i>kartichka.xcf</i>, за да останат слоевете, и изнесете като <i>kartichka.png</i>.</li>
+  </ol>
+  <div class="check"><b>Проверка</b><ul><li>Текстът се чете и няма огледално парче.</li><li>В прозореца Layers има поне 4 слоя.</li><li>Парчетата са плътно едно до друго, без да се застъпват.</li></ul></div>
+ </div>
+ <div class="sticky"><div class="scr ev"><img id="i3" alt="Скъсана картичка на три парчета"><a class="dl" id="d3" download="kartichka.png">Изтегли kartichka.png</a></div></div>
+</div></section>
+
+<section class="band ex" id="ex4"><div class="wrap cols">
+ <div>
+  <p class="num">Упражнение 4</p><h2>Премахване на бял фон</h2>
+  <p><b>Цел:</b> ябълката да остане на прозрачен фон, без бял ореол, за да я използвате във фотомонтаж.</p>
+  <div class="why"><b>Защо се получава бял ореол?</b> Ръбът на обекта е изгладен (anti-aliasing). Пикселите по него са смес от червено и бяло и не са нито „ябълка“, нито „фон“. Селекцията ги пропуска и те остават като светла рамка.</div>
+  <ol class="steps">
+   <li>Отворете <i>yabalka.png</i>.</li>
+   <li><kbd>Layer → Transparency → Add Alpha Channel</kbd>.<em>Без алфа канал изтриването оцветява с цвета на фона, вместо да прави пикселите прозрачни.</em></li>
+   <li>Изберете <b>Fuzzy Select</b> (магическа пръчка) <kbd>U</kbd>, задайте Threshold 20–30 и кликнете върху белия фон.<em>Threshold определя колко различни от кликнатия цвят може да са пикселите, които влизат в селекцията.</em></li>
+   <li>Махнете ореола: <kbd>Select → Grow</kbd> с 1–2 px.<em>Избран е <b>фонът</b>, затова го разширявате. Така полуизгладеният ръб също ще бъде изтрит. Ако обратно сте избрали <b>обекта</b>, използвате <kbd>Select → Shrink</kbd>.</em></li>
+   <li>Натиснете <kbd>Delete</kbd>. Сивата шахматна дъска означава прозрачност.</li>
+   <li><kbd>Select → None</kbd> (<kbd>Shift+Ctrl+A</kbd>).</li>
+   <li>Проверка за ореол: добавете временен тъмен слой отдолу и увеличете ръба на 400%. После го изтрийте.</li>
+   <li><kbd>File → Export As</kbd> → <b>yabalka_bez_fon.png</b>.<em>Задължително PNG. JPG не поддържа прозрачност и ще запълни фона отново с бяло.</em></li>
+  </ol>
+  <div class="check"><b>Проверка</b><ul><li>Фонът е шахматна дъска.</li><li>На тъмен фон няма светла рамка.</li><li>Листото и дръжката са цели.</li></ul></div>
+ </div>
+ <div class="sticky"><div class="scr ev"><img id="i4" alt="Ябълка на бял фон"><a class="dl" id="d4" download="yabalka.png">Изтегли yabalka.png</a></div></div>
+</div></section>
+
+<section class="band ex" id="ex5"><div class="wrap cols">
+ <div>
+  <p class="num">Упражнение 5</p><h2>Фотомонтаж: ябълката зад чашата</h2>
+  <p><b>Цел:</b> поставете ябълката от упражнение 4 на масата, отчасти скрита зад чашата, със сянка. Да изглежда като истинска снимка.</p>
+  <div class="why"><b>Защо маска, а не гумичка?</b> Гумичката изтрива пикселите завинаги. Маската само ги скрива: черно скрива, бяло показва. Ако сбъркате, рисувате с бяло и всичко се връща. Затова професионалистите работят с маски.</div>
+  <ol class="steps">
+   <li>Отворете <i>masa.jpg</i>. После <kbd>File → Open as Layers</kbd> → <i>yabalka_bez_fon.png</i>.<em>„Open as Layers“ добавя файла като нов слой в текущото изображение. Обикновеното „Open“ би го отворило в отделен прозорец.</em></li>
+   <li><b>Scale</b> <kbd>Shift+S</kbd>: заключете веригата за пропорции и намалете ябълката, докато размерът ѝ стане реален спрямо чашата.<em>Размерът се преценява по предмети, чийто истински размер знаем: чашата е висока около 10 см.</em></li>
+   <li>С <b>Move</b> <kbd>M</kbd> поставете ябълката така, че част от нея да е зад чашата. Засега стои пред нея, това се оправя в следващите стъпки.</li>
+   <li>Изберете слоя на ябълката → <kbd>Layer → Mask → Add Layer Mask</kbd> → <b>White (full opacity)</b>.<em>Бялата маска показва целия слой. В прозореца Layers се появява втора миниатюра.</em></li>
+   <li>Изберете фоновия слой и маркирайте чашата с Free Select <kbd>F</kbd>. Пак изберете <b>маската</b> на ябълката, като кликнете нейната миниатюра.</li>
+   <li>Задайте черен основен цвят и <kbd>Edit → Fill with FG Color</kbd>. Частта от ябълката зад чашата изчезва. <kbd>Select → None</kbd>.<em>Четка с черно или бяло върху маската доизглажда ръба.</em></li>
+   <li><b>Сянка:</b> нов прозрачен слой под ябълката → Ellipse Select <kbd>E</kbd> под нея → запълнете с черно → <kbd>Filters → Blur → Gaussian Blur</kbd> 15–25 px → Opacity на слоя 40–60%.<em>Сянката „закрепва“ предмета за масата. Без нея ябълката изглежда, че лети.</em></li>
+   <li>Запазете <i>montazh.xcf</i> и изнесете <i>montazh.jpg</i>.</li>
+  </ol>
+  <div class="check"><b>Проверка</b><ul><li>Ябълката е с реален размер и е <b>зад</b> чашата.</li><li>Има мека сянка върху масата.</li><li>Поне 3 слоя, от които един с маска.</li><li>Предадени са XCF и JPG.</li></ul></div>
+ </div>
+ <div class="sticky">
+  <div class="scr ev"><img id="i5" alt="Маса с чаша и книги"><a class="dl" id="d5" download="masa.jpg">Изтегли masa.jpg</a></div>
+  <div class="scr demo"><b>Как работи маската на слоя</b><canvas id="mkC" width="400" height="250"></canvas>
+   <div class="btns"><button id="bMask" aria-pressed="false">Маска: изключена</button><button id="bShadow" aria-pressed="false">Сянка: изключена</button></div>
+   <p class="small" style="color:#aaa">Ябълката е горен слой. Маската скрива частта, която трябва да е зад чашата.</p></div>
+ </div>
+</div></section>
+
+<section class="band ex" id="ex6"><div class="wrap">
+ <p class="num">Упражнение 6</p><h2>Как и в какъв формат да запазите</h2>
+ <p>В GIMP <kbd>Save</kbd> записва само XCF, за всичко останало се използва <kbd>Export As</kbd>. Правило: <b>XCF за работа, PNG или JPG за предаване.</b></p>
+ <table class="stack"><thead><tr><th>Формат</th><th>Слоеве</th><th>Прозрачност</th><th>Компресия</th><th>Кога</th></tr></thead><tbody>
+  <tr><td>XCF</td><td>да</td><td>да</td><td>без загуба</td><td>Работният файл. Всичко може да се поправи по-късно.</td></tr>
+  <tr><td>PNG</td><td>не</td><td>да</td><td>без загуба</td><td>Обекти без фон, екранни снимки, текст, графики.</td></tr>
+  <tr><td>JPG</td><td>не</td><td>не</td><td>със загуба</td><td>Снимки за споделяне, малък файл. Не се презаписва много пъти.</td></tr>
+ </tbody></table>
+ <p class="small">Задача: изнесете монтажа като JPG с качество 90 и с качество 30. Сравнете размера на файловете и гледайте около ябълката: там се появяват „квадратчета“ (артефакти).</p>
+</div></section>
+
+<section class="band ex" id="test"><div class="wrap">
+ <h2>Провери се</h2>
+ <details><summary>1. Снимката е тъмна, а хистограмата е само в лявата третина. Какво правите?</summary><p>Colors → Levels: местите бялата точка наляво до края на стълбчетата, за да разтегнете тоновете.</p></details>
+ <details><summary>2. Текстът на снимката се чете наобратно. Помага ли завъртане на 180°?</summary><p>Не. Трябва Flip Horizontally (хоризонтално обръщане). Завъртането само обръща картината с главата надолу.</p></details>
+ <details><summary>3. Искате да завъртите само едно парче от картичката. От кое меню?</summary><p>Layer → Transform. Менюто Image би завъртяло цялото изображение.</p></details>
+ <details><summary>4. Изтрихте фона, но вместо прозрачност стана бяло. Какво сте пропуснали?</summary><p>Layer → Transparency → Add Alpha Channel, преди да изтриете.</p></details>
+ <details><summary>5. Какво прави черното върху маската на слоя?</summary><p>Скрива тази част от слоя, без да я изтрива. Бялото я показва отново.</p></details>
+ <details><summary>6. Защо не предавате монтажа само като JPG?</summary><p>JPG слива слоевете и губи качество. XCF пази слоевете и маските за поправки.</p></details>
+</div></section>
+</main>
+<footer class="band ex"><div class="wrap">Изображенията за упражненията са генерирани за урока и могат свободно да се използват в час.<p class="small" style="margin-top:10px"><a href="https://itzona.github.io/" style="color:inherit">IT Зона</a> · <a href="../index.html" style="color:inherit">11. клас</a> · <a href="index.html" style="color:inherit">Мултимедия</a> · <a href="../danni/index.html" style="color:inherit">Обработка и анализ на данни</a> · © 2026 IT Зона · Учебни материали с образователна цел</p></div></footer>
+
+<script>
+{
+const $=s=>document.querySelector(s);
+const cv=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c};
+const rnd=seed=>()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};
+const gr=v=>`rgb(${v},${v},${v})`;
+function noise(c,amt,seed){const x=c.getContext('2d'),d=x.getImageData(0,0,c.width,c.height),p=d.data,r=rnd(seed);for(let i=0;i<p.length;i+=4){const n=Math.round((r()-.5)*amt);p[i]=Math.max(0,Math.min(255,p[i]+n));p[i+1]=Math.max(0,Math.min(255,p[i+1]+n));p[i+2]=Math.max(0,Math.min(255,p[i+2]+n))}x.putImageData(d,0,0);return c}
+
+/* 1 night bakery (dark, coloured slightly) */
+function night(){const c=cv(800,500),x=c.getContext('2d');
+ x.fillStyle='rgb(6,7,10)';x.fillRect(0,0,800,500);
+ x.fillStyle='rgb(14,13,12)';x.fillRect(80,90,640,330);
+ x.fillStyle='rgb(26,20,10)';x.fillRect(150,120,500,80);
+ x.fillStyle='rgb(44,36,20)';x.font='800 58px Manrope, sans-serif';x.textAlign='center';x.fillText('ПЕКАРНА',400,182);
+ x.fillStyle='rgb(30,24,14)';x.fillRect(150,240,220,150);x.fillStyle='rgb(18,14,9)';x.fillRect(256,240,8,150);x.fillRect(150,312,220,6);
+ x.fillStyle='rgb(36,28,16)';for(let i=0;i<5;i++){x.beginPath();x.ellipse(185+i*40,370,16,9,0,0,7);x.fill()}
+ x.fillStyle='rgb(20,18,16)';x.fillRect(450,240,150,180);x.fillStyle='rgb(28,24,18)';x.beginPath();x.arc(580,330,5,0,7);x.fill();
+ x.fillStyle='rgb(10,10,12)';x.fillRect(0,420,800,80);
+ x.fillStyle='rgb(3,3,4)';x.beginPath();x.ellipse(690,445,34,20,0,0,7);x.fill();x.beginPath();x.arc(720,420,16,0,7);x.fill();x.beginPath();x.moveTo(708,410);x.lineTo(712,394);x.lineTo(718,408);x.moveTo(722,406);x.lineTo(730,392);x.lineTo(733,410);x.fill();x.lineWidth=7;x.strokeStyle='rgb(3,3,4)';x.beginPath();x.moveTo(658,450);x.quadraticCurveTo(630,420,648,400);x.stroke();
+ x.fillStyle='rgb(40,40,8)';x.beginPath();x.arc(715,418,2.5,0,7);x.arc(726,418,2.5,0,7);x.fill();
+ x.fillStyle='rgb(48,44,34)';x.fillRect(60,40,6,380);x.beginPath();x.arc(63,40,14,0,7);x.fill();
+ {const d=x.getImageData(0,0,800,500),q=d.data;for(let i=0;i<q.length;i+=4){q[i]*=.6;q[i+1]*=.6;q[i+2]*=.6}x.putImageData(d,0,0)}
+ return noise(c,4,3)}
+function levels(src,b,w,g){const c=cv(src.width,src.height),x=c.getContext('2d');x.drawImage(src,0,0,c.width,c.height);const d=x.getImageData(0,0,c.width,c.height),p=d.data,lut=new Uint8ClampedArray(256);
+ for(let v=0;v<256;v++){let t=(v-b)/Math.max(1,w-b);t=Math.min(1,Math.max(0,t));lut[v]=255*Math.pow(t,1/g)}
+ for(let i=0;i<p.length;i+=4){p[i]=lut[p[i]];p[i+1]=lut[p[i+1]];p[i+2]=lut[p[i+2]]}x.putImageData(d,0,0);return c}
+
+/* 2 mirrored, tilted poster */
+function poster(){const a=cv(800,500),x=a.getContext('2d');x.fillStyle='#d8d3c6';x.fillRect(0,0,800,500);
+ x.fillStyle='#4b3a2a';x.fillRect(150,70,500,330);x.fillStyle='#1f5f8b';x.fillRect(166,86,468,298);
+ x.fillStyle='#ffd23f';x.beginPath();x.arc(530,170,50,0,7);x.fill();
+ x.fillStyle='#fff';x.textAlign='left';x.font='800 50px Manrope, sans-serif';x.fillText('ДОБРЕ',196,180);x.fillText('ДОШЛИ!',196,240);x.font='700 28px Manrope, sans-serif';x.fillText('Кабинет по мултимедия',196,310);x.fillText('стая 21 →',196,352);
+ x.fillStyle='#8c8577';x.fillRect(0,440,800,60);
+ const c=cv(800,500),y=c.getContext('2d');y.fillStyle='#000';y.fillRect(0,0,800,500);y.translate(400,250);y.rotate(-9*Math.PI/180);y.scale(-1,1);y.drawImage(a,-400,-250);return c}
+
+/* 3 torn postcard in 3 pieces */
+async function postcard(){try{await document.fonts.load('600 40px Caveat')}catch(e){}
+ const W=600,Hh=380,n=cv(W,Hh),x=n.getContext('2d');let g=x.createLinearGradient(0,0,0,220);g.addColorStop(0,'#7ec8f0');g.addColorStop(1,'#d9f0fb');x.fillStyle=g;x.fillRect(0,0,W,230);
+ x.fillStyle='#2a7fb8';x.fillRect(0,230,W,70);x.fillStyle='#f1d9a0';x.fillRect(0,300,W,80);x.fillStyle='#ffcf3a';x.beginPath();x.arc(470,90,46,0,7);x.fill();
+ x.fillStyle='#fff';x.beginPath();x.moveTo(120,230);x.lineTo(160,150);x.lineTo(162,230);x.fill();x.fillStyle='#7a4a2a';x.fillRect(110,230,70,10);
+ x.fillStyle='#0f3557';x.font='600 54px Caveat, cursive';x.textAlign='center';x.fillText('Поздрави от Варна!',300,355);
+ x.strokeStyle='#fff';x.lineWidth=10;x.strokeRect(5,5,W-10,Hh-10);
+ const r=rnd(5),cut=x0=>{const pts=[];for(let y=0;y<=Hh;y+=19)pts.push([x0+(r()-.5)*22,y]);return pts},c1=cut(200),c2=cut(400);
+ const piece=(L,R)=>{const p=cv(W,Hh),q=p.getContext('2d');q.beginPath();if(L){L.forEach(([a,b],i)=>i?q.lineTo(a,b):q.moveTo(a,b))}else{q.moveTo(0,0);q.lineTo(0,Hh)}
+  if(R){R.slice().reverse().forEach(([a,b])=>q.lineTo(a,b))}else{q.lineTo(W,Hh);q.lineTo(W,0)}
+  if(!L){}q.closePath();q.clip();q.drawImage(n,0,0);return p};
+ const pc=[piece(null,c1),piece(c1,c2),piece(c2,null)];
+ const s=cv(1000,700),t=s.getContext('2d');t.fillStyle='#3a3c40';t.fillRect(0,0,1000,700);
+ [[pc[0],100,190,780,470,90,0],[pc[1],300,190,250,200,180,0],[pc[2],500,190,330,520,-15,1]].forEach(([p,cx,cy,px,py,d,m])=>{t.save();t.shadowColor='rgba(0,0,0,.5)';t.shadowBlur=14;t.translate(px,py);t.rotate(d*Math.PI/180);if(m)t.scale(-1,1);t.drawImage(p,-cx,-cy);t.restore()});
+ return s.toDataURL('image/png')}
+
+/* 4 apple on white */
+function apple(sz){const S=sz||600,c=cv(S,S),x=c.getContext('2d'),k=S/600;x.scale(k,k);if(!sz){x.fillStyle='#fff';x.fillRect(0,0,600,600)}
+ let g=x.createRadialGradient(240,250,20,300,320,230);g.addColorStop(0,'#ff6b5a');g.addColorStop(.6,'#d4202a');g.addColorStop(1,'#7e0f16');x.fillStyle=g;
+ x.beginPath();x.moveTo(300,190);x.bezierCurveTo(380,140,500,180,490,320);x.bezierCurveTo(480,450,380,520,300,480);x.bezierCurveTo(220,520,120,450,110,320);x.bezierCurveTo(100,180,220,140,300,190);x.fill();
+ x.fillStyle='rgba(255,255,255,.55)';x.beginPath();x.ellipse(220,260,26,48,-.5,0,7);x.fill();
+ x.strokeStyle='#5a3a1e';x.lineWidth=12;x.lineCap='round';x.beginPath();x.moveTo(300,200);x.quadraticCurveTo(296,150,318,110);x.stroke();
+ x.fillStyle='#3f9a3a';x.beginPath();x.moveTo(316,140);x.quadraticCurveTo(380,90,430,120);x.quadraticCurveTo(380,170,316,140);x.fill();return c}
+
+/* 5 table with mug and books */
+function table(){const c=cv(1000,640),x=c.getContext('2d');let g=x.createLinearGradient(0,0,0,360);g.addColorStop(0,'#e9e4d8');g.addColorStop(1,'#d3ccbb');x.fillStyle=g;x.fillRect(0,0,1000,380);
+ g=x.createLinearGradient(0,380,0,640);g.addColorStop(0,'#a8754a');g.addColorStop(1,'#7a5233');x.fillStyle=g;x.fillRect(0,380,1000,260);
+ x.strokeStyle='rgba(60,35,15,.25)';x.lineWidth=2;for(let i=0;i<8;i++){x.beginPath();x.moveTo(0,400+i*32);x.bezierCurveTo(300,390+i*32,700,420+i*32,1000,405+i*32);x.stroke()}
+ [['#2f5d8a',120,330,300,46],['#b8432f',135,284,270,46],['#e2b44a',110,238,290,46]].forEach(([col,X,Y,w,h])=>{x.fillStyle=col;x.fillRect(X,Y,w,h);x.fillStyle='rgba(255,255,255,.75)';x.fillRect(X+w-14,Y+6,8,h-12)});
+ x.fillStyle='rgba(0,0,0,.18)';x.beginPath();x.ellipse(650,505,120,22,0,0,7);x.fill();
+ x.fillStyle='#f4f4f2';x.beginPath();x.moveTo(570,300);x.lineTo(730,300);x.lineTo(720,500);x.quadraticCurveTo(650,520,580,500);x.closePath();x.fill();
+ x.fillStyle='#e0e0dc';x.beginPath();x.ellipse(650,300,80,16,0,0,7);x.fill();x.fillStyle='#5a3a22';x.beginPath();x.ellipse(650,302,70,11,0,0,7);x.fill();
+ x.strokeStyle='#f4f4f2';x.lineWidth=18;x.beginPath();x.arc(735,390,46,-1.3,1.3);x.stroke();
+ x.fillStyle='rgba(0,0,0,.08)';x.fillRect(690,310,30,180);x.fillStyle='#1f5f8b';x.font='800 30px Manrope, sans-serif';x.textAlign='center';x.fillText('11 Ж',650,420);
+ return noise(c,6,9).toDataURL('image/jpeg',.9)}
+
+/* render evidence */
+const setImg=(n,url)=>{$('#i'+n).src=url;$('#d'+n).href=url};
+const fontsReady=document.fonts?Promise.all([document.fonts.load('800 50px Manrope'),document.fonts.load('600 40px Caveat')]).catch(()=>{}):Promise.resolve();
+fontsReady.then(async()=>{
+ const N=night();setImg(1,N.toDataURL('image/png'));
+ const hA=$('#heroA').getContext('2d'),hB=$('#heroB').getContext('2d');hA.drawImage(levels(N,0,30,1.2),0,0);hB.drawImage(N,0,0);
+ const hero=()=>{$('#heroB').style.clipPath=`inset(0 ${100-$('#heroR').value}% 0 0)`};$('#heroR').addEventListener('input',hero);hero();
+ const small=cv(400,250);small.getContext('2d').drawImage(N,0,0,400,250);
+ const hist=new Array(256).fill(0);{const p=small.getContext('2d').getImageData(0,0,400,250).data;for(let i=0;i<p.length;i+=4)hist[Math.round((p[i]+p[i+1]+p[i+2])/3)]++}
+ const drawLv=()=>{const b=+$('#lvB').value,w=Math.max(b+5,+$('#lvW').value),g=$('#lvG').value/100;$('#oB').textContent=b;$('#oW').textContent=w;$('#oG').textContent=g.toFixed(2).replace('.',',');
+  $('#lvC').getContext('2d').drawImage(levels(small,b,w,g),0,0);
+  const hc=$('#hist'),x=hc.getContext('2d'),mx=Math.max(...hist.slice(1));x.clearRect(0,0,400,70);x.fillStyle='#bbb';for(let v=0;v<256;v++){const h=Math.min(66,66*Math.sqrt(hist[v]/mx));x.fillRect(v*400/256,70-h,1.6,h)}
+  x.fillStyle='#e59a52';x.fillRect(b*400/256-1,0,3,70);x.fillStyle='#fff';x.fillRect(w*400/256-1,0,3,70)};
+ ['lvB','lvW','lvG'].forEach(id=>$('#'+id).addEventListener('input',drawLv));drawLv();
+ const P=poster().toDataURL('image/png');setImg(2,P);$('#flipImg').src=P;
+ const st={f:0,r180:0,r9:0},upd=()=>{$('#flipImg').style.transform=`rotate(${st.r180*180+st.r9*9}deg) scaleX(${st.f?-1:1})`;$('#bF').setAttribute('aria-pressed',!!st.f);$('#bR180').setAttribute('aria-pressed',!!st.r180);$('#bR9').setAttribute('aria-pressed',!!st.r9)};
+ $('#bF').onclick=()=>{st.f^=1;upd()};$('#bR180').onclick=()=>{st.r180^=1;upd()};$('#bR9').onclick=()=>{st.r9^=1;upd()};
+ setImg(4,apple().toDataURL('image/png'));
+ const T=table();setImg(5,T);
+ const timg=new Image();timg.onload=()=>{const ap=apple(150),ms={m:0,s:0};
+  const drawMk=()=>{const x=$('#mkC').getContext('2d');x.drawImage(timg,0,0,400,256);
+   if(ms.s){x.fillStyle='rgba(0,0,0,.35)';x.filter='blur(5px)';x.beginPath();x.ellipse(226,198,32,6,0,0,7);x.fill();x.filter='none'}
+   const L=cv(400,250),l=L.getContext('2d');l.drawImage(ap,190,112,90,90);
+   if(ms.m){l.globalCompositeOperation='destination-out';l.beginPath();l.moveTo(228,120);l.lineTo(292,120);l.lineTo(288,200);l.quadraticCurveTo(260,208,232,200);l.closePath();l.fill();l.beginPath();l.ellipse(260,120,32,7,0,0,7);l.fill()}
+   x.drawImage(L,0,0);$('#bMask').textContent='Маска: '+(ms.m?'включена':'изключена');$('#bShadow').textContent='Сянка: '+(ms.s?'включена':'изключена');$('#bMask').setAttribute('aria-pressed',!!ms.m);$('#bShadow').setAttribute('aria-pressed',!!ms.s)};
+  $('#bMask').onclick=()=>{ms.m^=1;drawMk()};$('#bShadow').onclick=()=>{ms.s^=1;drawMk()};drawMk()};timg.src=T;
+ setImg(3,await postcard());
+});
+}
+</script>
+<script>const CUR=1;</script>
+<script src="mm.js?v=20261125a"></script>
+</body>
+</html>
