@@ -22,8 +22,7 @@ const items=g=>g.r.map(i=>`<a class="${i==cur?'on':''}" href="${P[i][0]}"${i==cu
 /* Началната страница на модула ползва общия стил (style.css). */
 function navIndex(){
   document.getElementById("nav").innerHTML='<a class="grp home" href="https://itzona.github.io/">🏠 Начало</a>'+G.map((g,gi)=>
-    `<div class="dd"><button class="grp ${g.r.includes(cur)?'on':''}" onclick="tg(${gi},event)" aria-expanded="${og==gi}">${g.ic} ${g.n} ▾</button><div class="menu" style="display:${og==gi?'block':'none'}"><div class="mh">${g.full}</div>${items(g)}</div></div>`).join("")+
-    `<div class="dd"><button class="grp" onclick="tg(9,event)" aria-expanded="${og==9}">📊 Обработка и анализ на данни ▾</button><div class="menu" style="display:${og==9?'block':'none'}"><div class="mh">Обработка и анализ на данни</div><a href="../danni/index.html"><span class="n">·</span><span class="t">Към модула – уроците предстоят</span></a></div></div>`;
+    `<div class="dd"><button class="grp ${g.r.includes(cur)?'on':''}" onclick="tg(${gi},event)" aria-expanded="${og==gi}">${g.ic} ${g.n} ▾</button><div class="menu" style="display:${og==gi?'block':'none'}"><div class="mh">${g.full}</div>${items(g)}</div></div>`).join("");
 }
 
 /* Уроците имат собствено оформление, затова лентата с менютата носи свой стил (с префикс itzb-),
