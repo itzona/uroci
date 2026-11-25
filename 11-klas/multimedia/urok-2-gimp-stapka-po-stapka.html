@@ -6,7 +6,7 @@
 <title>Урок 2: GIMP стъпка по стъпка – Мултимедия, 11 клас</title>
 <link rel="icon" type="image/svg+xml" href="../../icons/multimedia.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=PT+Mono&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;700&family=PT+Mono&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
 /* VOICE: ясен учебник за 11 клас – спокоен, практичен, с „защо“ на всяка стъпка
    IDEA: работната маса на GIMP – тъмен „екран“ с изображение, до него тетрадка с инструкции
@@ -72,6 +72,33 @@ footer{color:var(--mute);font-size:14px}
 @media(max-width:820px){header .wrap,.cols{grid-template-columns:1fr}.sticky{position:static}}
 @media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 12px;padding-inline-start:8em;text-align:start;white-space:normal}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;font-weight:700}}
 @media(prefers-reduced-motion:reduce){.flipbox img{transition:none}}
+/* Общ футър на сайта – същият като в style.css */
+footer.site-footer{position:relative;z-index:1;clear:both;display:block;margin:64px 0 0;padding:36px 20px 26px;
+  background:#1a1d3a;color:#c4c7dc;text-align:left;border:0;
+  font:400 15px/1.5 'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:.005em}
+footer.site-footer *{box-sizing:border-box}
+footer.site-footer .sf-inner{max-width:1360px;margin:0 auto}
+footer.site-footer .sf-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 32px;
+  padding:0 0 30px;border-bottom:1px solid rgba(255,255,255,.12)}
+footer.site-footer .sf-brand{display:flex;align-items:center;gap:14px;min-width:0}
+footer.site-footer .sf-logo{flex:none;display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:12px;
+  background:linear-gradient(135deg,#6d5df6,#a855f7);color:#fff;font:700 15px/1 'JetBrains Mono',Consolas,monospace;letter-spacing:-.04em}
+footer.site-footer .sf-brand-text{display:flex;flex-direction:column;gap:4px;min-width:0}
+footer.site-footer .sf-name{display:block;margin:0;color:#fff;font-weight:700;font-size:19px;line-height:1.2}
+footer.site-footer .sf-tagline{display:block;margin:0;color:#c4c7dc;font-size:15px;line-height:1.4}
+footer.site-footer .sf-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 26px;margin:0;padding:0;list-style:none}
+footer.site-footer .sf-links li{margin:0;padding:0;list-style:none}
+footer.site-footer .sf-links li::before,footer.site-footer .sf-links li::marker{content:none}
+footer.site-footer .sf-links a,
+footer.site-footer .sf-links a:visited{display:inline;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;
+  color:#fff;text-decoration:none;font-weight:500;font-size:16px;line-height:1.5;white-space:nowrap}
+footer.site-footer .sf-links a:hover,
+footer.site-footer .sf-links a:focus-visible{background:none;color:#fff;text-decoration:underline;text-underline-offset:4px;outline:none}
+footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a9adc6;font-size:14.5px}
+@media (max-width:640px){
+  footer.site-footer .sf-top{flex-direction:column;align-items:flex-start}
+  footer.site-footer .sf-links{gap:8px 20px}
+}
 </style>
 <script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
 </head>
@@ -313,7 +340,28 @@ footer{color:var(--mute);font-size:14px}
  <details><summary>9. Магическата пръчка хвана и отблясъка върху ябълката. Какво променяте?</summary><p>Намалявате Threshold, за да влизат в селекцията само пиксели, много близки до бялото на фона.</p></details>
 </div></section>
 </main>
-<footer class="band ex"><div class="wrap">Изображенията за упражненията са генерирани за урока и могат свободно да се използват в час.<p class="small" style="margin-top:10px"><a href="https://itzona.github.io/" style="color:inherit">IT Зона</a> · <a href="../index.html" style="color:inherit">11. клас</a> · <a href="index.html" style="color:inherit">Мултимедия</a> · <a href="../danni/index.html" style="color:inherit">Обработка и анализ на данни</a> · © 2026 IT Зона · Учебни материали с образователна цел</p></div></footer>
+<p class="band small" style="margin:0;padding-block:18px 0;text-align:center">Изображенията за упражненията са генерирани за урока и могат свободно да се използват в час.</p>
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-top">
+      <div class="sf-brand">
+        <div class="sf-logo" aria-hidden="true">&lt;/&gt;</div>
+        <div class="sf-brand-text">
+          <div class="sf-name">IT Зона</div>
+          <div class="sf-tagline">Образователен портал по информационни технологии</div>
+        </div>
+      </div>
+      <ul class="sf-links" aria-label="Навигация във футъра">
+        <li><a href="https://itzona.github.io/">Начало</a></li>
+        <li><a href="../../9-klas/index.html">9. клас</a></li>
+        <li><a href="../../11-klas/index.html">11. клас</a></li>
+        <li><a href="../../12-klas/index.html">12. клас</a></li>
+        <li><a href="../../igri/index.html">Игри</a></li>
+      </ul>
+    </div>
+    <div class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</div>
+  </div>
+</footer>
 
 <script>
 {
