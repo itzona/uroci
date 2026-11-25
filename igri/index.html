@@ -17,6 +17,12 @@ body.page-index{display:flex;flex-direction:column;min-height:100vh}
 body.page-index .site-footer{margin-top:auto}
 /* шестте карти „Защо образователни игри?“ – по 3 на ред */
 .theme-12klas.page-index .facts{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+/* меню по класове над картите */
+.klas-menu{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0 0 22px}
+.klas-menu button{font:600 15px Inter,system-ui,sans-serif;min-height:42px;padding:0 18px;border-radius:999px;border:1px solid #d5dbea;background:#fff;color:#334155;cursor:pointer}
+.klas-menu button:hover{border-color:#94a3b8}
+.klas-menu button[aria-pressed=true]{background:#1e293b;border-color:#1e293b;color:#fff}
+.course[hidden]{display:none}
 </style>
 <link rel="icon" type="image/svg+xml" href="../icons/igra.svg">
 </head>
@@ -32,6 +38,7 @@ body.page-index .site-footer{margin-top:auto}
   <nav aria-label="Основна навигация">
     <a href="https://itzona.github.io/">🏠 Начало</a>
     <a href="../9-klas/index.html">9. клас</a>
+    <a href="../11-klas/index.html">11 клас</a>
     <a href="../12-klas/index.html">12 клас</a>
   </nav>
 
@@ -41,12 +48,24 @@ body.page-index .site-footer{margin-top:auto}
   </section>
 
   <h2 class="sec-title">Избери игра</h2>
+  <div class="klas-menu" role="group" aria-label="Игри по класове">
+    <button type="button" data-klas="all" aria-pressed="true">Всички</button>
+    <button type="button" data-klas="11" aria-pressed="false">11 клас</button>
+    <button type="button" data-klas="12" aria-pressed="false">12 клас</button>
+  </div>
   <div class="courses">
-    <a class="course" href="it-impostor.html">
+    <a class="course" href="it-impostor.html" data-klas="12">
       <div class="ic">🛸</div>
       <h3>IT Impostor</h3>
       <p>Всички знаят една IT дума, освен Impostor-а. Давайте подсказки и открийте кой се преструва.</p>
       <div class="tags"><span>12 клас</span><span>4–30 играчи</span><span>10 теми, 220 думи</span><span>~10 мин</span></div>
+      <div class="go">Играй →</div>
+    </a>
+    <a class="course" href="izcheznaloto-usb.html" data-klas="11">
+      <div class="ic">🕵️</div>
+      <h3>Случаят „Изчезналото USB“</h3>
+      <p>Игра-разследване: обработете уликите в GIMP, Excel и PowerPoint, разбийте кодовете и открийте кой е откраднал флашката с филма.</p>
+      <div class="tags"><span>11 клас</span><span>отбори по 3–4</span><span>4 мисии + тест</span><span>~80 мин</span></div>
       <div class="go">Играй →</div>
     </a>
   </div>
@@ -91,6 +110,17 @@ body.page-index .site-footer{margin-top:auto}
   </div>
 </footer>
 
+<script>
+(function(){
+  var btns=document.querySelectorAll('.klas-menu button'),cards=document.querySelectorAll('.courses .course[data-klas]');
+  function show(k){
+    btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.klas===k?'true':'false')});
+    cards.forEach(function(c){c.hidden=!(k==='all'||c.dataset.klas===k)});
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.klas);history.replaceState(null,'',b.dataset.klas==='all'?location.pathname:'#'+b.dataset.klas+'-klas')})});
+  var m=location.hash.match(/^#(11|12)-klas$/);if(m)show(m[1]);
+})();
+</script>
 <script src="../totop.js?v=20261126" defer></script>
 </body>
 </html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Случаят „Изчезналото USB“</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=PT+Mono&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: игра-разследване, напрегната, но ясна за ученици
+   IDEA: криминално досие – папка от манила с печати и улики
+   PICTURE: плик за веществени доказателства с USB; уликите са генерирани снимки
+   COLOUR and TYPE: спокоен синкавосив фон + мастило + червен печат; Oswald заглавия, Plex текст, PT Mono протоколи
+   LAYOUT: заглавна лента, лепкави табове на мисиите, една мисия на екран */
+:root{color-scheme:light dark;--bg:light-dark(#e3ecf3,#141b24);--card:light-dark(#fbfcfd,#1e2833);--ink:light-dark(#1a2230,#e4ebf2);--mute:light-dark(#4f5d6c,#a5b3c2);--line:light-dark(#c4d3e0,#34424f);--red:light-dark(#b3122b,#ef5a6b);--ok:light-dark(#22603a,#6fcf8f);--tab:light-dark(#d2e0eb,#19222d)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "IBM Plex Sans",system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Oswald,Impact,sans-serif;line-height:1.08;margin:0 0 .4em;text-wrap:balance}
+h1{font-size:clamp(32px,6vw,52px)}h2{font-size:clamp(26px,4vw,36px)}h3{font-size:20px;margin-top:1.2em}
+.band{padding:clamp(24px,4vw,56px) max(5vw,16px)}
+.wrap{max-width:1100px;margin:0 auto}
+header .wrap{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:center}
+.story{max-width:60ch;color:var(--mute)}
+.back{display:inline-block;margin-bottom:14px;color:var(--mute);font-weight:600;text-decoration:none}.back:hover{color:var(--ink)}
+.stamp{display:inline-block;border:3px solid var(--red);color:var(--red);font:700 15px Oswald,sans-serif;padding:2px 10px;transform:rotate(-3deg);margin-bottom:12px}
+.bag{width:100%;max-width:420px;justify-self:center}
+.panel{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin-top:18px;font-family:"PT Mono",monospace}
+.panel b{font-size:22px}
+nav{position:sticky;top:0;z-index:5;background:var(--tab);border-block:1px solid var(--line)}
+nav .scroll{display:flex;gap:4px;max-width:1100px;margin:0 auto;padding:6px max(5vw,16px)}
+nav button{flex:none;font:600 15px "IBM Plex Sans",sans-serif;min-height:44px;padding:0 14px;border:0;border-radius:8px;background:transparent;color:var(--ink);cursor:pointer}
+nav button[aria-selected=true]{background:var(--card);box-shadow:0 1px 0 var(--line)}
+nav button:disabled{opacity:.45;cursor:not-allowed}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:clamp(16px,3vw,28px);margin-bottom:18px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px}
+.brief{font-size:18px}
+.req{list-style:none;padding:0;margin:0}.req li{padding:8px 0 8px 30px;border-bottom:1px dashed var(--line);position:relative}
+.req li::before{content:"";position:absolute;left:4px;top:13px;width:14px;height:14px;border:2px solid var(--mute);border-radius:3px}
+.req li span{white-space:nowrap;color:var(--red);font-weight:600}
+.ev img{width:100%;height:auto;display:block;border-radius:6px;border:1px solid var(--line);background:#000}
+.note{font-size:14px;color:var(--mute)}
+.typed{font-family:"PT Mono",monospace}
+input,select,button.b{font:16px "IBM Plex Sans",sans-serif;min-height:44px;border-radius:8px;border:1px solid var(--line);padding:0 12px;background:var(--bg);color:var(--ink)}
+button.b{background:var(--ink);color:var(--card);border:0;font-weight:600;cursor:pointer;padding:0 18px}
+button.b.alt{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.code input{font-family:"PT Mono",monospace;font-size:20px;letter-spacing:.15em;text-transform:uppercase;width:12ch}
+.msg{min-height:1.6em;font-weight:600}.msg.bad{color:var(--red)}.msg.good{color:var(--ok)}
+.shake{animation:sh .4s}@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.hints{display:grid;gap:8px}.hint{border-left:4px solid var(--red);padding:6px 12px;background:var(--bg);border-radius:0 8px 8px 0}
+textarea{width:100%;height:140px;font:13px "PT Mono",monospace;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;white-space:nowrap}
+.scroll{overflow-x:auto}
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
+.role{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--bg)}
+.pts{display:grid;grid-template-columns:1fr auto;gap:4px 16px;max-width:420px}.pts span:nth-child(even){text-align:right;font-family:"PT Mono",monospace}
+.bar{height:12px;background:var(--line);border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--red);transition:width .4s}
+.q{font-size:18px;font-weight:600;margin:14px 0}.opts{display:grid;gap:8px}
+.opts button{text-align:left;min-height:48px;padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:16px "IBM Plex Sans",sans-serif;cursor:pointer}
+.opts button.r{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--bg))}.opts button.w{border-color:var(--red);background:color-mix(in srgb,var(--red) 15%,var(--bg))}
+.solved{text-align:center;padding:30px 10px}.solved .stamp{font-size:clamp(28px,6vw,48px);padding:8px 24px}
+.lock{padding:40px 16px;text-align:center;color:var(--mute)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;place-items:center;z-index:20;padding:16px}.modal.on{display:grid}
+.modal .card{max-width:420px;width:100%}
+@media(max-width:700px){header .wrap{grid-template-columns:1fr}.bag{max-width:300px}}
+@media(prefers-reduced-motion:reduce){.shake{animation:none}.bar i{transition:none}}
+</style>
+</head>
+<body>
+<header class="band"><div class="wrap">
+ <div>
+  <a class="back" href="index.html">← Към игрите</a><br>
+  <div class="stamp">ДОСИЕ № 11-МЛТ · СТРОГО СЕКРЕТНО</div>
+  <h1>Случаят „Изчезналото USB“</h1>
+  <p class="story">Утре е премиерата на филма на 11 клас за училищния фестивал. Единственото копие на монтажа беше на синя флашка в кабинета по мултимедия (каб. 21). Снощи флашката изчезна. Охранителната камера е заснела нещо, но кадърът е почти черен. Имате 80 минути, четири улики и четирима заподозрени.</p>
+  <div class="panel"><span>Отбор: <b id="pTeam">—</b></span><span>Точки: <b id="pScore">0</b>/100</span><span>Време: <b id="pTime">00:00</b></span></div>
+ </div>
+ <svg class="bag" viewBox="0 0 400 300" role="img" aria-label="Плик за веществени доказателства с флашка">
+  <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity=".12"/></linearGradient></defs>
+  <ellipse cx="200" cy="282" rx="160" ry="12" fill="#000" opacity=".18"/>
+  <rect x="50" y="30" width="300" height="240" rx="10" fill="url(#g1)" stroke="#8d7c55" stroke-width="2"/>
+  <rect x="50" y="30" width="300" height="34" fill="#b3122b"/>
+  <text x="200" y="54" text-anchor="middle" fill="#fff" font-family="Oswald" font-size="18" font-weight="700">ВЕЩЕСТВЕНО ДОКАЗАТЕЛСТВО</text>
+  <g transform="rotate(-14 200 165)">
+   <rect x="110" y="135" width="150" height="60" rx="12" fill="#1f4fa8"/><rect x="110" y="135" width="150" height="10" rx="5" fill="#fff" opacity=".2"/>
+   <rect x="258" y="147" width="50" height="36" fill="#c9ccd1"/><rect x="272" y="156" width="9" height="7" fill="#666"/><rect x="288" y="156" width="9" height="7" fill="#666"/>
+   <rect x="135" y="150" width="95" height="30" rx="3" fill="#f4f1e8"/><text x="182" y="171" text-anchor="middle" font-family="Caveat" font-size="18" fill="#1b2a6b">ФИЛМ 11</text>
+   <circle cx="102" cy="165" r="10" fill="none" stroke="#c9ccd1" stroke-width="4"/>
+  </g>
+  <rect x="235" y="215" width="100" height="42" fill="#f7f0dc" stroke="#8d7c55" transform="rotate(5 285 236)"/>
+  <text x="285" y="242" text-anchor="middle" font-family="PT Mono" font-size="13" fill="#1d1a14" transform="rotate(5 285 236)">КАБ. 21</text>
+ </svg>
+</div></header>
+
+<nav><div class="scroll" role="tablist" id="tabs"></div></nav>
+
+<main class="band"><div class="wrap">
+
+<section id="brief" class="on">
+ <div class="card brief"><h2>Брифинг</h2>
+  <p>Всеки отбор е следствен екип. Всяка мисия ви дава улика и <b>кодова дума</b>. Въведете кодовата дума и се отключва следващата мисия. Няма инструкции „клик по клик“: криминалистите сами избират инструментите. Ако закъсате, можете да отворите подсказка, но тя <b>струва точки</b>.</p>
+  <div class="row"><label for="teamIn"><b>Име на отбора:</b></label><input id="teamIn" maxlength="30" placeholder="напр. Шерлоците"><button class="b" id="startBtn">Започни разследването</button></div>
+  <p class="msg" id="startMsg"></p>
+ </div>
+ <div class="grid2">
+  <div class="card"><h3 style="margin-top:0">Роли в отбора (3–4 души)</h3>
+   <div class="roles">
+    <div class="role"><b>Криминалист</b><br>GIMP: обработва снимките и уликите.</div>
+    <div class="role"><b>Аналитик</b><br>Excel: филтри, формули, графики.</div>
+    <div class="role"><b>Монтажист</b><br>Фотомонтаж: слоеве, маски, реконструкция.</div>
+    <div class="role"><b>Говорител</b><br>PowerPoint: докладът и обвинението.</div>
+   </div>
+   <p class="note">Ролите се сменят: всеки трябва да работи поне в две мисии. В отбор от трима капитанът поема и PowerPoint.</p>
+  </div>
+  <div class="card"><h3 style="margin-top:0">Точкуване</h3>
+   <div class="pts"><span>Мисия 1 · Тъмният кадър</span><span>15</span><span>Мисия 2 · Дневникът на входа</span><span>20</span><span>Мисия 3 · Скъсаната бележка</span><span>25</span><span>Мисия 4 · Докладът</span><span>20</span><span>Финален тест</span><span>20</span><span><b>Общо</b></span><span><b>100</b></span></div>
+   <p class="note">Всеки верен код носи 5 т. автоматично. Останалото оценява учителят, като гледа файловете. Подсказки: −1, −2, −3 т. Грешно обвинение: −3 т.</p>
+  </div>
+ </div>
+</section>
+
+<section id="m1"></section>
+<section id="m2"></section>
+<section id="m3"></section>
+<section id="m4"></section>
+<section id="final"></section>
+
+<section id="teacher">
+ <div class="card"><h2>За учителя</h2>
+  <div id="tLock"><p>Отговорите и оценяването са зад ПИН код, за да не ги виждат учениците.</p>
+   <div class="row"><input id="tPin" type="password" inputmode="numeric" placeholder="ПИН" style="width:10ch"><button class="b" id="tBtn">Отвори</button></div><p class="msg bad" id="tMsg"></p></div>
+  <div id="tBody" hidden></div>
+ </div>
+</section>
+
+</div></main>
+
+<div class="modal" id="modal"><div class="card"><h3 style="margin-top:0" id="mTitle"></h3><p id="mText"></p><div class="row" id="mExtra"></div><div class="row" style="margin-top:12px"><button class="b" id="mOk">Да</button><button class="b alt" id="mNo">Отказ</button></div></div></div>
+
+<script>
+{
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rng=seed=>()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};
+const H=s=>{let h=5381;for(const ch of s.trim().toUpperCase().replace(/\s+/g,'')){h=(h*33+ch.charCodeAt(0))>>>0}return h};
+const dec=(s,seed)=>{const r=rng(seed),b=Uint8Array.from(atob(s),c=>c.charCodeAt(0)^Math.floor(r()*256));return new TextDecoder().decode(b)};
+const CODES={1:[2125417582],2:[238841244,1408716342],3:[1417916909]};
+const PIN=2088325482, ACC=197961969;
+const TEACH="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";
+const FIN="g/t3nt/ZCPYpHoPaxMrKNMznd2JfM32j8+k3aknqJq5RUA+lYLgmfZA1BXq0KQKWpv3UCWHkY+6PB9sdM+MKTHPpZGn7Muo/X7/gw01U+g3ngJNhLyE1qbInFAmCe1Q/OkCFlb/zMscHWwZjud6RNiU4aaW9cNxUSX+oJw54RNYKJCP2QMWgXwrIUEfgcBazqYb5FAMNMv/W22FXvYo+WolA2RJcdKmH830v8F3mNAB6okDZzKsyw/l4ZTFerZkABAyEYK/jQ7ExemMBHYbAPgOQ//FsOvpwPfZYNP62G2WGsGPi25m+XKpNHABNsyTr94/Aruz92cJG0D56nQ==";
+const STR="0IYHxvVgtBxyO5tNYa5tQ8YVUokB17NWY3zaftFm/9XYAuC6BFQ28D/h10r55Zq7pVEpgQCegAV1SWByURGDOxqZ0NOQPvVSls9Q1IDwNq/2i5tCHAoJ5NlvzR0WY9XKvI7HzT1WNHMbfo119m0yoqW3VFeu+2iIEDuq8+p3xlG1ETD1u2vGq5Ysje9/PftVMtVo4TfJa4yjAe6ttU3S24WL9HRPdwFVGYnlljISz7jsQcHYLdhACmpsq6avwRHZ8LUxAOi+vAJp/F/rGWEY8sUuFx04Blnt62ypnLcUqV4LxPBeoIkA1GaaO7CbrVjbEUs=";
+const QK=[911618325, 2201900373, 3494554263, 491054936, 1781336984, 3073990874, 70491547, 1361959516, 2653427485, 3944895454];
+
+/* ---------- state ---------- */
+const blank=()=>({team:'',start:0,open:0,hints:{1:0,2:0,3:0,4:0},codes:{1:0,2:0,3:0},m4ok:0,wrong:0,accused:0,ans:[],grade:{1:0,2:0,3:0,4:0},times:{}});
+let S=blank();
+try{const j=localStorage.getItem('usbcase');if(j)S=Object.assign(blank(),JSON.parse(j))}catch(e){}
+const save=()=>{try{localStorage.setItem('usbcase',JSON.stringify(S))}catch(e){}};
+const ok=(i,j)=>H(`q${i}:${j}:usb`)===QK[i];
+const TXT=JSON.parse(dec(STR,99173));
+const testPts=()=>S.ans.reduce((a,v,i)=>a+(ok(i,v)?2:0),0);
+const hintPen=()=>Object.values(S.hints).reduce((a,n)=>a+[0,1,3,6][n],0);
+const score=()=>Math.max(0,(S.codes[1]+S.codes[2]+S.codes[3])*5+S.grade[1]+S.grade[2]+S.grade[3]+S.grade[4]+testPts()-hintPen()-S.wrong*3);
+const fmt=ms=>{const t=Math.floor(ms/1000);return String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')};
+function panel(){$('#pTeam').textContent=S.team||'—';$('#pScore').textContent=score();}
+setInterval(()=>{$('#pTime').textContent=S.start?fmt(Date.now()-S.start):'00:00'},1000);
+
+/* ---------- modal ---------- */
+function ask(title,text,extra,onOk){$('#mTitle').textContent=title;$('#mText').textContent=text;$('#mExtra').innerHTML=extra||'';$('#modal').classList.add('on');
+ const ok=$('#mOk'),no=$('#mNo');const close=()=>{$('#modal').classList.remove('on');ok.onclick=no.onclick=null};
+ ok.onclick=()=>{if(onOk()!==false)close()};no.onclick=close;const f=$('#mExtra input');(f||ok).focus();}
+
+/* ---------- tabs ---------- */
+const TABS=[['brief','Брифинг',0],['m1','1 · Кадърът',1],['m2','2 · Дневникът',2],['m3','3 · Бележката',3],['m4','4 · Докладът',4],['final','Обвинение и тест',5],['teacher','За учителя',-1]];
+let cur='brief';
+function tabs(){$('#tabs').innerHTML=TABS.map(([id,l,n])=>`<button role="tab" data-t="${id}" aria-selected="${id===cur}" ${n>0&&S.open<n?'disabled':''}>${n>0&&S.open<n?'🔒 ':''}${l}</button>`).join('');}
+function go(id){cur=id;document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===id));tabs();window.scrollTo({top:document.querySelector('nav').offsetTop,behavior:'smooth'});}
+$('#tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b&&!b.disabled)go(b.dataset.t)});
+
+/* ---------- seeded random ---------- */
+const cv=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c};
+
+/* ---------- evidence 1: dark camera frame ---------- */
+function camera(){const W=960,Hh=600,a=cv(W,Hh),x=a.getContext('2d'),g=v=>`rgb(${v},${v},${v})`;
+ x.fillStyle=g(13);x.fillRect(0,0,W,380);x.fillStyle=g(10);x.fillRect(0,380,W,220);
+ x.fillStyle=g(17);x.fillRect(212,62,536,266);x.fillStyle=g(21);x.fillRect(220,70,520,250);
+ x.fillStyle=g(18);x.fillRect(470,0,20,40);x.fillRect(420,40,120,34);
+ x.textAlign='center';x.fillStyle=g(31);x.font='600 28px "PT Mono",monospace';x.fillText(TXT.cw[0],480,118);
+ x.font='700 100px "PT Mono",monospace';x.fillText(TXT.cw[1],480,215);x.font='700 54px "PT Mono",monospace';x.fillText(TXT.cw[2],480,290);
+ x.fillStyle=g(8);for(let i=0;i<4;i++){x.beginPath();x.moveTo(60+i*230,450);x.lineTo(230+i*230,450);x.lineTo(250+i*230,520);x.lineTo(40+i*230,520);x.fill()}
+ x.fillStyle=g(5);x.beginPath();x.arc(820,250,30,0,7);x.fill();x.beginPath();x.moveTo(775,290);x.lineTo(865,290);x.lineTo(880,470);x.lineTo(760,470);x.fill();
+ x.fillStyle='rgb(110,25,25)';x.fillRect(792,365,6,4);
+ x.fillStyle=g(64);x.textAlign='left';x.font='22px "PT Mono",monospace';x.fillText('CAM 03   23.11.2026   18:41:07',20,580);
+ const c=cv(W,Hh),y=c.getContext('2d');y.fillStyle='#000';y.fillRect(0,0,W,Hh);y.translate(W/2,Hh/2);y.rotate(7*Math.PI/180);y.scale(-1,1);y.drawImage(a,-W/2,-Hh/2);
+ const d=y.getImageData(0,0,W,Hh),p=d.data,r=rng(7);for(let i=0;i<p.length;i+=4){const n=Math.round((r()-.5)*6);p[i]=Math.max(0,p[i]+n);p[i+1]=Math.max(0,p[i+1]+n);p[i+2]=Math.max(0,p[i+2]+n)}y.putImageData(d,0,0);
+ return c.toDataURL('image/png');}
+
+/* ---------- evidence 2: access log ---------- */
+const R=[['23.11.2026','17:05','Мира Колева','ученик 11 кл.','Каб. 21','вход','V-214'],['23.11.2026','17:48','Иво Петров','лаборант','Каб. 21','вход','I-210'],['23.11.2026','18:38','Сашо Динев','ученик 10 кл.','Каб. 21','вход','D-219'],['23.11.2026','18:52','Иво Петров','лаборант','Каб. 21','вход','E-207'],['23.11.2026','19:15','Стефка Ненова','персонал','Каб. 21','вход','O-202'],
+['23.11.2026','17:31','Мира Колева','ученик 11 кл.','Каб. 21','изход','K-214'],['23.11.2026','18:44','Сашо Динев','ученик 10 кл.','Каб. 21','изход','R-219'],['23.11.2026','19:02','Иво Петров','лаборант','Каб. 21','изход','A-207'],['23.11.2026','19:40','Стефка Ненова','персонал','Каб. 21','изход','M-202'],['23.11.2026','18:15','Ана Георгиева','ученик 11 кл.','Каб. 21','отказан достъп','X-214'],
+['23.11.2026','08:02','Иво Петров','лаборант','Каб. 21','вход','S-210'],['23.11.2026','10:15','Мира Колева','ученик 11 кл.','Каб. 21','вход','T-214'],['23.11.2026','13:40','Сашо Динев','ученик 10 кл.','Каб. 21','вход','L-219'],['23.11.2026','15:55','Стефка Ненова','персонал','Каб. 21','вход','N-202'],
+['22.11.2026','17:20','Сашо Динев','ученик 10 кл.','Каб. 21','вход','F-219'],['22.11.2026','18:10','Мира Колева','ученик 11 кл.','Каб. 21','вход','U-214'],['22.11.2026','18:40','Иво Петров','лаборант','Каб. 21','вход','B-210'],['22.11.2026','19:05','Стефка Ненова','персонал','Каб. 21','вход','H-202'],
+['23.11.2026','17:12','Сашо Динев','ученик 10 кл.','Каб. 14','вход','P-141'],['23.11.2026','17:40','Мира Колева','ученик 11 кл.','Актова зала','вход','Z-301'],['23.11.2026','18:05','Иво Петров','лаборант','Сървърна','вход','C-099'],['23.11.2026','18:20','Стефка Ненова','персонал','Каб. 14','вход','G-141'],['23.11.2026','18:30','Мира Колева','ученик 11 кл.','Каб. 14','вход','W-141'],['23.11.2026','17:55','Николай Илиев','учител','Каб. 14','вход','P-141'],
+['23.11.2026','07:45','Иво Петров','лаборант','Главен вход','вход','Y-001'],['23.11.2026','07:58','Стефка Ненова','персонал','Главен вход','вход','Y-001'],['23.11.2026','08:10','Мира Колева','ученик 11 кл.','Главен вход','вход','Y-001'],['23.11.2026','08:12','Сашо Динев','ученик 10 кл.','Главен вход','вход','Y-001'],['23.11.2026','08:20','Ана Георгиева','ученик 11 кл.','Главен вход','вход','Y-001'],['23.11.2026','07:30','Николай Илиев','учител','Главен вход','вход','Y-001'],
+['23.11.2026','19:50','Сашо Динев','ученик 10 кл.','Главен вход','изход','Q-001'],['23.11.2026','20:05','Стефка Ненова','персонал','Главен вход','изход','Q-001'],['23.11.2026','19:30','Иво Петров','лаборант','Главен вход','изход','Q-001'],['23.11.2026','18:58','Мира Колева','ученик 11 кл.','Главен вход','изход','Q-001'],
+['22.11.2026','09:10','Ана Георгиева','ученик 11 кл.','Каб. 21','вход','T-214'],['22.11.2026','12:30','Николай Илиев','учител','Каб. 21','вход','S-210'],['22.11.2026','16:45','Сашо Динев','ученик 10 кл.','Каб. 14','вход','P-141'],['22.11.2026','17:50','Иво Петров','лаборант','Сървърна','вход','C-099'],['23.11.2026','11:20','Ана Георгиева','ученик 11 кл.','Каб. 21','вход','T-214'],['23.11.2026','14:05','Николай Илиев','учител','Каб. 21','вход','S-210']];
+const LOG=(()=>{const a=R.slice(),r=rng(42);for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a})();
+const HEAD=['Дата','Час','Име','Роля','Помещение','Действие','Терминал'];
+const TSV=[HEAD,...LOG].map(r=>r.join('\t')).join('\n');
+
+/* ---------- evidence 3: torn note + montage parts ---------- */
+async function torn(){try{await document.fonts.load('600 44px Caveat')}catch(e){}
+ const W=560,Hh=380,n=cv(W,Hh),x=n.getContext('2d');x.fillStyle='#f3eee0';x.fillRect(0,0,W,Hh);x.strokeStyle='#bcd0e6';x.lineWidth=1.5;for(let y=60;y<Hh;y+=44){x.beginPath();x.moveTo(0,y+12);x.lineTo(W,y+12);x.stroke()}x.strokeStyle='#e7a0a0';x.beginPath();x.moveTo(30,0);x.lineTo(30,Hh);x.stroke();
+ x.fillStyle='#1b2a6b';x.font='600 44px Caveat, cursive';TXT.note.forEach((t,i)=>x.fillText(t,44,[66,140,248,322][i]));
+ const r=rng(11),vx=[],hy=[];for(let y=0;y<=Hh;y+=20)vx.push([280+(r()-.5)*24,y]);for(let X=0;X<=W;X+=20)hy.push([X,192+(r()-.5)*20]);
+ const piece=(left,top)=>{const p=cv(W,Hh),q=p.getContext('2d');q.beginPath();if(left){q.moveTo(0,0);vx.forEach(([a,b])=>q.lineTo(a,b));q.lineTo(0,Hh)}else{q.moveTo(W,0);vx.forEach(([a,b])=>q.lineTo(a,b));q.lineTo(W,Hh)}q.closePath();q.clip();
+  q.beginPath();if(top){q.moveTo(0,0);hy.forEach(([a,b])=>q.lineTo(a,b));q.lineTo(W,0)}else{q.moveTo(0,Hh);hy.forEach(([a,b])=>q.lineTo(a,b));q.lineTo(W,Hh)}q.closePath();q.clip();q.drawImage(n,0,0);return p};
+ const S2=cv(1100,760),s=S2.getContext('2d');s.fillStyle='#3b3d40';s.fillRect(0,0,1100,760);
+ [[piece(1,1),140,96,820,560,180,0],[piece(0,1),420,96,230,560,90,0],[piece(1,0),140,286,270,190,-20,1],[piece(0,0),420,286,800,200,35,0]].forEach(([p,cx,cy,px,py,deg,m])=>{s.save();s.shadowColor='rgba(0,0,0,.5)';s.shadowBlur=14;s.translate(px,py);s.rotate(deg*Math.PI/180);if(m)s.scale(-1,1);s.drawImage(p,-cx,-cy);s.restore()});
+ return S2.toDataURL('image/png');}
+function usb(){const c=cv(700,320),x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,700,320);
+ x.fillStyle='#1f4fa8';x.beginPath();x.roundRect(120,100,400,120,22);x.fill();x.fillStyle='rgba(255,255,255,.18)';x.fillRect(140,106,360,16);
+ x.fillStyle='#c9ccd1';x.fillRect(518,125,122,70);x.fillStyle='#666';x.fillRect(560,145,18,12);x.fillRect(596,145,18,12);
+ x.fillStyle='#f4f1e8';x.fillRect(180,128,260,64);x.fillStyle='#1b2a6b';x.font='600 34px Caveat, cursive';x.textAlign='center';x.fillText('ФИЛМ 11 кл.',310,172);
+ x.strokeStyle='#c9ccd1';x.lineWidth=8;x.beginPath();x.arc(100,160,20,0,7);x.stroke();x.fillStyle='#ff3b3b';x.beginPath();x.arc(490,200,5,0,7);x.fill();return c.toDataURL('image/png')}
+function room(){const W=1400,Hh=860,c=cv(W,Hh),x=c.getContext('2d');let gr=x.createLinearGradient(0,0,0,600);gr.addColorStop(0,'#cfc8b6');gr.addColorStop(1,'#b5ab96');x.fillStyle=gr;x.fillRect(0,0,W,600);
+ x.fillStyle='#8a6f52';x.fillRect(0,600,W,260);x.strokeStyle='rgba(0,0,0,.15)';for(let i=-6;i<14;i++){x.beginPath();x.moveTo(700+i*40,600);x.lineTo(700+i*160,860);x.stroke()}
+ x.fillStyle='#e9eef2';x.fillRect(60,120,240,360);x.fillStyle='#a9c4d6';x.fillRect(72,132,216,336);x.fillStyle='#e9eef2';x.fillRect(176,132,8,336);x.fillRect(72,296,216,8);
+ x.fillStyle='#7d7d7d';x.fillRect(372,112,656,356);x.fillStyle='#f2f4f2';x.fillRect(380,120,640,340);x.fillStyle='rgba(120,140,170,.25)';x.fillRect(380,120,640,340);
+ x.fillStyle='#f7f3e8';x.beginPath();x.arc(1260,160,48,0,7);x.fill();x.strokeStyle='#333';x.lineWidth=4;x.stroke();x.lineWidth=3;x.beginPath();x.moveTo(1260,160);x.lineTo(1227,179);x.stroke();x.lineWidth=6;x.beginPath();x.moveTo(1260,160);x.lineTo(1251,184);x.stroke();
+ x.fillStyle='#6b4f36';x.beginPath();x.moveTo(800,560);x.lineTo(1280,560);x.lineTo(1320,610);x.lineTo(780,610);x.fill();x.fillStyle='#4a3524';x.fillRect(800,610,18,170);x.fillRect(1282,610,18,170);x.fillRect(780,610,540,16);
+ x.fillStyle='rgba(255,255,230,.18)';x.beginPath();x.moveTo(960,500);x.lineTo(1020,300);x.lineTo(420,170);x.lineTo(960,530);x.fill();
+ x.fillStyle='#d9d9d9';x.beginPath();x.roundRect(930,470,240,96,12);x.fill();x.fillStyle='#bdbdbd';x.fillRect(930,540,240,26);x.fillStyle='#2b2b2b';x.beginPath();x.arc(972,512,30,0,7);x.fill();x.fillStyle='#5c7a99';x.beginPath();x.arc(972,512,16,0,7);x.fill();x.fillStyle='#3a3';x.fillRect(1130,488,10,6);
+ x.fillStyle='#5a4330';for(let i=0;i<3;i++){x.beginPath();x.moveTo(40+i*260,700);x.lineTo(260+i*260,700);x.lineTo(290+i*260,780);x.lineTo(10+i*260,780);x.fill()}
+ return c.toDataURL('image/jpeg',.92)}
+
+/* ---------- missions ---------- */
+const HINTS={1:['Кадърът не е празен. Информацията се крие в най-тъмните тонове. Кой инструмент „разтяга“ тоналния обхват?','Цветове → Нива: преместете белия плъзгач силно наляво. Обърнете внимание и на часовника на камерата долу: как се чете?','Нива (бяло ≈ 35) → Изображение → Трансформиране → Обръщане хоризонтално → Завъртане ≈ 7°. Прочетете дъската.'],
+2:['Не всеки ред е важен. Интересува ви само един ден, едно помещение, един вид действие и само вечерта (след 17:00).','Данни → Филтър. Филтрирайте 4 колони, после сортирайте останалото по час, от най-рано към най-късно.','Остават 5 реда. Прочетете първата буква от колоната „Терминал“ отгоре надолу.'],
+3:['Бележката е скъсана на 4 парчета. Всяко парче трябва да стане отделен слой, който да можете да въртите.','Ласо около парче → Копиране → Поставяне като нов слой. После завъртете или обърнете всеки слой поотделно.','Горе вляво: 180°. Горе вдясно: 90°. Долу вляво: огледално + ≈20°. Долу вдясно: ≈ −35°.'],
+4:['Мислете за презентацията като за малък сайт: една начална страница (меню) и връщане към нея от всяка улика.','Вмъкване → Действие (или Връзка) → „Място в този документ“. Бутонът за връщане може да е фигура.','Сложете бутона „Към менюто“ в Изглед → Образец на слайдовете. Така се появява на всички слайдове наведнъж.']};
+const M={
+1:{t:'Мисия 1 · Тъмният кадър',story:'Камера 03 е хванала крадеца в 18:41, но кадърът е почти черен, накриво и с нещо странно. Лаборантът се кълне, че на дъската е имало написано нещо важно.',goal:'Възстановете кадъра така, че всичко на него да се чете нормално, и открийте кодовата дума.',ev:'<div class="ev"><img id="cam" alt="Тъмен кадър от охранителна камера"></div><p class="note">Запазете снимката (десен бутон или задържане → „Запазване на изображението“) и я отворете в GIMP. Работете върху PNG, не върху JPG.</p>',
+ req:[['Кадърът е изсветлен така, че дъската, силуетът и часовникът се виждат ясно',4],['Текстът се чете правилно, не е огледален',2],['Хоризонтът е изправен, а черните ъгли са изрязани',2],['Файлът е изнесен като <i>m1_otbor.png</i>',2]],code:1},
+2:{t:'Мисия 2 · Дневникът на входа',story:'Всяка врата в училището записва кой я е отворил с карта. Охраната ви праща целия дневник за два дни, но е разбъркан. В него има повече шум, отколкото сигнал.',goal:'Открийте кой е влизал в каб. 21 вечерта на кражбата и в какъв ред. Кодовата дума се крие в данните.',ev:'<div class="row"><button class="b" id="copyLog">Копирай дневника</button><span class="note" id="copyMsg">След това: Excel → клетка A1 → Поставяне (Ctrl+V)</span></div><textarea id="logTxt" readonly aria-label="Дневник за копиране"></textarea><div class="scroll"><table id="logPrev"></table></div><p class="note">Първите 6 от 40 реда. Ако бутонът не работи, маркирайте текста (Ctrl+A) и го копирайте.</p>',
+ req:[['Таблицата е форматирана като таблица, с филтри на заглавния ред',3],['Нов лист „Анализ“: за всеки от 4-мата заподозрени броят на влизанията му на 23.11 е изчислен с формула COUNTIFS, не на ръка',5],['Графика на влизанията със заглавие и надписи на осите',4],['Отделно: кой е влязъл в каб. 21 последен преди 18:40? (запишете го в листа)',3]],code:2},
+3:{t:'Мисия 3 · Скъсаната бележка',story:'В кошчето на каб. 21 криминалистите намират скъсана бележка. Някой се е опитал да я унищожи, но е бързал.',goal:'Сглобете бележката в GIMP и я прочетете. После направете реконструкция: снимка, която показва къде е скрито USB-то според бележката.',ev:'<div class="ev"><img id="torn" alt="Сканирани парчета от скъсана бележка"></div><h3>Материали за реконструкцията</h3><div class="grid2 ev"><img id="usbImg" alt="Флашка на бял фон"><img id="roomImg" alt="Кабинетът по мултимедия"></div><p class="note">Запазете трите изображения. Флашката е на бял фон, затова фонът трябва да изчезне.</p>',
+ req:[['Бележката е сглобена от 4 слоя и се чете (екранна снимка или PNG)',4],['Реконструкция: флашката е без бял фон и без бял ореол',4],['Мащабирана е реалистично и завъртяна според перспективата',3],['Флашката е <b>частично скрита</b> зад проектора (маска на слоя или разделен слой)',5],['Има сянка и надпис или стрелка, общо поне 4 слоя. Предават се XCF и JPG',4]],code:3},
+4:{t:'Мисия 4 · Докладът до директора',story:'Директорката ще слуша доклада ви две минути, не повече. Иска да кликва сама и да вижда само това, което я интересува.',goal:'Направете интерактивна презентация в PowerPoint, която води директорката през уликите и разкрива виновника чак накрая.',ev:'<p>Използвайте файловете от мисии 1–3. Как да я направите, решавате вие. Ето какво се проверява:</p>',
+ req:[['Поне 6 слайда: заглавен, меню, по един за всяка от 3-те улики, обвинение',4],['Менюто има хипервръзки към всяка улика, а всяка улика има бутон „Към менюто“',6],['Името на виновника е скрито, докато не се кликне върху обект (тригер анимация)',4],['Еднакъв дизайн, ясно разчитане от последния чин, без излишен текст',3],['Говорителят представя за ≤ 2 минути, без да чете от слайда',3]],code:0}};
+
+function mission(n){const m=M[n],el=$('#m'+n);
+ el.innerHTML=`<div class="card"><h2>${m.t}</h2><p class="brief">${m.story}</p><p><b>Задача:</b> ${m.goal}</p></div>
+ <div class="card"><h3 style="margin-top:0">Улики</h3>${m.ev}</div>
+ <div class="grid2"><div class="card"><h3 style="margin-top:0">Какво проверява учителят</h3><ul class="req">${m.req.map(([t,p])=>`<li>${t} <span>${p} т.</span></li>`).join('')}</ul>${m.code?'<p class="note">+5 т. за верния код.</p>':''}</div>
+ <div class="card"><h3 style="margin-top:0">Подсказки</h3><div class="hints" id="h${n}"></div></div></div>
+ <div class="card code">${m.code?`<h3 style="margin-top:0">Кодова дума</h3><div class="row"><input id="c${n}" maxlength="12" autocomplete="off" aria-label="Кодова дума"><button class="b" data-code="${n}">Провери</button></div><p class="msg" id="cm${n}"></p>`:
+ `<h3 style="margin-top:0">Готови ли сте?</h3><p>Покажете презентацията на учителя. Той въвежда ПИН и отключва обвинението.</p><button class="b" id="m4done">Учителят потвърждава</button><p class="msg" id="cm4"></p>`}</div>`;
+ hints(n);if(m.code&&S.codes[n])solvedMsg(n);if(!m.code&&S.m4ok)$('#cm4').textContent='Потвърдено ✓';}
+function hints(n){const k=S.hints[n],el=$('#h'+n);el.innerHTML=HINTS[n].slice(0,k).map((h,i)=>`<div class="hint"><b>Подсказка ${i+1}:</b> ${h}</div>`).join('')+(k<3?`<button class="b alt" data-hint="${n}">Отвори подсказка ${k+1} (−${k+1} т.)</button>`:'<p class="note">Няма повече подсказки.</p>');}
+function solvedMsg(n){const m=$('#cm'+n);m.className='msg good';m.textContent='Вярно! Следващата мисия е отключена.';$('#c'+n).disabled=true;}
+
+document.addEventListener('click',e=>{const t=e.target;
+ if(t.dataset.hint){const n=+t.dataset.hint;ask('Сигурни ли сте?',`Подсказка ${S.hints[n]+1} струва ${S.hints[n]+1} т.`,'',()=>{S.hints[n]++;save();hints(n);panel()})}
+ if(t.dataset.code){const n=+t.dataset.code,inp=$('#c'+n),m=$('#cm'+n);
+  if(CODES[n].includes(H(inp.value))){S.codes[n]=1;S.open=Math.max(S.open,n+1);S.times[n]=Date.now()-S.start;save();solvedMsg(n);tabs();panel()}
+  else{m.className='msg bad';m.textContent='Грешен код. Разследвайте още.';inp.classList.remove('shake');void inp.offsetWidth;inp.classList.add('shake')}}
+ if(t.id==='m4done'){ask('Потвърждение от учителя','Въведете ПИН:','<input id="pinIn" type="password" inputmode="numeric" style="width:10ch">',()=>{if(H($('#pinIn').value)!==PIN){$('#mText').textContent='Грешен ПИН.';return false}S.m4ok=1;S.open=Math.max(S.open,5);S.times[4]=Date.now()-S.start;save();$('#cm4').className='msg good';$('#cm4').textContent='Потвърдено ✓ Обвинението е отключено.';tabs()})}
+ if(t.id==='copyLog'){const done=()=>$('#copyMsg').textContent='Копирано! Поставете в Excel, в клетка A1.';navigator.clipboard?.writeText(TSV).then(done,()=>{$('#logTxt').select();document.execCommand('copy');done()})}
+});
+
+/* ---------- final ---------- */
+const SUS=['Иво Петров – лаборант','Мира Колева – режисьор, 11 кл.','Сашо Динев – 10 кл.','Стефка Ненова – персонал'];
+const PLC=['в шкафа с техниката','зад проектора','в учителската стая','в раницата си'];
+const MOT=['искал/а да промени монтажа тайно','конкурентен филм за фестивала','прибрал/а я по погрешка','за да я продаде'];
+const Q=[['Кадърът е тъмен, но детайлите в сенките съществуват. Кой инструмент разтяга тоналния обхват най-точно?',['Яркост–контраст','Нива (Levels)','Изостряне','Нюанс–наситеност']],
+['Изрязахте флашката с размито избиране, но около нея остава тънък бял ореол. Най-доброто решение е:',['Да свиете селекцията с 1–2 px и да изтриете пак','Да увеличите резолюцията','Да запишете файла като JPG','Да слеете всички слоеве']],
+['Защо реконструкцията се предава и като XCF?',['XCF е по-малък от JPG','XCF пази слоевете за последващи корекции','XCF се отваря директно в PowerPoint','XCF има по-добри цветове при печат']],
+['Текстът на кадъра се чете като в огледало. Коя операция го оправя?',['Завъртане на 180°','Обръщане хоризонтално','Обръщане вертикално','Инвертиране на цветовете']],
+['Какво връща =COUNTIFS(C:C;"Сашо Динев";F:F;"вход")?',['Броя редове, в които са изпълнени и двете условия','Броя редове, в които е изпълнено поне едно условие','Сумата от колона F','Номера на първия ред, който отговаря']],
+['Искате да сравните броя влизания на четиримата заподозрени. Коя диаграма е най-подходяща?',['Линейна','Колонна','Точкова','Площна']],
+['Снимка 4000 × 3000 px се отпечатва с 300 dpi. Колко широка е разпечатката?',['≈ 13,3 см','≈ 33,9 см','≈ 40 см','≈ 100 см']],
+['Бутонът „Към менюто“ трябва да е на всички слайдове. Кое е най-ефективно?',['Копиране ръчно на всеки слайд','Да се сложи в образеца на слайдовете','Преход между слайдовете','Анимация „Поява“']],
+['Тригер анимацията в PowerPoint стартира:',['Автоматично след предишната','При кликване върху конкретен обект','При смяна на слайда','След определено време']],
+['Флашката трябва да се постави върху снимката с прозрачен фон. Кой формат пази прозрачност?',['JPG','PNG','MP3','CSV']]];
+function final(){const el=$('#final');
+ if(!S.accused){el.innerHTML=`<div class="card"><h2>Обвинение</h2><p class="brief">Съберете всички улики: часа от кадъра, дневника, подписа и съдържанието на бележката. Кой, къде и защо? Всяко грешно обвинение струва 3 т.</p>
+ <div class="grid2"><label>Виновник<br><select id="aS">${SUS.map((s,i)=>`<option value="${i}">${s}</option>`).join('')}</select></label>
+ <label>Къде е флашката<br><select id="aP">${PLC.map((s,i)=>`<option value="${i}">${s}</option>`).join('')}</select></label>
+ <label>Мотив<br><select id="aM">${MOT.map((s,i)=>`<option value="${i}">${s}</option>`).join('')}</select></label></div>
+ <p><button class="b" id="accuse">Обвинявам!</button></p><p class="msg bad" id="aMsg">${S.wrong?`Грешни обвинения: ${S.wrong}`:''}</p></div>`;
+  $('#accuse').onclick=()=>{const v=`${$('#aS').value}|${$('#aP').value}|${$('#aM').value}`;if(H(v)===ACC){S.accused=1;S.acc=v;S.times[5]=Date.now()-S.start;save();final()}else{S.wrong++;save();panel();$('#aMsg').textContent=`Не съвпада с уликите. Грешни обвинения: ${S.wrong} (−${S.wrong*3} т.)`}};return}
+ const i=S.ans.length;
+ if(i<Q.length){el.innerHTML=`<div class="card"><h2>Финален тест</h2><p>Обвинението е прието. Сега докажете, че разбирате инструментите. Имате един опит на въпрос, по 2 т. за верен отговор.</p>
+  <div class="bar"><i style="width:${i*10}%"></i></div><p class="note">Въпрос ${i+1} от ${Q.length}</p><p class="q">${Q[i][0]}</p>
+  <div class="opts">${Q[i][1].map((o,j)=>`<button data-o="${j}">${String.fromCharCode(1072+j)}) ${o}</button>`).join('')}</div></div>`;
+  el.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{const j=+b.dataset.o;S.ans.push(j);save();panel();el.querySelectorAll('[data-o]').forEach(x=>{x.disabled=true;if(ok(i,+x.dataset.o))x.classList.add('r')});if(!ok(i,j))b.classList.add('w');setTimeout(final,1100)});return}
+ const t=S.times;el.innerHTML=`<div class="card solved"><div class="stamp">СЛУЧАЯТ Е РАЗКРИТ!</div><h2 style="margin-top:20px">${esc(S.team||'Отборът')}</h2>
+ <p class="brief">${dec(FIN,H("acc:"+S.acc))}</p></div>
+ <div class="card"><h3 style="margin-top:0">Протокол на отбора</h3><div class="pts typed">
+ <span>Кодове (3 × 5)</span><span>${(S.codes[1]+S.codes[2]+S.codes[3])*5}</span><span>Оценка от учителя</span><span>${S.grade[1]+S.grade[2]+S.grade[3]+S.grade[4]} / 65</span>
+ <span>Тест</span><span>${testPts()} / 20</span><span>Подсказки</span><span>−${hintPen()}</span><span>Грешни обвинения</span><span>−${S.wrong*3}</span>
+ <span><b>Общо</b></span><span><b>${score()} / 100</b></span><span>Време общо</span><span>${t[5]?fmt(t[5]):'—'}</span></div>
+ <p class="note">Учителят въвежда оценките за файловете в раздел „За учителя“. Общият резултат се обновява веднага.</p></div>`;}
+
+/* ---------- teacher ---------- */
+function teacher(pin){const b=$('#tBody');b.hidden=false;$('#tLock').hidden=true;
+ const sus=['Иво Петров','Мира Колева','Сашо Динев','Стефка Ненова'],cnt=sus.map(s=>R.filter(r=>r[0]==='23.11.2026'&&r[2]===s&&r[5]==='вход').length);
+ b.innerHTML=dec(TEACH,H('pin:'+pin))+`<h3>Очаквани резултати с COUNTIFS (влизания на 23.11)</h3><table class="typed">${sus.map((s,i)=>`<tr><td>${s}</td><td>${cnt[i]}</td></tr>`).join('')}</table>
+ <h3>Оценки за отбора „${esc(S.team||'—')}“</h3><div class="grid2">${[[1,10],[2,15],[3,20],[4,20]].map(([n,mx])=>`<label>Мисия ${n} (0–${mx})<br><input type="number" min="0" max="${mx}" data-g="${n}" value="${S.grade[n]}" style="width:8ch"></label>`).join('')}</div>
+ <p class="note">Подсказки: ${Object.entries(S.hints).map(([k,v])=>`М${k}: ${v}`).join(' · ')} · Грешни обвинения: ${S.wrong} · Време: ${Object.entries(S.times).map(([k,v])=>`етап ${k} – ${fmt(v)}`).join(', ')||'—'}</p>
+ <p><button class="b alt" id="reset">Нулирай за нов клас</button></p>`;
+ b.querySelectorAll('[data-g]').forEach(i=>i.oninput=()=>{const n=+i.dataset.g,mx=+i.max;S.grade[n]=Math.min(mx,Math.max(0,+i.value||0));save();panel()});
+ $('#reset').onclick=()=>ask('Нулиране','Изтрива целия напредък на този компютър.','',()=>{S=blank();save();location.reload()});}
+$('#tBtn').onclick=()=>{if(H($('#tPin').value)===PIN)teacher($('#tPin').value.trim());else $('#tMsg').textContent='Грешен ПИН.'};
+
+/* ---------- start ---------- */
+$('#startBtn').onclick=()=>{const v=$('#teamIn').value.trim();if(!v){$('#startMsg').className='msg bad';$('#startMsg').textContent='Въведете име на отбора.';return}
+ S.team=v;if(!S.start)S.start=Date.now();S.open=Math.max(S.open,1);save();panel();go('m1')};
+$('#teamIn').value=S.team;
+[1,2,3,4].forEach(mission);final();
+$('#logTxt').value=TSV;$('#logPrev').innerHTML='<tr>'+HEAD.map(h=>`<th>${h}</th>`).join('')+'</tr>'+LOG.slice(0,6).map(r=>'<tr>'+r.map(c=>`<td>${esc(c)}</td>`).join('')+'</tr>').join('');
+const fontsReady=document.fonts?document.fonts.load('700 100px "PT Mono"').catch(()=>{}):Promise.resolve();
+fontsReady.then(()=>{$('#cam').src=camera();$('#usbImg').src=usb();$('#roomImg').src=room();return torn()}).then(u=>{$('#torn').src=u});
+tabs();panel();
+}
+</script>
+<script src="../totop.js?v=20261126" defer></script>
+</body>
+</html>
