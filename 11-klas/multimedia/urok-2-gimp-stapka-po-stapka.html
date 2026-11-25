@@ -92,6 +92,16 @@ main>.band+.band{padding-top:0}
 .nosave canvas{width:100%;display:block;border-radius:6px;pointer-events:none}.nosave::after{content:"";position:absolute;inset:0}
 .hand{border:2px solid var(--acc);border-radius:12px;padding:12px 16px;margin:14px 0;background:var(--card)}.hand b:first-child{color:var(--acc)}
 @media(max-width:600px){kbd{white-space:normal;overflow-wrap:anywhere}}
+
+/* Тест с избор */
+.qz{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;background:var(--bg)}
+.qz h3{margin:0 0 8px;font-size:17px;line-height:1.35}.qz h3 span{color:var(--acc);font-family:"PT Mono",monospace;margin-right:6px}
+.qz button{display:block;width:100%;text-align:left;min-height:44px;margin:6px 0;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 15px/1.4 Manrope,sans-serif;cursor:pointer}
+.qz button:hover:not(:disabled){border-color:var(--acc)}.qz button:disabled{cursor:default}
+.qz button.ok{background:#1f7a3f;border-color:#1f7a3f;color:#fff}.qz button.bad{background:#b3261e;border-color:#b3261e;color:#fff}
+.qz .fb{margin-top:8px;padding:10px 12px;border-radius:8px;font-size:15px}.qz .fb.ok{background:rgba(46,160,90,.14)}.qz .fb.bad{background:rgba(200,50,40,.12)}
+.qz-score{margin-top:16px;padding:14px 16px;border-radius:12px;border:2px solid var(--acc);font-weight:700;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.qz-score button{min-height:44px;padding:0 16px;border-radius:10px;border:0;background:var(--acc);color:#fff;font:700 15px Manrope,sans-serif;cursor:pointer}
 /* Общ футър на сайта – същият като в style.css */
 footer.site-footer{position:relative;z-index:1;clear:both;display:block;margin:64px 0 0;padding:36px 20px 26px;
   background:#1a1d3a;color:#c4c7dc;text-align:left;border:0;
@@ -137,7 +147,7 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
  </div>
 </div></header>
 
-<nav><div class="scroll"><a href="#ex0">0 · Прозорецът на GIMP</a><a href="#ex1">1 · Нива</a><a href="#ex2">2 · Обръщане и завъртане</a><a href="#ex3">3 · Слоеве</a><a href="#ex4">4 · Премахване на фон</a><a href="#ex5">5 · Фотомонтаж с маска</a><a href="#ex6">6 · Формати</a><a href="#test">Провери се</a></div></nav>
+<nav><div class="scroll"><a href="#ex0">0 · Прозорецът на GIMP</a><a href="#ex1">1 · Нива</a><a href="#ex2">2 · Обръщане и завъртане</a><a href="#ex3">3 · Слоеве</a><a href="#ex4">4 · Премахване на фон</a><a href="#ex5">5 · Фотомонтаж с маска</a><a href="#ex6">6 · Формати</a><a href="#quiz">Тест</a><a href="#test">Провери се</a></div></nav>
 
 <main>
 <section class="band ex" id="ex0"><div class="wrap cols">
@@ -355,6 +365,13 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
  <p class="small">Задача: изнесете монтажа като JPG с качество 90 и с качество 30. Сравнете размера на файловете и гледайте около ябълката: там се появяват „квадратчета“ (артефакти).</p>
 </div></section>
 
+<section class="band ex" id="quiz"><div class="wrap">
+ <h2>Тест</h2>
+ <p>Изберете един отговор на всеки въпрос. Веднага ще видите дали е верен, с кратко обяснение. Накрая ще видите резултата си.</p>
+ <div id="quizBox"></div>
+ <div class="qz-score" id="quizScore" aria-live="polite"></div>
+</div></section>
+
 <section class="band ex" id="test"><div class="wrap">
  <h2>Провери се</h2>
  <details><summary>1. Снимката е тъмна, а хистограмата е само в лявата третина. Какво правите?</summary><p>Colors → Levels: местите бялата точка наляво до края на стълбчетата, за да разтегнете тоновете.</p></details>
@@ -505,7 +522,7 @@ fontsReady.then(async()=>{
 });
 }
 </script>
-<script>const CUR=1;</script>
-<script src="mm.js?v=20261125b"></script>
+<script>const CUR=1,QUIZ=[{"q": "Снимката е тъмна, а стълбчетата на хистограмата са само вляво. Какво правите?", "o": ["Увеличавате яркостта максимално", "В Colors → Levels (Цветове → Нива) местите бялата точка наляво до края на стълбчетата", "Завъртате снимката на 180°"], "a": 1, "w": "Нивата разтягат тоновете: най-светлият реален пиксел става бял, а останалите се разпределят по цялата скала. Яркостта само добавя едно число и черното става сиво."}, {"q": "При Нивата бялата точка е на 40. В каква стойност се превръща пиксел със стойност 20?", "o": ["20", "255", "около 128"], "a": 2, "w": "20 ÷ 40 × 255 ≈ 128. Пикселът става средно сив. Всичко с 40 или повече става бяло."}, {"q": "Текстът на снимката се чете наобратно, като в огледало. Коя команда го оправя?", "o": ["Image → Transform → Flip Horizontally (Изображение → Трансформиране → Хоризонтално обръщане)", "Завъртане на 180°", "Crop (Изрязване)"], "a": 0, "w": "Огледалният образ се оправя с хоризонтално обръщане. Завъртането на 180° само обръща картината с главата надолу и текстът пак е огледален."}, {"q": "Искате да завъртите само едно парче от картичката, а не цялото изображение. От кое меню?", "o": ["Image → Transform (Изображение → Трансформиране)", "Layer → Transform (Слой → Трансформиране)", "Colors (Цветове)"], "a": 1, "w": "Менюто Layer променя само активния слой. Менюто Image променя цялото изображение с всичките му слоеве."}, {"q": "Изтрихте белия фон, но вместо шахматна дъска стана отново бяло. Какво сте пропуснали?", "o": ["Layer → Transparency → Add Alpha Channel (Добавяне на алфа канал)", "Да увеличите Threshold", "Да запазите като JPG"], "a": 0, "w": "Без алфа канал слоят няма къде да запише „прозрачно“ и GIMP запълва с цвета на фона. Първо се добавя алфа канал, после се трие."}, {"q": "След изтриване на фона около ябълката остана светла рамка (ореол). Избран е бил фонът. Какво правите?", "o": ["Select → Shrink (Избор → Свиване)", "Select → Grow (Избор → Разширяване) с 1–2 px и триете отново", "Select → None (Избор → Нищо)"], "a": 1, "w": "Ореолът е от изгладените пиксели по ръба. Като разширите селекцията на фона с 1–2 px, тя хваща и тях. Shrink се ползва, когато е избран обектът."}, {"q": "Какво става, ако върху маската на слоя нарисувате със сиво (128)?", "o": ["Тази част се изтрива завинаги", "Тази част се вижда изцяло", "Тази част става полупрозрачна"], "a": 2, "w": "Маската казва колко се вижда всеки пиксел: бяло – изцяло, черно – скрит, сиво – наполовина. Нищо не се изтрива и може да се поправи."}, {"q": "Защо пазите работата си в XCF?", "o": ["Защото пази слоевете и маските и можете да поправяте по-късно", "Защото файлът е най-малък", "Защото се отваря на всеки телефон"], "a": 0, "w": "XCF е работният формат на GIMP. Той пази слоеве, маски и селекции. За показване и споделяне изнасяте PNG или JPG."}, {"q": "Какви файлове предавате за всяко упражнение?", "o": ["Само .jpg", "Два файла: .xcf и .png", "Само .xcf"], "a": 1, "w": "XCF показва как сте работили (слоевете), а PNG е готовата картинка без загуба на качество."}];</script>
+<script src="mm.js?v=20261126a"></script>
 </body>
 </html>

@@ -81,6 +81,16 @@ main>.band+.band{padding-top:0}
 .vis-cap{font-size:13px;color:#aaa;margin:4px 0 0}.vis h4{margin:14px 0 4px;font-size:15px;color:#fff}
 .bars{display:grid;gap:6px;margin-top:10px;font-size:13px}.bars div{display:grid;grid-template-columns:6.5em 1fr 5.5em;gap:8px;align-items:center}.bars i{display:block;height:14px;border-radius:4px;background:#e59a52}.bars span{font-family:"PT Mono",monospace;color:#fff;text-align:right}
 @media(max-width:600px){kbd{white-space:normal;overflow-wrap:anywhere}}
+
+/* Тест с избор */
+.qz{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0;background:var(--bg)}
+.qz h3{margin:0 0 8px;font-size:17px;line-height:1.35}.qz h3 span{color:var(--acc);font-family:"PT Mono",monospace;margin-right:6px}
+.qz button{display:block;width:100%;text-align:left;min-height:44px;margin:6px 0;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 15px/1.4 Manrope,sans-serif;cursor:pointer}
+.qz button:hover:not(:disabled){border-color:var(--acc)}.qz button:disabled{cursor:default}
+.qz button.ok{background:#1f7a3f;border-color:#1f7a3f;color:#fff}.qz button.bad{background:#b3261e;border-color:#b3261e;color:#fff}
+.qz .fb{margin-top:8px;padding:10px 12px;border-radius:8px;font-size:15px}.qz .fb.ok{background:rgba(46,160,90,.14)}.qz .fb.bad{background:rgba(200,50,40,.12)}
+.qz-score{margin-top:16px;padding:14px 16px;border-radius:12px;border:2px solid var(--acc);font-weight:700;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.qz-score button{min-height:44px;padding:0 16px;border-radius:10px;border:0;background:var(--acc);color:#fff;font:700 15px Manrope,sans-serif;cursor:pointer}
 /* Общ футър на сайта – същият като в style.css */
 footer.site-footer{position:relative;z-index:1;clear:both;display:block;margin:64px 0 0;padding:36px 20px 26px;
   background:#1a1d3a;color:#c4c7dc;text-align:left;border:0;
@@ -124,7 +134,7 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
   <p class="small" style="color:#aaa;margin:4px 0 0">Увеличете слънцето. Някъде след 8× започват да се виждат отделните пиксели.</p></div>
 </div></header>
 
-<nav><div class="scroll"><a href="#t1">Пиксели</a><a href="#t2">Растер или вектор</a><a href="#t3">Разделителна способност</a><a href="#t4">RGB и CMYK</a><a href="#t5">Битова дълбочина</a><a href="#t6">Размер и компресия</a><a href="#t7">Формати</a><a href="#t9">Корекции</a><a href="#t8">Практика</a><a href="#test">Провери се</a></div></nav>
+<nav><div class="scroll"><a href="#t1">Пиксели</a><a href="#t2">Растер или вектор</a><a href="#t3">Разделителна способност</a><a href="#t4">RGB и CMYK</a><a href="#t5">Битова дълбочина</a><a href="#t6">Размер и компресия</a><a href="#t7">Формати</a><a href="#t9">Корекции</a><a href="#t8">Практика</a><a href="#quiz">Тест</a><a href="#test">Провери се</a></div></nav>
 
 <main>
 <section class="band ex" id="t1"><div class="wrap cols">
@@ -348,6 +358,13 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
  <div class="scr"><b>peizazh.png</b><img id="dlImg" alt="Пейзаж за практиката" style="margin-top:10px"><a class="next" id="dlA" download="peizazh.png" style="margin-top:10px">Изтегли peizazh.png</a><p class="small" style="color:#aaa">Ако бутонът не работи: десен бутон върху картинката → „Запазване на изображението“.</p></div>
 </div></section>
 
+<section class="band ex" id="quiz"><div class="wrap">
+ <h2>Тест</h2>
+ <p>Изберете един отговор на всеки въпрос. Веднага ще видите дали е верен, с кратко обяснение. Накрая ще видите резултата си.</p>
+ <div id="quizBox"></div>
+ <div class="qz-score" id="quizScore" aria-live="polite"></div>
+</div></section>
+
 <section class="band ex" id="test"><div class="wrap">
  <h2>Провери се</h2>
  <details><summary>1. Защо снимка с размер 300 × 200 px става размазана, когато я разпънете на целия екран?</summary><p>Броят на пикселите е фиксиран. При увеличение всеки пиксел се разтяга на голяма площ, а нови детайли не се появяват.</p></details>
@@ -511,7 +528,7 @@ fontsReady.then(()=>{
 });
 }
 </script>
-<script>const CUR=0;</script>
-<script src="mm.js?v=20261125b"></script>
+<script>const CUR=0,QUIZ=[{"q": "Какво е пиксел?", "o": ["Най-малкият елемент на растерното изображение – квадратче с един цвят", "Формула, по която се рисува фигура", "Точка мастило, която принтерът поставя"], "a": 0, "w": "Пикселът (picture element) е най-малката част от растерното изображение. Всеки пиксел има само един цвят."}, {"q": "Снимка е 4000 × 3000 пиксела. Колко мегапиксела е?", "o": ["7 MP", "1,2 MP", "12 MP"], "a": 2, "w": "4000 × 3000 = 12 000 000 пиксела. Един мегапиксел е един милион пиксела, значи 12 MP."}, {"q": "Кое остава остро при увеличение 10 пъти?", "o": ["Снимка в JPG", "Лого в SVG", "Екранна снимка в PNG"], "a": 1, "w": "SVG е векторен формат. Фигурите се пресмятат наново при всяко увеличение и ръбовете остават остри. JPG и PNG са растерни и се разпикселяват."}, {"q": "Снимка, широка 1800 px, се печата с 300 dpi. Колко сантиметра ще е широка?", "o": ["15,24 см", "6 см", "54 см"], "a": 0, "w": "1800 ÷ 300 = 6 инча. Един инч е 2,54 см, значи 6 × 2,54 = 15,24 см."}, {"q": "Какъв цвят се получава в RGB при R 255, G 0, B 255?", "o": ["Жълто", "Бяло", "Пурпурно (магента)"], "a": 2, "w": "Червената и синята светлина се събират и дават пурпурно. Жълто е R 255 + G 255, а бяло – и трите канала на 255."}, {"q": "Колко цвята може да има снимка с 24 бита на пиксел (по 8 бита за R, G и B)?", "o": ["16 777 216", "256", "24"], "a": 0, "w": "Всеки канал има 2⁸ = 256 стъпки. Каналите са три: 256 × 256 × 256 = 16 777 216 цвята."}, {"q": "Колко байта заема некомпресирано изображение 1000 × 500 px с 24 бита на пиксел?", "o": ["500 000 байта", "1 500 000 байта", "12 000 000 байта"], "a": 1, "w": "1000 × 500 = 500 000 пиксела. 24 бита ÷ 8 = 3 байта на пиксел. 500 000 × 3 = 1 500 000 байта, около 1,5 MB."}, {"q": "Трябва ви лого без фон, което да сложите върху цветен сайт. Кой формат избирате?", "o": ["JPG", "BMP", "PNG"], "a": 2, "w": "PNG поддържа прозрачност (алфа канал), затова фонът остава прозрачен. JPG и BMP ще запълнят фона с цвят."}, {"q": "В модела HSV тонът (H) е 120°. Какъв е цветът?", "o": ["Зелен", "Червен", "Син"], "a": 0, "w": "Тонът се мери по кръг: 0° е червено, 120° – зелено, 240° – синьо."}];</script>
+<script src="mm.js?v=20261126a"></script>
 </body>
 </html>
