@@ -52,3 +52,29 @@ function navLesson(){
 }
 function nav(){cur<0?navIndex():navLesson()}
 nav();
+
+/* ---------- Тест с избор: QUIZ=[{q,o:[...],a:верен индекс,w:обяснение}] ---------- */
+function quizInit(){
+  const box=document.getElementById("quizBox"),sc=document.getElementById("quizScore");
+  if(!box||typeof QUIZ=="undefined")return;
+  const key="mm11_quiz_"+cur;let right=0,ans=0;
+  const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  let best=null;try{best=localStorage.getItem(key)}catch(e){}
+  const score=()=>{sc.innerHTML=ans<QUIZ.length?`<span>Отговорени: ${ans} от ${QUIZ.length}${best!=null?` · Най-добър резултат досега: ${best} от ${QUIZ.length}`:""}</span>`:
+    `<span>Резултат: ${right} от ${QUIZ.length} ${right==QUIZ.length?"🎉 Отлично!":right>=QUIZ.length*.7?"👍 Много добре!":"– препрочетете урока и опитайте пак"}</span><button type="button" id="quizAgain">Започни отначало</button>`;
+    const b=document.getElementById("quizAgain");if(b)b.onclick=()=>{render();box.scrollIntoView({behavior:"smooth",block:"start"})}};
+  function render(){right=0;ans=0;
+    box.innerHTML=QUIZ.map((q,i)=>`<div class="qz" data-i="${i}"><h3><span>${i+1}.</span>${esc(q.q)}</h3>${q.o.map((o,j)=>`<button type="button" data-j="${j}">${esc(o)}</button>`).join("")}<div class="fb" hidden></div></div>`).join("");
+    box.querySelectorAll(".qz").forEach(card=>{const q=QUIZ[+card.dataset.i];
+      card.querySelectorAll("button").forEach(btn=>btn.onclick=()=>{const j=+btn.dataset.j,ok=j==q.a;
+        card.querySelectorAll("button").forEach(b=>{b.disabled=true;if(+b.dataset.j==q.a)b.classList.add("ok")});
+        if(!ok)btn.classList.add("bad");
+        const fb=card.querySelector(".fb");fb.hidden=false;fb.className="fb "+(ok?"ok":"bad");
+        fb.innerHTML=(ok?"<b>✔ Вярно!</b> ":`<b>✘ Грешно.</b> Верният отговор е: <b>${esc(q.o[q.a])}</b>. `)+esc(q.w);
+        ans++;if(ok)right++;
+        if(ans==QUIZ.length){if(best==null||right>+best){best=right;try{localStorage.setItem(key,right)}catch(e){}}}
+        score()})});
+    score()}
+  render();
+}
+quizInit();
