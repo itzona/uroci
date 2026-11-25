@@ -38,7 +38,7 @@ document.addEventListener("keydown",e=>{if(e.key=="Escape"&&og!=-1){og=-1;nav()}
 function nav(){
   $("#nav").innerHTML='<a class="grp home" href="https://itzona.github.io/">🏠 Начало</a>'+G.map((g,gi)=>{
     const act=g.r.includes(cur);
-    return `<div class="dd"><button class="grp ${act?'on':''}" onclick="tg(${gi},event)" aria-expanded="${og==gi}">${g.ic} ${g.n} ▾</button><div class="menu" style="display:${og==gi?'block':'none'}"><div class="mh">${g.full}</div>${g.r.map(i=>`<a class="${i==cur?'on':''}${done[i]!=null?' done':''}" href="${P[i][0]}"${i==cur?' aria-current="page"':''}><span class="n">${i+1}.</span><span class="t">${P[i][1]}</span></a>`).join("")}</div></div>`}).join("");
+    return `<div class="dd"><button class="grp ${act?'on':''}" onclick="tg(${gi},event)" aria-expanded="${og==gi}">${g.ic} ${g.n} ▾</button><div class="menu" style="display:${og==gi?'block':'none'}"><div class="mh">${g.full}</div>${g.r.map(i=>`<a class="${i==cur?'on':''}${done[i]!=null?' done':''}" href="${P[i][0]}"${i==cur?' aria-current="page"':''}><span class="n">${i+1}.</span><span class="t">${P[i][1]}</span></a>`).join("")}</div></div>`}).join("")+'<a class="grp home" href="startap.html">🚀 Стартъп за 4 седмици</a>';
 }
 /* go(-1) – към началната страница на модула, go(i) – към урок i */
 function go(i){location.href=i<0||!P[i]?"index.html":P[i][0]}

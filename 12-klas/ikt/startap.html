@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Стартъп за 4 седмици</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: ясен, енергичен, като спринт план в истинска фирма — ученикът вижда веднага какво се иска
+   IDEA: седмичен спринт борд на стартъп — лента от 4 седмици, а под нея картичките за седмицата
+   PICTURE: голяма лента "Седмица 1–4" с отбелязана текущата седмица и срок + борд с картички
+   COLOUR and TYPE: небесно синьо поле, бяло, мастило #10223a, оранжев акцент за срокове; Outfit + Inter
+   LAYOUT: синя лента горе (заглавие + седмици), меню, после съдържание в една колона до 1100px */
+:root{color-scheme:light dark;
+--bg:light-dark(#f6f9fc,#0b1726);--card:light-dark(#fff,#12233a);--ink:light-dark(#10223a,#e8f0f8);
+--mute:light-dark(#53657a,#9fb3c8);--line:light-dark(#dbe5ef,#24384f);--sky:light-dark(#4fb3e8,#1c6f9e);
+--skyd:light-dark(#2a8fc7,#4fb3e8);--org:#ff7a1a;--ok:light-dark(#1f8a5b,#4cc38a);--soft:light-dark(#e8f4fb,#16314a)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Outfit,Inter,sans-serif;line-height:1.1;margin:0;text-wrap:balance}
+h1{font-size:clamp(32px,5vw,50px)}h2{font-size:clamp(24px,3vw,32px);margin-bottom:12px}h3{font-size:19px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 max(4vw,16px)}
+header{background:var(--sky);color:#fff;padding:28px 0 26px}
+header p{margin:6px 0 0;opacity:.95}
+.now{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+.now b{font:600 22px Outfit,sans-serif}.dl{background:var(--org);color:#fff;border-radius:999px;padding:3px 12px;font-weight:600;font-size:14px;white-space:nowrap}
+.weeks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:18px}
+.wk{background:rgba(255,255,255,.18);border:2px solid transparent;color:#fff;border-radius:12px;padding:12px;text-align:left;cursor:pointer;font:inherit;min-height:44px}
+.wk span{display:block;font-size:13px;opacity:.9}.wk strong{font:600 17px Outfit,sans-serif}
+.wk.cur{background:#fff;color:#10223a}.wk.sel{border-color:var(--org)}.wk.done{opacity:.75}
+.wk:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--org);outline-offset:2px}
+nav{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:6px}
+nav a{flex:none;padding:10px 14px;border-radius:10px;color:var(--ink);text-decoration:none;font-weight:500;font-size:15px}
+nav a.on{background:var(--soft);color:var(--skyd);font-weight:600}
+main{padding:28px 0 60px}section{display:none}section.on{display:block}
+.lead{font-size:18px;color:var(--mute);max-width:70ch;margin:0 0 20px}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 26px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.box h3{margin-bottom:6px}.box p{margin:0;color:var(--mute);font-size:15px}
+.board{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.task{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.task .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.code{font:700 15px Outfit,sans-serif;color:var(--skyd)}
+.chip{display:inline-block;background:var(--soft);color:var(--skyd);border-radius:999px;padding:2px 10px;font-size:13px;font-weight:600;white-space:nowrap}
+.task p{margin:0}.task ul{margin:0;padding-left:20px}.task li{margin:2px 0}
+.lbl{font-size:13px;font-weight:600;color:var(--mute);margin-top:4px}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:6px 0;cursor:pointer}
+.chk input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--ok)}
+.chk.y span{text-decoration:line-through;color:var(--mute)}
+.bar{height:8px;background:var(--line);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+.up{background:var(--soft);border-radius:10px;padding:8px 12px;font-size:14px}
+.note{border-left:4px solid var(--org);background:var(--card);padding:14px 16px;border-radius:0 12px 12px 0;margin:22px 0}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.cols{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:12px 0}
+.col{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:13px}
+.col b{display:block;font-size:14px;margin-bottom:4px}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:14px;color:var(--mute)}td.n{text-align:right;white-space:nowrap;font-weight:600}
+label.f{display:block;font-weight:600;margin:14px 0 6px}
+textarea,select,input[type=text]{width:100%;font:16px Inter,sans-serif;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+textarea{min-height:64px;resize:vertical}
+.btn{background:var(--skyd);color:#fff;border:0;border-radius:10px;padding:12px 18px;font:600 16px Inter,sans-serif;cursor:pointer;min-height:44px}
+.btn.g{background:transparent;color:var(--skyd);border:1px solid var(--line)}
+pre{background:var(--soft);border-radius:12px;padding:14px;white-space:pre-wrap;font:15px/1.5 Inter,sans-serif;min-height:60px}
+.slides{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0}
+.slide{aspect-ratio:16/9;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;justify-content:space-between}
+.locked{background:var(--card);border:2px dashed var(--line);border-radius:16px;padding:32px;text-align:center}.locked .lead{margin:8px auto 0}
+.wk.lock{background:rgba(16,34,58,.22);cursor:pointer}
+[hidden]{display:none!important}
+.ann{display:flex;gap:16px;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--org);border-radius:16px;padding:20px 22px;margin-bottom:30px}
+.ann .ae{font-size:34px;line-height:1}.ann h2{margin-bottom:8px}.ann p{margin:0 0 8px}.ann ul{margin:0 0 10px;padding-left:20px}.ann li{margin:3px 0}
+@media(max-width:600px){.ann{flex-direction:column;gap:6px;padding:16px}}
+.tbar{background:#10223a;color:#fff;padding:10px max(4vw,16px);font-size:15px;text-align:center}
+.tb{flex:none;margin-left:auto;background:transparent;border:1px solid var(--line);color:var(--mute);border-radius:10px;padding:8px 14px;font:500 15px Inter,sans-serif;cursor:pointer;min-height:44px}
+.tb.on{background:#10223a;color:#fff;border-color:#10223a}.pin{margin-top:14px}
+.steps{margin:0;padding:18px 18px 18px 38px}.steps li{margin:0 0 12px}.steps li:last-child{margin:0}
+.tcard{background:var(--soft);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:6px}
+.cm{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:15px}.cm p{margin:4px 0 0}
+.at{color:var(--skyd);font-weight:600}
+.slide b{font:700 28px Outfit,sans-serif;color:var(--skyd)}
+.small{font-size:14px;color:var(--mute)}
+@media(max-width:1000px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){.board,.grid2,.flow{grid-template-columns:minmax(0,1fr)}.cols{grid-template-columns:repeat(3,minmax(0,1fr))}.slides{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.weeks{grid-template-columns:repeat(2,minmax(0,1fr))}table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;font-weight:600;color:var(--mute)}}
+@media(prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<div id="tbar" class="tbar" hidden>Учителски режим: виждате и четирите седмици. Учениците виждат само отключените. Натиснете „Заключи отново“, преди да оставите компютъра.</div>
+<header><div class="wrap">
+  <h1>Вие сте фирма. Стартъп за 4 седмици</h1>
+  <p>12 клас · Профил ИТ · Модул „Решаване на проблеми с ИКТ“ · 6 смесени екипа (Група А + Група Б) · работа в Trello</p>
+  <div class="now" id="now"></div>
+  <div class="weeks" id="weeks"></div>
+</div></header>
+
+<nav><div class="wrap" id="nav">
+  <a href="#week">Седмицата</a><a href="#roli">Роли</a><a href="#trello">Къде какво пиша</a><a href="#otchet">Отчет</a><a href="#final">Финален питч</a><a href="#ocenka">Оценяване</a><button class="tb" id="tbtn" type="button">Учител</button>
+</div></nav>
+<div class="wrap" id="pinbox" hidden><form class="box pin" id="pinf">
+  <label class="f" for="pin" style="margin-top:0">ПИН на учителя</label>
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><input type="password" id="pin" inputmode="numeric" autocomplete="off" style="max-width:200px"><button class="btn" type="submit">Отключи</button><button class="btn g" type="button" id="pinx">Затвори</button></div>
+  <p class="small" id="pinmsg" style="margin:8px 0 0"></p></form></div>
+
+<main><div class="wrap">
+
+<section id="s-week"><div id="weekview"></div></section>
+
+<section id="s-roli">
+  <h2>Роли в екипа — всеки има една</h2>
+  <p class="lead">Всяка седмица на картичката пише коя роля отговаря за нея. Работите заедно, но отговорникът следи картичката да стигне до ГОТОВО.</p>
+  <div class="grid2" id="roles"></div>
+  <div class="note"><b>Екипи от 4:</b> Мениджър, Маркетинг, Финанси, Дизайн. <b>Екипи от 5:</b> + Секретар. Във всеки екип има хора и от двете групи — поне един Мениджър или Секретар от всяка група, за да се предава работата.</div>
+</section>
+
+<section id="s-trello">
+  <h2>Как работи вашият борд в Trello</h2>
+  <p class="lead">Бордът е затворен: виждат го само вашият екип и двете госпожи. Не показвайте идеята, цената и прототипа на другите екипи.</p>
+  <div class="cols">
+    <div class="col"><b>ИДЕЯ</b>Всички задачи в началото</div>
+    <div class="col"><b>ЗА ПЛАНИРАНЕ</b>Има отговорник и чеклист</div>
+    <div class="col"><b>В ПРОЦЕС</b>Работи се сега. Най-отгоре: ОТЧЕТ</div>
+    <div class="col"><b>ЗА ПРОВЕРКА</b>Готово според екипа</div>
+    <div class="col"><b>ГОТОВО</b>Мести само мениджърът</div>
+    <div class="col"><b>ПРОБЛЕМ</b>Пишеш какво те спира</div>
+  </div>
+  <div class="grid2">
+    <div class="box"><h3>3-те правила</h3><ul>
+      <li>Всичко се пише в Trello. Ако не е в Trello, не е направено.</li>
+      <li>Проблем? Местиш картичката в ПРОБЛЕМ / ПОМОЩ и пишеш какво те спира.</li>
+      <li>На финала всеки говори. Представяте заедно.</li></ul></div>
+    <div class="box"><h3>Готова картичка има</h3><ul>
+      <li>заглавие, отговорник и чеклист с отметки;</li>
+      <li>качен файл, снимка или линк — не само текст;</li>
+      <li>поне 1 коментар какво е направено;</li>
+      <li>правилна колона — не стои в ИДЕЯ 3 седмици.</li></ul></div>
+  </div>
+
+  <h2 style="margin-top:34px">Създаване на борда — Седмица 1, мениджърът</h2>
+  <ol class="box steps">
+   <li>Влез в <b>trello.com</b> (регистрация с имейл). Всички от екипа също си правят профил.</li>
+   <li><b>Create → Board</b>. Име: <b>„Екип N“</b>. Visibility: <b>Private</b>.</li>
+   <li>С <b>Add a list</b> направи 6-те колони точно с тези имена: ИДЕЯ, ЗА ПЛАНИРАНЕ, В ПРОЦЕС, ЗА ПРОВЕРКА, ГОТОВО, ПРОБЛЕМ.</li>
+   <li><b>Share</b> → покани по имейл всички от екипа (и от двете групи) и <b>двете госпожи</b>. Имейлите им ще ви бъдат дадени в часа.</li>
+   <li>Всеки четвъртък, щом седмицата се отключи: в колона ИДЕЯ <b>Add a card</b> за всяка задача — с номера и заглавието, напр. „1.3 Анкета с 20 човека“, плюс картичка „ОТЧЕТ – Седмица N“. На всяка картичка: <b>Members</b> → отговорникът, <b>Checklist</b> → точките от сайта.</li>
+  </ol>
+
+  <h2 style="margin-top:34px">Къде какво пишеш</h2>
+  <p class="lead">Всичко е в борда на екипа. Никога в Viber или чата — съотборниците от другата група няма да го видят.</p>
+  <table class="stack"><thead><tr><th>Какво</th><th>Къде точно</th><th>Как</th></tr></thead><tbody>
+   <tr><td><b>Резултатът от задачата</b></td><td>В картичката на задачата → <b>Описание</b></td><td>Самият текст: проблемът, клиентът, конкурентите…</td></tr>
+   <tr><td><b>Файл, снимка, линк</b></td><td>В картичката → <b>Прикачен файл</b></td><td>Снимка на анкетата, линк към таблицата, логото</td></tr>
+   <tr><td><b>Какво направих днес</b></td><td>В картичката → <b>Коментар</b></td><td><i>Направих: … / Остава: …</i></td></tr>
+   <tr><td><b>Въпрос към съотборник</b></td><td>В същата картичка → <b>Коментар с @име</b></td><td><i>@Мария, провери въпросите.</i> Trello ѝ праща известие.</td></tr>
+   <tr><td><b>Отчет за часа</b></td><td>Картичка <b>ОТЧЕТ – Седмица N</b> → Коментар</td><td>По 1 коментар от всяка група, започва с „Група А“ / „Група Б“</td></tr>
+   <tr><td><b>Заседнал съм</b></td><td>Местиш картичката в <b>ПРОБЛЕМ</b> + коментар</td><td>Пишеш какво те спира — госпожите отговарят там</td></tr>
+  </tbody></table>
+
+  <h2 style="margin-top:34px">Как виждам какво са написали другите и откъде продължавам</h2>
+  <div class="grid2">
+   <ol class="box steps">
+    <li><b>Камбанката</b> горе вдясно в Trello — там са всички съобщения с <b>@твоето име</b>. Отговори на тях първо.</li>
+    <li>Отвори <b>ОТЧЕТ – Седмица N</b>. Прочети последния коментар на другата група. Редът <b>„Следващия път трябва да“</b> е вашата задача за днес.</li>
+    <li>Отвори <b>картичката на твоята роля</b> и превърти до <b>Активност</b>. Най-горният коментар е най-новият — там пише докъде са стигнали.</li>
+    <li>Продължаваш от <b>„Остава:“</b>. В края на часа пишеш свой коментар <i>Направих / Остава</i> и, ако трябва, <b>@име</b> кой продължава.</li>
+   </ol>
+   <div class="tcard">
+    <div class="small">Пример: картичка в колона В ПРОЦЕС</div>
+    <h3>1.3 Анкета с 20 човека</h3>
+    <div class="small">Отговорник: Маркетинг · Прикачено: forms-link, rezultati.png</div>
+    <div class="lbl">Активност (най-новото е най-горе)</div>
+    <div class="cm"><b>Иван · Група А</b><p>Вече са 21 отговора, качих снимка на резултатите. Местя в ЗА ПРОВЕРКА.</p></div>
+    <div class="cm"><b>Мария · Група Б</b><p>Направих: формата в Google Forms, линкът е прикачен. Пуснах я на 8 души.<br>Остава: още 12 отговора. <span class="at">@Иван</span> пусни я в твоя клас.</p></div>
+    <div class="cm"><b>Иван · Група А</b><p>Направих: 5-те въпроса, в Описанието са.<br>Остава: да се направи формата. <span class="at">@Мария</span> можеш ли да ги сложиш в Google Forms?</p></div>
+    <div class="small" style="margin-top:8px">Примерни имена.</div>
+   </div>
+  </div>
+</section>
+
+<section id="s-otchet">
+  <h2>Отчет в края на всеки час</h2>
+  <p class="lead">В края на часа <b>всяка група</b> пише по 1 коментар в картичката „ОТЧЕТ – Седмица N“ (най-отгоре в колона В ПРОЦЕС). Пише мениджърът, а в групата без мениджър — човекът, когото екипът е определил. Другата група го чете в началото на следващия си час.</p>
+  <div class="grid2">
+    <form class="box" id="rep">
+      <label class="f" for="r0" style="margin-top:0">Група</label><select id="r0"><option>Група А</option><option>Група Б</option></select>
+      <label class="f" for="r1">Днес направихме</label><textarea id="r1" placeholder="Избрахме 3 проблема и направихме анкетата."></textarea>
+      <label class="f" for="r2">Следващия път трябва да (за другата група)</label><textarea id="r2" placeholder="Да пуснем анкетата на 20 човека."></textarea>
+      <label class="f" for="r3">Имаме проблем с</label><textarea id="r3" placeholder="Не можем да се чуем с Мария от другата група."></textarea>
+      <label class="f" for="r4">Кой какво направи (по един на ред: име – задача)</label><textarea id="r4" placeholder="Иван – въпроси за анкетата&#10;Мария – Google Forms"></textarea>
+      <p style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0"><button class="btn" type="submit">Копирай отчета</button><button class="btn g" type="button" id="clr">Изчисти</button></p>
+    </form>
+    <div><h3 style="margin-bottom:8px">Това поставяш в Trello</h3><pre id="out"></pre><p class="small" id="copied"></p>
+      <div class="note">Ако отчетът не е в тази картичка, значи екипът не е работил този час.</div></div>
+  </div>
+</section>
+
+<section id="s-final">
+  <div class="locked" id="finlock"><h2>Финалният питч е заключен</h2><p class="lead" id="finmsg"></p></div>
+  <div id="fin"><h2>Финален питч — 5 минути + 2 минути въпроси</h2>
+  <p class="lead">Госпожите са инвеститори. Накрая всички гласуват — не може да гласуваш за своя екип.</p>
+  <div class="slides" id="slides"></div>
+  <div class="grid2">
+    <div class="box"><h3>Кой говори</h3><p>Първата половина — човек от Група А, втората — от Група Б. Всеки член говори поне 1 минута.</p></div>
+    <div class="box"><h3>Преди часа</h3><p>Презентацията е прикачена (линк) в картичка 4.1, а видеата — в 3.4. Госпожите ги отварят от вашия борд.</p></div>
+  </div></div>
+</section>
+
+<section id="s-ocenka">
+  <h2>Как се оценява</h2>
+  <p class="lead">Оценката е обща за екипа, плюс лична част за всеки. </p>
+  <table class="stack"><thead><tr><th>Какво</th><th>Как се проверява</th><th>Точки</th></tr></thead><tbody id="rub"></tbody></table>
+  <p class="small">Скала: 50–64 Добър 4 · 65–84 Мн. добър 5 · 85–100 Отличен 6. Под 50 — екипът получава шанс да довърши.</p>
+</section>
+
+
+</div></main>
+
+<script>
+{
+/* Първи час (четвъртък). Седмица 1 е отключена винаги; всяка следваща се отключва 7 дни по-късно в HOUR:00. */
+const START='2026-11-26',HOUR=16;
+/* ПИН за учителите (хеш). За нов ПИН – помолете Claude да смени PIN_H. */
+const PIN_H='1vzhyts';
+
+const {W,SL}=JSON.parse(new TextDecoder().decode(Uint8Array.from(atob('=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'.split('').reverse().join('')),ch=>ch.charCodeAt(0))));
+const ROLES=[['Мениджър','Мести картичките, следи сроковете, пише ОТЧЕТ всеки час. Само той мести в ГОТОВО.'],['Маркетинг','Проучва клиенти и конкуренти, прави анкети и реклама.'],['Финанси','Смята разходи, цени и печалба в таблици.'],['Дизайн','Отговаря за визията: лого, прототип, презентации.'],['Секретар (екипи от 5)','Води протокол от срещите, пише отчет, ако мениджърът го няма.']];
+const RUB=[['Trello и отчети','Отчет всеки час, картичките в правилната колона',20],['Седмица 1','Всички картички на седмицата готови в срок',15],['Седмица 2','Всички картички на седмицата готови в срок',15],['Седмица 3','Всички картички на седмицата готови в срок',15],['Финален питч','Ясно, в срок, отговори на въпросите',25],['Лично участие','Твоите задачи, говориш на питча, коментари в Trello',10]];
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const st={get(k){try{return JSON.parse(localStorage.getItem(k)||'{}')}catch(e){return{}}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const DAY=864e5,s0=new Date(START+'T00:00:00');
+const ph=s=>{let x=5381;for(const c of 'ecobox-'+s)x=((x*33)^c.charCodeAt(0))>>>0;return x.toString(36)};
+let T=false;try{T=sessionStorage.getItem('tp')==='1'}catch(e){}
+const fmt=d=>d.toLocaleDateString('bg-BG',{day:'numeric',month:'long'});
+const wStart=i=>new Date(s0.getTime()+i*7*DAY+HOUR*36e5);
+const fdt=d=>fmt(d);
+let cur=0;for(let i=1;i<=4;i++)if(Date.now()>=wStart(i).getTime())cur=i;
+const open=i=>T||i<=cur;
+let sel=cur<0?0:Math.min(cur,3);
+
+function head(){
+  const n=$('#now');
+  if(cur>3)n.innerHTML=`<b>Проектът приключи</b><span>Браво на всички екипи!</span>`;
+  else n.innerHTML=`<b>Сега: Седмица ${cur+1} · ${esc(W[cur].t)}</b><span class="dl">${cur<3?`Срок: четвъртък, ${fdt(wStart(cur+1))}`:'Финален питч в часа'}</span>`;
+  $('#weeks').innerHTML=W.map((w,i)=>open(i)
+   ?`<button class="wk${i===cur?' cur':''}${i===sel?' sel':''}${i<cur?' done':''}" data-w="${i}"><span>Седмица ${i+1}${i?` · от ${fmt(wStart(i))}`:''}</span><strong>${esc(w.t)}</strong></button>`
+   :`<button class="wk lock${i===sel?' sel':''}" data-w="${i}"><span>Седмица ${i+1}</span><strong>Отключва се на ${fmt(wStart(i))}</strong></button>`).join('');
+}
+function week(){
+  const i=sel;
+  if(!open(i)){$('#weekview').innerHTML=`<div class="locked"><h2>Седмица ${i+1} е заключена</h2><p class="lead">Задачите ще се появят в четвъртък, ${fdt(wStart(i))}. Дотогава довършете картичките от текущата седмица.</p></div>`;return}
+  const w=W[sel],sv=st.get('chk');
+  const all=w.tasks.reduce((a,t)=>a+t.k.length,0);
+  const got=w.tasks.reduce((a,t)=>a+t.k.filter((_,j)=>sv[t.c+'-'+j]).length,0);
+  const m=w.m;
+  $('#weekview').innerHTML=`<div class="ann"><div class="ae">${m.e}</div><div><h2>${esc(m.h)}</h2>${m.a.map(x=>`<p>${esc(x)}</p>`).join('')}<p><b>${esc(m.n)}</b></p><ul>${m.l.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${m.b.map(x=>`<p>${esc(x)}</p>`).join('')}<p><b>${esc(m.z)}</b></p>${T?`<p class="tonly"><button class="btn" type="button" id="cpm">Копирай съобщението за чата</button> <span class="small" id="cpmok"></span></p>`:''}</div></div>
+  <h2>Седмица ${i+1}: ${esc(w.t)}</h2><p class="lead">${esc(w.goal)}</p>
+  <div class="flow">
+   <div class="box"><h3>1. Първите 5 минути</h3><p>Мениджърът създава в ИДЕЯ картичките на седмицата (номер + заглавие като по-долу) и „ОТЧЕТ – Седмица ${i+1}“. Останалите: камбанката → ОТЧЕТ → последният коментар на другата група. <a href="#trello">Как точно</a></p></div>
+   <div class="box"><h3>2. По време на часа</h3><p>Работиш по картичката на твоята роля. На съотборник от другата група пишеш коментар в същата картичка с @име.</p></div>
+   <div class="box"><h3>3. Последните 5 минути</h3><p>Всеки пише в своята картичка: „Направих: … / Остава: …“. Един от групата пише отчета в „ОТЧЕТ – Седмица ${i+1}“.</p></div>
+   <div class="box"><h3>4. До следващия четвъртък</h3><p>Отговаряш на @съобщенията до 24 часа. Довършените картички отиват в ЗА ПРОВЕРКА.</p></div>
+  </div>
+  <p class="small" style="margin:0 0 6px">Моят напредък тази седмица: ${got} от ${all} (отметките се пазят само на това устройство)</p>
+  <div class="bar" style="margin-bottom:18px"><i style="width:${all?got/all*100:0}%"></i></div>
+  <div class="board">${w.tasks.map(t=>`<article class="task"><div class="top"><div><div class="code">${t.c}</div><h3>${esc(t.n)}</h3></div><span class="chip">${esc(t.r)}</span></div>
+   <p>${esc(t.d)}</p><div class="lbl">Готово е, когато:</div>
+   <div>${t.k.map((k,j)=>{const id=t.c+'-'+j;return `<label class="chk${sv[id]?' y':''}"><input type="checkbox" data-id="${id}"${sv[id]?' checked':''}><span>${esc(k)}</span></label>`}).join('')}</div>
+   <div class="up"><b>Качвате в Trello:</b> ${esc(t.u)}</div></article>`).join('')}</div>
+  <div class="note"><b>Седмица ${i+1} е готова, когато</b> всички ${w.tasks.length} картички са поне в ЗА ПРОВЕРКА ${i<3?`до четвъртък, ${fdt(wStart(i+1))}`:'преди питча'}, и има отчет от часа. Заседнали сте? Картичката → ПРОБЛЕМ.</div>`;
+}
+$('#roles').innerHTML=ROLES.map(r=>`<div class="box"><h3>${r[0]}</h3><p>${r[1]}</p></div>`).join('');
+$('#rub').innerHTML=RUB.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td class="n">${r[2]} т.</td></tr>`).join('')+`<tr><td><b>Общо</b></td><td></td><td class="n">100 т.</td></tr>`;
+const slides=()=>{$('#slides').innerHTML=SL.map((s,i)=>`<div class="slide"><b>${i+1}</b><div><strong>${s[0]}</strong><div class="small">${s[1]}</div></div></div>`).join('')};
+
+const views=['week','roli','trello','otchet','final','ocenka'];
+let view=(()=>{let h=location.hash.slice(1);const m=h.match(/^week-([1-4])$/);if(m){sel=+m[1]-1;return 'week'}return views.includes(h)?h:'week'})();
+function route(){
+  $('#pinbox').hidden=true;
+  const h=view;
+  views.forEach(v=>$('#s-'+v).classList.toggle('on',v===h));
+  document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+h));
+  head();if(h==='week')week();
+  const f=open(3);$('#fin').hidden=!f;$('#finlock').hidden=f;$('#finmsg').textContent=`Ще се отключи в четвъртък, ${fdt(wStart(3))}.`;if(f)slides();
+}
+document.addEventListener('click',e=>{const b=e.target.closest('.wk');if(b){sel=+b.dataset.w;view='week';route();$('#weekview').scrollIntoView({block:'start'});return}
+  const a=e.target.closest('a[href^="#"]');if(a&&views.includes(a.getAttribute('href').slice(1))){e.preventDefault();view=a.getAttribute('href').slice(1);route();window.scrollTo(0,$('nav').offsetTop)}});
+document.addEventListener('click',async e=>{if(!e.target.closest('#cpm'))return;const m=W[sel].m;const t=[`${m.e} ${m.h}`,...m.a,'',m.n,...m.l,'',...m.b,'',m.z].join('\n');try{await navigator.clipboard.writeText(t);$('#cpmok').textContent='Копирано.'}catch(err){$('#cpmok').textContent='Не можа да се копира — маркирайте текста ръчно.'}});
+document.addEventListener('change',e=>{const c=e.target.closest('input[data-id]');if(!c)return;const sv=st.get('chk');sv[c.dataset.id]=c.checked;st.set('chk',sv);week()});
+
+
+const ids=['r0','r1','r2','r3','r4'];const dr=st.get('rep');
+function rep(){const v=ids.map(i=>$('#'+i).value.trim());const t=`${v[0]} · ${new Date().toLocaleDateString('bg-BG')}\nДнес направихме: ${v[1]||'…'}\nСледващия път трябва да: ${v[2]||'…'}\nИмаме проблем с: ${v[3]||'няма'}\nКой какво направи:\n${v[4]||'[име] – [задача]'}`;$('#out').textContent=t;st.set('rep',Object.fromEntries(ids.map((i,j)=>[i,v[j]])));return t}
+ids.forEach(i=>{if(dr[i])$('#'+i).value=dr[i];$('#'+i).addEventListener('input',rep)});rep();
+$('#rep').addEventListener('submit',async e=>{e.preventDefault();const t=rep();try{await navigator.clipboard.writeText(t);$('#copied').textContent='Копирано! Постави го като коментар в картичката ОТЧЕТ.'}catch(err){$('#copied').textContent='Маркирай текста отгоре и го копирай ръчно.'}});
+$('#clr').addEventListener('click',()=>{ids.slice(1).forEach(i=>$('#'+i).value='');rep();$('#copied').textContent=''});
+const tb=$('#tbtn'),pb=$('#pinbox');
+const setT=v=>{T=v;try{v?sessionStorage.setItem('tp','1'):sessionStorage.removeItem('tp')}catch(e){}tb.textContent=v?'Заключи отново':'Учител';tb.classList.toggle('on',v);$('#tbar').hidden=!v;route()};
+tb.addEventListener('click',()=>{if(T){setT(false);return}pb.hidden=!pb.hidden;if(!pb.hidden){$('#pinmsg').textContent='';$('#pin').value='';$('#pin').focus()}});
+$('#pinx').addEventListener('click',()=>{pb.hidden=true});
+$('#pinf').addEventListener('submit',e=>{e.preventDefault();if(ph($('#pin').value.trim())===PIN_H){pb.hidden=true;setT(true)}else{$('#pinmsg').textContent='Грешен ПИН.'}});
+if(T){tb.textContent='Заключи отново';tb.classList.add('on');$('#tbar').hidden=false}
+route();
+}
+</script>
+</body>
+</html>
