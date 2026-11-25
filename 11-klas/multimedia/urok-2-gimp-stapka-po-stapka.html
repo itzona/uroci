@@ -88,6 +88,9 @@ main>.band+.band{padding-top:0}
 .note-band{background:var(--card);border-radius:12px;max-width:1140px;margin:0 auto 0;padding:12px 16px!important}
 @media(max-width:600px){header.band>.wrap,main>.band>.wrap{padding:14px;border-radius:12px}}
 .tr{color:var(--mute);font-size:.92em}
+.nosave{position:relative;margin-top:10px;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.nosave canvas{width:100%;display:block;border-radius:6px;pointer-events:none}.nosave::after{content:"";position:absolute;inset:0}
+.hand{border:2px solid var(--acc);border-radius:12px;padding:12px 16px;margin:14px 0;background:var(--card)}.hand b:first-child{color:var(--acc)}
 @media(max-width:600px){kbd{white-space:normal;overflow-wrap:anywhere}}
 /* Общ футър на сайта – същият като в style.css */
 footer.site-footer{position:relative;z-index:1;clear:both;display:block;margin:64px 0 0;padding:36px 20px 26px;
@@ -125,7 +128,7 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
   <div class="lessons"><a href="urok-1-rasterna-grafika.html">← Урок 1 · Растерна графика</a><span>Урок 2 · GIMP стъпка по стъпка</span><a href="index.html">Мултимедия</a></div>
   <p class="num">Мултимедия · 11 клас · GIMP 2.10 / 3.0</p>
   <h1>GIMP стъпка по стъпка: от тъмна снимка до фотомонтаж</h1>
-  <p class="lead">Шест упражнения: как се прави и защо се прави точно така. Всяко има изображение за практика. Изтеглете го, отворете го в GIMP и следвайте стъпките. Накрая проверете резултата по списъка.</p>
+  <p class="lead">Шест упражнения: как се прави и защо се прави точно така. Всяко има изображение за практика. Изтеглете го, отворете го в GIMP и следвайте стъпките. Накрая проверете резултата по списъка и го сравнете с образеца на готовото изображение. Всяко упражнение се предава в два файла: <b>.xcf</b> и <b>.png</b>.</p>
   <p class="small">Преди този урок вижте <a href="urok-1-rasterna-grafika.html" style="color:var(--acc)">урок 1</a> за пикселите, цветовете и форматите. Менютата и термините са дадени на английски, а в скоби – на български, както са в българския превод на GIMP. Според версията имената може леко да се различават.</p>
  </div>
  <div class="scr"><div class="bar"><i></i><i></i><i></i></div>
@@ -152,6 +155,7 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
    <li><kbd>Edit → Undo History</kbd> <span class="tr">(Редактиране → История на отмяната)</span> – списък с всички действия. Кликнете по-старо, за да се върнете до него.</li>
    <li><kbd>1</kbd> – мащаб 100% (един пиксел от снимката = един пиксел на екрана). <kbd>Shift+Ctrl+J</kbd> – цялото изображение да се побере в прозореца.</li>
    <li><kbd>Ctrl</kbd> + колелцето на мишката – приближаване и отдалечаване. Задръжте <kbd>Space</kbd> и движете мишката, за да местите изгледа.</li></ul></div>
+  <div class="hand"><b>📤 Как се предава всяко упражнение</b><p style="margin:6px 0 0">Предавате <b>два файла</b> с едно и също име:</p><ul style="margin:6px 0 0;padding-left:22px"><li><b>.xcf</b> – работният файл от <kbd>File → Save</kbd> <span class="tr">(Файл → Запазване)</span>. По него учителят вижда слоевете и как сте работили.</li><li><b>.png</b> – готовата картинка от <kbd>File → Export As</kbd> <span class="tr">(Файл → Изнасяне като)</span>.</li></ul><p style="margin:6px 0 0">Образецът на готовото изображение до всяко упражнение е само за сравнение и не може да се изтегли.</p></div>
   <div class="why"><b>Save или Export?</b> <kbd>File → Save</kbd> <span class="tr">(Файл → Запазване)</span> записва само във формата на GIMP – <b>XCF</b>. Той пази слоевете, маските и селекциите, за да продължите по-късно. За PNG или JPG използвайте <kbd>File → Export As</kbd> <span class="tr">(Файл → Изнасяне като)</span> и напишете разширението в името, например <i>snimka.png</i>. GIMP избира формата според разширението.</div>
   <div class="oops"><b>Ако прозорците са се разпилели</b><ul><li><kbd>Windows → Single-Window Mode</kbd> <span class="tr">(Прозорци → Режим с един прозорец)</span> – всичко се събира в един прозорец.</li><li>Скрили сте панелите с <kbd>Tab</kbd>? Натиснете <kbd>Tab</kbd> отново.</li></ul></div>
  </div>
@@ -186,6 +190,7 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
    <li>Ако снимката изглежда сива и мътна, плъзнете <b>черния триъгълник</b> надясно, до началото на стълбчетата.</li>
    <li>Средният <b>сив триъгълник</b> (гама) изсветлява или потъмнява средните тонове, без да пипа черното и бялото. Нагласете го на око и натиснете <kbd>OK</kbd>.</li>
    <li>По желание: <kbd>Filters → Enhance → Noise Reduction</kbd> <span class="tr">(Филтри → Подобряване → Намаляване на шума)</span>.<em>Когато изсветлите тъмна снимка, шумът (зърното) също се усилва.</em></li>
+   <li>Запазете работния файл: <kbd>File → Save</kbd> <span class="tr">(Файл → Запазване)</span> → <i>pekarna_gotova.xcf</i>. После изнесете готовата картинка: <kbd>File → Export As</kbd> <span class="tr">(Файл → Изнасяне като)</span> → <i>pekarna_gotova.png</i>.<em>Предавате и двата файла.</em></li>
   </ol>
   <div class="how"><b>Какво е хистограма?</b>
    <p>Представете си, че подреждате всички пиксели на снимката по яркост – от 0 (черно) вляво до 255 (бяло) вдясно. Височината на всяко стълбче показва колко пиксела имат тази яркост. Ако всички стълбчета са вляво, снимката е тъмна. Ако са вдясно – светла. Ако са струпани в средата – сива и без контраст.</p></div>
@@ -199,10 +204,11 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
    <p>Гамата не пипа черното (0) и бялото (255), а огъва средните тонове. При 1,00 няма промяна. В GIMP стойност над 1 изсветлява сенките и средните тонове, а под 1 ги потъмнява. Пробвайте с плъзгача „Гама“ в опита вдясно.</p></div>
   <div class="oops"><b>Чести проблеми</b><ul><li><b>Снимката стана на петна и „шум“:</b> тъмните снимки имат малко информация, а Нивата я усилват заедно с шума. Нормално е – използвайте Noise Reduction или не разтягайте толкова силно.</li><li><b>Цветовете станаха странни:</b> проверете дали горе в прозореца Levels е избран канал <b>Value</b> <span class="tr">(Стойност)</span>, а не Red, Green или Blue.</li></ul></div>
   <div class="why"><b>Алтернатива:</b> <kbd>Colors → Curves</kbd> <span class="tr">(Цветове → Криви)</span>. Издърпайте горната дясна точка на кривата наляво и ще получите същото като с Нивата. С кривите имате повече контрол, защото можете да добавяте точки.</div>
-  <div class="check"><b>Проверка</b><ul><li>Надписът се чете, котката и прозорецът се виждат.</li><li>Черното е черно, а не сиво.</li><li>Хистограмата вече се простира по цялата ширина.</li></ul></div>
+  <div class="check"><b>Проверка</b><ul><li>Надписът се чете, котката и прозорецът се виждат.</li><li>Черното е черно, а не сиво.</li><li>Хистограмата вече се простира по цялата ширина.</li><li>Предадени са два файла: <b>.xcf</b> и <b>.png</b>.</li></ul></div>
  </div>
  <div class="sticky">
   <div class="scr ev"><img id="i1" alt="Тъмна нощна снимка на пекарна"><a class="dl" id="d1" download="noshtna_pekarna.png">Изтегли noshtna_pekarna.png</a></div>
+  <div class="scr demo"><b>✅ Така трябва да изглежда готовото</b><div class="nosave"><canvas id="ok1" width="800" height="500" aria-label="Образец на готовото изображение"></canvas></div><p class="small" style="color:#aaa;margin:6px 0 0">Образец за сравнение – не се изтегля. Направете го сами в GIMP.</p></div>
   <div class="scr demo"><b>Опитайте тук какво правят плъзгачите</b><canvas id="lvC" width="400" height="250"></canvas><canvas id="hist" width="400" height="70" style="margin-top:8px;background:#1d1d20"></canvas><p class="small" style="color:#ccc;margin:6px 0 0;font-family:'PT Mono',monospace" id="lvX"></p>
    <div class="ctl"><label>Черна точка <input type="range" id="lvB" min="0" max="60" value="0"><output id="oB">0</output></label><label>Бяла точка <input type="range" id="lvW" min="20" max="255" value="255"><output id="oW">255</output></label><label>Гама <input type="range" id="lvG" min="30" max="300" value="100"><output id="oG">1,00</output></label></div></div>
  </div>
@@ -218,7 +224,7 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
    <li><kbd>Image → Transform → Flip Horizontally</kbd> <span class="tr">(Изображение → Трансформиране → Хоризонтално обръщане)</span>.<em>Защо от менюто <b>Image</b>, а не <b>Layer</b>: Image обръща цялото изображение с всичките му слоеве, а Layer обръща само активния слой. Това ще ви трябва в упражнение 3.</em></li>
    <li>Изберете <b>Measure</b> <span class="tr">(Измерване)</span> <kbd>Shift+M</kbd> и прекарайте линия по ръба на рамката, който трябва да е хоризонтален. После натиснете <b>Straighten</b> <span class="tr">(Изправяне)</span> в настройките на инструмента.<em>GIMP сам изчислява ъгъла. Иначе с инструмента Rotate <span class="tr">(Завъртане)</span> <kbd>Shift+R</kbd> пробвате ъгъла на ръка.</em></li>
    <li>След завъртането в ъглите се появяват празни триъгълници. Изберете <b>Crop</b> <span class="tr">(Изрязване)</span> <kbd>Shift+C</kbd>, начертайте правоъгълник само върху снимката и натиснете <kbd>Enter</kbd>.</li>
-   <li>Запазете: <kbd>File → Export As</kbd> <span class="tr">(Файл → Изнасяне като)</span> → <i>plakat_opraven.png</i>.</li>
+   <li>Запазете работния файл: <kbd>File → Save</kbd> <span class="tr">(Файл → Запазване)</span> → <i>plakat_opraven.xcf</i>. После изнесете готовата картинка: <kbd>File → Export As</kbd> <span class="tr">(Файл → Изнасяне като)</span> → <i>plakat_opraven.png</i>.<em>Предавате и двата файла.</em></li>
   </ol>
   <div class="how"><b>Какво точно прави всяка команда?</b>
    <ul><li><b>Flip Horizontally</b> разменя лявата и дясната страна, все едно гледате снимката в огледало. Пикселът от левия край отива в десния. Нищо не се губи и картината не се размазва.</li>
@@ -226,10 +232,11 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
    <li><b>Measure и Straighten:</b> начертаната линия показва на GIMP кое трябва да е хоризонтално. Програмата измерва ъгъла между линията и истинската хоризонтала и завърта обратно точно толкова.</li>
    <li><b>Crop</b> изхвърля всичко извън правоъгълника. Размерът на изображението в пиксели намалява.</li></ul></div>
   <div class="oops"><b>Чести проблеми</b><ul><li><b>Обърна се само част от картината:</b> бил е избран <kbd>Layer → Transform</kbd> <span class="tr">(Слой → Трансформиране)</span> или е имало активна селекция. Отменете с <kbd>Ctrl+Z</kbd>, махнете селекцията с <kbd>Select → None</kbd> <span class="tr">(Избор → Нищо)</span> и използвайте <kbd>Image → Transform</kbd> <span class="tr">(Изображение → Трансформиране)</span>.</li><li><b>Не намирате Straighten:</b> в по-старите версии го няма. Тогава с инструмента Rotate въведете ъгъла на ръка: 9 или −9.</li></ul></div>
-  <div class="check"><b>Проверка</b><ul><li>Текстът се чете отляво надясно.</li><li>Рамката е успоредна на краищата на снимката.</li><li>Няма празни ъгли.</li></ul></div>
+  <div class="check"><b>Проверка</b><ul><li>Текстът се чете отляво надясно.</li><li>Рамката е успоредна на краищата на снимката.</li><li>Няма празни ъгли.</li><li>Предадени са два файла: <b>.xcf</b> и <b>.png</b>.</li></ul></div>
  </div>
  <div class="sticky">
   <div class="scr ev"><img id="i2" alt="Огледален и наклонен плакат"><a class="dl" id="d2" download="plakat.png">Изтегли plakat.png</a></div>
+  <div class="scr demo"><b>✅ Така трябва да изглежда готовото</b><div class="nosave"><canvas id="ok2" width="800" height="500" aria-label="Образец на готовото изображение"></canvas></div><p class="small" style="color:#aaa;margin:6px 0 0">Образец за сравнение – не се изтегля. Направете го сами в GIMP.</p></div>
   <div class="scr demo"><b>Разликата между обръщане и завъртане</b><div class="flipbox" style="margin-top:10px"><img id="flipImg" alt="Демонстрация на обръщане"></div>
    <div class="btns"><button id="bF" aria-pressed="false">Обърни хоризонтално</button><button id="bR180" aria-pressed="false">Завърти 180°</button><button id="bR9" aria-pressed="false">Завърти 9°</button></div></div>
  </div>
@@ -249,7 +256,7 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
    <li>Изберете слоя на парче и го завъртете: <kbd>Layer → Transform → Rotate 90°</kbd> <span class="tr">(Слой → Трансформиране → Завъртане на 90°)</span> / <kbd>180°</kbd>. За произволен ъгъл използвайте Rotate <span class="tr">(Завъртане)</span> <kbd>Shift+R</kbd>. Огледалното парче оправяте с <kbd>Layer → Transform → Flip Horizontally</kbd> <span class="tr">(Слой → Трансформиране → Хоризонтално обръщане)</span>.<em>Сега е <b>Layer</b>, не Image, защото искате да промените само това парче.</em></li>
    <li>Наредете парчетата с <b>Move</b> <span class="tr">(Преместване)</span> <kbd>M</kbd>. В настройките изберете „Move the active layer“ <span class="tr">(Преместване на активния слой)</span>. Увеличете изгледа и местете с точност до пиксел със стрелките.</li>
    <li>Отдолу добавете бял фон: <kbd>Layer → New Layer</kbd> <span class="tr">(Слой → Нов слой)</span> → Fill with: White <span class="tr">(Запълване с: бяло)</span>. Свалете го най-отдолу със стрелките в прозореца Layers.</li>
-   <li>Запазете като <i>kartichka.xcf</i>, за да останат слоевете, и изнесете като <i>kartichka.png</i>.</li>
+   <li>Запазете като <i>kartichka.xcf</i> <kbd>File → Save</kbd> <span class="tr">(Файл → Запазване)</span>, за да останат слоевете, и изнесете като <i>kartichka.png</i> <kbd>File → Export As</kbd> <span class="tr">(Файл → Изнасяне като)</span>.<em>Предавате и двата файла.</em></li>
   </ol>
   <div class="how"><b>Как да четете прозореца Layers</b>
    <ul><li><b>Редът има значение:</b> слоят най-горе в списъка се вижда най-отпред и закрива тези под него. Затова белият фон трябва да е най-отдолу.</li>
@@ -259,9 +266,10 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
   <div class="how"><b>Защо „Paste as → New Layer“, а не просто Ctrl+V?</b>
    <p>Обикновеното <kbd>Ctrl+V</kbd> поставя „плаващ слой“ (Floating Selection, „плаваща селекция“). Той е временен и трябва или да се закачи за слой с <kbd>Ctrl+H</kbd>, или да се превърне в нов слой с <kbd>Layer → To New Layer</kbd> <span class="tr">(Слой → В нов слой)</span>. „Paste as → New Layer“ прави това наведнъж.</p></div>
   <div class="oops"><b>Чести проблеми</b><ul><li><b>Сбъркахте точка с ласото:</b> <kbd>Backspace</kbd> маха последната точка.</li><li><b>Move мести грешния слой:</b> в настройките на Move изберете „Move the active layer“. Иначе GIMP мести слоя, върху чиито пиксели сте кликнали.</li><li><b>Парчето е с бели или тъмни ръбове:</b> това е част от фона, хванат с ласото. Не пречи, ако е тъмен и после е под белия слой. Иначе изтрийте ръба с гумичка.</li></ul></div>
-  <div class="check"><b>Проверка</b><ul><li>Текстът се чете и няма огледално парче.</li><li>В прозореца Layers има поне 4 слоя.</li><li>Парчетата са плътно едно до друго, без да се застъпват.</li></ul></div>
+  <div class="check"><b>Проверка</b><ul><li>Текстът се чете и няма огледално парче.</li><li>В прозореца Layers има поне 4 слоя.</li><li>Парчетата са плътно едно до друго, без да се застъпват.</li><li>Предадени са два файла: <b>.xcf</b> и <b>.png</b>.</li></ul></div>
  </div>
- <div class="sticky"><div class="scr ev"><img id="i3" alt="Скъсана картичка на три парчета"><a class="dl" id="d3" download="kartichka.png">Изтегли kartichka.png</a></div></div>
+ <div class="sticky"><div class="scr ev"><img id="i3" alt="Скъсана картичка на три парчета"><a class="dl" id="d3" download="kartichka.png">Изтегли kartichka.png</a></div>
+  <div class="scr demo"><b>✅ Така трябва да изглежда готовото</b><div class="nosave"><canvas id="ok3" width="600" height="380" aria-label="Образец на готовото изображение"></canvas></div><p class="small" style="color:#aaa;margin:6px 0 0">Образец за сравнение – не се изтегля. Направете го сами в GIMP.</p></div></div>
 </div></section>
 
 <section class="band ex" id="ex4"><div class="wrap cols">
@@ -277,6 +285,7 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
    <li>Натиснете <kbd>Delete</kbd>. Сивата шахматна дъска означава прозрачност.</li>
    <li><kbd>Select → None</kbd> <span class="tr">(Избор → Нищо)</span> (<kbd>Shift+Ctrl+A</kbd>).</li>
    <li>Проверка за ореол: добавете временен тъмен слой отдолу и увеличете ръба на 400%. После го изтрийте.</li>
+   <li>Запазете работния файл: <kbd>File → Save</kbd> <span class="tr">(Файл → Запазване)</span> → <i>yabalka_bez_fon.xcf</i>.</li>
    <li><kbd>File → Export As</kbd> <span class="tr">(Файл → Изнасяне като)</span> → <b>yabalka_bez_fon.png</b>.<em>Задължително PNG. JPG не поддържа прозрачност и ще запълни фона отново с бяло.</em></li>
   </ol>
   <div class="how"><b>Какво значи Threshold 25?</b>
@@ -286,9 +295,10 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
   <div class="how"><b>Какво е алфа канал?</b>
    <p>Освен R, G и B всеки пиксел получава четвърто число – колко е плътен: 255 е напълно видим, 0 е напълно прозрачен, 128 е полупрозрачен. Без този канал GIMP няма къде да запише „прозрачно“ и затова оцветява с цвета на фона.</p></div>
   <div class="oops"><b>Чести проблеми</b><ul><li><b>Изтри се и ябълката:</b> селекцията е била обърната. Отменете и проверете, че маркираните „мравки“ са около фона.</li><li><b>Вътре в листото остана бяло:</b> бели части, които не се допират до фона, не влизат в селекцията. Кликнете върху тях с <kbd>Shift</kbd>, за да ги добавите.</li></ul></div>
-  <div class="check"><b>Проверка</b><ul><li>Фонът е шахматна дъска.</li><li>На тъмен фон няма светла рамка.</li><li>Листото и дръжката са цели.</li></ul></div>
+  <div class="check"><b>Проверка</b><ul><li>Фонът е шахматна дъска.</li><li>На тъмен фон няма светла рамка.</li><li>Листото и дръжката са цели.</li><li>Предадени са два файла: <b>.xcf</b> и <b>.png</b>.</li></ul></div>
  </div>
- <div class="sticky"><div class="scr ev"><img id="i4" alt="Ябълка на бял фон"><a class="dl" id="d4" download="yabalka.png">Изтегли yabalka.png</a></div></div>
+ <div class="sticky"><div class="scr ev"><img id="i4" alt="Ябълка на бял фон"><a class="dl" id="d4" download="yabalka.png">Изтегли yabalka.png</a></div>
+  <div class="scr demo"><b>✅ Така трябва да изглежда готовото</b><div class="nosave"><canvas id="ok4" width="600" height="400" aria-label="Образец на готовото изображение"></canvas></div><p class="small" style="color:#aaa;margin:6px 0 0">Образец за сравнение – не се изтегля. Направете го сами в GIMP.</p></div></div>
 </div></section>
 
 <section class="band ex" id="ex5"><div class="wrap cols">
@@ -304,7 +314,7 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
    <li>Изберете фоновия слой и маркирайте чашата с Free Select <kbd>F</kbd>. Пак изберете <b>маската</b> на ябълката, като кликнете нейната миниатюра.</li>
    <li>Задайте черен основен цвят и <kbd>Edit → Fill with FG Color</kbd> <span class="tr">(Редактиране → Запълване с основния цвят)</span>. Частта от ябълката зад чашата изчезва. <kbd>Select → None</kbd> <span class="tr">(Избор → Нищо)</span>.<em>Четка с черно или бяло върху маската доизглажда ръба.</em></li>
    <li><b>Сянка:</b> нов прозрачен слой под ябълката → Ellipse Select <span class="tr">(Елипсовидно избиране)</span> <kbd>E</kbd> под нея → запълнете с черно → <kbd>Filters → Blur → Gaussian Blur</kbd> <span class="tr">(Филтри → Размазване → Гаусово размазване)</span> 15–25 px → Opacity <span class="tr">(Непрозрачност)</span> на слоя 40–60%.<em>Сянката „закрепва“ предмета за масата. Без нея ябълката изглежда, че лети.</em></li>
-   <li>Запазете <i>montazh.xcf</i> и изнесете <i>montazh.jpg</i>.</li>
+   <li>Запазете <i>montazh.xcf</i> <kbd>File → Save</kbd> <span class="tr">(Файл → Запазване)</span> и изнесете <i>montazh.png</i> <kbd>File → Export As</kbd> <span class="tr">(Файл → Изнасяне като)</span>.<em>Предавате и двата файла. JPG ще направите отделно в упражнение 6.</em></li>
   </ol>
   <div class="how"><b>Маската – с числа</b>
    <p>Маската е черно-бяла картина, „залепена“ за слоя. За всеки пиксел тя казва колко да се вижда:</p>
@@ -317,10 +327,11 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
    <li><b>Opacity 50%:</b> слоят се вижда наполовина и през сянката прозира дървото на масата. Истинските сенки не са плътно черни.</li>
    <li>Сянката трябва да е от страната, обратна на светлината. Вижте сянката на чашата: тя е точно под нея, значи светлината идва отгоре. Затова и сянката на ябълката слагате под нея, а не встрани.</li></ul></div>
   <div class="oops"><b>Чести проблеми</b><ul><li><b>Рисувате черно, а ябълката не изчезва, а почернява:</b> рисувате върху самия слой, а не върху маската. Кликнете миниатюрата на маската – около нея трябва да има бяла рамка.</li><li><b>Сянката е над ябълката:</b> преместете слоя на сянката под слоя на ябълката в прозореца Layers.</li></ul></div>
-  <div class="check"><b>Проверка</b><ul><li>Ябълката е с реален размер и е <b>зад</b> чашата.</li><li>Има мека сянка върху масата.</li><li>Поне 3 слоя, от които един с маска.</li><li>Предадени са XCF и JPG.</li></ul></div>
+  <div class="check"><b>Проверка</b><ul><li>Ябълката е с реален размер и е <b>зад</b> чашата.</li><li>Има мека сянка върху масата.</li><li>Поне 3 слоя, от които един с маска.</li><li>Предадени са два файла: <b>.xcf</b> и <b>.png</b>.</li></ul></div>
  </div>
  <div class="sticky">
   <div class="scr ev"><img id="i5" alt="Маса с чаша и книги"><a class="dl" id="d5" download="masa.jpg">Изтегли masa.jpg</a></div>
+  <div class="scr demo"><b>✅ Така трябва да изглежда готовото</b><div class="nosave"><canvas id="ok5" width="1000" height="640" aria-label="Образец на готовото изображение"></canvas></div><p class="small" style="color:#aaa;margin:6px 0 0">Образец за сравнение – не се изтегля. Направете го сами в GIMP.</p></div>
   <div class="scr demo"><b>Как работи маската на слоя</b><canvas id="mkC" width="400" height="250"></canvas>
    <div class="btns"><button id="bMask" aria-pressed="false">Маска: изключена</button><button id="bShadow" aria-pressed="false">Сянка: изключена</button></div>
    <p class="small" style="color:#aaa">Ябълката е горен слой. Маската скрива частта, която трябва да е зад чашата.</p></div>
@@ -413,7 +424,7 @@ function poster(){const a=cv(800,500),x=a.getContext('2d');x.fillStyle='#d8d3c6'
  x.fillStyle='#ffd23f';x.beginPath();x.arc(530,170,50,0,7);x.fill();
  x.fillStyle='#fff';x.textAlign='left';x.font='800 50px Manrope, sans-serif';x.fillText('ДОБРЕ',196,180);x.fillText('ДОШЛИ!',196,240);x.font='700 28px Manrope, sans-serif';x.fillText('Кабинет по мултимедия',196,310);x.fillText('стая 21 →',196,352);
  x.fillStyle='#8c8577';x.fillRect(0,440,800,60);
- const c=cv(800,500),y=c.getContext('2d');y.fillStyle='#000';y.fillRect(0,0,800,500);y.translate(400,250);y.rotate(-9*Math.PI/180);y.scale(-1,1);y.drawImage(a,-400,-250);return c}
+ const c=cv(800,500),y=c.getContext('2d');y.fillStyle='#000';y.fillRect(0,0,800,500);y.translate(400,250);y.rotate(-9*Math.PI/180);y.scale(-1,1);y.drawImage(a,-400,-250);poster.orig=a;return c}
 
 /* 3 torn postcard in 3 pieces */
 async function postcard(){try{await document.fonts.load('600 40px Caveat')}catch(e){}
@@ -429,7 +440,7 @@ async function postcard(){try{await document.fonts.load('600 40px Caveat')}catch
  const pc=[piece(null,c1),piece(c1,c2),piece(c2,null)];
  const s=cv(1000,700),t=s.getContext('2d');t.fillStyle='#3a3c40';t.fillRect(0,0,1000,700);
  [[pc[0],100,190,780,470,90,0],[pc[1],300,190,250,200,180,0],[pc[2],500,190,330,520,-15,1]].forEach(([p,cx,cy,px,py,d,m])=>{t.save();t.shadowColor='rgba(0,0,0,.5)';t.shadowBlur=14;t.translate(px,py);t.rotate(d*Math.PI/180);if(m)t.scale(-1,1);t.drawImage(p,-cx,-cy);t.restore()});
- return s.toDataURL('image/png')}
+ postcard.orig=n;return s.toDataURL('image/png')}
 
 /* 4 apple on white */
 function apple(sz){const S=sz||600,c=cv(S,S),x=c.getContext('2d'),k=S/600;x.scale(k,k);if(!sz){x.fillStyle='#fff';x.fillRect(0,0,600,600)}
@@ -479,6 +490,18 @@ fontsReady.then(async()=>{
    x.drawImage(L,0,0);$('#bMask').textContent='Маска: '+(ms.m?'включена':'изключена');$('#bShadow').textContent='Сянка: '+(ms.s?'включена':'изключена');$('#bMask').setAttribute('aria-pressed',!!ms.m);$('#bShadow').setAttribute('aria-pressed',!!ms.s)};
   $('#bMask').onclick=()=>{ms.m^=1;drawMk()};$('#bShadow').onclick=()=>{ms.s^=1;drawMk()};drawMk()};timg.src=T;
  setImg(3,await postcard());
+ /* образци на готовото – само за гледане */
+ {const wm=c=>{const x=c.getContext('2d');x.save();x.translate(c.width/2,c.height/2);x.rotate(-.42);x.font=`800 ${Math.round(c.width/11)}px Manrope, sans-serif`;x.textAlign='center';x.fillStyle='rgba(255,255,255,.28)';x.strokeStyle='rgba(0,0,0,.18)';x.lineWidth=2;
+   for(let k=-1;k<=1;k++){x.fillText('ОБРАЗЕЦ',0,k*c.height*.45);x.strokeText('ОБРАЗЕЦ',0,k*c.height*.45)}x.restore()};
+  const ctx=n=>$('#ok'+n).getContext('2d');
+  ctx(1).drawImage(levels(N,0,30,1.2),0,0);wm($('#ok1'));
+  ctx(2).drawImage(poster.orig,60,40,680,420,0,0,800,500);wm($('#ok2'));
+  {const x=ctx(3);x.fillStyle='#fff';x.fillRect(0,0,600,380);x.drawImage(postcard.orig,0,0);wm($('#ok3'))}
+  {const x=ctx(4);for(let y=0;y<400;y+=20)for(let X=0;X<600;X+=20){x.fillStyle=((X+y)/20)%2?'#cfcfcf':'#9a9a9a';x.fillRect(X,y,20,20)}x.drawImage(apple(400),100,0);wm($('#ok4'))}
+  {const im=new Image();im.onload=()=>{const x=ctx(5);x.drawImage(im,0,0);x.save();x.filter='blur(12px)';x.fillStyle='rgba(0,0,0,.4)';x.beginPath();x.ellipse(565,495,80,15,0,0,7);x.fill();x.restore();
+    const L=cv(1000,640),l=L.getContext('2d');l.drawImage(apple(600),475,280,225,225);l.globalCompositeOperation='destination-out';l.beginPath();l.moveTo(570,300);l.lineTo(730,300);l.lineTo(720,500);l.quadraticCurveTo(650,520,580,500);l.closePath();l.fill();l.beginPath();l.ellipse(650,300,80,17,0,0,7);l.fill();
+    x.drawImage(L,0,0);wm($('#ok5'))};im.src=T}
+  document.querySelectorAll('.nosave').forEach(n=>{n.addEventListener('contextmenu',e=>e.preventDefault());n.addEventListener('dragstart',e=>e.preventDefault())})}
 });
 }
 </script>

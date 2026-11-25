@@ -75,6 +75,11 @@ main>.band+.band{padding-top:0}
 .note-band{background:var(--card);border-radius:12px;max-width:1140px;margin:0 auto 0;padding:12px 16px!important}
 @media(max-width:600px){header.band>.wrap,main>.band>.wrap{padding:14px;border-radius:12px}}
 .tr{color:var(--mute);font-size:.92em}
+.fmt-icons{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:12px;margin:14px 0 20px}
+.fmt-icons figure{margin:0;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 6px 8px}
+.fmt-icons svg{width:58px;height:72px;display:block;margin:0 auto 6px}.fmt-icons figcaption{font-size:13px;line-height:1.3;color:var(--mute)}.fmt-icons figcaption b{display:block;color:var(--ink);font-size:14px}
+.vis-cap{font-size:13px;color:#aaa;margin:4px 0 0}.vis h4{margin:14px 0 4px;font-size:15px;color:#fff}
+.bars{display:grid;gap:6px;margin-top:10px;font-size:13px}.bars div{display:grid;grid-template-columns:6.5em 1fr 5.5em;gap:8px;align-items:center}.bars i{display:block;height:14px;border-radius:4px;background:#e59a52}.bars span{font-family:"PT Mono",monospace;color:#fff;text-align:right}
 @media(max-width:600px){kbd{white-space:normal;overflow-wrap:anywhere}}
 /* Общ футър на сайта – същият като в style.css */
 footer.site-footer{position:relative;z-index:1;clear:both;display:block;margin:64px 0 0;padding:36px 20px 26px;
@@ -205,9 +210,11 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
    <p>Значи ви трябва снимка поне 1181 × 1772 пиксела, около 2 MP.</p></div>
   <p>В GIMP: <kbd>Image → Print Size</kbd> <span class="tr">(Изображение → Размер при печат)</span> променя dpi, без да пипа пикселите. <kbd>Image → Scale Image</kbd> <span class="tr">(Изображение → Мащабиране на изображението)</span> променя броя на пикселите.</p>
  </div>
- <div class="sticky scr"><b>Калкулатор за печат</b>
+ <div class="scr"><b>Калкулатор за печат</b>
   <div class="calc"><label>Ширина, px<input type="number" id="pw" value="4000" min="1"></label><label>Височина, px<input type="number" id="ph" value="3000" min="1"></label><label>dpi<select id="pd"><option>72</option><option>150</option><option selected>300</option><option>600</option></select></label></div>
-  <div class="steps2" id="rSteps"></div><div class="res"><div>Мегапиксели: <span id="rMP"></span></div><div>Размер при печат: <span id="rCM"></span></div><div class="big" id="rVerdict"></div></div></div>
+  <div class="steps2" id="rSteps"></div><div class="res"><div>Мегапиксели: <span id="rMP"></span></div><div>Размер при печат: <span id="rCM"></span></div><div class="big" id="rVerdict"></div></div>
+  <div class="vis"><h4>На екрана: важни са само пикселите</h4><canvas id="visScr" width="480" height="230"></canvas><p class="vis-cap">Правоъгълниците са екраните в мащаб. Оранжевият е вашето изображение. Ако е по-голямо от екрана, екранът показва умалено копие.</p>
+  <h4>На хартия: важен е и dpi</h4><canvas id="visPap" width="480" height="230"></canvas><p class="vis-cap">Листовете са в истински пропорции. Променете dpi и вижте как се променя размерът на отпечатъка.</p></div></div>
 </div></section>
 
 <section class="band ex" id="t4"><div class="wrap cols">
@@ -246,6 +253,7 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
    <tr><td>24 бита</td><td>16 777 216</td><td>обикновена снимка: 8 бита × 3 канала (R, G, B)</td></tr>
    <tr><td>32 бита</td><td>16,7 млн. + прозрачност</td><td>PNG с алфа канал</td></tr>
   </tbody></table>
+  <div class="scr" style="margin-top:14px"><b>Един и същ преход при различна битова дълбочина</b><canvas id="bitC" width="480" height="200" style="margin-top:10px"></canvas><p class="vis-cap">Всяка ивица е преход от черно до бяло. При 1 бит има само 2 нюанса, при 2 бита – 4, при 4 бита – 16, а при 8 бита – 256 и окото вижда плавен преход.</p></div>
   <div class="why"><b>Какво става при малко цветове?</b> Плавните преходи (небе, залез) се превръщат в ивици. Това се нарича <i>постеризация</i> (posterization). В GIMP: <kbd>Colors → Posterize</kbd> <span class="tr">(Цветове → Постеризиране)</span> или <kbd>Image → Mode → Indexed</kbd> <span class="tr">(Изображение → Режим → Индексиран)</span> (палитра до 256 цвята).</div>
   <div class="term"><b>Алфа канал</b> (alpha channel) – четвърти канал, който пази <i>прозрачността</i> на всеки пиксел: от 0 (напълно прозрачен) до 255 (плътен).</div>
  </div>
@@ -279,12 +287,24 @@ footer.site-footer .sf-copy{margin:0;padding-top:26px;text-align:center;color:#a
  </div>
  <div class="sticky scr"><b>Опит: качество на JPG</b><canvas id="jpgC" width="480" height="300" style="margin-top:10px"></canvas>
   <div class="ctl"><label>Качество <input type="range" id="jpgR" min="1" max="100" value="80"><output id="jpgO"></output></label></div>
-  <div class="res"><div>Размер на JPG: <span id="jpgS"></span></div><div>Същата картинка като PNG: <span id="pngS"></span></div><div>Без компресия: <span id="rawS"></span></div></div>
+  <div class="res"><div>Размер на JPG: <span id="jpgS"></span></div><div>Същата картинка като PNG: <span id="pngS"></span></div><div>Без компресия: <span id="rawS"></span></div></div><div class="bars" id="szBars"></div>
   <p class="small" style="color:#aaa">Вдясно изображението е увеличено 2× около надписа, за да се виждат артефактите.</p></div>
 </div></section>
 
 <section class="band ex" id="t7"><div class="wrap">
  <p class="num">Тема 7</p><h2>Графични формати (file formats): кой кога</h2>
+ <p>Форматът се познава по <b>разширението</b> – буквите след точката в името на файла, например <i>ekskurzia.jpg</i>. В папката всеки формат има своя иконка.</p>
+ <div class="fmt-icons">
+  <figure><svg viewBox="0 0 58 72" aria-hidden="true"><path d="M4 2h36l14 14v52a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#d9534f"/><path d="M40 2v12a2 2 0 0 0 2 2h12z" fill="#fff" opacity=".45"/><text x="7" y="22" font-family="Manrope,sans-serif" font-weight="800" font-size="13" fill="#fff">JPG</text><rect x="12" y="34" width="34" height="22" rx="2" fill="#fff"/><circle cx="20" cy="40" r="3" fill="#ffd23f"/><path d="M13 55l10-10 7 6 6-5 10 9z" fill="#d9534f"/></svg><figcaption><b>.jpg</b>снимки</figcaption></figure>
+  <figure><svg viewBox="0 0 58 72" aria-hidden="true"><path d="M4 2h36l14 14v52a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#2f7fd1"/><path d="M40 2v12a2 2 0 0 0 2 2h12z" fill="#fff" opacity=".45"/><text x="7" y="22" font-family="Manrope,sans-serif" font-weight="800" font-size="13" fill="#fff">PNG</text><g fill="#fff"><rect x="12" y="34" width="8" height="8"/><rect x="28" y="34" width="8" height="8"/><rect x="20" y="42" width="8" height="8"/><rect x="36" y="42" width="8" height="8"/><rect x="12" y="50" width="8" height="6"/><rect x="28" y="50" width="8" height="6"/></g></svg><figcaption><b>.png</b>прозрачност, текст</figcaption></figure>
+  <figure><svg viewBox="0 0 58 72" aria-hidden="true"><path d="M4 2h36l14 14v52a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#8e44ad"/><path d="M40 2v12a2 2 0 0 0 2 2h12z" fill="#fff" opacity=".45"/><text x="7" y="22" font-family="Manrope,sans-serif" font-weight="800" font-size="13" fill="#fff">GIF</text><g fill="#fff"><rect x="11" y="36" width="10" height="16" rx="1"/><rect x="24" y="36" width="10" height="16" rx="1" opacity=".75"/><rect x="37" y="36" width="10" height="16" rx="1" opacity=".5"/></g></svg><figcaption><b>.gif</b>анимация, 256 цвята</figcaption></figure>
+  <figure><svg viewBox="0 0 58 72" aria-hidden="true"><path d="M4 2h36l14 14v52a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#16a085"/><path d="M40 2v12a2 2 0 0 0 2 2h12z" fill="#fff" opacity=".45"/><text x="7" y="22" font-family="Manrope,sans-serif" font-weight="800" font-size="11" fill="#fff">WebP</text><rect x="12" y="34" width="34" height="22" rx="2" fill="#fff"/><circle cx="20" cy="40" r="3" fill="#ffd23f"/><path d="M13 55l10-10 7 6 6-5 10 9z" fill="#16a085"/></svg><figcaption><b>.webp</b>модерен за уеб</figcaption></figure>
+  <figure><svg viewBox="0 0 58 72" aria-hidden="true"><path d="M4 2h36l14 14v52a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#7f8c8d"/><path d="M40 2v12a2 2 0 0 0 2 2h12z" fill="#fff" opacity=".45"/><text x="7" y="22" font-family="Manrope,sans-serif" font-weight="800" font-size="13" fill="#fff">BMP</text><g fill="#fff"><rect x="13" y="34" width="10" height="10"/><rect x="24" y="34" width="10" height="10" opacity=".6"/><rect x="35" y="34" width="10" height="10"/><rect x="13" y="45" width="10" height="10" opacity=".6"/><rect x="24" y="45" width="10" height="10"/><rect x="35" y="45" width="10" height="10" opacity=".6"/></g></svg><figcaption><b>.bmp</b>стар, голям файл</figcaption></figure>
+  <figure><svg viewBox="0 0 58 72" aria-hidden="true"><path d="M4 2h36l14 14v52a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#b9770e"/><path d="M40 2v12a2 2 0 0 0 2 2h12z" fill="#fff" opacity=".45"/><text x="7" y="22" font-family="Manrope,sans-serif" font-weight="800" font-size="11" fill="#fff">TIFF</text><rect x="17" y="32" width="24" height="9" fill="#fff"/><rect x="12" y="40" width="34" height="12" rx="2" fill="#fff"/><rect x="18" y="47" width="22" height="10" fill="#fff" stroke="#888" stroke-width="1"/></svg><figcaption><b>.tiff</b>печат, архив</figcaption></figure>
+  <figure><svg viewBox="0 0 58 72" aria-hidden="true"><path d="M4 2h36l14 14v52a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#34495e"/><path d="M40 2v12a2 2 0 0 0 2 2h12z" fill="#fff" opacity=".45"/><text x="7" y="22" font-family="Manrope,sans-serif" font-weight="800" font-size="13" fill="#fff">RAW</text><rect x="12" y="38" width="34" height="18" rx="3" fill="#fff"/><rect x="20" y="34" width="10" height="5" rx="1" fill="#fff"/><circle cx="29" cy="47" r="6" fill="#34495e"/><circle cx="29" cy="47" r="3" fill="#fff"/></svg><figcaption><b>.raw</b>от фотоапарата</figcaption></figure>
+  <figure><svg viewBox="0 0 58 72" aria-hidden="true"><path d="M4 2h36l14 14v52a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#a65a1c"/><path d="M40 2v12a2 2 0 0 0 2 2h12z" fill="#fff" opacity=".45"/><text x="7" y="22" font-family="Manrope,sans-serif" font-weight="800" font-size="13" fill="#fff">XCF</text><g fill="#fff"><path d="M29 33l17 7-17 7-17-7z"/><path d="M12 46l17 7 17-7" fill="none" stroke="#fff" stroke-width="2.5"/></g></svg><figcaption><b>.xcf</b>работен файл на GIMP</figcaption></figure>
+  <figure><svg viewBox="0 0 58 72" aria-hidden="true"><path d="M4 2h36l14 14v52a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#e67e22"/><path d="M40 2v12a2 2 0 0 0 2 2h12z" fill="#fff" opacity=".45"/><text x="7" y="22" font-family="Manrope,sans-serif" font-weight="800" font-size="13" fill="#fff">SVG</text><path d="M13 54C20 34 38 34 45 54" fill="none" stroke="#fff" stroke-width="2.5"/><g fill="#fff" stroke="#e67e22" stroke-width="1"><rect x="10" y="51" width="6" height="6"/><rect x="42" y="51" width="6" height="6"/><rect x="26" y="36" width="6" height="6"/></g></svg><figcaption><b>.svg</b>векторен</figcaption></figure>
+ </div>
  <table class="stack"><thead><tr><th>Формат</th><th>Вид</th><th>Компресия</th><th>Прозрачност</th><th>Анимация</th><th>Кога се използва</th></tr></thead><tbody>
   <tr><td>JPG / JPEG</td><td>растерен</td><td>със загуба</td><td>не</td><td>не</td><td>Снимки за уеб, телефон, имейл</td></tr>
   <tr><td>PNG</td><td>растерен</td><td>без загуба</td><td>да (алфа)</td><td>не</td><td>Лога без фон, екранни снимки, текст, графики</td></tr>
@@ -405,7 +425,18 @@ fontsReady.then(()=>{
   const cw=w/d*2.54,ch=h/d*2.54,f2=v=>(Math.round(v*100)/100).toLocaleString('bg-BG'),f1=v=>v.toFixed(1).replace('.',',');
   $('#rSteps').innerHTML=`<div>Ширина: <span class="eq">${w} ÷ ${d} = ${f2(w/d)} инча × 2,54 = ${f1(cw)} см</span></div><div>Височина: <span class="eq">${h} ÷ ${d} = ${f2(h/d)} инча × 2,54 = ${f1(ch)} см</span></div>`;
   $('#rCM').textContent=`${cw.toFixed(1).replace('.',',')} × ${ch.toFixed(1).replace('.',',')} см`;
-  $('#rVerdict').textContent=d>=300?(cw>=21?'Става за A4 и по-голямо':'Отпечатък с високо качество'):d>=150?'Става за плакат, гледан отдалеч':'Само за екран'};
+  $('#rVerdict').textContent=d>=300?(cw>=21?'Става за A4 и по-голямо':'Отпечатък с високо качество'):d>=150?'Става за плакат, гледан отдалеч':'Само за екран';
+  /* screen visual */
+  {const x=$('#visScr').getContext('2d'),S=[['HD 1280×720',1280,720],['Full HD 1920×1080',1920,1080],['4K 3840×2160',3840,2160]],mx=Math.max(3840,w),my=Math.max(2160,h),k=Math.min(460/mx,210/my);
+   x.clearRect(0,0,480,230);x.font='12px Manrope, sans-serif';x.fillStyle='rgba(229,154,82,.35)';x.fillRect(10,220-h*k,w*k,h*k);x.strokeStyle='#e59a52';x.lineWidth=2;x.strokeRect(10,220-h*k,w*k,h*k);
+   S.forEach(([n,a,b],i)=>{x.strokeStyle=['#9ad1ff','#7ee0b0','#c9a8ff'][i];x.lineWidth=1.5;x.strokeRect(10,220-b*k,a*k,b*k);x.fillStyle=x.strokeStyle;x.fillText(n,14,220-b*k+14)});
+   x.fillStyle='#e59a52';x.font='700 12px Manrope, sans-serif';x.fillText(`изображение ${w}×${h}`,Math.min(10+w*k,470)-x.measureText(`изображение ${w}×${h}`).width-4,220-h*k-4<12?14:220-h*k-4)}
+  /* paper visual */
+  {const x=$('#visPap').getContext('2d'),P=[['снимка 15×10',15,10],['A4 29,7×21',29.7,21],['A3 42×29,7',42,29.7]],mx=Math.max(42,cw),my=Math.max(29.7,ch),k=Math.min(460/mx,210/my);
+   x.clearRect(0,0,480,230);x.font='12px Manrope, sans-serif';
+   P.forEach(([n,a,b],i)=>{x.fillStyle=['#f4f1e8','#e9e4d8','#ddd6c6'][i];x.globalAlpha=.16;x.fillRect(10,220-b*k,a*k,b*k);x.globalAlpha=1;x.strokeStyle='#ddd';x.lineWidth=1;x.strokeRect(10,220-b*k,a*k,b*k);x.fillStyle='#ddd';x.fillText(n,10+a*k-x.measureText(n).width-4,220-b*k+14)});
+   x.fillStyle='rgba(229,154,82,.45)';x.fillRect(10,220-ch*k,cw*k,ch*k);x.strokeStyle='#e59a52';x.lineWidth=2;x.strokeRect(10,220-ch*k,cw*k,ch*k);
+   x.fillStyle='#fff';x.font='700 12px Manrope, sans-serif';x.fillText(`отпечатък ${f1(cw)}×${f1(ch)} см при ${d} dpi`,14,216)}};
  ['pw','ph','pd'].forEach(id=>$('#'+id).addEventListener('input',calc));calc();
  /* file size calc */
  const fcalc=()=>{const w=Math.max(1,Math.round(+$('#fw').value||1)),h=Math.max(1,Math.round(+$('#fh').value||1)),b=+$('#fb').value,n=v=>v.toLocaleString('bg-BG'),px=w*h,bits=px*b,by=bits/8;
@@ -425,8 +456,11 @@ fontsReady.then(()=>{
  /* jpg */
  const jc=$('#jpgC').getContext('2d'),png=L.toDataURL('image/png'),bytes=u=>Math.round((u.length-u.indexOf(',')-1)*3/4);
  $('#pngS').textContent=fmtB(bytes(png));$('#rawS').textContent=fmtB(480*300*3);
- const jpg=()=>{const q=+$('#jpgR').value;$('#jpgO').textContent=q;const u=L.toDataURL('image/jpeg',q/100);$('#jpgS').textContent=fmtB(bytes(u));const im=new Image();im.onload=()=>{jc.imageSmoothingEnabled=false;jc.drawImage(im,0,0,240,300,0,0,240,300);jc.drawImage(im,10,150,120,150,240,0,240,300);jc.fillStyle='rgba(0,0,0,.6)';jc.fillRect(244,4,60,22);jc.fillStyle='#fff';jc.font='13px "PT Mono",monospace';jc.fillText('2× лупа',248,20)};im.src=u};
+ const jpg=()=>{const q=+$('#jpgR').value;$('#jpgO').textContent=q;const u=L.toDataURL('image/jpeg',q/100);$('#jpgS').textContent=fmtB(bytes(u));{const raw=480*300*3,pn=bytes(png),jp=bytes(u);$('#szBars').innerHTML=[['Без компресия',raw],['PNG',pn],['JPG '+q,jp]].map(([n,v])=>`<div><b style="font-weight:600;color:#ccc">${n}</b><i style="width:${Math.max(1,v/raw*100)}%"></i><span>${fmtB(v)}</span></div>`).join('')}const im=new Image();im.onload=()=>{jc.imageSmoothingEnabled=false;jc.drawImage(im,0,0,240,300,0,0,240,300);jc.drawImage(im,10,150,120,150,240,0,240,300);jc.fillStyle='rgba(0,0,0,.6)';jc.fillRect(244,4,60,22);jc.fillStyle='#fff';jc.font='13px "PT Mono",monospace';jc.fillText('2× лупа',248,20)};im.src=u};
  $('#jpgR').addEventListener('input',jpg);jpg();
+ /* bit depth bands */
+ {const x=$('#bitC').getContext('2d');[[1,'1 бит · 2 нюанса'],[2,'2 бита · 4 нюанса'],[4,'4 бита · 16 нюанса'],[8,'8 бита · 256 нюанса']].forEach(([b,t],i)=>{const n=2**b,y=i*50;for(let X=0;X<480;X++){const v=Math.round(Math.floor(X/480*n)/(n-1)*255);x.fillStyle=`rgb(${v},${v},${v})`;x.fillRect(X,y,1,42)}
+  x.font='700 13px Manrope, sans-serif';const w=x.measureText(t).width;x.fillStyle='rgba(0,0,0,.65)';x.fillRect(6,y+10,w+12,22);x.fillStyle='#fff';x.fillText(t,12,y+26)})}
  /* photo-like raster vs flat vector */
  {const W=480,H=300,HZ=192,rr=rnd(11),P=[];for(let i=0;i<512;i++)P.push(rr());
   const n1=x=>{const i=Math.floor(x),t=x-i,u=t*t*(3-2*t);return P[i&511]*(1-u)+P[(i+1)&511]*u};
