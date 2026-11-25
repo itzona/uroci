@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="bg"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Кризисен щаб – екипна игра</title>
+<style>
+:root{--ink:#0f1b2d;--bg:#eef2f6;--red:#e5383b;--ok:#0d9488;--hi:#ffd166;--line:#c5d0dc}
+*{box-sizing:border-box}
+body{margin:0;font:17px/1.55 "Segoe UI",Trebuchet MS,sans-serif;color:var(--ink);background:var(--bg)}
+.w{max-width:1280px;margin:auto;padding:14px 22px}
+header{background:var(--ink);color:#fff;padding:12px 16px;border-radius:6px;border-bottom:5px solid var(--red);display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:center}
+h1{margin:0;font-size:1.45rem;letter-spacing:.3px}h2{margin:0 0 6px}h3{margin:12px 0 4px}
+.sc{font-weight:700;background:var(--hi);color:var(--ink);padding:3px 12px;border-radius:4px}
+button{font:inherit;cursor:pointer;border:1px solid var(--ink);background:#fff;color:var(--ink);border-radius:4px;padding:5px 12px}
+button:hover{background:var(--hi)}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--red);outline-offset:1px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.tabs button.on{background:var(--ink);color:#fff}
+.go{background:var(--red);color:#fff;border-color:var(--red);font-weight:700}.go:hover{background:#b92b2d;color:#fff}
+.card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--red);border-radius:6px;padding:20px 30px;margin:12px 0}
+.d{background:#fff6dc;border-left:4px solid var(--hi);padding:8px 12px;font-size:.93rem;margin:8px 0}
+.it{border-top:1px solid var(--line);padding-top:10px;margin-top:12px}
+.it>b{display:block}.pp{float:right;font-size:.85rem;background:var(--bg);padding:0 8px;border-radius:4px}
+input[type=text],input[type=number],select,textarea{font:inherit;padding:5px 8px;border:1px solid #8a9bb0;border-radius:4px;background:#fff;color:var(--ink)}
+textarea{width:100%;min-height:70px}input[type=number]{width:64px}
+.ch{display:inline-block;background:#dbe5f0;border-radius:4px;padding:1px 9px;margin:2px;font-size:.88rem}
+.ok{color:var(--ok);font-weight:700}.no{color:var(--red);font-weight:700}
+label{margin-right:12px;display:inline-block}
+.bar{height:9px;background:var(--bg);border-radius:4px;min-width:90px}.bar i{display:block;height:100%;background:var(--ok);border-radius:4px}
+table{border-collapse:collapse;max-width:100%}td,th{border:1px solid var(--line);padding:4px 8px;text-align:left}
+.t{background:#e6f6f4;border:2px dashed var(--ok);padding:8px 12px;margin-top:12px}
+.big{font-size:1.1rem;font-weight:700}
+.tmr{font-weight:700;font-variant-numeric:tabular-nums}
+details{margin:8px 0}summary{cursor:pointer;font-weight:700}
+header{background:linear-gradient(120deg,#0f1b2d,#1d3557)}
+.sir{display:inline-block;animation:sr 1s infinite alternate}@keyframes sr{to{transform:scale(1.25) rotate(-12deg);filter:drop-shadow(0 0 8px #e5383b)}}
+.pg{height:10px;background:#cfd9e4;border-radius:6px;margin:8px 0;overflow:hidden}.pg i{display:block;height:100%;background:linear-gradient(90deg,var(--ok),var(--hi),var(--red));transition:width .6s}
+.gr{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:10px 0}.bx{background:#f4f8fc;border:2px solid var(--line);border-radius:10px;padding:10px 14px}
+.ice>div{padding:10px 14px}.ice>div:first-child{background:#e8f4ff;border-radius:10px 10px 0 0}.ice>div:last-child{background:#1d4e89;color:#fff;border-radius:0 0 10px 10px}
+.st{display:flex;align-items:flex-end;gap:6px;margin:10px 0}.st div{flex:1;background:var(--ink);color:#fff;border-radius:8px 8px 0 0;padding:8px;font-size:.88rem}
+.bb{padding:8px 12px;border-radius:14px;background:#e9eef5;margin:6px 0;max-width:85%}.bb.me{background:#d7f3ee;margin-left:auto}
+.cf{position:fixed;top:-30px;font-size:26px;pointer-events:none;animation:fl 2.4s linear forwards;z-index:9}@keyframes fl{to{transform:translateY(110vh) rotate(540deg)}}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hint{font-size:.88rem;color:#4a5b70;margin:4px 0}
+/* айсберг */
+.ib{display:grid;grid-template-columns:minmax(220px,320px) 1fr;gap:18px;align-items:start;margin:10px 0}
+.ib svg{width:100%;height:auto;display:block}.ib .hot{cursor:pointer;transition:filter .2s}.ib .hot:hover,.ib .hot.on{filter:drop-shadow(0 0 7px #ffd166)}.ib .hot:focus{outline:none}.ib .hot:focus-visible polygon{stroke:var(--red);stroke-width:4}
+.ibt{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}.ibt button.on{background:var(--ink);color:#fff}
+.ex{border-left:5px solid #9cc3e6;background:#f4f8fc;border-radius:6px;padding:8px 12px;margin:8px 0;animation:pop .35s both}.ex.dn{border-color:#1d4e89;background:#eaf1fa}
+.ex .n{display:inline-block;min-width:24px;text-align:center;background:var(--ink);color:#fff;border-radius:12px;font-size:.8rem;margin-right:6px}
+/* обръщащи се карти */
+.fcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:10px 0}
+.fc{perspective:1000px;background:none!important;border:0;padding:0;height:290px;text-align:left;color:var(--ink)}
+.fc .in{display:block;position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}.fc.fl .in{transform:rotateY(180deg)}
+.fc .fr,.fc .bk{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;padding:12px 14px;border:2px solid var(--line)}
+.fc .fr{background:#f4f8fc;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border-top-width:6px}
+.fc .fr .ico{font-size:2.6rem}.fc .fr small{color:#4a5b70;margin-top:10px}
+.fc .bk{background:var(--ink);color:#fff;transform:rotateY(180deg);font-size:.9rem;overflow:auto}
+.fc .bk span{display:block;margin:6px 0;padding:5px 9px;background:rgba(255,255,255,.12);border-radius:10px 10px 10px 2px}
+/* Тъкман */
+.st button{flex:1;border:0;color:#fff;border-radius:8px 8px 0 0;padding:8px;font-size:.88rem;text-align:left;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.st button:hover{filter:brightness(1.2)}.st button.on{transform:translateY(-6px);box-shadow:0 0 0 4px var(--hi)}
+.tkp{border:2px solid var(--line);border-radius:10px;padding:10px 14px;background:#f4f8fc;animation:pop .35s both}
+.tkp .rk{background:#fde2e2;border-left:4px solid var(--red);padding:6px 10px;margin:6px 0;border-radius:4px}
+.tkp .hp{background:#e6f6f4;border-left:4px solid var(--ok);padding:6px 10px;margin:6px 0;border-radius:4px}
+/* конструктор на аз-послание */
+.az{background:#f4f8fc;border:2px solid var(--line);border-radius:10px;padding:12px 16px;margin:12px 0}
+.az .acc{background:#fde2e2;border-radius:14px;padding:8px 12px;display:inline-block;margin:4px 0}
+.az select{max-width:100%;margin:3px 0}.az .row{margin:6px 0}
+.az .pv{background:#d7f3ee;border-radius:14px;padding:10px 14px;margin:8px 0;font-style:italic}
+.az .pv u{text-decoration:none;border-bottom:2px dashed var(--ok);font-style:normal;font-weight:600}
+.qk .fb{display:block;margin-top:4px;font-weight:400}
+/* триъгълник */
+.tri{display:grid;grid-template-columns:minmax(240px,380px) 1fr;gap:16px;align-items:start}
+.tri svg{width:100%;height:auto;display:block}.tri svg text{font-weight:700}
+.tbtn{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.tbtn button.on,.tfx button.on{background:var(--ink);color:#fff}
+.tfx button{display:block;width:100%;text-align:left;margin:5px 0}
+/* мини-тест */
+.op{display:block;width:100%;text-align:left;margin:5px 0}
+.oy{background:#d7f3ee!important;border-color:var(--ok);font-weight:700}.ox{background:#fde2e2!important;border-color:var(--red)}
+.op:disabled{cursor:default;color:var(--ink)}
+.badge{display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,#ffd166,#f4a261);border:3px solid var(--ink);border-radius:50px;padding:10px 24px;font-weight:700;font-size:1.15rem;animation:pop .5s both}
+.badge b{font-size:2rem}.hb{background:var(--hi);color:var(--ink);border-radius:4px;padding:3px 10px;font-weight:700;margin-right:6px}
+/* симулатор */
+.spr{display:flex;align-items:center;margin:12px 0;overflow-x:auto;padding:4px 2px}
+.spr button{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;border:0;background:none!important;padding:2px 4px;font-size:.8rem;max-width:110px;text-align:center}
+.spr button i{font-style:normal;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#cfd9e4;color:var(--ink);font-weight:700;margin-bottom:3px;border:3px solid #cfd9e4;transition:.3s}
+.spr button.dn i{background:var(--ok);border-color:var(--ok);color:#fff}.spr button.cu i{background:var(--red);border-color:var(--hi);color:#fff;transform:scale(1.15)}
+.spr .ln{flex:1;min-width:14px;height:4px;background:#cfd9e4;border-radius:2px}.spr .ln.dn{background:var(--ok)}
+.sim{display:grid;grid-template-columns:1fr 1.25fr;gap:14px;align-items:start}
+.sst{background:#f4f8fc;border:2px solid var(--line);border-radius:10px;padding:12px 16px;animation:pop .35s both}
+.sst .who{font-size:.8rem;font-weight:700;color:#4a5b70;margin-top:8px}
+.brd{background:#1d3557;border-radius:10px;padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;color:var(--ink)}
+.brd>div{background:#fffdf3;border-radius:6px;padding:7px 10px;font-size:.88rem}.brd .w2{grid-column:1/-1}
+.brd .e{background:rgba(255,255,255,.1);color:#cfd9e4;border:2px dashed #5b7391;text-align:center}
+.brd .nw{animation:pop .5s both;box-shadow:0 0 0 3px var(--hi)}.brd h4{margin:0 0 4px;font-size:.92rem}
+.brd ul{margin:0;padding-left:18px}.brd table{font-size:.85rem;width:100%;background:#fff}.brd td,.brd th{padding:3px 6px}
+.brd td.win{background:#d7f3ee;font-weight:700}.brd .mc{transition:background .3s}.brd .mc.hl{background:var(--hi)}
+.stamp{display:inline-block;border:3px solid var(--ok);color:var(--ok);font-weight:800;padding:2px 10px;border-radius:6px;transform:rotate(-6deg);animation:pop .5s both}
+@media(max-width:820px){.ib,.tri,.sim{grid-template-columns:1fr}.brd{grid-template-columns:1fr}}
+@media(max-width:560px){.spr .ln{min-width:4px}.spr{padding:4px 0}.spr button{flex:1 1 0;min-width:0;font-size:.62rem;padding:2px 0;overflow-wrap:anywhere}.spr button i{width:28px;height:28px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.tabs,header button,.go,.nop{display:none}}
+</style></head><body><div class="w">
+<header><h1><span class="sir">🚨</span> Кризисен щаб</h1><span><span id="bdg"></span><span class="sc" id="tot"></span></span></header><div class="pg nop"><i id="pgb" style="width:0"></i></div>
+<div class="card nop" style="margin:10px 0"><b>Екип:</b> <input type="text" placeholder="Име 1" oninput="nm(0,this.value)"> <input type="text" placeholder="Име 2" oninput="nm(1,this.value)"> <input type="text" placeholder="Име 3" oninput="nm(2,this.value)"> <input type="text" placeholder="Име 4" oninput="nm(3,this.value)"> <button onclick="dice()">🎲 Тегли роли</button></div>
+<div class="tabs" id="tabs"></div><div id="m"></div></div>
+<script>
+const $=s=>document.querySelector(s),r5=x=>Math.round(x*2)/2;
+const RL=['Ръководител','Анализатор','Говорител','Секретар-скептик'],W=[3,3,2,1],CR=['Полезност','Възможност за срока','Интересно','Лекота на изработка'],ID=['Викторина','Дежурства'];
+const PN=['Мария','Иво','Деси','Калоян'],TK=[['Съдържание',6],['Тестване',5],['Презентация',5],['Дизайн',4]],H=[14,3,2,1];
+const S=[
+{t:'Файлът изчезна',e:'💾',min:8,
+ s:'Проектът е сайт за училищен фестивал със срок петък. В четвъртък сутрин откривате, че общият файл е стар и работата от два дни липсва. Ники: „Не съм аз!“. Дара: „Все някой го е презаписал!“.',
+ d:'Вт 18:10 – Дара качва версия 3 · Ср 21:40 – Ники качва версия 4 от стар файл на своя компютър · В „Архив“ има копие от вторник · Мария има снимки на екрана от сряда.',
+ a:'Факти: 1, 3, 5. Мнения: 2, 4, 6. Цел напр.: „Сайтът да е готов до петък с работата от двата дни.“ Връщане: копие от вторник + промените по снимките на Мария + нова версия. Правило: дата и инициали в името на файла, теглим последната версия, копие всяка вечер. Идея: проблемът е в процеса, не в човека.',
+ it:[{k:'cls',p:3,q:'1. Факт или мнение? Отдели ги.',l:[['Версия 4 е качена в сряда в 21:40','f'],['Ники е небрежен','m'],['В „Архив“ има копие от вторник','f'],['Все някой го е презаписал','m'],['Мария има снимки на екрана от сряда','f'],['Дара винаги работи накрая','m']]},
+ {k:'txt',p:2,q:'2. Обща цел в едно изречение – БЕЗ имена на виновни.',min:15,no:['Ники','Дара'],ex:'Сайтът да е готов до петък с работата от двата дни.'},
+ {k:'multi',p:3,q:'3. Как връщате загубеното? Отбележи верните стъпки.',o:['Отваряме копието от вторник от „Архив“','Повтаряме промените от сряда по снимките на Мария','Ники поправя всичко сам, за наказание','Започваме проекта отначало','Записваме резултата като нова версия'],c:[0,1,4]},
+ {k:'txt',p:2,q:'4. Едно правило, което пази от повторение.',min:15,ex:'Преди работа всеки тегли последната версия, името на файла е с дата и инициали, а всяка вечер се прави копие в „Архив“.'}]},
+{t:'Неравният товар',e:'⚖️',min:8,
+ s:'До срока има 4 дни. Часовете досега са: Мария 14, Иво 3, Деси 2, Калоян 1. Мария е изтощена и ядосана. Скрити факти: Иво е бил болен 3 дни; Деси не знае коя е нейната задача; Калоян е чакал Мария да му каже какво да прави.',
+ d:'Оставащи задачи: Съдържание 6 ч, Тестване 5 ч, Презентация 5 ч, Дизайн 4 ч (общо 20 ч).',
+ a:'Дялове: 70%, 15%, 10%, 5%. Първопричина: няма ясно разпределение и ежедневна проверка. Пример: Иво – Съдържание, Деси – Тестване, Калоян – Презентация, Мария – Дизайн; Мария пада от 70% на 45% (18 от 40 ч). Правило: задача с име и срок на видимо място, 5-минутна проверка всеки ден, при отсъствие задачата се прехвърля същия ден.',
+ it:[{k:'pct',p:2,q:'1. Какъв процент от първите 20 часа е направил всеки?'},
+ {k:'pick',p:2,q:'2. Каква е първопричината?',o:['Иво, Деси и Калоян са мързеливи','Няма ясно разпределение и ежедневна проверка','Мария работи твърде бързо'],c:1},
+ {k:'asg',p:4,q:'3. Разпредели оставащите задачи. Цел: всеки има задача и Мария да не е над 50% от всички 40 часа.'},
+ {k:'txt',p:2,q:'4. Правило, което пази от повторение.',min:15,ex:'Всяка задача е с име и срок на видимо място, всеки ден правим 5-минутна проверка, а при отсъствие задачата се прехвърля още същия ден.'}]},
+{t:'Две идеи, един срок',e:'🧪',min:10,
+ s:'До фестивала има 3 дни. Половината екип иска викторина по информатика, другата половина – приложение за график на дежурствата. Решете с матрица, а не с надвикване.',
+ d:'Теглата са: полезност ×3, възможност за срока ×3, интересно ×2, лекота на изработка ×1. Оценките са от 1 до 5 (5 е най-добре).',
+ a:'Примерни оценки – Викторина: 3, 5, 4, 5 → 37; Дежурства: 5, 2, 3, 2 → 29. С полезност ×4: 40 срещу 34, решението е устойчиво. Оценките може да са други – проверявай дали сумите са верни и решението е обосновано. „Губещата“ идея става бъдещо разширение или хората ѝ помагат в избраната.',
+ it:[{k:'mx',p:4,q:'1. Оцени двете идеи. Сумите се смятат сами.'},
+ {k:'str',p:2,q:'2. Тест за устойчивост: променя ли се победителят, ако едно тегло стане с 1 по-голямо или по-малко?'},
+ {k:'pick',p:2,q:'3. Какво правите с „губещата“ идея?',o:['Дават ѝ роля в избраната идея или я пазят като разширение','Забравят я','Гласуват пак, докато спечели тяхната'],c:0},
+ {k:'txt',p:2,q:'4. Запиши решението: кой, какво, до кога.',min:20,ex:'Избираме викторината. Ръководителят разпределя задачите днес, въпросите са готови до сряда, дизайнът до четвъртък, а в петък тестваме заедно. Идеята с дежурствата остава за по-късно.'}]},
+{t:'Мълчаливият',e:'🤐',min:8,
+ s:'Милен е най-добрият програмист, но на срещите мълчи. Стефан говори през цялото време и екипът винаги приема неговите идеи. Последните две негови идеи се оказаха трудни и проектът се бави. Милен казва тихо на секретаря: „Имах по-проста идея, но никой не ме питаше.“',
+ d:'Подсказка: мълчанието също е сигнал. Гледай какво липсва в екипа – не кой е виновен.',
+ a:'Етап: бурна фаза със скрит конфликт. Верни правила: минута мълчаливо писане, питане поименно, идеи без имена. Добро „аз-послание“: „Аз се притеснявам, че пропускаме идеи, и искам да чуем всички.“ Провери дали екипът наистина е разиграл срещата.',
+ it:[{k:'pick',p:2,q:'1. На кой етап е екипът?',o:['Формиране – всички се опознават','Бурна фаза – конфликтът е скрит','Изпълнение – всичко върви гладко'],c:1},
+ {k:'multi',p:4,q:'2. Кои правила помагат? Отбележи.',o:['1 минута мълчаливо писане на идеи, после всеки по ред','Ръководителят пита всеки поименно','Идеите се записват без имена и се оценяват по критерии','Говори най-опитният, останалите се съгласяват','Който мълчи, значи е съгласен'],c:[0,1,2]},
+ {k:'txt',p:2,q:'3. Секретарят-скептик казва на Стефан „аз-послание“ (започва с „Аз…“).',min:15,ex:'Аз се притеснявам, че пропускаме идеи, и искам да чуем всички, преди да решим.'},
+ {k:'chk',p:2,q:'4. Разиграйте 3-минутна среща по новите правила.',t:'Разиграхме я'}]},
+{t:'Обратът',e:'🌪️',min:8,
+ s:'Задачите са: Дизайн (Мария), Тестване (Иво), Съдържание – 6 ч (Деси), Презентация (Калоян). Учителят обявява: Деси напуска екипа до края на деня. Остават 2 дни.',
+ d:'Тройно ограничение: обхват, срок, ресурси. Когато ресурсите намалеят, нещо друго трябва да се промени.',
+ a:'Съдържанието се дели между двама–трима; ако не стига времето, намаляват обхвата. Етап: връща се към бурна фаза (или формиране). Първият час: списък на задачите на Деси, вземат файловете ѝ, ново разпределение със срокове. Благодарността е лична и конкретна.',
+ it:[{k:'multi',p:4,q:'1. Какво правите със задачите на Деси?',o:['Делим съдържанието между двама–трима','Ако времето не стига, намаляваме обхвата','Качваме всичко на Мария – тя е най-бърза','Оставяме задачата без отговорник'],c:[0,1]},
+ {k:'pick',p:2,q:'2. Какво става с екипа според Тъкман?',o:['Връща се към бурна фаза – нови роли и ново разпределение','Остава в изпълнение – нищо не се променя'],c:0},
+ {k:'multi',p:2,q:'3. Какво правите през първия час?',o:['Списък на задачите на Деси','Вземаме файловете ѝ още днес','Чакаме до сряда да видим какво ще стане','Не казваме на никого'],c:[0,1]},
+ {k:'txt',p:2,q:'4. Напиши по едно изречение благодарност към Деси за работата ѝ.',min:15,ex:'Деси, благодарим ти за свършеното съдържание – то ще ни помогне много и ще го довършим заедно.'}]},
+{t:'Чатът гори',e:'💬',min:8,
+ s:'Два дни преди срока груповият чат е в пламъци. Прочетете съобщенията и помогнете на екипа да се успокои, преди да е станало късно.',
+ d:'Фактът може да се провери. Мнението е оценка или усещане. Обвинението говори за човека („ти винаги…“).',
+ a:'Факти: 1 и 4. Мнения: 3 и 6. Обвинения: 2 и 5. Най-силно разпалва пожара съобщение 2. Аз-послание: „Аз се притеснявам, че закъсняваме с тестването, и искам да разберем как да помогнем.“ Първо съобщение на ръководителя: спира спора, казва факт и обща цел.',
+ it:[{k:'cht',p:3,q:'1. Какво е всяко съобщение? Отбележи.',l:[['Дара','Снощи качих версия 5, виж папката.','f'],['Ники','Ти винаги всичко разваляш, Дара!','b'],['Мими','Според мен дизайнът е грозен.','m'],['Тео','До петък остават 2 дни, а тестването още не е започнало.','f'],['Дара','Ники е мързелив и затова закъсняваме.','b'],['Мими','Никой не слуша никого – този екип е безнадежден.','m']]},
+ {k:'pick',p:2,q:'2. Кое съобщение най-много разпалва пожара?',o:['„Снощи качих версия 5, виж папката.“','„Ти винаги всичко разваляш, Дара!“','„Според мен дизайнът е грозен.“'],c:1},
+ {k:'txt',p:3,q:'3. Преправи съобщение 5 като „аз-послание“ – без обвинение.',min:20,no:['мързелив','виновен'],ex:'Аз се притеснявам, че закъсняваме с тестването, и искам да разберем какво пречи и как да помогнем.'},
+ {k:'txt',p:2,q:'4. Първото съобщение на ръководителя, което успокоява чата (спри, факт, цел).',min:20,ex:'Спираме за 5 минути. Фактът е, че остават 2 дни. Целта ни е сайтът да е готов в петък – да видим кой с какво може да помогне.'}]}];
+let cur=-2,ts=0,T=false,names=['','','',''],st=S.map(()=>({})),ck=S.map(()=>0),ip=S.map(()=>[]),pt=S.map(()=>0),left=480,tm=null;
+const g=(j,x)=>st[cur]['i'+j+'_'+x],s=(j,x,v)=>{st[cur]['i'+j+'_'+x]=v};
+const nm=(i,v)=>{names[i]=v;chips()},dice=()=>{names.sort(()=>Math.random()-.5);document.querySelectorAll('.card input[type=text]').forEach((e,i)=>e.value=names[i]);chips()};
+const tch=()=>{if(T){T=false}else if((prompt('Код за учител:')||'').trim().toLowerCase()=='учител')T=true;draw()};
+function chips(){const e=$('#ch');if(e)e.innerHTML=RL.map((r,k)=>`<span class="ch">${r}: <b>${names[(k+cur)%4]||'?'}</b></span>`).join('')}
+function sums(){const a=[0,0];for(let o=0;o<2;o++)CR.forEach((c,i)=>a[o]+=W[i]*(+g(0,'m'+i+o)||0));return a}
+function mxOk(){return CR.every((c,i)=>[0,1].every(o=>{const v=g(0,'m'+i+o);return v>=1&&v<=5&&v==Math.round(v)}))}
+function win(w){const a=[0,0];[0,1].forEach(o=>CR.forEach((c,i)=>a[o]+=w[i]*g(0,'m'+i+o)));return a[0]>a[1]?0:a[1]>a[0]?1:-1}
+function asgI(j){const t=H.slice();let all=true;TK.forEach((k,i)=>{const a=g(j,i);if(a===undefined||a==='')all=false;else t[+a]+=k[1]});const ev=PN.every((n,p)=>TK.some((k,i)=>g(j,i)==p));return{t,all,ev,sh:t[0]/40}}
+function asgT(j){const a=asgI(j);return `<table><tr>${PN.map((n,p)=>`<th>${n}</th>`).join('')}</tr><tr>${a.t.map(x=>`<td>${x} ч (${Math.round(x/(a.all?40:Math.max(1,a.t.reduce((u,v)=>u+v))*1)*100)}%)</td>`).join('')}</tr><tr>${a.t.map(x=>`<td><div class="bar"><i style="width:${Math.min(100,x*2.5)}%"></i></div></td>`).join('')}</tr></table>`}
+function mxT(){const a=sums(),m=mxOk();return `Суми: <b>${ID[0]} ${a[0]}</b> · <b>${ID[1]} ${a[1]}</b>${m?' → печели <b>'+(a[0]>a[1]?ID[0]:a[1]>a[0]?ID[1]:'равенство')+'</b>':''}`}
+function hint(j){const q=S[cur].it[j],v=(g(j,'t')||'').trim();return v.length<q.min?'Напиши поне '+q.min+' знака.':q.no&&q.no.some(n=>v.includes(n))?'Махни имената – търсим причина, не виновен!':''}
+function sc(j){const q=S[cur].it[j],p=q.p;
+ if(q.k=='cls'){let n=0;q.l.forEach((r,i)=>{if(g(j,i)==r[1])n++});return r5(p*n/q.l.length)}
+ if(q.k=='cht'){let n=0;q.l.forEach((r,i)=>{if(g(j,i)==r[2])n++});return r5(p*n/q.l.length)}
+ if(q.k=='pick')return g(j,'a')===q.c?p:0;
+ if(q.k=='multi'){let a=0,b=0;q.o.forEach((o,i)=>{if(g(j,i))q.c.includes(i)?a++:b++});return r5(Math.max(0,a-b)/q.c.length*p)}
+ if(q.k=='txt')return g(j,'sg')??0;
+ if(q.k=='chk')return g(j,'k')?p:0;
+ if(q.k=='pct'){let n=0;[70,15,10,5].forEach((a,i)=>{if(Math.abs(g(j,i)-a)<=1)n++});return r5(p*n/4)}
+ if(q.k=='asg'){const a=asgI(j);return !a.all?0:a.ev?p:a.sh<=.5?p/2:0}
+ if(q.k=='mx')return mxOk()?p:0;
+ if(q.k=='str')return g(j,'r')&&mxOk()?p:0;return 0}
+function item(j){const q=S[cur].it[j],c=ck[cur],f=c?` <span class="pp ${ip[cur][j]==q.p?'ok':'no'}">${ip[cur][j]}/${q.p}</span>`:`<span class="pp">${q.p} т.</span>`;let h=`<div class="it"><b>${q.q}</b>${f}`;
+ if(q.k=='cls')q.l.forEach((r,i)=>{const v=g(j,i);h+=`<div>${r[0]}: <label><input type="radio" name="c${j}_${i}" ${v=='f'?'checked':''} onchange="s(${j},${i},'f')"> Факт</label><label><input type="radio" name="c${j}_${i}" ${v=='m'?'checked':''} onchange="s(${j},${i},'m')"> Мнение</label>${c&&v?(v==r[1]?'<span class="ok">✓</span>':'<span class="no">✗</span>'):''}</div>`});
+ if(q.k=='cht')q.l.forEach((r,i)=>{const v=g(j,i);h+=`<div class="bb ${i%2?'me':''}"><b>${r[0]}:</b> ${r[1]}<br><select onchange="s(${j},${i},this.value)"><option value="">– какво е? –</option>${[['f','Факт'],['m','Мнение'],['b','Обвинение']].map(o=>`<option value="${o[0]}" ${v==o[0]?'selected':''}>${o[1]}</option>`).join('')}</select>${c&&v?(v==r[2]?' <span class="ok">✓</span>':' <span class="no">✗</span>'):''}</div>`});
+ if(q.k=='pick')q.o.forEach((o,i)=>{h+=`<div><label><input type="radio" name="p${j}" ${g(j,'a')===i?'checked':''} onchange="s(${j},'a',${i})"> ${o}</label>${c&&g(j,'a')===i?(i==q.c?' <span class="ok">✓</span>':' <span class="no">✗</span>'):''}</div>`});
+ if(q.k=='multi')q.o.forEach((o,i)=>{const v=g(j,i);h+=`<div><label><input type="checkbox" ${v?'checked':''} onchange="s(${j},${i},this.checked)"> ${o}</label>${c&&v?(q.c.includes(i)?' <span class="ok">✓</span>':' <span class="no">✗</span>'):''}</div>`});
+ if(q.k=='txt')h+=`<textarea rows="3" oninput="s(${j},'t',this.value)">${(g(j,'t')||'').replace(/</g,'&lt;')}</textarea>${c&&hint(j)?`<div class="no">${hint(j)}</div>`:''}${c?`<div class="t">✍ <b>Какво трябваше да напишете (пример):</b> ${q.ex}</div><div class="d">✍ <b>Сравни с примера и си дай точки:</b> ${[0,q.p/2,q.p].map(v=>`<label><input type="radio" name="sg${j}" ${g(j,'sg')===v?'checked':''} onchange="s(${j},'sg',${v});chk()"> ${v} т.</label>`).join('')}</div>`:''}`;
+ if(q.k=='chk')h+=`<label><input type="checkbox" ${g(j,'k')?'checked':''} onchange="s(${j},'k',this.checked)"> ${q.t}</label>`;
+ if(q.k=='pct')h+=PN.map((n,i)=>`<label>${n}: <input type="number" value="${g(j,i)??''}" oninput="s(${j},${i},this.value)"> %</label>`).join('')+(c?`<div class="t">✍ <b>Верни отговори:</b> Мария 70%, Иво 15%, Деси 10%, Калоян 5% (часовете се делят на 20).</div>`:'');
+ if(q.k=='asg'){h+=TK.map((k,i)=>`<label>${k[0]} (${k[1]} ч): <select onchange="s(${j},${i},this.value);$('#as').innerHTML=asgT(${j})"><option value="">–</option>${PN.map((n,p)=>`<option value="${p}" ${g(j,i)==p?'selected':''}>${n}</option>`).join('')}</select></label>`).join('')+`<div id="as">${asgT(j)}</div><small>Общо часове с вече направените (14, 3, 2, 1).</small>${c?`<div class="t">✍ <b>Пример:</b> Иво – Съдържание, Деси – Тестване, Калоян – Презентация, Мария – Дизайн. Така Мария пада от 70% на 45% от всички 40 часа.</div>`:''}`}
+ if(q.k=='mx'){h+=`<table><tr><th>Критерий (тегло)</th><th>${ID[0]}</th><th>${ID[1]}</th></tr>${CR.map((n,i)=>`<tr><td>${n} ×${W[i]}</td>${[0,1].map(o=>`<td><input type="number" min="1" max="5" value="${g(0,'m'+i+o)??''}" oninput="s(0,'m${i}${o}',+this.value);$('#mx').innerHTML=mxT()"></td>`).join('')}</tr>`).join('')}</table><div id="mx">${mxT()}</div>${c?`<div class="t">✍ <b>Пример:</b> Викторина 3, 5, 4, 5 → 37; Дежурства 5, 2, 3, 2 → 29. Печели викторината. Твоите оценки може да са други – важното е да са обосновани.</div>`:''}`}
+ if(q.k=='str'){h+=`<button onclick="if(!mxOk())return alert('Първо попълни матрицата от задача 1.');s(${j},'r',1);draw()">🔬 Пусни теста</button>`;if(g(j,'r')&&mxOk()){const b=win(W),bad=[];W.forEach((w,i)=>[-1,1].forEach(d=>{if(w+d>=1){const x=W.slice();x[i]+=d;if(win(x)!=b)bad.push(CR[i]+(d>0?' +1':' −1'))}}));h+=bad.length?`<p class="no">⚠ Крехко решение! Победителят се променя при: ${bad.join(', ')}. Защо все пак избирате този вариант?</p>`:`<p class="ok">✅ Устойчиво – победителят е същият при всяка промяна.</p>`}}
+ return h+'</div>'}
+function draw(){
+ $('#tabs').innerHTML=`<button class="${cur==-2?'on':''}" onclick="go(-2)">📚 Теория</button><button class="${cur==-3?'on':''}" onclick="go(-3)">✅ Мини-тест${BADGE?' 🎖':''}</button><button class="${cur==-1?'on':''}" onclick="go(-1)">📖 Как се играе</button>`+S.map((x,i)=>`<button class="${cur==i?'on':''}" onclick="go(${i})">${x.e} ${'АБВГДЕ'[i]}${ck[i]?' · '+pt[i]:''}</button>`).join('')+`<button class="${cur>5?'on':''}" onclick="go(6)">🏁 Резултат</button>`;
+ const tot=pt.reduce((a,b)=>a+b,0);$('#tot').textContent=tot+' / 60 т.';$('#pgb').style.width=tot/60*100+'%';
+ let h='';
+ if(cur==-2)h=th();else if(cur==-3)h=mtH();else if(cur==-1)h=`<div class="card"><h2>🎮 Как се играе</h2><p>Вие сте екип от 4 души. Теглете роли с 🎲 – във всяка ситуация ролите се въртят. Решете шестте ситуации, натиснете „Провери“ и вземете до <b>10 точки</b> за всяка (общо 60). Нямате право да обвинявате хора – търсите добро решение.</p>
+ <h3>🧭 Метод в 5 стъпки – интерактивен водач</h3><p class="hint">Пример: училищен подкаст. Натискай „Следваща стъпка“ и гледай как екипът попълва таблото си – точно така ще работите и вие в ситуациите А–Е.</p><div id="sim">${simH()}</div>
+ <h3>Роли</h3><p><b>Ръководител</b> води срещата и следи времето. <b>Анализатор</b> отделя фактите от мненията. <b>Говорител</b> обявява решението. <b>Секретар-скептик</b> записва и пита „Какво може да се обърка?“.</p>
+ <h3>Етапи на екипа (Тъкман)</h3><p>Формиране → Бурна фаза → Нормиране → Изпълнение. Споровете в бурната фаза са нормални.</p>
+ <button class="go" onclick="go(0)">Към първата ситуация</button></div>`;
+ else if(cur>5){const rk=tot<18?'Новобранец 🐣':tot<36?'Екипен играч 🤝':tot<50?'Кризисен експерт 🧯':'Легенда на екипа 🏆';h=`<div class="card"><h2>🏁 Резултат</h2><table>${S.map((x,i)=>`<tr><td>${x.e} ${x.t}</td><td>${ck[i]?pt[i]+' / 10':'–'}</td></tr>`).join('')}</table><p class="big">Общо: ${tot} / 60 – ${rk}</p><p>Какво беше най-трудно? Кое правило бихте взели в реален проект?</p><button onclick="print()">🖨 Принтирай</button></div>`}
+ else{const x=S[cur];h=`<div class="card"><h2>${x.e} Ситуация ${'АБВГДЕ'[cur]} – ${x.t}</h2><div id="ch"></div><p>${x.s}</p><div class="d">${x.d}</div><p>⏱ <span class="tmr" id="tmr"></span> <button onclick="tgl()">Старт / Стоп</button></p>${x.it.map((q,j)=>item(j)).join('')}<p><button class="go" onclick="chk()">✅ Провери и вземи точки</button> <span class="big" id="res">${ck[cur]?'Точки: '+pt[cur]+' / 10 '+(pt[cur]>=9?'🏆':pt[cur]>=6?'⭐':'💪')+(S[cur].it.filter((q,j)=>q.k=='txt'&&g(j,'sg')===undefined).length?' · ✍ Дай си точки на отворените въпроси':''):''}</span></p>${T?`<div class="t">👩‍🏫 <b>Отговори:</b> ${x.a}</div>`:''}</div>`}
+ $('#m').innerHTML=h;chips();tmu();$('#bdg').innerHTML=BADGE?'<span class="hb">🎖 Готов за Кризисния щаб</span>':'';thFx();if(cur==-1)simFx()}
+function chk(){ck[cur]=1;let t=0;S[cur].it.forEach((q,j)=>{ip[cur][j]=sc(j);t+=ip[cur][j]});pt[cur]=t;draw();if(t>=9)boom()}
+function go(i){cur=i;clearInterval(tm);tm=null;if(i>=0&&i<6)left=S[i].min*60;draw();scrollTo(0,0)}
+function tgl(){if(tm){clearInterval(tm);tm=null}else tm=setInterval(()=>{left--;tmu();if(left<=0){clearInterval(tm);tm=null}},1000)}
+function tmu(){const e=$('#tmr');if(e)e.textContent=left>0?Math.floor(left/60)+':'+String(left%60).padStart(2,'0'):'⏰ Времето изтече!'}
+/* ===== 📚 ТЕОРИЯ – интерактивни слайдове ===== */
+let ibk=null,tk=null,fl=[0,0,0,0],az={sc:0,v:[-1,-1,-1],ck:0},TC={ch:null,fx:null},tcur=[1,1,1],traf=0,BADGE=false,mta=[],sp=0,stb=0,stok=0;
+const IB=[[['💾','„Файлът изчезна“','Сайт за училищния фестивал: в четвъртък сутринта общият файл е стар и работата на двама души от последните два дни липсва. В чата веднага започва „Не съм аз!“.'],
+ ['⏳','„Закъсняваме“','Презентация по биология от 10 слайда: до срока остават 3 дни, а са готови само 2 слайда. Всеки е мислел, че другият вече е започнал.'],
+ ['🤐','„Ники мълчи“','Отбор по роботика: на всяка среща говори само Стефан. Ники има по-просто решение за сензора, но не го казва, защото „и без това ще изберат неговото“.']],
+ [['📂','Няма правила за версиите','Никой не е уговорил къде се качва файлът и как се казва, затова всеки качва „последната“ версия от своя компютър.','Помага: дата и инициали в името, всеки тегли последната версия, копие всяка вечер.'],
+ ['📋','Няма ясно разпределение','Задачите са „на всички“, а това значи на никого. До задачите няма име и срок и никой не проверява докъде са стигнали.','Помага: задача + име + срок на видимо място и 5-минутна проверка всеки ден.'],
+ ['🔇','Никой не казва какво мисли','В екипа не е безопасно да кажеш различно мнение – печели идеята на този, който говори най-силно.','Помага: минута мълчаливо писане, питане поименно, идеи без имена.']]];
+const RD=[['🧭','Ръководител','води срещата и следи времето','#e5383b',['Имаме 8 минути – нека първо чуем фактите.','Спираме спора. Търсим причина, не виновен.','Деси, ти още не си казала – какво мислиш?','Остават 2 минути, време е да решим.']],
+ ['🔍','Анализатор','отделя фактите от мненията','#1d4e89',['Това факт ли е, или мнение? Как да го проверим?','Факт: в „Архив“ има копие от вторник.','Да сметнем: 4 × 3 = 12, плюс 2 × 1 – общо 14.','„Ники е небрежен“ е мнение – да го оставим настрана.']],
+ ['📣','Говорител','обявява решението','#0d9488',['Нека повторя, за да съм сигурна, че сме съгласни…','Значи целта ни е: сайтът готов до петък.','Решихме: избираме викторината, защото събра 37 точки.','Ще обясня на класа защо избрахме този вариант.']],
+ ['🤔','Секретар-скептик','записва и пита „Какво може да се обърка?“','#ffd166',['Какво може да се обърка?','Записах: Иво – съдържание, до сряда.','А ако Деси пак отсъства – кой поема задачата ѝ?','Решението устойчиво ли е, ако сменим едно тегло?']]];
+const TKD=[['1. Формиране','опознават се','var(--ink)',100,'Първа среща за училищния вестник: всички са любезни, никой не спори и чакат учителят да каже кой какво прави. Чуват се реплики като „Все ми е едно“ и „Както решите“.','Учтиво мълчание – задачите остават неясни и никой не поема отговорност.','Обща цел, роли, кратко запознаване: „Какво умее всеки от нас?“'],
+ ['2. Бурна фаза','спорове, скрити конфликти','var(--red)',130,'Двама искат различна тема за броя, Стефан говори през цялото време, а Милен спира да пише в чата. Появяват се реплики като „Пак твоята идея!“.','Обвинения и скрит конфликт – някой тихо се отказва или проектът засяда.','Факти вместо мнения, аз-послания, решение с матрица, питане поименно.'],
+ ['3. Нормиране','правила и доверие','var(--ink)',160,'Екипът вече има правила: файлът се казва „vestnik_20-11_МИ“, всеки ден има 5-минутна проверка, а задачите са с име и срок на таблото.','Групово мислене – всички се съгласяват, за да не развалят мира, и никой не пита „Ами ако…?“.','Секретарят-скептик пита „Какво може да се обърка?“ и екипът прави тест за устойчивост.'],
+ ['4. Изпълнение','работят гладко','var(--ok)',190,'Броят излиза навреме. Всеки знае задачата си, а когато някой закъса, другите помагат, без да чакат да ги помолят.','Самоувереност. Щом дойде нов човек или някой напусне, екипът се връща назад – и ако не го забележи, спорът избухва.','Отпразнувайте успеха и запишете какво е проработило – за следващия проект.']];
+const AZL=['Аз се притеснявам, че…','защото…','и искам…'];
+const AZ=[{b:'„Ти винаги закъсняваш с твоята част и заради теб ще се провалим!“',p:[
+ [['ти си мързелив и не ти пука',0,'Това пак е обвинение – говори за човека, а не за проблема.'],['няма да успеем да предадем проекта до петък',1,'Точно! Казваш какво те тревожи – проблема, а не човека.'],['никой в този екип не го е грижа',0,'Обобщение („никой“) – звучи като обвинение към всички.']],
+ [['ти винаги всичко забравяш',0,'„Винаги“ е преувеличение и атака – това не е факт.'],['така ми се струва',0,'Няма нищо конкретно – другите не разбират какъв е проблемът.'],['тестването още не е започнало, а остават 2 дни',1,'Да! Това е факт – може да се провери.']],
+ [['да се разберем днес кой с какво може да помогне',1,'Чудесно – молбата е конкретна и насочена към решение.'],['да се извиниш пред всички',0,'Това е наказание, а не решение на проблема.'],['учителят да разбере какъв си',0,'Заплаха – ще разпали спора още повече.']]]},
+ {b:'„Пак си презаписал файла! Ти объркваш всичко!“',p:[
+ [['ти не ставаш за този екип',0,'Атака срещу човека – той ще се защитава, а не ще помага.'],['ще загубим работата от последните два дни',1,'Точно! Говориш за последствието, което те тревожи.'],['всичко ще се провали',0,'Преувеличение – плаши, но не казва какъв е проблемът.']],
+ [['във версия 4 липсват промените от сряда',1,'Да! Конкретен факт, който всеки може да провери.'],['никога не внимаваш',0,'„Никога“ е обвинение, а не факт.'],['винаги става така с теб',0,'Пак говори за човека, а не за случилото се.']],
+ [['да не пипаш повече файла',0,'Изключва човек от екипа – проблемът с версиите остава.'],['да си признаеш, че си виновен',0,'Търси виновен, а не решение.'],['да въведем правило за имената на файловете с дата и инициали',1,'Отлично – правило, което пази от повторение.']]]}];
+const QO=['Факт','Мнение','Обвинение','Аз-послание'];
+const QK=[['„Тестването още не е започнало, а остават 2 дни.“',0,'Може да се провери – с календара и списъка със задачи.'],
+ ['„Ти винаги закъсняваш!“',2,'Говори за човека („ти винаги…“), а не за конкретен проблем.'],
+ ['„Според мен презентацията е скучна.“',1,'Това е оценка – друг може да я намира за интересна. Не може да се провери.'],
+ ['„Аз се притеснявам, че не стигаме, защото остават 2 дни, и искам да си разпределим задачите.“',3,'Има и трите части: какво ме тревожи, защо (факт) и какво искам.',1]];
+const TV=[['📦 Обхват',160,62],['⏰ Срок',48,222],['👥 Ресурси',272,222]],TCX=160,TCY=169;
+const TCS=[{b:'👥 Намаляват ресурсите',v:2,f:.6,l:'−1 човек',s:'Деси напуска екипа (както в Ситуация Д) – от 4 души остават 3.',fx:[[0,.65,'↓ по-малко','📦 Намаляваме обхвата','махаме галерията и правим само 3 основни страници на сайта.'],[1,1.3,'↑ +2 дни','⏰ Удължаваме срока','молим учителя за още 2 дни, за да довършим всичко.']]},
+ {b:'⏰ Съкращава се срокът',v:1,f:.6,l:'−3 дни',s:'Фестивалът се мести по-рано – сайтът трябва да е готов във вторник, а не в петък.',fx:[[0,.65,'↓ по-малко','📦 Намаляваме обхвата','оставяме само програмата и картата, викторината отпада.'],[2,1.3,'↑ +2 души','👥 Добавяме ресурси','двама съученици от паралелния клас помагат с текстовете.']]},
+ {b:'📦 Добавят нови изисквания',v:0,f:1.3,l:'+ английска версия',s:'Директорът иска сайтът да има и английска версия.',fx:[[1,1.3,'↑ +1 седмица','⏰ Удължаваме срока','английската версия излиза седмица след фестивала.'],[2,1.3,'↑ +2 души','👥 Добавяме ресурси','учителката по английски и двама ученици помагат с превода.']]}];
+
+function ibH(){if(ibk===null)return '<p class="hint">👆 Кликни върху горната или долната част на айсберга (или на бутоните), за да видиш реални примери от училищни проекти.</p>';
+ return (ibk?'<p><b>Под водата са причините.</b> Те не се виждат, но създават повечето проблеми. Всяка причина отговаря на симптома със същия номер.</p>':'<p><b>Над водата е това, което всички виждат и за което спорят.</b> Но то е само симптом.</p>')+IB[ibk].map((x,i)=>`<div class="ex ${ibk?'dn':''}" style="animation-delay:${i*.12}s"><span class="n">${i+1}</span>${x[0]} <b>${x[1]}</b><br>${x[2]}${x[3]?`<br><small class="ok">✔ ${x[3]}</small>`:''}</div>`).join('')+(ibk?'<p class="hint">Свържи: 💾 → 📂 · ⏳ → 📋 · 🤐 → 🔇</p>':'<p class="hint">👉 Сега кликни „Под водата“ – какво стои зад тези симптоми?</p>')}
+const ib=k=>{ibk=k;draw()};
+function azH(){const z=AZ[az.sc];return `<div class="az"><h3 style="margin-top:0">🛠 Конструктор на аз-послание</h3><p style="margin:2px 0">Обвинение в груповия чат:</p><div class="acc">🔥 ${z.b}</div><p class="hint">Сглоби от трите менюта спокойно изречение, което говори за проблема, а не за човека.</p>${z.p.map((o,i)=>`<div class="row"><label for="az${i}"><b>${AZL[i]}</b></label><br><select id="az${i}" onchange="az.v[${i}]=+this.value;az.ck=0;azU()"><option value="-1">– избери –</option>${o.map((x,k)=>`<option value="${k}" ${az.v[i]==k?'selected':''}>${x[0]}</option>`).join('')}</select></div>`).join('')}<div class="pv" id="azp"></div><p><button class="go" onclick="az.ck=1;azU()">✅ Провери изречението</button> <button onclick="az={sc:(az.sc+1)%AZ.length,v:[-1,-1,-1],ck:0};draw()">🔁 Друго обвинение</button></p><div id="azf" aria-live="polite"></div></div>`}
+function azU(){const z=AZ[az.sc],p=$('#azp'),f=$('#azf');if(!p)return;const w=i=>az.v[i]<0?'…':z.p[i][az.v[i]][0];p.innerHTML=`💬 „Аз се притеснявам, че <u>${w(0)}</u>, защото <u>${w(1)}</u>, и искам <u>${w(2)}</u>.“`;
+ if(!az.ck){f.innerHTML='';return}if(az.v.some(v=>v<0)){f.innerHTML='<p class="no">Избери и трите части.</p>';return}
+ const r=z.p.map((o,i)=>o[az.v[i]]),ok=r.every(x=>x[1]);f.innerHTML=r.map((x,i)=>`<div class="${x[1]?'ok':'no'}">${x[1]?'✓':'✗'} ${AZL[i]} <span style="font-weight:400;color:var(--ink)">${x[2]}</span></div>`).join('')+(ok?'<p class="big ok">🎉 Готово! Това е истинско аз-послание: проблем + факт + молба.</p>':'<p class="no">Поправи частите с ✗ и провери пак.</p>')}
+const qk=(b,n,k)=>{const q=QK[n],ok=k==q[1];b.parentNode.querySelectorAll('button').forEach(x=>x.classList.remove('oy','ox'));b.classList.add(ok?'oy':'ox');b.parentNode.querySelector('.fb').innerHTML=ok?'✅ Точно! '+q[2]:'❌ Опитай пак.'};
+function trH(){const c=TC.ch===null?null:TCS[TC.ch];let h=`<div class="tbtn">${TCS.map((x,i)=>`<button class="${TC.ch===i?'on':''}" onclick="trS(${i})">${x.b}</button>`).join('')}<button onclick="TC={ch:null,fx:null};trR()">↺ Нулирай</button></div>`;
+ if(!c)return h+'<p class="hint">👆 Избери промяна и виж какво става с другите два върха на триъгълника.</p>';
+ h+=`<div class="ex dn"><b>Какво се случи:</b> ${c.s}</div><p><b>Как компенсирате?</b> Щом единият връх се промени, поне един от другите два също трябва да се промени.</p><div class="tfx">${c.fx.map((x,i)=>`<button class="${TC.fx===i?'on':''}" onclick="TC.fx=${i};trR()"><b>${x[3]}</b> – ${x[4]}</button>`).join('')}<button class="${TC.fx===2?'on':''}" onclick="TC.fx=2;trR()"><b>🙈 Нищо не променяме</b> – „Ще се справим някак.“</button></div>`;
+ if(TC.fx===2)h+='<div class="tkp"><div class="rk">⚠ Когато обхватът, срокът и ресурсите не са в баланс, страда <b>качеството</b>: бъгове, недовършени страници, работа през нощта и скандали в чата.</div></div>';
+ else if(TC.fx!==null)h+='<div class="tkp"><div class="hp">✔ Балансът е възстановен. Решението е честно и целият екип го знае.</div></div>';else h+='<p class="no">⚠ Триъгълникът е изкривен – изберете как ще компенсирате.</p>';return h}
+function triT(){const f=[1,1,1],c=TC.ch===null?null:TCS[TC.ch];if(c){f[c.v]=c.f;if(TC.fx===0||TC.fx===1){const x=c.fx[TC.fx];f[x[0]]=x[1]}}return f}
+function triP(f){const e=$('#trp');if(!e)return;const c=TC.ch===null?null:TCS[TC.ch],fi=c&&(TC.fx===0||TC.fx===1)?c.fx[TC.fx][0]:-1,bal=!c||fi>=0,pt=TV.map((v,i)=>[TCX+(v[1]-TCX)*f[i],TCY+(v[2]-TCY)*f[i]]);
+ e.setAttribute('points',pt.map(p=>p.join(',')).join(' '));e.setAttribute('fill',bal?'rgba(13,148,136,.16)':'rgba(229,56,59,.16)');e.setAttribute('stroke',bal?'#0d9488':'#e5383b');
+ pt.forEach((p,i)=>{const ch=c&&c.v==i,fx=fi==i,col=ch?'#e5383b':fx?'#0d9488':'#0f1b2d',top=i==0,ci=$('#tc'+i),n=$('#tn'+i),l=$('#tl'+i);
+  ci.setAttribute('cx',p[0]);ci.setAttribute('cy',p[1]);ci.setAttribute('fill',col);n.setAttribute('x',p[0]);n.setAttribute('y',p[1]+(top?-32:32));
+  l.setAttribute('x',p[0]);l.setAttribute('y',p[1]+(top?-16:48));l.setAttribute('fill',col);l.textContent=ch?c.l:fx?c.fx[TC.fx][2]:''});
+ const q=$('#tq');q.textContent=!c?'Качество: ✓':bal?'Качество: ✓ баланс':'Качество: ⚠ пада';q.setAttribute('fill',!c?'#0f1b2d':bal?'#0d9488':'#e5383b')}
+function triU(an){const to=triT(),fr=tcur.slice();cancelAnimationFrame(traf);if(!an||matchMedia('(prefers-reduced-motion: reduce)').matches){tcur=to;triP(to);return}const t0=performance.now(),st=t=>{const k=Math.min(1,(t-t0)/550),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;tcur=fr.map((a,i)=>a+(to[i]-a)*e);triP(tcur);if(k<1)traf=requestAnimationFrame(st)};traf=requestAnimationFrame(st)}
+const trS=i=>{TC={ch:i,fx:null};trR()},trR=()=>{const e=$('#tpn');if(e)e.innerHTML=trH();triU(1)};
+function thFx(){if(cur!=-2)return;if(ts==3)azU();if(ts==4)triU(0)}
+const THS=[()=>{const wv='M0 112'+' q7.5 -5 15 0 q7.5 5 15 0'.repeat(10),hk=k=>`class="hot ${ibk===k?'on':''}" onclick="ib(${k})" tabindex="0" role="button" aria-label="${k?'Под водата':'Видимо'}" onkeydown="if(event.key=='Enter'||event.key==' '){event.preventDefault();ib(${k})}"`;
+ return `<h2>🚨 Какво е кризисен щаб?</h2><p>Проблеми има във всеки екип – изчезнал файл, закъснение, спор. <b>Кризата</b> започва, когато търсим кого да обвиним, вместо какво да поправим. <b>Кризисният щаб</b> е кратка спокойна среща, на която екипът намира причината и решава какво да прави.</p>
+ <div class="ib"><svg viewBox="0 0 300 330" role="img" aria-label="Айсберг: малка видима част и голяма част под водата"><defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a6cb0"/><stop offset="1" stop-color="#0f1b2d"/></linearGradient></defs>
+ <rect width="300" height="112" fill="#e8f4ff"/><rect y="112" width="300" height="218" fill="url(#wg)"/>
+ <g ${hk(1)}><polygon points="86,112 214,112 252,160 262,228 220,300 150,318 80,298 40,232 50,160" fill="#9cc3e6" stroke="#cfe3f5" stroke-width="2" opacity=".9"/><text x="150" y="200" text-anchor="middle" font-size="16" font-weight="700" fill="#0f1b2d">🌊 Под водата</text><text x="150" y="222" text-anchor="middle" font-size="12" fill="#0f1b2d">причините – кликни</text></g>
+ <g ${hk(0)}><polygon points="150,22 178,58 200,78 214,112 86,112 104,74 124,52" fill="#fff" stroke="#9cc3e6" stroke-width="2"/><text x="150" y="94" text-anchor="middle" font-size="14" font-weight="700" fill="#0f1b2d">👀 Видимо</text></g>
+ <path d="${wv}" stroke="#fff" stroke-width="2" fill="none" pointer-events="none"/><text x="292" y="60" text-anchor="end" font-size="11" fill="#1d4e89">малка част</text><text x="292" y="318" text-anchor="end" font-size="11" fill="#cfe3f5">голямата част</text></svg>
+ <div><div class="ibt"><button class="${ibk===0?'on':''}" onclick="ib(0)">👀 Видимо</button><button class="${ibk===1?'on':''}" onclick="ib(1)">🌊 Под водата</button></div>${ibH()}</div></div><p>Правило на играта: <b>търсим причина, не виновен.</b></p>`},
+()=>`<h2>🎭 Четири роли</h2><p class="hint">👆 Кликни върху карта, за да я обърнеш и да видиш какво <b>казва</b> човекът с тази роля по време на играта.</p><div class="fcg">${RD.map((r,i)=>`<button class="fc ${fl[i]?'fl':''}" onclick="fl[${i}]^=1;this.classList.toggle('fl')" aria-label="${r[1]} – обърни картата"><span class="in"><span class="fr" style="border-top-color:${r[3]}"><span class="ico">${r[0]}</span><b>${r[1]}</b>${r[2]}<small>🔄 кликни, за да обърнеш</small></span><span class="bk"><b>${r[0]} ${r[1]} казва:</b>${r[4].map(q=>`<span>„${q}“</span>`).join('')}</span></span></button>`).join('')}</div><p><button onclick="const o=fl.some(x=>!x);fl=fl.map(()=>o?1:0);document.querySelectorAll('.fc').forEach((e,i)=>e.classList.toggle('fl',!!fl[i]))">🔄 Обърни всички</button></p><p>Във всяка ситуация ролите се въртят – така всеки опитва всичко.</p>`,
+()=>`<h2>📈 Как расте един екип (Тъкман)</h2><p class="hint">👆 Кликни върху стъпало, за да видиш как изглежда екипът в този момент и какъв е рискът.</p><div class="st">${TKD.map((x,i)=>`<button class="${tk===i?'on':''}" style="height:${x[3]}px;background:${x[2]}" onclick="tk=${i};draw()"><b>${x[0]}</b>${x[1]}</button>`).join('')}</div>${tk===null?'':`<div class="tkp"><b>${TKD[tk][0]} – как изглежда екипът:</b><p style="margin:4px 0">${TKD[tk][4]}</p><div class="rk">⚠ <b>Риск:</b> ${TKD[tk][5]}</div><div class="hp">✔ <b>Какво помага:</b> ${TKD[tk][6]}</div></div>`}<p>Споровете във втората стъпка са <b>нормални</b>. Когато в екипа дойде или си тръгне човек, екипът често се връща назад.</p>`,
+()=>`<h2>🔎 Факт, мнение, обвинение</h2><div class="gr"><div class="bx">✅ <b>Факт</b><br>може да се провери<br><small>„Файлът е качен във вторник.“</small></div><div class="bx">💭 <b>Мнение</b><br>оценка или усещане<br><small>„Дизайнът е грозен.“</small></div><div class="bx">🔥 <b>Обвинение</b><br>говори за човека<br><small>„Ти винаги всичко разваляш!“</small></div></div><h3>„Аз-послание“</h3><p><i>Аз се притеснявам, че… защото… и искам…</i></p>${azH()}${QK.map((q,n)=>`<div class="t qk">⚡ <b>Бърза проверка ${n+1}:</b> ${q[0]} ${QO.slice(0,q[3]?4:3).map((o,k)=>`<button onclick="qk(this,${n},${k})">${o}</button>`).join(' ')} <b class="fb" aria-live="polite"></b></div>`).join('')}`,
+()=>`<h2>⚖️ Решаваме с матрица</h2><p>Когато две идеи спорят, не надвиквайте. Дайте критерии с <b>тегла</b> (колко е важен критерият), оценете от 1 до 5, умножете <b>оценка × тегло</b> и съберете.</p><table><tr><th></th><th>Идея А</th><th>Идея Б</th></tr><tr><td>Полезност (×3)</td><td>4 → 12</td><td>2 → 6</td></tr><tr><td>Лекота (×1)</td><td>2 → 2</td><td>5 → 5</td></tr><tr><td><b>Сума</b></td><td><b>14</b></td><td>11</td></tr></table><h3>Тройно ограничение</h3><p><span class="ch">📦 Обхват</span><span class="ch">⏰ Срок</span><span class="ch">👥 Ресурси</span> Ако се промени едно от трите, друго трябва да се промени. Напуснал човек означава по-малко ресурси, значи по-малък обхват или по-дълъг срок.</p>
+ <div class="tri"><svg viewBox="-40 -20 400 310" role="img" aria-label="Триъгълник на тройното ограничение"><polygon id="trp" stroke-width="3" stroke-linejoin="round"/>${[0,1,2].map(i=>`<circle id="tc${i}" r="11" stroke="#fff" stroke-width="2"/><text id="tn${i}" text-anchor="middle" font-size="15" fill="#0f1b2d">${TV[i][0]}</text><text id="tl${i}" text-anchor="middle" font-size="12"></text>`).join('')}<text id="tq" x="-32" y="2" font-size="14"></text></svg><div id="tpn">${trH()}</div></div>`];
+const th=()=>`<div class="card"><div class="pg"><i style="width:${(ts+1)*20}%"></i></div>${THS[ts]()}<p>${ts?'<button onclick="tn(-1)">← Назад</button> ':''}${ts<4?'<button class="go" onclick="tn(1)">Напред →</button>':'<button class="go" onclick="go(-3)">✅ Към мини-теста</button> <button onclick="go(-1)">🎮 Към играта</button>'} <small>${ts+1} / 5</small></p></div>`;
+const tn=d=>{ts=Math.max(0,Math.min(4,ts+d));draw();scrollTo(0,0)};
+
+/* ===== ✅ МИНИ-ТЕСТ ===== */
+const MT=[{t:'Роля',q:'По време на срещата Тео казва: „Добре, а ако в понеделник кабинетът се окаже зает – какъв е резервният план?“ Каква роля има Тео?',o:['Ръководител','Анализатор','Говорител','Секретар-скептик'],c:3,e:'Секретарят-скептик записва решенията и пита „Какво може да се обърка?“ – точно това прави Тео. Така екипът се подготвя за проблемите предварително.'},
+ {t:'Факт или мнение',q:'Кое от съобщенията в груповия чат е факт?',o:['„Дизайнът е скучен.“','„Ти никога не помагаш!“','„До петък остават 2 дни, а тестването не е започнало.“','„Този екип е безнадежден.“'],c:2,e:'Фактът може да се провери – с календара и списъка със задачи. „Скучен“ и „безнадежден“ са мнения, а „Ти никога…“ е обвинение към човек.'},
+ {t:'Тъкман',q:'Екипът по роботика работеше гладко цял месец. После към него се присъедини нов съученик и отново започнаха спорове кой какво прави. Какво се случва според Тъкман?',o:['Екипът остава в изпълнение','Екипът се връща към бурна фаза','Екипът за първи път стига до нормиране','Екипът се разпада и нищо не може да се направи'],c:1,e:'Когато в екипа дойде или си тръгне човек, ролите се разместват и екипът често се връща към бурната фаза. Това е нормално – трябват нови правила и ново разпределение.'},
+ {t:'Аз-послание',q:'Ники пише на Дара: „Ти пак презаписа файла!“ Кое е най-доброто аз-послание вместо това?',o:['„Аз мисля, че ти си небрежна.“','„Аз се притеснявам, че загубихме работата от два дни, защото версия 4 е от стар файл, и искам да въведем правило за имената.“','„Аз нищо не съм направил – ти си виновна.“'],c:1,e:'Доброто аз-послание има три части: какво ме тревожи (проблемът), защо (факт) и какво искам (решение). Не стига изречението да започва с „Аз“ – „Аз мисля, че ти си небрежна“ пак е обвинение.'},
+ {t:'Матрица',q:'Матрица с тегла: полезност ×3, лекота ×1. Идея А има оценка 4 за полезност и 2 за лекота. Колко точки събира?',o:['6','10','14','24'],c:2,e:'Умножаваме оценка × тегло и събираме: 4 × 3 = 12, 2 × 1 = 2, 12 + 2 = 14. Отговорът 6 е само сборът от оценките – без теглата.'},
+ {t:'Тройно ограничение',q:'Два дни преди срока учителят обявява, че сайтът трябва да има и английска версия. Срокът и екипът остават същите. Кое е най-разумно?',o:['Работим както досега и се надяваме времето да стигне','Махаме нещо по-маловажно от обхвата или договаряме повече време или помощ','Всеки работи тайно през нощта','Отказваме се от целия проект'],c:1,e:'Обхват, срок и ресурси са свързани: щом обхватът расте, а срокът и хората са същите, трябва да се промени нещо друго – иначе пада качеството.'}];
+function mtH(){const n=mta.filter(x=>x!==undefined).length,ok=mta.filter((x,i)=>x===MT[i].c).length;
+ let h=`<div class="card"><h2>✅ Мини-тест: готови ли сте за щаба?</h2><p>6 кратки ситуации. Отговорът се проверява веднага. При <b>поне 5 от 6</b> верни получавате значка <b>„Готов за Кризисния щаб“</b>.</p><div class="pg"><i style="width:${n/6*100}%"></i></div><p class="hint">Отговорени: ${n} / 6 · Верни: ${ok}</p>`;
+ MT.forEach((q,i)=>{const a=mta[i],d=a!==undefined;h+=`<div class="it"><b>${i+1}. <span class="ch">${q.t}</span> ${q.q}</b>${q.o.map((o,k)=>`<button class="op ${d&&k==q.c?'oy':''} ${d&&k==a&&a!=q.c?'ox':''}" ${d?'disabled':''} onclick="mtA(${i},${k})">${d&&k==q.c?'✓ ':d&&k==a?'✗ ':''}${o}</button>`).join('')}${d?`<div class="${a==q.c?'t':'d'}">${a==q.c?'✅ <b>Вярно!</b>':'❌ <b>Не съвсем.</b> Верният отговор е маркиран в зелено.'} ${q.e}</div>`:''}</div>`});
+ if(n==6)h+=ok>=5?`<div style="text-align:center;margin:18px 0"><div class="badge"><b>🎖</b><span>Готов за Кризисния щаб<br><small>${ok} / 6 верни</small></span></div><p><button class="go" onclick="go(-1)">🎮 Към играта</button> <button onclick="mta=[];draw()">🔁 Реши отново</button></p></div>`:`<div class="d" style="margin-top:14px"><b>${ok} / 6 верни.</b> За значката трябват поне 5. Прочети обясненията или се върни към 📚 Теория и опитай пак.</div><p><button class="go" onclick="mta=[];draw();scrollTo(0,0)">🔁 Опитай пак</button> <button onclick="go(-2)">📚 Към теорията</button></p>`;
+ return h+'</div>'}
+function mtA(i,k){if(mta[i]!==undefined)return;mta[i]=k;const y=scrollY,was=BADGE;if(mta.filter(x=>x!==undefined).length==6&&mta.filter((x,j)=>x===MT[j].c).length>=5)BADGE=true;draw();scrollTo(0,y);if(BADGE&&!was)boom()}
+
+/* ===== 📖 СТЪПКОВ СИМУЛАТОР – училищен подкаст ===== */
+const SP=[{t:'Спрете',i:'🛑',txt:'Лина иска запис в петък, Борис – в понеделник, а епизодът трябва да е качен до сряда. Вместо да спорят кой е прав, Ръководителят спира и казва „имаме проблем“ – без обвинения.',who:[['Лина','🧭 Ръководител','„Имаме два варианта и срок. Да ги сравним, а не да се доказваме.“']],tip:'Ръководителят не казва кой е прав – само назовава проблема и срока.'},
+ {t:'Факти и мнения',i:'🔍',txt:'Анализаторът подрежда казаното в две колони на таблото. Фактът може да се провери (график, разписание), а мнението – не.',who:[['Борис','🔍 Анализатор','„Кое можем да докажем и кое само усещаме?“'],['Мими','📣 Говорител','„В понеделник ще сме уморени.“ – Борис: „Това е мнение, слагам го вдясно.“']],tip:'Мнението не е лошо – просто не може само да реши спора.'},
+ {t:'Обща цел',i:'🎯',txt:'Целта е едно изречение, с което всички са съгласни. В нея няма „петък“ или „понеделник“ – тя казва какво искаме да постигнем.',who:[['Мими','📣 Говорител','„Значи искаме епизод, качен до сряда, в който участват всички. Съгласни ли сте?“']],tip:'Целта не съдържа нито един от вариантите – така никой не „губи“.'},
+ {t:'Варианти и матрица',i:'⚖️',txt:'Екипът избира критерии с тегла: присъстват всички ×3, тих кабинет ×2, време за монтаж ×1. Всеки вариант получава оценка от 1 до 5. Гледай как се смята таблото: оценка × тегло, после сума.',who:[['Борис','🔍 Анализатор','„Петък: 1 × 3 = 3, 5 × 2 = 10, 2 × 1 = 2 – общо 15.“'],['Тео','🤔 Секретар-скептик','„А ако тихият кабинет е по-важен? Да направим тест за устойчивост.“']],tip:'Теглото показва колко е важен критерият. Решава сумата, а не най-силният глас.'},
+ {t:'Запис на решението',i:'📝',txt:'Решението се записва конкретно – кой, какво и до кога. Без запис утре всеки ще помни различно.',who:[['Тео','🤔 Секретар-скептик','„Записвам: кой, какво, до кога.“'],['Мими','📣 Говорител','„Решихме: записваме в понеделник!“']],tip:'Записът е готов, когато всеки ред има кой, какво и до кога. Сега сте готови за ситуациите А–Е!'}];
+const SM={o:['Петък','Понеделник','Събота'],c:[['Присъстват всички',3],['Тих кабинет',2],['Време за монтаж',1]],v:[[1,5,2],[5,3,4],[2,4,5]]};
+const simW=()=>SM.c.map((c,i)=>i==1&&stb?3:c[1]),simS=()=>{const w=simW();return SM.v.map(r=>r.reduce((a,x,i)=>a+x*w[i],0))};
+function simB(){const nw=i=>i==sp?' nw':'',e=(i,t,c='')=>`<div class="e ${c}">🔒 ${t}<br><small>попълва се на стъпка ${i+1}</small></div>`;
+ let h=`<div class="brd" aria-live="polite"><div class="w2"><h4>🧩 Табло на екипа „Подкаст“</h4>🧭 Лина – Ръководител · 🔍 Борис – Анализатор · 📣 Мими – Говорител · 🤔 Тео – Секретар-скептик</div><div class="w2${nw(0)}"><h4>🛑 Проблем</h4>Два варианта за запис – петък или понеделник. Епизодът трябва да е качен до сряда.</div>`;
+ h+=sp>=1?`<div class="${nw(1)}"><h4>✅ Факти</h4><ul><li>В петък двама са на състезание</li><li>Кабинетът е свободен и в двата дни</li><li>Срок за качване: сряда</li></ul></div><div class="${nw(1)}"><h4>💭 Мнения</h4><ul><li>„В понеделник ще сме уморени“</li><li>„В петък е по-забавно“</li></ul></div>`:e(1,'Факти')+e(1,'Мнения');
+ h+=sp>=2?`<div class="w2${nw(2)}"><h4>🎯 Обща цел</h4>Епизод, качен до сряда, в който участват всички.</div>`:e(2,'Обща цел','w2');
+ if(sp>=3){const w=simW(),su=simS(),mx=Math.max(...su),wi=SM.o[su.indexOf(mx)];h+=`<div class="w2${nw(3)}"><h4>⚖️ Матрица (оценка × тегло)</h4><div style="overflow-x:auto"><table><tr><th>Критерий</th>${SM.o.map(o=>`<th>${o}</th>`).join('')}</tr>${SM.c.map((c,i)=>`<tr><td>${c[0]} ×${w[i]}${i==1&&stb?' 🔬':''}</td>${SM.o.map((o,k)=>`<td class="mc" id="mc${i}${k}">${SM.v[k][i]} × ${w[i]} = <b>${SM.v[k][i]*w[i]}</b></td>`).join('')}</tr>`).join('')}<tr><td><b>Сума</b></td>${su.map((x,k)=>`<td id="ms${k}" class="${x==mx?'win':''}">${x}${x==mx?' 🏆':''}</td>`).join('')}</tr></table></div>${stb?`<small class="ok">✔ И с „Тих кабинет ×3“ печели ${wi} (${su.join(' · ')}) – решението е устойчиво.</small>`:`<small>Печели ${wi} с ${mx} точки.</small>`}</div>`}else h+=e(3,'Матрица','w2');
+ h+=sp>=4?`<div class="w2${nw(4)}"><h4>📝 Решение <span class="stamp">РЕШЕНО ✓</span></h4><p style="margin:2px 0 6px">„Записваме в понеделник.“</p><table><tr><th>Кой</th><th>Какво</th><th>До кога</th></tr><tr><td>Лина</td><td>Резервира кабинета</td><td>до петък</td></tr><tr><td>Борис</td><td>Пише текста</td><td>до понеделник</td></tr><tr><td>Всички</td><td>Записват епизода</td><td>понеделник</td></tr><tr><td>Всеки</td><td>Казва дали е готов</td><td>вторник вечер</td></tr><tr><td>Мими и Тео</td><td>Монтират и качват</td><td>до сряда</td></tr></table></div>`:e(4,'Решение','w2');
+ return h+'</div>'}
+function simH(){const x=SP[sp];return `<div class="spr">${SP.map((y,i)=>`${i?`<span class="ln ${i<=sp?'dn':''}"></span>`:''}<button class="${i<sp?'dn':i==sp?'cu':''}" onclick="sp=${i};simR()" aria-label="Стъпка ${i+1}: ${y.t}"${i==sp?' aria-current="step"':''}><i>${i<sp?'✓':i+1}</i>${y.t}</button>`).join('')}</div>
+ <div class="sim"><div class="sst"><div class="big">${x.i} Стъпка ${sp+1} от 5: ${x.t}</div><p>${x.txt}</p>${x.who.map(w=>`<div class="who">${w[0]} · ${w[1]}</div><div class="bb">${w[2]}</div>`).join('')}${sp==3?`<p><button onclick="simM()">▶ Пресметни отново</button> <button onclick="stb^=1;simR()">${stb?'↩ Върни теглата':'🔬 Тест за устойчивост'}</button></p>${stb?'<p class="hint">Тео предлага „Тих кабинет“ да тежи ×3 вместо ×2. Печели ли пак същият вариант?</p>':''}`:''}<p class="hint">💡 ${x.tip}</p><p>${sp?'<button onclick="sp--;simR()">← Предишна</button> ':''}${sp<4?'<button class="go" onclick="sp++;simR()">Следваща стъпка →</button>':'<button class="go" onclick="go(0)">🚨 Към ситуация А</button> <button onclick="sp=0;stb=0;simR()">↺ Отначало</button>'}</p></div>${simB()}</div>`}
+const simR=()=>{const e=$('#sim');if(e){e.innerHTML=simH();simFx()}};
+function simFx(){stok++;if(sp==3)simM()}
+function simM(){const tok=++stok,w=simW(),su=simS(),mx=Math.max(...su),q=[],D=380;SM.o.forEach((o,k)=>SM.c.forEach((c,i)=>q.push([i,k])));
+ q.forEach(([i,k])=>{const c=$('#mc'+i+k);if(c)c.innerHTML='<span style="color:#9aa8b8">?</span>'});SM.o.forEach((o,k)=>{const c=$('#ms'+k);if(c){c.textContent='…';c.className=''}});
+ q.forEach(([i,k],n)=>setTimeout(()=>{if(tok!=stok)return;const c=$('#mc'+i+k);if(!c)return;c.innerHTML=`${SM.v[k][i]} × ${w[i]} = <b>${SM.v[k][i]*w[i]}</b>`;c.classList.add('hl');setTimeout(()=>c.classList.remove('hl'),330);if(i==SM.c.length-1){const s=$('#ms'+k);if(s)s.textContent=su[k]}},300+n*D));
+ setTimeout(()=>{if(tok!=stok)return;su.forEach((x,k)=>{const s=$('#ms'+k);if(s&&x==mx){s.className='win';s.textContent=x+' 🏆'}})},300+q.length*D+150)}
+function boom(){for(let i=0;i<30;i++){const e=document.createElement('span');e.className='cf';e.textContent=['🎉','⭐','🏆','✨'][i%4];e.style.left=Math.random()*100+'vw';e.style.animationDelay=Math.random()*.8+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),3500)}}
+addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&e.key=='U')tch()});
+draw();
+</script><script src="../totop.js?v=20261126" defer></script>
+</body></html>
