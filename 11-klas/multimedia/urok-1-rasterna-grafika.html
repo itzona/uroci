@@ -75,7 +75,7 @@ footer{color:var(--mute);font-size:14px}
   <p class="small" style="color:#aaa;margin:4px 0 0">Увеличете слънцето. Някъде след 8× започват да се виждат отделните пиксели.</p></div>
 </div></header>
 
-<nav><div class="scroll"><a href="#t1">Пиксели</a><a href="#t2">Растер или вектор</a><a href="#t3">Разделителна способност</a><a href="#t4">RGB и CMYK</a><a href="#t5">Битова дълбочина</a><a href="#t6">Размер и компресия</a><a href="#t7">Формати</a><a href="#t8">Практика</a><a href="#test">Провери се</a></div></nav>
+<nav><div class="scroll"><a href="#t1">Пиксели</a><a href="#t2">Растер или вектор</a><a href="#t3">Разделителна способност</a><a href="#t4">RGB и CMYK</a><a href="#t5">Битова дълбочина</a><a href="#t6">Размер и компресия</a><a href="#t7">Формати</a><a href="#t9">Корекции</a><a href="#t8">Практика</a><a href="#test">Провери се</a></div></nav>
 
 <main>
 <section class="band ex" id="t1"><div class="wrap cols">
@@ -99,9 +99,28 @@ footer{color:var(--mute);font-size:14px}
    <tr><td>Пази</td><td>цвета на всеки пиксел</td><td>формули на фигури</td></tr>
    <tr><td>При увеличение</td><td>губи качество</td><td>остава остра</td></tr>
    <tr><td>Подходяща за</td><td>снимки, плавни преходи</td><td>лога, икони, схеми, шрифтове</td></tr>
-   <tr><td>Програми</td><td>GIMP, Photoshop, Krita</td><td>Inkscape, Illustrator, CorelDRAW</td></tr>
-   <tr><td>Формати</td><td>JPG, PNG, GIF, WebP, TIFF</td><td>SVG, AI, EPS, PDF</td></tr>
+   <tr><td>Размер на файла</td><td>расте с броя на пикселите, често е голям</td><td>обикновено е малък</td></tr>
+   <tr><td>Слабост</td><td>при уголемяване се вижда „на квадратчета“</td><td>не може да предаде истинска снимка с хиляди плавни нюанси</td></tr>
+   <tr><td>Програми</td><td>GIMP, Photoshop, Krita, Paint.NET, Photopea (в браузъра)</td><td>Inkscape, Illustrator, CorelDRAW, AutoCAD (за чертежи)</td></tr>
+   <tr><td>Формати</td><td>JPG, PNG, GIF, WebP, TIFF, BMP</td><td>SVG, AI, EPS, PDF, WMF</td></tr>
   </tbody></table>
+  <h3>Къде срещаме растер и вектор</h3>
+  <table class="stack"><thead><tr><th>Пример</th><th>Вид</th><th>Защо</th></tr></thead><tbody>
+   <tr><td>Снимка от телефона</td><td>растер (JPG)</td><td>милиони цветове и плавни преходи</td></tr>
+   <tr><td>Екранна снимка</td><td>растер (PNG)</td><td>записва точно пикселите на екрана</td></tr>
+   <tr><td>Лого на училището</td><td>вектор (SVG)</td><td>трябва да е остро и на значка, и на банер</td></tr>
+   <tr><td>Буквите на шрифта</td><td>вектор</td><td>текстът се чете ясно при всякакъв размер</td></tr>
+   <tr><td>Икони в приложение</td><td>вектор или PNG</td><td>SVG се нагажда към всеки екран</td></tr>
+   <tr><td>План на сграда</td><td>вектор</td><td>нужни са точни линии и размери</td></tr>
+  </tbody></table>
+  <div class="why"><b>Може ли растер да стане вектор?</b> Да, чрез <i>трасиране</i>: програмата обхожда контурите и ги превръща във фигури. В Inkscape: <kbd>Path → Trace Bitmap</kbd>. Получава се добре само при прости картинки – лога, силуети, рисунки с малко цветове. От снимка става „плакат“ от петна.</div>
+  <h3>Трети вид: фрактална графика</h3>
+  <p><b>Фракталната графика</b> не пази нито пиксели, нито готови фигури, а <i>правило</i>, което се повтаря отново и отново. Всяко малко парче прилича на цялото – това се нарича <b>самоподобие</b>. Помислете за клон на дърво: от него излизат по-малки клончета, които изглеждат като малки клони, а от тях още по-малки.</p>
+  <p>Като векторната, и фракталната картина се пресмята наново при увеличение, затова при приближаване се появяват все нови детайли. Използва се за природни пейзажи (планини, облаци, дървета) в игри и филми, за ефекти и абстрактно изкуство. Най-известни са фракталите на Манделброт и Жулиа. Рисуват се със специални програми или с няколко реда код (например в Comenius Logo).</p>
+  <div class="scr"><b>Опит: папрат от едно правило</b><canvas id="fern" width="300" height="300" style="margin-top:10px;max-width:300px;margin-inline:auto"></canvas>
+   <div class="ctl"><label>Повторения <input type="range" id="fernR" min="1" max="60" value="30"><output id="fernO"></output></label></div>
+   <p class="small" style="color:#aaa;margin:4px 0 0">Всяка точка се получава от предишната с едни и същи четири формули. Колкото повече повторения, толкова по-ясно се вижда листото. Всяко листенце е малко копие на цялата папрат.</p></div>
+  <div class="why"><b>Фрактали в природата:</b> снежинки, кристали, папрати, карфиол, брегови линии и мълнии.</div>
  </div>
  <div class="sticky scr"><b>Еднакво увеличение – различен резултат</b><div class="duo"><div><canvas id="vecR" width="300" height="300"></canvas><p>растерен кръг</p></div><div><svg id="vecS" viewBox="0 0 100 100" style="width:100%;background:#fff;border-radius:6px;display:block"><circle cx="50" cy="50" r="40" fill="#e59a52"/></svg><p>векторен кръг</p></div></div>
   <div class="ctl"><label>Увеличение <input type="range" id="vecZ" min="1" max="16" value="1"><output id="vecO">1×</output></label></div></div>
@@ -136,16 +155,21 @@ footer{color:var(--mute);font-size:14px}
  <div><p class="num">Тема 4</p><h2>Цветови модели: RGB и CMYK</h2>
   <p><b>RGB</b> е модел за екрани. Екранът свети с три цвята – червено (Red), зелено (Green) и синьо (Blue). Всеки канал има стойност от 0 до 255. Когато светлините се събират, се получава по-светъл цвят: червено + зелено = жълто, а трите на максимум дават бяло. Затова моделът се нарича <i>адитивен</i> (събирателен).</p>
   <p><b>CMYK</b> е модел за печат: Cyan (синьозелено), Magenta (пурпурно), Yellow (жълто) и Key (черно). Мастилото поглъща светлина, затова при смесване цветът става по-тъмен. Моделът се нарича <i>субтрактивен</i> (изваждащ).</p>
-  <div class="term"><b>HEX код</b> – RGB стойностите, записани в шестнайсетична бройна система: #FF8000 = R 255, G 128, B 0. Използва се в уеб дизайна и в GIMP.<br><span class="small">Как се чете: кодът се разделя на три двойки – FF (червено), 80 (зелено), 00 (синьо). В шестнайсетичната система има 16 цифри: 0–9 и A=10, B=11, C=12, D=13, E=14, F=15. Първата цифра от двойката се умножава по 16 и се добавя втората: FF = 15 × 16 + 15 = 255; 80 = 8 × 16 + 0 = 128; 00 = 0.</span><br><b>HSV</b> – друг начин да се опише същият цвят: тон (Hue), наситеност (Saturation) и яркост (Value). Удобен е, когато избирате цвят на ръка.</div>
+  <div class="term"><b>HEX код</b> – RGB стойностите, записани в шестнайсетична бройна система: #FF8000 = R 255, G 128, B 0. Използва се в уеб дизайна и в GIMP.<br><span class="small">Как се чете: кодът се разделя на три двойки – FF (червено), 80 (зелено), 00 (синьо). В шестнайсетичната система има 16 цифри: 0–9 и A=10, B=11, C=12, D=13, E=14, F=15. Първата цифра от двойката се умножава по 16 и се добавя втората: FF = 15 × 16 + 15 = 255; 80 = 8 × 16 + 0 = 128; 00 = 0.</span></div>
+  <p><b>HSV</b> (наричан още <b>HSB</b>) е трети начин да се опише цвят. Той е най-близо до това как хората мислят за цветовете: първо казваме „оранжево“, после „по-бледо“ или „по-тъмно“.</p>
+  <div class="term"><b>H – тон</b> (Hue): самият цвят, като градуси по кръг от 0° до 360°. 0° е червено, 120° – зелено, 240° – синьо, а 360° пак е червено.<br><b>S – наситеност</b> (Saturation): от 0% (сиво, без цвят) до 100% (най-чистият цвят). Отива от центъра към ръба на кръга.<br><b>V – яркост</b> (Value или Brightness): от 0% (черно) до 100% (най-светло). Отива от върха на конуса нагоре.</div>
+  <p>HSV не описва нов вид цветове – това са същите RGB цветове, само подредени по друг начин. Удобен е, когато променяте цвят „на око“: в GIMP прозорецът за избор на цвят има полета H, S и V. Смесителят вдясно показва и HSV стойностите на цвета.</p>
   <div class="why"><b>Защо отпечатаната снимка е по-бледа от екрана?</b> С RGB се получават по-ярки цветове, отколкото с CMYK. Наситеното неоново зелено на екрана просто не може да се отпечата с мастило.</div>
  </div>
  <div class="sticky scr"><b>Смесете цвят в RGB</b>
   <div class="ctl"><label>R (червено) <input type="range" id="cR" min="0" max="255" value="255"><output id="oR"></output></label><label>G (зелено) <input type="range" id="cG" min="0" max="255" value="128"><output id="oG"></output></label><label>B (синьо) <input type="range" id="cB" min="0" max="255" value="0"><output id="oBl"></output></label></div>
-  <div class="swatch" id="sw"></div>
+  <div class="swatch" id="sw"></div><div class="res"><div>HSV: <span id="hsvO"></span></div></div>
   <div class="diag">
    <svg viewBox="0 0 120 110" style="background:#000" role="img" aria-label="Адитивно смесване RGB"><g style="mix-blend-mode:screen;isolation:isolate"><circle cx="45" cy="42" r="30" fill="#f00" style="mix-blend-mode:screen"/><circle cx="75" cy="42" r="30" fill="#0f0" style="mix-blend-mode:screen"/><circle cx="60" cy="68" r="30" fill="#00f" style="mix-blend-mode:screen"/></g></svg>
    <svg viewBox="0 0 120 110" style="background:#fff" role="img" aria-label="Субтрактивно смесване CMYK"><circle cx="45" cy="42" r="30" fill="#0ff" style="mix-blend-mode:multiply"/><circle cx="75" cy="42" r="30" fill="#f0f" style="mix-blend-mode:multiply"/><circle cx="60" cy="68" r="30" fill="#ff0" style="mix-blend-mode:multiply"/></svg>
-  </div><div class="duo" style="margin-top:0"><p>RGB – светлина (екран)</p><p>CMY(K) – мастило (печат)</p></div></div>
+  </div><div class="duo" style="margin-top:0"><p>RGB – светлина (екран)</p><p>CMY(K) – мастило (печат)</p></div>
+  <canvas id="hsvC" width="360" height="300" style="margin-top:12px;background:#fff" role="img" aria-label="Конус на модела HSV: тонът е по кръга, наситеността е от центъра към ръба, яркостта е от върха нагоре"></canvas>
+  <div class="duo" style="margin-top:0;grid-template-columns:1fr"><p>HSV – тон (по кръга), наситеност (към ръба), яркост (нагоре)</p></div></div>
 </div></section>
 
 <section class="band ex" id="t5"><div class="wrap cols">
@@ -182,7 +206,7 @@ footer{color:var(--mute);font-size:14px}
   <div class="scr"><b>Калкулатор за размер без компресия</b>
    <div class="calc"><label>Ширина, px<input type="number" id="fw" value="1920" min="1"></label><label>Височина, px<input type="number" id="fh" value="1080" min="1"></label><label>Битове на пиксел<select id="fb"><option>1</option><option>8</option><option selected>24</option><option>32</option></select></label></div>
    <div class="steps2" id="fSteps"></div></div>
-  <div class="term"><b>Компресия без загуба</b> (PNG, GIF, TIFF) – данните се записват по-кратко, но след отваряне всеки пиксел е точно същият. Например вместо „синьо, синьо, синьо…“ се записва „200 × синьо“.<br><b>Компресия със загуба</b> (JPG) – премахват се детайли, които окото трудно забелязва. Файлът става много по-малък, но изгубеното не може да се върне.</div>
+  <div class="term"><b>Компресия без загуба</b> (PNG, GIF, TIFF) – данните се записват по-кратко, но след отваряне всеки пиксел е точно същият. Например вместо „синьо, синьо, синьо…“ се записва „200 × синьо“. Прилича на опаковане на дрехи в куфар с вакуумна торба: заемат по-малко място, но като ги извадите, всичко си е там. Подходяща е за лога, текст, остри линии и за архив.<br><b>Компресия със загуба</b> (JPG) – премахват се детайли, които окото трудно забелязва. Файлът става много по-малък, но изгубеното не може да се върне. Подходяща е за снимки в интернет, където е важно страницата да се зарежда бързо.<br><span class="small">Векторните файлове рядко се компресират – те и без това са малки, защото пазят само описание на фигурите.</span></div>
   <div class="why"><b>Внимание:</b> всяко ново записване на JPG отново губи качество. Работете в XCF или PNG и изнасяйте в JPG само накрая.</div>
   <p>Около текста и острите ръбове JPG оставя „квадратчета“ и „шум“. Това са <b>артефакти</b>, получени от блоковете 8 × 8 пиксела, на които JPG разделя снимката.</p>
  </div>
@@ -206,9 +230,20 @@ footer{color:var(--mute);font-size:14px}
   <tr><td>SVG</td><td>векторен</td><td>текст (XML)</td><td>да</td><td>да</td><td>Лога, икони, графики за уеб</td></tr>
  </tbody></table>
  <div class="cols" style="margin-top:22px">
-  <div class="why" style="margin:0"><b>Бърз избор:</b> снимка → JPG · нужна е прозрачност или остър текст → PNG · анимация → GIF или WebP · лого, което ще се уголемява → SVG · работата не е завършена → XCF.</div>
+  <div><div class="why" style="margin:0"><b>Бърз избор:</b> снимка за екран → JPG · снимка за печат в печатница → TIFF · нужна е прозрачност или остър текст → PNG · анимация → GIF или WebP · лого, което ще се уголемява → SVG · работата не е завършена → XCF.</div><div class="term"><b>Прозрачност</b> – някои пиксели са невидими и през тях се вижда това, което е отдолу. Така един обект (лого, ябълка, подпис) може да се постави върху всякакъв фон. Поддържат я PNG, GIF, WebP, TIFF и SVG, но не и JPG.</div></div>
   <div class="scr"><b>Как изглежда прозрачността</b><div class="duo"><div><canvas id="trA" width="200" height="150"></canvas><p>JPG – фонът остава бял</p></div><div><canvas id="trB" width="200" height="150"></canvas><p>PNG – шахматът означава прозрачно</p></div></div></div>
  </div>
+</div></section>
+
+<section class="band ex" id="t9"><div class="wrap cols">
+ <div><p class="num">Тема 8</p><h2>Основни корекции на изображение</h2>
+  <p>Във всяка програма за растерна графика ще намерите едни и същи основни настройки. Всички те просто променят числата на пикселите – по едно и също правило за цялата снимка.</p>
+  <div class="term"><b>Яркост</b> – колко светла е цялата снимка. Към всеки канал се добавя едно и също число. Ако е твърде много, светлите места „изгарят“ в бяло и детайлът изчезва.<br><b>Контраст</b> – колко се различават светлите от тъмните места. При висок контраст снимката е рязка, но се губят детайли в сенките и светлините. При нисък изглежда мътна, „като в мъгла“.<br><b>Наситеност</b> – колко живи са цветовете. При 0 остава само яркостта и снимката става черно-бяла (монохромна).<br><b>Острота и размазване</b> – острота подчертава границите между обектите. Размазването (Blur) смекчава шума или прави фона мек, както при портретите в телефона.<br><b>Изрязване</b> (Crop) – махат се излишните краища, за да личи главният обект.<br><b>Филтри</b> – готови „рецепти“ от няколко настройки наведнъж, например сепия или стара снимка.</div>
+  <div class="why"><b>Важно:</b> корекциите губят информация. Ако изгорите светлите места до бяло, после не можете да ги върнете с намаляване на яркостта. Затова пазете оригинала и работете върху копие. В урок 2 ще видите как <kbd>Colors → Levels</kbd> изсветлява снимка, без да изгаря светлите места.</div>
+ </div>
+ <div class="sticky scr"><b>Опит: пробвайте настройките</b><canvas id="adjC" width="480" height="300" style="margin-top:10px"></canvas>
+  <div class="ctl"><label>Яркост <input type="range" id="aB" min="40" max="180" value="100"><output id="aBo"></output></label><label>Контраст <input type="range" id="aC" min="30" max="200" value="100"><output id="aCo"></output></label><label>Наситеност <input type="range" id="aS" min="0" max="250" value="100"><output id="aSo"></output></label><label>Размазване <input type="range" id="aR" min="0" max="8" value="0"><output id="aRo"></output></label><label>Сепия <input type="range" id="aP" min="0" max="100" value="0"><output id="aPo"></output></label></div>
+  <p class="small" style="color:#aaa;margin:6px 0 0">100% значи без промяна. Пробвайте наситеност 0% и яркост 180%.</p></div>
 </div></section>
 
 <section class="band ex" id="t8"><div class="wrap cols">
@@ -235,6 +270,8 @@ footer{color:var(--mute);font-size:14px}
  <details><summary>5. Колко байта заема некомпресирана снимка 1000 × 1000 px с 24 бита на пиксел?</summary><p>1000 × 1000 = 1 000 000 пиксела. 24 бита ÷ 8 = 3 байта на пиксел. 1 000 000 × 3 = 3 000 000 байта, около 3 MB (в папката ще пише около 2,9 MB, защото 1 MB = 1 048 576 байта).</p></details>
  <details><summary>6. Трябва ви лого без фон за сайт. JPG или PNG?</summary><p>PNG, защото пази прозрачността. JPG ще направи фона бял.</p></details>
  <details><summary>7. Защо JPG не е подходящ за работен файл, който ще редактирате многократно?</summary><p>Компресията е със загуба и всяко ново записване влошава качеството. Освен това JPG не пази слоеве.</p></details>
+<details><summary>8. Изображение 1024 × 768 px. Колко място заема без компресия при 24 бита, при 8 бита и при 1 бит на пиксел?</summary><p>Пикселите са 1024 × 768 = 786 432.<br>24 бита = 3 байта на пиксел: 786 432 × 3 = 2 359 296 байта ≈ 2,25 MB.<br>8 бита = 1 байт на пиксел: 786 432 байта = 768 KB.<br>1 бит = 1/8 байт на пиксел: 786 432 ÷ 8 = 98 304 байта = 96 KB.<br>Колкото по-малко цветове, толкова по-малък файл.</p></details>
+ <details><summary>9. Кое е растер и кое вектор: снимка от екскурзия, шрифтът Arial, лого за тениска?</summary><p>Снимката е растер. Шрифтът и логото са вектор, защото трябва да остават остри при всякакъв размер.</p></details>
  <p style="margin-top:22px"><a class="next" href="urok-2-gimp-stapka-po-stapka.html">Към урок 2: GIMP стъпка по стъпка →</a></p>
 </div></section>
 </main>
@@ -244,6 +281,7 @@ footer{color:var(--mute);font-size:14px}
 {
 const $=s=>document.querySelector(s);
 const cv=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c};
+const rnd=seed=>()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};
 const fmtB=b=>b>1048576?(b/1048576).toFixed(2).replace('.',',')+' MB':(b/1024).toFixed(1).replace('.',',')+' KB';
 
 /* sample landscape 480×300 */
@@ -287,7 +325,9 @@ fontsReady.then(()=>{
  ['fw','fh','fb'].forEach(id=>$('#'+id).addEventListener('input',fcalc));fcalc();
  /* RGB mixer */
  const mix=()=>{const r=+$('#cR').value,g=+$('#cG').value,b=+$('#cB').value;$('#oR').textContent=r;$('#oG').textContent=g;$('#oBl').textContent=b;
-  const hex='#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('').toUpperCase();const sw=$('#sw');sw.style.background=hex;sw.style.color=(r*.3+g*.59+b*.11)>140?'#111':'#fff';sw.textContent=hex};
+  const hex='#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('').toUpperCase();const sw=$('#sw');sw.style.background=hex;sw.style.color=(r*.3+g*.59+b*.11)>140?'#111':'#fff';sw.textContent=hex;
+  const mx=Math.max(r,g,b),mn=Math.min(r,g,b),dd=mx-mn;let hh=0;if(dd){hh=mx===r?((g-b)/dd)%6:mx===g?(b-r)/dd+2:(r-g)/dd+4;hh=Math.round(hh*60);if(hh<0)hh+=360}
+  $('#hsvO').textContent=`H ${hh}° · S ${mx?Math.round(dd/mx*100):0}% · V ${Math.round(mx/255*100)}%`};
  ['cR','cG','cB'].forEach(id=>$('#'+id).addEventListener('input',mix));mix();
  /* posterize */
  const base=L.getContext('2d').getImageData(0,0,480,300);
@@ -299,6 +339,27 @@ fontsReady.then(()=>{
  $('#pngS').textContent=fmtB(bytes(png));$('#rawS').textContent=fmtB(480*300*3);
  const jpg=()=>{const q=+$('#jpgR').value;$('#jpgO').textContent=q;const u=L.toDataURL('image/jpeg',q/100);$('#jpgS').textContent=fmtB(bytes(u));const im=new Image();im.onload=()=>{jc.imageSmoothingEnabled=false;jc.drawImage(im,0,0,240,300,0,0,240,300);jc.drawImage(im,10,150,120,150,240,0,240,300);jc.fillStyle='rgba(0,0,0,.6)';jc.fillRect(244,4,60,22);jc.fillStyle='#fff';jc.font='13px "PT Mono",monospace';jc.fillText('2× лупа',248,20)};im.src=u};
  $('#jpgR').addEventListener('input',jpg);jpg();
+ /* HSV cone */
+ {const c=$('#hsvC'),x=c.getContext('2d'),W=360,H=300,cx=170,ty=78,R=105,k=.32,apx=268,im=x.createImageData(W,H),d=im.data;
+  const hsv=(h,s,v)=>{const f=n=>{const kk=(n+h/60)%6;return v*(1-s*Math.max(0,Math.min(kk,4-kk,1)))};return[f(5)*255,f(3)*255,f(1)*255]};
+  const put=(X,Y,c3)=>{X=Math.round(X);Y=Math.round(Y);if(X<0||Y<0||X>=W||Y>=H)return;const i=(Y*W+X)*4;d[i]=c3[0];d[i+1]=c3[1];d[i+2]=c3[2];d[i+3]=255};
+  for(let v=0;v<=1;v+=.002)for(let p=0;p<=Math.PI;p+=.004){put(cx+R*v*Math.cos(p),ty+(1-v)*(apx-ty)+k*R*v*Math.sin(p),hsv((p*180/Math.PI+360)%360,1,v))}
+  for(let Y=Math.floor(ty-k*R);Y<=ty+k*R;Y++)for(let X=cx-R;X<=cx+R;X++){const u=(X-cx)/R,w=(Y-ty)/(k*R),q=Math.hypot(u,w);if(q<=1){let a=Math.atan2(w,u)*180/Math.PI;if(a<0)a+=360;put(X,Y,hsv(a,q,1))}}
+  x.fillStyle='#fff';x.fillRect(0,0,W,H);const t=document.createElement('canvas');t.width=W;t.height=H;t.getContext('2d').putImageData(im,0,0);x.drawImage(t,0,0);
+  x.strokeStyle='#333';x.fillStyle='#333';x.lineWidth=1.5;x.font='600 14px Manrope, sans-serif';
+  const arr=(x1,y1,x2,y2)=>{x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();const a=Math.atan2(y2-y1,x2-x1);x.beginPath();x.moveTo(x2,y2);x.lineTo(x2-8*Math.cos(a-.4),y2-8*Math.sin(a-.4));x.lineTo(x2-8*Math.cos(a+.4),y2-8*Math.sin(a+.4));x.fill()};
+  arr(cx,ty-k*R-14,cx+R,ty-k*R-14);x.beginPath();x.moveTo(cx,ty-k*R-20);x.lineTo(cx,ty);x.stroke();x.fillText('S – наситеност',cx+8,ty-k*R-20);
+  arr(cx+R+30,apx,cx+R+30,ty);x.save();x.translate(cx+R+48,(apx+ty)/2+50);x.rotate(-Math.PI/2);x.fillText('V – яркост',0,0);x.restore();
+  x.beginPath();x.ellipse(cx,ty,R+16,k*R+16,0,Math.PI*.95,Math.PI*1.5);x.stroke();arr(cx-R*.55,ty-k*R-15.5,cx-R*.75,ty-k*R-11);x.fillText('H – тон',16,ty-k*R-6)}
+ /* fern */
+ {const fc=$('#fern').getContext('2d');const draw=()=>{const n=+$('#fernR').value*1000;$('#fernO').textContent=n.toLocaleString('bg-BG');fc.fillStyle='#111';fc.fillRect(0,0,300,300);fc.fillStyle='#6fcf8f';let X=0,Y=0,rr=rnd(7);
+   for(let i=0;i<n;i++){const q=rr();let nx,ny;if(q<.01){nx=0;ny=.16*Y}else if(q<.86){nx=.85*X+.04*Y;ny=-.04*X+.85*Y+1.6}else if(q<.93){nx=.2*X-.26*Y;ny=.23*X+.22*Y+1.6}else{nx=-.15*X+.28*Y;ny=.26*X+.24*Y+.44}X=nx;Y=ny;fc.fillRect(150+X*27,292-Y*28,1,1)}};
+  $('#fernR').addEventListener('input',draw);draw()}
+ /* adjustments */
+ {const ac=$('#adjC');ac.getContext('2d').drawImage(L,0,0);const ids=['aB','aC','aS','aR','aP'];
+  const adj=()=>{const [b,c,sa,bl,se]=ids.map(i=>+$('#'+i).value);ids.forEach((i,j)=>$('#'+i+'o').textContent=j===3?bl+' px':$('#'+i).value+'%');
+   ac.style.filter=`brightness(${b}%) contrast(${c}%) saturate(${sa}%) blur(${bl*ac.clientWidth/480}px) sepia(${se}%)`};
+  ids.forEach(i=>$('#'+i).addEventListener('input',adj));adj()}
  /* transparency */
  const star=(x,cx,cy)=>{x.fillStyle='#e59a52';x.beginPath();for(let i=0;i<10;i++){const r=i%2?22:50,a=i*Math.PI/5-Math.PI/2;x.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a))}x.closePath();x.fill()};
  const a=$('#trA').getContext('2d');a.fillStyle='#4a6b8a';a.fillRect(0,0,200,150);a.fillStyle='#fff';a.fillRect(45,20,110,110);star(a,100,78);
