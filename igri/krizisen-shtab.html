@@ -115,7 +115,7 @@ header{background:linear-gradient(120deg,#0f1b2d,#1d3557)}
 .mtg{background:#f4f8fc;border:2px solid var(--line);border-radius:10px;padding:10px 16px;margin:8px 0}.mtg .bx b{display:block}.mtg .bx{font-size:.92rem;background:#fff}.stp li{margin:6px 0}.mtd{margin:8px 0}.mtd summary{font-weight:700;cursor:pointer;padding:6px 0}
 </style><link rel="stylesheet" href="../footer.css?v=20261126">
 </head><body><div class="w">
-<header><h1><span class="sir">🚨</span> Кризисен щаб</h1><span><span id="bdg"></span><span class="sc" id="tot"></span></span></header><div class="pg nop"><i id="pgb" style="width:0"></i></div>
+<header><h1><span class="sir">🚨</span> Кризисен щаб</h1><span><span id="bdg"></span><span class="sc" id="tot"></span> <button id="fsb" onclick="fsT()" title="Цял екран" style="margin-left:6px">⛶</button></span></header><div class="pg nop"><i id="pgb" style="width:0"></i></div>
 <div class="card nop" style="margin:10px 0"><b>Екип:</b> <input type="text" placeholder="Име 1" oninput="nm(0,this.value)"> <input type="text" placeholder="Име 2" oninput="nm(1,this.value)"> <input type="text" placeholder="Име 3" oninput="nm(2,this.value)"> <input type="text" placeholder="Име 4" oninput="nm(3,this.value)"> <input type="text" placeholder="Име 5 (по желание)" oninput="nm(4,this.value)"> <button onclick="dice()">🎲 Тегли роли</button></div>
 <div class="tabs" id="tabs"></div><div id="m"></div></div>
 <script>
@@ -431,6 +431,14 @@ function simM(){const tok=++stok,w=simW(),su=simS(),mx=Math.max(...su),q=[],D=38
 function boom(){for(let i=0;i<30;i++){const e=document.createElement('span');e.className='cf';e.textContent=['🎉','⭐','🏆','✨'][i%4];e.style.left=Math.random()*100+'vw';e.style.animationDelay=Math.random()*.8+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),3500)}}
 addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&e.key=='U')tch()});
 draw();
+/* Цял екран: браузърите позволяват това само след действие на потребителя, затова се включва при първото докосване/клик/клавиш */
+const fsE=document.documentElement,fsOn=()=>document.fullscreenElement||document.webkitFullscreenElement,
+fsGo=()=>{const f=fsE.requestFullscreen||fsE.webkitRequestFullscreen;if(f&&!fsOn())try{const r=f.call(fsE);r&&r.catch&&r.catch(()=>{})}catch(e){}},
+fsT=()=>{if(fsOn())(document.exitFullscreen||document.webkitExitFullscreen).call(document);else fsGo()},
+fsU=()=>{const b=$('#fsb');if(b){b.textContent=fsOn()?'🗗':'⛶';b.title=fsOn()?'Изход от цял екран':'Цял екран'}},
+fs1=e=>{if(e.target&&e.target.id=='fsb')return;['pointerdown','keydown'].forEach(n=>removeEventListener(n,fs1,true));fsGo()};
+['pointerdown','keydown'].forEach(n=>addEventListener(n,fs1,true));
+document.addEventListener('fullscreenchange',fsU);document.addEventListener('webkitfullscreenchange',fsU);
 </script><script src="../totop.js?v=20261126" defer></script>
 <footer class="site-footer">
   <div class="sf-inner">
