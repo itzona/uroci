@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="bg"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Пре-мортем – екипна работа</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔮</text></svg>">
+<style>
+:root{--ink:#0f1b2d;--bg:#eef2f6;--red:#e5383b;--ok:#0d9488;--hi:#ffd166;--line:#c5d0dc;--mid:#f4a261}
+*{box-sizing:border-box}
+body{margin:0;font:17px/1.55 "Segoe UI",Trebuchet MS,sans-serif;color:var(--ink);background:var(--bg)}
+.w{max-width:1180px;margin:auto;padding:14px 22px}
+header{background:linear-gradient(120deg,#0f1b2d,#3a1d57);color:#fff;padding:12px 16px;border-radius:6px;border-bottom:5px solid var(--red);display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:center}
+header a{color:#fff}
+h1{margin:0;font-size:1.45rem;letter-spacing:.3px}h2{margin:0 0 6px}h3{margin:14px 0 4px}
+.sc{font-weight:700;background:var(--hi);color:var(--ink);padding:3px 12px;border-radius:4px}
+button{font:inherit;cursor:pointer;border:1px solid var(--ink);background:#fff;color:var(--ink);border-radius:4px;padding:5px 12px}
+button:hover{background:var(--hi)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--red);outline-offset:1px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.tabs button.on{background:var(--ink);color:#fff}
+.tabs button .ck{color:var(--ok);font-weight:700}.tabs button.on .ck{color:#7ff0e0}
+.go{background:var(--red);color:#fff;border-color:var(--red);font-weight:700}.go:hover{background:#b92b2d;color:#fff}
+.card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--red);border-radius:6px;padding:20px 30px;margin:12px 0}
+.d{background:#fff6dc;border-left:4px solid var(--hi);padding:8px 12px;font-size:.93rem;margin:8px 0}
+.t{background:#e6f6f4;border:2px dashed var(--ok);padding:8px 12px;margin-top:12px}
+input[type=text],select,textarea{font:inherit;padding:5px 8px;border:1px solid #8a9bb0;border-radius:4px;background:#fff;color:var(--ink);max-width:100%}
+textarea{width:100%;min-height:64px}
+label{margin-right:12px;display:inline-block}
+.ok{color:var(--ok);font-weight:700}.no{color:var(--red);font-weight:700}
+.hint{font-size:.88rem;color:#4a5b70;margin:4px 0}
+.ch{display:inline-block;background:#dbe5f0;border-radius:4px;padding:1px 9px;margin:2px;font-size:.88rem}
+.gr{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:10px 0}
+.bx{background:#f4f8fc;border:2px solid var(--line);border-radius:10px;padding:10px 14px}
+.bx b{display:block}
+.pg{height:10px;background:#cfd9e4;border-radius:6px;margin:8px 0;overflow:hidden}.pg i{display:block;height:100%;background:linear-gradient(90deg,var(--ok),var(--hi));transition:width .6s}
+.tmr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:6px;padding:6px 12px;margin:8px 0}
+.tmr b{font-size:1.6rem;font-variant-numeric:tabular-nums;min-width:80px}
+.tmr button{padding:2px 10px}.tmr.end{background:var(--red);animation:bl .6s 4 alternate}@keyframes bl{to{opacity:.6}}
+.gone{position:relative;background:#1b1b1b;color:#fff;border-radius:8px;padding:22px 26px;margin:10px 0;overflow:hidden}
+.gone h2{color:#ff8a8a;font-size:1.6rem}
+.gone .stamp{position:absolute;right:18px;top:14px;border:4px solid #ff4d4f;color:#ff4d4f;font-weight:800;padding:2px 12px;transform:rotate(9deg);font-size:1.2rem;letter-spacing:2px}
+.mem{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.mem .bx textarea{min-height:120px}
+.cats{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.sug{border:1px dashed #8a9bb0;background:#f7f9fc;font-size:.9rem;padding:3px 10px;border-radius:14px}
+.row{display:grid;grid-template-columns:34px 1fr 170px 40px;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.row .n{background:var(--ink);color:#fff;border-radius:50%;width:28px;height:28px;display:grid;place-items:center;font-size:.85rem;font-weight:700}
+.row input[type=text]{width:100%}
+.x{border-color:#bbb;color:#888;padding:3px 8px}.x:hover{background:#ffe1e1;color:var(--red)}
+.ev{display:grid;grid-template-columns:auto auto 1fr;gap:6px 14px;align-items:end;padding:10px 0;border-bottom:1px solid var(--line)}
+.ev>span:first-child{grid-column:1/-1}.ev .score{justify-self:end}
+.seg{display:inline-flex;border:1px solid #8a9bb0;border-radius:4px;overflow:hidden}
+.seg button{border:0;border-radius:0;padding:4px 10px;border-right:1px solid #8a9bb0}.seg button:last-child{border-right:0}
+.seg button.on{background:var(--ink);color:#fff}
+.sl{font-size:.75rem;color:#4a5b70;display:block}
+.score{display:inline-grid;place-items:center;width:44px;height:36px;border-radius:6px;font-weight:800;font-size:1.1rem}
+.s0{background:#e9eef5;color:#8a9bb0}.lo{background:#c9f0e8;color:#075e55}.md{background:#ffe3b8;color:#7a4300}.hi2{background:#ffc9c9;color:#9a1215}
+.mxw{display:grid;grid-template-columns:1fr minmax(240px,330px);gap:24px;align-items:start}.mxw>div:last-child{position:sticky;top:10px}
+.mx{display:grid;grid-template-columns:34px repeat(3,1fr);grid-template-rows:repeat(3,1fr) 28px;gap:4px;aspect-ratio:1.1}
+.mx .c{border-radius:6px;padding:4px;display:flex;flex-wrap:wrap;gap:3px;align-content:flex-start;position:relative}
+.mx .c i{position:absolute;right:6px;bottom:2px;font-style:normal;font-weight:800;opacity:.35;font-size:1.2rem}
+.mx .ax{font-size:.75rem;color:#4a5b70;display:grid;place-items:center;text-align:center}
+.mx .ax.v{writing-mode:vertical-rl;transform:rotate(180deg)}
+.dot{background:var(--ink);color:#fff;border-radius:50%;width:24px;height:24px;display:grid;place-items:center;font-size:.78rem;font-weight:700}
+.rx{border:1px solid var(--line);border-left:6px solid var(--line);border-radius:6px;padding:10px 14px;margin:10px 0;background:#fff}
+.rx.hi2{border-left-color:var(--red);background:#fff}.rx.md{border-left-color:var(--mid);background:#fff}.rx.lo{border-left-color:var(--ok);background:#fff}
+.rx .top{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.rx .f{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-top:8px}
+.rx .f label{display:block;margin:0;font-size:.88rem;font-weight:600}
+.rx .f input,.rx .f select{width:100%;font-weight:400}
+.strat{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.strat button{font-size:.9rem;padding:3px 10px}.strat button.on{background:var(--ink);color:#fff}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#e9eef5}
+.tw{overflow-x:auto}
+.chk li{list-style:none;margin:4px 0}.chk{padding-left:4px}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:10px 0}
+.flow div{flex:1;min-width:130px;background:var(--ink);color:#fff;border-radius:8px;padding:8px 10px;font-size:.9rem}
+.flow div small{display:block;opacity:.75}
+.cf{position:fixed;top:-30px;font-size:26px;pointer-events:none;animation:fl 2.4s linear forwards;z-index:9}@keyframes fl{to{transform:translateY(110vh) rotate(540deg)}}
+.nav{display:flex;justify-content:space-between;gap:8px;margin-top:16px;flex-wrap:wrap}
+@media(max-width:760px){
+ .w{padding:10px 12px}.card{padding:14px 16px}
+ .mxw{grid-template-columns:1fr}
+ .row{grid-template-columns:30px 1fr 36px}.row select{grid-column:2/3}
+ .ev{grid-template-columns:1fr auto}.ev>span:nth-child(2),.ev>span:nth-child(3){grid-column:1/-1}.mxw>div:last-child{position:static}
+}
+@media print{
+ body{background:#fff;font-size:12pt}.nop,.tabs,.tmr,.nav,header button{display:none!important}
+ .card{border:0;padding:0;margin:0}header{background:#fff;color:#000;border:0;padding:0}
+}
+</style>
+</head><body><div class="w">
+<header><h1>🔮 Пре-мортем</h1><span><span class="sc" id="tot">0%</span></span></header>
+<div class="pg nop"><i id="pgb" style="width:0"></i></div>
+<div class="tabs" id="tabs"></div>
+<div id="m"></div>
+<p class="hint nop" style="text-align:center;margin-top:20px"><a href="index.html">← Всички игри</a> · Записва се автоматично в този браузър.</p>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const KEY='pre-mortem-v1';
+const TOPICS=['Библиотека – информационна система за училищна библиотека','Разписание – мобилно приложение за разписание и известия','Ученическа фирма – сайт с онлайн поръчки','Състезание – система за регистрация и класиране','Своя идея'];
+const CATS=[['tech','🧩 Технически'],['plan','📅 Проектни'],['team','🤝 Екип'],['res','💰 Ресурси'],['sec','🔐 Данни и сигурност']];
+const SUG={tech:['Избрахме нова технология, която никой не владее','Частите на проекта не работят заедно','Не тествахме нищо до последния ден'],
+ plan:['Целта и обхватът бяха неясни','Оставихме всичко за последната седмица','Добавяхме нови функции до края'],
+ team:['Един член на екипа свърши почти всичко','Някой се разболя и задачите му останаха','Скарахме се и спряхме да си говорим'],
+ res:['Нямахме достатъчно часове за работа заедно','Програмата, която ни трябваше, е платена','Нямахме компютър с нужната програма'],
+ sec:['Изгубихме файловете – нямаше резервно копие','Работихме върху различни версии на документа','Използвахме чужди снимки без разрешение']};
+const STR=[['avoid','🚫 Избягване','променяме плана, за да няма причина'],['reduce','⬇️ Намаляване','правим вероятността или щетата по-малка'],['transfer','➡️ Прехвърляне','отговорността минава към друг'],['accept','🤝 Приемане','осъзнато поемаме риска и имаме резервен план']];
+const STEPS=[['Как работи','📚',0],['Провалът','💀',5],['Причините','🧩',10],['Оценка','⚖️',8],['Реакция','🛡️',12],['Регистър','📋',5]];
+let bank=false,notesOpen=false;
+let D={team:'',topic:'',own:'',names:['','','',''],notes:['','','',''],risks:[],refl:['','']},cur=0,tm=null,left=0,run=false;
+try{const v=JSON.parse(localStorage.getItem(KEY));if(v&&v.risks)D=Object.assign(D,v)}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}prog()};
+const nm=i=>D.names[i].trim()||('Член '+(i+1));
+const sc=r=>(r.p||0)*(r.i||0);
+const lvl=s=>!s?'s0':s>=6?'hi2':s>=3?'md':'lo';
+const lvlT=s=>!s?'—':s>=6?'висок':s>=3?'среден':'нисък';
+const valid=()=>D.risks.filter(r=>r.t.trim());
+const topicT=()=>D.topic==='Своя идея'?(D.own.trim()||'своя идея'):(D.topic||'екипния проект');
+function done(k){const R=valid();return [
+ !!(D.team.trim()&&D.topic),
+ D.notes.filter(x=>x.trim()).length>=2,
+ R.length>=5,
+ R.length>=5&&R.every(r=>r.p&&r.i),
+ R.length>=5&&R.every(r=>r.s&&r.m&&r.m.trim().length>=10&&r.o!==''&&r.o!=null),
+ !!(D.refl[0].trim()&&D.refl[1].trim())][k]}
+function prog(){const n=[0,1,2,3,4,5].filter(done).length,p=Math.round(n/6*100);$('#pgb').style.width=p+'%';$('#tot').textContent=p+'%';tabs()}
+function tabs(){$('#tabs').innerHTML=STEPS.map((s,k)=>`<button class="${k==cur?'on':''}" onclick="go(${k})">${s[1]} ${k}. ${s[0]} ${done(k)?'<span class="ck">✓</span>':''}</button>`).join('')}
+function go(k){cur=k;stopT();left=STEPS[k][2]*60;draw();window.scrollTo({top:0,behavior:'smooth'})}
+function timer(){if(!STEPS[cur][2])return'';const m=Math.floor(left/60),s=left%60;return`<div class="tmr nop ${left<=0?'end':''}" id="tmr">⏱ <b id="tt">${m}:${String(s).padStart(2,'0')}</b><span>препоръчително време</span><button onclick="tgl()">${run?'⏸ Пауза':'▶ Старт'}</button><button onclick="left=${STEPS[cur][2]*60};stopT();draw()">↺</button><button onclick="left+=60;tick(0)">+1 мин</button></div>`}
+function tgl(){if(run){stopT();draw();return}run=true;tm=setInterval(()=>tick(1),1000);draw()}
+function stopT(){run=false;clearInterval(tm)}
+function tick(d){left=Math.max(0,left-d);const e=$('#tt');if(e){const m=Math.floor(left/60),s=left%60;e.textContent=m+':'+String(s).padStart(2,'0')}if(left<=0&&run){stopT();draw()}}
+function nav(){return`<div class="nav">${cur>0?`<button onclick="go(${cur-1})">← Назад</button>`:'<span></span>'}${cur<5?`<button class="go" onclick="go(${cur+1})">Напред: ${STEPS[cur+1][0]} →</button>`:''}</div>`}
+const set=(path,v)=>{const p=path.split('.');let o=D;while(p.length>1)o=o[p.shift()];o[p[0]]=v;save()};
+
+function s0(){return`<div class="card"><h2>Какво е пре-мортем?</h2>
+<p><b>Пост-мортем</b> („след смъртта“) е анализ, който правим, след като проектът е приключил – какво се обърка. <b>Пре-мортем</b> („преди смъртта“) обръща реда: <b>преди</b> да започнем, си представяме, че проектът <b>вече се е провалил</b>, и търсим защо.</p>
+<div class="d">💡 Защо работи? Когато питаме „Какво <i>може</i> да се обърка?“, хората са оптимисти и не искат да изглеждат негативни. Когато кажем „Проектът <i>се провали</i> – защо?“, мозъкът започва да търси обяснения и открива много повече причини. Методът е предложен от психолога Гари Клайн и се използва в софтуерни фирми, болници и армията.</div>
+<h3>Връзка с уроците</h3>
+<p>Пре-мортемът е метод за <b>идентифициране на рискове</b> (урок 5), като мозъчната атака. След това правим същото като в урока: <b>оценка = вероятност × влияние</b> и избираме <b>реакция</b>. Резултатът е <b>регистър на рисковете</b> за вашия екипен проект (урок 12 – поне 5 риска с оценка и реакция).</p>
+<div class="flow">${STEPS.slice(1).map((s,k)=>`<div>${s[1]} ${k+1}. ${s[0]}<small>~${s[2]} мин</small></div>`).join('')}</div>
+<h3>Правила</h3>
+<ul><li>Никой не е виновен предварително – търсим <b>причини</b>, не хора.</li><li>Няма глупави идеи. Колкото по-конкретна причината, толкова по-добре.</li><li>Първо всеки мисли <b>сам</b>, после обсъждаме заедно – така се чуват и тихите.</li></ul>
+</div>
+<div class="card"><h2>👥 Вашият екип</h2>
+<p><label>Име на екипа<br><input type="text" value="${esc(D.team)}" oninput="set('team',this.value)" placeholder="напр. Отбор Бета"></label></p>
+<p><label>Тема на екипния проект<br><select onchange="set('topic',this.value);draw()"><option value="">– избери –</option>${TOPICS.map(t=>`<option ${D.topic==t?'selected':''}>${t}</option>`).join('')}</select></label>
+${D.topic==='Своя идея'?`<label>Каква?<br><input type="text" value="${esc(D.own)}" oninput="set('own',this.value)" placeholder="кратко описание"></label>`:''}</p>
+<p><b>Членове:</b><br>${D.names.map((n,i)=>`<input type="text" value="${esc(n)}" placeholder="Име ${i+1}" oninput="set('names.${i}',this.value)" style="margin:3px 6px 3px 0">`).join('')}</p>
+<p class="hint">Екип от 3? Оставете четвъртото поле празно.</p>
+${nav()}</div>`}
+
+function s1(){return`<div class="gone"><span class="stamp">ПРОВАЛ</span><h2>💀 Денят на предаването…</h2>
+<p>Днес е денят на презентацията на проекта <b>„${esc(topicT())}“</b>. Учителят отваря файловете ви и…</p>
+<p style="font-size:1.15rem"><b>Проектът се провали. Напълно.</b> Не е предаден навреме, половината липсва, а презентацията е хаос.</p>
+<p>Не питаме <i>дали</i> ще стане. <b>Вече е станало.</b> Въпросът е: <b>какво се случи?</b></p></div>
+<div class="card">${timer()}<h2>Всеки сам: защо се провалихме?</h2>
+<p>Мълчаливо, без да обсъждате, всеки записва поне <b>3 причини</b>. Пишете ги като в минало време – „Изгубихме…“, „Никой не…“, „Оставихме…“.</p>
+<div class="cats">${CATS.map(c=>`<span class="ch">${c[1]}</span>`).join('')}</div>
+<p class="hint">Ако се затрудните, помислете за всяка категория: какво може да се обърка с техниката, с плана, в екипа, с времето и парите, с файловете?</p>
+<div class="mem">${D.names.map((n,i)=>(n.trim()||i<3)?`<div class="bx"><b>✍ ${esc(nm(i))}</b><textarea oninput="set('notes.${i}',this.value)" placeholder="1. …&#10;2. …&#10;3. …">${esc(D.notes[i])}</textarea></div>`:'').join('')}</div>
+<div class="d">📱 Играете на един компютър? Всеки пише на лист, после секретарят ги препише тук. Важното е първо да мислите поотделно.</div>
+${nav()}</div>`}
+
+function s2(){const R=D.risks;return`<div class="card">${timer()}<h2>🧩 Обединете причините</h2>
+<p>Всеки прочита на глас своите причини. Сложете еднаквите заедно и запишете общия списък тук. Всяка причина – в едно изречение и с категория. Нужни са <b>поне 5</b>.</p>
+<details ${notesOpen?'open':''} ontoggle="notesOpen=this.open"><summary>Вижте какво написахте в стъпка 1</summary><div class="gr">${D.notes.map((x,i)=>x.trim()?`<div class="bx"><b>${esc(nm(i))}</b><div style="white-space:pre-wrap">${esc(x)}</div></div>`:'').join('')||'<p class="hint">Още няма записани бележки.</p>'}</div></details>
+<div id="rl">${R.map((r,k)=>`<div class="row"><span class="n">${k+1}</span><input type="text" value="${esc(r.t)}" oninput="D.risks[${k}].t=this.value;save();chk2()" placeholder="напр. Изгубихме файловете – нямаше резервно копие"><select onchange="D.risks[${k}].c=this.value;save();chk2()"><option value="">категория…</option>${CATS.map(c=>`<option value="${c[0]}" ${r.c==c[0]?'selected':''}>${c[1]}</option>`).join('')}</select><button class="x" title="Изтрий" onclick="D.risks.splice(${k},1);save();draw()">✕</button></div>`).join('')}</div>
+<p><button onclick="add('','')">➕ Добави причина</button></p>
+<div id="c2"></div>
+<details class="nop" ${bank?'open':''} ontoggle="bank=this.open"><summary>💡 Банка с идеи (само ако закъсате)</summary><p class="hint">Натиснете, за да добавите. По-добре е да измислите свои – те са за вашия проект.</p>
+${CATS.map(c=>`<div><b style="font-size:.9rem">${c[1]}</b><div class="cats">${SUG[c[0]].map(s=>`<button class="sug" onclick="add(${esc(JSON.stringify(s))},'${c[0]}')">${esc(s)}</button>`).join('')}</div></div>`).join('')}</details>
+${nav()}</div>`}
+function add(t,c){D.risks.push({t,c,p:0,i:0,s:'',m:'',o:'',w:''});save();draw();const l=document.querySelectorAll('#rl input[type=text]');if(!t&&l.length)l[l.length-1].focus()}
+function chk2(){const e=$('#c2');if(!e)return;const R=valid(),cs=new Set(R.map(r=>r.c).filter(Boolean));
+ let h=R.length>=5?`<p class="ok">✓ ${R.length} причини – чудесно!</p>`:`<p class="no">Имате ${R.length} от поне 5 причини.</p>`;
+ if(R.length)h+=cs.size>=3?`<p class="ok">✓ Покрити са ${cs.size} категории.</p>`:`<p class="hint">⚠ Причините са само от ${cs.size||0} категори${cs.size==1?'я':'и'}. Помислете и за другите – екип, данни, ресурси…</p>`;
+ if(R.some(r=>D.names.some(n=>n.trim().length>1&&r.t.includes(n.trim()))))h+=`<p class="no">Махнете имената – търсим причина, не виновен!</p>`;
+ e.innerHTML=h}
+
+function s3(){const R=valid();return`<div class="card">${timer()}<h2>⚖️ Оценете всяка причина</h2>
+<p>Както в урок 5: <b>вероятност</b> (колко е вероятно да се случи) и <b>влияние</b> (колко ще навреди). <b>Оценка = вероятност × влияние</b>, от 1 до 9.</p>
+<div class="mxw"><div>${R.length?D.risks.map((r,k)=>r.t.trim()?`<div class="ev"><span><b>${idx(k)}.</b> ${esc(r.t)}</span>
+<span><span class="sl">Вероятност</span><span class="seg">${['ниска','средна','висока'].map((x,v)=>`<button class="${r.p==v+1?'on':''}" onclick="D.risks[${k}].p=${v+1};save();draw()">${x}</button>`).join('')}</span></span>
+<span><span class="sl">Влияние</span><span class="seg">${['малко','средно','голямо'].map((x,v)=>`<button class="${r.i==v+1?'on':''}" onclick="D.risks[${k}].i=${v+1};save();draw()">${x}</button>`).join('')}</span></span>
+<span class="score ${lvl(sc(r))}">${sc(r)||'?'}</span></div>`:'').join(''):'<p class="no">Първо добавете причини в стъпка 2.</p>'}</div>
+<div><h3 style="margin-top:0">Матрица на риска</h3>${matrix()}<p class="hint">Числата в кръгчетата са номерата на причините. Горе вдясно е опасната зона.</p></div></div>
+<div class="d">🗣 Ако не сте съгласни за оценката, всеки казва число с пръсти (1–3) едновременно. При голяма разлика – тези с крайните оценки обясняват защо.</div>
+${nav()}</div>`}
+function idx(k){let n=0;for(let j=0;j<=k;j++)if(D.risks[j].t.trim())n++;return n}
+function matrix(){let h='<div class="mx">';for(let p=3;p>=1;p--){h+=`<div class="ax v">${['','ниска','средна','висока'][p]}</div>`;for(let i=1;i<=3;i++){const s=p*i;h+=`<div class="c ${lvl(s)}"><i>${s}</i>${D.risks.map((r,k)=>r.t.trim()&&r.p==p&&r.i==i?`<span class="dot" title="${esc(r.t)}">${idx(k)}</span>`:'').join('')}</div>`}}
+ h+='<div></div>'+['малко','средно','голямо'].map(x=>`<div class="ax">${x}</div>`).join('')+'</div><div class="hint" style="display:flex;justify-content:space-between"><span>↑ Вероятност</span><span>Влияние →</span></div>';return h}
+
+function order(){return D.risks.map((r,k)=>[r,k]).filter(x=>x[0].t.trim()).sort((a,b)=>sc(b[0])-sc(a[0]))}
+function s4(){const O=order(),ppl=D.names.map((n,i)=>[n.trim(),i]).filter(x=>x[0]);return`<div class="card">${timer()}<h2>🛡️ Какво ще направим?</h2>
+<p>Рисковете са подредени от най-опасния. За всеки изберете <b>стратегия</b>, напишете <b>конкретна мярка</b>, <b>отговорник</b> и <b>ранен сигнал</b> – как ще разберем навреме, че се случва.</p>
+<div class="gr">${STR.map(s=>`<div class="bx"><b>${s[1]}</b><span class="hint">${s[2]}</span></div>`).join('')}</div>
+${O.length?O.map(([r,k])=>{const s=sc(r);return`<div class="rx ${lvl(s)}"><div class="top"><span class="score ${lvl(s)}">${s||'?'}</span><b>${esc(r.t)}</b></div>
+<div class="strat">${STR.map(x=>`<button class="${r.s==x[0]?'on':''}" onclick="D.risks[${k}].s='${x[0]}';save();draw()">${x[1]}</button>`).join('')}</div>
+${s>=6&&r.s==='accept'?'<p class="no" style="margin:6px 0 0">⚠ Висок риск и „приемане“? Това е опасно – помислете дали не може да го намалите.</p>':''}
+<div class="f"><label>Мярка – какво точно правим?<input type="text" value="${esc(r.m)}" oninput="D.risks[${k}].m=this.value;save()" placeholder="${r.s==='accept'?'резервен план, ако се случи':'напр. всяка вечер копие в общата папка'}"></label>
+<label>Отговорник<select onchange="D.risks[${k}].o=this.value;save()"><option value="">– кой? –</option>${ppl.map(([n,i])=>`<option value="${i}" ${r.o!==''&&r.o==i?'selected':''}>${esc(n)}</option>`).join('')}<option value="all" ${r.o=='all'?'selected':''}>Целият екип</option></select></label>
+<label>Ранен сигнал<input type="text" value="${esc(r.w)}" oninput="D.risks[${k}].w=this.value;save()" placeholder="напр. в сряда още няма тестова версия"></label></div></div>`}).join(''):'<p class="no">Първо добавете и оценете причини.</p>'}
+${!ppl.length?'<p class="hint">Попълнете имената в „Как работи“, за да изберете отговорници.</p>':''}
+<div class="d">✅ Добрата мярка е <b>конкретна</b> (кой, какво, кога). „Ще внимаваме“ не е мярка. „Всеки петък Иво проверява дали има копие в облака“ е мярка.</div>
+${nav()}</div>`}
+
+function owner(r){return r.o==='all'?'Целият екип':(r.o!==''&&r.o!=null&&D.names[r.o]?.trim())||'—'}
+function stT(r){return(STR.find(x=>x[0]==r.s)||['','—'])[1]}
+function catT(r){return(CATS.find(x=>x[0]==r.c)||['','—'])[1]}
+function s5(){const O=order(),R=valid(),hi=R.filter(r=>sc(r)>=6),cs=new Set(R.map(r=>r.c).filter(Boolean));
+ const C=[[R.length>=5,`Поне 5 риска (имате ${R.length})`],[R.length&&R.every(r=>r.p&&r.i),'Всички са оценени'],[cs.size>=3,'Поне 3 различни категории'],[R.length&&R.every(r=>r.s&&r.m.trim().length>=10),'Всеки риск има стратегия и конкретна мярка'],[R.length&&R.every(r=>r.o!==''&&r.o!=null),'Всеки риск има отговорник'],[!hi.some(r=>r.s==='accept'),'Нито един висок риск не е оставен на „приемане“']];
+ return`<div class="card"><h2>📋 Регистър на рисковете</h2>
+<p><b>Екип:</b> ${esc(D.team)||'—'} · <b>Проект:</b> ${esc(topicT())} · <b>Членове:</b> ${esc(D.names.filter(n=>n.trim()).join(', '))||'—'}</p>
+<div class="tw"><table><tr><th>№</th><th>Риск</th><th>Категория</th><th>В × Вл</th><th>Оценка</th><th>Стратегия</th><th>Мярка</th><th>Отговорник</th><th>Ранен сигнал</th></tr>
+${O.map(([r],n)=>`<tr><td>${n+1}</td><td>${esc(r.t)}</td><td>${catT(r)}</td><td>${r.p||'?'} × ${r.i||'?'}</td><td><span class="score ${lvl(sc(r))}">${sc(r)||'?'}</span><br><small>${lvlT(sc(r))}</small></td><td>${stT(r)}</td><td>${esc(r.m)||'—'}</td><td>${esc(owner(r))}</td><td>${esc(r.w)||'—'}</td></tr>`).join('')||'<tr><td colspan="9">Няма рискове.</td></tr>'}</table></div>
+<h3>✔ Проверка</h3><ul class="chk">${C.map(c=>`<li>${c[0]?'<span class="ok">✓</span>':'<span class="no">✗</span>'} ${c[1]}</li>`).join('')}</ul>
+<h3>💭 Размисъл</h3>
+<p><label style="display:block">Коя причина за провала ви изненада най-много и защо?<textarea oninput="set('refl.0',this.value)">${esc(D.refl[0])}</textarea></label></p>
+<p><label style="display:block">Какво ще промените в плана на проекта още тази седмица?<textarea oninput="set('refl.1',this.value)">${esc(D.refl[1])}</textarea></label></p>
+<div class="nop" style="display:flex;gap:8px;flex-wrap:wrap"><button class="go" onclick="window.print()">🖨 Принтирай / запази като PDF</button><button onclick="copyT()">📋 Копирай като текст</button><button onclick="if(confirm('Да изчистя ли всичко за нов екип?')){try{localStorage.removeItem(KEY)}catch(e){}location.reload()}">🗑 Нов екип</button></div>
+<p id="cp" class="ok"></p>
+<div class="t nop">📁 Този регистър е част от екипния проект (урок 12, „Анализ на риска“ – 15 т.). Копирайте таблицата в документа на екипа или я запазете като PDF. Връщайте се към нея всяка седмица – рисковете се <b>наблюдават</b>, не само се записват.</div>
+${nav()}</div>`}
+function copyT(){const O=order();let t=`РЕГИСТЪР НА РИСКОВЕТЕ\nЕкип: ${D.team}\nПроект: ${topicT()}\nЧленове: ${D.names.filter(n=>n.trim()).join(', ')}\n\n№\tРиск\tКатегория\tВероятност\tВлияние\tОценка\tСтратегия\tМярка\tОтговорник\tРанен сигнал\n`;
+ O.forEach(([r],n)=>{t+=[n+1,r.t,catT(r).replace(/^\S+ /,''),r.p||'',r.i||'',sc(r)||'',stT(r).replace(/^\S+ /,''),r.m,owner(r),r.w].join('\t')+'\n'});
+ t+=`\nИзненада ни: ${D.refl[0]}\nПромяна в плана: ${D.refl[1]}\n`;
+ const ok=()=>{$('#cp').textContent='✓ Копирано! Поставете в Word или Excel (таблицата се запазва).'};
+ if(navigator.clipboard)navigator.clipboard.writeText(t).then(ok,()=>fb(t,ok));else fb(t,ok)}
+function fb(t,ok){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');ok()}catch(e){alert('Маркирайте таблицата и копирайте ръчно.')}a.remove()}
+function party(){for(let i=0;i<30;i++){const e=document.createElement('div');e.className='cf';e.textContent=['🎉','🛡️','✅','⭐'][i%4];e.style.left=Math.random()*100+'vw';e.style.animationDelay=Math.random()*.8+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),3500)}}
+let partied=false;
+function draw(){$('#m').innerHTML=[s0,s1,s2,s3,s4,s5][cur]();tabs();if(cur==2)chk2();
+ if(cur==5&&!partied&&[0,1,2,3,4].every(done)){partied=true;party()}}
+left=STEPS[0][2]*60;prog();draw();
+</script>
+</body></html>
