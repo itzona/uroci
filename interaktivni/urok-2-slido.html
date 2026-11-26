@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 2: Slido – анкети и въпроси в Google Slides – Интерактивни презентации, 11 и 12 клас</title>
+<link rel="icon" type="image/svg+xml" href="../icons/interaktivni.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ip-urok.css?v=20261127">
+</head>
+<body>
+
+<header class="hero slido">
+  <div class="wrap">
+    <div>
+      <span class="tag">Урок 2 · Интерактивни презентации · 11 и 12 клас</span>
+      <h1>Slido: анкети и въпроси в Google Slides</h1>
+      <p>Slido се вгражда в презентацията, която вече правиш. Анкетите стават слайдове, а публиката задава въпроси и гласува за най-интересните.</p>
+    </div>
+    <svg viewBox="0 0 470 320" role="img" aria-label="Прожекционен екран с растящи стълбове и телефони, от които се гласува">
+      <ellipse cx="235" cy="300" rx="210" ry="14" fill="#13246e" opacity=".5"/>
+      <rect x="40" y="18" width="300" height="200" rx="16" fill="#13246e"/>
+      <rect x="48" y="26" width="284" height="184" rx="10" fill="#fff"/>
+      <rect x="48" y="26" width="284" height="30" rx="10" fill="#13246e"/>
+      <rect x="48" y="44" width="284" height="12" fill="#13246e"/>
+      <text x="62" y="46" fill="#fff" font-family="Nunito Sans,sans-serif" font-size="12">slido.com</text>
+      <text x="250" y="46" fill="#ffc23d" font-family="Nunito,sans-serif" font-weight="900" font-size="13"># 482 913</text>
+      <rect x="64" y="68" width="150" height="9" rx="4" fill="#1b2240"/>
+      <rect x="64" y="82" width="96" height="7" rx="3" fill="#c8cfe8"/>
+      <line x1="64" y1="192" x2="316" y2="192" stroke="#dfe3f3" stroke-width="2"/>
+      <rect class="bargrow" x="78" y="110" width="44" height="82" rx="6" fill="#2347d6"/>
+      <rect class="bargrow" x="136" y="140" width="44" height="52" rx="6" fill="#ff6a4d" style="animation-delay:.15s"/>
+      <rect class="bargrow" x="194" y="124" width="44" height="68" rx="6" fill="#ffc23d" style="animation-delay:.3s"/>
+      <rect class="bargrow" x="252" y="162" width="44" height="30" rx="6" fill="#45b0ff" style="animation-delay:.45s"/>
+      <rect x="180" y="218" width="20" height="40" fill="#13246e"/>
+      <rect x="140" y="256" width="100" height="10" rx="5" fill="#13246e"/>
+      <g transform="translate(330 120) rotate(8)">
+        <rect width="74" height="136" rx="14" fill="#1b2240"/><rect x="6" y="10" width="62" height="116" rx="9" fill="#fff"/>
+        <rect x="14" y="24" width="46" height="6" rx="3" fill="#1b2240"/>
+        <rect x="14" y="40" width="46" height="16" rx="5" fill="#eef2ff" stroke="#2347d6" stroke-width="2"/>
+        <rect x="14" y="62" width="46" height="16" rx="5" fill="#fff" stroke="#dfe3f3" stroke-width="2"/>
+        <rect x="14" y="84" width="46" height="16" rx="5" fill="#fff" stroke="#dfe3f3" stroke-width="2"/>
+        <rect x="14" y="106" width="46" height="12" rx="5" fill="#2347d6"/>
+      </g>
+      <g transform="translate(398 168) rotate(-6)">
+        <rect width="62" height="114" rx="12" fill="#1b2240"/><rect x="5" y="9" width="52" height="96" rx="8" fill="#fff"/>
+        <circle cx="31" cy="50" r="17" fill="#3ccf7e"/><path d="M23 50l6 6 11-12" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="13" y="78" width="36" height="6" rx="3" fill="#c8cfe8"/>
+      </g>
+      <g transform="translate(372 42)"><circle r="24" fill="#ffc23d"/><text y="9" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="26" fill="#1b2240">?</text></g>
+      <g transform="translate(436 96)"><circle r="16" fill="#ff6a4d"/><text y="6" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="18" fill="#fff">!</text></g>
+      <g transform="translate(18 250)"><circle r="14" fill="#45b0ff"/><text y="5" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="14" fill="#fff">24</text></g>
+    </svg>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Теория</summary><div class="menu"><a href="#kakvo">Какво е Slido</a><a href="#vidove">Видове взаимодействия</a><a href="#izgled">Как изглежда</a></div></details>
+    <details><summary>Как се прави</summary><div class="menu"><a href="#stapki">Slido в Google Slides</a><a href="#drugi">PowerPoint и без добавка</a><a href="#saveti">Как се води Q&A</a></div></details>
+    <details><summary>Задача</summary><div class="menu"><a href="#zadacha">Задача за часа</a><a href="#primeri">Пример</a><a href="#kriterii">Критерии за оценяване</a></div></details>
+    <a href="#test">Тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="kakvo">
+  <div class="wrap grid2">
+    <div>
+      <h2>Какво е Slido</h2>
+      <p><b>Slido</b> е инструмент за анкети и въпроси от публиката, който се <b>вгражда в презентацията, която вече правиш</b> – в Google Slides или PowerPoint. Не е нужно да правиш всичко наново в друг сайт: анкетите стават обикновени слайдове между твоите.</p>
+      <p>Най-силната страна на Slido е <b>Q&amp;A</b> – зрителите пишат въпроси, гласуват за въпросите на другите, и най-важните излизат най-отгоре.</p>
+      <p>Участниците отварят <b>slido.com</b> и въвеждат кода на събитието (започва с <b>#</b>) или сканират QR кода.</p>
+    </div>
+    <div class="card">
+      <h3>Slido и Mentimeter – разликата</h3>
+      <table class="stack">
+        <thead><tr><th></th><th>Mentimeter</th><th>Slido</th></tr></thead>
+        <tbody>
+          <tr><td><b>Къде правиш слайдовете</b></td><td>В сайта на Mentimeter</td><td>В Google Slides / PowerPoint + добавка</td></tr>
+          <tr><td><b>Силна страна</b></td><td>Много видове слайдове</td><td>Q&amp;A с гласуване за въпросите</td></tr>
+          <tr><td><b>Безплатно</b></td><td>Без лимит на участниците (нови акаунти)</td><td>До 100 участници, 3 анкети и 1 тест в един slido</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="vidove">
+  <div class="wrap">
+    <h2>Видове взаимодействия в Slido</h2>
+    <p class="muted">В Slido всеки въпрос към публиката се нарича <b>interaction</b>. Всички видове анкети (poll) се броят към лимита от <b>3 анкети</b> в безплатния план, тестът – към лимита от <b>1 тест</b>.</p>
+    <div class="grid" style="margin-top:20px">
+      <div class="card tile"><div class="mini"><div class="q">Кой браузър ползваш?</div>
+          <div class="hrow"><span>Chrome</span><i style="width:66%;background:var(--blue)"></i><em>58%</em></div>
+          <div class="hrow"><span>Edge</span><i style="width:24%;background:var(--coral)"></i><em>21%</em></div>
+          <div class="hrow"><span>Safari</span><i style="width:16%;background:var(--sun)"></i><em>13%</em></div>
+          <div class="hrow"><span>Firefox</span><i style="width:9%;background:var(--sky)"></i><em>8%</em></div></div>
+        <h3>Multiple choice</h3><span class="pill">анкета</span><p>Избор от готови отговори. Може да се разреши повече от един отговор.</p></div>
+      <div class="card tile"><div class="mini"><div class="q">С една дума: облак е…</div>
+          <div class="cloud" style="height:110px"><span style="font-size:28px;color:var(--blue)">съхранение</span><span style="font-size:14px;color:var(--coral)">Drive</span><span style="font-size:20px;color:var(--deep)">сървъри</span><span style="font-size:13px;color:var(--sky)">онлайн</span><span style="font-size:16px;color:var(--coral)">достъп</span></div></div>
+        <h3>Word cloud</h3><span class="pill">анкета</span><p>Облак от думи – по-често написаните думи са по-големи.</p></div>
+      <div class="card tile"><div class="mini"><div class="q">Оцени урока</div>
+          <div style="font:900 40px Nunito,sans-serif;color:var(--blue);text-align:center;margin-top:8px">4,3<span style="font-size:16px;color:var(--muted)"> / 5</span></div>
+          <div style="text-align:center;font-size:22px;color:var(--sun);letter-spacing:4px">★★★★☆</div></div>
+        <h3>Rating</h3><span class="pill">анкета</span><p>Оценка със звезди или по скала. Показва средната оценка.</p></div>
+      <div class="card tile"><div class="mini"><div class="q">Какво да подобрим?</div>
+          <div class="sticky"><div>Повече примери</div><div>По-кратки слайдове</div><div>Видео</div></div></div>
+        <h3>Open text</h3><span class="pill">анкета</span><p>Свободен текст – кратки мнения и идеи.</p></div>
+      <div class="card tile"><div class="mini"><div class="q">Подреди по важност</div>
+          <div class="hrow"><span>1. Батерия</span><i style="width:80%;background:var(--blue)"></i></div>
+          <div class="hrow"><span>2. Цена</span><i style="width:60%;background:var(--blue);opacity:.75"></i></div>
+          <div class="hrow"><span>3. Тегло</span><i style="width:40%;background:var(--blue);opacity:.5"></i></div></div>
+        <h3>Ranking</h3><span class="pill">анкета</span><p>Участниците подреждат елементи. Резултат: обща класация.</p></div>
+      <div class="card tile"><div class="mini"><div class="q">Кой порт ползва HTTPS?</div>
+          <div class="answers"><div style="background:#e5484d"><u>A</u>80</div><div style="background:#1f9d6a"><u>B</u>443 ✓</div><div style="background:#d99a00"><u>C</u>21</div><div style="background:#2347d6"><u>D</u>25</div></div></div>
+        <h3>Quiz</h3><span class="pill">тест</span><p>Въпроси с верен отговор и класиране на участниците.</p></div>
+      <div class="card tile"><div class="mini"><div class="q">Въпроси от публиката</div>
+          <div class="qa"><div><b>▲ 12</b>Ще има ли контролно?</div><div><b>▲ 7</b>Може ли по двойки?</div><div><b>▲ 2</b>Кога е срокът?</div></div></div>
+        <h3>Q&amp;A</h3><span class="pill">въпроси</span><p>Публиката пише въпроси и гласува за чуждите. Може да е анонимно.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="izgled">
+  <div class="wrap">
+    <h2>Как изглежда Slido</h2>
+    <p class="muted">Схеми на основните екрани. Менютата са на английски, както ще ги видиш.</p>
+    <div class="grid2" style="margin-top:22px">
+      <figure style="margin:0">
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Google Slides – добавка Slido</span></div>
+          <div class="gmenu"><span>File</span><span>Edit</span><span>View</span><span>Insert</span><span>Slide</span><span>Tools</span><b>Extensions</b><span>Help</span></div>
+          <div class="gbody">
+            <div class="gdrop"><div>Add-ons</div><div>Apps Script</div><div class="on">Slido ▸ Open</div></div>
+            <div style="padding:16px"><div style="background:var(--card);border:1px solid var(--line);border-radius:8px;height:180px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;padding:10px"><b style="font-family:Nunito,sans-serif">Анкета: Slido</b><div class="hrow" style="width:80%"><span>Да</span><i style="width:60%;background:var(--blue)"></i></div><div class="hrow" style="width:80%"><span>Не</span><i style="width:25%;background:var(--coral)"></i></div></div></div>
+            <div class="gside"><b>Slido</b><p class="note" style="margin:4px 0">Create interaction</p><div>Multiple choice</div><div>Word cloud</div><div>Rating</div><div>Quiz</div><div>Q&A</div></div>
+          </div></div>
+        <figcaption class="cap"><b>Slido в Google Slides.</b> Добавката се отваря от менюто Extensions, а анкетите се създават в панела отдясно и стават отделни слайдове.</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Q&A – въпроси от публиката</span></div>
+          <div class="qa" style="padding:10px 16px"><div><b>▲ 21</b>Ще бъде ли това в теста?</div><div><b>▲ 15</b>Може ли да използваме Canva вместо PowerPoint?</div><div><b>▲ 8</b>Колко слайда минимум?</div><div><b>▲ 3</b>Може ли да сме в отбор от трима?</div></div>
+          <div style="padding:0 16px 12px" class="row"><span class="pill">Popular</span><span class="pill" style="opacity:.6">Recent</span><span class="pill" style="opacity:.6">Answered</span></div></div>
+        <figcaption class="cap"><b>Q&A.</b> Въпросите се подреждат по брой гласове. Модераторът може да скрие неподходящ въпрос или да го маркира като отговорен.</figcaption>
+      </figure>
+      <figure style="margin:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start">
+        <div class="phone"><div class="scr"><div class="url">slido.com</div><b style="font-size:15px">Joining as a participant?</b><div class="code"># 482 913</div><div class="send" style="background:#1b7a4c">Join</div><p style="font-size:11px;color:#777;margin-top:12px">Кодът е на слайда, заедно с QR код</p></div></div>
+        <div class="phone"><div class="scr"><div class="url">slido.com · Q&amp;A</div><div style="border:2px solid #dfe3f3;border-radius:10px;padding:8px;color:#777">Type your question</div><div class="send" style="background:#1b7a4c;margin:8px 0 12px">Send</div><div style="font-size:12px;border-bottom:1px solid #dfe3f3;padding:6px 0">👍 9 · Ще има ли контролно?</div><div style="font-size:12px;border-bottom:1px solid #dfe3f3;padding:6px 0">👍 4 · Може ли по двойки?</div><p style="font-size:11px;color:#777;margin-top:8px">☐ Ask anonymously</p></div></div>
+        <figcaption class="cap" style="grid-column:1/-1"><b>Телефонът на участника.</b> Въвежда кода с # и гласува или задава въпрос. С палец нагоре подкрепя въпросите на другите.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="stapki">
+  <div class="wrap">
+    <h2>Slido в Google Slides стъпка по стъпка</h2>
+    <p class="muted">Направи стъпките заедно с учителя. Надписите са на английски и може леко да се различават в нова версия.</p>
+    <div class="steps" style="margin-top:24px">
+      <div class="step"><div class="txt"><h3>Регистрация</h3><ol><li>Отвори <a href="https://www.slido.com">slido.com</a> → <b>Sign up</b>.</li><li>Влез с Google акаунта си – със същия, с който работиш в Google Slides.</li><li>Избери безплатния план <b>Basic</b>. Не въвеждай данни за карта.</li></ol></div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>slido.com/signup</span></div><div style="padding:22px;display:grid;gap:10px;max-width:320px;margin:0 auto"><b style="font-family:Nunito,sans-serif;font-size:20px;text-align:center">Create your free account</b><div style="border:2px solid var(--line);border-radius:10px;padding:10px;text-align:center;font-weight:700">Continue with Google</div><div style="background:#1b7a4c;color:#fff;border-radius:10px;padding:10px;text-align:center;font-weight:800">Sign up</div></div></div></div>
+      <div class="step"><div class="txt"><h3>Обикновените слайдове</h3><ol><li>В Google Slides създай презентация <b>„Тема – Име Фамилия, клас“</b>.</li><li>Направи заглавен слайд, 2 информационни слайда (3–5 точки и картинка) и заключителен слайд.</li><li>Остави място между тях – там ще влязат анкетите.</li></ol></div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Google Slides</span></div><div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:16px"><div class="f" style="border:2px solid var(--blue);border-radius:8px;padding:12px 6px;font-size:12px;text-align:center">1 · Заглавие</div><div style="border:1px solid var(--line);border-radius:8px;padding:12px 6px;font-size:12px;text-align:center">2 · Информация</div><div style="border:1px solid var(--line);border-radius:8px;padding:12px 6px;font-size:12px;text-align:center">3 · Информация</div><div style="border:1px solid var(--line);border-radius:8px;padding:12px 6px;font-size:12px;text-align:center">4 · Край</div></div></div></div>
+      <div class="step"><div class="txt"><h3>Добавката Slido</h3><ol><li><b>Extensions</b> → <b>Add-ons</b> → <b>Get add-ons</b>.</li><li>Потърси „Slido“ и натисни <b>Install</b>. Разреши достъпа с Google акаунта.</li><li>Отвори я: <b>Extensions</b> → <b>Slido</b>. Отдясно се появява панелът на Slido.</li></ol></div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Google Slides – Extensions</span></div><div class="gmenu"><span>File</span><span>Edit</span><span>View</span><span>Insert</span><span>Slide</span><b>Extensions</b><span>Help</span></div><div style="padding:14px;font-size:13px;display:grid;gap:6px;max-width:240px"><div style="border:1px solid var(--line);border-radius:8px;padding:6px 10px">Add-ons ▸ Get add-ons</div><div style="border:2px solid #1b7a4c;border-radius:8px;padding:6px 10px;font-weight:800">Slido ▸ Open</div></div></div></div>
+      <div class="step"><div class="txt"><h3>Анкетите и тестът</h3><ol><li>В панела на Slido избери вид: <b>Multiple choice</b>, <b>Word cloud</b>, <b>Rating</b>, <b>Quiz</b>…</li><li>Напиши въпроса и отговорите. При Quiz отбележи верния отговор.</li><li>Натисни бутона за добавяне – анкетата става <b>отделен слайд</b>.</li><li>Премести слайда на правилното място, като го плъзнеш в списъка вляво.</li></ol></div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Панел Slido</span></div><div class="gside" style="border:0"><b>Create interaction</b><div>Multiple choice</div><div>Word cloud</div><div>Rating</div><div>Quiz</div><div>Q&amp;A</div></div></div></div>
+      <div class="step"><div class="txt"><h3>Q&amp;A</h3><ol><li>От панела добави и <b>Q&amp;A</b> слайд – той е в края, след информацията.</li><li>Публиката пише въпроси и натиска палец нагоре на въпросите, които иска да чуе отговор.</li><li>Ти отговаряш устно на най-харесваните.</li></ol></div>
+        <div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Q&A – въпроси от публиката</span></div>
+          <div class="qa" style="padding:10px 16px"><div><b>▲ 21</b>Ще бъде ли това в теста?</div><div><b>▲ 15</b>Може ли да използваме Canva вместо PowerPoint?</div><div><b>▲ 8</b>Колко слайда минимум?</div><div><b>▲ 3</b>Може ли да сме в отбор от трима?</div></div>
+          <div style="padding:0 16px 12px" class="row"><span class="pill">Popular</span><span class="pill" style="opacity:.6">Recent</span><span class="pill" style="opacity:.6">Answered</span></div></div>
+        <figcaption class="cap"><b>Q&A.</b> Въпросите се подреждат по брой гласове. Модераторът може да скрие неподходящ въпрос или да го маркира като отговорен.</figcaption>
+      </div></div>
+      <div class="step"><div class="txt"><h3>Презентиране</h3><ol><li>Пусни <b>Slideshow</b>.</li><li>При първото пускане Slido може да поиска да активира анкетите – следвай указанията в панела.</li><li>Зрителите влизат на slido.com с кода или сканират QR кода от слайда.</li><li>Тествай предварително от телефона си.</li></ol></div>
+        <div class="phone"><div class="scr"><div class="url">slido.com</div><b style="font-size:14px">Кой браузър ползваш?</b><div class="opt on"><i></i>Chrome</div><div class="opt"><i></i>Edge</div><div class="opt"><i></i>Safari</div><div class="send" style="background:#1b7a4c">Send</div></div></div></div>
+      <div class="step"><div class="txt"><h3>Резултатите</h3><ol><li>След презентацията отвори slido.com и избери своя slido.</li><li>Там са резултатите от анкетите и всички въпроси от Q&amp;A.</li><li>Направи екранни снимки – износът във файл е в платените планове.</li></ol></div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>slido.com – моят slido</span></div><div style="padding:16px;display:grid;gap:8px;font-size:13px"><b>Пароли и сигурност</b><div class="hrow"><span>Анкета 1</span><i style="width:70%;background:#1b7a4c"></i><em>24</em></div><div class="hrow"><span>Анкета 2</span><i style="width:62%;background:#1b7a4c"></i><em>22</em></div><div class="hrow"><span>Q&amp;A</span><i style="width:30%;background:#1b7a4c"></i><em>9 въпроса</em></div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="drugi">
+  <div class="wrap grid2">
+    <div>
+      <h2>Ако работиш в PowerPoint</h2>
+      <ol>
+        <li>Инсталирай <a href="https://slido.com/powerpoint">Slido for PowerPoint</a> на компютъра, от който ще презентираш.</li>
+        <li>В менюто на PowerPoint се появява Slido. Избери вид анкета – тя се добавя като нов слайд.</li>
+        <li>Пусни презентацията с <kbd>F5</kbd>. Анкетата тръгва сама, а зрителите влизат с код или QR код.</li>
+      </ol>
+    </div>
+    <div>
+      <h2>Ако добавката не тръгва</h2>
+      <ol>
+        <li>Създай анкетите направо на slido.com: <b>Create slido</b> → раздел <b>Polls</b> → <b>Create poll</b>.</li>
+        <li>Q&amp;A е в раздел <b>Q&amp;A</b>.</li>
+        <li>По време на презентацията превключвай между слайдовете и браузъра с <kbd>Alt</kbd>+<kbd>Tab</kbd>.</li>
+      </ol>
+      <div class="tip">Условията на задачата са същите – 3 анкети, 1 тест и Q&amp;A.</div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="saveti">
+  <div class="wrap">
+    <h2>Как се води добро Q&amp;A</h2>
+    <div class="grid" style="margin-top:18px">
+      <div class="card"><h3>Покажи кода рано</h3><p>Нека въпросите се събират по време на цялата презентация, не само в края.</p></div>
+      <div class="card"><h3>Отговаряй по гласовете</h3><p>Започни от въпроса с най-много палци – той интересува най-много хора.</p></div>
+      <div class="card"><h3>Модерирай</h3><p>В настройките може въпросите първо да се одобряват от теб, преди да ги видят всички.</p></div>
+      <div class="card"><h3>Анонимност</h3><p>Анонимните въпроси са по-смели и честни – разреши ги.</p></div>
+      <div class="card"><h3>Маркирай отговорените</h3><p>Така се вижда кои въпроси остават.</p></div>
+      <div class="card"><h3>Брой анкетите</h3><p>Безплатният план позволява 3 анкети и 1 тест в един slido – планирай ги предварително.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="zadacha">
+  <div class="wrap">
+    <h2>Задача за часа</h2>
+    <div class="goal"><h3>Какво трябва да направиш</h3><p>Направи презентация в <b>Google Slides</b> (или PowerPoint) по нова тема и вгради в нея с <b>Slido</b> 3 анкети, 1 тест и въпроси от публиката (Q&amp;A). Проведи я пред класа и отговори на въпросите.</p>
+      <div class="time"><span>⏱ 1 учебен час</span><span>👤 индивидуално или по двойки</span><span>🎯 20 точки</span></div></div>
+    <div class="grid2" style="margin-top:26px">
+      <div>
+      <h3>Изисквания – точно в този ред</h3>
+      <ol class="req">
+        <li><b>Презентация.</b> В Google Slides създай <b>„Тема – Име Фамилия, клас“</b>. Темата е <b>различна</b> от тази в урока за Mentimeter.</li>
+        <li><b>Слайд 1 – заглавие</b> с темата и твоето име.</li>
+        <li><b>Анкета 1 – Word cloud</b> (загрявка) веднага след заглавието: „С една дума: …“.</li>
+        <li><b>Слайдове с информация</b> – 2 слайда с по 3–5 кратки точки и по 1 картинка.</li>
+        <li><b>Анкета 2 – Multiple choice</b> (мнение) с 3–5 отговора.</li>
+        <li><b>Анкета 3 – Rating</b> (оценка от 1 до 5) или <b>Ranking</b>.</li>
+        <li><b>Тест – Quiz</b> с 1 въпрос и отбелязан верен отговор, който проверява информацията от слайдовете.</li>
+        <li><b>Q&amp;A слайд</b> в края. Съучениците задават въпроси и гласуват; ти отговаряш на <b>поне 2-та най-харесвани</b>.</li>
+        <li><b>Заключителен слайд</b> – извод и „Благодаря“.</li>
+        <li><b>Проба и провеждане.</b> Провери от телефона си, че всяка анкета приема отговори. После проведи презентацията.</li>
+      </ol>
+      <div class="tip">Точно 3 анкети и 1 тест – толкова позволява безплатният план на Slido за един slido. Q&amp;A е отделно.</div>
+      </div>
+      <div>
+        <div class="card"><h3>Какво предаваш</h3><ul><li>Линк към Google Slides презентацията, споделен с учителя (<b>Share</b> → достъп за преглед)</li><li>Екранни снимки на резултатите от трите анкети, теста и Q&amp;A</li><li>2–3 изречения: кой въпрос в Q&amp;A събра най-много гласове и какво показаха анкетите</li></ul><p class="note">Предаваш там, където каже учителят (напр. Google Classroom).</p></div>
+        <div class="card" style="margin-top:20px"><h3>Избери тема</h3>
+      <table class="stack">
+        <thead><tr><th>Тема</th><th>Примерен въпрос</th></tr></thead>
+        <tbody>
+          <tr><td>Софтуерно пиратство</td><td>„Доколко е приемливо да се ползва нелицензиран софтуер?“</td></tr>
+          <tr><td>Сигурност на данните</td><td>„Къде пазиш резервни копия на снимките си?“</td></tr>
+          <tr><td>Компютърна конфигурация</td><td>„Подреди: процесор, RAM, видеокарта, SSD, цена“</td></tr>
+          <tr><td>ИИ в училище</td><td>„С какво ти помага ИИ?“</td></tr>
+          <tr><td>Дигитална хигиена</td><td>„Колко часа на ден си на телефона?“</td></tr>
+          <tr><td>Управление на проекти</td><td>„Кой модел не позволява връщане към предишен етап?“</td></tr>
+          <tr><td>Професии в ИТ</td><td>„Какво те притеснява за бъдещето?“</td></tr>
+          <tr><td>Фалшиви новини</td><td>„Кое заглавие е фалшиво?“</td></tr>
+          <tr><td>Своя тема</td><td>Съгласувай с учителя</td></tr>
+        </tbody>
+      </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="primeri">
+  <div class="wrap">
+    <h2>Пример: „Избор на лаптоп“ в Google Slides + Slido</h2>
+    <p class="muted">Презентация от 9 слайда, която отговаря точно на заданието. Резултатите са примерни.</p>
+    <div class="grid" style="margin-top:14px">
+      <div class="card"><span class="pill">Слайд 1</span><p>„Избор на лаптоп – Иван Петров, 12а“.</p></div>
+      <div class="card"><span class="pill">Анкета 1 · Word cloud</span><p>„С една дума: за какво ти трябва лаптоп?“ – излизат „учене“, „игри“, „филми“.</p></div>
+      <div class="card"><span class="pill">Слайдове 3–4 · информация</span><p>„Основни компоненти: процесор, RAM, SSD, видеокарта, батерия“ и „Какво означават числата в обявата“ – с картинки.</p></div>
+      <div class="card"><span class="pill">Анкета 2 · Multiple choice</span><p>„Какво е най-важно за теб при лаптоп?“ – мощност / батерия / тегло / цена.</p></div>
+      <div class="card"><span class="pill">Анкета 3 · Rating</span><p>„Колко доволен си от сегашния си компютър? (1–5)“ – средно 3,4.</p></div>
+      <div class="card"><span class="pill">Тест · Quiz</span><p>„Кое ускорява зареждането на програмите най-много?“ – <b>SSD ✓</b> / по-голям екран / повече USB портове.</p></div>
+      <div class="card"><span class="pill">Q&amp;A</span><p>Най-харесван въпрос (▲ 11): „Струва ли си геймърски лаптоп за училище?“ – отговорено устно.</p></div>
+      <div class="card"><span class="pill">Слайд 9</span><p>Извод: „Препоръчителна конфигурация за ученик“, съобразена с резултатите от анкетите.</p></div>
+    </div>
+    <div class="card" style="margin-top:20px"><h3>Изводът, който ученикът предава</h3><p>„За повечето от класа най-важна е батерията, а не мощността. 19 от 24 познаха, че SSD ускорява програмите. В Q&amp;A най-много гласове събра въпросът дали си струва геймърски лаптоп за училище.“</p></div>
+  </div>
+</section>
+
+<section class="band" id="kriterii">
+  <div class="wrap grid2">
+    <div>
+      <h2>Критерии за оценяване</h2>
+      <table class="crit">
+        <thead><tr><th>Критерий</th><th>Точки</th></tr></thead>
+        <tbody><tr><td><b>Презентация</b> – заглавие, 2 информационни слайда с картинки, заключение</td><td>3</td></tr><tr><td><b>Добавката</b> – анкетите са вградени като слайдове на правилните места</td><td>3</td></tr><tr><td><b>Три анкети</b> – Word cloud, Multiple choice и Rating/Ranking (по 1 т.)</td><td>3</td></tr><tr><td><b>Quiz</b> – свързан с информацията, отбелязан верен отговор</td><td>3</td></tr><tr><td><b>Q&amp;A</b> – проведено, отговорено на поне 2 въпроса</td><td>4</td></tr><tr><td><b>Оформление</b> – четим текст, единен стил</td><td>2</td></tr><tr><td><b>Снимки и извод</b></td><td>2</td></tr><tr><td><b>Общо</b></td><td><b>20</b></td></tr></tbody>
+      </table>
+    </div>
+    <div>
+      <h3 style="margin-top:8px">Оценка</h3>
+      <table class="crit">
+        <thead><tr><th>Точки</th><th>Оценка</th></tr></thead>
+        <tbody><tr><td>18–20</td><td>Отличен 6</td></tr><tr><td>15–17</td><td>Много добър 5</td></tr><tr><td>12–14</td><td>Добър 4</td></tr><tr><td>9–11</td><td>Среден 3</td></tr><tr><td>0–8</td><td>Слаб 2</td></tr></tbody>
+      </table>
+      <div class="card" style="margin-top:20px"><h3>Провери се, преди да предадеш</h3>
+        <label class="chk"><input type="checkbox"> Темата е различна от урока за Mentimeter</label>
+        <label class="chk"><input type="checkbox"> 3 анкети: Word cloud, Multiple choice, Rating/Ranking</label>
+        <label class="chk"><input type="checkbox"> 1 Quiz с отбелязан верен отговор</label>
+        <label class="chk"><input type="checkbox"> Q&A слайд в края</label>
+        <label class="chk"><input type="checkbox"> Тествах от телефон</label>
+        <label class="chk"><input type="checkbox"> Имам линк, снимки и извод</label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">10 въпроса. Избери отговор на всеки и натисни „Провери“.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check" type="button">Провери</button><button class="btn ghost" id="again" type="button">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<section class="band"><div class="wrap pager"><a href="urok-1-mentimeter.html"><small>← Урок 1</small>Mentimeter</a><a class="nx" href="urok-3-kahoot.html"><small>Урок 3 →</small>Kahoot!</a></div></section>
+
+<footer>IT Зона · Интерактивни презентации · 11 и 12 клас. Изгледите на инструментите са схематични – бутоните може леко да се различават.</footer>
+
+<script>const CUR=1;</script>
+<script src="ip.js?v=20261127"></script>
+<script>
+const QUIZ=[
+ ["Какво е най-голямото предимство на Slido пред Mentimeter?", ["Има повече видове слайдове", "Работи вътре в Google Slides и PowerPoint и има силно Q&amp;A", "Не изисква интернет", "Има музика по време на теста"], 1, "Анкетите стават слайдове в презентацията, която вече правиш."],
+ ["Как участниците влизат в Slido?", ["На kahoot.it с PIN", "На slido.com с кода на събитието или с QR код", "С имейл покана", "Само с акаунт в Slido"], 1, "Кодът започва с # и се вижда на слайда."],
+ ["От кое меню на Google Slides се добавя Slido?", ["Insert", "Format", "Extensions", "Slide"], 2, "Extensions → Add-ons → Get add-ons → Slido."],
+ ["Колко анкети и тестове позволява безплатният план в един slido?", ["1 анкета", "3 анкети и 1 тест", "10 анкети и 5 теста", "Без ограничение"], 1, "Затова задачата е точно 3 анкети и 1 тест."],
+ ["Какво се случва с анкетата, създадена в панела на Slido?", ["Отваря се в нов прозорец", "Става отделен слайд в презентацията", "Изпраща се по имейл", "Изтрива се след часа"], 1, "Слайдът може да се премести на правилното място в списъка."],
+ ["Каква е особеността на Q&amp;A?", ["Има верен отговор и точки", "Публиката задава въпроси и гласува за чуждите", "Отговорите се поставят върху снимка", "Разпределят се 100 точки"], 1, "Най-харесваните въпроси излизат най-отгоре."],
+ ["На кой въпрос от Q&amp;A е добре да отговориш първо?", ["На най-новия", "На този с най-много гласове", "На най-краткия", "На своя"], 1, "Той интересува най-много хора."],
+ ["Какво прави модерирането на Q&amp;A?", ["Изтрива всички въпроси", "Въпросите се одобряват от презентатора, преди да ги видят всички", "Показва имената на питащите", "Добавя точки"], 1, "Така неподходящ въпрос не излиза на екрана."],
+ ["Кой вид анкета показва средна оценка със звезди?", ["Word cloud", "Rating", "Open text", "Q&amp;A"], 1, "Rating показва средната оценка."],
+ ["Как запазваш резултатите в безплатния план?", ["Те се изпращат автоматично на учителя", "С екранна снимка от моя slido на slido.com", "Не могат да се видят", "Само с принтер"], 1, "Износът във файл е в платените планове."]];
+</script>
+<script src="ip-urok.js?v=20261127"></script>
+<script src="../totop.js?v=20261126" defer></script>
+</body>
+</html>
