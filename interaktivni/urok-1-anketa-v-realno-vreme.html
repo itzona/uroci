@@ -52,7 +52,8 @@ nav summary:hover,nav details[open] summary,nav>.wrap>a:hover{background:var(--c
 nav .menu{position:absolute;left:0;top:calc(100% + 4px);background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:6px;min-width:240px;box-shadow:0 12px 30px rgba(20,30,80,.16)}
 nav .menu a{display:block;padding:10px 12px;border-radius:8px;color:var(--ink);text-decoration:none}
 nav .menu a:hover{background:var(--card);color:var(--blue)}
-@media(max-width:600px){nav .menu{position:fixed;left:8px;right:8px;top:auto}}
+nav .menu{z-index:30}
+@media(max-width:600px){nav details{position:static}nav .menu{position:absolute;left:8px;right:8px;top:calc(100% + 4px);min-width:0}}
 :focus-visible{outline:3px solid var(--sun);outline-offset:2px}
 /* generic */
 .grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
@@ -686,6 +687,8 @@ dets.forEach(d=>d.addEventListener('toggle',()=>{if(d.open)dets.forEach(o=>{if(o
 document.addEventListener('click',e=>{if(!e.target.closest('nav details'))dets.forEach(o=>o.open=false)});
 $$('nav .menu a').forEach(a=>a.addEventListener('click',()=>a.closest('details').open=false));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')dets.forEach(o=>o.open=false)});
+// отстъп при скок до раздел = височината на лепкавото меню (на телефон е на два реда)
+const navEl=$('nav');const pad=()=>document.documentElement.style.scrollPaddingTop=(navEl.offsetHeight+12)+'px';pad();addEventListener('resize',pad);
 
 // примерни QR кодове
 function qr(seed){let s=seed,r=()=>(s=(s*9301+49297)%233280)/233280,n=21,o='';
