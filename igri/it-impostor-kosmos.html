@@ -87,6 +87,21 @@ button:disabled{opacity:.45;cursor:not-allowed}
 #eject .txt{position:absolute;bottom:20%;left:16px;right:16px;text-align:center;font-size:clamp(1.3rem,4.5vw,2.2rem);font-weight:800;min-height:1.4em}
 #eject .txt2{position:absolute;bottom:13%;left:16px;right:16px;text-align:center;color:var(--mut);font-size:1.1rem}
 #eject button{position:absolute;bottom:5%}
+.code{font-family:Consolas,monospace;font-size:clamp(2.2rem,9vw,4rem);font-weight:900;letter-spacing:.12em;color:var(--warn);margin:6px 0 12px}
+.code.sm{font-size:1.2rem;letter-spacing:.08em;margin:0}
+.joinbox{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap;margin:8px 0 6px}
+.qr{width:190px;height:190px;background:#fff;border-radius:12px;padding:6px;flex:none}.qr svg{width:100%;height:100%;display:block}
+.qr p{color:#333;padding:8px}
+.joinbox p{margin:6px 0}.url{word-break:break-all;color:var(--acc)}
+.pins{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px;text-align:left;background:#0b1224;border-radius:12px;padding:10px}
+.kick{position:absolute;top:4px;right:4px;padding:2px 7px;font-size:.8rem;background:#0b1224;color:var(--mut);border:1px solid var(--line)}
+.phinfo{text-align:center;padding:20px 6px}.phinfo .ic{font-size:3.4rem}.phinfo p{font-size:1.15rem;margin-top:8px}
+.phhead{display:flex;align-items:center;gap:12px;background:var(--panel2);border-radius:14px;padding:8px 12px;margin:8px 0}.phhead svg{width:54px;height:62px;flex:none}
+button.sm{padding:6px 12px;font-size:.9rem;margin-top:4px}
+.mini svg{width:30px;height:34px;vertical-align:middle;margin-right:6px}
+.big2{font-size:1.15rem;font-weight:700;color:var(--warn)}
+.no{color:var(--bad);font-weight:700;margin-top:8px}
+body.phone h1{font-size:1.5rem}body.phone .sub{display:none}body.phone .wrap{padding-top:10px}
 /* край */
 .win{font-size:clamp(1.8rem,6vw,3rem);font-weight:900;text-align:center;margin:6px 0}
 .win.crw{color:var(--ok)}.win.imp{color:var(--bad)}
@@ -104,8 +119,12 @@ button:disabled{opacity:.45;cursor:not-allowed}
   <!-- НАСТРОЙКИ -->
   <div class="card" id="setup">
     <h2>⚙️ Настройки</h2>
+    <label class="f" for="play">Как играчите виждат ролите</label>
+    <select id="play"><option value="pass" selected>📱 Един телефон минава от ръка на ръка</option><option value="code">🔢 Всеки на своя телефон с код на играта (без интернет)</option><option value="online">🌐 Онлайн стая – всеки играе от своя телефон</option></select>
+    <p class="hint" id="playHint"></p>
+    <div id="pinRow"><label class="f" for="pin">Защита с ПИН</label><select id="pin"><option value="0" selected>Без ПИН – всеки въвежда само номера си</option><option value="1">С ПИН – учителят дава на всеки личен 3-цифрен ПИН</option></select><p class="hint">С ПИН никой не може да види чужда роля, като въведе чужд номер.</p></div>
     <div class="grid2">
-      <div>
+      <div id="localFields">
         <label class="f" for="players">Брой играчи (4–30)</label>
         <input type="number" id="players" min="4" max="30" value="10">
         <label class="f" for="names">Имена (по желание, по едно на ред)</label>
@@ -131,15 +150,21 @@ button:disabled{opacity:.45;cursor:not-allowed}
     </div>
     <h3>📜 Как се играе</h3>
     <div class="rules">
-      <div><b>1. Роли</b>Телефонът минава от ръка на ръка. Екипажът вижда IT дума, Impostor-ите – близка дума или нищо.</div>
+      <div><b>1. Роли</b>От един телефон, от своя телефон с код или в онлайн стая. Екипажът вижда IT дума, Impostor-ите – близка дума или нищо.</div>
       <div><b>2. Задачи 🔧</b>Избрани играчи решават IT задача пред всички. Вярната пълни лентата на кораба. Impostor-ът може нарочно да сгреши (саботаж).</div>
       <div><b>3. Подсказки 💬</b>Всеки жив играч казва една дума за своята дума – без да я издава.</div>
       <div><b>4. Спешна среща 🚨</b>Обсъждате и гласувате. Най-гласуваният е изхвърлен в космоса.</div>
       <div><b>🏆 Екипажът печели</b>ако изхвърли всички Impostor-и или напълни лентата със задачи.</div>
       <div><b>😈 Impostor-ите печелят</b>ако оцелеят след последната среща или станат колкото екипажа.</div>
     </div>
-    <div class="row"><button class="big" onclick="startGame()">🚀 Излитаме</button></div>
+    <div class="row"><button class="big" id="startBtn" onclick="startGame()">🚀 Излитаме</button></div>
+    <p class="hint center">Ученик съм и имам код от учителя → <a href="#kod" style="color:var(--acc)">📱 Моята роля</a></p>
   </div>
+
+  <!-- КОД НА ИГРАТА / ОНЛАЙН СТАЯ / ТЕЛЕФОН -->
+  <div class="card hidden" id="codeScreen"></div>
+  <div class="card hidden" id="lobby"></div>
+  <div class="card hidden" id="phone"></div>
 
   <!-- РОЛИ -->
   <div class="card center hidden" id="reveal"></div>
@@ -594,8 +619,10 @@ const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const rnd=n=>Math.floor(Math.random()*n),pick=a=>a[rnd(a.length)];
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
-const ALL='Всички теми (случайна)';
+const show=(id,on=true)=>$(id).classList.toggle('hidden',!on);
+const ALL='Всички теми (случайна)',TN=Object.keys(themes);
 const COLORS=['#ef4444','#3b82f6','#22c55e','#eab308','#a855f7','#f97316','#06b6d4','#ec4899','#84cc16','#f5f5f4','#8b5cf6','#14b8a6','#f43f5e','#64748b','#d97706'];
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 
 /* Оригинален робот – кутия с екран-лице и антена */
 function robot(color,o={}){const face=o.dead?'<path d="M30 30l8 8M38 30l-8 8M52 30l8 8M60 30l-8 8" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/>':
@@ -611,41 +638,133 @@ function robot(color,o={}){const face=o.dead?'<path d="M30 30l8 8M38 30l-8 8M52 
  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
  (function f(){x.clearRect(0,0,c.width,c.height);x.fillStyle='#fff';S.forEach(s=>{if(!still){s.x-=s.v;if(s.x<0)s.x=c.width}x.globalAlpha=.4+s.r/2;x.beginPath();x.arc(s.x,s.y,s.r,0,7);x.fill()});x.globalAlpha=1;if(!still)requestAnimationFrame(f)})()})();
 
+/* ===== Раздаване: всичко случайно идва от едно число (seed), за да могат телефоните да го изчислят сами ===== */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function deal(c){const r=mulberry32(c.seed*2654435761%4294967296+7),rp=a=>a[Math.floor(r()*a.length)];
+ const theme=c.th?TN[c.th-1]:rp(TN),word=rp(Object.keys(themes[theme])),idx=[...Array(c.n).keys()];
+ for(let i=idx.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]]}
+ return{theme,word,decoy:decoys[word],imps:idx.slice(0,c.ic)}}
+const pinOf=(seed,i)=>100+Math.floor(mulberry32(seed*31+i*977+12345)()*900);
+/* Код на играта: брой играчи, Impostor-и, режим, тема, ПИН и seed в 6 знака + 1 контролен */
+const B36='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+function encCode(c){let v=((((c.n-4)*3+c.ic-1)*2+(c.mode==='none'?1:0))*12+c.th)*2+(c.pin?1:0);v=v*46656+c.seed;
+ const s=v.toString(36).toUpperCase().padStart(6,'0')+B36[v%31];return s.slice(0,3)+'-'+s.slice(3)}
+function decCode(str){const s=String(str||'').toUpperCase().replace(/[^0-9A-Z]/g,'');if(s.length!==7)return null;const v=parseInt(s.slice(0,6),36);if(isNaN(v)||B36[v%31]!==s[6])return null;
+ let x=v;const seed=x%46656;x=Math.floor(x/46656);const pin=x%2;x=Math.floor(x/2);const th=x%12;x=Math.floor(x/12);const mode=x%2?'none':'similar';x=Math.floor(x/2);const ic=x%3+1,n=Math.floor(x/3)+4;
+ if(n>30||th>TN.length||ic*2>=n)return null;return{n,ic,mode,th,pin:!!pin,seed}}
+
+/* ===== Външни библиотеки – зареждат се само при нужда ===== */
+const PEER_JS='https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js',QR_JS='https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js';
+function loadScript(src){return new Promise((ok,no)=>{const old=document.querySelector(`script[src="${src}"]`);if(old){if(old.dataset.ok)return ok();old.addEventListener('load',ok);old.addEventListener('error',no);return}
+ const s=document.createElement('script');s.src=src;s.onload=()=>{s.dataset.ok=1;ok()};s.onerror=()=>{s.remove();no(new Error('load'))};document.head.appendChild(s)})}
+async function qrInto(el,text){try{await loadScript(QR_JS);const q=qrcode(0,'M');q.addData(text);q.make();$(el).innerHTML=q.createSvgTag({cellSize:5,margin:2,scalable:true})}catch(e){$(el).innerHTML='<p class="hint">QR кодът не се зареди – въведете адреса ръчно.</p>'}}
+const pageURL=()=>location.href.split('#')[0];
+const ROOM_ABC='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',PID=c=>'itzona-impostor-'+c.toLowerCase();
+function peerOpts(){const q=new URLSearchParams(location.search).get('peer');if(!q)return{debug:0};const[h,p]=q.split(':');return{host:h,port:+p||9000,path:'/',secure:false,debug:0}}
+
 /* ===== Настройки ===== */
-[ALL].concat(Object.keys(themes)).forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=n===ALL?n:n+' ('+Object.keys(themes[n]).length+' думи)';$('theme').appendChild(o)});
+[ALL].concat(TN).forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=n===ALL?n:n+' ('+Object.keys(themes[n]).length+' думи)';$('theme').appendChild(o)});
+function playChanged(){const v=$('play').value;show('localFields',v!=='online');show('pinRow',v==='code');
+ $('playHint').innerHTML={pass:'Един телефон (или компютър) минава от ръка на ръка и всеки вижда ролята си.',code:'Учителят пуска играта на общия екран и получава <b>код</b>. Всеки отваря страницата на своя телефон, въвежда кода и номера си и вижда ролята си. <b>Не е нужен интернет</b> между телефоните.',online:'Учителят създава <b>онлайн стая</b>. Учениците влизат с QR код от своите телефони, получават ролите си там, <b>решават задачите и гласуват тайно от телефона</b>. Нужен е интернет.'}[v];
+ $('startBtn').textContent=v==='online'?'🌐 Създай стая':'🚀 Излитаме'}
+$('play').addEventListener('change',playChanged);playChanged();
 
-let P=[],G={};
-function startGame(){
- const nm=$('names').value.split('\n').map(s=>s.trim()).filter(Boolean);
- const n=nm.length?nm.length:parseInt($('players').value,10);
+let P=[],G={started:false};
+function settings(n){const ic=$('impostorCount').value==='auto'?(n>=15?2:1):+$('impostorCount').value;
+ if(ic*2>=n){alert('При '+n+' играчи може да има най-много '+(Math.ceil(n/2)-1)+' Impostor-и.');return null}
+ const th=$('theme').value===ALL?0:TN.indexOf($('theme').value)+1;
+ return{n,ic,mode:$('mode').value,th,pin:$('play').value==='code'&&$('pin').value==='1',seed:rnd(46656)}}
+function startGame(){const play=$('play').value;
+ if(play==='online')return openLobby();
+ const nm=$('names').value.split('\n').map(s=>s.trim()).filter(Boolean),n=nm.length?nm.length:parseInt($('players').value,10);
  if(isNaN(n)||n<4||n>30)return alert('Играчите трябва да са между 4 и 30.');
- const ic=$('impostorCount').value==='auto'?(n>=15?2:1):+$('impostorCount').value;
- if(ic*2>=n)return alert('При '+n+' играчи може да има най-много '+(Math.ceil(n/2)-1)+' Impostor-и.');
- const tn=Object.keys(themes),ch=$('theme').value,theme=ch===ALL?pick(tn):ch,word=pick(Object.keys(themes[theme]));
- const imps=shuffle([...Array(n).keys()]).slice(0,ic);
- P=Array.from({length:n},(_,i)=>({n:nm[i]||'Робот '+(i+1),c:COLORS[i%COLORS.length],imp:imps.includes(i),alive:true}));
- const maxM=$('meetings').value==='auto'?ic+2:+$('meetings').value,tasksOn=$('tasksOn').value==='1',perRound=3;
- G={theme,word,decoy:decoys[word],mode:$('mode').value,maxM,meet:0,round:1,talk:+$('talk').value,tasksOn,perRound,
-  done:0,goal:Math.ceil(maxM*perRound*.75),total:0,showRole:$('showRole').value==='1',ri:0,log:[]};
- $('setup').classList.add('hidden');$('reveal').classList.remove('hidden');revealStep(false);
-}
+ const c=settings(n);if(!c)return;begin(c,nm,play)}
+function begin(c,nm,play,cids){const d=deal(c),maxM=$('meetings').value==='auto'?c.ic+2:+$('meetings').value,perRound=3;
+ P=Array.from({length:c.n},(_,i)=>({n:nm[i]||'Играч '+(i+1),c:COLORS[i%COLORS.length],imp:d.imps.includes(i),alive:true,cid:cids?cids[i]:null}));
+ G={cfg:c,play,code:encCode(c),theme:d.theme,word:d.word,decoy:d.decoy,mode:c.mode,maxM,meet:0,round:1,talk:+$('talk').value,tasksOn:$('tasksOn').value==='1',perRound,
+  done:0,goal:Math.ceil(maxM*perRound*.75),total:0,showRole:$('showRole').value==='1',ri:0,log:[],started:true,phase:'roles',ballots:{},votes:{},skip:0};
+ ['setup','lobby','end','game'].forEach(id=>show(id,false));
+ if(play==='pass'){show('reveal');revealStep(false)}
+ else if(play==='code')codeScreen();
+ else{P.forEach((p,i)=>sendRole(i));goGame()}}
 const label=i=>(i+1)+'. '+esc(P[i].n);
+function goGame(){show('reveal',false);show('codeScreen',false);show('game');addLog('🚀 Корабът излетя. На борда има '+P.length+' души.');startRound()}
 
-/* ===== Раздаване на ролите ===== */
-function revealStep(show){const i=G.ri,p=P[i],r=$('reveal');
- if(!show){r.innerHTML=`<h2>Подай телефона на</h2><div class="rolebot">${robot(p.c)}</div><div class="role">${label(i)}</div><p class="hint">Другите да не гледат!</p><div class="row"><button class="big" onclick="revealStep(true)">👁 Покажи ролята</button></div>`;return}
- const others=P.map((q,k)=>q.imp&&k!==i?label(k):null).filter(Boolean);
- let h=`<div class="rolebot">${robot(p.c,{imp:p.imp})}</div><div class="hint">${label(i)} · Тема: <b>${esc(G.theme)}</b></div>`;
- if(p.imp){h+=`<div class="role imp">😈 Ти си IMPOSTOR!</div>`+(G.mode==='similar'?`<div class="word">Твоята близка дума: <b>${esc(G.decoy)}</b></div><p class="hint">Екипажът има друга, близка дума от същата тема. Говори така, че да се слееш, и се опитай да познаеш тяхната.</p>`:`<div class="word">Нямаш дума – слушай другите и се престори.</div>`)
-  +(others.length?`<p class="hint">Другите Impostor-и: <b>${others.join(', ')}</b></p>`:'')+`<p class="hint">🔧 При задачите можеш нарочно да сгрешиш – това е саботаж. Но внимавай: грешките събуждат подозрения!</p>`}
- else h+=`<div class="role crw">🧑‍🚀 Ти си от ЕКИПАЖА</div><div class="word">Думата е: <b>${esc(G.word)}</b></div><p class="hint">Решавай задачите вярно – всяка вярна задача пълни лентата на кораба. Внимавай кой греши и кой говори странно.</p>`;
- h+=`<div class="row"><button class="big" onclick="nextReveal()">${i<P.length-1?'🙈 Скрий и подай нататък':'🚀 Всички видяха – започваме'}</button></div>`;r.innerHTML=h}
-function nextReveal(){if(G.ri<P.length-1){G.ri++;revealStep(false)}else{$('reveal').classList.add('hidden');$('game').classList.remove('hidden');addLog('🚀 Корабът излетя. На борда има '+P.length+' души.');startRound()}}
+/* ===== Режим 1: един телефон ===== */
+function roleHTML(r){/* r: {lab,c,imp,theme,word,decoy,mode,others} */
+ let h=`<div class="rolebot">${robot(r.c,{imp:r.imp})}</div><div class="hint">${esc(r.lab)} · Тема: <b>${esc(r.theme)}</b></div>`;
+ if(r.imp)h+=`<div class="role imp">😈 Ти си IMPOSTOR!</div>`+(r.mode==='similar'?`<div class="word">Твоята близка дума: <b>${esc(r.decoy)}</b></div><p class="hint">Екипажът има друга, близка дума от същата тема. Говори така, че да се слееш, и се опитай да познаеш тяхната.</p>`:`<div class="word">Нямаш дума – слушай другите и се престори.</div>`)
+  +(r.others&&r.others.length?`<p class="hint">Другите Impostor-и: <b>${r.others.map(esc).join(', ')}</b></p>`:'')+`<p class="hint">🔧 При задачите можеш нарочно да сгрешиш – това е саботаж. Но внимавай: грешките събуждат подозрения!</p>`;
+ else h+=`<div class="role crw">🧑‍🚀 Ти си от ЕКИПАЖА</div><div class="word">Думата е: <b>${esc(r.word)}</b></div><p class="hint">Решавай задачите вярно – всяка вярна задача пълни лентата на кораба. Внимавай кой греши и кой говори странно.</p>`;
+ return h}
+const roleOf=i=>({lab:(i+1)+'. '+P[i].n,c:P[i].c,imp:P[i].imp,theme:G.theme,word:P[i].imp?'':G.word,decoy:P[i].imp&&G.mode==='similar'?G.decoy:'',mode:G.mode,others:P[i].imp?P.map((q,k)=>q.imp&&k!==i?(k+1)+'. '+q.n:null).filter(Boolean):[]});
+function revealStep(showIt){const i=G.ri,r=$('reveal');
+ if(!showIt){r.innerHTML=`<h2>Подай телефона на</h2><div class="rolebot">${robot(P[i].c)}</div><div class="role">${label(i)}</div><p class="hint">Другите да не гледат!</p><div class="row"><button class="big" onclick="revealStep(true)">👁 Покажи ролята</button></div>`;return}
+ r.innerHTML=roleHTML(roleOf(i))+`<div class="row"><button class="big" onclick="nextReveal()">${i<P.length-1?'🙈 Скрий и подай нататък':'🚀 Всички видяха – започваме'}</button></div>`}
+function nextReveal(){if(G.ri<P.length-1){G.ri++;revealStep(false)}else goGame()}
+
+/* ===== Режим 2: код на играта (учителски екран) ===== */
+function codeScreen(){const url=pageURL()+'#kod='+G.code.replace('-','');show('codeScreen');
+ $('codeScreen').innerHTML=`<div class="center"><h2>🔢 Код на играта</h2><div class="code">${G.code}</div>
+ <div class="joinbox"><div class="qr" id="cQr"></div><div style="text-align:left"><p>1. Отворете на телефона си:<br><b class="url">${esc(url)}</b><br><span class="hint">(или сканирайте QR кода)</span></p><p>2. Въведете кода и <b>номера си</b> от списъка долу${G.cfg.pin?' и <b>ПИН-а</b>, който ще ви даде учителят':''}.</p><p>3. Запомнете ролята си и скрийте екрана.</p></div></div>
+ <h3>Номера на играчите</h3><div class="crew">${P.map((p,i)=>`<div class="bot">${robot(p.c)}${label(i)}</div>`).join('')}</div>
+ ${G.cfg.pin?`<div class="row"><button class="sec" onclick="togglePins()">🔑 ПИН-ове (само за учителя)</button><button class="sec" onclick="printSlips()">🖨 Принтирай листчета с ПИН</button></div><div id="pins" class="hidden"></div>`:''}
+ <div class="row"><button class="big" onclick="goGame()">▶ Всички видяха ролите – започваме</button></div></div>`;
+ qrInto('cQr',url)}
+function togglePins(){const e=$('pins');if(e.classList.contains('hidden')){e.innerHTML=`<div class="pins">${P.map((p,i)=>`<div>${label(i)}: <b>${pinOf(G.cfg.seed,i)}</b></div>`).join('')}</div>`;show('pins')}else{e.innerHTML='';show('pins',false)}}
+function printSlips(){const w=window.open('','_blank');if(!w)return alert('Браузърът спря новия прозорец. Разрешете изскачащите прозорци.');
+ w.document.write(`<!doctype html><meta charset="utf-8"><title>ПИН листчета</title><style>body{font-family:Segoe UI,sans-serif;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px}div{border:2px dashed #888;padding:14px;text-align:center;font-size:18px}b{font-size:28px;display:block;margin-top:6px}</style>`
+ +P.map((p,i)=>`<div>${label(i)}<br>Код: ${G.code}<b>ПИН ${pinOf(G.cfg.seed,i)}</b></div>`).join(''));w.document.close();w.focus();w.print()}
+
+/* ===== Режим 3: онлайн стая (учителски екран) ===== */
+let peer=null,room='',conns={},LOB=[];
+async function openLobby(){show('setup',false);show('lobby');LOB=[];conns={};
+ $('lobby').innerHTML='<div class="center"><h2>🌐 Създаване на стая…</h2><p class="hint">Свързване със сървъра…</p></div>';
+ try{await loadScript(PEER_JS)}catch(e){return lobbyErr('Библиотеката за онлайн игра не се зареди. Проверете интернета или изберете режим „код на играта“.')}
+ room=Array.from({length:4},()=>ROOM_ABC[rnd(ROOM_ABC.length)]).join('');
+ if(peer)try{peer.destroy()}catch(e){}
+ peer=new Peer(PID(room),peerOpts());
+ peer.on('open',renderLobby);
+ peer.on('connection',c=>{c.on('data',d=>hostData(c,d));c.on('close',()=>{if(conns[c.cid]===c)delete conns[c.cid];G.started?hud():renderLobby()})});
+ peer.on('error',e=>{if(e.type==='unavailable-id')return openLobby();if(e.type==='peer-unavailable')return;lobbyErr('Връзката със сървъра не успя ('+e.type+'). Опитайте отново или изберете режим „код на играта“.')});
+ peer.on('disconnected',()=>{try{peer.reconnect()}catch(e){}})}
+function lobbyErr(t){if(G.started){addLog('⚠️ '+esc(t));return}$('lobby').innerHTML=`<div class="center"><h2>⚠️ Онлайн стаята не можа да се създаде</h2><p>${esc(t)}</p><div class="row"><button onclick="openLobby()">🔁 Опитай пак</button><button class="sec" onclick="location.reload()">⚙️ Назад към настройките</button></div></div>`}
+function renderLobby(){if(G.started)return;const url=pageURL()+'#stai='+room,on=LOB.filter(p=>conns[p.cid]&&conns[p.cid].open);
+ $('lobby').innerHTML=`<div class="center"><h2>🌐 Онлайн стая</h2><div class="code">${room}</div>
+ <div class="joinbox"><div class="qr" id="lQr"></div><div style="text-align:left"><p>1. Сканирайте QR кода или отворете:<br><b class="url">${esc(url)}</b></p><p>2. Напишете името си и натиснете „Влез“.</p><p>3. Ролята, задачите и гласуването са на вашия телефон.</p></div></div>
+ <h3>Влезли: ${LOB.length} / 30</h3><div class="crew">${LOB.map((p,i)=>`<div class="bot">${robot(COLORS[i%COLORS.length])}${i+1}. ${esc(p.name)}${conns[p.cid]&&conns[p.cid].open?'':'<div class="tag">📵 офлайн</div>'}<button class="kick" title="Махни" onclick="kick('${esc(p.cid)}')">✕</button></div>`).join('')||'<p class="hint">Още няма влезли играчи…</p>'}</div>
+ <div class="row"><button class="big" ${LOB.length<4?'disabled':''} onclick="startOnline()">🚀 Започни игра${LOB.length<4?' (поне 4 играчи)':''}</button><button class="sec" onclick="location.reload()">⚙️ Настройки</button></div></div>`;
+ if(!$('lQr').innerHTML)qrInto('lQr',url)}
+function kick(cid){const c=conns[cid];if(c){try{c.send({t:'msg',text:'Учителят те махна от стаята.'})}catch(e){}setTimeout(()=>{try{c.close()}catch(e){}},300)}LOB=LOB.filter(p=>p.cid!==cid);delete conns[cid];renderLobby()}
+function startOnline(G0){const n=LOB.length;if(n<4)return;const c=settings(n);if(!c)return;begin(c,LOB.map(p=>p.name),'online',LOB.map(p=>p.cid))}
+function hostData(c,d){if(!d||typeof d!=='object')return;
+ if(d.t==='join'){const cid=String(d.cid||'').replace(/[^a-z0-9]/gi,'').slice(0,40),name=String(d.name||'').trim().slice(0,20)||'Играч';if(!cid)return;c.cid=cid;
+  if(G.started){const i=P.findIndex(p=>p.cid===cid);if(i<0){try{c.send({t:'msg',text:'Играта вече започна. Изчакайте следващата игра.'})}catch(e){}return}conns[cid]=c;sendRole(i);push(i);hud();return}
+  const ex=LOB.find(p=>p.cid===cid);if(ex)ex.name=name;else{if(LOB.length>=30){try{c.send({t:'msg',text:'Стаята е пълна.'})}catch(e){}return}LOB.push({cid,name})}
+  conns[cid]=c;try{c.send({t:'lobby',name})}catch(e){}renderLobby();return}
+ if(!G.started)return;const i=P.findIndex(p=>p.cid===c.cid);if(i<0)return;
+ if(d.t==='ans'&&G.phase==='task'&&G.queue[G.qi]===i&&G.taskOpen){const k=+d.k;if(k>=0&&k<G.cur.o.length)taskAns(k)}
+ if(d.t==='vote'&&G.phase==='vote'&&P[i].alive){const v=d.v==='s'?'s':+d.v;if(v!=='s'&&!(P[v]&&P[v].alive))return;G.ballots[i]=v;voteGrid();push(i)}}
+function send(i,m){const c=P[i]&&conns[P[i].cid];if(c&&c.open)try{c.send(m)}catch(e){}}
+function sendRole(i){if(G.play!=='online')return;send(i,{t:'role',r:roleOf(i)})}
+function stateFor(i){const p=P[i],b={t:'state',alive:p.alive,round:G.round,meet:G.meet,maxM:G.maxM,done:G.done,goal:G.goal,tasksOn:G.tasksOn};
+ if(G.phase==='end')return{...b,ph:'end',win:G.win,why:G.why,imp:p.imp,word:G.word,decoy:G.mode==='similar'?G.decoy:'',imps:P.map((q,k)=>q.imp?(k+1)+'. '+q.n:null).filter(Boolean)};
+ if(G.phase==='eject')return{...b,ph:'info',icon:'🚀',text:G.ejMsg};
+ if(!p.alive)return{...b,ph:'dead'};
+ const who=G.queue&&G.queue[G.qi]!==undefined?G.queue[G.qi]:-1;
+ if(G.phase==='taskIntro')return who===i?{...b,ph:'info',icon:'🔧',text:'Ти си на ред за задача! Задачата ще се появи тук.'}:{...b,ph:'info',icon:'🔧',text:'Задача решава '+(who+1)+'. '+P[who].n+'. Гледай общия екран.'};
+ if(G.phase==='task'){if(who===i&&G.taskOpen)return{...b,ph:'task',q:G.cur.q,o:G.cur.o,cat:G.cur.cat,code:!!G.cur.code,left:Math.max(0,Math.round((G.tEnd-Date.now())/1000))};
+  return{...b,ph:'info',icon:'🔧',text:G.taskOpen?'Задача решава '+(who+1)+'. '+P[who].n+'. Гледай общия екран.':G.lastTask}}
+ if(G.phase==='clue')return{...b,ph:'info',icon:'💬',text:'Подсказки: когато дойде твоят ред, кажи на глас една дума, свързана с твоята дума – без да я издаваш.'};
+ if(G.phase==='vote')return{...b,ph:'vote',cands:alive().map(j=>({i:j,l:(j+1)+'. '+P[j].n,c:P[j].c})),mine:G.ballots[i]??null};
+ return{...b,ph:'info',icon:'🛸',text:'Гледай общия екран.'}}
+function push(i){if(G.play!=='online')return;if(i===undefined)P.forEach((p,k)=>send(k,stateFor(k)));else send(i,stateFor(i))}
+function setPhase(ph){G.phase=ph;push()}
 
 /* ===== Горна лента и екипаж ===== */
-function hud(){$('hRound').textContent=G.round;$('hMeet').textContent=G.meet;$('hMaxMeet').textContent=G.maxM;$('hTheme').textContent=G.theme;
- $('hBarBox').classList.toggle('hidden',!G.tasksOn);$('hTasks').textContent=G.done;$('hGoal').textContent=G.goal;$('hBar').style.width=Math.min(100,G.done/G.goal*100)+'%';
- $('crew').innerHTML=P.map((p,i)=>`<div class="bot ${p.alive?'':'dead'}">${robot(p.c,{dead:!p.alive})}${label(i)}${!p.alive&&p.out?`<div class="tag ${p.imp&&G.showRole?'i':''}">${G.showRole?(p.imp?'Impostor':'екипаж'):'в космоса'}</div>`:''}</div>`).join('')}
+function hud(){if(!G.started)return;$('hRound').textContent=G.round;$('hMeet').textContent=G.meet;$('hMaxMeet').textContent=G.maxM;$('hTheme').textContent=G.theme;
+ show('hBarBox',G.tasksOn);$('hTasks').textContent=G.done;$('hGoal').textContent=G.goal;$('hBar').style.width=Math.min(100,G.done/G.goal*100)+'%';
+ $('crew').innerHTML=P.map((p,i)=>`<div class="bot ${p.alive?'':'dead'}">${robot(p.c,{dead:!p.alive})}${label(i)}${!p.alive&&p.out?`<div class="tag ${p.imp&&G.showRole?'i':''}">${G.showRole?(p.imp?'Impostor':'екипаж'):'в космоса'}</div>`:''}${G.play==='online'&&!(conns[p.cid]&&conns[p.cid].open)?'<div class="tag">📵 офлайн</div>':''}</div>`).join('')}
 function addLog(t){G.log.unshift(t);$('log').innerHTML=G.log.map(x=>`<div>${x}</div>`).join('')}
 const alive=()=>P.map((p,i)=>i).filter(i=>P[i].alive);
 const aliveImp=()=>alive().filter(i=>P[i].imp).length;
@@ -662,48 +781,57 @@ const EXT=[['.mp3','Аудио'],['.jpg','Изображение'],['.docx','Т�
 const UNITS=['1 бит','1 байт','1 KB','1 MB','1 GB','1 TB'];
 const HTML=[['<p>Текст</p>',['<p>Текст</b>','<p>Текст<p/>']],['<a href="index.html">Начало</a>',['<a href=index.html>Начало<a>','<a link="index.html">Начало</a>']],['<img src="logo.png" alt="Лого">',['<img href="logo.png">Лого</img>','<image src="logo.png">']],['<h1>Заглавие</h1>',['<h1>Заглавие</h2>','<h>Заглавие</h>']],['<ul><li>Едно</li></ul>',['<ul><li>Едно</ul></li>','<list><li>Едно</li></list>']]];
 function makeTask(){const kinds=['def','def','def','port','bin','html','unit','ext'],k=pick(kinds);
- if(k==='def'){const ts=Object.keys(themes).filter(t=>t!==G.theme),t=pick(ts),ws=shuffle(Object.keys(themes[t])),w=ws[0];let d=themes[t][w];const cut=d.indexOf('. ');if(cut>40)d=d.slice(0,cut+1);
+ if(k==='def'){const ts=TN.filter(t=>t!==G.theme),t=pick(ts),ws=shuffle(Object.keys(themes[t])),w=ws[0];let d=themes[t][w];const cut=d.indexOf('. ');if(cut>40)d=d.slice(0,cut+1);
   return{q:`Коя дума отговаря на описанието?<br><i>„${esc(d)}“</i>`,o:shuffle([w,ws[1],ws[2]]),a:w,cat:'📘 Речник ('+esc(t)+')'}}
  if(k==='port'){const s=shuffle(PORTS),r=s[0];return{q:`Кой порт използва <b>${r[0]}</b> по подразбиране?`,o:shuffle([r[1],s[1][1],s[2][1]]),a:r[1],cat:'🌐 Мрежи'}}
  if(k==='bin'){const v=1+rnd(15),b=v.toString(2).padStart(4,'0');const o=new Set([v]);while(o.size<3)o.add(1+rnd(15));return{q:`Колко е двоичното число <code>${b}</code> в десетична бройна система?`,o:shuffle([...o].map(String)),a:String(v),cat:'🔢 Бройни системи'}}
  if(k==='html'){const h=pick(HTML);return{q:'Кой ред HTML е написан правилно?',o:shuffle([h[0],...h[1]]),a:h[0],cat:'🧩 HTML',code:true}}
  if(k==='unit'){const idx=shuffle([...UNITS.keys()]).slice(0,3),mx=UNITS[Math.max(...idx)];return{q:'Кое е <b>най-голямо</b>?',o:shuffle(idx.map(i=>UNITS[i])),a:mx,cat:'💾 Мерни единици'}}
  const s=shuffle(EXT),r=s[0];return{q:`Какъв тип файл е <code>${r[0]}</code>?`,o:shuffle([r[1],s[1][1],s[2][1]]),a:r[1],cat:'📁 Файлове'}}
-function taskIntro(){const i=G.queue[G.qi];
- $('phase').innerHTML=`<div class="center"><h2>🔧 Задачи на кораба (${G.qi+1} / ${G.queue.length})</h2><div class="who">${robot(P[i].c)}<div style="text-align:left"><div class="hint">Задачата е за</div><div class="role" style="margin:0">${label(i)}</div></div></div><p class="hint">Играчът казва отговора на глас, а някой натиска бутона. Без подсказки от другите!</p><div class="row"><button class="big" onclick="taskShow()">▶ Покажи задачата</button></div></div>`}
-function taskShow(){const t=makeTask(),i=G.queue[G.qi];G.cur=t;
- $('phase').innerHTML=`<div class="task center"><div class="hud"><div class="who" style="justify-content:flex-start">${robot(P[i].c)}<b>${label(i)}</b></div><div class="hint">${t.cat}</div><div class="tmr" id="tTm"></div></div><div class="q">${t.q}</div><div class="opts">${t.o.map((o,k)=>`<button onclick="taskAns(${k})">${t.code?'<code>'+esc(o)+'</code>':esc(o)}</button>`).join('')}</div><div id="tFb"></div></div>`;
- timer(25,'tTm',()=>taskAns(-1))}
-function taskAns(k){clearInterval(TM);const t=G.cur,i=G.queue[G.qi],bs=[...document.querySelectorAll('.opts button')];if(!bs.length||bs[0].disabled)return;
+function taskIntro(){const i=G.queue[G.qi],on=G.play==='online';
+ $('phase').innerHTML=`<div class="center"><h2>🔧 Задачи на кораба (${G.qi+1} / ${G.queue.length})</h2><div class="who">${robot(P[i].c)}<div style="text-align:left"><div class="hint">Задачата е за</div><div class="role" style="margin:0">${label(i)}</div></div></div><p class="hint">${on?'Играчът отговаря от своя телефон. Другите гледат и не подсказват!':'Играчът казва отговора на глас, а някой натиска бутона. Без подсказки от другите!'}</p><div class="row"><button class="big" onclick="taskShow()">▶ Покажи задачата</button></div></div>`;setPhase('taskIntro')}
+function taskShow(){const t=makeTask(),i=G.queue[G.qi];G.cur=t;G.taskOpen=true;G.tEnd=Date.now()+25000;
+ $('phase').innerHTML=`<div class="task center"><div class="hud"><div class="who" style="justify-content:flex-start">${robot(P[i].c)}<b>${label(i)}</b></div><div class="hint">${t.cat}</div><div class="tmr" id="tTm"></div></div><div class="q">${t.q}</div>${G.play==='online'?'<p class="hint">📱 Отговорът идва от телефона на играча (или натиснете тук, ако телефонът е изключен).</p>':''}<div class="opts">${t.o.map((o,k)=>`<button onclick="taskAns(${k})">${t.code?'<code>'+esc(o)+'</code>':esc(o)}</button>`).join('')}</div><div id="tFb"></div></div>`;
+ timer(25,'tTm',()=>taskAns(-1));setPhase('task')}
+function taskAns(k){if(!G.taskOpen)return;clearInterval(TM);G.taskOpen=false;const t=G.cur,i=G.queue[G.qi],bs=[...document.querySelectorAll('.opts button')];
  bs.forEach((b,n)=>{b.disabled=true;if(t.o[n]===t.a)b.classList.add('ok');else if(n===k)b.classList.add('no')});
  const ok=k>=0&&t.o[k]===t.a;G.total++;if(ok)G.done++;
+ G.lastTask=(ok?'✅ ':'❌ ')+(i+1)+'. '+P[i].n+(ok?' реши задачата.':k<0?' не успя навреме.':' сгреши задачата.');
  addLog((ok?'✅ ':'❌ ')+label(i)+(ok?' реши задача ('+t.cat+').':k<0?' не успя навреме ('+t.cat+').':' сгреши задача ('+t.cat+').'));hud();
- $('tFb').innerHTML=`<div class="fb ${ok?'ok':'no'}">${ok?'✅ Вярно! Лентата на кораба се пълни.':'❌ Грешка… случайност или саботаж? 🤔'}</div><div class="row"><button class="big" onclick="taskNext()">Продължи</button></div>`}
+ $('tFb').innerHTML=`<div class="fb ${ok?'ok':'no'}">${ok?'✅ Вярно! Лентата на кораба се пълни.':'❌ Грешка… случайност или саботаж? 🤔'}</div><div class="row"><button class="big" onclick="taskNext()">Продължи</button></div>`;push()}
 function taskNext(){if(G.done>=G.goal)return endGame('crew','🔧 Екипажът изпълни всички задачи и корабът е спасен!');G.qi++;if(G.qi<G.queue.length)taskIntro();else cluePhase()}
 
 /* ===== Подсказки ===== */
 function cluePhase(){const a=alive(),s=rnd(a.length),ord=a.slice(s).concat(a.slice(0,s));
- $('phase').innerHTML=`<div class="center"><h2>💬 Подсказки</h2><p>Всеки жив играч казва <b>една дума</b>, свързана с неговата дума – без да я издава. Започва <b>${label(ord[0])}</b>, после по ред:</p><div class="order">${ord.map(i=>`<span>${label(i)}</span>`).join('')}</div><p class="hint">Подозирате някого? Натиснете бутона за спешна среща.</p><div class="row"><button class="big red" onclick="meeting()">🚨 Спешна среща</button></div></div>`}
+ $('phase').innerHTML=`<div class="center"><h2>💬 Подсказки</h2><p>Всеки жив играч казва <b>една дума</b>, свързана с неговата дума – без да я издава. Започва <b>${label(ord[0])}</b>, после по ред:</p><div class="order">${ord.map(i=>`<span>${label(i)}</span>`).join('')}</div><p class="hint">Подозирате някого? Натиснете бутона за спешна среща.</p><div class="row"><button class="big red" onclick="meeting()">🚨 Спешна среща</button></div></div>`;setPhase('clue')}
 
 /* ===== Спешна среща и гласуване ===== */
-function meeting(){G.meet++;hud();addLog('🚨 Спешна среща №'+G.meet+'.');G.votes={};G.skip=0;votePhase()}
-function votePhase(){const a=alive(),mx=Math.max(0,...a.map(i=>G.votes[i]||0));
+function meeting(){G.meet++;hud();addLog('🚨 Спешна среща №'+G.meet+'.');G.votes={};G.skip=0;G.ballots={};votePhase()}
+function votePhase(){const on=G.play==='online';
  $('phase').innerHTML=`<div class="center"><div class="hud"><h2 style="margin:0">🗳 Спешна среща №${G.meet} от ${G.maxM}</h2><div>⏱ <span class="tmr" id="vTm"></span></div></div>
- <p class="hint">Обсъдете кой е подозрителен (странни подсказки, грешни задачи). После всеки вдига ръка за един играч – натискайте + за всеки глас. ${G.meet>=G.maxM?'<b style="color:#facc15">Това е последната среща!</b>':''}</p>
- <div class="vote" id="vGrid"></div><div class="row"><button class="big red" onclick="endVote()">🚀 Изхвърли най-гласувания</button></div></div>`;voteGrid();timer(G.talk,'vTm')}
-function voteGrid(){const a=alive(),vals=a.map(i=>G.votes[i]||0),mx=Math.max(0,...vals),top=vals.filter(v=>v===mx).length===1&&mx>G.skip;
+ <p class="hint">Обсъдете кой е подозрителен (странни подсказки, грешни задачи). ${on?'После всеки <b>гласува тайно от телефона си</b>. Гласовете се показват след края на гласуването.':'После всеки вдига ръка за един играч – натискайте + за всеки глас.'} ${G.meet>=G.maxM?'<b style="color:#facc15">Това е последната среща!</b>':''}</p>
+ ${on?'<p class="big2" id="vCount"></p>':''}<div class="vote" id="vGrid"></div><div class="row"><button class="big red" onclick="endVote()">🚀 ${on?'Приключи гласуването':'Изхвърли най-гласувания'}</button></div></div>`;setPhase('vote');voteGrid();timer(G.talk,'vTm')}
+function voteGrid(){if(G.phase!=='vote'||!$('vGrid'))return;const a=alive();
+ if(G.play==='online'){const n=a.filter(i=>G.ballots[i]!==undefined).length;$('vCount').textContent='Гласували: '+n+' / '+a.length+(n===a.length?' – всички гласуваха! ✅':'');
+  $('vGrid').innerHTML=a.map(i=>`<div class="vc">${robot(P[i].c)}<div class="n">${label(i)}</div><div class="tag">${G.ballots[i]!==undefined?'✅ гласува':'⏳ мисли…'}</div></div>`).join('');return}
+ const vals=a.map(i=>G.votes[i]||0),mx=Math.max(0,...vals),top=vals.filter(v=>v===mx).length===1&&mx>G.skip;
  $('vGrid').innerHTML=a.map(i=>{const v=G.votes[i]||0;return`<div class="vc ${top&&v===mx?'top':''}">${robot(P[i].c)}<div class="n">${label(i)}</div><div class="ctl"><button onclick="vote(${i},-1)" aria-label="махни глас">−</button><b>${v}</b><button onclick="vote(${i},1)" aria-label="добави глас">+</button></div></div>`}).join('')
  +`<div class="vc ${!top&&G.skip>0?'top':''}"><div style="font-size:2.6rem;line-height:58px">⏭</div><div class="n">Пропусни (никого)</div><div class="ctl"><button onclick="vote('s',-1)">−</button><b>${G.skip}</b><button onclick="vote('s',1)">+</button></div></div>`}
 function vote(i,d){if(i==='s')G.skip=Math.max(0,G.skip+d);else G.votes[i]=Math.max(0,(G.votes[i]||0)+d);voteGrid()}
-function endVote(){clearInterval(TM);const a=alive(),vals=a.map(i=>G.votes[i]||0),mx=Math.max(0,...vals),leaders=a.filter(i=>(G.votes[i]||0)===mx);
- if(mx===0||leaders.length>1||G.skip>=mx){addLog('🤷 Никой не беше изхвърлен'+(leaders.length>1&&mx>0?' (равен брой гласове).':'.'));return showEject(null)}
- const i=leaders[0];P[i].alive=false;P[i].out=true;showEject(i)}
+function endVote(){clearInterval(TM);const a=alive();
+ if(G.play==='online'){G.votes={};G.skip=0;Object.entries(G.ballots).forEach(([v,t])=>{if(!P[+v].alive)return;if(t==='s')G.skip++;else G.votes[t]=(G.votes[t]||0)+1})}
+ const vals=a.map(i=>G.votes[i]||0),mx=Math.max(0,...vals),leaders=a.filter(i=>(G.votes[i]||0)===mx);
+ const tally=a.filter(i=>G.votes[i]).sort((x,y)=>G.votes[y]-G.votes[x]).map(i=>P[i].n+' '+G.votes[i]).concat(G.skip?['пропуснали '+G.skip]:[]).join(' · ');
+ G.tally=tally?'Гласове: '+tally:'Никой не гласува.';
+ if(mx===0||leaders.length>1||G.skip>=mx){addLog('🤷 Никой не беше изхвърлен'+(leaders.length>1&&mx>0?' (равен брой гласове).':'.')+' '+esc(G.tally));return showEject(null)}
+ const i=leaders[0];P[i].alive=false;P[i].out=true;addLog('🗳 '+esc(G.tally));showEject(i)}
 function showEject(i){const e=$('eject');e.classList.remove('hidden');$('ejBtn').classList.add('hidden');$('ejTxt').textContent='';$('ejTxt2').textContent='';
  const fly=$('ejBot');fly.style.animation='none';void fly.offsetWidth;fly.style.animation='';
  let msg,msg2='';if(i===null){fly.innerHTML='';msg='Никой не беше изхвърлен.'}else{fly.innerHTML=robot(P[i].c,{dead:true});
   msg=G.showRole?(P[i].n+(P[i].imp?' беше Impostor.':' НЕ беше Impostor.')):P[i].n+' излетя в космоса.';
-  const left=aliveImp()-0;msg2=G.showRole?(left===0?'':'Остава'+(left===1?' 1 Impostor.':'т '+left+' Impostor-и.')):'';
+  const left=aliveImp();msg2=G.showRole?(left===0?'':'Остава'+(left===1?' 1 Impostor.':'т '+left+' Impostor-и.')):'';
   addLog('🚀 '+label(i)+' излетя в космоса'+(G.showRole?(P[i].imp?' – беше Impostor! 😈':' – беше от екипажа. 😢'):'.'))}
+ msg2=(msg2?msg2+'\n':'')+G.tally;G.ejMsg=msg+(msg2?' '+msg2.replace('\n',' '):'');setPhase('eject');
  let n=0;const typ=setInterval(()=>{n++;$('ejTxt').textContent=msg.slice(0,n);if(n>=msg.length){clearInterval(typ);$('ejTxt2').textContent=msg2;$('ejBtn').classList.remove('hidden')}},55);hud()}
 function afterEject(){$('eject').classList.add('hidden');const ai=aliveImp(),ac=alive().length-ai;
  if(ai===0)return endGame('crew','🧑‍🚀 Екипажът откри всички Impostor-и!');
@@ -712,7 +840,7 @@ function afterEject(){$('eject').classList.add('hidden');const ai=aliveImp(),ac=
  G.round++;startRound()}
 
 /* ===== Край ===== */
-function endGame(w,why){clearInterval(TM);$('game').classList.add('hidden');const e=$('end');e.classList.remove('hidden');
+function endGame(w,why){clearInterval(TM);G.win=w;G.why=why;show('game',false);const e=$('end');show('end');setPhase('end');
  const ex=(h,wd)=>themes[G.theme][wd]?`<b>${h}</b><p>${esc(themes[G.theme][wd])}</p>${clues[wd]?`<p class="hint">Добри подсказки: ${esc(clues[wd])}</p>`:''}`:'';
  e.innerHTML=`<div class="win ${w==='crew'?'crw':'imp'}">${w==='crew'?'🏆 ПОБЕДА НА ЕКИПАЖА':'😈 ПОБЕДА НА IMPOSTOR-ИТЕ'}</div><p class="center">${why}</p>
  <h3>Кой какъв беше</h3><div class="crew">${P.map((p,i)=>`<div class="bot ${p.imp?'imp':''} ${p.alive?'':'dead'}">${robot(p.c,{imp:p.imp,dead:!p.alive})}${label(i)}<div class="tag ${p.imp?'i':''}">${p.imp?'Impostor':'екипаж'}</div></div>`).join('')}</div>
@@ -720,7 +848,70 @@ function endGame(w,why){clearInterval(TM);$('game').classList.add('hidden');cons
  <div class="exp">${ex('📘 Какво означава „'+esc(G.word)+'“?',G.word)}${G.mode==='similar'?ex('📙 А какво е „'+esc(G.decoy)+'“?',G.decoy):''}</div>
  ${G.tasksOn?`<p class="hint">🔧 Решени задачи: ${G.done} от ${G.total} (цел: ${G.goal}).</p>`:''}
  <div class="row"><button class="big" onclick="sameAgain()">🔁 Нова игра със същите играчи</button><button class="big sec" onclick="location.reload()">⚙️ Нови настройки</button></div>`}
-function sameAgain(){$('end').classList.add('hidden');startGame()}
+function sameAgain(){const c={...G.cfg,seed:rnd(46656)};
+ if(G.play==='online'){/* махаме излезлите, добавяме новодошлите от лобито не е нужно – играят същите */const keep=P.filter(p=>conns[p.cid]&&conns[p.cid].open);if(keep.length<4)return alert('Свързаните играчи са по-малко от 4.');c.n=keep.length;if(c.ic*2>=c.n)c.ic=Math.ceil(c.n/2)-1;return begin(c,keep.map(p=>p.n),'online',keep.map(p=>p.cid))}
+ begin(c,P.map(p=>p.n),G.play)}
+
+/* ===== ТЕЛЕФОН НА ИГРАЧА ===== */
+function phoneMode(){document.body.classList.add('phone');['setup','reveal','game','end','lobby','codeScreen'].forEach(id=>show(id,false));show('phone')}
+/* Режим „код“: телефонът изчислява ролята сам, без връзка */
+function phoneCode(pre){phoneMode();$('phone').innerHTML=`<h2>🔢 Моята роля</h2><label class="f" for="pcCode">Код на играта</label><input id="pcCode" autocomplete="off" autocapitalize="characters" placeholder="напр. 3KD-7QPA" value="${esc(pre||'')}">
+ <div id="pcMore"></div><div class="center" id="pcOut"></div>`;
+ const upd=()=>{const c=decCode($('pcCode').value);$('pcOut').innerHTML='';
+  if(!c){$('pcMore').innerHTML=$('pcCode').value.replace(/[^0-9a-z]/gi,'').length>=7?'<p class="no">❌ Невалиден код – проверете буквите.</p>':'';return}
+  $('pcMore').innerHTML=`<label class="f" for="pcNum">Моят номер (от общия екран)</label><select id="pcNum"><option value="">– избери –</option>${Array.from({length:c.n},(_,i)=>`<option value="${i}">${i+1}</option>`).join('')}</select>
+  ${c.pin?'<label class="f" for="pcPin">ПИН (от учителя)</label><input id="pcPin" inputmode="numeric" maxlength="3" autocomplete="off">':''}<div class="row"><button class="big" onclick="phoneCodeShow()">👁 Покажи ролята</button></div>`};
+ $('pcCode').addEventListener('input',upd);upd()}
+function phoneCodeShow(){const c=decCode($('pcCode').value),i=$('pcNum').value;if(!c||i==='')return alert('Изберете своя номер.');const n=+i;
+ if(c.pin&&+$('pcPin').value!==pinOf(c.seed,n))return alert('Грешен ПИН.');
+ const d=deal(c),imp=d.imps.includes(n);
+ $('pcOut').innerHTML=roleHTML({lab:'Играч '+(n+1),c:COLORS[n%COLORS.length],imp,theme:d.theme,word:imp?'':d.word,decoy:imp&&c.mode==='similar'?d.decoy:'',mode:c.mode,others:imp?d.imps.filter(k=>k!==n).map(k=>'Играч '+(k+1)):[]})
+  +'<div class="row"><button class="big sec" onclick="$(\'pcOut\').innerHTML=\'\'">🙈 Скрий ролята</button></div>';
+ $('pcMore').querySelectorAll('input,select').forEach(e=>{if(e.id==='pcPin')e.value=''})}
+
+/* Режим „онлайн“: телефонът се свързва с учителския екран */
+let PH={code:'',conn:null,peer:null,role:null,st:null,cid:'',name:'',roleOpen:false,timer:null};
+function phoneOnline(code){phoneMode();PH.code=code.toUpperCase();PH.cid=store.get('imp-cid')||('c'+Math.random().toString(36).slice(2,12));store.set('imp-cid',PH.cid);
+ const nm=store.get('imp-name')||'';
+ $('phone').innerHTML=`<h2>🌐 Стая <span class="code sm">${esc(PH.code)}</span></h2><div id="phBody"><label class="f" for="phName">Твоето име</label><input id="phName" maxlength="20" value="${esc(nm)}" placeholder="напр. Ана"><div class="row"><button class="big" onclick="phoneJoin()">🚀 Влез</button></div></div>`;
+ if(nm&&store.get('imp-room')===PH.code)phoneJoin()}
+async function phoneJoin(){const n=($('phName')?$('phName').value:PH.name).trim();if(!n)return alert('Напишете името си.');PH.name=n.slice(0,20);store.set('imp-name',PH.name);store.set('imp-room',PH.code);
+ phStatus('📡','Свързване със стаята…');
+ try{await loadScript(PEER_JS)}catch(e){return phStatus('⚠️','Библиотеката за онлайн игра не се зареди. Проверете интернета.',true)}
+ try{if(PH.peer)PH.peer.destroy()}catch(e){}
+ PH.peer=new Peer(peerOpts());
+ PH.peer.on('open',()=>{const c=PH.peer.connect(PID(PH.code),{reliable:true});PH.conn=c;
+  c.on('open',()=>c.send({t:'join',name:PH.name,cid:PH.cid}));c.on('data',phoneData);
+  c.on('close',()=>phStatus('📵','Връзката с учителския екран прекъсна.',true))});
+ PH.peer.on('error',e=>phStatus('⚠️',e.type==='peer-unavailable'?'Няма стая с код '+PH.code+'. Проверете кода или изчакайте учителя да я създаде.':'Грешка при връзката ('+e.type+').',true))}
+function phStatus(icon,text,retry){$('phone').innerHTML=`<h2>🌐 Стая <span class="code sm">${esc(PH.code)}</span></h2>${PH.role?phHead():''}<div class="phinfo"><div class="ic">${icon}</div><p>${esc(text)}</p>${retry?'<div class="row"><button onclick="phoneJoin()">🔁 Свържи се пак</button></div>':''}</div>${PH.role?'<div id="phRole"></div>':''}`;if(PH.role)phRoleBox()}
+function phHead(){const r=PH.role;return`<div class="phhead">${robot(r.c,{dead:PH.st&&PH.st.alive===false})}<div><b>${esc(r.lab)}</b><br><button class="sec sm" onclick="PH.roleOpen=!PH.roleOpen;phRoleBox()">👁 ${PH.roleOpen?'Скрий':'Покажи'} ролята</button></div></div>`}
+function phRoleBox(){const e=$('phRole');if(!e)return;e.innerHTML=PH.roleOpen&&PH.role?`<div class="card center">${roleHTML(PH.role)}</div>`:'';const b=document.querySelector('.phhead button');if(b)b.textContent='👁 '+(PH.roleOpen?'Скрий':'Покажи')+' ролята'}
+function phoneData(d){if(!d||typeof d!=='object')return;
+ if(d.t==='msg')return phStatus('ℹ️',d.text,false);
+ if(d.t==='lobby')return phStatus('✅','Вътре си, '+d.name+'! Изчакай учителя да започне играта.');
+ if(d.t==='role'){PH.role=d.r;PH.roleOpen=true;PH.st=null;return phRender()}
+ if(d.t==='state'){if(['vote','task','end'].includes(d.ph)&&(!PH.st||PH.st.ph!==d.ph))PH.roleOpen=false;PH.st=d;phRender()}}
+function phRender(){clearInterval(PH.timer);const s=PH.st;
+ let h=`<h2>🌐 Стая <span class="code sm">${esc(PH.code)}</span></h2>${PH.role?phHead():''}<div id="phRole"></div>`;
+ if(!s){h+=`<div class="phinfo"><div class="ic">🛸</div><p>Запомни ролята си и я скрий. Играта започва на общия екран.</p></div>`}
+ else{if(s.tasksOn&&s.ph!=='end')h+=`<div class="bar"><small>🔧 Задачи: ${s.done} / ${s.goal} · Среща ${s.meet} / ${s.maxM}</small><div class="tr"><i style="width:${Math.min(100,s.done/s.goal*100)}%"></i></div></div>`;
+  if(s.ph==='info')h+=`<div class="phinfo"><div class="ic">${s.icon||'🛸'}</div><p>${esc(s.text)}</p></div>`;
+  if(s.ph==='dead')h+=`<div class="phinfo"><div class="ic">🚀</div><p>Ти си в космоса. Може да гледаш, но не говори и не подсказвай!</p></div>`;
+  if(s.ph==='task')h+=`<div class="task center"><div class="hud"><span class="hint">${s.cat}</span><span class="tmr" id="phTm"></span></div><div class="q">${s.q}</div><div class="opts">${s.o.map((o,k)=>`<button onclick="phAns(${k},this)">${s.code?'<code>'+esc(o)+'</code>':esc(o)}</button>`).join('')}</div></div>`;
+  if(s.ph==='vote')h+=`<h3 class="center">🗳 Гласувай тайно</h3><p class="hint center">${s.mine!==null&&s.mine!==undefined?'✅ Гласът ти е изпратен. Можеш да го смениш, докато учителят не приключи гласуването.':'Кой е Impostor?'}</p><div class="opts">${s.cands.map(c=>`<button class="${s.mine===c.i?'ok':''}" onclick="phVote(${c.i})"><span class="mini">${robot(c.c)}</span>${esc(c.l)}</button>`).join('')}<button class="${s.mine==='s'?'ok':''}" onclick="phVote('s')">⏭ Пропускам</button></div>`;
+  if(s.ph==='end')h+=`<div class="win ${s.win==='crew'?'crw':'imp'}">${s.win==='crew'?'🏆 Екипажът печели!':'😈 Impostor-ите печелят!'}</div><p class="center">${esc(s.why)}</p><div class="word">Ти беше: <b>${s.imp?'Impostor 😈':'екипаж 🧑‍🚀'}</b><br>Думата на екипажа: <b>${esc(s.word)}</b>${s.decoy?`<br>Думата на Impostor-ите: <b>${esc(s.decoy)}</b>`:''}<br>Impostor-и: <b>${s.imps.map(esc).join(', ')}</b></div>`}
+ $('phone').innerHTML=h;phRoleBox();
+ if(s&&s.ph==='task'){let t=s.left;const u=()=>{const e=$('phTm');if(e)e.textContent='0:'+String(Math.max(0,t)).padStart(2,'0')};u();PH.timer=setInterval(()=>{t--;u();if(t<=0)clearInterval(PH.timer)},1000)}}
+function phAns(k,b){document.querySelectorAll('#phone .opts button').forEach(x=>x.disabled=true);b.classList.add('ok');try{PH.conn.send({t:'ans',k})}catch(e){}}
+function phVote(v){try{PH.conn.send({t:'vote',v})}catch(e){}}
+
+/* ===== Маршрут: учителски екран или телефон на играч ===== */
+(function(){const h=decodeURIComponent(location.hash.slice(1));
+ if(h.startsWith('kod'))return phoneCode(h.split('=')[1]||'');
+ if(h.startsWith('stai='))return phoneOnline(h.slice(5).replace(/[^0-9a-z]/gi,''));
+})();
+addEventListener('hashchange',()=>location.reload());
 </script>
 <script src="../totop.js?v=20261126" defer></script>
 </body>
