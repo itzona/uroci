@@ -86,12 +86,6 @@ button:hover{
     margin-bottom:15px;
 }
 
-.timer{
-    font-size:3rem;
-    color:#ef4444;
-    margin-top:20px;
-}
-
 .field{
     display:block;
     text-align:left;
@@ -143,9 +137,6 @@ select{
     white-space:pre-line;
 }
 
-.rounds{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:16px 0 6px}
-.rounds span{font-weight:700;color:#38bdf8;font-size:1.1rem}
-.rounds button.small{width:auto;margin:0;padding:8px 14px;font-size:.9rem;background:#1e293b;border:1px solid #334155}
 .explain .clue{color:#fbbf24;margin:-6px 0 14px}
 
 
@@ -192,12 +183,6 @@ select{
         </select>
         <p class="hint" id="modeHint"></p>
 
-        <label class="field" for="voteTime">Време за познаване на Impostor-а</label>
-        <select id="voteTime">
-            <option value="120">2 минути</option>
-            <option value="180" selected>3 минути</option>
-            <option value="300">5 минути</option>
-        </select>
 
         <button onclick="startGame()">
             Стартирай игра
@@ -237,11 +222,6 @@ select{
                 Няма ограничение на времето – помислете спокойно.
             </p>
 
-            <div class="rounds">
-                <span id="roundInfo">Кръг 1 от 3</span>
-                <button class="small" onclick="nextRound()">➕ Следващ кръг</button>
-            </div>
-
             <button onclick="startVoting()">
                 🗳️ Започни познаването
             </button>
@@ -253,8 +233,6 @@ select{
             <p class="instructions">
                 Обсъдете подсказките и посочете кой според вас не знае думата.
             </p>
-
-            <div class="timer" id="timer"></div>
 
             <button id="revealBtn" onclick="revealImpostor()">
                 Покажи Impostor
@@ -711,8 +689,6 @@ let secretWord = "";
 let secretTheme = "";
 let decoyWord = "";
 let mode = "similar";
-let timerId = null;
-let round = 1;
 
 function $(id){
     return document.getElementById(id);
@@ -824,46 +800,16 @@ function nextPlayer(){
         $("discussion").classList.remove("hidden");
         $("cluePhase").classList.remove("hidden");
         $("votePhase").classList.add("hidden");
-        round = 1;
-        $("roundInfo").textContent = "Кръг 1 от 3";
     }
-}
-
-function nextRound(){
-    round++;
-    $("roundInfo").textContent = round <= 3 ? "Кръг " + round + " от 3" : "Кръг " + round + " (допълнителен)";
 }
 
 function startVoting(){
     $("cluePhase").classList.add("hidden");
     $("votePhase").classList.remove("hidden");
     $("revealBtn").classList.remove("hidden");
-    startTimer(parseInt($("voteTime").value, 10));
-}
-
-function startTimer(seconds){
-    clearInterval(timerId);
-    let left = seconds;
-    renderTime(left);
-
-    timerId = setInterval(function(){
-        left--;
-        renderTime(left);
-        if(left <= 0){
-            clearInterval(timerId);
-            $("timer").textContent = "⏰ Времето изтече!";
-        }
-    }, 1000);
-}
-
-function renderTime(s){
-    const m = String(Math.floor(s / 60)).padStart(2, "0");
-    const sec = String(s % 60).padStart(2, "0");
-    $("timer").textContent = m + ":" + sec;
 }
 
 function revealImpostor(){
-    clearInterval(timerId);
     const sorted = impostors.slice().sort(function(a, b){ return a - b; });
     const list = sorted.length > 1 ? sorted.slice(0, -1).join(", ") + " и " + sorted[sorted.length - 1] : String(sorted[0]);
     $("result").textContent = (impostors.length > 1 ? "Impostor-ите бяха играчи " : "Impostor беше играч ") + list;
@@ -898,7 +844,6 @@ function addExplanation(heading, word){
 }
 
 function newGame(){
-    clearInterval(timerId);
     $("discussion").classList.add("hidden");
     $("result").classList.add("hidden");
     $("resultWord").classList.add("hidden");
