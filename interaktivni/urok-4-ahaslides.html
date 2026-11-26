@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 4: AhaSlides – направи готова презентация интерактивна – Интерактивни презентации, 11 и 12 клас</title>
+<link rel="icon" type="image/svg+xml" href="../icons/interaktivni.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ip-urok.css?v=20261127">
+</head>
+<body>
+
+<header class="hero aha">
+  <div class="wrap">
+    <div>
+      <span class="tag">Урок 4 · Интерактивни презентации · 11 и 12 клас</span>
+      <h1>AhaSlides: направи готова презентация интерактивна</h1>
+      <p>Внасяш презентация, която вече имаш, и между слайдовете ѝ добавяш анкети, тест с класиране и колело на късмета.</p>
+    </div>
+    <svg viewBox="0 0 470 320" role="img" aria-label="Прожекционен екран с растящи стълбове и телефони, от които се гласува">
+      <ellipse cx="235" cy="300" rx="210" ry="14" fill="#13246e" opacity=".5"/>
+      <rect x="40" y="18" width="300" height="200" rx="16" fill="#13246e"/>
+      <rect x="48" y="26" width="284" height="184" rx="10" fill="#fff"/>
+      <rect x="48" y="26" width="284" height="30" rx="10" fill="#13246e"/>
+      <rect x="48" y="44" width="284" height="12" fill="#13246e"/>
+      <text x="62" y="46" fill="#fff" font-family="Nunito Sans,sans-serif" font-size="12">ahaslides.com</text>
+      <text x="250" y="46" fill="#ffc23d" font-family="Nunito,sans-serif" font-weight="900" font-size="13">VIRUS</text>
+      <rect x="64" y="68" width="150" height="9" rx="4" fill="#1b2240"/>
+      <rect x="64" y="82" width="96" height="7" rx="3" fill="#c8cfe8"/>
+      <line x1="64" y1="192" x2="316" y2="192" stroke="#dfe3f3" stroke-width="2"/>
+      <rect class="bargrow" x="78" y="110" width="44" height="82" rx="6" fill="#2347d6"/>
+      <rect class="bargrow" x="136" y="140" width="44" height="52" rx="6" fill="#ff6a4d" style="animation-delay:.15s"/>
+      <rect class="bargrow" x="194" y="124" width="44" height="68" rx="6" fill="#ffc23d" style="animation-delay:.3s"/>
+      <rect class="bargrow" x="252" y="162" width="44" height="30" rx="6" fill="#45b0ff" style="animation-delay:.45s"/>
+      <rect x="180" y="218" width="20" height="40" fill="#13246e"/>
+      <rect x="140" y="256" width="100" height="10" rx="5" fill="#13246e"/>
+      <g transform="translate(330 120) rotate(8)">
+        <rect width="74" height="136" rx="14" fill="#1b2240"/><rect x="6" y="10" width="62" height="116" rx="9" fill="#fff"/>
+        <rect x="14" y="24" width="46" height="6" rx="3" fill="#1b2240"/>
+        <rect x="14" y="40" width="46" height="16" rx="5" fill="#eef2ff" stroke="#2347d6" stroke-width="2"/>
+        <rect x="14" y="62" width="46" height="16" rx="5" fill="#fff" stroke="#dfe3f3" stroke-width="2"/>
+        <rect x="14" y="84" width="46" height="16" rx="5" fill="#fff" stroke="#dfe3f3" stroke-width="2"/>
+        <rect x="14" y="106" width="46" height="12" rx="5" fill="#2347d6"/>
+      </g>
+      <g transform="translate(398 168) rotate(-6)">
+        <rect width="62" height="114" rx="12" fill="#1b2240"/><rect x="5" y="9" width="52" height="96" rx="8" fill="#fff"/>
+        <circle cx="31" cy="50" r="17" fill="#3ccf7e"/><path d="M23 50l6 6 11-12" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="13" y="78" width="36" height="6" rx="3" fill="#c8cfe8"/>
+      </g>
+      <g transform="translate(372 42)"><circle r="24" fill="#ffc23d"/><text y="9" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="26" fill="#1b2240">?</text></g>
+      <g transform="translate(436 96)"><circle r="16" fill="#ff6a4d"/><text y="6" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="18" fill="#fff">!</text></g>
+      <g transform="translate(18 250)"><circle r="14" fill="#45b0ff"/><text y="5" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="14" fill="#fff">24</text></g>
+    </svg>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Теория</summary><div class="menu"><a href="#kakvo">Какво е AhaSlides</a><a href="#vidove">Видове слайдове</a><a href="#izgled">Как изглежда</a></div></details>
+    <details><summary>Как се прави</summary><div class="menu"><a href="#stapki">Стъпка по стъпка</a><a href="#koga">Кой инструмент кога</a></div></details>
+    <details><summary>Задача</summary><div class="menu"><a href="#zadacha">Задача за часа</a><a href="#primeri">Пример</a><a href="#kriterii">Критерии за оценяване</a></div></details>
+    <a href="#test">Тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="kakvo">
+  <div class="wrap grid2">
+    <div>
+      <h2>Какво е AhaSlides</h2>
+      <p><b>AhaSlides</b> събира на едно място всичко от предишните уроци: анкети като в Mentimeter, Q&amp;A като в Slido и тест с класиране като в Kahoot!.</p>
+      <p>Най-полезното е, че може да <b>внесеш готова презентация</b> (PowerPoint или PDF) и между нейните слайдове да добавиш въпроси. Така не правиш нищо наново – вземаш презентация, която вече имаш, и я правиш интерактивна.</p>
+      <p>Участниците влизат на <b>ahaslides.com</b> с кода от екрана или с QR кода.</p>
+    </div>
+    <div class="card">
+      <h3>Безплатният план</h3>
+      <ul>
+        <li>До <b>50 участници</b> едновременно.</li>
+        <li>До <b>3 анкетни</b> и до <b>5 тестови</b> въпроса в една презентация.</li>
+        <li>Неограничен брой слайдове със съдържание (текст, картинки, внесени слайдове).</li>
+      </ul>
+      <p class="note">Ограниченията се променят – провери на сайта преди часа.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="vidove">
+  <div class="wrap">
+    <h2>Видове слайдове в AhaSlides</h2>
+    <p class="muted">Анкетните въпроси се броят към лимита от 3, тестовите – към лимита от 5 в безплатния план.</p>
+    <h3 style="margin-top:20px">Тестови въпроси (с верен отговор и точки)</h3>
+    <div class="grid" style="margin-top:12px">
+      <div class="card tile"><div class="mini"><div class="q">Кой порт ползва HTTPS?</div><div class="hrow"><span>80</span><i style="width:20%;background:var(--line)"></i></div><div class="hrow"><span>443 ✓</span><i style="width:70%;background:#1f9d6a"></i></div><div class="hrow"><span>21</span><i style="width:10%;background:var(--line)"></i></div></div><h3>Pick answer</h3><span class="pill">тест</span><p>Избор от готови отговори.</p></div>
+      <div class="card tile"><div class="mini"><div class="q">Как се нарича измамното писмо, което иска паролата ти?</div><div style="border:2px solid var(--line);border-radius:8px;padding:8px;margin-top:10px">фишинг ✓</div><div class="note">приема се и „phishing“</div></div><h3>Short answer</h3><span class="pill">тест</span><p>Участникът пише отговора сам. Приемат се няколко зададени варианта.</p></div>
+      <div class="card tile"><div class="mini"><div class="q">Подреди от най-малката</div><div class="lead"><div><span>1. бит</span></div><div><span>2. байт</span></div><div><span>3. килобайт</span></div><div><span>4. мегабайт</span></div></div></div><h3>Correct order</h3><span class="pill">тест</span><p>Подреждане в правилния ред.</p></div>
+      <div class="card tile"><div class="mini"><div class="q">Свържи</div><div class="hrow"><span>троянец</span><em>→ маскира се</em></div><div class="hrow"><span>ransomware</span><em>→ иска откуп</em></div><div class="hrow"><span>spyware</span><em>→ шпионира</em></div></div><h3>Match pairs</h3><span class="pill">тест</span><p>Свързване на двойки: понятие – обяснение.</p></div>
+      <div class="card tile"><div class="mini"><div class="q">Коя е дънната платка?</div><div class="answers"><div style="background:var(--card);color:var(--ink);justify-content:center;font-size:22px">🖥️</div><div style="background:#1f9d6a;justify-content:center;font-size:22px">🟩 ✓</div><div style="background:var(--card);color:var(--ink);justify-content:center;font-size:22px">⌨️</div><div style="background:var(--card);color:var(--ink);justify-content:center;font-size:22px">🖱️</div></div></div><h3>Pick image</h3><span class="pill">тест</span><p>Отговорите са картинки.</p></div>
+      <div class="card tile"><div class="mini"><div class="q">Вход или изход?</div><div class="answers"><div style="background:var(--blue)">Вход: клавиатура, мишка</div><div style="background:var(--coral)">Изход: монитор, принтер</div></div></div><h3>Categorise</h3><span class="pill">тест</span><p>Разпределяне на елементи в групи.</p></div>
+    </div>
+    <h3 style="margin-top:26px">Анкети и други</h3>
+    <div class="grid" style="margin-top:12px">
+      <div class="card tile"><div class="mini"><div class="q">Кое ползваш най-често?</div><div class="hrow"><span>Телефон</span><i style="width:70%;background:#c2410c"></i></div><div class="hrow"><span>Лаптоп</span><i style="width:35%;background:#c2410c"></i></div></div><h3>Poll</h3><span class="pill">анкета</span><p>Избор на мнение, без верен отговор.</p></div>
+      <div class="card tile"><div class="mini"><div class="q">С една дума: вирус е…</div><div class="cloud" style="height:100px"><span style="font-size:26px;color:#c2410c">опасен</span><span style="font-size:14px;color:var(--blue)">код</span><span style="font-size:18px;color:var(--deep)">заразяване</span><span style="font-size:13px;color:var(--coral)">досаден</span></div></div><h3>Word cloud</h3><span class="pill">анкета</span><p>Облак от думи.</p></div>
+      <div class="card tile"><div class="mini"><div class="q">Колко защитен се чувстваш?</div><div class="scale">Телефон<div class="track"><b style="left:62%"></b></div></div><div class="scale">Лаптоп<div class="track"><b style="left:44%"></b></div></div></div><h3>Scales</h3><span class="pill">анкета</span><p>Оценка на твърдения по скала.</p></div>
+      <div class="card tile"><div class="mini"><div class="q">Какво те притеснява онлайн?</div><div class="sticky"><div>Измамни сайтове</div><div>Пароли</div><div>Фалшиви профили</div></div></div><h3>Open ended</h3><span class="pill">анкета</span><p>Свободен текст.</p></div>
+      <div class="card tile"><div class="mini"><svg viewBox="0 0 120 120" style="width:110px;height:110px;display:block;margin:0 auto"><g transform="translate(60 60)"><path d="M0 0L0-52A52 52 0 0 1 45-26Z" fill="#c2410c"/><path d="M0 0L45-26A52 52 0 0 1 45 26Z" fill="#2347d6"/><path d="M0 0L45 26A52 52 0 0 1 0 52Z" fill="#ffc23d"/><path d="M0 0L0 52A52 52 0 0 1-45 26Z" fill="#1f9d6a"/><path d="M0 0L-45 26A52 52 0 0 1-45-26Z" fill="#ff6a4d"/><path d="M0 0L-45-26A52 52 0 0 1 0-52Z" fill="#45b0ff"/><circle r="8" fill="#fff"/></g><path d="M60 2l7 12h-14z" fill="#1b2240"/></svg></div><h3>Spinner wheel</h3><span class="pill">игра</span><p>Колело на късмета – избира случайно име или тема.</p></div>
+      <div class="card tile"><div class="mini"><div class="lead"><div><span>1. Мария</span><b>2 750</b></div><div><span>2. Иво</span><span>2 480</span></div><div><span>3. Ники</span><span>2 100</span></div></div></div><h3>Leaderboard</h3><span class="pill">класиране</span><p>Класиране след тестовите въпроси.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="izgled">
+  <div class="wrap">
+    <h2>Как изглежда AhaSlides</h2>
+    <p class="muted">Схеми на основните екрани. Бутоните са на английски, както ще ги видиш.</p>
+    <div class="grid2" style="margin-top:22px">
+      <figure style="margin:0">
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Import</span></div>
+          <div style="padding:22px;text-align:center"><b style="font-family:Nunito,sans-serif;font-size:18px">Import your slides</b>
+            <div style="border:2px dashed var(--line);border-radius:12px;padding:26px 10px;margin:14px 0;color:var(--muted)">📄 Плъзни файла тук<br><small>PDF, PPT, PPTX</small></div>
+            <div class="note">Вируси и защита.pdf · 6 слайда</div></div></div>
+        <figcaption class="cap"><b>Внасяне.</b> Всяка страница от PDF-а или всеки слайд от PowerPoint става отделен слайд в AhaSlides. Текстът в тях не се редактира – той е като картинка.</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>AhaSlides – редактор</span></div>
+          <div class="editor">
+            <div class="slides"><div>1 · Внесен слайд</div><div class="on">2 · Word cloud</div><div>3 · Внесен слайд</div><div>4 · Pick answer</div></div>
+            <div class="canvas"><b style="font-family:Nunito,sans-serif">С една дума: вирус е…</b>
+              <div class="cloud" style="height:150px"><span style="font-size:30px;color:#c2410c">опасен</span><span style="font-size:15px;color:var(--blue)">код</span><span style="font-size:20px;color:var(--deep)">заразяване</span><span style="font-size:14px;color:var(--coral)">досаден</span><span style="font-size:17px;color:var(--sky)">хакер</span></div></div>
+            <div class="panel"><b>Word cloud</b><label>Your question</label><div class="f">С една дума: вирус е…</div><label>Entries per participant</label><div class="f">3</div><div class="tog">Hide results<s></s></div><div class="tog">Profanity filter<s class="on"></s></div></div>
+          </div></div>
+        <figcaption class="cap"><b>Редакторът.</b> Вляво са всички слайдове – внесените и добавените въпроси. Подреждаш ги с плъзгане. Вдясно са настройките на избрания слайд.</figcaption>
+      </figure>
+      <figure style="margin:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start">
+        <div class="phone"><div class="scr"><div class="url">ahaslides.com/VIRUS</div><b style="font-size:14px">Свържи понятието с обяснението</b><div class="opt"><i></i>троянски кон ↔ …</div><div class="opt"><i></i>ransomware ↔ …</div><div class="opt"><i></i>spyware ↔ …</div><div class="send" style="background:#c2410c">Submit</div></div></div>
+        <div class="phone"><div class="scr"><div class="url">ahaslides.com/VIRUS</div><b style="font-size:15px">Верен отговор! 🎉</b><p style="font-size:30px;font-weight:900;color:#c2410c;margin:16px 0 4px;text-align:center">+ 820</p><p style="font-size:12px;color:#777;text-align:center">Ти си на 2-ро място</p></div></div>
+        <figcaption class="cap" style="grid-column:1/-1"><b>Телефонът на участника.</b> Отговаря на теста и веднага вижда точките и мястото си в класирането.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="stapki">
+  <div class="wrap">
+    <h2>AhaSlides стъпка по стъпка</h2>
+    <p class="muted">Направи стъпките заедно с учителя. Надписите може леко да се различават в нова версия.</p>
+    <div class="steps" style="margin-top:24px">
+      <div class="step"><div class="txt"><h3>Регистрация</h3><ol><li>Отвори <a href="https://ahaslides.com">ahaslides.com</a> → <b>Sign up free</b>.</li><li>Влез с Google акаунт.</li><li>Остани на безплатния план. Не въвеждай данни за карта.</li></ol></div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>ahaslides.com/signup</span></div><div style="padding:22px;display:grid;gap:10px;max-width:320px;margin:0 auto"><b style="font-family:Nunito,sans-serif;font-size:20px;text-align:center">Sign up free</b><div style="border:2px solid var(--line);border-radius:10px;padding:10px;text-align:center;font-weight:700">Continue with Google</div><div style="background:#c2410c;color:#fff;border-radius:10px;padding:10px;text-align:center;font-weight:800">Sign up</div></div></div></div>
+      <div class="step"><div class="txt"><h3>Подготви файла</h3><ol><li>Избери своя презентация от 5 до 8 слайда.</li><li>Google Slides: <b>File</b> → <b>Download</b> → <b>PDF document</b> или <b>Microsoft PowerPoint</b>.</li><li>PowerPoint: <b>File</b> → <b>Save As</b> → PDF или остави .pptx.</li></ol></div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Google Slides – File → Download</span></div><div style="padding:14px;font-size:13px;display:grid;gap:6px;max-width:260px"><div style="border:2px solid var(--blue);border-radius:8px;padding:6px 10px;font-weight:800">PDF document (.pdf)</div><div style="border:1px solid var(--line);border-radius:8px;padding:6px 10px">Microsoft PowerPoint (.pptx)</div><div style="border:1px solid var(--line);border-radius:8px;padding:6px 10px;opacity:.6">PNG image</div></div></div></div>
+      <div class="step"><div class="txt"><h3>Внеси презентацията</h3><ol><li>Създай нова презентация и избери <b>Import</b> (PDF, PPT).</li><li>Качи файла и изчакай да се обработи.</li><li>Прегледай всички слайдове – провери, че нищо не липсва и текстът се чете.</li></ol></div>
+        <div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Import</span></div>
+          <div style="padding:22px;text-align:center"><b style="font-family:Nunito,sans-serif;font-size:18px">Import your slides</b>
+            <div style="border:2px dashed var(--line);border-radius:12px;padding:26px 10px;margin:14px 0;color:var(--muted)">📄 Плъзни файла тук<br><small>PDF, PPT, PPTX</small></div>
+            <div class="note">Вируси и защита.pdf · 6 слайда</div></div></div>
+        <figcaption class="cap"><b>Внасяне.</b> Всяка страница от PDF-а или всеки слайд от PowerPoint става отделен слайд в AhaSlides. Текстът в тях не се редактира – той е като картинка.</figcaption>
+      </div></div>
+      <div class="step"><div class="txt"><h3>Добави въпросите</h3><ol><li>Натисни <b>+ New slide</b> и избери вид – напр. <b>Word cloud</b> или <b>Pick answer</b>.</li><li>Напиши въпроса и отговорите; при тест отбележи верния.</li><li>Плъзни новия слайд в левия списък на мястото му – след слайда с информацията, от която е въпросът.</li></ol></div>
+        <div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>AhaSlides – редактор</span></div>
+          <div class="editor">
+            <div class="slides"><div>1 · Внесен слайд</div><div class="on">2 · Word cloud</div><div>3 · Внесен слайд</div><div>4 · Pick answer</div></div>
+            <div class="canvas"><b style="font-family:Nunito,sans-serif">С една дума: вирус е…</b>
+              <div class="cloud" style="height:150px"><span style="font-size:30px;color:#c2410c">опасен</span><span style="font-size:15px;color:var(--blue)">код</span><span style="font-size:20px;color:var(--deep)">заразяване</span><span style="font-size:14px;color:var(--coral)">досаден</span><span style="font-size:17px;color:var(--sky)">хакер</span></div></div>
+            <div class="panel"><b>Word cloud</b><label>Your question</label><div class="f">С една дума: вирус е…</div><label>Entries per participant</label><div class="f">3</div><div class="tog">Hide results<s></s></div><div class="tog">Profanity filter<s class="on"></s></div></div>
+          </div></div>
+        <figcaption class="cap"><b>Редакторът.</b> Вляво са всички слайдове – внесените и добавените въпроси. Подреждаш ги с плъзгане. Вдясно са настройките на избрания слайд.</figcaption>
+      </div></div>
+      <div class="step"><div class="txt"><h3>Настройки на теста</h3><ol><li>Задай време за отговор (напр. 20–30 секунди).</li><li>Включи по-бързите верни отговори да носят повече точки.</li><li>Добави <b>Leaderboard</b> след последния тестов въпрос.</li></ol></div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Настройки на тестов въпрос</span></div><div class="panel" style="padding:16px;font-size:14px"><b>Pick answer</b><label>Time limit</label><div class="f">20 s</div><label>Points</label><div class="f">Max 1000</div><div class="tog">Faster answers get more points<s class="on"></s></div><div class="tog">Show leaderboard after this slide<s class="on"></s></div></div></div></div>
+      <div class="step"><div class="txt"><h3>Колелото</h3><ol><li><b>+ New slide</b> → <b>Spinner wheel</b>.</li><li>Въведи имената на първите трима от класирането или темите, между които ще се избира.</li><li>По време на презентацията натисни, за да завъртиш.</li></ol></div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Spinner wheel</span></div><div style="padding:14px"><svg viewBox="0 0 120 120" style="width:150px;height:150px;display:block;margin:0 auto"><g transform="translate(60 60)"><path d="M0 0L0-52A52 52 0 0 1 45-26Z" fill="#c2410c"/><path d="M0 0L45-26A52 52 0 0 1 45 26Z" fill="#2347d6"/><path d="M0 0L45 26A52 52 0 0 1 0 52Z" fill="#ffc23d"/><path d="M0 0L0 52A52 52 0 0 1-45 26Z" fill="#1f9d6a"/><path d="M0 0L-45 26A52 52 0 0 1-45-26Z" fill="#ff6a4d"/><path d="M0 0L-45-26A52 52 0 0 1 0-52Z" fill="#45b0ff"/><circle r="8" fill="#fff"/></g><path d="M60 2l7 12h-14z" fill="#1b2240"/></svg></div></div></div>
+      <div class="step"><div class="txt"><h3>Презентиране</h3><ol><li>Натисни <b>Present</b>. Горе се вижда адресът с кода и QR кодът.</li><li>Тествай от телефона си, преди да започнеш.</li><li>Слайдовете се сменят със стрелките <kbd>←</kbd> <kbd>→</kbd>.</li></ol></div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start">
+        <div class="phone"><div class="scr"><div class="url">ahaslides.com/VIRUS</div><b style="font-size:14px">Свържи понятието с обяснението</b><div class="opt"><i></i>троянски кон ↔ …</div><div class="opt"><i></i>ransomware ↔ …</div><div class="opt"><i></i>spyware ↔ …</div><div class="send" style="background:#c2410c">Submit</div></div></div>
+        <div class="phone"><div class="scr"><div class="url">ahaslides.com/VIRUS</div><b style="font-size:15px">Верен отговор! 🎉</b><p style="font-size:30px;font-weight:900;color:#c2410c;margin:16px 0 4px;text-align:center">+ 820</p><p style="font-size:12px;color:#777;text-align:center">Ти си на 2-ро място</p></div></div>
+        <figcaption class="cap" style="grid-column:1/-1"><b>Телефонът на участника.</b> Отговаря на теста и веднага вижда точките и мястото си в класирането.</figcaption>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="koga">
+  <div class="wrap">
+    <h2>Обобщение: кой инструмент кога</h2>
+    <p class="muted">Вече познаваш и четирите. Ето кога кой е най-подходящ.</p>
+    <table class="stack" style="margin-top:18px">
+      <thead><tr><th>Искам…</th><th>Избирам</th><th>Защо</th></tr></thead>
+      <tbody>
+        <tr><td>Нова презентация с много видове въпроси и красиви диаграми</td><td><b>Mentimeter</b></td><td>Най-много видове слайдове</td></tr>
+        <tr><td>Да добавя анкети в презентация в Google Slides / PowerPoint и да събера въпроси</td><td><b>Slido</b></td><td>Вгражда се в презентацията; силно Q&amp;A</td></tr>
+        <tr><td>Бърз тест-състезание за преговор</td><td><b>Kahoot!</b></td><td>Игра с музика, таймер и подиум</td></tr>
+        <tr><td>Да направя готова презентация интерактивна, без да я правя наново</td><td><b>AhaSlides</b></td><td>Внася PowerPoint и PDF; много видове тестове</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="band alt" id="zadacha">
+  <div class="wrap">
+    <h2>Задача за часа</h2>
+    <div class="goal"><h3>Какво трябва да направиш</h3><p><b>Внеси</b> в <b>AhaSlides</b> своя готова презентация от 5–8 слайда и я превърни в интерактивен урок за съучениците – с анкети, тест от 3 различни вида, класиране и колело на късмета.</p>
+      <div class="time"><span>⏱ 1 учебен час</span><span>👤 индивидуално или по двойки</span><span>🎯 20 точки</span></div></div>
+    <div class="grid2" style="margin-top:26px">
+      <div>
+      <h3>Изисквания – точно в този ред</h3>
+      <ol class="req">
+        <li><b>Изходен файл.</b> Твоя презентация от друг предмет или от урока за Slido – <b>5 до 8 слайда</b>, свалена като PDF или PPTX.</li>
+        <li><b>Внасяне.</b> Нова презентация в AhaSlides с име <b>„Тема – Име Фамилия, клас“</b>, внесена с <b>Import</b>. Всички слайдове са налице и текстът се чете.</li>
+        <li><b>В началото – Word cloud или Poll</b> (загрявка) преди първия внесен слайд с информация.</li>
+        <li><b>По средата – Scales или Open ended</b> (мнение на публиката).</li>
+        <li><b>След информацията – 3 тестови въпроса от 3 различни вида:</b><ul><li><b>Pick answer</b> (4 отговора, 1 верен);</li><li><b>Short answer</b> (с поне 2 приемливи варианта на отговора);</li><li><b>Correct order</b> или <b>Match pairs</b> (поне 4 елемента).</li></ul>Всеки въпрос е веднага след слайда, от който е.</li>
+        <li><b>Точки и класиране.</b> По-бързите верни отговори носят повече точки; <b>Leaderboard</b> след третия тестов въпрос.</li>
+        <li><b>В края – Spinner wheel</b> с имената на първите трима от класирането. Колелото избира кой печели бонус.</li>
+        <li><b>Лимит.</b> Общо най-много 3 анкети и 5 тестови въпроса – толкова позволява безплатният план.</li>
+        <li><b>Проба и провеждане.</b> Тествай от телефона си, после проведи презентацията пред класа.</li>
+      </ol>
+      
+      </div>
+      <div>
+        <div class="card"><h3>Какво предаваш</h3><ul><li>Линк към презентацията (бутон <b>Share</b>)</li><li>Екранна снимка на Leaderboard</li><li>2–3 изречения: кой тестов въпрос беше най-труден и какво се промени в презентацията, след като стана интерактивна</li></ul><p class="note">Предаваш там, където каже учителят (напр. Google Classroom).</p></div>
+        <div class="card" style="margin-top:20px"><h3>Избери тема</h3>
+      <table class="stack">
+        <thead><tr><th>Тема</th><th>Примерен въпрос</th></tr></thead>
+        <tbody>
+          <tr><td>Софтуерно пиратство</td><td>„Доколко е приемливо да се ползва нелицензиран софтуер?“</td></tr>
+          <tr><td>Сигурност на данните</td><td>„Къде пазиш резервни копия на снимките си?“</td></tr>
+          <tr><td>Компютърна конфигурация</td><td>„Подреди: процесор, RAM, видеокарта, SSD, цена“</td></tr>
+          <tr><td>ИИ в училище</td><td>„С какво ти помага ИИ?“</td></tr>
+          <tr><td>Дигитална хигиена</td><td>„Колко часа на ден си на телефона?“</td></tr>
+          <tr><td>Управление на проекти</td><td>„Кой модел не позволява връщане към предишен етап?“</td></tr>
+          <tr><td>Професии в ИТ</td><td>„Какво те притеснява за бъдещето?“</td></tr>
+          <tr><td>Фалшиви новини</td><td>„Кое заглавие е фалшиво?“</td></tr>
+          <tr><td>Своя тема</td><td>Съгласувай с учителя</td></tr>
+        </tbody>
+      </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="primeri">
+  <div class="wrap">
+    <h2>Пример: „Вируси и защита“ – внесен PDF + въпроси</h2>
+    <p class="muted">6 внесени слайда (сиви) и 6 добавени (цветни). Отговаря точно на заданието.</p>
+    <div class="grid" style="margin-top:18px">
+      <div class="card"><span class="pill">Word cloud</span><p>„С една дума: компютърен вирус е…“</p></div>
+      <div class="card" style="opacity:.7"><span class="pill">Внесени 1–3</span><p>Заглавие; „Видове зловреден софтуер“; „Как се заразява компютърът“.</p></div>
+      <div class="card"><span class="pill">Scales</span><p>„Колко защитен е твоят телефон / лаптоп / акаунт в игри? (1–5)“</p></div>
+      <div class="card" style="opacity:.7"><span class="pill">Внесени 4–5</span><p>„Фишинг“; „Антивирусна програма и обновления“.</p></div>
+      <div class="card"><span class="pill">Pick answer</span><p>„Кое е най-сигурният начин да отвориш неочакван прикачен файл?“ – <b>Да проверя при подателя по друг канал ✓</b> / Да го отворя веднага / Да го препратя на приятел / Да изключа антивирусната</p></div>
+      <div class="card"><span class="pill">Short answer</span><p>„Как се нарича измамно писмо, което иска паролата ти?“ – приема се <b>фишинг</b>, <b>phishing</b>.</p></div>
+      <div class="card"><span class="pill">Match pairs</span><p>вирус → заразява други файлове · троянски кон → маскира се като полезна програма · ransomware → криптира файловете и иска откуп · spyware → тайно събира информация</p></div>
+      <div class="card"><span class="pill">Leaderboard + Spinner wheel</span><p>Класиране след третия въпрос; колелото избира между първите трима кой печели бонус.</p></div>
+      <div class="card" style="opacity:.7"><span class="pill">Внесен 6</span><p>„5 правила за защита“ и „Благодаря“.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="kriterii">
+  <div class="wrap grid2">
+    <div>
+      <h2>Критерии за оценяване</h2>
+      <table class="crit">
+        <thead><tr><th>Критерий</th><th>Точки</th></tr></thead>
+        <tbody><tr><td><b>Внасяне</b> – 5–8 слайда, всички се четат, име с тема и автор</td><td>3</td></tr><tr><td><b>Анкети</b> – загрявка в началото и мнение по средата</td><td>3</td></tr><tr><td><b>Три вида тест</b> – Pick answer, Short answer, Correct order/Match pairs (по 2 т.)</td><td>6</td></tr><tr><td><b>Leaderboard и Spinner wheel</b> на правилните места</td><td>2</td></tr><tr><td><b>Оформление</b> – въпросите са след слайда, от който са; спазен лимит</td><td>2</td></tr><tr><td><b>Провеждане и извод</b> – проведено, снимка на класирането, писмен извод</td><td>4</td></tr><tr><td><b>Общо</b></td><td><b>20</b></td></tr></tbody>
+      </table>
+    </div>
+    <div>
+      <h3 style="margin-top:8px">Оценка</h3>
+      <table class="crit">
+        <thead><tr><th>Точки</th><th>Оценка</th></tr></thead>
+        <tbody><tr><td>18–20</td><td>Отличен 6</td></tr><tr><td>15–17</td><td>Много добър 5</td></tr><tr><td>12–14</td><td>Добър 4</td></tr><tr><td>9–11</td><td>Среден 3</td></tr><tr><td>0–8</td><td>Слаб 2</td></tr></tbody>
+      </table>
+      <div class="card" style="margin-top:20px"><h3>Провери се, преди да предадеш</h3>
+        <label class="chk"><input type="checkbox"> Внесох 5–8 слайда</label>
+        <label class="chk"><input type="checkbox"> Word cloud/Poll в началото, Scales/Open ended по средата</label>
+        <label class="chk"><input type="checkbox"> 3 тестови въпроса от различен вид</label>
+        <label class="chk"><input type="checkbox"> Leaderboard след третия тестов въпрос</label>
+        <label class="chk"><input type="checkbox"> Spinner wheel в края</label>
+        <label class="chk"><input type="checkbox"> Имам линк, снимка и извод</label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">10 въпроса. Избери отговор на всеки и натисни „Провери“.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check" type="button">Провери</button><button class="btn ghost" id="again" type="button">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<section class="band"><div class="wrap pager"><a href="urok-3-kahoot.html"><small>← Урок 3</small>Kahoot!</a><a class="nx" href="index.html"><small>Към раздела →</small>Всички уроци</a></div></section>
+
+<footer>IT Зона · Интерактивни презентации · 11 и 12 клас. Изгледите на инструментите са схематични – бутоните може леко да се различават.</footer>
+
+<script>const CUR=3;</script>
+<script src="ip.js?v=20261127"></script>
+<script>
+const QUIZ=[
+ ["С какво AhaSlides се отличава най-много?", ["Работи без интернет", "Внася готова презентация (PowerPoint или PDF) и между слайдовете се добавят въпроси", "Има само облак от думи", "Не изисква акаунт за презентатора"], 1, "Така не правиш презентацията наново."],
+ ["Как участниците влизат в AhaSlides?", ["kahoot.it с PIN", "ahaslides.com с кода от екрана или с QR код", "slido.com с #код", "Само с покана по имейл"], 1, "Кодът се вижда горе по време на презентирането."],
+ ["Колко участници позволява безплатният план едновременно?", ["5", "до 50", "до 1000", "Без ограничение"], 1, "За един клас това е достатъчно."],
+ ["Кой вид тестов въпрос иска участникът сам да напише отговора?", ["Pick answer", "Short answer", "Correct order", "Pick image"], 1, "Затова се задават няколко приемливи варианта, напр. „фишинг“ и „phishing“."],
+ ["Кой вид е подходящ за „Подреди от най-малката: бит, байт, килобайт, мегабайт“?", ["Match pairs", "Correct order", "Word cloud", "Scales"], 1, "Correct order проверява правилната последователност."],
+ ["Кой вид свързва понятие с обяснение?", ["Match pairs", "Poll", "Spinner wheel", "Open ended"], 0, "Match pairs – свързване на двойки."],
+ ["Как в Google Slides сваляш презентацията за внасяне?", ["Insert → Image", "File → Download → PDF document или Microsoft PowerPoint", "Extensions → Slido", "Share → Copy link"], 1, "AhaSlides внася PDF, PPT и PPTX."],
+ ["Може ли да редактираш текста на внесен слайд в AhaSlides?", ["Да, като обикновен текст", "Не – внесеният слайд е като картинка; поправките се правят в оригинала", "Само в платения план", "Само заглавието"], 1, "Затова провери презентацията преди да я внесеш."],
+ ["За какво служи Spinner wheel?", ["Показва класирането", "Избира случайно име или тема", "Внася PDF", "Скрива резултатите"], 1, "Колелото на късмета прави избора забавен и честен."],
+ ["Кой инструмент е най-подходящ за бързо тест-състезание с музика и подиум?", ["Slido", "Kahoot!", "Google Slides", "AhaSlides Import"], 1, "Помниш от урок 3."]];
+</script>
+<script src="ip-urok.js?v=20261127"></script>
+<script src="../totop.js?v=20261126" defer></script>
+</body>
+</html>
