@@ -38,7 +38,6 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .bar small{color:var(--mut)}
 .bar .tr{height:16px;border-radius:9px;background:#0b1224;border:1px solid var(--line);overflow:hidden;margin-top:4px}
 .bar .tr i{display:block;height:100%;width:0;background:linear-gradient(90deg,#16a34a,#4ade80);transition:width .6s}
-.snd{background:var(--panel2);color:var(--ink);border:1px solid var(--line);padding:8px 12px}
 /* екипаж */
 .crew{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-top:10px}
 .bot{background:var(--panel2);border:2px solid transparent;border-radius:14px;padding:8px 4px 6px;text-align:center;font-size:.82rem;line-height:1.2;position:relative}
@@ -156,7 +155,6 @@ button:disabled{opacity:.45;cursor:not-allowed}
       <div class="hud">
         <div class="st">Кръг <b id="hRound">1</b> · Срещи: <b id="hMeet">0</b> / <b id="hMaxMeet">3</b> · Тема: <b id="hTheme"></b></div>
         <div class="bar" id="hBarBox"><small>🔧 Задачи на кораба: <b id="hTasks">0</b> / <b id="hGoal">0</b></small><div class="tr"><i id="hBar"></i></div></div>
-        <button class="snd" id="sndBtn" onclick="toggleSound()" title="Звук">🔊</button>
       </div>
       <div class="crew" id="crew"></div>
     </div>
@@ -614,15 +612,6 @@ function robot(color,o={}){const face=o.dead?'<path d="M30 30l8 8M38 30l-8 8M52 
  <rect x="8" y="62" width="12" height="20" rx="5" fill="${color}" stroke="#0f172a" stroke-width="3"/><rect x="70" y="62" width="12" height="20" rx="5" fill="${color}" stroke="#0f172a" stroke-width="3"/>
  <rect x="28" y="88" width="12" height="10" rx="3" fill="#334155"/><rect x="50" y="88" width="12" height="10" rx="3" fill="#334155"/></svg>`}
 
-/* ===== Звук (Web Audio, без файлове) ===== */
-let SND=true,AC=null;
-function toggleSound(){SND=!SND;$('sndBtn').textContent=SND?'🔊':'🔇'}
-function tone(f1,f2,d,type='sawtooth',vol=.08){if(!SND)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type=type;o.frequency.setValueAtTime(f1,t);o.frequency.linearRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+d)}catch(e){}}
-const sSiren=()=>{for(let i=0;i<4;i++)setTimeout(()=>tone(600,1100,.45),i*500)};
-const sOk=()=>{tone(660,660,.12,'sine',.1);setTimeout(()=>tone(990,990,.18,'sine',.1),120)};
-const sBad=()=>tone(220,110,.4,'square',.07);
-const sWhoosh=()=>tone(900,80,1.6,'triangle',.06);
-
 /* ===== Звезди ===== */
 (function(){const c=$('stars'),x=c.getContext('2d');let S=[];const rs=()=>{c.width=innerWidth;c.height=innerHeight;S=Array.from({length:Math.round(c.width*c.height/5000)},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.2,v:Math.random()*.25+.05}))};rs();addEventListener('resize',rs);
  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -693,7 +682,7 @@ function taskShow(){const t=makeTask(),i=G.queue[G.qi];G.cur=t;
  timer(25,'tTm',()=>taskAns(-1))}
 function taskAns(k){clearInterval(TM);const t=G.cur,i=G.queue[G.qi],bs=[...document.querySelectorAll('.opts button')];if(!bs.length||bs[0].disabled)return;
  bs.forEach((b,n)=>{b.disabled=true;if(t.o[n]===t.a)b.classList.add('ok');else if(n===k)b.classList.add('no')});
- const ok=k>=0&&t.o[k]===t.a;G.total++;if(ok){G.done++;sOk()}else sBad();
+ const ok=k>=0&&t.o[k]===t.a;G.total++;if(ok)G.done++;
  addLog((ok?'✅ ':'❌ ')+label(i)+(ok?' реши задача ('+t.cat+').':k<0?' не успя навреме ('+t.cat+').':' сгреши задача ('+t.cat+').'));hud();
  $('tFb').innerHTML=`<div class="fb ${ok?'ok':'no'}">${ok?'✅ Вярно! Лентата на кораба се пълни.':'❌ Грешка… случайност или саботаж? 🤔'}</div><div class="row"><button class="big" onclick="taskNext()">Продължи</button></div>`}
 function taskNext(){if(G.done>=G.goal)return endGame('crew','🔧 Екипажът изпълни всички задачи и корабът е спасен!');G.qi++;if(G.qi<G.queue.length)taskIntro();else cluePhase()}
@@ -703,12 +692,12 @@ function cluePhase(){const a=alive(),s=rnd(a.length),ord=a.slice(s).concat(a.sli
  $('phase').innerHTML=`<div class="center"><h2>💬 Подсказки</h2><p>Всеки жив играч казва <b>една дума</b>, свързана с неговата дума – без да я издава. Започва <b>${label(ord[0])}</b>, после по ред:</p><div class="order">${ord.map(i=>`<span>${label(i)}</span>`).join('')}</div><p class="hint">Подозирате някого? Натиснете бутона за спешна среща.</p><div class="row"><button class="big red" onclick="meeting()">🚨 Спешна среща</button></div></div>`}
 
 /* ===== Спешна среща и гласуване ===== */
-function meeting(){G.meet++;hud();$('siren').classList.remove('hidden');sSiren();addLog('🚨 Спешна среща №'+G.meet+'.');
+function meeting(){G.meet++;hud();$('siren').classList.remove('hidden');addLog('🚨 Спешна среща №'+G.meet+'.');
  setTimeout(()=>{$('siren').classList.add('hidden');G.votes={};G.skip=0;votePhase()},2200)}
 function votePhase(){const a=alive(),mx=Math.max(0,...a.map(i=>G.votes[i]||0));
  $('phase').innerHTML=`<div class="center"><div class="hud"><h2 style="margin:0">🗳 Спешна среща №${G.meet} от ${G.maxM}</h2><div>⏱ <span class="tmr" id="vTm"></span></div></div>
  <p class="hint">Обсъдете кой е подозрителен (странни подсказки, грешни задачи). После всеки вдига ръка за един играч – натискайте + за всеки глас. ${G.meet>=G.maxM?'<b style="color:#facc15">Това е последната среща!</b>':''}</p>
- <div class="vote" id="vGrid"></div><div class="row"><button class="big red" onclick="endVote()">🚀 Изхвърли най-гласувания</button></div></div>`;voteGrid();timer(G.talk,'vTm',()=>tone(440,440,.6,'sine',.1))}
+ <div class="vote" id="vGrid"></div><div class="row"><button class="big red" onclick="endVote()">🚀 Изхвърли най-гласувания</button></div></div>`;voteGrid();timer(G.talk,'vTm')}
 function voteGrid(){const a=alive(),vals=a.map(i=>G.votes[i]||0),mx=Math.max(0,...vals),top=vals.filter(v=>v===mx).length===1&&mx>G.skip;
  $('vGrid').innerHTML=a.map(i=>{const v=G.votes[i]||0;return`<div class="vc ${top&&v===mx?'top':''}">${robot(P[i].c)}<div class="n">${label(i)}</div><div class="ctl"><button onclick="vote(${i},-1)" aria-label="махни глас">−</button><b>${v}</b><button onclick="vote(${i},1)" aria-label="добави глас">+</button></div></div>`}).join('')
  +`<div class="vc ${!top&&G.skip>0?'top':''}"><div style="font-size:2.6rem;line-height:58px">⏭</div><div class="n">Пропусни (никого)</div><div class="ctl"><button onclick="vote('s',-1)">−</button><b>${G.skip}</b><button onclick="vote('s',1)">+</button></div></div>`}
@@ -718,7 +707,7 @@ function endVote(){clearInterval(TM);const a=alive(),vals=a.map(i=>G.votes[i]||0
  const i=leaders[0];P[i].alive=false;P[i].out=true;showEject(i)}
 function showEject(i){const e=$('eject');e.classList.remove('hidden');$('ejBtn').classList.add('hidden');$('ejTxt').textContent='';$('ejTxt2').textContent='';
  const fly=$('ejBot');fly.style.animation='none';void fly.offsetWidth;fly.style.animation='';
- let msg,msg2='';if(i===null){fly.innerHTML='';msg='Никой не беше изхвърлен.'}else{fly.innerHTML=robot(P[i].c,{dead:true});sWhoosh();
+ let msg,msg2='';if(i===null){fly.innerHTML='';msg='Никой не беше изхвърлен.'}else{fly.innerHTML=robot(P[i].c,{dead:true});
   msg=G.showRole?(P[i].n+(P[i].imp?' беше Impostor.':' НЕ беше Impostor.')):P[i].n+' излетя в космоса.';
   const left=aliveImp()-0;msg2=G.showRole?(left===0?'':'Остава'+(left===1?' 1 Impostor.':'т '+left+' Impostor-и.')):'';
   addLog('🚀 '+label(i)+' излетя в космоса'+(G.showRole?(P[i].imp?' – беше Impostor! 😈':' – беше от екипажа. 😢'):'.'))}
@@ -730,7 +719,7 @@ function afterEject(){$('eject').classList.add('hidden');const ai=aliveImp(),ac=
  G.round++;startRound()}
 
 /* ===== Край ===== */
-function endGame(w,why){clearInterval(TM);$('game').classList.add('hidden');const e=$('end');e.classList.remove('hidden');(w==='crew'?sOk:sBad)();
+function endGame(w,why){clearInterval(TM);$('game').classList.add('hidden');const e=$('end');e.classList.remove('hidden');
  const ex=(h,wd)=>themes[G.theme][wd]?`<b>${h}</b><p>${esc(themes[G.theme][wd])}</p>${clues[wd]?`<p class="hint">Добри подсказки: ${esc(clues[wd])}</p>`:''}`:'';
  e.innerHTML=`<div class="win ${w==='crew'?'crw':'imp'}">${w==='crew'?'🏆 ПОБЕДА НА ЕКИПАЖА':'😈 ПОБЕДА НА IMPOSTOR-ИТЕ'}</div><p class="center">${why}</p>
  <h3>Кой какъв беше</h3><div class="crew">${P.map((p,i)=>`<div class="bot ${p.imp?'imp':''} ${p.alive?'':'dead'}">${robot(p.c,{imp:p.imp,dead:!p.alive})}${label(i)}<div class="tag ${p.imp?'i':''}">${p.imp?'Impostor':'екипаж'}</div></div>`).join('')}</div>
