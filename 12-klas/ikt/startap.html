@@ -89,6 +89,7 @@ pre{background:var(--soft);border-radius:12px;padding:14px;white-space:pre-wrap;
 @media(prefers-reduced-motion:reduce){.bar i{transition:none}}
 </style>
 <script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+<link rel="stylesheet" href="../../footer.css?v=20261126">
 </head>
 <body>
 <div id="tbar" class="tbar" hidden>Учителски режим: виждате и четирите седмици. Учениците виждат само отключените. Натиснете „Заключи отново“, преди да оставите компютъра.</div>
@@ -309,5 +310,25 @@ if(T){tb.textContent='Заключи отново';tb.classList.add('on');$('#tb
 route();
 }
 </script>
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-top">
+      <div class="sf-brand">
+        <div class="sf-logo" aria-hidden="true">&lt;/&gt;</div>
+        <div class="sf-brand-text">
+          <div class="sf-name">IT Зона</div>
+          <div class="sf-tagline">Образователен портал по информационни технологии</div>
+        </div>
+      </div>
+      <ul class="sf-links" aria-label="Навигация във футъра">
+        <li><a href="https://itzona.github.io/">Начало</a></li>
+        <li><a href="../../9-klas/index.html">9. клас</a></li>
+        <li><a href="../../11-klas/index.html">11. клас</a></li>
+        <li><a href="../../12-klas/index.html">12. клас</a></li>
+      </ul>
+    </div>
+    <div class="sf-copy">© 2026 IT Зона · Учебни материали с образователна цел</div>
+  </div>
+</footer>
 </body>
 </html>
