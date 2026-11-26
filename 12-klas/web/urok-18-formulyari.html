@@ -73,6 +73,210 @@
 <tr><td><code>&lt;textarea&gt;</code></td><td>многоредов текст</td></tr>
 <tr><td><code>&lt;button type="submit"&gt;</code></td><td>бутон за изпращане</td></tr></table>
 <div class="box"><b>label</b> – надпис към полето; свързва се с него чрез <code>for="ime"</code> и <code>id="ime"</code>.<br><code>placeholder</code> – подсказка в полето, <code>required</code> – задължително поле. Радио бутоните от една група имат еднакво <code>name</code>.</div>
+<h3>📤 Как форма изпраща данните</h3>
+<p>Всяка форма започва с отварящ таг <code>&lt;form&gt;</code> и завършва със затварящ <code>&lt;/form&gt;</code>. Цялото съдържание на формата (полета, надписи, бутони) е между тях. Повечето елементи се създават с тага <code>&lt;input&gt;</code> – той няма затварящ таг, а видът му се задава с атрибута <code>type</code>.</p>
+<p>Когато потребителят натисне бутона за изпращане, браузърът събира данните от всички полета и ги изпраща като двойки <b>име=стойност</b> (<code>name=value</code>). Затова <b>всяко поле, чиято стойност трябва да се изпрати, трябва да има атрибут <code>name</code></b>. Поле без <code>name</code> се вижда на страницата, но данните му не се изпращат.</p>
+<pre>&lt;form action="obrabotka.php" method="get"&gt;
+  ... полета ...
+  &lt;input type="submit" value="Изпрати"&gt;
+&lt;/form&gt;</pre>
+<table class="t"><tr><th>Атрибут на &lt;form&gt;</th><th>Какво означава</th></tr>
+<tr><td><code>action</code></td><td>адрес (файл/скрипт), към който се изпращат данните</td></tr>
+<tr><td><code>method="get"</code></td><td>данните се добавят към адреса след знак <code>?</code>, напр. <code>obrabotka.php?ime=Ivan&amp;klas=12</code> – видими са, подходящо за търсене</td></tr>
+<tr><td><code>method="post"</code></td><td>данните се изпращат „скрито“ в тялото на заявката – за пароли, лични данни и големи обеми</td></tr></table>
+<h3>✏️ Поле за текст</h3>
+<p>Почти всяка форма съдържа поне едно поле за въвеждане на текст – за име, град, търсене и др. Полето е <b>едноредово</b> – в него не може да се натисне Enter за нов ред (за това има <code>&lt;textarea&gt;</code>). Създава се с тага <code>&lt;input&gt;</code> и атрибут <code>type="text"</code>:</p>
+<pre>&lt;input type="text"&gt;</pre>
+<p>Ако не зададем други атрибути, браузърът показва празно поле с ширина около <b>20 символа</b>. Въведеният текст може да е по-дълъг – полето просто „превърта“ текста. С допълнителни атрибути управляваме как изглежда и как се държи полето:</p>
+<table class="t"><tr><th>Атрибут</th><th>Какво прави</th><th>Пример</th></tr>
+<tr><td><code>name</code></td><td>име на полето – с него стойността се изпраща към сървъра</td><td><code>name="ime"</code></td></tr>
+<tr><td><code>id</code></td><td>уникален идентификатор – за връзка с <code>&lt;label&gt;</code>, CSS и JavaScript</td><td><code>id="ime"</code></td></tr>
+<tr><td><code>size</code></td><td>видима ширина на полето в символи</td><td><code>size="40"</code></td></tr>
+<tr><td><code>maxlength</code></td><td>максимален брой символи, които могат да се въведат</td><td><code>maxlength="10"</code></td></tr>
+<tr><td><code>value</code></td><td>текст, който е предварително попълнен (потребителят може да го изтрие)</td><td><code>value="София"</code></td></tr>
+<tr><td><code>placeholder</code></td><td>сива подсказка, която изчезва, щом започнем да пишем (не се изпраща)</td><td><code>placeholder="Въведи име"</code></td></tr>
+<tr><td><code>required</code></td><td>полето е задължително – формата не се изпраща, ако е празно</td><td><code>required</code></td></tr>
+<tr><td><code>readonly</code></td><td>стойността се вижда и изпраща, но не може да се променя</td><td><code>readonly</code></td></tr>
+<tr><td><code>disabled</code></td><td>полето е неактивно (сиво) и стойността му <b>не се изпраща</b></td><td><code>disabled</code></td></tr></table>
+<p><b>Пример 1: просто текстово поле с надпис</b></p>
+<pre>&lt;form&gt;
+  &lt;label for="ime"&gt;Вашето име:&lt;/label&gt;
+  &lt;input type="text" name="ime" id="ime"&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 1</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  &lt;label for=&quot;ime&quot;&gt;Вашето име:&lt;/label&gt;
+  &lt;input type=&quot;text&quot; name=&quot;ime&quot; id=&quot;ime&quot;&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:86px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 1"></iframe></div>
+<p>Атрибутът <code>for</code> на <code>&lt;label&gt;</code> има същата стойност като <code>id</code> на полето. Затова, ако щракнеш върху надписа „Вашето име:“, курсорът влиза в полето. Опитай!</p>
+<p><b>Пример 2: ширина (size) и ограничение на дължината (maxlength)</b></p>
+<pre>&lt;form&gt;
+  &lt;label for="ime2"&gt;Име:&lt;/label&gt;
+  &lt;input type="text" name="ime" id="ime2" size="30" maxlength="35"&gt;&lt;br&gt;
+  &lt;label for="kod"&gt;Пощенски код:&lt;/label&gt;
+  &lt;input type="text" name="kod" id="kod" size="4" maxlength="4"&gt;&lt;br&gt;
+  &lt;label for="grad"&gt;Град:&lt;/label&gt;
+  &lt;input type="text" name="grad" id="grad" value="София"&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 2</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  &lt;label for=&quot;ime2&quot;&gt;Име:&lt;/label&gt;
+  &lt;input type=&quot;text&quot; name=&quot;ime&quot; id=&quot;ime2&quot; size=&quot;30&quot; maxlength=&quot;35&quot;&gt;&lt;br&gt;
+  &lt;label for=&quot;kod&quot;&gt;Пощенски код:&lt;/label&gt;
+  &lt;input type=&quot;text&quot; name=&quot;kod&quot; id=&quot;kod&quot; size=&quot;4&quot; maxlength=&quot;4&quot;&gt;&lt;br&gt;
+  &lt;label for=&quot;grad&quot;&gt;Град:&lt;/label&gt;
+  &lt;input type=&quot;text&quot; name=&quot;grad&quot; id=&quot;grad&quot; value=&quot;София&quot;&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:146px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 2"></iframe></div>
+<p>Полето „Име“ е широко 30 символа, но приема до 35. В „Пощенски код“ не можеш да напишеш повече от 4 знака. Полето „Град“ вече е попълнено с <code>value</code> – опитай да изтриеш текста.</p>
+<p><b>Пример 3: подсказка, задължително поле и поле само за четене</b></p>
+<pre>&lt;form&gt;
+  &lt;label&gt;Имейл: &lt;input type="text" name="mail" placeholder="ime@primer.bg" required&gt;&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;Училище: &lt;input type="text" name="uch" value="ПГ по ИТ" readonly&gt;&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;Клас: &lt;input type="text" name="klas" value="12" disabled&gt;&lt;/label&gt;&lt;br&gt;
+  &lt;input type="submit" value="Изпрати"&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 3</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  &lt;label&gt;Имейл: &lt;input type=&quot;text&quot; name=&quot;mail&quot; placeholder=&quot;ime@primer.bg&quot; required&gt;&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;Училище: &lt;input type=&quot;text&quot; name=&quot;uch&quot; value=&quot;ПГ по ИТ&quot; readonly&gt;&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;Клас: &lt;input type=&quot;text&quot; name=&quot;klas&quot; value=&quot;12&quot; disabled&gt;&lt;/label&gt;&lt;br&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Изпрати&quot;&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:176px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 3"></iframe></div>
+<p>Натисни „Изпрати“, без да попълваш имейла – браузърът ще покаже съобщение, че полето е задължително. Тук <code>&lt;label&gt;</code> „обвива“ полето – това е втори начин за свързване, при който не са нужни <code>for</code> и <code>id</code>.</p>
+<p><b>Други полета, които приличат на текстовото.</b> Със същия таг <code>&lt;input&gt;</code>, но с друга стойност на <code>type</code>, получаваме полета с различно поведение:</p>
+<p><b>Пример 4: password и hidden</b></p>
+<pre>&lt;form&gt;
+  &lt;label for="user"&gt;Потребител:&lt;/label&gt;
+  &lt;input type="text" name="user" id="user"&gt;&lt;br&gt;
+  &lt;label for="pass"&gt;Парола:&lt;/label&gt;
+  &lt;input type="password" name="parola" id="pass"&gt;&lt;br&gt;
+  &lt;input type="hidden" name="ezik" value="bg"&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 4</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  &lt;label for=&quot;user&quot;&gt;Потребител:&lt;/label&gt;
+  &lt;input type=&quot;text&quot; name=&quot;user&quot; id=&quot;user&quot;&gt;&lt;br&gt;
+  &lt;label for=&quot;pass&quot;&gt;Парола:&lt;/label&gt;
+  &lt;input type=&quot;password&quot; name=&quot;parola&quot; id=&quot;pass&quot;&gt;&lt;br&gt;
+  &lt;input type=&quot;hidden&quot; name=&quot;ezik&quot; value=&quot;bg&quot;&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:116px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 4"></iframe></div>
+<p><code>type="password"</code> показва точки вместо въведените знаци. <code>type="hidden"</code> изобщо не се вижда на страницата, но стойността му (<code>ezik=bg</code>) се изпраща заедно с формата – използва се за служебна информация.</p>
+<p><b>Какво се изпраща?</b> Ако в Пример 2 потребителят напише име <i>Иван</i> и град <i>Пловдив</i>, към сървъра заминава: <code>ime=Иван&amp;kod=&amp;grad=Пловдив</code> – по една двойка <code>name=value</code> за всяко поле.</p>
+<div class="box"><b>Чести грешки при текстовите полета:</b><br>
+• забравен <code>name</code> – полето се показва, но данните не се изпращат;<br>
+• еднакви <code>id</code> на две полета – <code>id</code> трябва да е уникален в цялата страница;<br>
+• <code>for</code> на label не съвпада точно с <code>id</code> (главни/малки букви са различни!);<br>
+• <code>placeholder</code> вместо <code>&lt;label&gt;</code> – подсказката изчезва при писане и потребителят забравя какво се иска. Използвай label винаги.</div>
+<h3>🔘 Радиобутони</h3>
+<p>Радиобутоните се използват, когато потребителят трябва да избере <b>само един</b> вариант от няколко възможни – пол, клас, начин на плащане, отговор на тестов въпрос. Името идва от старите радиоапарати, при които натискането на един бутон за станция изскача предишния.</p>
+<p>Създават се с <code>&lt;input type="radio"&gt;</code>. Трите най-важни правила са:</p>
+<ol>
+<li><b>Еднакво <code>name</code></b> за всички бутони от една група – така браузърът „знае“, че те са свързани и позволява избор само на един от тях.</li>
+<li><b>Различно <code>value</code></b> за всеки бутон – това е стойността, която ще се изпрати, ако бутонът е избран. Без <code>value</code> се изпраща безсмисленото <code>on</code>.</li>
+<li><b>Уникално <code>id</code></b> за всеки бутон и <code>&lt;label for="..."&gt;</code> към него – така може да се щрака и върху текста, а не само върху малкото кръгче.</li>
+</ol>
+<p><b>Пример 1: „Какъв подарък искате?“</b></p>
+<pre>&lt;form&gt;
+  Какъв подарък искате?&lt;br&gt;
+  &lt;input type="radio" id="device1" name="device" value="Phone"&gt;
+  &lt;label for="device1"&gt;Телефон&lt;/label&gt;&lt;br&gt;
+  &lt;input type="radio" id="device2" name="device" value="Tablet"&gt;
+  &lt;label for="device2"&gt;Таблет&lt;/label&gt;&lt;br&gt;
+  &lt;input type="radio" id="device3" name="device" value="Laptop"&gt;
+  &lt;label for="device3"&gt;Лаптоп&lt;/label&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 1</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  Какъв подарък искате?&lt;br&gt;
+  &lt;input type=&quot;radio&quot; id=&quot;device1&quot; name=&quot;device&quot; value=&quot;Phone&quot;&gt;
+  &lt;label for=&quot;device1&quot;&gt;Телефон&lt;/label&gt;&lt;br&gt;
+  &lt;input type=&quot;radio&quot; id=&quot;device2&quot; name=&quot;device&quot; value=&quot;Tablet&quot;&gt;
+  &lt;label for=&quot;device2&quot;&gt;Таблет&lt;/label&gt;&lt;br&gt;
+  &lt;input type=&quot;radio&quot; id=&quot;device3&quot; name=&quot;device&quot; value=&quot;Laptop&quot;&gt;
+  &lt;label for=&quot;device3&quot;&gt;Лаптоп&lt;/label&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:162px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 1"></iframe></div>
+<p>Трите бутона имат едно и също <code>name="device"</code>, затова можеш да избереш само един. Щракни върху „Таблет“, после върху „Лаптоп“ – първият избор се маха автоматично. Ако е избран „Телефон“, се изпраща <code>device=Phone</code>.</p>
+<p><b>Пример 2: избор по подразбиране с checked</b></p>
+<pre>&lt;form&gt;
+  Начин на доставка:&lt;br&gt;
+  &lt;label&gt;&lt;input type="radio" name="dostavka" value="adres" checked&gt; до адрес&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type="radio" name="dostavka" value="ofis"&gt; до офис на куриер&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type="radio" name="dostavka" value="magazin"&gt; вземане от магазина&lt;/label&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 2</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  Начин на доставка:&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;dostavka&quot; value=&quot;adres&quot; checked&gt; до адрес&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;dostavka&quot; value=&quot;ofis&quot;&gt; до офис на куриер&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;dostavka&quot; value=&quot;magazin&quot;&gt; вземане от магазина&lt;/label&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:162px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 2"></iframe></div>
+<p>Атрибутът <code>checked</code> маркира бутона като избран още при зареждане на страницата. В една група сложи <code>checked</code> най-много на <b>един</b> бутон. Тук label обвива бутона – не са нужни <code>id</code> и <code>for</code>.</p>
+<p><b>Пример 3: две независими групи в една форма</b></p>
+<pre>&lt;form&gt;
+  &lt;b&gt;Клас:&lt;/b&gt;
+  &lt;label&gt;&lt;input type="radio" name="klas" value="11"&gt; 11.&lt;/label&gt;
+  &lt;label&gt;&lt;input type="radio" name="klas" value="12" checked&gt; 12.&lt;/label&gt;&lt;br&gt;
+  &lt;b&gt;Паралелка:&lt;/b&gt;
+  &lt;label&gt;&lt;input type="radio" name="paralelka" value="A"&gt; А&lt;/label&gt;
+  &lt;label&gt;&lt;input type="radio" name="paralelka" value="B"&gt; Б&lt;/label&gt;
+  &lt;label&gt;&lt;input type="radio" name="paralelka" value="V"&gt; В&lt;/label&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 3</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  &lt;b&gt;Клас:&lt;/b&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;klas&quot; value=&quot;11&quot;&gt; 11.&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;klas&quot; value=&quot;12&quot; checked&gt; 12.&lt;/label&gt;&lt;br&gt;
+  &lt;b&gt;Паралелка:&lt;/b&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;paralelka&quot; value=&quot;A&quot;&gt; А&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;paralelka&quot; value=&quot;B&quot;&gt; Б&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;paralelka&quot; value=&quot;V&quot;&gt; В&lt;/label&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:106px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 3"></iframe></div>
+<p>Групите имат <b>различни</b> имена (<code>klas</code> и <code>paralelka</code>), затова във всяка група може да има по един избран бутон. Изпраща се например <code>klas=12&amp;paralelka=B</code>.</p>
+<p><b>Пример 4: ❌ често срещана грешка – различни name</b></p>
+<pre>&lt;form&gt;
+  Любим сезон (грешно!):&lt;br&gt;
+  &lt;label&gt;&lt;input type="radio" name="s1" value="prolet"&gt; пролет&lt;/label&gt;
+  &lt;label&gt;&lt;input type="radio" name="s2" value="liato"&gt; лято&lt;/label&gt;
+  &lt;label&gt;&lt;input type="radio" name="s3" value="esen"&gt; есен&lt;/label&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 4 – грешно</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  Любим сезон (грешно!):&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s1&quot; value=&quot;prolet&quot;&gt; пролет&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s2&quot; value=&quot;liato&quot;&gt; лято&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;s3&quot; value=&quot;esen&quot;&gt; есен&lt;/label&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:101px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 4 – грешно"></iframe></div>
+<p>Тъй като всеки бутон има различно <code>name</code>, браузърът ги смята за три отделни групи – можеш да избереш и трите, и после не можеш да махнеш избора! Поправката е проста: дай на всички <code>name="sezon"</code>.</p>
+<p><b>Пример 5: тестов въпрос със задължителен отговор</b></p>
+<pre>&lt;form&gt;
+  Кой таг създава поле за многоредов текст?&lt;br&gt;
+  &lt;label&gt;&lt;input type="radio" name="otg" value="a" required&gt; &amp;lt;input&amp;gt;&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type="radio" name="otg" value="b"&gt; &amp;lt;textarea&amp;gt;&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type="radio" name="otg" value="c"&gt; &amp;lt;select&amp;gt;&lt;/label&gt;&lt;br&gt;
+  &lt;input type="submit" value="Отговори"&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 5</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  Кой таг създава поле за многоредов текст?&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;otg&quot; value=&quot;a&quot; required&gt; &amp;lt;input&amp;gt;&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;otg&quot; value=&quot;b&quot;&gt; &amp;lt;textarea&amp;gt;&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;otg&quot; value=&quot;c&quot;&gt; &amp;lt;select&amp;gt;&lt;/label&gt;&lt;br&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Отговори&quot;&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:192px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 5"></iframe></div>
+<p>Достатъчно е <code>required</code> да е на <b>един</b> бутон от групата – формата няма да се изпрати, докато не бъде избран някой вариант. Натисни „Отговори“ без избор и виж какво става.</p>
+<p><b>Радиобутон или отметка (checkbox)?</b> Двата вида изглеждат подобно, но се използват за различни неща:</p>
+<table class="t"><tr><th></th><th>Радиобутон <code>type="radio"</code></th><th>Отметка <code>type="checkbox"</code></th></tr>
+<tr><td>Форма</td><td>кръгче ◉</td><td>квадратче ☑</td></tr>
+<tr><td>Колко може да се изберат</td><td>точно един от групата</td><td>нито един, един или няколко</td></tr>
+<tr><td>Може ли изборът да се махне с повторно щракване</td><td>не – само като избереш друг</td><td>да</td></tr>
+<tr><td>Пример</td><td>пол, клас, начин на плащане</td><td>хобита, дейности, „Съгласен съм с условията“</td></tr>
+<tr><td>Какво се изпраща</td><td><code>device=Phone</code></td><td><code>device1=Phone&amp;device3=Laptop</code></td></tr></table>
+<p><b>Пример 6: същият въпрос, но с отметки – може няколко отговора</b></p>
+<pre>&lt;form&gt;
+  Какви устройства използвате?&lt;br&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="device1" value="Phone"&gt; Телефон&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="device2" value="Tablet"&gt; Таблет&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="device3" value="Laptop"&gt; Лаптоп&lt;/label&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 6</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  Какви устройства използвате?&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;device1&quot; value=&quot;Phone&quot;&gt; Телефон&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;device2&quot; value=&quot;Tablet&quot;&gt; Таблет&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;device3&quot; value=&quot;Laptop&quot;&gt; Лаптоп&lt;/label&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:162px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 6"></iframe></div>
+<p>Сравни с Пример 1 – тук можеш да отметнеш 0, 1, 2 или 3 устройства. Ако избереш телефон и лаптоп, се изпраща <code>device1=Phone&amp;device3=Laptop</code>.</p>
+<div class="box"><b>Запомни:</b> радиобутони от една група = <b>еднакво <code>name</code></b> + <b>различно <code>value</code></b> + <b>уникално <code>id</code></b>. Винаги добавяй <code>&lt;label&gt;</code>, за да може да се щрака върху текста.</div>
 <p><b>Опитай:</b> добави поле за телефон (<code>type="tel"</code>) и направи имейла задължителен.</p>
 <h3>🧪 Пробвай сам</h3><div class="lab"><div class="pane"><small>Код (можеш да го променяш)</small><textarea id="ed" spellcheck="false">&lt;form onsubmit="event.preventDefault();document.getElementById('o').innerText='Здравей, '+document.getElementById('ime').value+'!'">
   &lt;label for="ime">Име:&lt;/label>
