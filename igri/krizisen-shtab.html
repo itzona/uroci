@@ -19,6 +19,7 @@ button:hover{background:var(--hi)}button:focus-visible,input:focus-visible,selec
 .it>b{display:block}.pp{float:right;font-size:.85rem;background:var(--bg);padding:0 8px;border-radius:4px}
 input[type=text],input[type=number],select,textarea{font:inherit;padding:5px 8px;border:1px solid #8a9bb0;border-radius:4px;background:#fff;color:var(--ink)}
 textarea{width:100%;min-height:70px}input[type=number]{width:64px}
+.rlg{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:6px;margin:6px 0 10px}.rlc{background:#eef4fa;border-left:4px solid #457b9d;border-radius:6px;padding:6px 10px;font-size:.9rem}.rlc small{display:block;color:#4a5b70;margin-top:2px;line-height:1.3}.rln{color:#1d3557}
 .ch{display:inline-block;background:#dbe5f0;border-radius:4px;padding:1px 9px;margin:2px;font-size:.88rem}
 .ok{color:var(--ok);font-weight:700}.no{color:var(--red);font-weight:700}
 label{margin-right:12px;display:inline-block}
@@ -179,7 +180,8 @@ const tmH=()=>{const n=names.map(x=>x.trim()).filter(Boolean);return n.length?n.
 const nm=(i,v)=>{names[i]=v;chips();rtm()},dice=()=>{const f=names.filter(x=>x.trim());for(let i=f.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[f[i],f[j]]=[f[j],f[i]]}names=f.concat(Array(5-f.length).fill(''));document.querySelectorAll('.card input[type=text]').forEach((e,i)=>e.value=names[i]);chips();rtm()};
 const tch=()=>{if(T){T=false}else if((prompt('Код за учител:')||'').trim().toLowerCase()=='учител')T=true;draw()};
 const nN=()=>names.filter(x=>x.trim()).length>4?5:4;
-function chips(){const e=$('#ch'),n=nN();if(e)e.innerHTML=(n==5?RL5:RL).map((r,k)=>`<span class="ch">${r}: <b>${names[(k+cur)%n]||'?'}</b></span>`).join('')}
+const RH={'Ръководител':['🧭','Чете ситуацията на глас, пуска таймера и дава думата на всеки поред.'],'Анализатор':['🔍','Пита „Това факт ли е или мнение?“ и разделя казаното.'],'Говорител':['📣','Обобщава на глас решението, преди да натиснете „Провери“.'],'Секретар-скептик':['🤔','Отбелязва отговорите и преди проверка пита „Какво може да се обърка?“.'],'Секретар':['✍','Само той пипа мишката: отбелязва отговорите и пише в полетата.'],'Скептик':['🤔','Преди „Провери“ пита „Сигурни ли сме? Какво може да се обърка?“.']};
+function chips(){const e=$('#ch'),n=nN();if(e)e.innerHTML='<div class="rlg">'+(n==5?RL5:RL).map((r,k)=>`<div class="rlc"><div>${RH[r][0]} <b>${r}</b>: <b class="rln">${zesc(names[(k+cur)%n])||'?'}</b></div><small>${RH[r][1]}</small></div>`).join('')+'</div>'}
 function sums(){const a=[0,0];for(let o=0;o<2;o++)CR.forEach((c,i)=>a[o]+=W[i]*(+g(0,'m'+i+o)||0));return a}
 function mxOk(){return CR.every((c,i)=>[0,1].every(o=>{const v=g(0,'m'+i+o);return v>=1&&v<=5&&v==Math.round(v)}))}
 function win(w){const a=[0,0];[0,1].forEach(o=>CR.forEach((c,i)=>a[o]+=w[i]*g(0,'m'+i+o)));return a[0]>a[1]?0:a[1]>a[0]?1:-1}
