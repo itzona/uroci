@@ -163,6 +163,106 @@
 • еднакви <code>id</code> на две полета – <code>id</code> трябва да е уникален в цялата страница;<br>
 • <code>for</code> на label не съвпада точно с <code>id</code> (главни/малки букви са различни!);<br>
 • <code>placeholder</code> вместо <code>&lt;label&gt;</code> – подсказката изчезва при писане и потребителят забравя какво се иска. Използвай label винаги.</div>
+<h3>☑️ Отметки (checkbox)</h3>
+<p>Отметките се използват, когато потребителят може да избере <b>нито един, един или няколко</b> варианта едновременно – хобита, любими предмети, допълнителни услуги, „Съгласен съм с условията“. Всяка отметка е <b>независима</b> от останалите: щракване я отмята, второ щракване маха отметката.</p>
+<p>Създават се с <code>&lt;input type="checkbox"&gt;</code>. Към всяка отметка задаваме:</p>
+<ol>
+<li><b><code>name</code></b> – името, под което ще се изпрати стойността;</li>
+<li><b><code>value</code></b> – стойността, която се изпраща, <b>само ако</b> отметката е отметната. Неотметнатите отметки изобщо не се изпращат. Ако липсва <code>value</code>, се изпраща <code>on</code>;</li>
+<li><b><code>id</code></b> и <code>&lt;label for="..."&gt;</code> – за да може да се щрака и върху текста.</li>
+</ol>
+<table class="t"><tr><th>Атрибут</th><th>Какво прави</th></tr>
+<tr><td><code>name</code></td><td>име на отметката (стойността се изпраща като <code>name=value</code>)</td></tr>
+<tr><td><code>value</code></td><td>стойност, която се изпраща, ако отметката е отметната</td></tr>
+<tr><td><code>checked</code></td><td>отметката е отметната още при зареждане на страницата (може на няколко)</td></tr>
+<tr><td><code>required</code></td><td>отметката <b>трябва</b> да бъде отметната, за да се изпрати формата</td></tr>
+<tr><td><code>disabled</code></td><td>неактивна отметка – не може да се щрака и не се изпраща</td></tr></table>
+<p><b>Пример 1: „Какви устройства използвате?“</b></p>
+<pre>&lt;form&gt;
+  Какви устройства използвате?&lt;br&gt;
+  &lt;input type="checkbox" id="u1" name="device1" value="Phone"&gt;
+  &lt;label for="u1"&gt;Телефон&lt;/label&gt;&lt;br&gt;
+  &lt;input type="checkbox" id="u2" name="device2" value="Tablet"&gt;
+  &lt;label for="u2"&gt;Таблет&lt;/label&gt;&lt;br&gt;
+  &lt;input type="checkbox" id="u3" name="device3" value="Laptop"&gt;
+  &lt;label for="u3"&gt;Лаптоп&lt;/label&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 1</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  Какви устройства използвате?&lt;br&gt;
+  &lt;input type=&quot;checkbox&quot; id=&quot;u1&quot; name=&quot;device1&quot; value=&quot;Phone&quot;&gt;
+  &lt;label for=&quot;u1&quot;&gt;Телефон&lt;/label&gt;&lt;br&gt;
+  &lt;input type=&quot;checkbox&quot; id=&quot;u2&quot; name=&quot;device2&quot; value=&quot;Tablet&quot;&gt;
+  &lt;label for=&quot;u2&quot;&gt;Таблет&lt;/label&gt;&lt;br&gt;
+  &lt;input type=&quot;checkbox&quot; id=&quot;u3&quot; name=&quot;device3&quot; value=&quot;Laptop&quot;&gt;
+  &lt;label for=&quot;u3&quot;&gt;Лаптоп&lt;/label&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:162px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 1"></iframe></div>
+<p>Тук всяка отметка има свое <code>name</code>. Можеш да отметнеш 0, 1, 2 или 3 устройства. Ако отметнеш телефон и лаптоп, се изпраща <code>device1=Phone&amp;device3=Laptop</code> – таблетът липсва, защото не е отметнат.</p>
+<p><b>Пример 2: група отметки с едно и също name</b></p>
+<pre>&lt;form&gt;
+  Хобита:&lt;br&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="hobi" value="sport"&gt; спорт&lt;/label&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="hobi" value="muzika"&gt; музика&lt;/label&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="hobi" value="knigi"&gt; книги&lt;/label&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="hobi" value="igri"&gt; игри&lt;/label&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 2</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  Хобита:&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;hobi&quot; value=&quot;sport&quot;&gt; спорт&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;hobi&quot; value=&quot;muzika&quot;&gt; музика&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;hobi&quot; value=&quot;knigi&quot;&gt; книги&lt;/label&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;hobi&quot; value=&quot;igri&quot;&gt; игри&lt;/label&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:101px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 2"></iframe></div>
+<p>За разлика от радиобутоните, при отметките еднаквото <code>name</code> <b>не</b> ограничава избора – пак можеш да отметнеш всички. Името просто се повтаря при изпращане: <code>hobi=sport&amp;hobi=knigi</code>. И двата начина (Пример 1 и Пример 2) са правилни.</p>
+<p><b>Пример 3: предварително отметнати с checked</b></p>
+<pre>&lt;form&gt;
+  Допълнителни услуги към поръчката:&lt;br&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="usl" value="opakovka" checked&gt; подаръчна опаковка&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="usl" value="kartichka" checked&gt; картичка&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="usl" value="ekspres"&gt; експресна доставка&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="usl" value="sms" disabled&gt; SMS известие (недостъпно)&lt;/label&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 3</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  Допълнителни услуги към поръчката:&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;usl&quot; value=&quot;opakovka&quot; checked&gt; подаръчна опаковка&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;usl&quot; value=&quot;kartichka&quot; checked&gt; картичка&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;usl&quot; value=&quot;ekspres&quot;&gt; експресна доставка&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;usl&quot; value=&quot;sms&quot; disabled&gt; SMS известие (недостъпно)&lt;/label&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:192px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 3"></iframe></div>
+<p>Първите две отметки са отметнати от самото начало (<code>checked</code>), но потребителят може да ги махне. Последната е <code>disabled</code> – сива е и не може да се избере.</p>
+<p><b>Пример 4: единична отметка „Съгласен съм“</b></p>
+<pre>&lt;form&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="usloviya" required&gt; Съгласен съм с условията за ползване&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type="checkbox" name="novini" value="da"&gt; Искам да получавам новини по имейл&lt;/label&gt;&lt;br&gt;
+  &lt;input type="submit" value="Регистрирай ме"&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 4</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;usloviya&quot; required&gt; Съгласен съм с условията за ползване&lt;/label&gt;&lt;br&gt;
+  &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;novini&quot; value=&quot;da&quot;&gt; Искам да получавам новини по имейл&lt;/label&gt;&lt;br&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Регистрирай ме&quot;&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:131px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 4"></iframe></div>
+<p>Една отметка може да стои и сама – за въпрос с отговор „да/не“. Опитай да натиснеш бутона, без да отметнеш условията: <code>required</code> спира изпращането. Първата отметка няма <code>value</code>, затова се изпраща <code>usloviya=on</code>; втората изпраща <code>novini=da</code>.</p>
+<p><b>Пример 5: групиране с fieldset и legend</b></p>
+<pre>&lt;form&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Любими предмети&lt;/legend&gt;
+    &lt;label&gt;&lt;input type="checkbox" name="predmet" value="it"&gt; Информатика&lt;/label&gt;
+    &lt;label&gt;&lt;input type="checkbox" name="predmet" value="mat"&gt; Математика&lt;/label&gt;
+    &lt;label&gt;&lt;input type="checkbox" name="predmet" value="bel"&gt; Български език&lt;/label&gt;
+  &lt;/fieldset&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 5</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Любими предмети&lt;/legend&gt;
+    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;predmet&quot; value=&quot;it&quot;&gt; Информатика&lt;/label&gt;
+    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;predmet&quot; value=&quot;mat&quot;&gt; Математика&lt;/label&gt;
+    &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;predmet&quot; value=&quot;bel&quot;&gt; Български език&lt;/label&gt;
+  &lt;/fieldset&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:118px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 5"></iframe></div>
+<p>Тагът <code>&lt;fieldset&gt;</code> огражда свързаните полета с рамка, а <code>&lt;legend&gt;</code> е заглавието на рамката. Така формата е по-подредена – използва се и за радиобутони.</p>
+<div class="box"><b>Чести грешки при отметките:</b><br>
+• липсва <code>value</code> – сървърът получава само <code>on</code> и не знае кой вариант е избран (ако са с еднакво име);<br>
+• отметки вместо радиобутони, когато трябва да има <b>точно един</b> отговор (напр. пол или клас);<br>
+• <code>required</code> на всяка отметка от група – тогава потребителят е <b>длъжен</b> да ги отметне всички!</div>
 <h3>🔘 Радиобутони</h3>
 <p>Радиобутоните се използват, когато потребителят трябва да избере <b>само един</b> вариант от няколко възможни – пол, клас, начин на плащане, отговор на тестов въпрос. Името идва от старите радиоапарати, при които натискането на един бутон за станция изскача предишния.</p>
 <p>Създават се с <code>&lt;input type="radio"&gt;</code>. Трите най-важни правила са:</p>
@@ -277,6 +377,161 @@
 &lt;/form&gt;&lt;/div&gt;" style="height:162px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 6"></iframe></div>
 <p>Сравни с Пример 1 – тук можеш да отметнеш 0, 1, 2 или 3 устройства. Ако избереш телефон и лаптоп, се изпраща <code>device1=Phone&amp;device3=Laptop</code>.</p>
 <div class="box"><b>Запомни:</b> радиобутони от една група = <b>еднакво <code>name</code></b> + <b>различно <code>value</code></b> + <b>уникално <code>id</code></b>. Винаги добавяй <code>&lt;label&gt;</code>, за да може да се щрака върху текста.</div>
+<h3>🔽 Падащо меню (select)</h3>
+<p>Падащото меню (списък) позволява избор от много варианти, като заема малко място – вижда се само избраният вариант, а останалите се показват при щракване. Подходящо е за град, държава, месец, клас, когато вариантите са много.</p>
+<p>Създава се с два тага, и двата <b>със затварящ таг</b>:</p>
+<ul>
+<li><code>&lt;select&gt; … &lt;/select&gt;</code> – самото меню; на него се слага <code>name</code> (и <code>id</code> за label);</li>
+<li><code>&lt;option&gt; … &lt;/option&gt;</code> – всеки отделен вариант. Текстът между таговете се вижда, а атрибутът <code>value</code> е стойността, която се изпраща. Ако <code>value</code> липсва, се изпраща самият текст.</li>
+</ul>
+<table class="t"><tr><th>Атрибут</th><th>На кой таг</th><th>Какво прави</th></tr>
+<tr><td><code>name</code></td><td>select</td><td>име, под което се изпраща избраната стойност</td></tr>
+<tr><td><code>size</code></td><td>select</td><td>колко варианта да се виждат наведнъж (по подразбиране 1 = падащо меню)</td></tr>
+<tr><td><code>multiple</code></td><td>select</td><td>позволява избор на няколко варианта (с Ctrl или Shift)</td></tr>
+<tr><td><code>required</code></td><td>select</td><td>трябва да е избран вариант с непразна стойност</td></tr>
+<tr><td><code>value</code></td><td>option</td><td>стойността, която се изпраща при избор на този вариант</td></tr>
+<tr><td><code>selected</code></td><td>option</td><td>вариантът е избран по подразбиране (иначе се избира първият)</td></tr>
+<tr><td><code>disabled</code></td><td>option</td><td>вариантът се вижда, но не може да се избере</td></tr>
+<tr><td><code>label</code></td><td>optgroup</td><td>заглавие на група варианти в менюто</td></tr></table>
+<p><b>Пример 1: „Кой е любимият ви цвят?“</b></p>
+<pre>&lt;form&gt;
+  &lt;label for="cvqt"&gt;Кой е любимият ви цвят?&lt;/label&gt;
+  &lt;select name="ChooseOne" id="cvqt"&gt;
+    &lt;option value="Red"&gt;червен&lt;/option&gt;
+    &lt;option value="Blue"&gt;син&lt;/option&gt;
+    &lt;option value="Green"&gt;зелен&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 1</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  &lt;label for=&quot;cvqt&quot;&gt;Кой е любимият ви цвят?&lt;/label&gt;
+  &lt;select name=&quot;ChooseOne&quot; id=&quot;cvqt&quot;&gt;
+    &lt;option value=&quot;Red&quot;&gt;червен&lt;/option&gt;
+    &lt;option value=&quot;Blue&quot;&gt;син&lt;/option&gt;
+    &lt;option value=&quot;Green&quot;&gt;зелен&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:70px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 1"></iframe></div>
+<p>Потребителят вижда „червен“, „син“, „зелен“, но се изпраща стойността от <code>value</code>. Ако избере „син“, заминава <code>ChooseOne=Blue</code>. Ако нищо не промени, е избран първият вариант – „червен“.</p>
+<p><b>Пример 2: избран по подразбиране вариант (selected)</b></p>
+<pre>&lt;form&gt;
+  &lt;label for="grad2"&gt;Град:&lt;/label&gt;
+  &lt;select name="grad" id="grad2"&gt;
+    &lt;option value="sof"&gt;София&lt;/option&gt;
+    &lt;option value="pdv"&gt;Пловдив&lt;/option&gt;
+    &lt;option value="vtr" selected&gt;Велико Търново&lt;/option&gt;
+    &lt;option value="var"&gt;Варна&lt;/option&gt;
+    &lt;option value="bgs"&gt;Бургас&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 2</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  &lt;label for=&quot;grad2&quot;&gt;Град:&lt;/label&gt;
+  &lt;select name=&quot;grad&quot; id=&quot;grad2&quot;&gt;
+    &lt;option value=&quot;sof&quot;&gt;София&lt;/option&gt;
+    &lt;option value=&quot;pdv&quot;&gt;Пловдив&lt;/option&gt;
+    &lt;option value=&quot;vtr&quot; selected&gt;Велико Търново&lt;/option&gt;
+    &lt;option value=&quot;var&quot;&gt;Варна&lt;/option&gt;
+    &lt;option value=&quot;bgs&quot;&gt;Бургас&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:70px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 2"></iframe></div>
+<p>Атрибутът <code>selected</code> прави „Велико Търново“ избран при зареждане, въпреки че не е първи в списъка.</p>
+<p><b>Пример 3: задължителен избор с подсказка</b></p>
+<pre>&lt;form&gt;
+  &lt;label for="klas3"&gt;Клас:&lt;/label&gt;
+  &lt;select name="klas" id="klas3" required&gt;
+    &lt;option value="" disabled selected&gt;-- изберете клас --&lt;/option&gt;
+    &lt;option value="9"&gt;9. клас&lt;/option&gt;
+    &lt;option value="10"&gt;10. клас&lt;/option&gt;
+    &lt;option value="11"&gt;11. клас&lt;/option&gt;
+    &lt;option value="12"&gt;12. клас&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;input type="submit" value="Напред"&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 3</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  &lt;label for=&quot;klas3&quot;&gt;Клас:&lt;/label&gt;
+  &lt;select name=&quot;klas&quot; id=&quot;klas3&quot; required&gt;
+    &lt;option value=&quot;&quot; disabled selected&gt;-- изберете клас --&lt;/option&gt;
+    &lt;option value=&quot;9&quot;&gt;9. клас&lt;/option&gt;
+    &lt;option value=&quot;10&quot;&gt;10. клас&lt;/option&gt;
+    &lt;option value=&quot;11&quot;&gt;11. клас&lt;/option&gt;
+    &lt;option value=&quot;12&quot;&gt;12. клас&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Напред&quot;&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:70px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 3"></iframe></div>
+<p>Първият вариант е само подсказка: има празна стойност (<code>value=""</code>), избран е (<code>selected</code>) и не може да бъде избран отново (<code>disabled</code>). Заедно с <code>required</code> на select това принуждава потребителя да избере истински клас. Натисни „Напред“ без избор.</p>
+<p><b>Пример 4: списък с няколко видими реда (size)</b></p>
+<pre>&lt;form&gt;
+  &lt;label for="mesec"&gt;Месец на раждане:&lt;/label&gt;&lt;br&gt;
+  &lt;select name="mesec" id="mesec" size="4"&gt;
+    &lt;option&gt;януари&lt;/option&gt;&lt;option&gt;февруари&lt;/option&gt;&lt;option&gt;март&lt;/option&gt;
+    &lt;option&gt;април&lt;/option&gt;&lt;option&gt;май&lt;/option&gt;&lt;option&gt;юни&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 4</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  &lt;label for=&quot;mesec&quot;&gt;Месец на раждане:&lt;/label&gt;&lt;br&gt;
+  &lt;select name=&quot;mesec&quot; id=&quot;mesec&quot; size=&quot;4&quot;&gt;
+    &lt;option&gt;януари&lt;/option&gt;&lt;option&gt;февруари&lt;/option&gt;&lt;option&gt;март&lt;/option&gt;
+    &lt;option&gt;април&lt;/option&gt;&lt;option&gt;май&lt;/option&gt;&lt;option&gt;юни&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:146px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 4"></iframe></div>
+<p>С <code>size="4"</code> менюто вече не е падащо – показва 4 реда и лента за превъртане. Тук вариантите нямат <code>value</code>, затова се изпраща самият текст, напр. <code>mesec=март</code>.</p>
+<p><b>Пример 5: избор на няколко варианта (multiple)</b></p>
+<pre>&lt;form&gt;
+  &lt;label for="ezici"&gt;Езици, които изучавате:&lt;/label&gt;&lt;br&gt;
+  &lt;select name="ezik" id="ezici" multiple size="4"&gt;
+    &lt;option value="en"&gt;английски&lt;/option&gt;
+    &lt;option value="de"&gt;немски&lt;/option&gt;
+    &lt;option value="fr"&gt;френски&lt;/option&gt;
+    &lt;option value="es"&gt;испански&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 5</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  &lt;label for=&quot;ezici&quot;&gt;Езици, които изучавате:&lt;/label&gt;&lt;br&gt;
+  &lt;select name=&quot;ezik&quot; id=&quot;ezici&quot; multiple size=&quot;4&quot;&gt;
+    &lt;option value=&quot;en&quot;&gt;английски&lt;/option&gt;
+    &lt;option value=&quot;de&quot;&gt;немски&lt;/option&gt;
+    &lt;option value=&quot;fr&quot;&gt;френски&lt;/option&gt;
+    &lt;option value=&quot;es&quot;&gt;испански&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:146px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 5"></iframe></div>
+<p>С <code>multiple</code> можеш да избереш няколко варианта: задръж <b>Ctrl</b> и щракай върху всеки (или <b>Shift</b> за поредица). Изпраща се <code>ezik=en&amp;ezik=de</code>. Атрибутът <code>size</code> задава колко реда се виждат.</p>
+<p><b>Пример 6: групи от варианти (optgroup)</b></p>
+<pre>&lt;form&gt;
+  &lt;label for="ql"&gt;Ястие:&lt;/label&gt;
+  &lt;select name="qstie" id="ql"&gt;
+    &lt;optgroup label="Супи"&gt;
+      &lt;option value="tarator"&gt;таратор&lt;/option&gt;
+      &lt;option value="bob"&gt;боб чорба&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label="Основни"&gt;
+      &lt;option value="musaka"&gt;мусака&lt;/option&gt;
+      &lt;option value="kebapche"&gt;кебапчета&lt;/option&gt;
+    &lt;/optgroup&gt;
+  &lt;/select&gt;
+&lt;/form&gt;</pre>
+<div class="pvw"><div class="pvb"><i></i><i></i><i></i><span class="pvt">Пример 6</span></div><iframe class="pvf" srcdoc="&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;body style=&quot;margin:0;padding:0&quot;&gt;&lt;div style=&quot;font-family:Arial;margin:12px;line-height:1.9&quot;&gt;&lt;form&gt;
+  &lt;label for=&quot;ql&quot;&gt;Ястие:&lt;/label&gt;
+  &lt;select name=&quot;qstie&quot; id=&quot;ql&quot;&gt;
+    &lt;optgroup label=&quot;Супи&quot;&gt;
+      &lt;option value=&quot;tarator&quot;&gt;таратор&lt;/option&gt;
+      &lt;option value=&quot;bob&quot;&gt;боб чорба&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label=&quot;Основни&quot;&gt;
+      &lt;option value=&quot;musaka&quot;&gt;мусака&lt;/option&gt;
+      &lt;option value=&quot;kebapche&quot;&gt;кебапчета&lt;/option&gt;
+    &lt;/optgroup&gt;
+  &lt;/select&gt;
+&lt;/form&gt;&lt;/div&gt;" style="height:70px" sandbox="allow-scripts allow-modals" title="Резултат: Пример 6"></iframe></div>
+<p>Тагът <code>&lt;optgroup label="..."&gt;</code> групира вариантите под удебелено заглавие, което не може да се избере. Отвори менюто, за да видиш групите.</p>
+<p><b>Радиобутони или падащо меню?</b> И двете позволяват избор на един вариант:</p>
+<table class="t"><tr><th></th><th>Радиобутони</th><th>Падащо меню</th></tr>
+<tr><td>Брой варианти</td><td>малко (2–5)</td><td>много (6 и повече)</td></tr>
+<tr><td>Видимост</td><td>всички варианти се виждат веднага</td><td>вижда се само избраният</td></tr>
+<tr><td>Място на страницата</td><td>заемат повече място</td><td>заема един ред</td></tr>
+<tr><td>Пример</td><td>пол, начин на доставка</td><td>град, държава, година на раждане</td></tr></table>
+<div class="box"><b>Чести грешки при падащото меню:</b><br>
+• <code>name</code> се слага на <code>&lt;option&gt;</code> вместо на <code>&lt;select&gt;</code> – името е на менюто, стойностите са на вариантите;<br>
+• забравен затварящ таг <code>&lt;/select&gt;</code> или <code>&lt;/option&gt;</code>;<br>
+• <code>selected</code> на няколко варианта в обикновено меню (без <code>multiple</code>) – браузърът избира само последния;<br>
+• <code>type="select"</code> – такъв тип няма, падащото меню е отделен таг <code>&lt;select&gt;</code>, а не <code>&lt;input&gt;</code>.</div>
 <p><b>Опитай:</b> добави поле за телефон (<code>type="tel"</code>) и направи имейла задължителен.</p>
 <h3>🧪 Пробвай сам</h3><div class="lab"><div class="pane"><small>Код (можеш да го променяш)</small><textarea id="ed" spellcheck="false">&lt;form onsubmit="event.preventDefault();document.getElementById('o').innerText='Здравей, '+document.getElementById('ime').value+'!'">
   &lt;label for="ime">Име:&lt;/label>
