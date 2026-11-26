@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 1: Презентация с анкета в реално време – Интерактивни презентации, 11 и 12 клас</title>
+<link rel="icon" type="image/svg+xml" href="../icons/interaktivni.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: приятелски урок за 12 клас – ясен, практичен, весел, но подреден
+   IDEA: прожекционен екран в класната стая, на който гласовете от телефоните растат на живо
+   PICTURE: илюстриран екран с растящи стълбове и телефони в хедъра; схеми на всеки инструмент
+   COLOUR and TYPE: кобалтово синьо доминира, слънчево жълто подкрепя, корал за акцент; Nunito 900 + Nunito Sans
+   LAYOUT: синя лента с илюстрация, лепкаво меню с падащи списъци, светли секции с карти и схеми, тест накрая */
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#0f1530);--ink:light-dark(#1b2240,#eef1ff);--muted:light-dark(#566083,#a9b1d6);
+--card:light-dark(#f3f5fd,#18203f);--line:light-dark(#dfe3f3,#2a3462);--paper:light-dark(#ffffff,#1d2649);
+--blue:#2347d6;--acc:#2347d6;--mute:var(--muted);--coral:#ff6a4d;--sun:#ffc23d;--sky:#45b0ff;--deep:#13246e}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.6 "Nunito Sans",system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Nunito,system-ui,sans-serif;line-height:1.1;text-wrap:balance;margin:0 0 .5em}
+h2{font-size:clamp(28px,4vw,40px);font-weight:900}
+h3{font-size:21px;font-weight:800}
+p{max-width:70ch}
+a{color:var(--blue)}
+.band{padding:clamp(32px,5vw,64px) max(5vw,16px)}
+.wrap{max-width:1180px;margin:0 auto}
+.alt{background:var(--card)}
+.muted{color:var(--muted)}
+.note{font-size:13.5px;color:var(--muted)}
+/* hero */
+.hero{background:var(--blue);color:#fff;padding:clamp(28px,4vw,56px) max(5vw,16px) clamp(24px,3vw,40px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:32px;align-items:center}
+.hero h1{font-size:clamp(34px,5vw,52px);font-weight:900;color:#fff}
+.hero p{font-size:18px;color:#dfe6ff}
+.tag{display:inline-block;background:var(--sun);color:#1b2240;font-weight:800;border-radius:99px;padding:4px 14px;font-size:14px;margin-bottom:14px}
+.hero svg{width:100%;height:auto;display:block}
+.bargrow{transform-box:fill-box;transform-origin:bottom;animation:grow 1.4s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grow{from{transform:scaleY(.05)}}
+@media(prefers-reduced-motion:reduce){.bargrow{animation:none}html{scroll-behavior:auto}}
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 4px 16px rgba(20,30,80,.06)}
+nav .wrap{display:flex;flex-wrap:wrap;gap:4px;padding:6px max(2vw,8px)}
+nav details{position:relative}
+nav summary,nav>.wrap>a{list-style:none;cursor:pointer;font-weight:700;padding:10px 14px;border-radius:10px;min-height:44px;display:flex;align-items:center;gap:6px;color:var(--ink);text-decoration:none}
+nav summary::-webkit-details-marker{display:none}
+nav summary::after{content:"";width:7px;height:7px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg) translateY(-2px);opacity:.6}
+nav summary:hover,nav details[open] summary,nav>.wrap>a:hover{background:var(--card)}
+nav .menu{position:absolute;left:0;top:calc(100% + 4px);background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:6px;min-width:240px;box-shadow:0 12px 30px rgba(20,30,80,.16)}
+nav .menu a{display:block;padding:10px 12px;border-radius:8px;color:var(--ink);text-decoration:none}
+nav .menu a:hover{background:var(--card);color:var(--blue)}
+@media(max-width:600px){nav .menu{position:fixed;left:8px;right:8px;top:auto}}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+/* generic */
+.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.grid2{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));align-items:start}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px}
+.alt .card{background:var(--paper)}
+.btn{font:700 16px "Nunito Sans",sans-serif;border:0;border-radius:12px;padding:11px 18px;min-height:44px;cursor:pointer;background:var(--blue);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.btn.coral{background:var(--coral)}
+.btn:disabled{opacity:.5;cursor:default}
+input[type=text]{font:16px "Nunito Sans",sans-serif;padding:11px 14px;border-radius:12px;border:2px solid var(--line);background:var(--paper);color:var(--ink);min-height:44px}
+table{border-collapse:collapse;width:100%;background:var(--paper);border-radius:14px;overflow:hidden}
+th,td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--deep);color:#fff;font-family:Nunito,sans-serif}
+.scroll{overflow-x:auto}
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;counter-reset:s}
+.flow .card{position:relative;text-align:center}
+.flow .card::before{counter-increment:s;content:counter(s);position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:30px;height:30px;border-radius:50%;background:var(--coral);color:#fff;font:900 16px/30px Nunito,sans-serif}
+.flow svg{width:84px;height:84px;margin:6px auto 8px;display:block}
+@media(max-width:820px){.flow{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:30px}}
+/* mock frames */
+.mock{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(20,30,80,.10)}
+.mock .top{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--card);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.mock .top i{width:10px;height:10px;border-radius:50%;background:#ff6a4d;display:inline-block}
+.mock .top i:nth-child(2){background:#ffc23d}.mock .top i:nth-child(3){background:#3ccf7e}
+.mock .top span{margin-left:8px;background:var(--paper);border-radius:6px;padding:2px 10px;flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.cap{font-size:14px;color:var(--muted);margin:10px 2px 0}
+.join{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--deep);color:#fff;padding:8px 14px;font-size:14px}
+.join b{color:var(--sun);font-size:16px;letter-spacing:.06em;white-space:nowrap}
+.qr{width:46px;height:46px;background:#fff;border-radius:4px;padding:3px;flex:none}
+.qr svg{width:100%;height:100%;display:block}
+/* vertical bars */
+.vbars{display:flex;align-items:flex-end;gap:14px;height:190px;padding:16px 18px 0}
+.vbar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.vbar i{display:block;width:100%;border-radius:8px 8px 0 0;transition:height .35s ease;min-height:3px}
+.vbar b{font-family:Nunito,sans-serif;font-size:18px;margin-bottom:4px}
+.vbar span{font-size:13.5px;font-weight:700;padding:6px 0 10px;white-space:nowrap}
+.hidden-res .vbar i,.hidden-res .vbar b{visibility:hidden}
+.hidden-res{position:relative}
+.hidden-res::after{content:"Резултатите са скрити – гласуването продължава";position:absolute;inset:30% 10% auto;text-align:center;font-weight:800;color:var(--muted)}
+/* mini mocks */
+.mini{height:170px;background:var(--paper);border:1px solid var(--line);border-radius:12px;margin-bottom:14px;position:relative;overflow:hidden;padding:12px}
+.mini .q{font-weight:800;font-size:13px;margin-bottom:8px}
+.hrow{display:flex;align-items:center;gap:8px;font-size:12.5px;margin:6px 0}
+.hrow span{width:74px;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hrow i{height:14px;border-radius:7px;display:block}
+.hrow em{font-style:normal;font-weight:800;white-space:nowrap}
+.cloud{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px 10px;font-family:Nunito,sans-serif;font-weight:900;line-height:1.05}
+.sticky{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.sticky div{background:#fff3c4;color:#3b3000;font-size:11.5px;padding:6px;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,.08);height:52px;overflow:hidden}
+.sticky div:nth-child(3n+2){background:#ffe0d8}.sticky div:nth-child(3n){background:#dbe9ff}
+.scale{font-size:12.5px;margin:8px 0}
+.scale .track{height:6px;border-radius:3px;background:var(--line);position:relative;margin-top:5px}
+.scale .track b{position:absolute;top:-5px;width:16px;height:16px;border-radius:50%;background:var(--coral);transform:translateX(-50%);border:3px solid var(--paper)}
+.qa div{display:flex;gap:10px;align-items:center;font-size:12.5px;border-bottom:1px solid var(--line);padding:6px 0}
+.qa b{flex:none;background:var(--card);border-radius:8px;padding:2px 8px;font-size:12px;color:var(--blue)}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.answers div{color:#fff;font-weight:800;font-size:12.5px;border-radius:8px;padding:10px 8px;display:flex;gap:6px;align-items:center}
+.answers div u{text-decoration:none;background:rgba(255,255,255,.25);border-radius:5px;padding:0 6px}
+.lead div{display:flex;justify-content:space-between;font-size:12.5px;padding:5px 8px;border-radius:8px;margin-bottom:4px;background:var(--card)}
+.lead div:first-child{background:var(--sun);color:#1b2240;font-weight:800}
+.tile h3{margin-bottom:4px}
+.tile .when{font-size:14px;color:var(--muted);margin:6px 0 0}
+.pill{display:inline-block;font-size:12px;font-weight:800;padding:2px 10px;border-radius:99px;background:var(--card);color:var(--blue);margin:0 4px 4px 0;border:1px solid var(--line)}
+/* editor mock */
+.editor{display:grid;grid-template-columns:110px minmax(0,1fr) 190px;min-height:300px}
+.editor .slides{background:var(--card);padding:8px;border-right:1px solid var(--line)}
+.editor .slides div{background:var(--paper);border:2px solid var(--line);border-radius:8px;height:52px;margin-bottom:8px;font-size:10.5px;padding:4px 6px;color:var(--muted)}
+.editor .slides div.on{border-color:var(--blue);color:var(--ink)}
+.editor .canvas{padding:16px;display:flex;flex-direction:column}
+.editor .panel{border-left:1px solid var(--line);padding:12px;font-size:12.5px}
+.panel label{display:block;font-weight:700;margin:8px 0 3px}
+.panel .f{border:1px solid var(--line);border-radius:6px;padding:4px 8px;background:var(--card);margin-bottom:4px}
+.tog{display:flex;justify-content:space-between;align-items:center;margin:8px 0}
+.tog s{width:28px;height:16px;border-radius:8px;background:var(--line);position:relative}
+.tog s::after{content:"";position:absolute;width:12px;height:12px;border-radius:50%;background:#fff;top:2px;left:2px}
+.tog s.on{background:var(--blue)}.tog s.on::after{left:14px}
+@media(max-width:700px){.editor{grid-template-columns:minmax(0,1fr)}.editor .slides{display:flex;gap:6px;border-right:0;border-bottom:1px solid var(--line)}.editor .slides div{flex:1;margin:0}.editor .panel{border-left:0;border-top:1px solid var(--line)}}
+.picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;padding:14px}
+.picker div{border:1px solid var(--line);border-radius:10px;padding:10px 8px;text-align:center;font-size:12.5px;font-weight:700;background:var(--card)}
+.picker div.on{border:2px solid var(--blue);background:var(--paper)}
+.picker svg{width:40px;height:28px;display:block;margin:0 auto 4px}
+/* phone */
+.phone{width:210px;margin:0 auto;background:#1b2240;border-radius:30px;padding:12px;box-shadow:0 14px 30px rgba(20,30,80,.25)}
+.phone .scr{background:#fff;color:#1b2240;border-radius:20px;min-height:340px;padding:16px 14px;font-size:13px}
+.phone .scr .url{text-align:center;font-size:11px;color:#777;margin-bottom:12px}
+.phone .opt{border:2px solid #dfe3f3;border-radius:10px;padding:8px 10px;margin:6px 0;display:flex;gap:8px;align-items:center}
+.phone .opt.on{border-color:#2347d6;background:#eef2ff}
+.phone .opt i{width:14px;height:14px;border-radius:50%;border:2px solid #9aa3c7;flex:none}
+.phone .opt.on i{border:4px solid #2347d6}
+.phone .send{background:#2347d6;color:#fff;text-align:center;border-radius:10px;padding:9px;font-weight:800;margin-top:12px}
+.phone .code{border:2px solid #dfe3f3;border-radius:10px;padding:10px;text-align:center;font-size:18px;letter-spacing:.12em;margin:10px 0;font-weight:800}
+/* google slides mock */
+.gmenu{display:flex;gap:14px;padding:8px 14px;font-size:13px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.gmenu b{background:#e3ebff;color:#2347d6;border-radius:6px;padding:0 8px}
+.gbody{display:grid;grid-template-columns:minmax(0,1fr) 200px;min-height:250px;position:relative}
+.gdrop{position:absolute;left:min(52%,300px);top:0;background:var(--paper);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,.15);font-size:12.5px;padding:6px 0;z-index:2;width:170px}
+.gdrop div{padding:5px 12px}.gdrop div.on{background:#e3ebff;color:#2347d6;font-weight:800}
+.gside{border-left:1px solid var(--line);padding:12px;font-size:12.5px;background:var(--card)}
+.gside div{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:7px 9px;margin:6px 0;font-weight:700}
+@media(max-width:600px){.gbody{grid-template-columns:minmax(0,1fr)}.gside{border-left:0}.gdrop{left:auto;right:8px}}
+/* steps */
+.steps{counter-reset:st;display:grid;gap:26px}
+.step{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center}
+.step .txt h3::before{counter-increment:st;content:"Стъпка " counter(st);display:block;font-size:14px;color:var(--coral);font-weight:900;margin-bottom:4px}
+@media(max-width:820px){.step{grid-template-columns:minmax(0,1fr)}}
+ol li,ul li{margin:4px 0}
+kbd{background:var(--card);border:1px solid var(--line);border-bottom-width:3px;border-radius:6px;padding:0 6px;font:700 14px "Nunito Sans",sans-serif}
+.feat{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.feat .card h3{font-size:18px}
+.tip{border-left:5px solid var(--sun);background:var(--paper);padding:14px 18px;border-radius:0 14px 14px 0;margin:18px 0}
+/* carousel */
+.car{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 16px}
+.car>.slide{flex:0 0 min(320px,82%);scroll-snap-align:start}
+.carnav{display:flex;gap:8px;justify-content:flex-end}
+.slide .mock{height:100%}
+.snum{font-size:12px;font-weight:800;color:var(--coral)}
+/* demo */
+.demo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;align-items:start}
+@media(max-width:820px){.demo{grid-template-columns:minmax(0,1fr)}.hero .wrap{grid-template-columns:minmax(0,1fr)}}
+.votebtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.votebtns button{background:var(--paper);color:var(--ink);border:2px solid var(--line)}
+.votebtns button:hover{border-color:var(--blue)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.chk{display:flex;gap:8px;align-items:center;font-weight:700;min-height:44px;cursor:pointer}
+.chk input{width:20px;height:20px}
+/* quiz */
+.qz{margin-bottom:18px}
+.qz fieldset{border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:0;background:var(--paper)}
+.qz legend{font-weight:800;font-family:Nunito,sans-serif;font-size:17px;padding:0 6px}
+.qz label{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;cursor:pointer;min-height:44px}
+.qz label:hover{background:var(--card)}
+.qz input{width:18px;height:18px;flex:none}
+.qz .ok{background:#dff7e8;color:#0b4d27}.qz .bad{background:#ffe3dc;color:#7a1d08}
+.qz .why{font-size:14px;color:var(--muted);margin:8px 6px 0;display:none}
+.done .why{display:block}
+#score{font-family:Nunito,sans-serif;font-weight:900;font-size:24px}
+.crit td:last-child,.crit th:last-child{text-align:right;white-space:nowrap}
+footer{background:var(--deep);color:#cfd8ff;text-align:center;padding:26px 16px;font-size:14px}
+@media(max-width:600px){table{font-size:13.5px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--line)}.stack td{display:flow-root;border:0;padding:3px 12px;padding-inline-start:8.5em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:8em;margin-inline-start:-8.5em;font-weight:800;color:var(--muted)}.stack td:empty{display:none}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="tag">Интерактивни презентации · 11 и 12 клас</span>
+      <h1>Презентация с анкета в реално време</h1>
+      <p>Аудиторията гласува от телефоните си, а отговорите се появяват на екрана веднага. Тук ще научиш как става това, какво може всеки инструмент и как сам да направиш такава презентация.</p>
+    </div>
+    <svg viewBox="0 0 470 320" role="img" aria-label="Прожекционен екран с растящи стълбове и телефони, от които се гласува">
+      <ellipse cx="235" cy="300" rx="210" ry="14" fill="#13246e" opacity=".5"/>
+      <rect x="40" y="18" width="300" height="200" rx="16" fill="#13246e"/>
+      <rect x="48" y="26" width="284" height="184" rx="10" fill="#fff"/>
+      <rect x="48" y="26" width="284" height="30" rx="10" fill="#13246e"/>
+      <rect x="48" y="44" width="284" height="12" fill="#13246e"/>
+      <text x="62" y="46" fill="#fff" font-family="Nunito Sans,sans-serif" font-size="12">menti.com</text>
+      <text x="250" y="46" fill="#ffc23d" font-family="Nunito,sans-serif" font-weight="900" font-size="13">1234 5678</text>
+      <rect x="64" y="68" width="150" height="9" rx="4" fill="#1b2240"/>
+      <rect x="64" y="82" width="96" height="7" rx="3" fill="#c8cfe8"/>
+      <line x1="64" y1="192" x2="316" y2="192" stroke="#dfe3f3" stroke-width="2"/>
+      <rect class="bargrow" x="78" y="110" width="44" height="82" rx="6" fill="#2347d6"/>
+      <rect class="bargrow" x="136" y="140" width="44" height="52" rx="6" fill="#ff6a4d" style="animation-delay:.15s"/>
+      <rect class="bargrow" x="194" y="124" width="44" height="68" rx="6" fill="#ffc23d" style="animation-delay:.3s"/>
+      <rect class="bargrow" x="252" y="162" width="44" height="30" rx="6" fill="#45b0ff" style="animation-delay:.45s"/>
+      <rect x="180" y="218" width="20" height="40" fill="#13246e"/>
+      <rect x="140" y="256" width="100" height="10" rx="5" fill="#13246e"/>
+      <g transform="translate(330 120) rotate(8)">
+        <rect width="74" height="136" rx="14" fill="#1b2240"/><rect x="6" y="10" width="62" height="116" rx="9" fill="#fff"/>
+        <rect x="14" y="24" width="46" height="6" rx="3" fill="#1b2240"/>
+        <rect x="14" y="40" width="46" height="16" rx="5" fill="#eef2ff" stroke="#2347d6" stroke-width="2"/>
+        <rect x="14" y="62" width="46" height="16" rx="5" fill="#fff" stroke="#dfe3f3" stroke-width="2"/>
+        <rect x="14" y="84" width="46" height="16" rx="5" fill="#fff" stroke="#dfe3f3" stroke-width="2"/>
+        <rect x="14" y="106" width="46" height="12" rx="5" fill="#2347d6"/>
+      </g>
+      <g transform="translate(398 168) rotate(-6)">
+        <rect width="62" height="114" rx="12" fill="#1b2240"/><rect x="5" y="9" width="52" height="96" rx="8" fill="#fff"/>
+        <circle cx="31" cy="50" r="17" fill="#3ccf7e"/><path d="M23 50l6 6 11-12" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="13" y="78" width="36" height="6" rx="3" fill="#c8cfe8"/>
+      </g>
+      <g transform="translate(372 42)"><circle r="24" fill="#ffc23d"/><text y="9" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="26" fill="#1b2240">?</text></g>
+      <g transform="translate(436 96)"><circle r="16" fill="#ff6a4d"/><text y="6" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="18" fill="#fff">!</text></g>
+      <g transform="translate(18 250)"><circle r="14" fill="#45b0ff"/><text y="5" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="14" fill="#fff">24</text></g>
+    </svg>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Теория</summary><div class="menu">
+      <a href="#kakvo">Какво е анкета в реално време</a><a href="#kak">Как работи</a><a href="#demo">Опитай сам</a><a href="#vidove">Видове интерактивни въпроси</a></div></details>
+    <details><summary>Инструменти</summary><div class="menu">
+      <a href="#instrumenti">Сравнение на инструментите</a><a href="#izgled">Как изглежда всеки инструмент</a><a href="#vazmozhnosti">Още възможности</a></div></details>
+    <details><summary>Как се прави</summary><div class="menu">
+      <a href="#menti">Mentimeter стъпка по стъпка</a><a href="#slido">Slido в Google Slides и PowerPoint</a><a href="#saveti">Съвети за добри въпроси</a></div></details>
+    <details><summary>Задача</summary><div class="menu">
+      <a href="#zadacha">Задание</a><a href="#primeri">Примери</a><a href="#kriterii">Критерии за оценяване</a></div></details>
+    <a href="#test">Тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="kakvo">
+  <div class="wrap grid2">
+    <div>
+      <h2>Какво е анкета в реално време?</h2>
+      <p><b>Интерактивна презентация</b> е презентация, в която публиката участва – отговаря на въпроси, гласува, пише идеи. <b>Анкета в реално време</b> е слайд с въпрос, на който всички отговарят едновременно от телефон или компютър, а резултатите се рисуват на екрана още докато гласуват.</p>
+      <p>Не е нужна регистрация на зрителите и не се инсталира приложение – отваря се сайт, въвежда се код или се сканира QR код.</p>
+    </div>
+    <div class="card">
+      <h3>За какво се използва</h3>
+      <ul>
+        <li><b>Загрявка</b> – „Какво знаете вече за…?“</li>
+        <li><b>Проверка на разбирането</b> – кратък тест по средата на урока</li>
+        <li><b>Вземане на решение</b> – класът избира място за екскурзия</li>
+        <li><b>Мнение и обратна връзка</b> – анонимно и честно</li>
+        <li><b>Въпроси към лектора</b> – Q&A, където най-харесваните въпроси излизат най-отгоре</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="kak">
+  <div class="wrap">
+    <h2>Как работи</h2>
+    <p class="muted">Четири стъпки, които са едни и същи във всички инструменти.</p>
+    <div class="flow" style="margin-top:28px">
+      <div class="card"><svg viewBox="0 0 84 84"><rect x="10" y="16" width="64" height="42" rx="5" fill="#2347d6"/><rect x="15" y="21" width="54" height="32" rx="3" fill="#fff"/><rect x="21" y="40" width="7" height="9" fill="#ff6a4d"/><rect x="31" y="33" width="7" height="16" fill="#ffc23d"/><rect x="41" y="28" width="7" height="21" fill="#2347d6"/><path d="M4 64h76l-6 6H10z" fill="#13246e"/></svg><h3>Създаваш</h3><p>Презентатора създава слайдовете с въпроси в браузъра.</p></div>
+      <div class="card"><svg viewBox="0 0 84 84"><rect x="12" y="12" width="60" height="60" rx="8" fill="#fff" stroke="#13246e" stroke-width="4"/><rect x="20" y="20" width="16" height="16" fill="#13246e"/><rect x="48" y="20" width="16" height="16" fill="#13246e"/><rect x="20" y="48" width="16" height="16" fill="#13246e"/><rect x="48" y="48" width="7" height="7" fill="#ff6a4d"/><rect x="57" y="57" width="7" height="7" fill="#13246e"/><rect x="40" y="40" width="5" height="5" fill="#13246e"/></svg><h3>Споделяш кода</h3><p>На екрана се показват адрес, числов код и QR код.</p></div>
+      <div class="card"><svg viewBox="0 0 84 84"><rect x="24" y="6" width="36" height="72" rx="8" fill="#1b2240"/><rect x="28" y="13" width="28" height="56" rx="4" fill="#fff"/><rect x="32" y="22" width="20" height="8" rx="3" fill="#eef2ff" stroke="#2347d6" stroke-width="2"/><rect x="32" y="34" width="20" height="8" rx="3" fill="#fff" stroke="#c8cfe8" stroke-width="2"/><rect x="32" y="46" width="20" height="8" rx="3" fill="#fff" stroke="#c8cfe8" stroke-width="2"/><rect x="32" y="58" width="20" height="6" rx="3" fill="#2347d6"/></svg><h3>Публиката гласува</h3><p>Всеки отговаря от своето устройство, анонимно.</p></div>
+      <div class="card"><svg viewBox="0 0 84 84"><rect x="8" y="10" width="68" height="56" rx="6" fill="#fff" stroke="#13246e" stroke-width="4"/><rect class="bargrow" x="18" y="34" width="10" height="24" fill="#2347d6"/><rect class="bargrow" x="32" y="44" width="10" height="14" fill="#ff6a4d"/><rect class="bargrow" x="46" y="24" width="10" height="34" fill="#ffc23d"/><rect class="bargrow" x="60" y="50" width="8" height="8" fill="#45b0ff"/></svg><h3>Резултати на живо</h3><p>Диаграмата се променя с всеки нов глас.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="demo">
+  <div class="wrap">
+    <h2>Опитай сам: така изглежда на живо</h2>
+    <p class="muted">Гласувай с бутоните или пусни „класа“ да гласува. Скрий резултатите, за да видиш как работи тази настройка.</p>
+    <div class="demo" style="margin-top:20px">
+      <div>
+        <div class="mock">
+          <div class="join"><span>Отиди на <b style="letter-spacing:0">menti.com</b> и въведи кода</span><b>1234 5678</b><div class="qr" data-qr="7"></div></div>
+          <div style="padding:14px 18px 0;font-family:Nunito,sans-serif;font-weight:800;font-size:18px">Кой формат запазва прозрачен фон на изображение?</div>
+          <div class="vbars" id="pollBars"></div>
+          <div style="display:flex;justify-content:flex-end;padding:0 14px 10px;font-size:13px;color:var(--muted)" id="pollCount"></div>
+        </div>
+        <p class="note">Кодът и адресът са примерни. Изгледът е схематичен.</p>
+      </div>
+      <div class="card">
+        <h3>Твоят глас</h3>
+        <div class="votebtns" id="pollBtns"></div>
+        <div class="row">
+          <button class="btn coral" id="sim">Симулирай 25 ученици</button>
+          <button class="btn ghost" id="reset">Нулирай</button>
+        </div>
+        <label class="chk"><input type="checkbox" id="hideRes"> Скрий резултатите, докато се гласува</label>
+        <p class="note">Верен отговор: PNG (поддържа прозрачност), GIF също, но само с един прозрачен цвят.</p>
+      </div>
+    </div>
+    <div class="demo" style="margin-top:34px">
+      <div class="mock">
+        <div class="join"><span>Облак от думи</span><b>1234 5678</b></div>
+        <div style="padding:14px 18px 4px;font-family:Nunito,sans-serif;font-weight:800;font-size:18px">С една дума: каква е добрата презентация?</div>
+        <div class="cloud" id="cloud" style="min-height:190px;padding:10px 16px 18px"></div>
+      </div>
+      <div class="card">
+        <h3>Добави дума в облака</h3>
+        <p class="muted" style="font-size:15px">Колкото повече хора напишат една дума, толкова по-голяма става тя.</p>
+        <form id="cloudForm" class="row"><input type="text" id="word" maxlength="20" placeholder="напр. кратка" aria-label="Дума"><button class="btn">Изпрати</button></form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="vidove">
+  <div class="wrap">
+    <h2>Видове интерактивни въпроси</h2>
+    <p class="muted">Всяка карта показва схематично как изглежда резултатът на екрана. Имената са на английски, както са в инструментите.</p>
+    <div class="grid" style="margin-top:22px">
+      <div class="card tile">
+        <div class="mini"><div class="q">Коя мрежа ползваш най-много?</div>
+          <div class="hrow"><span>YouTube</span><i style="width:62%;background:var(--blue)"></i><em>12</em></div>
+          <div class="hrow"><span>Instagram</span><i style="width:46%;background:var(--coral)"></i><em>9</em></div>
+          <div class="hrow"><span>TikTok</span><i style="width:36%;background:var(--sun)"></i><em>7</em></div>
+          <div class="hrow"><span>Друга</span><i style="width:10%;background:var(--sky)"></i><em>2</em></div></div>
+        <h3>Multiple choice</h3><span class="pill">Mentimeter</span><span class="pill">Slido</span><span class="pill">AhaSlides</span>
+        <p>Избор от готови отговори. Резултат: стълбовидна, кръгова или поничковидна диаграма.</p><p class="when">Кога: мнение, гласуване, бърз избор.</p></div>
+      <div class="card tile">
+        <div class="mini"><div class="q">С какво свързваш ИИ?</div>
+          <div class="cloud" style="height:110px"><span style="font-size:15px;color:var(--sky)">роботи</span><span style="font-size:30px;color:var(--blue)">ChatGPT</span><span style="font-size:13px;color:var(--coral)">бъдеще</span><span style="font-size:22px;color:var(--coral)">помощ</span><span style="font-size:13px;color:var(--sun)">страх</span><span style="font-size:18px;color:var(--deep)">код</span><span style="font-size:14px;color:var(--blue)">данни</span></div></div>
+        <h3>Word cloud</h3><span class="pill">Mentimeter</span><span class="pill">Slido</span><span class="pill">AhaSlides</span>
+        <p>Облак от думи – най-често написаните думи са най-големи.</p><p class="when">Кога: загрявка, асоциации, обобщение в една дума.</p></div>
+      <div class="card tile">
+        <div class="mini"><div class="q">Какво би променил в училище?</div>
+          <div class="sticky"><div>Повече практика в час</div><div>По-късно начало</div><div>Wi-Fi навсякъде</div><div>Кафе машина</div><div>Повече проекти</div><div>Нови компютри</div></div></div>
+        <h3>Open ended</h3><span class="pill">Mentimeter</span><span class="pill">AhaSlides</span>
+        <p>Свободен текст. Отговорите излизат като бележки или в списък.</p><p class="when">Кога: идеи, предложения, обратна връзка.</p></div>
+      <div class="card tile">
+        <div class="mini"><div class="q">Оцени от 1 до 5</div>
+          <div class="scale">Часове пред екрана<div class="track"><b style="left:78%"></b></div></div>
+          <div class="scale">Сън през седмицата<div class="track"><b style="left:42%"></b></div></div>
+          <div class="scale">Спорт<div class="track"><b style="left:55%"></b></div></div></div>
+        <h3>Scales / Rating</h3><span class="pill">Mentimeter</span><span class="pill">Slido</span><span class="pill">AhaSlides</span>
+        <p>Оценка по скала за едно или няколко твърдения. Показва средната стойност.</p><p class="when">Кога: доколко сте съгласни, самооценка.</p></div>
+      <div class="card tile">
+        <div class="mini"><div class="q">Най-важно при лаптоп</div>
+          <div class="hrow"><span>1. Процесор</span><i style="width:80%;background:var(--blue)"></i></div>
+          <div class="hrow"><span>2. RAM</span><i style="width:64%;background:var(--blue);opacity:.8"></i></div>
+          <div class="hrow"><span>3. Батерия</span><i style="width:48%;background:var(--blue);opacity:.6"></i></div>
+          <div class="hrow"><span>4. Цена</span><i style="width:34%;background:var(--blue);opacity:.45"></i></div></div>
+        <h3>Ranking</h3><span class="pill">Mentimeter</span><span class="pill">Slido</span><span class="pill">AhaSlides</span>
+        <p>Участниците подреждат елементи по важност. Резултат: обща класация.</p><p class="when">Кога: приоритети, критерии за избор.</p></div>
+      <div class="card tile">
+        <div class="mini"><div class="q">Кой порт ползва HTTPS?</div>
+          <div class="answers"><div style="background:#e5484d"><u>A</u>80</div><div style="background:#2347d6"><u>B</u>443</div><div style="background:#d99a00"><u>C</u>21</div><div style="background:#1f9d6a"><u>D</u>25</div></div>
+          <div class="note" style="margin-top:10px">Остават 12 секунди · 18 отговора</div></div>
+        <h3>Quiz</h3><span class="pill">Mentimeter</span><span class="pill">Slido</span><span class="pill">Kahoot!</span>
+        <p>Тест с верен отговор, таймер и точки – по-бързият верен отговор носи повече точки.</p><p class="when">Кога: проверка на знанията, състезание.</p></div>
+      <div class="card tile">
+        <div class="mini"><div class="q">Класиране след 3 въпроса</div>
+          <div class="lead"><div><span>1. Мария</span><b>2 840</b></div><div><span>2. Иво</span><span>2 610</span></div><div><span>3. Деси</span><span>2 300</span></div><div><span>4. Калин</span><span>1 950</span></div></div></div>
+        <h3>Leaderboard</h3><span class="pill">Mentimeter</span><span class="pill">Kahoot!</span><span class="pill">AhaSlides</span>
+        <p>Класиране между въпросите в тест. Участниците въвеждат прякор.</p><p class="when">Кога: игровизация, мотивация.</p></div>
+      <div class="card tile">
+        <div class="mini"><div class="q">Въпроси от публиката</div>
+          <div class="qa"><div><b>▲ 14</b>Има ли контролно след темата?</div><div><b>▲ 9</b>Може ли да работим по двойки?</div><div><b>▲ 4</b>Кой инструмент е най-лесен?</div></div></div>
+        <h3>Q&A</h3><span class="pill">Slido</span><span class="pill">Mentimeter</span><span class="pill">AhaSlides</span>
+        <p>Публиката пише въпроси и гласува за чуждите. Най-харесваните излизат най-отгоре.</p><p class="when">Кога: край на лекция, събрание.</p></div>
+      <div class="card tile">
+        <div class="mini"><div class="q">Разпредели 100 точки</div>
+          <div class="hrow"><span>Игри</span><i style="width:54%;background:var(--coral)"></i><em>38</em></div>
+          <div class="hrow"><span>Музика</span><i style="width:36%;background:var(--sun)"></i><em>27</em></div>
+          <div class="hrow"><span>Спорт</span><i style="width:28%;background:var(--sky)"></i><em>21</em></div>
+          <div class="hrow"><span>Книги</span><i style="width:18%;background:var(--blue)"></i><em>14</em></div></div>
+        <h3>100 points</h3><span class="pill">Mentimeter</span>
+        <p>Всеки разпределя 100 точки между вариантите – показва колко силно предпочита нещо.</p><p class="when">Кога: бюджет, приоритети.</p></div>
+      <div class="card tile">
+        <div class="mini"><div class="q">Задачи: усилие × полза</div>
+          <svg viewBox="0 0 240 120" style="width:100%;height:112px"><line x1="120" y1="4" x2="120" y2="116" stroke="currentColor" opacity=".25"/><line x1="6" y1="60" x2="234" y2="60" stroke="currentColor" opacity=".25"/><text x="10" y="16" font-size="10" fill="currentColor" opacity=".6">голяма полза</text><text x="170" y="112" font-size="10" fill="currentColor" opacity=".6">голямо усилие</text><circle cx="60" cy="30" r="7" fill="#2347d6"/><circle cx="170" cy="36" r="7" fill="#ff6a4d"/><circle cx="80" cy="90" r="7" fill="#ffc23d"/><circle cx="196" cy="92" r="7" fill="#45b0ff"/></svg></div>
+        <h3>2×2 Grid</h3><span class="pill">Mentimeter</span>
+        <p>Оценка на елементи по две оси. Всяка точка е средната оценка.</p><p class="when">Кога: анализ, планиране на проект.</p></div>
+      <div class="card tile">
+        <div class="mini"><div class="q">Посочи на картата къде живееш</div>
+          <svg viewBox="0 0 240 120" style="width:100%;height:112px"><path d="M20 40 Q40 12 90 22 T170 18 Q220 26 222 58 Q214 96 160 100 T60 102 Q18 90 20 40Z" fill="#dbe9ff" stroke="#2347d6" stroke-width="2"/><g fill="#ff6a4d"><circle cx="70" cy="60" r="5"/><circle cx="78" cy="52" r="5"/><circle cx="150" cy="44" r="5"/><circle cx="168" cy="74" r="5"/><circle cx="74" cy="66" r="5"/><circle cx="120" cy="82" r="5"/></g></svg></div>
+        <h3>Pin on image</h3><span class="pill">Mentimeter</span><span class="pill">AhaSlides</span>
+        <p>Участниците поставят точка върху изображение – карта, схема, снимка.</p><p class="when">Кога: „Посочи процесора на дънната платка“.</p></div>
+      <div class="card tile">
+        <div class="mini"><div class="q">Реакции по време на слайд</div>
+          <svg viewBox="0 0 240 120" style="width:100%;height:112px"><g><circle cx="44" cy="80" r="16" fill="#ff6a4d"/><path d="M36 78a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 6-8 10-8 10s-8-4-8-10z" fill="#fff"/></g><g><circle cx="100" cy="50" r="16" fill="#2347d6"/><path d="M94 56v-10h4l4-8c3 0 3 3 2 6h6c2 0 2 2 1 3l-3 9h-14" fill="#fff"/></g><g><circle cx="160" cy="70" r="16" fill="#ffc23d"/><circle cx="154" cy="66" r="2" fill="#1b2240"/><circle cx="166" cy="66" r="2" fill="#1b2240"/><path d="M152 74q8 7 16 0" stroke="#1b2240" stroke-width="2.5" fill="none"/></g><g><circle cx="208" cy="38" r="16" fill="#45b0ff"/><text x="208" y="45" text-anchor="middle" font-size="20" font-weight="900" fill="#fff" font-family="Nunito">?</text></g></svg></div>
+        <h3>Reactions</h3><span class="pill">Mentimeter</span><span class="pill">AhaSlides</span>
+        <p>Зрителите изпращат бързи реакции – сърце, палец, усмивка, въпрос – по всяко време.</p><p class="when">Кога: настроение на публиката, без да се спира презентацията.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="instrumenti">
+  <div class="wrap">
+    <h2>Сравнение на инструментите</h2>
+    <p class="muted">Всички работят в браузъра и имат безплатен план. Ограниченията на безплатните планове се променят често – провери на сайта преди часа.</p>
+    <table class="stack" style="margin-top:18px">
+      <thead><tr><th>Инструмент</th><th>Участниците влизат на</th><th>Безплатен план</th><th>Силна страна</th></tr></thead>
+      <tbody>
+        <tr><td><b>Mentimeter</b></td><td>menti.com + код</td><td>Нови акаунти (след 4.11.2026) – без лимит на участниците, но с ограничен достъп до резултатите по-късно</td><td>Най-много видове слайдове, красиви диаграми</td></tr>
+        <tr><td><b>Slido</b></td><td>slido.com + код</td><td>До 100 участници, 3 анкети и 1 тест на събитие</td><td>Работи вътре в Google Slides и PowerPoint; силно Q&A</td></tr>
+        <tr><td><b>AhaSlides</b></td><td>ahaslides.com + код</td><td>До 50 участници едновременно, ограничен брой интерактивни слайдове</td><td>Внася готов PowerPoint или PDF; игри като колело на късмета</td></tr>
+        <tr><td><b>Kahoot!</b></td><td>kahoot.it + PIN</td><td>Основен безплатен план с ограничения</td><td>Тестове-състезания с музика, таймер и класиране</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="band alt" id="izgled">
+  <div class="wrap">
+    <h2>Как изглежда всеки инструмент</h2>
+    <p class="muted">Схеми на основните екрани. Бутоните и менютата са на английски, както ще ги видиш в инструментите. Действителният вид може леко да се различава.</p>
+    <div class="grid2" style="margin-top:22px">
+      <figure style="margin:0">
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>mentimeter.com – редактор</span></div>
+          <div class="editor">
+            <div class="slides"><div>1 · Heading</div><div class="on">2 · Multiple choice</div><div>3 · Word cloud</div><div>4 · Quiz</div></div>
+            <div class="canvas"><b style="font-family:Nunito,sans-serif">Кой браузър ползваш?</b>
+              <div class="vbars" style="height:150px;padding:10px 0 0"><div class="vbar"><b>14</b><i style="height:90%;background:var(--blue)"></i><span>Chrome</span></div><div class="vbar"><b>5</b><i style="height:34%;background:var(--coral)"></i><span>Edge</span></div><div class="vbar"><b>4</b><i style="height:28%;background:var(--sun)"></i><span>Safari</span></div><div class="vbar"><b>2</b><i style="height:14%;background:var(--sky)"></i><span>Firefox</span></div></div></div>
+            <div class="panel"><b>Slide type: Multiple choice</b>
+              <label>Question</label><div class="f">Кой браузър ползваш?</div>
+              <label>Options</label><div class="f">Chrome</div><div class="f">Edge</div><div class="f">+ Add option</div>
+              <div class="tog">Show results<s></s></div><div class="tog">Multiple answers<s class="on"></s></div></div>
+          </div></div>
+        <figcaption class="cap"><b>Mentimeter.</b> Отляво – слайдовете, в средата – визуализацията, отдясно – настройките на текущия слайд.</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Google Slides – добавка Slido</span></div>
+          <div class="gmenu"><span>File</span><span>Edit</span><span>View</span><span>Insert</span><span>Slide</span><span>Tools</span><b>Extensions</b><span>Help</span></div>
+          <div class="gbody">
+            <div class="gdrop"><div>Add-ons</div><div>Apps Script</div><div class="on">Slido ▸ Open</div></div>
+            <div style="padding:16px"><div style="background:var(--card);border:1px solid var(--line);border-radius:8px;height:180px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;padding:10px"><b style="font-family:Nunito,sans-serif">Анкета: Slido</b><div class="hrow" style="width:80%"><span>Да</span><i style="width:60%;background:var(--blue)"></i></div><div class="hrow" style="width:80%"><span>Не</span><i style="width:25%;background:var(--coral)"></i></div></div></div>
+            <div class="gside"><b>Slido</b><p class="note" style="margin:4px 0">Create interaction</p><div>Multiple choice</div><div>Word cloud</div><div>Rating</div><div>Quiz</div><div>Q&A</div></div>
+          </div></div>
+        <figcaption class="cap"><b>Slido в Google Slides.</b> Добавката се отваря от менюто Extensions, а анкетите се създават в панела отдясно и стават отделни слайдове.</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Режим Present – екранът на проектора</span></div>
+          <div class="join"><span>Join at <b style="letter-spacing:0">menti.com</b> | use code</span><b>1234 5678</b><div class="qr" data-qr="3"></div></div>
+          <div style="padding:14px 18px 4px;font-family:Nunito,sans-serif;font-weight:800">С една дума: какво е облакът?</div>
+          <div class="cloud" style="height:170px;padding:0 14px"><span style="font-size:16px;color:var(--sky)">интернет</span><span style="font-size:36px;color:var(--blue)">съхранение</span><span style="font-size:14px;color:var(--coral)">Google Drive</span><span style="font-size:24px;color:var(--coral)">сървъри</span><span style="font-size:18px;color:var(--deep)">достъп</span><span style="font-size:14px;color:var(--sun)">файлове</span><span style="font-size:20px;color:var(--blue)">онлайн</span></div>
+          <div style="display:flex;justify-content:space-between;padding:6px 14px 10px;font-size:12.5px;color:var(--muted)"><span>◀ ▶ стрелки за слайдовете</span><span>22 отговора</span></div></div>
+        <figcaption class="cap"><b>Екранът по време на презентиране.</b> Горе винаги стоят адресът, кодът и QR кодът, а долу броят на отговорилите.</figcaption>
+      </figure>
+      <figure style="margin:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start">
+        <div class="phone"><div class="scr"><div class="url">menti.com</div><b style="font-size:15px">Please enter the code</b><div class="code">1234 5678</div><div class="send">Submit</div><p style="font-size:11px;color:#777;margin-top:12px">Кодът е на екрана на презентатора</p></div></div>
+        <div class="phone"><div class="scr"><div class="url">menti.com</div><b style="font-size:14px">Кой браузър ползваш?</b><div class="opt on"><i></i>Chrome</div><div class="opt"><i></i>Edge</div><div class="opt"><i></i>Safari</div><div class="opt"><i></i>Firefox</div><div class="send">Submit</div></div></div>
+        <figcaption class="cap" style="grid-column:1/-1"><b>Телефонът на участника.</b> Първо въвежда кода, после вижда въпроса на текущия слайд и гласува.</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Тест-състезание (Kahoot! / Quiz в Mentimeter)</span></div>
+          <div style="padding:14px 16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><b style="font-family:Nunito,sans-serif;font-size:17px">Колко бита има един байт?</b><span style="width:44px;height:44px;border-radius:50%;background:var(--deep);color:#fff;display:grid;place-items:center;font-weight:900;flex:none">14</span></div>
+            <div class="answers"><div style="background:#e5484d;padding:16px 10px"><u>A</u>4</div><div style="background:#2347d6;padding:16px 10px"><u>B</u>8</div><div style="background:#d99a00;padding:16px 10px"><u>C</u>16</div><div style="background:#1f9d6a;padding:16px 10px"><u>D</u>1024</div></div></div></div>
+        <figcaption class="cap"><b>Тест с таймер.</b> Отговорите са цветни, за да се разпознават бързо и на телефона. След въпроса се показва класиране.</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Q&A – въпроси от публиката</span></div>
+          <div class="qa" style="padding:10px 16px"><div><b>▲ 21</b>Ще бъде ли това в теста?</div><div><b>▲ 15</b>Може ли да използваме Canva вместо PowerPoint?</div><div><b>▲ 8</b>Колко слайда минимум?</div><div><b>▲ 3</b>Може ли да сме в отбор от трима?</div></div>
+          <div style="padding:0 16px 12px" class="row"><span class="pill">Popular</span><span class="pill" style="opacity:.6">Recent</span><span class="pill" style="opacity:.6">Answered</span></div></div>
+        <figcaption class="cap"><b>Q&A.</b> Въпросите се подреждат по брой гласове. Модераторът може да скрие неподходящ въпрос или да го маркира като отговорен.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="vazmozhnosti">
+  <div class="wrap">
+    <h2>Още възможности</h2>
+    <p class="muted">Настройки и функции, които правят анкетата по-добра. Наличността зависи от инструмента и плана.</p>
+    <div class="feat" style="margin-top:20px">
+      <div class="card"><h3>Скриване на резултатите</h3><p>Резултатите се показват едва когато всички гласуват. Така гласът на едни не влияе на другите.</p></div>
+      <div class="card"><h3>QR код и кратък код</h3><p>Зрителите сканират с камерата на телефона и влизат директно – без да пишат адрес.</p></div>
+      <div class="card"><h3>Темпо на аудиторията</h3><p>Вместо презентаторът да сменя слайдовете, всеки участник минава през въпросите със свое темпо – удобно за домашна анкета.</p></div>
+      <div class="card"><h3>Таймер и точки</h3><p>При тестовете има обратно броене. По-бързият верен отговор носи повече точки, а след всеки въпрос се показва класиране.</p></div>
+      <div class="card"><h3>Филтър за неприлични думи</h3><p>При облак от думи и отворени въпроси неподходящите думи се скриват автоматично.</p></div>
+      <div class="card"><h3>Модериране на Q&A</h3><p>Въпросите първо се одобряват от презентатора и чак тогава се виждат от всички.</p></div>
+      <div class="card"><h3>Изображения в отговорите</h3><p>Към вариантите може да се добави картинка – например „Кое от тези е дънна платка?“.</p></div>
+      <div class="card"><h3>Реакции</h3><p>Сърце, палец нагоре, въпрос – публиката показва настроението си, без да прекъсва.</p></div>
+      <div class="card"><h3>Внасяне на готова презентация</h3><p>Някои инструменти (напр. AhaSlides) внасят PowerPoint или PDF и между слайдовете се добавят въпроси.</p></div>
+      <div class="card"><h3>Генериране с ИИ</h3><p>Някои инструменти предлагат въпроси по темата на презентацията. Провери ги – ИИ греши.</p></div>
+      <div class="card"><h3>Шаблони и теми</h3><p>Готови цветови теми и шаблони за загрявки, ретроспективи и тестове.</p></div>
+      <div class="card"><h3>Експорт на резултатите</h3><p>В платените планове – в Excel или PDF. В безплатните най-сигурният начин е екранна снимка.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="menti">
+  <div class="wrap">
+    <h2>Mentimeter стъпка по стъпка</h2>
+    <p class="muted">Основният инструмент за задачата. Надписите на бутоните са на английски и може леко да се различават в нова версия.</p>
+    <div class="steps" style="margin-top:24px">
+      <div class="step"><div class="txt"><h3>Регистрация</h3><ol><li>Отвори <a href="https://www.mentimeter.com">mentimeter.com</a> → <b>Sign up</b>.</li><li>Влез с Google акаунт – най-бързо.</li><li>Избери <b>Education</b> и безплатния план <b>Free</b>. Не въвеждай данни за карта.</li></ol></div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>mentimeter.com/signup</span></div><div style="padding:22px;display:grid;gap:10px;max-width:320px;margin:0 auto"><b style="font-family:Nunito,sans-serif;font-size:20px;text-align:center">Sign up for free</b><div class="f" style="border:2px solid var(--line);border-radius:10px;padding:10px;text-align:center;font-weight:700">Continue with Google</div><div class="note" style="text-align:center">или</div><div style="border:2px solid var(--line);border-radius:10px;padding:10px;color:var(--muted)">Email</div><div style="background:var(--blue);color:#fff;border-radius:10px;padding:10px;text-align:center;font-weight:800">Sign up</div></div></div></div>
+      <div class="step"><div class="txt"><h3>Нова презентация</h3><ol><li>Натисни <b>New Menti</b> (или <b>+ New presentation</b>).</li><li>Дай име: „Тема – Име Фамилия, 12а“.</li><li>Първият слайд направи заглавен: <b>Content → Heading</b>.</li><li>Добави 1–2 информационни слайда: <b>Text</b>, <b>Bullets</b> или <b>Image</b>.</li></ol></div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Моите презентации</span></div><div style="padding:18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px"><div style="background:var(--blue);color:#fff;border-radius:10px;padding:16px 8px;text-align:center;font-weight:800">+ New Menti</div><div style="border:1px solid var(--line);border-radius:10px;padding:16px 8px;text-align:center;font-size:13px;color:var(--muted)">Start with AI</div><div style="border:1px solid var(--line);border-radius:10px;padding:16px 8px;text-align:center;font-size:13px;color:var(--muted)">Templates</div><div style="grid-column:1/-1;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:13px">Пароли и сигурност – Иван Петров, 12а<span class="note" style="float:right">редактирана днес</span></div></div></div></div>
+      <div class="step"><div class="txt"><h3>Интерактивен слайд</h3><ol><li><b>+ New slide</b> → раздел <b>Interactive questions</b>.</li><li>Избери вид – Multiple choice, Word cloud, Scales, Ranking, Open ended…</li><li>За тест с верен отговор: раздел <b>Quiz competition</b> → <b>Select answer</b>.</li><li>Повтори, докато имаш поне 3 интерактивни слайда от различен вид.</li></ol></div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>+ New slide</span></div><div class="picker" id="picker"></div></div></div>
+      <div class="step"><div class="txt"><h3>Въпрос и настройки</h3><ol><li>В десния панел напиши въпроса и отговорите (3–5).</li><li>Избери вид диаграма – стълбове, кръгова, поничка.</li><li>Реши дали резултатите да се показват веднага, или след гласуването.</li><li>При облак от думи разреши 2–3 думи на участник.</li><li>От <b>Themes</b> избери тема с добър контраст.</li></ol></div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Настройки на слайда</span></div><div class="panel" style="padding:16px;font-size:14px"><b>Multiple choice</b><label>Question</label><div class="f">Колко знака трябва да има сигурната парола?</div><label>Options</label><div class="f">6</div><div class="f">8</div><div class="f">12 или повече ✓</div><label>Visualization</label><div class="row"><span class="pill">Bars</span><span class="pill" style="opacity:.6">Donut</span><span class="pill" style="opacity:.6">Pie</span></div><div class="tog">Show results instantly<s></s></div><div class="tog">Profanity filter<s class="on"></s></div></div></div></div>
+      <div class="step"><div class="txt"><h3>Проба и презентиране</h3><ol><li>Натисни <b>Present</b>. Горе се показват menti.com, кодът и QR кодът.</li><li>Тествай от собствения си телефон – гласувай и провери дали резултатът се появява.</li><li>Пред класа: прочети въпроса, дай 30–60 секунди, покажи резултата и го коментирай с едно изречение.</li><li>Слайдовете се сменят със стрелките <kbd>←</kbd> <kbd>→</kbd>.</li></ol></div>
+        <div class="phone"><div class="scr"><div class="url">menti.com</div><b style="font-size:14px">Колко знака трябва да има сигурната парола?</b><div class="opt"><i></i>6</div><div class="opt"><i></i>8</div><div class="opt on"><i></i>12 или повече</div><div class="send">Submit</div><p style="font-size:11px;color:#777;margin-top:10px;text-align:center">Thank you! Your vote is in.</p></div></div></div>
+      <div class="step"><div class="txt"><h3>Споделяне и предаване</h3><ol><li>Натисни <b>Share</b> и копирай линка към презентацията.</li><li>Направи екранна снимка на резултатите веднага – безплатният план ограничава достъпа до тях по-късно.</li><li>Изпрати линка и снимката на учителя.</li></ol></div>
+        <div class="mock"><div class="top"><i></i><i></i><i></i><span>Share</span></div><div style="padding:18px;display:grid;gap:10px"><b>Share presentation</b><div style="display:flex;gap:8px"><div style="flex:1;border:1px solid var(--line);border-radius:8px;padding:8px;font-size:13px;color:var(--muted);overflow:hidden;white-space:nowrap">https://www.menti.com/al...</div><div style="background:var(--blue);color:#fff;border-radius:8px;padding:8px 12px;font-weight:800;font-size:13px">Copy link</div></div><div class="tog">Participation link<s class="on"></s></div><div class="tog">View-only link<s></s></div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="slido">
+  <div class="wrap grid2">
+    <div>
+      <h2>Slido в Google Slides</h2>
+      <ol>
+        <li>Създай презентацията в Google Slides.</li>
+        <li><b>Extensions</b> → <b>Add-ons</b> → <b>Get add-ons</b> → търси „Slido“ → <b>Install</b>.</li>
+        <li><b>Extensions</b> → <b>Slido</b> → влез с Google акаунта. Отдясно се отваря панел.</li>
+        <li>Избери вид (Multiple choice, Word cloud, Rating, Quiz), напиши въпроса и го добави – анкетата става отделен слайд.</li>
+        <li>При презентиране следвай указанията в панела на Slido, за да тръгнат анкетите на живо.</li>
+      </ol>
+      <div class="tip">Безплатният план на Slido позволява 3 анкети и 1 тест на събитие – точно колкото изисква задачата.</div>
+    </div>
+    <div>
+      <h2>Slido в PowerPoint</h2>
+      <ol>
+        <li>Инсталирай <a href="https://slido.com/powerpoint">Slido for PowerPoint</a> на компютъра, от който ще презентираш.</li>
+        <li>В менюто на PowerPoint се появява Slido. Избери вид анкета – тя се добавя като нов слайд.</li>
+        <li>Пусни презентацията с <kbd>F5</kbd>. Анкетата тръгва сама, а зрителите влизат с код или QR код.</li>
+      </ol>
+      <div class="tip">Ако нямаш права да инсталираш, създай анкетите на slido.com и превключвай между презентацията и браузъра с <kbd>Alt</kbd>+<kbd>Tab</kbd>.</div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="saveti">
+  <div class="wrap">
+    <h2>Съвети за добри въпроси</h2>
+    <div class="grid" style="margin-top:18px">
+      <div class="card"><h3>Кратко и ясно</h3><p>Въпросът се чете за 3 секунди. Ако трябва да го обясняваш, пренапиши го.</p></div>
+      <div class="card"><h3>3–5 отговора</h3><p>Два са малко за интересна диаграма, повече от пет объркват.</p></div>
+      <div class="card"><h3>Смесвай видовете</h3><p>Облак за загрявка, избор за мнение, тест за проверка – разнообразието държи вниманието.</p></div>
+      <div class="card"><h3>Коментирай резултата</h3><p>Анкетата има смисъл, когато кажеш какво показват гласовете: „Повечето смятат…, а всъщност…“.</p></div>
+      <div class="card"><h3>Без лични данни</h3><p>Не питай за имена, адреси, телефони или неща, които могат да засрамят някого.</p></div>
+      <div class="card"><h3>Тествай предварително</h3><p>Гласувай от телефон, преди да излезеш пред класа.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="zadacha">
+  <div class="wrap grid2">
+    <div>
+      <h2>Задача: твоята интерактивна презентация</h2>
+      <p><b>Създай интерактивна презентация по избрана тема, с която да проучиш мнението или знанията на съучениците си в реално време, и я проведи пред класа.</b></p>
+      <h3 style="margin-top:20px">Изисквания</h3>
+      <ol>
+        <li>Минимум 5 слайда: заглавен, 1–2 информационни, поне 3 интерактивни, заключителен.</li>
+        <li>Интерактивните слайдове са от поне 3 <b>различни вида</b>, единият е тест с верен отговор.</li>
+        <li>Поне един въпрос проверява информацията от предходните слайдове.</li>
+        <li>Въпросите са кратки, ясни и без правописни грешки; при избор – 3 до 5 отговора.</li>
+        <li>Анкетата е анонимна и не иска лични данни.</li>
+        <li>Презентацията е проверена с телефон преди представянето.</li>
+      </ol>
+      <h3 style="margin-top:20px">Какво предаваш</h3>
+      <ul><li>Линк към презентацията</li><li>Екранна снимка на резултатите от проведената анкета</li><li>2–3 изречения извод: какво показаха резултатите</li></ul>
+      <p class="muted">Инструмент: Mentimeter (препоръчан), Slido или AhaSlides. Работа: индивидуално или по двойки.</p>
+    </div>
+    <div class="card">
+      <h3>Избери тема</h3>
+      <table class="stack">
+        <thead><tr><th>Тема</th><th>Примерен въпрос</th></tr></thead>
+        <tbody>
+          <tr><td>Софтуерно пиратство</td><td>Скала: „Доколко е приемливо да се ползва нелицензиран софтуер?“</td></tr>
+          <tr><td>Сигурност на данните</td><td>Избор: „Къде пазиш резервни копия на снимките си?“</td></tr>
+          <tr><td>Компютърна конфигурация</td><td>Класиране: „Подреди: процесор, RAM, видеокарта, SSD, цена“</td></tr>
+          <tr><td>ИИ в училище</td><td>Облак: „С какво ти помага ИИ?“</td></tr>
+          <tr><td>Дигитална хигиена</td><td>Избор: „Колко часа на ден си на телефона?“</td></tr>
+          <tr><td>Управление на проекти</td><td>Тест: „Кой модел не позволява връщане към предишен етап?“</td></tr>
+          <tr><td>Професии в ИТ</td><td>Отворен: „Какво те притеснява за бъдещето?“</td></tr>
+          <tr><td>Фалшиви новини</td><td>Тест: „Кое заглавие е фалшиво?“</td></tr>
+          <tr><td>Бал на класа</td><td>100 точки: „Разпредели бюджета: зала, музика, фотограф, украса“</td></tr>
+          <tr><td>Своя тема</td><td>Съгласувай с учителя</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="primeri">
+  <div class="wrap">
+    <h2>Пример 1: „Пароли и сигурност“ в Mentimeter</h2>
+    <p class="muted">Готова презентация от 7 слайда, която отговаря на всички изисквания. Плъзни настрани или използвай стрелките. Резултатите са примерни.</p>
+    <div class="carnav"><button class="btn ghost" id="prev" aria-label="Предишен слайд">◀</button><button class="btn ghost" id="next" aria-label="Следващ слайд">▶</button></div>
+    <div class="car" id="car" tabindex="0">
+      <div class="slide"><div class="mock"><div class="join"><span class="snum" style="color:var(--sun)">Слайд 1 · Heading</span></div><div style="height:200px;display:grid;place-content:center;text-align:center;padding:14px"><b style="font-family:Nunito,sans-serif;font-size:24px">Пароли и сигурност</b><span class="muted">Иван Петров, 12а</span></div></div></div>
+      <div class="slide"><div class="mock"><div class="join"><span class="snum" style="color:var(--sun)">Слайд 2 · Word cloud</span><b>1234 5678</b></div><div style="padding:10px 14px 0;font-weight:800">С какво свързваш думата „парола“?</div><div class="cloud" style="height:160px;padding:0 10px"><span style="font-size:30px;color:var(--blue)">сигурност</span><span style="font-size:15px;color:var(--coral)">забравям</span><span style="font-size:20px;color:var(--coral)">123456</span><span style="font-size:14px;color:var(--sky)">досада</span><span style="font-size:18px;color:var(--deep)">защита</span><span style="font-size:13px;color:var(--sun)">хакери</span></div></div></div>
+      <div class="slide"><div class="mock"><div class="join"><span class="snum" style="color:var(--sun)">Слайд 3 · Multiple choice</span><b>1234 5678</b></div><div style="padding:10px 14px 0;font-weight:800">Ползваш ли една парола за няколко сайта?</div><div class="vbars" style="height:150px"><div class="vbar"><b>15</b><i style="height:90%;background:var(--coral)"></i><span>Да</span></div><div class="vbar"><b>7</b><i style="height:42%;background:var(--sun)"></i><span>Понякога</span></div><div class="vbar"><b>3</b><i style="height:18%;background:var(--blue)"></i><span>Не</span></div></div></div></div>
+      <div class="slide"><div class="mock"><div class="join"><span class="snum" style="color:var(--sun)">Слайд 4 · Text</span></div><div style="height:200px;padding:16px;font-size:14px"><b style="font-family:Nunito,sans-serif;font-size:17px">Сигурната парола</b><ul style="margin:8px 0 0;padding-left:18px"><li>поне 12 знака</li><li>малки и главни букви, цифри, символи</li><li>различна за всеки сайт</li><li>двуфакторна защита</li><li>мениджър на пароли</li></ul></div></div></div>
+      <div class="slide"><div class="mock"><div class="join"><span class="snum" style="color:var(--sun)">Слайд 5 · Quiz</span><span>⏱ 20 с</span></div><div style="padding:10px 14px;font-weight:800">Коя парола е най-сигурна?</div><div class="answers" style="padding:0 14px 14px"><div style="background:#e5484d"><u>A</u>ivan2008</div><div style="background:#2347d6"><u>B</u>Qwerty123!</div><div style="background:#1f9d6a;outline:3px solid var(--sun)"><u>C</u>Kot#Luna_92!Ski</div><div style="background:#d99a00"><u>D</u>password</div></div><div class="note" style="padding:0 14px 12px">Верен: C · 19 от 25 отговориха вярно</div></div></div>
+      <div class="slide"><div class="mock"><div class="join"><span class="snum" style="color:var(--sun)">Слайд 6 · Scales</span><b>1234 5678</b></div><div style="padding:10px 16px 16px;height:200px"><b>Колко сигурни са твоите акаунти? (1–5)</b><div class="scale" style="margin-top:14px">Имейл<div class="track"><b style="left:66%"></b></div></div><div class="scale">Социални мрежи<div class="track"><b style="left:48%"></b></div></div><div class="scale">Игри<div class="track"><b style="left:30%"></b></div></div></div></div></div>
+      <div class="slide"><div class="mock"><div class="join"><span class="snum" style="color:var(--sun)">Слайд 7 · Heading</span></div><div style="height:200px;display:grid;place-content:center;text-align:center;padding:14px"><b style="font-family:Nunito,sans-serif;font-size:22px">Смени една парола още днес!</b><span class="muted">Благодаря за участието</span></div></div></div>
+    </div>
+    <div class="card" style="margin-top:10px"><h3>Изводът, който ученикът предава</h3><p>„60% от класа ползват една парола за няколко сайта, а най-слабо защитени според самите тях са акаунтите в игри. След урока 19 от 25 разпознаха сигурната парола в теста.“</p></div>
+
+    <h2 style="margin-top:44px">Пример 2: „Избор на лаптоп“ в Slido + Google Slides</h2>
+    <div class="grid" style="margin-top:14px">
+      <div class="card"><span class="pill">Слайд 1–2</span><p>Заглавие и слайд „Основни компоненти: процесор, RAM, SSD, видеокарта, батерия“ – обикновени Google слайдове.</p></div>
+      <div class="card"><span class="pill">Анкета 1 · Multiple choice</span><p>„За какво ще ползваш лаптопа най-много?“ – учене / игри / видео монтаж / програмиране.</p></div>
+      <div class="card"><span class="pill">Анкета 2 · Ranking</span><p>„Подреди по важност: цена, батерия, тегло, мощност.“</p></div>
+      <div class="card"><span class="pill">Тест · Quiz</span><p>„Кое ускорява зареждането на програмите най-много?“ – SSD ✓ / по-голям екран / повече USB портове.</p></div>
+      <div class="card"><span class="pill">Слайд 6</span><p>Заключение: „Препоръчителна конфигурация за ученик до 1500 лв.“, съобразена с резултатите от анкетите.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="kriterii">
+  <div class="wrap grid2">
+    <div>
+      <h2>Критерии за оценяване</h2>
+      <table class="crit">
+        <thead><tr><th>Критерий</th><th>Точки</th></tr></thead>
+        <tbody>
+          <tr><td><b>Структура и съдържание</b> – заглавен, информационен и заключителен слайд; точна информация</td><td>4</td></tr>
+          <tr><td><b>Интерактивни слайдове</b> – 3 различни вида (по 1 т.), тест с верен отговор (1 т.), верни настройки (1 т.)</td><td>5</td></tr>
+          <tr><td><b>Качество на въпросите</b> – ясни, по темата, без грешки, един проверява информацията</td><td>4</td></tr>
+          <tr><td><b>Оформление</b> – четим текст, контраст, единен стил</td><td>3</td></tr>
+          <tr><td><b>Провеждане и тълкуване</b> – уверено водене, коментар, писмен извод</td><td>4</td></tr>
+          <tr><td><b>Общо</b></td><td><b>20</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3 style="margin-top:8px">Оценка</h3>
+      <table class="crit">
+        <thead><tr><th>Точки</th><th>Оценка</th></tr></thead>
+        <tbody><tr><td>18–20</td><td>Отличен 6</td></tr><tr><td>15–17</td><td>Много добър 5</td></tr><tr><td>12–14</td><td>Добър 4</td></tr><tr><td>9–11</td><td>Среден 3</td></tr><tr><td>0–8</td><td>Слаб 2</td></tr></tbody>
+      </table>
+      <div class="card" style="margin-top:20px"><h3>Провери се, преди да предадеш</h3>
+        <label class="chk"><input type="checkbox"> Поне 5 слайда</label>
+        <label class="chk"><input type="checkbox"> 3 интерактивни слайда от различен вид</label>
+        <label class="chk"><input type="checkbox"> Има тест с верен отговор</label>
+        <label class="chk"><input type="checkbox"> Тествах от телефон</label>
+        <label class="chk"><input type="checkbox"> Имам линк, снимка на резултатите и извод</label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">10 въпроса. Избери отговор на всеки и натисни „Провери“.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check">Провери</button><button class="btn ghost" id="again">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<footer>IT Зона · Интерактивни презентации · 11 и 12 клас. Изгледите на инструментите са схематични.</footer>
+
+<script>
+{
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+// меню
+const dets=$$('nav details');
+dets.forEach(d=>d.addEventListener('toggle',()=>{if(d.open)dets.forEach(o=>{if(o!==d)o.open=false})}));
+document.addEventListener('click',e=>{if(!e.target.closest('nav details'))dets.forEach(o=>o.open=false)});
+$$('nav .menu a').forEach(a=>a.addEventListener('click',()=>a.closest('details').open=false));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')dets.forEach(o=>o.open=false)});
+
+// примерни QR кодове
+function qr(seed){let s=seed,r=()=>(s=(s*9301+49297)%233280)/233280,n=21,o='';
+  const fin=(x,y)=>`<rect x="${x}" y="${y}" width="7" height="7" fill="#13246e"/><rect x="${x+1}" y="${y+1}" width="5" height="5" fill="#fff"/><rect x="${x+2}" y="${y+2}" width="3" height="3" fill="#13246e"/>`;
+  for(let y=0;y<n;y++)for(let x=0;x<n;x++){const f=(x<8&&y<8)||(x>12&&y<8)||(x<8&&y>12);if(!f&&r()>.52)o+=`<rect x="${x}" y="${y}" width="1" height="1" fill="#13246e"/>`}
+  return `<svg viewBox="0 0 21 21" shape-rendering="crispEdges">${o}${fin(0,0)}${fin(14,0)}${fin(0,14)}</svg>`}
+$$('.qr').forEach(q=>q.innerHTML=qr(+q.dataset.qr||5));
+
+// анкета на живо
+const opts=[{t:'PNG',c:'var(--blue)'},{t:'JPEG',c:'var(--coral)'},{t:'GIF',c:'var(--sun)'},{t:'BMP',c:'var(--sky)'}].map(o=>({...o,v:0}));
+const bars=$('#pollBars'),cnt=$('#pollCount');
+function drawPoll(){const tot=opts.reduce((a,o)=>a+o.v,0),max=Math.max(1,...opts.map(o=>o.v));
+  bars.innerHTML=opts.map(o=>`<div class="vbar"><b>${o.v}</b><i style="height:${o.v/max*82}%;background:${o.c}"></i><span>${o.t}</span></div>`).join('');
+  cnt.textContent=tot+(tot===1?' глас':' гласа')}
+$('#pollBtns').innerHTML=opts.map((o,i)=>`<button class="btn" data-i="${i}">${o.t}</button>`).join('');
+$('#pollBtns').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;opts[b.dataset.i].v++;drawPoll()});
+let timer=null;
+$('#sim').addEventListener('click',()=>{const w=[.55,.15,.22,.08];let left=25;$('#sim').disabled=true;
+  timer=setInterval(()=>{let r=Math.random(),i=0;while(r>w[i]&&i<3){r-=w[i];i++}opts[i].v++;drawPoll();if(--left<=0){clearInterval(timer);$('#sim').disabled=false}},140)});
+$('#reset').addEventListener('click',()=>{clearInterval(timer);$('#sim').disabled=false;opts.forEach(o=>o.v=0);drawPoll()});
+$('#hideRes').addEventListener('change',e=>bars.classList.toggle('hidden-res',e.target.checked));
+drawPoll();
+
+// облак от думи
+const words={};['кратка','кратка','кратка','ясна','интересна','интересна','картинки','забавна','интерактивна','интерактивна','интерактивна','интерактивна','подредена'].forEach(w=>words[w]=(words[w]||0)+1);
+const cols=['var(--blue)','var(--coral)','var(--deep)','var(--sky)','#d99a00'];
+const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function drawCloud(){const e=Object.entries(words),max=Math.max(...e.map(x=>x[1]));
+  const order=e.sort((a,b)=>b[1]-a[1]).map((x,i)=>[x,i]).sort((a,b)=>(a[1]%2?1:-1)-(b[1]%2?1:-1)||a[1]-b[1]);
+  $('#cloud').innerHTML=order.map(([[w,n],i])=>`<span style="font-size:${14+Math.round(n/max*26)}px;color:${cols[i%cols.length]}">${esc(w)}</span>`).join('')}
+$('#cloudForm').addEventListener('submit',e=>{e.preventDefault();const w=$('#word').value.trim().toLowerCase();if(!w)return;words[w]=(words[w]||0)+1;$('#word').value='';drawCloud()});
+drawCloud();
+
+// избор на вид слайд
+const types=[['Multiple choice','<rect x="4" y="14" width="7" height="12" fill="#2347d6"/><rect x="15" y="6" width="7" height="20" fill="#ff6a4d"/><rect x="26" y="18" width="7" height="8" fill="#ffc23d"/>'],
+ ['Word cloud','<text x="20" y="18" text-anchor="middle" font-size="13" font-weight="900" fill="#2347d6">Аа</text><text x="6" y="26" font-size="7" fill="#ff6a4d">дума</text><text x="26" y="26" font-size="7" fill="#45b0ff">идея</text>'],
+ ['Open ended','<rect x="4" y="4" width="14" height="10" fill="#fff3c4"/><rect x="22" y="4" width="14" height="10" fill="#ffe0d8"/><rect x="13" y="16" width="14" height="10" fill="#dbe9ff"/>'],
+ ['Scales','<line x1="4" y1="9" x2="36" y2="9" stroke="#c8cfe8" stroke-width="3"/><circle cx="26" cy="9" r="4" fill="#ff6a4d"/><line x1="4" y1="20" x2="36" y2="20" stroke="#c8cfe8" stroke-width="3"/><circle cx="14" cy="20" r="4" fill="#ff6a4d"/>'],
+ ['Ranking','<rect x="4" y="4" width="30" height="5" fill="#2347d6"/><rect x="4" y="12" width="22" height="5" fill="#2347d6" opacity=".7"/><rect x="4" y="20" width="14" height="5" fill="#2347d6" opacity=".45"/>'],
+ ['Q&A','<rect x="4" y="4" width="32" height="8" rx="2" fill="#dfe3f3"/><rect x="4" y="16" width="32" height="8" rx="2" fill="#dfe3f3"/><path d="M8 10l3-4 3 4z" fill="#2347d6"/><path d="M8 22l3-4 3 4z" fill="#2347d6"/>'],
+ ['Pin on image','<rect x="4" y="4" width="32" height="22" rx="3" fill="#dbe9ff"/><circle cx="14" cy="12" r="3" fill="#ff6a4d"/><circle cx="26" cy="18" r="3" fill="#ff6a4d"/>'],
+ ['100 points','<rect x="4" y="8" width="16" height="12" fill="#ff6a4d"/><rect x="20" y="8" width="10" height="12" fill="#ffc23d"/><rect x="30" y="8" width="6" height="12" fill="#45b0ff"/>'],
+ ['2×2 Grid','<line x1="20" y1="2" x2="20" y2="28" stroke="#9aa3c7"/><line x1="2" y1="15" x2="38" y2="15" stroke="#9aa3c7"/><circle cx="12" cy="8" r="3" fill="#2347d6"/><circle cx="29" cy="22" r="3" fill="#ff6a4d"/>'],
+ ['Select answer (Quiz)','<rect x="3" y="3" width="16" height="10" rx="2" fill="#e5484d"/><rect x="21" y="3" width="16" height="10" rx="2" fill="#2347d6"/><rect x="3" y="16" width="16" height="10" rx="2" fill="#d99a00"/><rect x="21" y="16" width="16" height="10" rx="2" fill="#1f9d6a"/>'],
+ ['Heading','<rect x="6" y="9" width="28" height="5" rx="2" fill="#1b2240"/><rect x="11" y="18" width="18" height="3" rx="1" fill="#9aa3c7"/>'],
+ ['Image','<rect x="4" y="4" width="32" height="22" rx="3" fill="#dfe3f3"/><path d="M6 24l10-10 7 7 4-4 9 7z" fill="#45b0ff"/><circle cx="28" cy="10" r="3" fill="#ffc23d"/>']];
+$('#picker').innerHTML=types.map((t,i)=>`<div class="${i===0?'on':''}"><svg viewBox="0 0 40 30">${t[1]}</svg>${t[0]}</div>`).join('');
+
+// карусел
+const car=$('#car');const step=d=>{const s=car.querySelector('.slide');car.scrollBy({left:d*(s.offsetWidth+16),behavior:'smooth'})};
+$('#prev').addEventListener('click',()=>step(-1));$('#next').addEventListener('click',()=>step(1));
+car.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();step(1)}if(e.key==='ArrowLeft'){e.preventDefault();step(-1)}});
+
+// тест
+const Q=[
+ ['Какво е анкета в реално време?',['Анкета, която се попълва на хартия и се обработва после','Въпрос, на който публиката отговаря от своите устройства, а резултатите се показват веднага','Видео, което се пуска по време на презентацията','Презентация, записана предварително'],1,'Отговорите идват от телефоните и диаграмата се обновява на живо.'],
+ ['Кой вид въпрос показва най-често писаните думи с най-голям шрифт?',['Ranking','Scales','Word cloud','Quiz'],2,'Облакът от думи (Word cloud) уголемява думите според това колко често са написани.'],
+ ['Как участниците влизат в анкета в Mentimeter?',['Изтеглят приложение и се регистрират','На menti.com с код или чрез QR код','Чрез имейл покана','Само от компютъра на учителя'],1,'Не е нужна регистрация – само адрес и код или QR код.'],
+ ['Защо понякога се скриват резултатите, докато трае гласуването?',['За да се зарежда по-бързо','За да не влияе гласът на едни върху другите','Защото безплатният план не ги показва','За да не се вижда кодът'],1,'Ако хората виждат кое води, често гласуват за него.'],
+ ['Кой вид е подходящ, за да се подредят критерии по важност?',['Ranking','Open ended','Word cloud','Pin on image'],0,'Ranking дава обща класация по важност.'],
+ ['От кое меню на Google Slides се добавя Slido?',['Insert','Format','Extensions','Slide'],2,'Extensions → Add-ons → Get add-ons → Slido.'],
+ ['Каква е особеността на Q&A?',['Има верен отговор и точки','Публиката задава въпроси и гласува за чуждите','Отговорите се поставят върху снимка','Разпределят се 100 точки'],1,'Най-харесваните въпроси излизат най-отгоре.'],
+ ['Какво трябва да се избягва в анкета за класа?',['Кратки въпроси','Тест с верен отговор','Въпроси, които искат лични данни','Облак от думи'],2,'Анкетата трябва да е анонимна и безопасна за всички.'],
+ ['При кой вид по-бързият верен отговор носи повече точки?',['Quiz (тест-състезание)','Scales','2×2 Grid','Open ended'],0,'В тест-състезанието има таймер, точки и класиране.'],
+ ['Колко отговора е добре да има при въпрос с избор?',['1','2','3 до 5','10 или повече'],2,'Под три е скучно, над пет – объркващо.']];
+const form=$('#quiz');
+function renderQuiz(){form.classList.remove('done');$('#score').textContent='';
+  form.innerHTML=Q.map((q,i)=>`<div class="qz"><fieldset><legend>${i+1}. ${q[0]}</legend>${q[1].map((a,j)=>`<label id="l${i}_${j}"><input type="radio" name="q${i}" value="${j}">${a}</label>`).join('')}<p class="why">${q[3]}</p></fieldset></div>`).join('')}
+$('#check').addEventListener('click',()=>{let ok=0;Q.forEach((q,i)=>{const c=form.querySelector(`input[name=q${i}]:checked`);
+  q[1].forEach((_,j)=>$(`#l${i}_${j}`).classList.remove('ok','bad'));$(`#l${i}_${q[2]}`).classList.add('ok');
+  if(c){if(+c.value===q[2])ok++;else $(`#l${i}_${c.value}`).classList.add('bad')}});
+  form.classList.add('done');$('#score').textContent=`Резултат: ${ok} от ${Q.length}`});
+$('#again').addEventListener('click',renderQuiz);
+renderQuiz();
+}
+</script>
+<script>const CUR=0;</script>
+<script src="ip.js?v=20261126"></script>
+<script src="../totop.js?v=20261126" defer></script>
+</body>
+</html>
