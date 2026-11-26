@@ -108,8 +108,7 @@ header{background:linear-gradient(120deg,#0f1b2d,#1d3557)}
 .zno .zap{font-size:.8rem;color:#4a5b70;display:flex;justify-content:space-between}.zno b{display:block;margin-top:2px}
 @keyframes zin{from{transform:translateY(-40px);opacity:0}to{transform:none;opacity:1}}
 .zal button{font-size:1.15rem;padding:10px 22px}
-.zshake .w{animation:zsk .12s 5}@keyframes zsk{25%{transform:translate(-6px,3px)}75%{transform:translate(6px,-3px)}}
-@media(prefers-reduced-motion:reduce){.zpp,.zbub,.zblink,.zsir,.zal,.zno,.zshake .w{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.zpp,.zbub,.zblink,.zsir,.zal,.zno{animation:none!important}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media print{.tabs,header button,.go,.nop{display:none}}
 .mtg{background:#f4f8fc;border:2px solid var(--line);border-radius:10px;padding:10px 16px;margin:8px 0}.mtg .bx b{display:block}.mtg .bx{font-size:.92rem;background:#fff}.stp li{margin:6px 0}.mtd{margin:8px 0}.mtd summary{font-weight:700;cursor:pointer;padding:6px 0}
@@ -174,7 +173,8 @@ const S=[
  {k:'txt',p:3,q:'3. Преправи съобщение 5 като „аз-послание“ – без обвинение.',min:20,no:['мързелив','виновен'],ex:'Аз се притеснявам, че закъсняваме с тестването, и искам да разберем какво пречи и как да помогнем.'},
  {k:'txt',p:2,q:'4. Първото съобщение на ръководителя, което успокоява чата (спри, факт, цел).',min:20,ex:'Спираме за 5 минути. Фактът е, че остават 2 дни. Целта ни е сайтът да е готов в петък – да видим кой с какво може да помогне.'}]}];
 let cur=-2,ts=0,T=false,names=['','','',''],st=S.map(()=>({})),ck=S.map(()=>0),ip=S.map(()=>[]),pt=S.map(()=>0),left=480,tm=null;
-const g=(j,x)=>st[cur]['i'+j+'_'+x],s=(j,x,v)=>{st[cur]['i'+j+'_'+x]=v};
+const g=(j,x)=>st[cur]['i'+j+'_'+x],s=(j,x,v)=>{const k='i'+j+'_'+x;if(ck[cur]&&!(x=='sg'&&st[cur][k]===undefined))return;st[cur][k]=v};
+let rfl=['',''];
 const nm=(i,v)=>{names[i]=v;chips()},dice=()=>{names.sort(()=>Math.random()-.5);document.querySelectorAll('.card input[type=text]').forEach((e,i)=>e.value=names[i]);chips()};
 const tch=()=>{if(T){T=false}else if((prompt('Код за учител:')||'').trim().toLowerCase()=='учител')T=true;draw()};
 function chips(){const e=$('#ch');if(e)e.innerHTML=RL.map((r,k)=>`<span class="ch">${r}: <b>${names[(k+cur)%4]||'?'}</b></span>`).join('')}
@@ -217,10 +217,10 @@ function draw(){
  <h3>Роли</h3><p><b>Ръководител</b> води срещата и следи времето. <b>Анализатор</b> отделя фактите от мненията. <b>Говорител</b> обявява решението. <b>Секретар-скептик</b> записва и пита „Какво може да се обърка?“.</p>
  <h3>Етапи на екипа (Тъкман)</h3><p>Формиране → Бурна фаза → Нормиране → Изпълнение. Споровете в бурната фаза са нормални.</p>
  <button class="go" onclick="go(0)">Към първата ситуация</button></div>`;
- else if(cur>5){const rk=tot<18?'Новобранец 🐣':tot<36?'Екипен играч 🤝':tot<50?'Кризисен експерт 🧯':'Легенда на екипа 🏆';h=`<div class="card"><h2>🏁 Резултат</h2><table>${S.map((x,i)=>`<tr><td>${x.e} ${x.t}</td><td>${ck[i]?pt[i]+' / 10':'–'}</td></tr>`).join('')}</table><p class="big">Общо: ${tot} / 60 – ${rk}</p><p>Какво беше най-трудно? Кое правило бихте взели в реален проект?</p><button onclick="print()">🖨 Принтирай</button></div>`}
+ else if(cur>5){const rk=tot<18?'Новобранец 🐣':tot<36?'Екипен играч 🤝':tot<50?'Кризисен експерт 🧯':'Легенда на екипа 🏆';h=`<div class="card"><h2>🏁 Резултат</h2><table>${S.map((x,i)=>`<tr><td>${x.e} ${x.t}</td><td>${ck[i]?pt[i]+' / 10':'–'}</td></tr>`).join('')}</table><p class="big">Общо: ${tot} / 60 – ${rk}</p><h3>💬 Размисъл</h3><p><b>Какво беше най-трудно?</b></p><textarea rows="3" style="width:100%" placeholder="Напишете отговора си тук…" oninput="rfl[0]=this.value">${zesc(rfl[0])}</textarea><p><b>Кое правило бихте взели в реален проект?</b></p><textarea rows="3" style="width:100%" placeholder="Напишете отговора си тук…" oninput="rfl[1]=this.value">${zesc(rfl[1])}</textarea><p></p><button onclick="print()">🖨 Принтирай</button></div>`}
  else if(!zop[cur])h=`<div class="card">${zalH(cur)}</div>`;
- else{const x=S[cur];h=`<div class="card"><h2>${x.e} Ситуация ${'АБВГДЕ'[cur]} – ${x.t}</h2><div id="ch"></div>${zscene(cur)}<p>${x.s}</p><div class="d">${x.d}</div><p>⏱ <span class="tmr" id="tmr"></span> <button onclick="tgl()">Старт / Стоп</button></p>${x.it.map((q,j)=>item(j)).join('')}<p><button class="go" onclick="chk()">✅ Провери и вземи точки</button> <span class="big" id="res">${ck[cur]?'Точки: '+pt[cur]+' / 10 '+(pt[cur]>=9?'🏆':pt[cur]>=6?'⭐':'💪')+(S[cur].it.filter((q,j)=>q.k=='txt'&&g(j,'sg')===undefined).length?' · ✍ Дай си точки на отворените въпроси':''):''}</span></p>${T?`<div class="t">👩‍🏫 <b>Отговори:</b> ${x.a}</div>`:''}</div>`}
- $('#m').innerHTML=h;chips();tmu();$('#bdg').innerHTML=BADGE?'<span class="hb">🎖 Готов за Кризисния щаб</span>':'';thFx();if(cur==-1)simFx()}
+ else{const x=S[cur];h=`<div class="card"><h2>${x.e} Ситуация ${'АБВГДЕ'[cur]} – ${x.t}</h2><div id="ch"></div>${zscene(cur)}<p>${x.s}</p><div class="d">${x.d}</div><p>⏱ <span class="tmr" id="tmr"></span> <button onclick="tgl()">Старт / Стоп</button></p>${x.it.map((q,j)=>item(j)).join('')}<p>${ck[cur]?'<button class="go" disabled>🔒 Отговорите са заключени</button>':'<button class="go" onclick="if(confirm(\'След проверка отговорите не могат да се променят. Да проверим ли?\'))chk()">✅ Провери и вземи точки</button>'} <span class="big" id="res">${ck[cur]?'Точки: '+pt[cur]+' / 10 '+(pt[cur]>=9?'🏆':pt[cur]>=6?'⭐':'💪')+(S[cur].it.filter((q,j)=>q.k=='txt'&&g(j,'sg')===undefined).length?' · ✍ Дай си точки на отворените въпроси':''):''}</span></p>${T?`<div class="t">👩‍🏫 <b>Отговори:</b> ${x.a}</div>`:''}</div>`}
+ $('#m').innerHTML=h;if(cur>=0&&cur<6&&ck[cur]&&zop[cur])$('#m').querySelectorAll('.it input,.it select,.it textarea').forEach(e=>{if(!(e.name&&e.name.startsWith('sg')&&g(+e.name.slice(2),'sg')===undefined))e.disabled=true});chips();tmu();$('#bdg').innerHTML=BADGE?'<span class="hb">🎖 Готов за Кризисния щаб</span>':'';thFx();if(cur==-1)simFx()}
 function chk(){ck[cur]=1;let t=0;S[cur].it.forEach((q,j)=>{ip[cur][j]=sc(j);t+=ip[cur][j]});pt[cur]=t;draw();if(t>=9)boom()}
 function go(i){cur=i;clearInterval(tm);tm=null;if(i>=0&&i<6)left=S[i].min*60;draw();scrollTo(0,0)}
 function tgl(){if(tm){clearInterval(tm);tm=null}else tm=setInterval(()=>{left--;tmu();if(left<=0){clearInterval(tm);tm=null}},1000)}
@@ -312,7 +312,7 @@ function zalH(i){const a=ZAL[i];return`<div class="zal"><div class="zsl">${zsire
 <div class="zt">🚨 ВХОДЯЩА КРИЗА ${'АБВГДЕ'[i]}</div>
 <div class="zph"><div class="zno"><div class="zap">${a[0]} <span>сега</span></div><b>${a[1]}</b><div>${a[2]}</div></div></div>
 <p>Щабът се събира. Имате <b>${S[i].min} минути</b>. Готови ли сте?</p>
-<button class="go" onclick="zop[${i}]=1;document.body.classList.add('zshake');setTimeout(()=>document.body.classList.remove('zshake'),600);draw()">🚨 Приеми кризата</button></div>`}
+<button class="go" onclick="zop[${i}]=1;draw()">🚨 Приеми кризата</button></div>`}
 /* ===== 📚 ТЕОРИЯ – интерактивни слайдове ===== */
 let ibk=null,tk=null,fl=[0,0,0,0],az={sc:0,v:[-1,-1,-1],ck:0},TC={ch:null,fx:null},tcur=[1,1,1],traf=0,BADGE=false,mta=[],sp=0,stb=0,stok=0;
 const IB=[[['💾','„Файлът изчезна“','Сайт за училищния фестивал: в четвъртък сутринта общият файл е стар и работата на двама души от последните два дни липсва. В чата веднага започва „Не съм аз!“.'],
