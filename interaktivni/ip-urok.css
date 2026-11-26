@@ -1,9 +1,9 @@
 /* Общ стил за уроците в раздела „Интерактивни презентации“ (11. и 12. клас) */
-:root{color-scheme:light dark;
+:root{color-scheme:light; /* винаги светла тема – уроците се показват на интерактивен дисплей */
 --bg:light-dark(#ffffff,#0f1530);--ink:light-dark(#1b2240,#eef1ff);--muted:light-dark(#566083,#a9b1d6);
 --card:light-dark(#f3f5fd,#18203f);--line:light-dark(#dfe3f3,#2a3462);--paper:light-dark(#ffffff,#1d2649);
 --blue:#2347d6;--acc:#2347d6;--mute:var(--muted);--coral:#ff6a4d;--sun:#ffc23d;--sky:#45b0ff;--deep:#13246e}
-:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+:root[data-theme=dark]{color-scheme:light}
 *{box-sizing:border-box;min-width:0}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.6 "Nunito Sans",system-ui,sans-serif;overflow-x:clip}
