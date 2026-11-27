@@ -79,12 +79,12 @@ function trust(o={}){
   const L=["Надеждни издатели","Надеждни местоположения","Надеждни документи","Добавки","Настройки за ActiveX","Настройки за макроси","Защитен изглед","Лента за съобщения","Блокиране на файлове","Опции за поверителност"];
   return dlg("Център за сигурност",`<div class="two"><div class="lst">${L.map(t=>`<span class="${t=="Настройки за макроси"?'on':''}">${t}</span>`).join('')}</div><div class="db"><b style="font-size:14px">Настройки за макроси</b><div style="margin-top:10px">${LEVELS.map((t,i)=>`<div class="rad${i==(o.level??1)?' on':''}${H('lv:'+i,o)}"><i></i><span>${t}</span></div>`).join('')}</div><div style="border-top:1px solid #e1dfdd;margin-top:12px;padding-top:8px;color:#605e5c">Настройки на макроси за разработчици</div><div class="cb"><i></i>Достъп до обектния модел на VBA проекта</div></div></div>`,bt('ok','OK',o,1)+bt('no','Отказ',o),o,640);
 }
-const TYPES=["Презентация на PowerPoint (*.pptx)","Презентация на PowerPoint с разрешени макроси (*.pptm)","Презентация на PowerPoint 97-2003 (*.ppt)","PDF (*.pdf)","Слайдшоу на PowerPoint с разрешени макроси (*.ppsm)"];
+const TYPES_PP=["Презентация на PowerPoint (*.pptx)","Презентация на PowerPoint с разрешени макроси (*.pptm)","Презентация на PowerPoint 97-2003 (*.ppt)","PDF (*.pdf)","Слайдшоу на PowerPoint с разрешени макроси (*.ppsm)"];
 function save(o={}){
-  const type=o.type??0;
+  const TYPES=o.types||TYPES_PP,type=o.type??0;
   const list=o.open?`<div style="position:absolute;left:96px;right:14px;top:100%;margin-top:-2px;background:#fff;border:1px solid #8a8886;box-shadow:0 6px 14px rgba(0,0,0,.2);z-index:4">${TYPES.map((t,i)=>`<div style="padding:3px 8px" class="${i==1?H('ty:1',o):''}">${t}</div>`).join('')}</div>`:'';
   return dlg("Записване като",`<div class="db"><div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><span>← → ↑</span><div class="fld" style="flex:1">Този компютър › Документи › Информатика</div></div>
-  <div style="display:grid;grid-template-columns:130px 1fr;gap:8px"><div class="tree" style="height:130px"><div>⭐ Бърз достъп</div><div>🖥️ Работен плот</div><div>📄 Документи</div><div>⬇️ Изтегляния</div></div><div class="tree" style="height:130px"><div>📊 Проект-ИТ.pptx</div><div>📊 Вируси и защита.pptx</div></div></div>
+  <div style="display:grid;grid-template-columns:130px 1fr;gap:8px"><div class="tree" style="height:130px"><div>⭐ Бърз достъп</div><div>🖥️ Работен плот</div><div>📄 Документи</div><div>⬇️ Изтегляния</div></div><div class="tree" style="height:130px">${(o.files||["📊 Проект-ИТ.pptx","📊 Вируси и защита.pptx"]).map(f=>`<div>${f}</div>`).join('')}</div></div>
   <div style="display:grid;grid-template-columns:90px 1fr;gap:6px 8px;align-items:center;margin-top:10px;position:relative"><span>Име на файла:</span><div class="fld">${esc(o.name||"Презентация1")}</div><span>Запиши като тип:</span><div class="sel${H('type',o)}">${TYPES[type]}</div>${list}</div></div>`,bt('save','Запиши',o,1)+bt('no','Отказ',o),o,600);
 }
 function macros(o={}){
@@ -122,19 +122,67 @@ function vbe(o={}){
   const mods=o.modules||(o.module?["Module1"]:[]);
   const menu=mn.map(m=>{let dd='';if(o.menu==m)dd=`<div class="dd" style="left:0;top:100%">${MENUS[m].map(t=>t=="—"?'<hr>':`<div class="${H('mi:'+t.split('  ')[0],o)}"><span>${t.split('  ')[0]}</span><span style="color:#777">${t.split('  ')[1]||''}</span></div>`).join('')}</div>`;
     return `<span style="position:relative" class="${o.menu==m?'on':''}${H('mn:'+m,o)}">${m}${dd}</span>`}).join('');
-  const code=o.code!=null?`<div class="cw"><div class="ch"><span>${esc(file)} - ${mods[0]||'Module1'} (Code)</span><span>– □ ✕</span></div><div class="cc"><span>(General)</span><span>${esc(o.proc||'(Declarations)')}</span></div><div class="code">${codeLines(o.code,o)}</div></div>`:`<div style="background:#8f8f8f;margin:0"></div>`;
+  const code=o.code!=null?`<div class="cw"><div class="ch"><span>${esc(file)} - ${esc(o.cwName||mods[0]||'Module1')} (Code)</span><span>– □ ✕</span></div><div class="cc"><span class="${H('c1',o)}">${esc(o.obj1||'(General)')}</span><span class="${H('c2',o)}">${esc(o.proc||'(Declarations)')}</span></div><div class="code">${codeLines(o.code,o)}</div></div>`:`<div style="background:#8f8f8f;margin:0"></div>`;
   return `<div class="vbe"><div class="tb"><span>🧩</span><span class="ttl">Microsoft Visual Basic for Applications - ${esc(file)}${o.mode?' ['+o.mode+']':''}</span><span>– □ ✕</span></div>
   <div class="mnu">${menu}</div>
   <div class="tool"><span>🅿️</span><span>💾</span><span class="sp"></span><span>✂️</span><span>📋</span><span class="sp"></span><span>↶</span><span>↷</span><span class="sp"></span><span class="run${H('run',o)}">▶</span><span class="brk">⏸</span><span class="rst${H('reset',o)}">■</span><span class="sp"></span><span>📐</span><span>🔍</span><span style="margin-left:auto;font-size:11px;color:#555">Ln ${o.ln||1}, Col 1</span></div>
-  <div class="wk"><div class="prj"><div class="ph">Project - VBAProject</div><div class="pt"><div>⊟ 📁 VBAProject (${esc(file)})</div>${mods.length?`<div>&nbsp;&nbsp;&nbsp;⊟ 📁 Modules</div>${mods.map((m,i)=>`<div class="${i==0?'on':''}${H('mod:'+m,o)}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;📄 ${m}</div>`).join('')}`:''}</div>
+  <div class="wk"><div class="prj"><div class="ph">Project - VBAProject</div><div class="pt"><div>⊟ 📁 VBAProject (${esc(file)})</div>${o.objs?`<div>&nbsp;&nbsp;&nbsp;⊟ 📁 Microsoft Excel Objects</div>${o.objs.map(m=>`<div class="${o.selObj==m?'on':''}${H('obj:'+m,o)}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;📄 ${esc(m)}</div>`).join('')}`:''}${mods.length?`<div>&nbsp;&nbsp;&nbsp;⊟ 📁 Modules</div>${mods.map((m,i)=>`<div class="${i==0&&!o.selObj?'on':''}${H('mod:'+m,o)}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;📄 ${m}</div>`).join('')}`:''}</div>
   <div class="props"><div class="ph">Properties - ${mods[0]||''}</div>${mods.length?`<table><tr><td>(Name)</td><td>${mods[0]}</td></tr></table>`:''}</div></div>
   <div style="display:flex;flex-direction:column">${code}${o.imm!=null?`<div class="imm"><div class="ch">Immediate</div><pre>${esc(o.imm)}</pre></div>`:''}</div></div>
   ${o.tip?`<div class="vtip" style="left:${o.tip.x}px;top:${o.tip.y}px">${esc(o.tip.t)}</div>`:''}
   ${o.ovl?`<div class="ovl">${o.ovl}</div>`:''}</div>`;
 }
 const vbErr=(text,o={})=>msg({title:"Microsoft Visual Basic for Applications",icon:o.icon||"exc",text,buttons:["OK","Help"],hot:o.hot});
-function show(o={}){return `<div class="show"><div class="sl">${o.slide||defSlide}</div>${o.ovl?`<div class="ovl">${o.ovl}</div>`:''}</div>`}
+function show(o={}){return `<div class="sshow"><div class="sl">${o.slide||defSlide}</div>${o.ovl?`<div class="ovl">${o.ovl}</div>`:''}</div>`}
 const slide=h=>`<div class="sl">${h}</div>`;
+
+/* ---------- Excel ---------- */
+const COLS="ABCDEFG";
+function parseR(r){if(!r)return null;const m=r.toUpperCase().match(/^([A-G])(\d+)(?::([A-G])(\d+))?$/);if(!m)return null;
+  const a=[COLS.indexOf(m[1]),+m[2]],b=m[3]?[COLS.indexOf(m[3]),+m[4]]:a;return{c1:Math.min(a[0],b[0]),r1:Math.min(a[1],b[1]),c2:Math.max(a[0],b[0]),r2:Math.max(a[1],b[1])}}
+function xribbon(o){const R=o.rec;
+  switch(o.tab){
+  case "Разработчик":return grp("Код",rb("vb","🧩","Visual Basic",o)+rb("mac","📜","Макроси",o)+small([[R?"stop":"rec",R?"⏹ Спиране на записа":"⏺ Записване на макрос"],["rel",(o.relOn?"🟩 ":"▫️ ")+"Използване на относителни препратки"],["sec","⚠️ Защита на макросите"]],o))+grp("Добавки",rb("add","🧷","Добавки",o))+grp("Контроли",rb("ins","🧰","Вмъкване",o)+rb("design","📐","Режим на проектиране",o));
+  case "Изглед":return grp("Изгледи на работната книга",rb("norm","▦","Нормален",o))+grp("Показване",small([["grid","☑ Линии на мрежата"],["hd","☑ Заглавия"]],o))+grp("Прозорец",rb("freeze","❄️","Фиксиране на прозорците",o))+grp("Макроси",rb("vmac","📜","Макроси",o));
+  case "Данни":return grp("Сортиране и филтриране",rb("sortaz","🔤","Сортиране",o)+rb("filter","🔽","Филтър",o))+grp("Инструменти за данни",rb("valid","✅","Валидиране на данни",o));
+  default:return grp("Клипборд",rb("paste","📋","Постави",o))+grp("Шрифт",small([["f1","Calibri ▾  11 ▾"],["bold","<b>B</b> <i>I</i> <u>U</u>"],["fill","🪣 Запълване ▾  A▾"]],o))+grp("Подравняване",small([["al","≡ ≡ ≡"],["merge","⇔ Обедини и центрирай"]],o))+grp("Стилове",rb("cf","🎨","Условно форматиране",o))+grp("Клетки",rb("fmtc","📏","Формат",o));
+  }}
+function xl(o={}){
+  const tabs=["Файл","Начало","Вмъкване","Оформление на страницата","Формули","Данни","Преглед","Изглед"];if(o.dev!==false)tabs.push("Разработчик");
+  const cells=o.cells||[],sel=parseR(o.sel),rows=o.rows||10,nc=o.nc||6,cw=o.cw||[34,140,80,80,80,80];
+  const st=o.st||{};
+  let g=`<table class="xg"><tr><th></th>${[...COLS.slice(0,nc)].map((c,i)=>`<th style="width:${cw[i]||80}px" class="${sel&&i>=sel.c1&&i<=sel.c2?'hs':''}">${c}</th>`).join('')}</tr>`;
+  for(let r=1;r<=rows;r++){g+=`<tr><th class="${sel&&r>=sel.r1&&r<=sel.r2?'hs':''}">${r}</th>`;
+    for(let c=0;c<nc;c++){const a=COLS[c]+r,v=(cells[r-1]||[])[c];const ins=sel&&c>=sel.c1&&c<=sel.c2&&r>=sel.r1&&r<=sel.r2;
+      const cls=[ins&&'in',sel&&ins&&c==sel.c1&&r==sel.r1&&'ac',typeof v=='number'&&'num'].filter(Boolean).join(' ');
+      g+=`<td class="${cls}${H('cell:'+a,o)}" style="${st[a]||''}">${v==null?'':esc(v)}</td>`}
+    g+='</tr>'}
+  g+='</table>';
+  const sheets=o.sheets||["Лист1"];
+  return `<div class="pp xl"><div class="tb"><span class="lg">X</span><span>💾 ↶ ↷</span><span class="ttl">${esc(o.file||"Книга1")} – Excel</span><span class="wb">–□✕</span></div>
+  ${o.backstage?`<div class="bks"><div class="side">${["⟵","Начало","Нов","Отваряне","|","Информация","Запиши","Запиши като","Печат","Споделяне","Експортиране","Затвори","~","Акаунт","Опции"].map(t=>t=="|"?'<span class="sep"></span>':t=="~"?'<span class="grow"></span>':`<span class="${H('bs:'+t,o)}">${t}</span>`).join('')}</div><div class="main"><h2>Добър ден</h2><p style="color:#605e5c">Празна работна книга · Последни</p></div></div>`:`
+  <div class="tabs">${tabs.map(t=>`<span class="${t==o.tab?'on':''}${t=="Разработчик"&&o.devNew?' new':''}${H('tab:'+t,o)}">${t}</span>`).join('')}</div>
+  ${o.warn?`<div class="warn"><span>🛡️</span><b>ПРЕДУПРЕЖДЕНИЕ ЗА ЗАЩИТА</b><span>Макросите са забранени.</span><span class="wbtn${H('warn',o)}">Разреши съдържанието</span></div>`:''}
+  <div class="rib">${xribbon(o)}</div>
+  <div class="fx"><span class="nb">${esc(o.name||(sel?COLS[sel.c1]+sel.r1:'A1'))}</span><span style="color:#888">✕ ✓ <i>fx</i></span><span class="fv">${esc(o.fx||'')}</span></div>
+  <div class="gridw">${g}${o.shapes||''}</div>
+  <div class="sht"><span>◀ ▶</span>${sheets.map(s=>`<span class="${s==(o.sheet||sheets[0])?'on':''}${H('sh:'+s,o)}">${esc(s)}</span>`).join('')}<span>⊕</span></div>
+  <div class="stb"><span>${o.rec?`<span class="${H('recbtn',o)}" style="color:#c00">⏹</span> Записва се…`:'Готово'}</span><span>${o.status||''} ${o.file&&/xlsm/.test(o.file)?'🔒 .xlsm · ':''}100%</span></div>`}
+  ${o.drop?`<div class="dropdown" style="left:${o.drop.x}px;top:${o.drop.y}px">${o.drop.html}</div>`:''}
+  ${o.ovl?`<div class="ovl">${o.ovl}</div>`:''}</div>`;
+}
+function rec(o={}){
+  return dlg("Записване на макрос",`<div class="db" style="display:grid;gap:6px">Име на макрос:<div class="fld${H('f:name',o)}">${esc(o.name||'Макрос1')}${o.typing?'<span class="typing"> </span>':''}</div>
+  Клавиш за бърз достъп:<div style="display:flex;gap:6px;align-items:center">Ctrl+${o.key&&o.key==o.key.toUpperCase()&&/[A-ZА-Я]/.test(o.key)?'Shift+':''}<div class="fld${H('f:key',o)}" style="width:36px;text-align:center">${esc(o.key||'')}</div></div>
+  Съхраняване на макроса в:<div class="sel${H('f:store',o)}">${o.store||'Тази работна книга'}</div>
+  Описание:<div class="fld${H('f:desc',o)}" style="min-height:44px">${esc(o.desc||'')}</div></div>`,bt('ok','OK',o,1)+bt('no','Отказ',o),o,360);
+}
+function assign(o={}){
+  const names=o.names||["FormatTablica"],s=o.sel??names[0];
+  return dlg("Присвояване на макрос",`<div class="db" style="display:grid;grid-template-columns:1fr 100px;gap:12px"><div>Име на макрос:<div class="fld" style="margin:4px 0">${esc(s||'Бутон1_Click')}</div><div class="mlist">${names.map(n=>`<div class="${n==s?'on':''}${H('m:'+n,o)}">${esc(n)}</div>`).join('')}</div>Макроси в:<div class="sel" style="margin-top:4px">Всички отворени работни книги</div></div>
+  <div class="vbtn" style="margin-top:18px">${bt('edit','Редактиране',o)}${bt('recb','Записване…',o)}</div></div>`,bt('ok','OK',o,1)+bt('no','Отказ',o),o,420);
+}
+const ctrlDrop=o=>`<div class="dh">Контроли за формуляри</div><div class="dg"><span class="${H('ctl:btn',o)} nohand" title="Бутон">▭</span><span>☑</span><span>◉</span><span>▤</span><span>▾</span><span>⇕</span><span>Aa</span><span>⬚</span></div><div class="dh">ActiveX контроли</div><div class="dg"><span>▭</span><span>☑</span><span>abl</span><span>▤</span><span>▾</span><span>◉</span></div>`;
 
 /* ---------- мащабиране на сцените ---------- */
 function fit(){$$('.stage').forEach(s=>{const w=s.parentElement.clientWidth;if(w)s.style.zoom=Math.min(1.4,w/760)})}
@@ -210,5 +258,5 @@ function checkName(n){
 }
 
 const init=()=>{codes();bugs();fit()};
-return{hl,codeLines,pp,vbe,options,trust,save,macros,action,msg,setup,vbErr,show,slide,put,walk,fit,init,checkName,LEVELS,esc};
+return{hl,codeLines,pp,xl,rec,assign,ctrlDrop,parseR,COLS,vbe,options,trust,save,macros,action,msg,setup,vbErr,show,slide,put,walk,fit,init,checkName,LEVELS,esc,TYPES_XL:["Работна книга на Excel (*.xlsx)","Работна книга на Excel с разрешени макроси (*.xlsm)","Двоична работна книга на Excel (*.xlsb)","Работна книга на Excel 97-2003 (*.xls)","PDF (*.pdf)"]};
 })();
