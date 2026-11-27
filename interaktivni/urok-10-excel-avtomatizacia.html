@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 10: Excel – събития, отчети и автоматичен дневник – Интерактивни презентации, 11 и 12 клас</title>
+<link rel="icon" type="image/svg+xml" href="../icons/interaktivni.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ip-urok.css?v=20261127b">
+<link rel="stylesheet" href="mk.css?v=20261128">
+</head>
+<body>
+
+<header class="hero xlh">
+  <div class="wrap">
+    <div>
+      <span class="tag">Урок 10 · Макроси в Excel · 11 и 12 клас</span>
+      <h1>Excel: събития, отчети и автоматичен дневник</h1>
+      <p>Макрос, който тръгва <b>сам</b> – когато въведеш оценка или отвориш файла. Макрос, който прави <b>нов лист с отчет</b>, сортира и записва PDF. Накрая сглобяваш всичко в един умен дневник на класа.</p>
+    </div>
+    <svg viewBox="0 0 470 320" role="img" aria-label="Мълния, която свързва въведена оценка с автоматично оцветяване, и лист с отчет">
+      <ellipse cx="235" cy="302" rx="210" ry="12" fill="#0d3b22" opacity=".45"/>
+      <rect x="30" y="40" width="190" height="200" rx="12" fill="#fff"/>
+      <rect x="30" y="40" width="190" height="34" rx="12" fill="#217346"/><rect x="30" y="60" width="190" height="14" fill="#217346"/>
+      <text x="46" y="63" font-family="Calibri,sans-serif" font-weight="700" font-size="15" fill="#fff">Оценки</text>
+      <g font-family="Calibri,sans-serif" font-size="15" fill="#222"><text x="46" y="104">Ива</text><text x="160" y="104">5.50</text><text x="46" y="138">Ники</text><rect class="bargrow" x="148" y="120" width="60" height="26" fill="#ffc7ce"/><text x="160" y="139" fill="#9c0006">2.50</text><text x="46" y="172">Сара</text><text x="160" y="172">6.00</text></g>
+      <path d="M232 92 l-22 52 h20 l-14 46 l40 -62 h-22 l16 -36z" fill="#ffc23d"/>
+      <rect x="270" y="56" width="170" height="190" rx="12" fill="#fff"/>
+      <rect x="270" y="56" width="170" height="34" rx="12" fill="#13246e"/><rect x="270" y="76" width="170" height="14" fill="#13246e"/>
+      <text x="286" y="79" font-family="Calibri,sans-serif" font-weight="700" font-size="15" fill="#fff">Отчет</text>
+      <g font-family="Calibri,sans-serif" font-size="13" fill="#222"><text x="286" y="116">Ученици</text><text x="400" y="116">28</text><text x="286" y="142">Среден</text><text x="400" y="142">4.63</text><text x="286" y="168">Слаби</text><text x="404" y="168">2</text></g>
+      <rect x="286" y="186" width="16" height="40" fill="#1d6f42"/><rect x="310" y="196" width="16" height="30" fill="#45b0ff"/><rect x="334" y="176" width="16" height="50" fill="#1d6f42"/><rect x="358" y="206" width="16" height="20" fill="#ff6a4d"/>
+      <g transform="translate(392 210)"><rect width="56" height="66" rx="6" fill="#d13438"/><text x="28" y="42" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="16" fill="#fff">PDF</text></g>
+    </svg>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Теория</summary><div class="menu"><a href="#sabitia">Събития</a><a href="#kade">Къде се пише кодът</a><a href="#listove">Листове и отчет</a></div></details>
+    <details><summary>Пробвай</summary><div class="menu"><a href="#simulator">Умният дневник</a><a href="#recepti">Готови макроси</a></div></details>
+    <details><summary>Стъпка по стъпка</summary><div class="menu"><a href="#stapki-change">Събитие при промяна</a><a href="#stapki-open">Събитие при отваряне</a><a href="#greshki">Чести грешки</a></div></details>
+    <details><summary>Задача</summary><div class="menu"><a href="#zadacha">Проект</a><a href="#kriterii">Критерии за оценяване</a></div></details>
+    <a href="#test">Тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="sabitia">
+  <div class="wrap grid2">
+    <div>
+      <h2>Събития – макроси, които тръгват сами</h2>
+      <p>Досега пускаше макросите ти: с бутон, клавиши или <kbd>Alt</kbd>+<kbd>F8</kbd>. <b>Събитие</b> (event) е нещо, което се случва в Excel – промяна на клетка, отваряне на файла, избор на лист. Можеш да закачиш макрос към събитие и той ще се изпълнява <b>автоматично</b>, всеки път.</p>
+      <table class="stack" style="margin-top:14px">
+        <thead><tr><th>Събитие</th><th>Кога се случва</th><th>Пример</th></tr></thead>
+        <tbody>
+          <tr><td><code>Worksheet_Change</code></td><td>Промяна на стойност в клетка на листа</td><td>Оценка под 3 → червено веднага</td></tr>
+          <tr><td><code>Worksheet_SelectionChange</code></td><td>Избиране на друга клетка</td><td>Подсказка в лентата на състоянието</td></tr>
+          <tr><td><code>Worksheet_Activate</code></td><td>Отиване на този лист</td><td>Обновяване на отчета</td></tr>
+          <tr><td><code>Workbook_Open</code></td><td>Отваряне на файла</td><td>Поздрав и отиване на лист „Оценки“</td></tr>
+          <tr><td><code>Workbook_BeforeClose</code></td><td>Преди затваряне</td><td>„Не забрави да запишеш!“</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Как изглежда</h3>
+<pre class="vba" data-title="Лист1 (Оценки) – код на листа">
+Private Sub Worksheet_Change(ByVal Target As Range)
+    If Target.Count > 1 Then Exit Sub
+    If Target.Column <> 3 Or Target.Row = 1 Then Exit Sub
+    If IsEmpty(Target.Value) Or Target.Value >= 3 Then
+        Target.Interior.ColorIndex = xlNone
+    Else
+        Target.Interior.Color = RGB(255, 199, 206)
+    End If
+End Sub
+</pre>
+      <ol class="lx">
+        <li data-l="1"><b>Името не се избира</b> – трябва да е точно <code>Worksheet_Change</code>. <code>Private</code> = не се показва в списъка с макроси. <code>Target</code> е клетката, която току-що е променена – Excel я подава сам.</li>
+        <li data-l="2">Ако са променени много клетки наведнъж (поставяне, изтриване на диапазон) – излизаме, за да няма грешка.</li>
+        <li data-l="3">Интересува ни само колона C (3) и не заглавието. <code>&lt;&gt;</code> значи „различно“.</li>
+        <li data-l="4-8">Празна клетка или оценка от 3 нагоре → без цвят. Иначе → червено. <code>IsEmpty</code> е важен: празното се смята за 0 и иначе изтрита оценка би станала червена.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="kade">
+  <div class="wrap">
+    <h2>Къде се пише кодът – най-важното в урока</h2>
+    <p>Събитията <b>не</b> се пишат в Module1! Всеки лист и книгата имат свой „модул“ в <b>Microsoft Excel Objects</b>. Ако сложиш <code>Worksheet_Change</code> в Module1, той просто никога няма да тръгне.</p>
+    <div class="grid" style="margin-top:18px">
+      <div class="card"><h3>📄 Лист1 (Оценки)</h3><p>Събития на <b>този</b> лист: <code>Worksheet_Change</code>, <code>Worksheet_SelectionChange</code>, <code>Worksheet_Activate</code>.</p><span class="pill">двоен клик → Worksheet → Change</span></div>
+      <div class="card"><h3>📘 ThisWorkbook</h3><p>Събития на <b>цялата книга</b>: <code>Workbook_Open</code>, <code>Workbook_BeforeClose</code>, <code>Workbook_SheetChange</code>.</p><span class="pill">двоен клик → Workbook → Open</span></div>
+      <div class="card"><h3>📦 Modules → Module1</h3><p><b>Обикновени</b> макроси, които пускаш с бутон или Alt+F8: <code>Sortirai</code>, <code>Otchet</code>…</p><span class="pill">Insert → Module</span></div>
+    </div>
+    <div data-mk="proj" style="margin-top:20px;border-radius:12px;overflow:hidden"></div>
+  </div>
+</section>
+
+<section class="band" id="listove">
+  <div class="wrap grid2">
+    <div>
+      <h2>Листове и отчет на нов лист</h2>
+      <p>Обектът <code>Sheets</code> съдържа всички листове. С него макросът може да добави, преименува, изтрие или избере лист.</p>
+      <table class="stack">
+        <thead><tr><th>Код</th><th>Какво прави</th></tr></thead>
+        <tbody>
+          <tr><td><code>Sheets("Оценки").Activate</code></td><td>отива на листа</td></tr>
+          <tr><td><code>Set ws = Sheets.Add(After:=Sheets(Sheets.Count))</code></td><td>нов лист най-накрая; <code>ws</code> сочи към него</td></tr>
+          <tr><td><code>ws.Name = "Отчет"</code></td><td>преименува</td></tr>
+          <tr><td><code>Sheets("Отчет").Delete</code></td><td>изтрива (Excel пита „Сигурни ли сте?“)</td></tr>
+          <tr><td><code>Application.DisplayAlerts = False</code></td><td>спира въпросите на Excel (после пак <code>True</code>!)</td></tr>
+          <tr><td><code>On Error Resume Next</code></td><td>„ако има грешка, продължи“ – напр. ако листът го няма. <code>On Error GoTo 0</code> го изключва.</td></tr>
+        </tbody>
+      </table>
+      <div class="tip"><b>Променлива-обект.</b> <code>Dim ws As Worksheet</code> и <code>Set ws = …</code> – вместо да пишеш <code>Sheets("Отчет")</code> 10 пъти, пишеш <code>ws</code>. Обектите се присвояват винаги със <code>Set</code>.</div>
+    </div>
+    <div>
+<pre class="vba" data-title="Otchet">
+Sub Otchet()
+    Dim ws As Worksheet, oc As Range, posleden As Long
+    posleden = Sheets("Оценки").Cells(Rows.Count, 1).End(xlUp).Row
+    Set oc = Sheets("Оценки").Range("C2:C" & posleden)
+    Application.DisplayAlerts = False
+    On Error Resume Next
+    Sheets("Отчет").Delete
+    On Error GoTo 0
+    Application.DisplayAlerts = True
+    Set ws = Sheets.Add(After:=Sheets(Sheets.Count))
+    ws.Name = "Отчет"
+    ws.Range("A1").Value = "Отчет за класа"
+    ws.Range("A1").Font.Size = 16
+    ws.Range("A3").Value = "Брой ученици"
+    ws.Range("B3").Value = oc.Count
+    ws.Range("A4").Value = "Среден успех"
+    ws.Range("B4").Value = Round(WorksheetFunction.Average(oc), 2)
+    ws.Range("A5").Value = "Най-висока оценка"
+    ws.Range("B5").Value = WorksheetFunction.Max(oc)
+    ws.Range("A6").Value = "Слаби (под 3)"
+    ws.Range("B6").Value = WorksheetFunction.CountIf(oc, "<3")
+    ws.Columns("A:B").AutoFit
+End Sub
+</pre>
+      <ol class="lx">
+        <li data-l="3-4"><code>oc</code> е обхватът с всички оценки – ще го ползваме 4 пъти.</li>
+        <li data-l="5-9">Изтриваме стария „Отчет“, ако има такъв – без въпроси и без грешка, ако го няма.</li>
+        <li data-l="10-11">Нов лист в края, с име „Отчет“.</li>
+        <li data-l="12-21">Попълваме: брой (<code>.Count</code>), средно, максимум, брой слаби (<code>CountIf</code> с условие като във формула).</li>
+        <li data-l="22">Ширина на колоните.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="simulator">
+  <div class="wrap">
+    <h2>🧪 Умният дневник</h2>
+    <p class="muted">Въведи оценка в полетата отдолу – това е <b>промяна на клетка</b> и събитието <code>Worksheet_Change</code> се изпълнява само. Пробвай бутоните на листа. Отдясно е кодът, който се изпълнява в момента.</p>
+    <div class="sim" style="margin-top:16px">
+      <div>
+        <div data-mk="dSheet" id="dSheet"></div>
+        <div class="row" style="margin-top:10px" id="dIn"></div>
+        <div class="row" style="margin-top:6px"><button type="button" class="btn ghost" id="dOpen">📂 Затвори и отвори файла</button><button type="button" class="btn ghost" id="dReset">↺ Отначало</button></div>
+        <p class="note" id="dNote" aria-live="polite">Пробвай: напиши 2.5 при Мартин, после пак 4.</p>
+      </div>
+      <div class="vba-box"><div class="hd"><span id="dTitle">📄 код</span></div><div class="lines" id="dCode"><p class="muted" style="padding:10px 16px;font-family:'Nunito Sans'">Тук ще се покаже кодът, който се изпълнява.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="recepti">
+  <div class="wrap">
+    <h2>Готови макроси за дневника</h2>
+    <div class="grid2" style="margin-top:14px">
+      <div>
+        <h3>Сортиране по оценка</h3>
+<pre class="vba" data-title="Sortirai">
+Sub Sortirai()
+    Dim posleden As Long
+    posleden = Cells(Rows.Count, 1).End(xlUp).Row
+    Range("A1:D" & posleden).Sort Key1:=Range("C1"), _
+        Order1:=xlDescending, Header:=xlYes
+End Sub
+</pre>
+        <ol class="lx">
+          <li data-l="4-5"><code>Key1</code> – по коя колона; <code>xlDescending</code> – от най-високата (за възходящо: <code>xlAscending</code>); <code>Header:=xlYes</code> – първият ред е заглавие и не се сортира. <code>:=</code> задава параметър по име.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Изчистване с потвърждение</h3>
+<pre class="vba" data-title="Izchisti">
+Sub Izchisti()
+    If MsgBox("Да изтрия ли всички ученици?", vbYesNo + vbQuestion) = vbNo Then Exit Sub
+    Range("A2:E1000").ClearContents
+    Range("A2:E1000").Interior.ColorIndex = xlNone
+End Sub
+</pre>
+        <ol class="lx">
+          <li data-l="2">Опасните действия винаги питат – Ctrl+Z няма да помогне!</li>
+          <li data-l="3-4"><code>ClearContents</code> трие стойностите, но оставя форматирането на заглавието.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Отчетът като PDF</h3>
+<pre class="vba" data-title="VPdf">
+Sub VPdf()
+    Dim pat As String
+    pat = ThisWorkbook.Path & "\Otchet.pdf"
+    Sheets("Отчет").ExportAsFixedFormat Type:=xlTypePDF, Filename:=pat
+    MsgBox "Записано: " & pat, vbInformation
+End Sub
+</pre>
+        <ol class="lx">
+          <li data-l="3"><code>ThisWorkbook.Path</code> – папката, в която е файлът. PDF-ът се записва до него. Файлът трябва вече да е записан веднъж.</li>
+          <li data-l="4">Изнася листа като PDF. Ако листът „Отчет“ го няма – първо пусни <code>Otchet</code>.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Поздрав при отваряне</h3>
+<pre class="vba" data-title="ThisWorkbook – код на книгата">
+Private Sub Workbook_Open()
+    Sheets("Оценки").Activate
+    Range("A1").Select
+    MsgBox "Добре дошли в дневника на 11 Б!" & vbCrLf & _
+        "Ученици: " & Cells(Rows.Count, 1).End(xlUp).Row - 1, vbInformation
+End Sub
+</pre>
+        <ol class="lx">
+          <li data-l="1">В <b>ThisWorkbook</b>, не в модул. Тръгва, когато файлът се отвори <b>и</b> макросите са разрешени.</li>
+          <li data-l="4-5">Броят ученици = последният ред минус заглавието.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="tip"><b>⚠️ Събитие, което пише в клетки.</b> Ако <code>Worksheet_Change</code> промени стойност на клетка, това е нова промяна → събитието тръгва пак → и пак… Excel може да „замръзне“. Затова около писането се спират събитията:
+<pre class="vba" data-title="Безопасно писане от събитие">
+Application.EnableEvents = False
+Target.Offset(0, 2).Value = IIf(Target.Value < 3, "Слаб", "")
+Application.EnableEvents = True
+</pre>
+    <code>IIf(условие, ако да, ако не)</code> е кратко If в една стойност. Цветът (Interior) не е „промяна“, затова горният пример с оцветяване е безопасен.</div>
+  </div>
+</section>
+
+<section class="band alt" id="stapki-change">
+  <div class="wrap">
+    <h2>Стъпка по стъпка: събитие при промяна</h2>
+    <div class="walk green" data-walk="chg" data-title="Worksheet_Change в кода на листа „Оценки“"></div>
+  </div>
+</section>
+
+<section class="band" id="stapki-open">
+  <div class="wrap">
+    <h2>Стъпка по стъпка: събитие при отваряне и отчет</h2>
+    <div class="walk green" data-walk="open" data-title="Workbook_Open, бутон „Отчет“ и PDF"></div>
+  </div>
+</section>
+
+<section class="band alt" id="greshki">
+  <div class="wrap">
+    <h2>Чести грешки</h2>
+    <div class="scroll" style="margin-top:16px">
+    <table class="stack">
+      <thead><tr><th>Какво виждаш</th><th>Причина</th><th>Как се поправя</th></tr></thead>
+      <tbody>
+        <tr><td>Събитието никога не тръгва</td><td>Кодът е в Module1, а не в кода на листа / ThisWorkbook</td><td>Премести го: двоен клик върху <b>Лист1</b> или <b>ThisWorkbook</b>.</td></tr>
+        <tr><td>Събитието никога не тръгва</td><td>Името е сгрешено: <code>Worksheet_Changed</code></td><td>Избирай го от двете падащи менюта – тогава името е винаги точно.</td></tr>
+        <tr><td>Събитията спряха изобщо</td><td>Макрос е спрял с грешка след <code>EnableEvents = False</code></td><td>В Immediate: <code>Application.EnableEvents = True</code> и Enter.</td></tr>
+        <tr><td>Excel „замръзва“</td><td>Change пише в клетка → безкраен кръг</td><td><code>EnableEvents = False</code> преди писането.</td></tr>
+        <tr><td>„Type mismatch“ при поставяне на много клетки</td><td>Target е повече от една клетка</td><td><code>If Target.Count &gt; 1 Then Exit Sub</code>.</td></tr>
+        <tr><td>„That name is already taken“</td><td>Лист „Отчет“ вече има</td><td>Изтрий стария преди <code>ws.Name = "Отчет"</code> (виж Otchet).</td></tr>
+        <tr><td>Workbook_Open не тръгва</td><td>Макросите не са разрешени при отваряне</td><td>Натисни <b>Разреши съдържанието</b>, затвори и отвори пак.</td></tr>
+        <tr><td>PDF-ът го няма</td><td>Файлът не е записан – <code>ThisWorkbook.Path</code> е празно</td><td>Първо запиши книгата.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h3 style="margin-top:30px">🧪 Намери грешката</h3>
+    <div class="grid" style="margin-top:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr))">
+      <div class="bug" data-bad="1" data-ok="Името на събитието е сгрешено (WorkSheetChange без долна черта). Трябва точно Worksheet_Change – избирай го от падащите менюта.">
+<pre class="vba" data-title="Грешка 1 – не тръгва сам">
+Private Sub WorkSheetChange(ByVal Target As Range)
+    If Target.Column = 3 Then Target.Font.Bold = True
+End Sub
+</pre>
+        <div class="res" aria-live="polite"></div>
+      </div>
+      <div class="bug" data-bad="3" data-ok="Събитието пише в клетка, без да спре събитията – промяната в D пуска Worksheet_Change отново и отново. Нужни са Application.EnableEvents = False / True около реда.">
+<pre class="vba" data-title="Грешка 2 – Excel замръзва">
+Private Sub Worksheet_Change(ByVal Target As Range)
+    If Target.Count > 1 Then Exit Sub
+    Target.Offset(0, 1).Value = Now
+End Sub
+</pre>
+        <div class="res" aria-live="polite"></div>
+      </div>
+      <div class="bug" data-bad="3" data-ok="ws е обект – присвоява се със Set: Set ws = Sheets.Add(…). Без Set излиза „Object variable or With block variable not set“.">
+<pre class="vba" data-title="Грешка 3 – Object variable not set">
+Sub NovList()
+    Dim ws As Worksheet
+    ws = Sheets.Add(After:=Sheets(Sheets.Count))
+    ws.Name = "Отчет"
+End Sub
+</pre>
+        <div class="res" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="zadacha">
+  <div class="wrap">
+    <h2>Проект: дневник на класа</h2>
+    <div class="goal"><h3>Автоматичен дневник</h3><p>Сглоби всичко от уроци 8–10 в един файл: събития, които реагират сами, бутони за сортиране, отчет и PDF, и поздрав при отваряне. Представи го пред класа.</p>
+      <div class="time"><span>⏱ 2 учебни часа</span><span>👤 индивидуално или по двойки</span><span>🎯 20 точки</span></div></div>
+    <div class="grid2" style="margin-top:26px">
+      <div>
+        <h3>Изисквания – точно в този ред</h3>
+        <ol class="req">
+          <li><b>Файл</b> Dnevnik-Proekt-Ime-Familia.xlsm. Лист <b>Оценки</b> с поне 12 ученика (№, Ученик, Оценка, Отсъствия).</li>
+          <li><b>Worksheet_Change</b> в кода на листа: оценка под 3 → червено, от 5.50 → зелено, иначе без цвят; празна клетка → без цвят. Проверки за много клетки и за колоната.</li>
+          <li><b>Второ правило в същото събитие</b>: отсъствия (колона D) над 10 → клетката удебелена.</li>
+          <li><b>Workbook_Open</b> в ThisWorkbook: отива на „Оценки“ и показва поздрав с броя ученици.</li>
+          <li><b>Module1</b>: <code>Sortirai</code>, <code>Otchet</code> (минимум 4 показателя), <code>Izchisti</code> (с потвърждение), <code>VPdf</code>; плюс <code>DobaviUchenik</code> от урок 9.</li>
+          <li><b>Бутони</b> на листа за всички 5 макроса, с иконки и ясни надписи.</li>
+          <li><b>Option Explicit</b> най-горе във всеки модул и <code>Dim</code> за всички променливи.</li>
+          <li><b>Проба</b>: съученик въвежда оценки, добавя ученик, прави отчет и PDF – без твоя помощ.</li>
+        </ol>
+      </div>
+      <div>
+        <div class="card"><h3>Какво предаваш</h3><ul><li>Файла <b>.xlsm</b> и <b>Otchet.pdf</b></li><li>Снимки на трите места с код: Лист1, ThisWorkbook, Module1</li><li>Кратко представяне (2–3 мин.) пред класа</li><li>Отговор: <i>Каква е разликата между макрос в Module1 и събитие в Лист1?</i></li></ul></div>
+        <div class="card" style="margin-top:20px"><h3>Подсказка за второто правило</h3>
+<pre class="vba" data-title="Част от Worksheet_Change">
+If Target.Column = 4 And Target.Row > 1 Then
+    Target.Font.Bold = (Target.Value > 10)
+End If
+</pre>
+          <p class="note"><code>(Target.Value &gt; 10)</code> е <code>True</code> или <code>False</code> – директно става удебелено или не.</p></div>
+        <div class="card" style="margin-top:20px"><h3>⭐ Бонус</h3><ul><li>Диаграма в отчета: <code>ws.Shapes.AddChart2(201, xlColumnClustered).Chart.SetSourceData Sheets("Оценки").Range("B1:C" &amp; posleden)</code></li><li><code>Workbook_BeforeClose</code> с напомняне да се запише.</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="kriterii">
+  <div class="wrap grid2">
+    <div>
+      <h2>Критерии за оценяване</h2>
+      <table class="crit">
+        <thead><tr><th>Критерий</th><th>Точки</th></tr></thead>
+        <tbody>
+          <tr><td><b>Worksheet_Change</b> – оценки, празни клетки, проверки</td><td>4</td></tr>
+          <tr><td><b>Второ правило</b> за отсъствията</td><td>2</td></tr>
+          <tr><td><b>Workbook_Open</b> – на правилното място, работи</td><td>2</td></tr>
+          <tr><td><b>Sortirai, Izchisti</b></td><td>2</td></tr>
+          <tr><td><b>Otchet</b> – нов лист, 4 показателя, без грешка при повторно пускане</td><td>4</td></tr>
+          <tr><td><b>VPdf</b> и DobaviUchenik</td><td>2</td></tr>
+          <tr><td><b>Бутони, Option Explicit, коментари</b></td><td>2</td></tr>
+          <tr><td><b>Представяне и отговор</b></td><td>2</td></tr>
+          <tr><td><b>Общо</b></td><td><b>20</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3 style="margin-top:8px">Оценка</h3>
+      <table class="crit">
+        <thead><tr><th>Точки</th><th>Оценка</th></tr></thead>
+        <tbody><tr><td>18–20</td><td>Отличен 6</td></tr><tr><td>15–17</td><td>Много добър 5</td></tr><tr><td>12–14</td><td>Добър 4</td></tr><tr><td>9–11</td><td>Среден 3</td></tr><tr><td>0–8</td><td>Слаб 2</td></tr></tbody>
+      </table>
+      <div class="card" style="margin-top:20px"><h3>Провери се, преди да предадеш</h3>
+        <label class="chk"><input type="checkbox"> Събитията са в Лист1 и ThisWorkbook, не в Module1</label>
+        <label class="chk"><input type="checkbox"> Otchet работи и при второ пускане</label>
+        <label class="chk"><input type="checkbox"> Изтрита оценка не остава червена</label>
+        <label class="chk"><input type="checkbox"> Izchisti пита преди да трие</label>
+        <label class="chk"><input type="checkbox"> Затворих и отворих файла – поздравът се появи</label>
+        <label class="chk"><input type="checkbox"> Съученик ползва дневника без помощ</label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">10 въпроса. Избери отговор на всеки и натисни „Провери“.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check" type="button">Провери</button><button class="btn ghost" id="again" type="button">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<section class="band alt"><div class="wrap pager"><a href="urok-9-excel-vba-kletki-i-cikli.html"><small>← Урок 9</small>Excel: клетки, цикли и условия</a><a class="nx" href="index.html"><small>Към раздела →</small>Всички уроци</a></div></section>
+
+<footer>IT Зона · Интерактивни презентации · 11 и 12 клас. Изгледите на програмите са схематични – бутоните може леко да се различават според версията на Excel.</footer>
+
+<script>const CUR=9;</script>
+<script src="ip.js?v=20261128"></script>
+<script src="mk.js?v=20261128"></script>
+<script>
+{
+const M=MK,g=id=>document.getElementById(id);
+const lines=(src,cls={})=>src.map((l,i)=>`<div class="ln${cls[i+1]?' '+cls[i+1]:''}"><b>${i+1}</b><span>${M.hl(l)||' '}</span></div>`).join('');
+const HEADST={};["A1","B1","C1","D1"].forEach(a=>HEADST[a]="font-weight:700;color:#fff;background:#217346");
+const BASE=[[1,"Ива Петрова",5.5,2],[2,"Мартин Колев",4.75,5],[3,"Ники Георгиев",2.8,12],[4,"Сара Иванова",6,0],[5,"Петър Димов",3.9,7]];
+const RED='background:#ffc7ce;color:#9c0006',GRN='background:#c6efce;color:#0b4d27';
+const F="Dnevnik.xlsm",objs=["Лист1 (Оценки)","ThisWorkbook"];
+const codeOf=t=>document.querySelector(`pre.vba[data-title="${t}"]`).textContent.replace(/^\n+/,'').replace(/\s+$/,'').split('\n');
+
+/* --- проект: къде е кодът --- */
+M.put("proj",M.vbe({file:F,objs,modules:["Module1"],selObj:"Лист1 (Оценки)",cwName:"Лист1",obj1:"Worksheet",proc:"Change",code:codeOf("Лист1 (Оценки) – код на листа").join('\n')}));
+
+/* ---------- симулатор ---------- */
+const CH=codeOf("Лист1 (Оценки) – код на листа"),SO=codeOf("Sortirai"),OT=codeOf("Otchet"),IZ=codeOf("Izchisti"),PD=codeOf("VPdf"),OP=codeOf("ThisWorkbook – код на книгата");
+let rows,colr,sheet,rep,busy=false;
+function reset(){rows=BASE.map(r=>r.slice());colr={};sheet="Оценки";rep=null;draw();inputs();g('dCode').innerHTML='<p class="muted" style="padding:10px 16px;font-family:\'Nunito Sans\'">Тук ще се покаже кодът, който се изпълнява.</p>';g('dTitle').textContent='📄 код'}
+const BTNS=`<button class="xbtn" data-m="sort" style="left:480px;top:8px;width:150px;height:30px">🔽 Сортирай</button><button class="xbtn" data-m="otchet" style="left:480px;top:44px;width:150px;height:30px">📊 Отчет</button><button class="xbtn" data-m="pdf" style="left:480px;top:80px;width:150px;height:30px">📄 PDF</button><button class="xbtn" data-m="izch" style="left:480px;top:116px;width:150px;height:30px">🧹 Изчисти</button>`;
+function draw(sel,ovl){let o;
+  if(sheet=="Оценки"){const cells=[["№","Ученик","Оценка","Отсъствия"],...rows];const st=Object.assign({},HEADST);rows.forEach((r,i)=>{if(colr[r[1]])st['C'+(i+2)]=colr[r[1]]});
+    o={cells,st,cw:[34,130,70,80,90,200],nc:6,shapes:BTNS}}
+  else{const cells=[["Отчет за класа"],[],["Брой ученици",rep[0]],["Среден успех",rep[1]],["Най-висока оценка",rep[2]],["Слаби (под 3)",rep[3]]];o={cells,st:{A1:"font-size:16px;font-weight:700"},cw:[150,70,80,80,80,80],nc:6}}
+  M.put("dSheet",M.xl(Object.assign({file:F,rows:8,sheets:rep?["Оценки","Отчет"]:["Оценки"],sheet,tab:"Разработчик",sel:sel||null,ovl},o)));
+  const box=g('dSheet');box.querySelectorAll('button.xbtn').forEach(b=>b.onclick=()=>run(b.dataset.m));
+  box.querySelectorAll('.sht span').forEach(s=>{if(s.textContent=="Оценки"||s.textContent=="Отчет"){s.style.cursor='pointer';s.onclick=()=>{if(busy)return;sheet=s.textContent;draw()}}})}
+function inputs(){g('dIn').innerHTML=rows.map((r,i)=>`<label style="font-weight:700;font-size:14px">C${i+2} <span style="font-weight:400">${r[1].split(' ')[0]}</span> <input type="text" inputmode="decimal" value="${r[2]??''}" data-i="${i}" style="width:70px;font:15px 'Nunito Sans';padding:6px;border-radius:8px;border:2px solid var(--line)"></label>`).join('');
+  g('dIn').querySelectorAll('input').forEach(inp=>inp.onchange=()=>change(+inp.dataset.i,inp.value))}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function show(title,src,seq){g('dTitle').textContent='📄 '+title;for(const[l,fn,ms] of seq){if(fn)fn();g('dCode').innerHTML=lines(src,{[l]:'on'});await wait(ms||260)}g('dCode').innerHTML=lines(src)}
+function msgW(o){return new Promise(res=>{draw(null,M.msg(o));const bts=g('dSheet').querySelectorAll('.ovl .bt');bts.forEach(b=>{b.style.cursor='pointer';b.tabIndex=0;b.onclick=()=>{res(b.textContent)}});bts[0].focus()})}
+async function change(i,val){if(busy)return;busy=true;sheet="Оценки";
+  const v=val.trim()==''?null:parseFloat(val.replace(',','.'));rows[i][2]=v==null||isNaN(v)?(val.trim()==''?null:val):v;draw('C'+(i+2));
+  const nm=rows[i][1];g('dNote').innerHTML=`Промяна в <b>C${i+2}</b> → Excel пуска <code>Worksheet_Change</code> с <code>Target = C${i+2}</code>.`;
+  const empty=rows[i][2]==null;
+  await show("Лист1 (Оценки) – Worksheet_Change",CH,[[1],[2],[3],[4],...(empty||typeof rows[i][2]!='number'||rows[i][2]>=3?[[5,()=>{delete colr[nm];draw('C'+(i+2))}]]:[[6],[7,()=>{colr[nm]=RED;draw('C'+(i+2))}]]),[8],[9]]);
+  busy=false}
+async function run(m){if(busy)return;busy=true;try{
+  if(m=="sort"){await show("Module1 – Sortirai",SO,[[1],[2],[3],[4,()=>{rows.sort((a,b)=>(b[2]??-1)-(a[2]??-1));sheet="Оценки";draw();inputs()},500],[5],[6]]);g('dNote').textContent='Сортирано по оценка, от най-високата. Номерата в A също се местят с реда.'}
+  if(m=="otchet"){const nums=rows.map(r=>r[2]).filter(x=>typeof x=='number');
+    await show("Module1 – Otchet",OT,[[1],[2],[3],[4],[5],[6],[7],[8],[9],[10,()=>{rep=["","","",""];sheet="Отчет";draw()},400],[11],[12],[13],[14],[15,()=>{rep[0]=nums.length;draw()}],[16],[17,()=>{rep[1]=nums.length?Math.round(nums.reduce((a,b)=>a+b,0)/nums.length*100)/100:0;draw()}],[18],[19,()=>{rep[2]=nums.length?Math.max(...nums):0;draw()}],[20],[21,()=>{rep[3]=nums.filter(x=>x<3).length;draw()}],[22],[23]]);
+    g('dNote').textContent='Нов лист „Отчет“. Пусни пак – старият се изтрива и се прави нов, без грешка.'}
+  if(m=="pdf"){if(!rep){g('dTitle').textContent='📄 Module1 – VPdf';g('dCode').innerHTML=lines(PD,{4:'err'});await msgW({title:"Microsoft Visual Basic",icon:"exc",text:"Run-time error '9':\n\nSubscript out of range",buttons:["End","Debug"]});draw();g('dNote').textContent='Няма лист „Отчет“ – първо натисни „📊 Отчет“.';return}
+    await show("Module1 – VPdf",PD,[[1],[2],[3],[4,null,600]]);g('dCode').innerHTML=lines(PD,{5:'on'});await msgW({icon:"inf",title:"Microsoft Excel",text:"Записано: D:\\Uchilishte\\Otchet.pdf"});draw();g('dCode').innerHTML=lines(PD);g('dNote').textContent='PDF-ът е до файла на книгата.'}
+  if(m=="izch"){g('dTitle').textContent='📄 Module1 – Izchisti';g('dCode').innerHTML=lines(IZ,{2:'on'});const a=await msgW({icon:"que",title:"Microsoft Excel",text:"Да изтрия ли всички ученици?",buttons:["Да","Не"]});
+    if(a=="Не"){draw();g('dCode').innerHTML=lines(IZ);g('dNote').textContent='„Не“ → Exit Sub. Нищо не е изтрито.';return}
+    await show("Module1 – Izchisti",IZ,[[3,()=>{rows=rows.map(r=>[null,null,null,null]);draw()},400],[4,()=>{colr={};draw()}],[5]]);inputs();g('dNote').textContent='Всичко е изтрито. Натисни „↺ Отначало“ за нови данни.'}
+  }finally{busy=false}}
+g('dOpen').onclick=async()=>{if(busy)return;busy=true;sheet="Оценки";draw();
+  await show("ThisWorkbook – Workbook_Open",OP,[[1],[2],[3],[4,null,200]]);
+  const n=rows.filter(r=>r[0]!=null).length;g('dCode').innerHTML=lines(OP,{4:'on'});
+  await msgW({icon:"inf",title:"Microsoft Excel",text:`Добре дошли в дневника на 11 Б!\nУченици: ${n}`});draw();g('dCode').innerHTML=lines(OP);g('dNote').textContent='Workbook_Open тръгна сам при отварянето.';busy=false};
+g('dReset').onclick=()=>{if(!busy)reset()};
+reset();
+
+/* ---------- пътеводители ---------- */
+const stub='Private Sub Worksheet_Change(ByVal Target As Range)\n\nEnd Sub';
+const ddW=`<div class="dd" style="left:6px;top:24px">`;
+const sheetX=(st,extra={})=>M.xl(Object.assign({file:F,cells:[["№","Ученик","Оценка","Отсъствия"],...BASE],cw:[34,130,70,80,90],nc:5,rows:8,sheets:["Оценки"],tab:"Начало",st:Object.assign({},HEADST,st)},extra));
+M.walk("chg",[
+ {t:"Двоен клик върху листа",m:M.vbe({file:F,objs,modules:["Module1"],hot:"obj:Лист1 (Оценки)"}),c:"<kbd>Alt</kbd>+<kbd>F11</kbd>. Вляво, в <b>Microsoft Excel Objects</b>, двоен клик върху <b>Лист1 (Оценки)</b>. Отваря се празен прозорец – кодът на този лист."},
+ {t:"Лявото меню: Worksheet",m:M.vbe({file:F,objs,modules:["Module1"],selObj:"Лист1 (Оценки)",cwName:"Лист1",code:"",hot:"c1"}),c:"Над кода има две падащи менюта. В лявото, където пише <b>(General)</b>, избери <b>Worksheet</b>."},
+ {t:"Редакторът добавя SelectionChange",m:M.vbe({file:F,objs,modules:["Module1"],selObj:"Лист1 (Оценки)",cwName:"Лист1",obj1:"Worksheet",proc:"SelectionChange",code:"Private Sub Worksheet_SelectionChange(ByVal Target As Range)\n\nEnd Sub",hot:"c2"}),c:"Редакторът сам добавя събитието по подразбиране – <code>SelectionChange</code>. Не ни трябва (ще го изтрием). В дясното меню избери <b>Change</b>."},
+ {t:"Празно Worksheet_Change",m:M.vbe({file:F,objs,modules:["Module1"],selObj:"Лист1 (Оценки)",cwName:"Лист1",obj1:"Worksheet",proc:"Change",code:stub,cur:2}),c:"Появява се <code>Worksheet_Change</code> с правилното име и параметър. Изтрий празното SelectionChange. Така никога няма да сгрешиш името."},
+ {t:"Напиши кода",m:M.vbe({file:F,objs,modules:["Module1"],selObj:"Лист1 (Оценки)",cwName:"Лист1",obj1:"Worksheet",proc:"Change",code:CH.join('\n')}),c:"Напиши проверките и оцветяването. <kbd>Ctrl</kbd>+<kbd>S</kbd>. Не се пуска с F5 – събитието чака промяна."},
+ {t:"Въведи оценка",m:sheetX({},{sel:"C3",fx:"2.5",hot:"cell:C3"}),c:"В Excel напиши <b>2.5</b> (или 2,5 според настройките) в C3 и натисни <kbd>Enter</kbd>."},
+ {t:"Оцветява се само",m:sheetX({C3:RED},{sel:"C4"}),c:"Клетката става червена в момента на <kbd>Enter</kbd> – без бутон. Напиши пак 4.75 – цветът изчезва. Изтрий я – също без цвят."}
+]);
+M.walk("open",[
+ {t:"Двоен клик върху ThisWorkbook",m:M.vbe({file:F,objs,modules:["Module1"],hot:"obj:ThisWorkbook"}),c:"В <b>Microsoft Excel Objects</b> двоен клик върху <b>ThisWorkbook</b>."},
+ {t:"Workbook → Open",m:M.vbe({file:F,objs,modules:["Module1"],selObj:"ThisWorkbook",cwName:"ThisWorkbook",obj1:"Workbook",proc:"Open",code:"Private Sub Workbook_Open()\n\nEnd Sub",hot:"c2",cur:2}),c:"Ляво меню: <b>Workbook</b>. Редакторът веднага добавя <code>Workbook_Open</code> – точно каквото ни трябва."},
+ {t:"Кодът",m:M.vbe({file:F,objs,modules:["Module1"],selObj:"ThisWorkbook",cwName:"ThisWorkbook",obj1:"Workbook",proc:"Open",code:OP.join('\n')}),c:"Напиши поздрава. <kbd>Ctrl</kbd>+<kbd>S</kbd>, затвори Excel и отвори файла отново."},
+ {t:"Разреши съдържанието",m:sheetX({},{warn:true,hot:"warn",tab:"Начало"}),c:"При отваряне натисни <b>Разреши съдържанието</b>. Чак тогава макросите и събитията могат да тръгнат."},
+ {t:"Поздравът",m:sheetX({},{ovl:M.msg({icon:"inf",title:"Microsoft Excel",text:"Добре дошли в дневника на 11 Б!\nУченици: 5",hot:"mb:OK"})}),c:"<code>Workbook_Open</code> се изпълни сам. Първия път, след „Разреши съдържанието“, може да трябва да затвориш и отвориш още веднъж."},
+ {t:"Бутон „Отчет“",m:sheetX({},{tab:"Разработчик",shapes:`<div class="xbtn hot" style="left:450px;top:40px;width:140px;height:32px">📊 Отчет</div>`}),c:"Добави <code>Otchet</code> в Module1 и бутон за него (урок 8). Щракни го."},
+ {t:"Новият лист",m:M.xl({file:F,cells:[["Отчет за класа"],[],["Брой ученици",5],["Среден успех",4.59],["Най-висока оценка",6],["Слаби (под 3)",1]],st:{A1:"font-size:16px;font-weight:700"},cw:[150,70,80,80,80],nc:5,rows:8,sheets:["Оценки","Отчет"],sheet:"Отчет",tab:"Разработчик"}),c:"Появява се лист <b>Отчет</b> в края с изчислените показатели. Натисни бутона пак – старият лист се заменя, без грешка."},
+ {t:"PDF",m:sheetX({},{tab:"Разработчик",ovl:M.msg({icon:"inf",title:"Microsoft Excel",text:"Записано: D:\\Uchilishte\\Otchet.pdf",hot:"mb:OK"})}),c:"Макросът <code>VPdf</code> записва отчета като PDF до файла. Отвори го и провери."}
+]);
+M.init();
+}
+</script>
+<script>
+const QUIZ=[
+ ["Какво е събитие (event) в Excel?", ["Вид диаграма", "Нещо, което се случва – промяна на клетка, отваряне на файла – и към което може да се закачи макрос", "Грешка в кода", "Нов лист"], 1, "Макросът тръгва сам при събитието."],
+ ["Къде се пише Worksheet_Change?", ["В Module1", "В кода на листа (Microsoft Excel Objects → Лист1)", "В ThisWorkbook", "Във формула"], 1, "В модул никога няма да тръгне."],
+ ["Къде се пише Workbook_Open?", ["В Лист1", "В Module1", "В ThisWorkbook", "В Personal.xlsb"], 2, "Събитията на книгата са в ThisWorkbook."],
+ ["Какво е Target в Worksheet_Change?", ["Първата клетка на листа", "Клетката (обхватът), която току-що е променена", "Активният лист", "Името на файла"], 1, "Excel го подава автоматично."],
+ ["Защо проверяваме If Target.Count > 1 Then Exit Sub?", ["За да е по-бързо", "Ако са променени много клетки наведнъж, Target.Value не е едно число и би дало грешка", "Задължително е", "За да се запише файлът"], 1, "Напр. при поставяне или изтриване на диапазон."],
+ ["Какво става, ако Worksheet_Change пише стойност в клетка без EnableEvents = False?", ["Нищо", "Новата промяна пуска събитието отново – безкраен кръг", "Excel се затваря", "Стойността не се записва"], 1, "Спирай събитията около писането."],
+ ["Как се присвоява обект на променлива?", ["ws = Sheets(1)", "Set ws = Sheets(1)", "Let ws = Sheets(1)", "ws := Sheets(1)"], 1, "За обекти – със Set."],
+ ["Какво прави Header:=xlYes при Sort?", ["Сортира и заглавието", "Първият ред е заглавие и не се сортира", "Добавя заглавие", "Сортира по заглавие"], 1, "Иначе заглавието ще се смеси с данните."],
+ ["Защо Izchisti пита с vbYesNo?", ["Задължително е", "Изтриването не може да се отмени с Ctrl+Z", "За да е по-бавно", "За да се запише PDF"], 1, "Опасните действия винаги потвърждаваме."],
+ ["Как най-лесно получаваш точното име на събитие в редактора?", ["Пишеш го по памет", "Избираш обекта и събитието от двете падащи менюта над кода", "Копираш от интернет", "Записваш го с рекордера"], 1, "Тогава името и параметрите са винаги точни."]];
+</script>
+<script src="ip-urok.js?v=20261127"></script>
+<script src="../totop.js?v=20261126" defer></script>
+</body>
+</html>

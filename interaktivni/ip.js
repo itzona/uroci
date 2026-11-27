@@ -3,7 +3,8 @@
    CUR – номер на урока, броен от 0 (-1 за началната страница на модула).
    Нов урок: добавете ред в P и номера му в r на съответния раздел в G. */
 const G=[{n:"Уроци",ic:"📊",full:"Интерактивни презентации – 11. и 12. клас",r:[0,1,2,3]},
- {n:"Макроси",ic:"⚙️",full:"Макроси в PowerPoint (VBA)",r:[4,5,6]}];
+ {n:"Макроси",ic:"⚙️",full:"Макроси в PowerPoint (VBA)",r:[4,5,6]},
+ {n:"Excel",ic:"📗",full:"Макроси в Excel (VBA)",r:[7,8,9]}];
 /* Файл и заглавие на всеки урок (по реда на номерата) */
 const P=[
  ["urok-1-mentimeter.html","Mentimeter: анкета в реално време"],
@@ -12,7 +13,10 @@ const P=[
  ["urok-4-ahaslides.html","AhaSlides: направи готова презентация интерактивна"],
  ["urok-5-makrosi-parvi-stapki.html","Макроси в PowerPoint: първи стъпки с VBA"],
  ["urok-6-makrosi-interaktiven-test.html","Интерактивен тест с макроси"],
- ["urok-7-makrosi-avtomatizacia.html","Макроси за автоматизация на презентацията"]
+ ["urok-7-makrosi-avtomatizacia.html","Макроси за автоматизация на презентацията"],
+ ["urok-8-excel-zapisvane-na-makros.html","Excel: записване на макрос"],
+ ["urok-9-excel-vba-kletki-i-cikli.html","Excel: клетки, цикли и условия във VBA"],
+ ["urok-10-excel-avtomatizacia.html","Excel: събития, отчети и автоматичен дневник"]
 ];
 const cur=typeof CUR=="number"?CUR:-1;
 /* go(-1) – към началната страница на модула, go(i) – към урок i */
