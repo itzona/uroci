@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 7: Макроси за автоматизация на презентацията – Интерактивни презентации, 11 и 12 клас</title>
+<link rel="icon" type="image/svg+xml" href="../icons/interaktivni.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ip-urok.css?v=20261127b">
+<link rel="stylesheet" href="mk.css?v=20261127">
+</head>
+<body>
+
+<header class="hero ppt">
+  <div class="wrap">
+    <div>
+      <span class="tag">Урок 7 · Макроси в PowerPoint · 11 и 12 клас</span>
+      <h1>Макроси за автоматизация: цялата презентация с един клик</h1>
+      <p>Еднакъв шрифт на 30 слайда, надпис с автор на всеки слайд, нови слайдове от списък, изтриване на празните – с <b>цикли</b> макросът обхожда слайдовете вместо теб. Ще се научиш и да проследяваш кода ред по ред.</p>
+    </div>
+    <svg viewBox="0 0 470 320" role="img" aria-label="Редица слайдове, които се оцветяват един след друг, и стрелка на цикъл">
+      <ellipse cx="235" cy="302" rx="210" ry="12" fill="#5a1c1e" opacity=".45"/>
+      <g font-family="Nunito,sans-serif" font-weight="900">
+        <g><rect x="20" y="40" width="130" height="80" rx="8" fill="#fff"/><rect x="34" y="56" width="80" height="10" rx="4" fill="#1b2240"/><rect x="34" y="74" width="100" height="6" rx="3" fill="#c8cfe8"/><rect x="34" y="104" width="70" height="7" rx="3" fill="#ffc23d"/><text x="138" y="56" font-size="11" fill="#999" text-anchor="end">1</text></g>
+        <g><rect x="170" y="40" width="130" height="80" rx="8" fill="#fff"/><rect x="184" y="56" width="80" height="10" rx="4" fill="#1b2240"/><rect x="184" y="74" width="100" height="6" rx="3" fill="#c8cfe8"/><rect x="184" y="104" width="70" height="7" rx="3" fill="#ffc23d"/><text x="288" y="56" font-size="11" fill="#999" text-anchor="end">2</text></g>
+        <g><rect x="320" y="40" width="130" height="80" rx="8" fill="#fff" stroke="#ffc23d" stroke-width="5"/><rect x="334" y="56" width="80" height="10" rx="4" fill="#1b2240"/><rect x="334" y="74" width="100" height="6" rx="3" fill="#c8cfe8"/><rect class="bargrow" x="334" y="104" width="70" height="7" rx="3" fill="#ffc23d"/><text x="438" y="56" font-size="11" fill="#999" text-anchor="end">3</text></g>
+        <g opacity=".55"><rect x="20" y="140" width="130" height="80" rx="8" fill="#fff"/><rect x="34" y="156" width="80" height="10" rx="4" fill="#8a8fa8"/><rect x="34" y="174" width="100" height="6" rx="3" fill="#c8cfe8"/><text x="138" y="156" font-size="11" fill="#999" text-anchor="end">4</text></g>
+        <g opacity=".55"><rect x="170" y="140" width="130" height="80" rx="8" fill="#fff"/><rect x="184" y="156" width="80" height="10" rx="4" fill="#8a8fa8"/><rect x="184" y="174" width="100" height="6" rx="3" fill="#c8cfe8"/><text x="288" y="156" font-size="11" fill="#999" text-anchor="end">5</text></g>
+        <g opacity=".55"><rect x="320" y="140" width="130" height="80" rx="8" fill="#fff"/><rect x="334" y="156" width="80" height="10" rx="4" fill="#8a8fa8"/><rect x="334" y="174" width="100" height="6" rx="3" fill="#c8cfe8"/><text x="438" y="156" font-size="11" fill="#999" text-anchor="end">6</text></g>
+      </g>
+      <path d="M60 262 H400 a18 18 0 0 0 0 -36" stroke="#ffd8c2" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M392 222 l10 -10 l8 13 z" fill="#ffd8c2"/>
+      <text x="230" y="290" text-anchor="middle" font-family="Consolas,monospace" font-size="16" fill="#fff">For Each sld In …Slides</text>
+    </svg>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Теория</summary><div class="menu"><a href="#zashto">Защо автоматизация</a><a href="#obekti">Обектите в PowerPoint</a><a href="#cikli">Цикли</a></div></details>
+    <details><summary>Пробвай</summary><div class="menu"><a href="#simulator">Цикълът в действие</a><a href="#recepti">Готови макроси</a></div></details>
+    <details><summary>Стъпка по стъпка</summary><div class="menu"><a href="#stapki">Безопасно пускане и проследяване</a><a href="#greshki">Чести грешки</a><a href="#bez-makros">Кога не ти трябва макрос</a></div></details>
+    <details><summary>Задача</summary><div class="menu"><a href="#zadacha">Задача за часа</a><a href="#kriterii">Критерии за оценяване</a></div></details>
+    <a href="#test">Тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="zashto">
+  <div class="wrap grid2">
+    <div>
+      <h2>Защо автоматизация</h2>
+      <p>В уроци 5 и 6 макросите работеха <b>по време на слайдшоуто</b> – за публиката. Сега ще пишеш макроси <b>за себе си</b>, докато редактираш: те променят много слайдове наведнъж.</p>
+      <p>Пример: учителят каза „всички презентации с шрифт Calibri и с името ви долу на всеки слайд“. Твоята има 30 слайда с по 3 текстови полета – това са 90 щраквания за шрифта и 30 ръчно вмъкнати надписа. Макросът го прави за <b>2 секунди</b> – и без пропуснат слайд.</p>
+      <div class="tip"><b>⚠️ Ctrl+Z не отменя макрос!</b> Промените от макроса не могат да се върнат с „Отмяна“. Затова <b>преди</b> всяко пускане: <b>запиши копие</b> на презентацията. Ако нещо се обърка – затваряш без записване и отваряш копието.</div>
+    </div>
+    <div class="card">
+      <h3>Колко време спестява</h3>
+      <div class="mini" style="height:auto">
+        <div class="q">30 слайда × 3 текстови полета</div>
+        <div class="hrow"><span>Ръчно</span><i style="width:70%;background:#ff6a4d"></i><em>≈ 20 мин</em></div>
+        <div class="hrow"><span>Макрос</span><i style="width:3%;background:#1f9d6a"></i><em>2 сек</em></div>
+        <div class="q" style="margin-top:12px">Надпис с автор и номер</div>
+        <div class="hrow"><span>Ръчно</span><i style="width:55%;background:#ff6a4d"></i><em>≈ 15 мин</em></div>
+        <div class="hrow"><span>Макрос</span><i style="width:3%;background:#1f9d6a"></i><em>1 сек</em></div>
+      </div>
+      <p class="note">Писането на макроса отнема време първия път. Печелиш, когато задачата е голяма или се повтаря – макросът се използва отново за всяка нова презентация.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="obekti">
+  <div class="wrap">
+    <h2>Обектите в PowerPoint – „кутии в кутии“</h2>
+    <p>За VBA всичко в PowerPoint е <b>обект</b>: презентацията, слайдът, фигурата, текстът, шрифтът. Обектите са вложени един в друг, а <b>точката</b> значи „вътре в“. Натискай частите на записа отляво надясно и гледай какво се маркира.</p>
+    <div class="om" id="om" style="margin:18px 0 12px"></div>
+    <div class="grid2">
+      <div>
+        <div class="omv" id="omApp"><span class="lb">Application (PowerPoint)</span>
+          <div class="omv" id="omPres" style="margin-top:8px"><span class="lb">ActivePresentation (Hardware.pptm)</span>
+            <div class="ss" id="omSlides">
+              <div class="s" id="omS1"><span class="lb">Slides(1)</span><div class="sh">Компютърът</div></div>
+              <div class="s" id="omS2"><span class="lb">Slides(2)</span><div class="sh" id="omSh1"><span class="tx" id="omTx">Процесор</span></div><div class="sh" id="omSh2" style="font-size:10px">Изпълнява командите</div></div>
+              <div class="s" id="omS3"><span class="lb">Slides(3)</span><div class="sh">Памет</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="omOut" aria-live="polite"></div>
+    </div>
+    <div class="grid" style="margin-top:22px">
+      <div class="card"><h3>Колекции и елементи</h3><p><code>Slides</code> (с „s“) е <b>колекция</b> – всички слайдове. <code>Slides(2)</code> е <b>един</b> елемент – вторият слайд. Също: <code>Shapes</code> и <code>Shapes(1)</code> или <code>Shapes("Rezultat")</code>.</p></div>
+      <div class="card"><h3>Свойства</h3><p>Свойството е характеристика: <code>Font.Name</code>, <code>Font.Size</code>, <code>Slides.Count</code>, <code>SlideIndex</code>. Четеш го или го сменяш с <code>=</code>.</p></div>
+      <div class="card"><h3>Методи</h3><p>Методът е действие: <code>.Delete</code> (изтрий), <code>.Add</code> (добави), <code>.Duplicate</code> (дублирай), <code>.AddTextbox</code> (добави текстово поле).</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="cikli">
+  <div class="wrap grid2">
+    <div>
+      <h2>Цикли – повтори за всеки слайд</h2>
+      <p><b>Цикълът</b> повтаря едни и същи команди много пъти. Във VBA има два вида, които ще ползваш най-често.</p>
+      <h3 style="margin-top:20px">For Each – за всеки елемент</h3>
+<pre class="vba" data-title="For Each">
+Dim sld As Slide
+For Each sld In ActivePresentation.Slides
+    ' тук: какво да се направи със слайда sld
+Next sld
+</pre>
+      <ol class="lx">
+        <li data-l="1"><code>sld</code> е променлива от вид <code>Slide</code> – „пръст“, който сочи един слайд.</li>
+        <li data-l="2">„<b>За всеки</b> слайд <code>sld</code> <b>в</b> слайдовете на презентацията“: при всяко завъртане <code>sld</code> сочи следващия слайд.</li>
+        <li data-l="3">Командите в тялото на цикъла се изпълняват веднъж за всеки слайд.</li>
+        <li data-l="4"><code>Next sld</code> – „мини на следващия“. След последния слайд цикълът свършва.</li>
+      </ol>
+      <h3 style="margin-top:20px">For … To – с брояч</h3>
+<pre class="vba" data-title="For с брояч">
+Dim i As Integer
+For i = 1 To ActivePresentation.Slides.Count
+    MsgBox "Това е слайд " & i
+Next i
+</pre>
+      <ol class="lx">
+        <li data-l="2"><code>i</code> започва от 1 и расте с 1 до броя на слайдовете. С <code>Step -1</code> брои надолу: <code>For i = 10 To 1 Step -1</code>.</li>
+        <li data-l="3">Използваш <code>i</code> като номер: <code>ActivePresentation.Slides(i)</code>.</li>
+      </ol>
+    </div>
+    <div>
+      <h3>Цикъл в цикъл</h3>
+      <p>Всеки слайд има много фигури. За да стигнеш до <b>всяка фигура на всеки слайд</b>, слагаш цикъл в цикъла – като часовник: вътрешният (фигурите) се завърта целия, после външният (слайдовете) мръдва с едно.</p>
+<pre class="vba" data-title="Вложени цикли">
+For Each sld In ActivePresentation.Slides
+    For Each shp In sld.Shapes
+        If shp.HasTextFrame Then
+            shp.TextFrame.TextRange.Font.Name = "Calibri"
+        End If
+    Next shp
+Next sld
+</pre>
+      <ol class="lx">
+        <li data-l="1,7">Външен цикъл – слайдовете.</li>
+        <li data-l="2,6">Вътрешен цикъл – фигурите на текущия слайд <code>sld</code>.</li>
+        <li data-l="3,5"><b>Проверка!</b> Картинките и линиите нямат текст. Ако опиташ да смениш шрифта на картинка, излиза грешка. <code>HasTextFrame</code> е <code>True</code> само за фигури, които могат да имат текст.</li>
+        <li data-l="4">Сменя шрифта на целия текст във фигурата.</li>
+      </ol>
+      <div class="tip"><b>Защо изтриването се прави отзад напред?</b> Ако изтриеш слайд 3, слайд 4 става 3. Цикълът минава на i = 4 и <b>прескача</b> бившия слайд 4. Затова при изтриване броим назад: <code>For i = Count To 1 Step -1</code>. Пробвай го в симулатора отдолу!</div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="simulator">
+  <div class="wrap">
+    <h2>🧪 Цикълът в действие</h2>
+    <p class="muted">Шест слайда с различни шрифтове и цветове; слайдове 3 и 4 са празни (без нито една фигура). Избери макрос и натисни <b>▶ Изпълни</b> или върви ред по ред с <b>⤵ Стъпка (F8)</b>.</p>
+    <div class="om" id="simPick" style="margin:14px 0"></div>
+    <div class="row" id="dirRow" style="margin-bottom:10px" hidden><b>Посока на цикъла:</b><label class="chk"><input type="radio" name="dir" value="back" checked> назад (Step -1) – правилно</label><label class="chk"><input type="radio" name="dir" value="fwd"> напред – с грешка</label></div>
+    <div class="sim">
+      <div>
+        <div class="minis" id="minis"></div>
+        <div class="watch" id="simWatch"></div>
+        <div class="row"><button type="button" class="btn coral" id="simRun">▶ Изпълни (F5)</button><button type="button" class="btn" id="simStep">⤵ Стъпка (F8)</button><button type="button" class="btn ghost" id="simReset">↺ Върни презентацията</button></div>
+        <div class="msgarea" id="simMsg" style="min-height:120px"><span class="muted">Съобщенията на макроса ще се появят тук</span></div>
+      </div>
+      <div><div class="vba-box"><div class="hd"><span id="simTitle">📄 Module1</span></div><div class="lines" id="simCode"></div></div><p class="note" id="simNote" style="margin-top:10px"></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="recepti">
+  <div class="wrap">
+    <h2>Готови макроси – рецепти</h2>
+    <p class="muted">Седем макроса за <b>един модул</b>. Копирай ги, промени името, шрифта и цвета. Пускат се с <kbd>Alt</kbd>+<kbd>F8</kbd> в нормален изглед (не в слайдшоу).</p>
+    <div class="grid2" style="margin-top:18px">
+      <div>
+        <h3>1. Един шрифт и цвят на целия текст</h3>
+<pre class="vba" data-title="EdinShrift">
+Sub EdinShrift()
+    Dim sld As Slide, shp As Shape
+    For Each sld In ActivePresentation.Slides
+        For Each shp In sld.Shapes
+            If shp.HasTextFrame Then
+                shp.TextFrame.TextRange.Font.Name = "Calibri"
+                shp.TextFrame.TextRange.Font.Color.RGB = RGB(27, 34, 64)
+            End If
+        Next shp
+    Next sld
+    MsgBox "Готово! Обработени слайдове: " & ActivePresentation.Slides.Count
+End Sub
+</pre>
+        <ol class="lx">
+          <li data-l="2">Две променливи на един ред, разделени със запетая.</li>
+          <li data-l="6-7"><code>RGB(червено, зелено, синьо)</code> – всяко от 0 до 255. <code>RGB(27, 34, 64)</code> е тъмносиньо; <code>RGB(255, 0, 0)</code> – червено.</li>
+          <li data-l="11">Отчет накрая – така знаеш, че макросът е стигнал до края.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>2. Надпис с автор и номер на всеки слайд</h3>
+<pre class="vba" data-title="Nadpis">
+Sub Nadpis()
+    Dim sld As Slide, shp As Shape
+    For Each sld In ActivePresentation.Slides
+        Set shp = sld.Shapes.AddTextbox(msoTextOrientationHorizontal, _
+            20, ActivePresentation.PageSetup.SlideHeight - 40, 500, 30)
+        shp.Name = "Avtor"
+        shp.TextFrame.TextRange.Text = "Ива Петрова, 11 Б · слайд " & sld.SlideIndex
+        shp.TextFrame.TextRange.Font.Size = 12
+    Next sld
+End Sub
+</pre>
+        <ol class="lx">
+          <li data-l="4-5"><code>AddTextbox(посока, отляво, отгоре, ширина, височина)</code> – размерите са в точки (1 точка ≈ 0,35 мм). <code>SlideHeight - 40</code> = 40 точки над долния край. Знакът <code>_</code> в края на ред значи „командата продължава на следващия ред“.</li>
+          <li data-l="6">Даваме име <b>Avtor</b> – така макрос 3 ще намери и изтрие надписите.</li>
+          <li data-l="7"><code>sld.SlideIndex</code> – поредният номер на слайда.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>3. Изтрий надписите „Avtor“</h3>
+<pre class="vba" data-title="IztriiAvtor">
+Sub IztriiAvtor()
+    Dim sld As Slide, i As Integer
+    For Each sld In ActivePresentation.Slides
+        For i = sld.Shapes.Count To 1 Step -1
+            If sld.Shapes(i).Name = "Avtor" Then sld.Shapes(i).Delete
+        Next i
+    Next sld
+End Sub
+</pre>
+        <ol class="lx">
+          <li data-l="4">Отзад напред – защото трием (виж „Защо изтриването се прави отзад напред?“).</li>
+          <li data-l="5">Трие само фигурите с име <b>Avtor</b>. Пусни го, ако си пуснал Nadpis два пъти или искаш да смениш текста.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>4. Еднакъв фон на всички слайдове</h3>
+<pre class="vba" data-title="Fon">
+Sub Fon()
+    Dim sld As Slide
+    For Each sld In ActivePresentation.Slides
+        sld.FollowMasterBackground = msoFalse
+        sld.Background.Fill.Solid
+        sld.Background.Fill.ForeColor.RGB = RGB(255, 243, 214)
+    Next sld
+End Sub
+</pre>
+        <ol class="lx">
+          <li data-l="4">Слайдът спира да взема фона от образеца (Slide Master) – иначе собственият фон не се вижда.</li>
+          <li data-l="5-6">Плътна заливка (<code>Solid</code>) в светлокремав цвят.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>5. Нови слайдове от списък</h3>
+<pre class="vba" data-title="NoviSlaidove">
+Sub NoviSlaidove()
+    Dim temi As Variant, i As Integer, sld As Slide
+    temi = Array("Процесор", "Памет", "Видеокарта", "Захранване")
+    For i = 0 To UBound(temi)
+        Set sld = ActivePresentation.Slides.Add( _
+            ActivePresentation.Slides.Count + 1, ppLayoutTitleOnly)
+        sld.Shapes(1).TextFrame.TextRange.Text = temi(i)
+    Next i
+End Sub
+</pre>
+        <ol class="lx">
+          <li data-l="3"><code>Array(…)</code> – списък от стойности. Номерацията в него започва от <b>0</b>.</li>
+          <li data-l="4"><code>UBound(temi)</code> – последният номер в списъка (тук 3).</li>
+          <li data-l="5-6">Добавя слайд <b>най-накрая</b> (Count + 1) с оформление „Само заглавие“.</li>
+          <li data-l="7"><code>Shapes(1)</code> на нов слайд е контейнерът за заглавие – пишем темата в него.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>6. Изтрий празните слайдове</h3>
+<pre class="vba" data-title="IztriiPrazni">
+Sub IztriiPrazni()
+    Dim i As Integer
+    For i = ActivePresentation.Slides.Count To 1 Step -1
+        If ActivePresentation.Slides(i).Shapes.Count = 0 Then
+            ActivePresentation.Slides(i).Delete
+        End If
+    Next i
+End Sub
+</pre>
+        <ol class="lx">
+          <li data-l="3">Броим назад – от последния към първия.</li>
+          <li data-l="4">„Празен“ тук значи <b>без нито една фигура</b>. Слайд с празни контейнери („Щракнете, за да добавите заглавие“) има фигури и не се трие.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>7. Статистика на презентацията</h3>
+<pre class="vba" data-title="Statistika">
+Sub Statistika()
+    Dim sld As Slide, shp As Shape
+    Dim dumi As Long, kartinki As Integer
+    For Each sld In ActivePresentation.Slides
+        For Each shp In sld.Shapes
+            If shp.HasTextFrame Then
+                dumi = dumi + shp.TextFrame.TextRange.Words.Count
+            End If
+            If shp.Type = msoPicture Then kartinki = kartinki + 1
+        Next shp
+    Next sld
+    MsgBox "Слайдове: " & ActivePresentation.Slides.Count & vbCrLf & _
+        "Думи: " & dumi & vbCrLf & "Картинки: " & kartinki, vbInformation, "Статистика"
+End Sub
+</pre>
+        <ol class="lx">
+          <li data-l="3"><code>Long</code> – цяло число за големи стойности (думите може да са над 32 767).</li>
+          <li data-l="7">Натрупване: към досегашния брой добавяме думите на тази фигура. Броят е приблизителен – PowerPoint брои и някои препинателни знаци.</li>
+          <li data-l="9">Брои картинките, вмъкнати с <b>Вмъкване → Картини</b>. Картина в контейнер на оформлението има друг вид и не се брои.</li>
+          <li data-l="12-13"><code>vbCrLf</code> – нов ред в съобщението.</li>
+        </ol>
+      </div>
+      <div>
+        <div class="card" style="margin-top:34px">
+          <h3>Как пускаш тези макроси</h3>
+          <ol>
+            <li>Запиши <b>копие</b> на презентацията като .pptm.</li>
+            <li><kbd>Alt</kbd>+<kbd>F11</kbd> → Insert → Module → постави кода.</li>
+            <li>Курсорът в макроса → <kbd>F5</kbd>. Или в PowerPoint: <kbd>Alt</kbd>+<kbd>F8</kbd> → избери → <b>Изпълни</b>.</li>
+            <li>Прегледай слайдовете. Ако нещо не е както трябва – затвори без записване.</li>
+          </ol>
+          <p class="note">Тези макроси работят в нормален изглед. Ако ги пуснеш по време на слайдшоу, промените се виждат чак след излизане.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="stapki">
+  <div class="wrap">
+    <h2>Стъпка по стъпка: безопасно пускане и проследяване на кода</h2>
+    <p class="muted">Когато макросът не прави това, което очакваш, го изпълняваш <b>ред по ред</b> и гледаш какво става. Така работят и професионалните програмисти.</p>
+    <div class="walk" data-walk="debug" data-title="Копие → код → точка на прекъсване → стъпка по стъпка → резултат"></div>
+    <div class="grid" style="margin-top:22px">
+      <div class="card"><h3>⌨️ Клавиши за проследяване</h3><div class="kv"><span><kbd>F8</kbd></span><span>изпълни <b>един</b> ред (Step Into)</span><span><kbd>F9</kbd></span><span>сложи/махни точка на прекъсване</span><span><kbd>F5</kbd></span><span>продължи до края или до следващата точка</span><span><kbd>Ctrl</kbd>+<kbd>G</kbd></span><span>прозорец Immediate</span><span>■ Reset</span><span>спри макроса веднага</span></div></div>
+      <div class="card"><h3>🔎 Debug.Print</h3><p>Ред <code>Debug.Print sld.SlideIndex, shp.Name</code> в цикъла пише в прозореца <b>Immediate</b> кой слайд и коя фигура се обработват – без да спира макроса с MsgBox.</p></div>
+      <div class="card"><h3>🛑 Макросът „зацикли“</h3><p>Ако макросът не спира, натисни <kbd>Esc</kbd> или <kbd>Ctrl</kbd>+<kbd>Break</kbd>. Излиза прозорец „Code execution has been interrupted“ → <b>End</b>.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="greshki">
+  <div class="wrap">
+    <h2>Чести грешки</h2>
+    <div class="scroll" style="margin-top:16px">
+    <table class="stack">
+      <thead><tr><th>Какво виждаш</th><th>Причина</th><th>Как се поправя</th></tr></thead>
+      <tbody>
+        <tr><td>„This object does not have a TextFrame“ / „Object doesn't support this property or method“</td><td>Опит за текст на картинка, линия или таблица</td><td>Провери <code>If shp.HasTextFrame Then</code> преди да пипаш текста.</td></tr>
+        <tr><td>„Integer out of range. 6 is not in the valid range of 1 to 5“</td><td>Изтриване в цикъл напред – слайдовете намаляват, а броячът продължава</td><td>Изтривай отзад напред: <code>For i = Count To 1 Step -1</code>.</td></tr>
+        <tr><td>Пропуснат празен слайд</td><td>Същата причина – след изтриване номерата се изместват</td><td>Цикъл отзад напред.</td></tr>
+        <tr><td>Надписите са два пъти</td><td><code>Nadpis</code> е пуснат два пъти</td><td>Пусни <code>IztriiAvtor</code> и после <code>Nadpis</code> веднъж.</td></tr>
+        <tr><td>Фонът не се сменя</td><td>Слайдът взема фона от образеца</td><td>Ред <code>sld.FollowMasterBackground = msoFalse</code>.</td></tr>
+        <tr><td>„Variable not defined“</td><td>Отгоре на модула има <code>Option Explicit</code> и липсва <code>Dim</code></td><td>Декларирай променливата с <code>Dim</code> – това е добра практика, а не наказание.</td></tr>
+        <tr><td>Не мога да върна промените</td><td>Ctrl+Z не отменя макроси</td><td>Затвори без записване и отвори копието.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h3 style="margin-top:30px">🧪 Намери грешката</h3>
+    <div class="grid" style="margin-top:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr))">
+      <div class="bug" data-bad="3" data-ok="Липсва проверката If shp.HasTextFrame. На слайд с картинка редът ще даде грешка. Сложи шрифта вътре в If shp.HasTextFrame Then … End If.">
+<pre class="vba" data-title="Грешка 1 – спира на слайд с картинка">
+For Each sld In ActivePresentation.Slides
+    For Each shp In sld.Shapes
+        shp.TextFrame.TextRange.Font.Name = "Arial"
+    Next shp
+Next sld
+</pre>
+        <div class="res" aria-live="polite"></div>
+      </div>
+      <div class="bug" data-bad="2" data-ok="При изтриване цикълът трябва да е отзад напред: For i = ActivePresentation.Slides.Count To 1 Step -1.">
+<pre class="vba" data-title="Грешка 2 – пропуска слайдове">
+Dim i As Integer
+For i = 1 To ActivePresentation.Slides.Count
+    If ActivePresentation.Slides(i).Shapes.Count = 0 Then
+        ActivePresentation.Slides(i).Delete
+    End If
+Next i
+</pre>
+        <div class="res" aria-live="polite"></div>
+      </div>
+      <div class="bug" data-bad="4" data-ok="Next трябва да е за същата променлива като For Each: Next sld, а не Next shp. VBA: „Invalid Next control variable reference“.">
+<pre class="vba" data-title="Грешка 3 – не се компилира">
+Dim sld As Slide
+For Each sld In ActivePresentation.Slides
+    sld.FollowMasterBackground = msoFalse
+Next shp
+</pre>
+        <div class="res" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="bez-makros">
+  <div class="wrap">
+    <h2>Кога <u>не</u> ти трябва макрос</h2>
+    <p class="muted">Добрият програмист първо проверява дали няма готов инструмент. За някои задачи PowerPoint вече има бутон.</p>
+    <table class="stack" style="margin-top:16px">
+      <thead><tr><th>Задача</th><th>Вграден инструмент</th><th>Макрос – кога</th></tr></thead>
+      <tbody>
+        <tr><td>Един шрифт навсякъде</td><td><b>Начало → Замени ▾ → Замяна на шрифтове</b> или <b>Изглед → Образец на слайдовете</b></td><td>Когато искаш и цвят, и размер, или само за определени фигури</td></tr>
+        <tr><td>Номер на слайда</td><td><b>Вмъкване → Горен и долен колонтитул → Номер на слайда</b></td><td>Когато текстът е сложен: „Име, клас · слайд 3 от 12“</td></tr>
+        <tr><td>Замяна на дума</td><td><b>Начало → Замени</b> (<kbd>Ctrl</kbd>+<kbd>H</kbd>)</td><td>Рядко е нужен</td></tr>
+        <tr><td>Еднакъв фон</td><td><b>Проектиране → Форматиране на фона → Приложи за всички</b></td><td>Когато фонът зависи от условие (напр. различен за всеки трети слайд)</td></tr>
+        <tr><td>Изтриване на празни слайдове, статистика, слайдове от списък</td><td>Няма</td><td>✅ Тук макросът е най-полезен</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="band" id="zadacha">
+  <div class="wrap">
+    <h2>Задача за часа</h2>
+    <div class="goal"><h3>„Автоматизатор“ – модул с макроси за всяка презентация</h3><p>Напиши модул с <b>5 макроса</b>, които оправят оформлението на презентация с един клик, и ги пусни върху <b>своя готова презентация</b> от поне 8 слайда (напр. от урок 2 или 4). Покажи „преди“ и „след“.</p>
+      <div class="time"><span>⏱ 1–2 учебни часа</span><span>👤 индивидуално</span><span>🎯 20 точки</span></div></div>
+    <div class="grid2" style="margin-top:26px">
+      <div>
+        <h3>Изисквания – точно в този ред</h3>
+        <ol class="req">
+          <li><b>Копие.</b> Запиши презентацията като <b>Avtomatizacia-Ime-Familia.pptm</b>. Оригиналът остава непроменен. Направи екранна снимка „<b>преди</b>“ (Изглед → Сортировач на слайдове).</li>
+          <li><b>Модул</b> с име <b>Avtomatizacia</b> (в прозореца Properties, <kbd>F4</kbd> → <b>(Name)</b>).</li>
+          <li><code>EdinShrift</code> – твой избор на шрифт и цвят, с проверка <code>HasTextFrame</code> и отчет с MsgBox.</li>
+          <li><code>Nadpis</code> – <b>твоето име, клас и номер на слайда</b> долу на всеки слайд; фигурата се казва <b>Avtor</b>.</li>
+          <li><code>IztriiAvtor</code> – маха всички надписи Avtor (цикъл отзад напред).</li>
+          <li><code>NoviSlaidove</code> – добавя накрая 3 слайда със заглавия от <code>Array</code>, свързани с темата ти (напр. „Източници“, „Въпроси“, „Благодаря“).</li>
+          <li><code>Statistika</code> – брой слайдове, думи и картинки.</li>
+          <li><b>Коментар</b> над всеки макрос. Поне един макрос проследи с <kbd>F8</kbd>.</li>
+          <li><b>Пусни</b> макросите и направи снимка „<b>след</b>“ и снимка на съобщението от <code>Statistika</code>.</li>
+        </ol>
+      </div>
+      <div>
+        <div class="card"><h3>Какво предаваш</h3><ul><li>Файла <b>.pptm</b></li><li>Снимки „преди“ и „след“ (Сортировач на слайдове)</li><li>Снимка на съобщението от Statistika</li><li>Отговор в 2–3 изречения: <i>Защо изтриването се прави с цикъл отзад напред?</i></li></ul></div>
+        <div class="card" style="margin-top:20px"><h3>Как изглежда „преди“ и „след“</h3>
+          <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px">
+            <div><b class="note">ПРЕДИ</b><div class="minis" style="grid-template-columns:1fr 1fr;gap:6px;margin-top:4px">
+              <div class="mini-sl"><div class="mt" style="font-family:'Comic Sans MS',cursive;color:#7a2e8e">Хардуер</div></div>
+              <div class="mini-sl"><div class="mt" style="font-family:'Times New Roman',serif">Процесор</div></div>
+              <div class="mini-sl"><div class="mt" style="font-family:'Courier New',monospace;color:#c2410c">Памет</div></div>
+              <div class="mini-sl"><div class="mt" style="font-family:Georgia,serif;color:#1f9d6a">Диск</div></div></div></div>
+            <div><b class="note">СЛЕД</b><div class="minis" style="grid-template-columns:1fr 1fr;gap:6px;margin-top:4px">
+              <div class="mini-sl"><div class="mt" style="font-family:Calibri,Carlito,sans-serif;color:#1b2240">Хардуер</div><span class="ft">Ива, 11 Б · 1</span></div>
+              <div class="mini-sl"><div class="mt" style="font-family:Calibri,Carlito,sans-serif;color:#1b2240">Процесор</div><span class="ft">Ива, 11 Б · 2</span></div>
+              <div class="mini-sl"><div class="mt" style="font-family:Calibri,Carlito,sans-serif;color:#1b2240">Памет</div><span class="ft">Ива, 11 Б · 3</span></div>
+              <div class="mini-sl"><div class="mt" style="font-family:Calibri,Carlito,sans-serif;color:#1b2240">Диск</div><span class="ft">Ива, 11 Б · 4</span></div></div></div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:20px"><h3>⭐ Бонус за желаещите</h3><ul><li><code>Fon</code> – еднакъв фон, но <b>само на слайдовете с четен номер</b> (подсказка: <code>If sld.SlideIndex Mod 2 = 0 Then</code>).</li><li><code>IztriiPrazni</code> и проба върху копие с 2 празни слайда един след друг.</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="kriterii">
+  <div class="wrap grid2">
+    <div>
+      <h2>Критерии за оценяване</h2>
+      <table class="crit">
+        <thead><tr><th>Критерий</th><th>Точки</th></tr></thead>
+        <tbody>
+          <tr><td><b>Копие и модул</b> – .pptm с правилно име, модул Avtomatizacia</td><td>2</td></tr>
+          <tr><td><b>EdinShrift</b> – вложени цикли, HasTextFrame, шрифт, цвят, отчет</td><td>4</td></tr>
+          <tr><td><b>Nadpis</b> – име, клас и номер на всеки слайд; име Avtor</td><td>3</td></tr>
+          <tr><td><b>IztriiAvtor</b> – цикъл отзад напред</td><td>2</td></tr>
+          <tr><td><b>NoviSlaidove</b> – 3 слайда от Array</td><td>3</td></tr>
+          <tr><td><b>Statistika</b> – слайдове, думи, картинки</td><td>2</td></tr>
+          <tr><td><b>Код</b> – коментари, отстъпи, Dim за всички променливи</td><td>2</td></tr>
+          <tr><td><b>Снимки и отговор</b> за цикъла отзад напред</td><td>2</td></tr>
+          <tr><td><b>Общо</b></td><td><b>20</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3 style="margin-top:8px">Оценка</h3>
+      <table class="crit">
+        <thead><tr><th>Точки</th><th>Оценка</th></tr></thead>
+        <tbody><tr><td>18–20</td><td>Отличен 6</td></tr><tr><td>15–17</td><td>Много добър 5</td></tr><tr><td>12–14</td><td>Добър 4</td></tr><tr><td>9–11</td><td>Среден 3</td></tr><tr><td>0–8</td><td>Слаб 2</td></tr></tbody>
+      </table>
+      <div class="card" style="margin-top:20px"><h3>Провери се, преди да предадеш</h3>
+        <label class="chk"><input type="checkbox"> Работих върху копие</label>
+        <label class="chk"><input type="checkbox"> Модулът се казва Avtomatizacia</label>
+        <label class="chk"><input type="checkbox"> 5-те макроса работят без грешки</label>
+        <label class="chk"><input type="checkbox"> Надписите не са двойни</label>
+        <label class="chk"><input type="checkbox"> Имам снимки „преди“, „след“ и Statistika</label>
+        <label class="chk"><input type="checkbox"> Проследих макрос с F8</label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">10 въпроса. Избери отговор на всеки и натисни „Провери“.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check" type="button">Провери</button><button class="btn ghost" id="again" type="button">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<section class="band alt"><div class="wrap pager"><a href="urok-6-makrosi-interaktiven-test.html"><small>← Урок 6</small>Интерактивен тест с макроси</a><a class="nx" href="index.html"><small>Към раздела →</small>Всички уроци</a></div></section>
+
+<footer>IT Зона · Интерактивни презентации · 11 и 12 клас. Изгледите на програмите са схематични – бутоните може леко да се различават според версията на PowerPoint.</footer>
+
+<script>const CUR=6;</script>
+<script src="ip.js?v=20261127b"></script>
+<script src="mk.js?v=20261127"></script>
+<script>
+{
+const M=MK,g=id=>document.getElementById(id);
+const lines=(src,cls={})=>src.map((l,i)=>`<div class="ln${cls[i+1]?' '+cls[i+1]:''}"><b>${i+1}</b><span>${M.hl(l)||' '}</span></div>`).join('');
+
+/* ---------- обектен модел ---------- */
+const OM=[
+ ["Application","Application",["omApp"],"Самата програма PowerPoint. Обикновено не се пише – подразбира се."],
+ ["ActivePresentation","ActivePresentation",["omPres"],"Презентацията, която е отворена и активна в момента."],
+ ["Slides",".Slides",["omS1","omS2","omS3"],"<b>Колекция</b> – всички слайдове. <code>ActivePresentation.Slides.Count</code> дава броя им (тук 3)."],
+ ["Slides(2)","(2)",["omS2"],"<b>Един</b> слайд – вторият. Номерът е поредният номер отляво в PowerPoint."],
+ ["Shapes",".Shapes",["omSh1","omSh2"],"Всички фигури на слайд 2: заглавие, текст, картинки, бутони…"],
+ ["Shapes(1)","(1)",["omSh1"],"Първата фигура – тук заглавието. Може и по име: <code>Shapes(\"Заглавие 1\")</code>."],
+ ["TextFrame.TextRange",".TextFrame.TextRange",["omTx"],"<b>Текстът</b> във фигурата. <code>TextFrame</code> е „рамката“ за текст, <code>TextRange</code> – самият текст."],
+ ["Font.Name = \"Arial\"",".Font.Name = \"Arial\"",["omTx"],"<b>Свойство</b> на текста – шрифтът. С <code>=</code> го сменяме. Виж как „Процесор“ смени шрифта!"]];
+const om=g('om');
+om.innerHTML=OM.map((o,i)=>(i?'<i>›</i>':'')+`<button type="button" data-i="${i}">${M.esc(o[0])}</button>`).join('');
+const omSel=k=>{om.querySelectorAll('button').forEach((b,j)=>b.classList.toggle('on',j==k));
+  document.querySelectorAll('.omv,.omv .s,.omv .sh,.omv .tx').forEach(e=>e.classList.remove('lit'));
+  OM[k][2].forEach(id=>g(id).classList.add('lit'));
+  g('omTx').style.fontFamily=k==7?'Arial, sans-serif':'';g('omTx').style.fontWeight=k==7?'800':'';
+  const path=OM.slice(1,k+1).map(o=>o[1]).join('')||'Application';
+  g('omOut').innerHTML=`<p style="font:700 14.5px Consolas,monospace;background:var(--card);padding:10px 12px;border-radius:10px;overflow-wrap:anywhere;margin-top:0">${M.hl(path)}</p><p>${OM[k][3]}</p>${k<7?`<button type="button" class="btn" id="omNext">Следваща част ›</button>`:'<p class="note">Целият ред сменя шрифта на заглавието на слайд 2.</p>'}`;
+  const n=g('omNext');if(n)n.onclick=()=>omSel(k+1)};
+om.querySelectorAll('button').forEach(b=>b.onclick=()=>omSel(+b.dataset.i));omSel(0);
+
+/* ---------- симулатор на циклите ---------- */
+const START=[
+ {t:"Компютърът",b:"Части и устройства",f:"'Comic Sans MS',cursive",c:"#7a2e8e"},
+ {t:"Процесор",b:"Изпълнява командите",f:"'Times New Roman',serif",c:"#1b2240"},
+ {e:1},{e:1},
+ {t:"Памет",b:"RAM и SSD",f:"'Courier New',monospace",c:"#c2410c"},
+ {t:"Благодаря!",b:"Въпроси?",f:"Georgia,serif",c:"#1f9d6a"}];
+const CODE={
+ EdinShrift:['Sub EdinShrift()','    Dim sld As Slide, shp As Shape','    For Each sld In ActivePresentation.Slides','        For Each shp In sld.Shapes','            If shp.HasTextFrame Then','                shp.TextFrame.TextRange.Font.Name = "Calibri"','                shp.TextFrame.TextRange.Font.Color.RGB = RGB(27, 34, 64)','            End If','        Next shp','    Next sld','    MsgBox "Готово! Обработени слайдове: " & ActivePresentation.Slides.Count','End Sub'],
+ Nadpis:['Sub Nadpis()','    Dim sld As Slide, shp As Shape','    For Each sld In ActivePresentation.Slides','        Set shp = sld.Shapes.AddTextbox(msoTextOrientationHorizontal, _','            20, ActivePresentation.PageSetup.SlideHeight - 40, 500, 30)','        shp.Name = "Avtor"','        shp.TextFrame.TextRange.Text = "Ива Петрова, 11 Б · слайд " & sld.SlideIndex','        shp.TextFrame.TextRange.Font.Size = 12','    Next sld','End Sub'],
+ Fon:['Sub Fon()','    Dim sld As Slide','    For Each sld In ActivePresentation.Slides','        sld.FollowMasterBackground = msoFalse','        sld.Background.Fill.Solid','        sld.Background.Fill.ForeColor.RGB = RGB(255, 243, 214)','    Next sld','End Sub'],
+ IztriiPrazni:['Sub IztriiPrazni()','    Dim i As Integer','    For i = ActivePresentation.Slides.Count To 1 Step -1','        If ActivePresentation.Slides(i).Shapes.Count = 0 Then','            ActivePresentation.Slides(i).Delete','        End If','    Next i','End Sub']};
+const NOTE={EdinShrift:"Вложени цикли: за всеки слайд – за всяка фигура. Празните слайдове нямат фигури и вътрешният цикъл не се завърта нито веднъж.",Nadpis:"Добавя ново текстово поле на всеки слайд – и на празните.",Fon:"Един цикъл – само по слайдовете.",IztriiPrazni:"Сравни двете посоки: напред пропуска слайд и стига до несъществуващ номер."};
+let slides,mac='EdinShrift',steps=[],pc=0,timer=null,vars={};
+const sp=g('simPick');sp.innerHTML=Object.keys(CODE).map(k=>`<button type="button" data-k="${k}">${k}</button>`).join('');
+function reset(){clearTimeout(timer);timer=null;slides=START.map((s,i)=>({...s,id:i+1,bg:'',ft:'',font:false}));pc=0;vars={};steps=build();g('simMsg').innerHTML='<span class="muted">Съобщенията на макроса ще се появят тук</span>';render(0);btns()}
+function code(){let c=CODE[mac].slice();if(mac=='IztriiPrazni'&&document.querySelector('[name=dir]:checked').value=='fwd')c[2]='    For i = 1 To ActivePresentation.Slides.Count';return c}
+function build(){const S=[],n=START.length;const at=(l,fn,v)=>S.push({l,fn,v});
+  at(1);at(2);
+  if(mac=='EdinShrift'){START.forEach((s,i)=>{at(3,null,{sld:'Слайд '+(i+1),shp:'–'});
+      if(!s.e)['Заглавие','Текст'].forEach((nm,k)=>{at(4,null,{shp:nm+' '+(k+1)});at(5);at(6,sl=>{sl[i].font=true;sl[i].fk=(sl[i].fk||0)|(1<<k)});at(7,sl=>{sl[i].col=(sl[i].col||0)|(1<<k)});at(8);at(9)});
+      at(10)});
+    at(11,null,{msg:"Готово! Обработени слайдове: "+n});at(12)}
+  if(mac=='Nadpis'){START.forEach((s,i)=>{at(3,null,{sld:'Слайд '+(i+1)});at(4,sl=>{sl[i].ft=' '});at(6,null,{shp:'Avtor'});at(7,sl=>{sl[i].ft='Ива Петрова, 11 Б · слайд '+(i+1)});at(8);at(9)});at(10)}
+  if(mac=='Fon'){START.forEach((s,i)=>{at(3,null,{sld:'Слайд '+(i+1)});at(4);at(5);at(6,sl=>{sl[i].bg='#fff3d6'});at(7)});at(8)}
+  if(mac=='IztriiPrazni'){
+    const fwd=document.querySelector('[name=dir]:checked').value=='fwd';
+    let cur=START.map(s=>!!s.e);
+    const loop=fwd?[1,2,3,4,5,6]:[6,5,4,3,2,1];
+    for(const i of loop){at(3,null,{i,cnt:null});
+      if(i>cur.length){at(4,null,{err:`Run-time error '-2147188160 (80048240)':\n\nSlides.Item : Integer out of range.\n${i} is not in the valid range of 1 to ${cur.length}.`});return S}
+      at(4);if(cur[i-1]){at(5,sl=>sl.splice(i-1,1),{del:i});cur.splice(i-1,1)}at(6);at(7)}
+    at(8)}
+  return S}
+function render(line,v={}){Object.assign(vars,v);
+  const curIdx=vars.sld?+vars.sld.split(' ')[1]-1:(vars.i?vars.i-1:-1);
+  g('minis').innerHTML=slides.map((s,i)=>`<div class="mini-sl${i==curIdx&&line&&line!=12?' cur':''}" style="background:${s.bg||'#fff'}">${s.e?'<div class="mb" style="color:#bbb;text-align:center;margin-top:18%">(празен)</div>':`<div class="mt" style="font-family:${s.fk&1?'Calibri,Carlito,sans-serif':s.f};color:${s.col&1?'#1b2240':s.c}">${s.t}</div><div class="mb" style="font-family:${s.fk&2?'Calibri,Carlito,sans-serif':s.f};color:${s.col&2?'#1b2240':s.c}">${s.b}</div>`}${s.ft?`<span class="ft">${s.ft}</span>`:''}<span class="no">${i+1}</span></div>`).join('');
+  const w=[];
+  if(mac=='IztriiPrazni'){w.push(`i = <b>${vars.i??'–'}</b>`);w.push(`Slides.Count = <b>${slides.length}</b>`)}
+  else{w.push(`sld = <b>${vars.sld||'–'}</b>`);if(mac!='Fon')w.push(`shp = <b>${vars.shp||'–'}</b>`)}
+  g('simWatch').innerHTML=w.map(x=>`<div>${x}</div>`).join('');
+  g('simCode').innerHTML=lines(code(),line?{[line]:'on'}:{});
+  g('simTitle').textContent='📄 Module1 – '+mac;g('simNote').textContent=NOTE[mac]}
+function step(){if(pc>=steps.length){clearTimeout(timer);timer=null;btns();return false}
+  const s=steps[pc++];if(s.fn)s.fn(slides);render(s.l,s.v||{});
+  if(s.v&&s.v.msg)g('simMsg').innerHTML=M.msg({text:s.v.msg});
+  if(s.v&&s.v.err){g('simMsg').innerHTML=M.vbErr(s.v.err).replace('class="msg"','class="msg" style="max-width:420px"');g('simCode').children[s.l-1].style.background='#ffd7d7';pc=steps.length;clearTimeout(timer);timer=null;btns();return false}
+  if(s.v&&s.v.del)g('simMsg').innerHTML=`<span>🗑 Изтрит слайд №${s.v.del}. Слайдовете след него се преномерираха.</span>`;
+  if(pc>=steps.length){btns();return false}return true}
+function btns(){const done=pc>=steps.length;g('simRun').disabled=done;g('simStep').disabled=done;g('simRun').textContent=timer?'⏸ Пауза':'▶ Изпълни (F5)'}
+g('simStep').onclick=()=>{clearTimeout(timer);timer=null;step();btns()};
+g('simRun').onclick=()=>{if(timer){clearTimeout(timer);timer=null;btns();return}
+  const tick=()=>{if(step())timer=setTimeout(tick,mac=='EdinShrift'?140:260);else{timer=null;btns()}};timer=setTimeout(tick,10);btns()};
+g('simReset').onclick=reset;
+sp.querySelectorAll('button').forEach(b=>b.onclick=()=>{mac=b.dataset.k;sp.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x==b));g('dirRow').hidden=mac!='IztriiPrazni';reset()});
+document.querySelectorAll('[name=dir]').forEach(r=>r.onchange=reset);
+sp.querySelector('button').classList.add('on');reset();
+
+/* ---------- пътеводител: проследяване ---------- */
+const F="Avtomatizacia-Iva-Petrova.pptm";
+const C=CODE.EdinShrift.join('\n');
+const thB=START.filter(s=>!s.e).map(s=>`<div class="t1" style="top:20%;font-family:${s.f};color:${s.c}">${s.t}</div><div class="t2" style="top:55%;font-family:${s.f}">${s.b}</div>`);
+const thA=START.filter(s=>!s.e).map(s=>`<div class="t1" style="top:20%;font-family:Calibri,Carlito,sans-serif;color:#1b2240">${s.t}</div><div class="t2" style="top:55%;font-family:Calibri,Carlito,sans-serif;color:#1b2240">${s.b}</div>`);
+M.walk("debug",[
+ {t:"Първо – копие",m:M.pp({backstage:true,hot:"bs:Запиши като",file:"Hardware.pptx"}),c:"Отвори своята презентация → <b>Файл → Запиши като</b> → име <b>Avtomatizacia-Ime-Familia</b>, тип <b>.pptm</b>. Оригиналът (.pptx) остава непокътнат."},
+ {t:"Как изглежда сега",m:M.pp({file:F,dev:true,tab:"Разработчик",thumbs:thB,cur:1,slide:thB[1]}),c:"Различни шрифтове и цветове на всеки слайд – точно това ще оправи макросът."},
+ {t:"Модул и код",m:M.vbe({file:F,module:true,code:C,proc:"EdinShrift",ln:1}),c:"<kbd>Alt</kbd>+<kbd>F11</kbd> → <b>Insert → Module</b> → постави кода на <code>EdinShrift</code>."},
+ {t:"Точка на прекъсване (F9)",m:M.vbe({file:F,module:true,code:C,proc:"EdinShrift",bp:6,ln:6}),c:"Щракни в сивата ивица вляво от ред 6 или сложи курсора там и натисни <kbd>F9</kbd>. Редът става тъмночервен с точка. Когато макросът стигне до него, ще <b>спре</b>."},
+ {t:"Пусни с F5",m:M.vbe({file:F,module:true,code:C,proc:"EdinShrift",bp:6,ln:1,hot:"run"}),c:"Курсорът в макроса → <kbd>F5</kbd>. Макросът тръгва и спира на точката."},
+ {t:"Спрял на точката",m:M.vbe({file:F,module:true,code:C,proc:"EdinShrift",cur:6,mode:"break",ln:6,tip:{x:300,y:300,t:'shp.Name = "Заглавие 1"'}}),c:"Жълтата стрелка и жълтият ред показват <b>следващия</b> ред за изпълнение. Режимът е <b>[break]</b>. Задръж мишката върху <code>shp</code> или друга променлива – излиза жълто балонче с текущата ѝ стойност."},
+ {t:"Ред по ред с F8",m:M.vbe({file:F,module:true,code:C,proc:"EdinShrift",menu:"Debug",mode:"break",hot:"mi:Step Into"}),c:"<b>Debug → Step Into</b> или <kbd>F8</kbd> изпълнява <b>един</b> ред. Натискай го няколко пъти и следи как жълтият ред минава през вътрешния цикъл, после пак през външния."},
+ {t:"Следващият ред",m:M.vbe({file:F,module:true,code:C,proc:"EdinShrift",cur:7,mode:"break",ln:7}),c:"Шрифтът на заглавието вече е сменен; сега ще се смени цветът. Ако превключиш в PowerPoint (иконата в лентата на задачите), ще видиш промяната на първия слайд."},
+ {t:"Immediate – питай VBA",m:M.vbe({file:F,module:true,code:C,proc:"EdinShrift",cur:7,mode:"break",imm:"? ActivePresentation.Slides.Count\n 6 \n? sld.SlideIndex\n 1 "}),c:"<kbd>Ctrl</kbd>+<kbd>G</kbd> отваря прозореца <b>Immediate</b>. Напиши <code>? sld.SlideIndex</code> и <kbd>Enter</kbd> – VBA отговаря веднага. Въпросителният знак значи „покажи ми“."},
+ {t:"Продължи до края",m:M.vbe({file:F,module:true,code:C,proc:"EdinShrift",ovl:M.msg({text:"Готово! Обработени слайдове: 6",hot:"mb:OK"})}),c:"Махни точката с <kbd>F9</kbd> и натисни <kbd>F5</kbd> – макросът стига до края и показва отчета."},
+ {t:"Резултатът",m:M.pp({file:F,dev:true,tab:"Изглед",thumbs:thA,cur:1,slide:thA[1]}),c:"Всички слайдове са с Calibri и тъмносин текст. Прегледай ги. Доволен си? <kbd>Ctrl</kbd>+<kbd>S</kbd>. Не си? Затвори без записване и отвори копието."}
+]);
+M.init();
+}
+</script>
+<script>
+const QUIZ=[
+ ["Какво става, ако натиснеш Ctrl+Z след макрос, който е сменил шрифта на всички слайдове?", ["Всичко се връща", "Промените от макроса не се отменят – затова се работи върху копие", "Отменя се само последният слайд", "Макросът се изтрива"], 1, "Винаги записвай копие преди да пуснеш макрос."],
+ ["Какво значи точката в ActivePresentation.Slides(2).Shapes(1)?", ["Край на командата", "„Вътре в“ – слайд 2 е в презентацията, фигура 1 е в слайд 2", "Умножение", "Коментар"], 1, "Обектите са вложени като кутии в кутии."],
+ ["Каква е разликата между Slides и Slides(2)?", ["Няма разлика", "Slides е всички слайдове, Slides(2) е вторият слайд", "Slides(2) са два слайда", "Slides е само първият"], 1, "Колекция и елемент."],
+ ["Какво прави For Each sld In ActivePresentation.Slides … Next sld?", ["Изтрива слайдовете", "Изпълнява командите вътре веднъж за всеки слайд", "Брои слайдовете", "Скача на слайд sld"], 1, "Това е цикъл."],
+ ["Защо проверяваме If shp.HasTextFrame Then?", ["За да е по-бързо", "Картинките и линиите нямат текст – без проверка ще излезе грешка", "За да се покаже съобщение", "Не е нужно"], 1, "Шрифт се сменя само на фигури с текст."],
+ ["Защо изтриването на слайдове се прави с цикъл отзад напред?", ["По-красиво е", "При изтриване номерата на следващите слайдове намаляват и цикълът напред прескача слайд", "VBA не може да брои напред", "За да се изтрият всички слайдове"], 1, "For i = Count To 1 Step -1."],
+ ["Какво прави клавишът F8 в редактора на VBA?", ["Изпълнява целия макрос", "Изпълнява един ред (стъпка по стъпка)", "Записва", "Слага точка на прекъсване"], 1, "F9 слага точка на прекъсване, F5 продължава."],
+ ["Какво значи жълтият ред в режим [break]?", ["Грешка", "Следващият ред, който ще се изпълни", "Коментар", "Изтрит ред"], 1, "Ред с грешка е червен."],
+ ["За какво служи RGB(27, 34, 64)?", ["Размер на шрифта", "Задава цвят чрез количество червено, зелено и синьо", "Позиция на фигура", "Номер на слайд"], 1, "Всяко число е от 0 до 255."],
+ ["За коя задача макросът е най-полезен, защото няма вграден бутон?", ["Номер на слайда", "Замяна на дума", "Изтриване на всички празни слайдове и статистика на презентацията", "Смяна на темата"], 2, "За останалите има готови инструменти."]];
+</script>
+<script src="ip-urok.js?v=20261127"></script>
+<script src="../totop.js?v=20261126" defer></script>
+</body>
+</html>
