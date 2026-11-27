@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 1: Макроси в Excel – записване на макрос – Макроси в Excel, 10 клас</title>
+<link rel="icon" type="image/svg+xml" href="../../icons/excel.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../interaktivni/ip-urok.css?v=20261127b">
+<link rel="stylesheet" href="../../interaktivni/mk.css?v=20261128">
+</head>
+<body>
+
+<header class="hero xlh">
+  <div class="wrap">
+    <div>
+      <span class="tag">Урок 1 · Макроси в Excel · 10 клас</span>
+      <h1>Макроси в Excel: записване на макрос</h1>
+      <p>В Excel не е нужно да пишеш кода сам – натискаш „Записване на макрос“, правиш действията веднъж и Excel ги превръща във VBA код. После ги повтаряш с един клик, клавишна комбинация или бутон на листа.</p>
+    </div>
+    <svg viewBox="0 0 470 320" role="img" aria-label="Таблица в Excel и червен бутон за запис">
+      <ellipse cx="235" cy="302" rx="210" ry="12" fill="#0d3b22" opacity=".45"/>
+      <rect x="24" y="22" width="320" height="220" rx="12" fill="#0d3b22"/>
+      <rect x="32" y="30" width="304" height="204" rx="6" fill="#fff"/>
+      <rect x="32" y="30" width="304" height="24" rx="6" fill="#217346"/><rect x="32" y="46" width="304" height="8" fill="#217346"/>
+      <text x="44" y="47" font-family="Segoe UI,sans-serif" font-size="12" fill="#fff">Dnevnik.xlsm</text>
+      <g font-family="Calibri,sans-serif" font-size="13">
+        <rect x="46" y="66" width="276" height="26" fill="#217346"/>
+        <text x="58" y="84" fill="#fff" font-weight="700">№</text><text x="96" y="84" fill="#fff" font-weight="700">Ученик</text><text x="250" y="84" fill="#fff" font-weight="700">Оценка</text>
+        <g fill="#222"><text x="58" y="112">1</text><text x="96" y="112">Ива Петрова</text><text x="270" y="112">5.50</text>
+        <text x="58" y="138">2</text><text x="96" y="138">Мартин Колев</text><text x="270" y="138">4.75</text>
+        <text x="58" y="164">3</text><text x="96" y="164">Ники Георгиев</text><text x="270" y="164">2.80</text>
+        <text x="58" y="190">4</text><text x="96" y="190">Сара Иванова</text><text x="270" y="190">6.00</text></g>
+        <g stroke="#dfe3f3"><line x1="46" y1="120" x2="322" y2="120"/><line x1="46" y1="146" x2="322" y2="146"/><line x1="46" y1="172" x2="322" y2="172"/><line x1="46" y1="198" x2="322" y2="198"/></g>
+      </g>
+      <rect x="164" y="244" width="20" height="30" fill="#0d3b22"/><rect x="124" y="270" width="100" height="10" rx="5" fill="#0d3b22"/>
+      <g transform="translate(398 96)"><circle r="52" fill="#fff"/><circle class="bargrow" r="30" fill="#e02424" style="transform-origin:center"/><text y="78" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="15" fill="#fff">REC</text></g>
+      <g transform="translate(360 200)"><rect width="96" height="34" rx="10" fill="#c9f0d6"/><text x="48" y="23" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="15" fill="#0d3b22">Ctrl+Shift+F</text></g>
+    </svg>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Теория</summary><div class="menu"><a href="#kakvo">Макроси в Excel</a><a href="#rekorder">Как записва рекордерът</a><a href="#otnositelni">Абсолютни и относителни</a></div></details>
+    <details><summary>Стъпка по стъпка</summary><div class="menu"><a href="#podgotovka">1. Подготовка и безопасност</a><a href="#zapis">2. Запис на макрос</a><a href="#kod">3. Записаният код</a><a href="#buton">4. Бутон на листа</a><a href="#pochistvane">5. Почисти кода</a><a href="#greshki">Чести грешки</a></div></details>
+    <details><summary>Задача</summary><div class="menu"><a href="#zadacha">Задача за часа</a><a href="#kriterii">Критерии за оценяване</a></div></details>
+    <a href="#test">Тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="kakvo">
+  <div class="wrap grid2">
+    <div>
+      <h2>Макроси в Excel</h2>
+      <p>Езикът е същият като в PowerPoint – <b>VBA</b>. Разликата е в обектите: вместо слайдове и фигури тук има <b>работни книги</b>, <b>листове</b> и <b>клетки</b>.</p>
+      <p>Най-голямото предимство на Excel е <b>рекордерът на макроси</b> („Записване на макрос“). Той следи какво правиш – маркиране, удебеляване, цветове, ширина на колони – и записва всяко действие като ред VBA код.</p>
+      <div class="tip"><b>Рекордерът е добър учител.</b> Не знаеш как се пише нещо във VBA? Запиши го и виж кода! Така работят и опитните програмисти.</div>
+      <h3 style="margin-top:22px">Какво не може рекордерът</h3>
+      <ul>
+        <li>Не записва <b>решения</b> („ако оценката е под 3, оцвети в червено“) и <b>повторения</b> („за всеки ред…“). Това се дописва на ръка – в урок 2.</li>
+        <li>Записва и <b>грешните</b> щраквания. Ако сбъркаш – спри записа и започни отначало.</li>
+        <li>Записва <b>точните адреси</b> на клетките (A1:D1), освен ако не включиш относителните препратки.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="card">
+        <h3>PowerPoint и Excel – сравнение</h3>
+        <table class="stack">
+          <thead><tr><th></th><th>PowerPoint</th><th>Excel</th></tr></thead>
+          <tbody>
+            <tr><td>Записване на макрос</td><td>❌ няма</td><td>✅ има</td></tr>
+            <tr><td>Файл с макроси</td><td>.pptm</td><td><b>.xlsm</b></td></tr>
+            <tr><td>Главни обекти</td><td>Slides, Shapes</td><td>Workbooks, Sheets, <b>Range</b>, <b>Cells</b></td></tr>
+            <tr><td>Бутон</td><td>Фигура + Действие</td><td>Бутон (контрола) + Присвояване на макрос</td></tr>
+            <tr><td>Клавишна комбинация</td><td>❌</td><td>✅ Ctrl+буква</td></tr>
+            <tr><td>Редактор</td><td colspan="2" style="text-align:center">един и същ – <kbd>Alt</kbd>+<kbd>F11</kbd></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card" style="margin-top:18px">
+        <h3>За какво служат макросите в Excel</h3>
+        <ul>
+          <li>🎨 Еднакво форматиране на всяка нова таблица</li>
+          <li>🧹 Почистване на данни, изтриване на празни редове</li>
+          <li>🚦 Оцветяване на оценки или стойности по правило</li>
+          <li>📄 Отчет на нов лист и записване като PDF</li>
+          <li>⌨️ Бутони и форми за бързо въвеждане</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="rekorder">
+  <div class="wrap">
+    <h2>🧪 Как записва рекордерът</h2>
+    <p class="muted">Натисни <b>⏺ Записване</b>, после прави действията с бутоните – и гледай как отдясно се появява кодът. Накрая <b>⏹ Спри</b> и пусни макроса върху неоформена таблица.</p>
+    <div class="sim" style="margin-top:16px">
+      <div>
+        <div data-mk="recSheet" id="recSheet"></div>
+        <div class="row" style="margin-top:12px"><button type="button" class="btn coral" id="rStart">⏺ Записване на макрос</button><button type="button" class="btn ghost" id="rStop" disabled>⏹ Спиране на записа</button><button type="button" class="btn" id="rPlay" disabled style="background:#1d6f42">▶ Изпълни макроса</button><button type="button" class="btn ghost" id="rReset">↺ Нова таблица</button></div>
+        <div class="acts" id="rActs"></div>
+        <p class="note" id="rNote" aria-live="polite"></p>
+      </div>
+      <div class="recpane">
+        <div class="vba-box" style="border:0;box-shadow:none;border-radius:0"><div class="hd"><span id="rTitle">📄 Module1 (Code)</span></div></div>
+        <div class="reclog" id="rLog"></div>
+      </div>
+    </div>
+    <div class="tip">Истинският рекордер записва още повече редове – например всички свойства на подравняването (<code>.WrapText = False</code>, <code>.Orientation = 0</code>…), дори да не си ги пипал. Тук са съкратени, за да се вижда главното.</div>
+  </div>
+</section>
+
+<section class="band" id="otnositelni">
+  <div class="wrap grid2">
+    <div>
+      <h2>Абсолютни и относителни препратки</h2>
+      <p>По подразбиране рекордерът записва <b>точния адрес</b>: „отиди на B8“. Макросът винаги пише в B8, независимо къде си.</p>
+      <p>С бутона <b>Разработчик → Използване на относителни препратки</b> (Use Relative References) рекордерът записва <b>посоката</b>: „една клетка надолу от текущата“. Тогава макросът работи от всяка клетка.</p>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));margin-top:14px">
+<pre class="vba" data-title="Абсолютен запис">
+Range("B8").Select
+ActiveCell.Value = "Общо:"
+</pre>
+<pre class="vba" data-title="Относителен запис">
+ActiveCell.Offset(1, 0).Select
+ActiveCell.Value = "Общо:"
+</pre>
+      </div>
+      <p class="note"><code>Offset(1, 0)</code> = 1 ред надолу, 0 колони встрани. <code>Offset(0, 2)</code> = 2 колони надясно. <code>Offset(-1, 0)</code> = един ред нагоре.</p>
+    </div>
+    <div class="lab">
+      <h3>🧪 Пробвай: къде ще пише макросът?</h3>
+      <p class="muted">Щракни клетка в таблицата (тя става текуща), избери вида запис и пусни макроса.</p>
+      <div data-mk="relSheet" id="relSheet"></div>
+      <div class="row" style="margin-top:10px"><label class="chk"><input type="radio" name="rel" value="abs" checked> Абсолютен (B8)</label><label class="chk"><input type="radio" name="rel" value="rel"> Относителен (Offset(1, 0))</label></div>
+      <div class="row"><button type="button" class="btn" id="relRun" style="background:#1d6f42">▶ Изпълни</button><button type="button" class="btn ghost" id="relClr">Изчисти</button></div>
+      <div class="out ok" id="relOut" aria-live="polite">Текуща клетка: B3</div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="podgotovka">
+  <div class="wrap">
+    <h2>Стъпка 1. Подготовка и безопасност</h2>
+    <p class="muted">Разделът <b>„Разработчик“</b> (Developer) е скрит по подразбиране. Включва се веднъж на компютъра.</p>
+    <div class="grid2" style="margin-top:16px">
+      <div class="card" id="bezopasnost">
+        <h3>🛡️ Безопасност: защо Excel пита за макросите</h3>
+        <p>Макросът е истинска програма. Може да оформи таблица, но може и да изтрие файлове или да свали вирус. Затова <b>макросите от чужди файлове са спрени</b> и Excel показва жълта лента <b>„ПРЕДУПРЕЖДЕНИЕ ЗА ЗАЩИТА – Макросите са забранени“</b> с бутон <b>Разреши съдържанието</b>.</p>
+        <p><b>Правило:</b> разрешавай макроси само във файлове, които <b>сам си направил</b> или са от човек, на когото имаш доверие (например учителят).</p>
+        <p>Провери настройката: <b>Разработчик → Защита на макросите</b> → трябва да е избрано <b>„Забрани VBA макросите с уведомяване“</b>. Никога не избирай „Разреши VBA макросите“.</p>
+        <p class="note">Файл, изтеглен от интернет или имейл, може да покаже червена лента „Microsoft блокира изпълнението на макроси“. Ако е твой: десен бутон върху файла → <b>Свойства</b> → отметка <b>Отблокиране</b> → OK.</p>
+      </div>
+      <div class="card">
+        <h3>📁 Файлът трябва да е .xlsm</h3>
+        <table class="stack">
+          <thead><tr><th>Разширение</th><th>Макроси</th></tr></thead>
+          <tbody>
+            <tr><td><b>.xlsx</b> – обикновена работна книга</td><td>❌ при записване кодът се изтрива</td></tr>
+            <tr><td><b>.xlsm</b> – с разрешени макроси</td><td>✅ с нея работим</td></tr>
+            <tr><td><b>.xlsb</b> – двоична</td><td>✅ рядко се ползва</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Буквата <b>m</b> идва от <b>macro</b>. Записвай като .xlsm още преди да започнеш.</p>
+        <h3 style="margin-top:14px">Правила за име на макрос</h3>
+        <ul><li>започва с <b>буква</b>;</li><li>само букви, цифри и долна черта <code>_</code>;</li><li><b>без интервали</b>, тирета и точки;</li><li>не е дума на VBA (<code>Sub</code>, <code>End</code>…);</li><li>препоръка: <b>латиница</b> – <code>FormatTablica</code>, <code>Kam_Otchet</code>.</li></ul>
+      </div>
+    </div>
+    <div class="walk green" data-walk="dev" data-title="Разработчик в Excel и записване като .xlsm"></div>
+  </div>
+</section>
+
+<section class="band" id="zapis">
+  <div class="wrap">
+    <h2>Стъпка 2. Запиши първия макрос</h2>
+    <p class="muted">Ще запишеш макрос <code>FormatTablica</code>, който оформя заглавния ред на дневника: удебелен бял текст на зелен фон, центриран, и автоматична ширина на колоните.</p>
+    <div class="walk green" data-walk="rec" data-title="Записване на макрос FormatTablica"></div>
+    <div class="grid2" style="margin-top:22px">
+      <div class="tip" style="margin:0"><b>Клавишна комбинация – с Shift!</b> <kbd>Ctrl</kbd>+<kbd>C</kbd>, <kbd>Ctrl</kbd>+<kbd>S</kbd>, <kbd>Ctrl</kbd>+<kbd>Z</kbd> вече имат работа. Ако дадеш на макроса <kbd>Ctrl</kbd>+<kbd>C</kbd>, копирането спира да работи в тази книга! Напиши <b>главна</b> буква в полето – получаваш <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>, която е свободна.</div>
+      <div class="tip" style="margin:0"><b>Къде да се съхрани?</b> <b>Тази работна книга</b> – макросът е във файла и тръгва с него. <b>Лична работна книга с макроси</b> (PERSONAL.XLSB) – макросът е достъпен във всички книги, но само на твоя компютър. За училищни задачи избирай „Тази работна книга“.</div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="kod">
+  <div class="wrap grid2">
+    <div>
+      <h2>Стъпка 3. Какво записа Excel</h2>
+      <p>Отвори редактора (<kbd>Alt</kbd>+<kbd>F11</kbd>) → вляво <b>Modules → Module1</b>. Ето какво е записал рекордерът. Щракни върху обясненията.</p>
+<pre class="vba" data-title="Module1 – записан код">
+Sub FormatTablica()
+'
+' FormatTablica Макрос
+' Оформя заглавния ред на таблицата
+'
+' Клавишна комбинация: Ctrl+Shift+F
+'
+    Range("A1:D1").Select
+    Selection.Font.Bold = True
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 4616993
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    With Selection.Font
+        .ThemeColor = xlThemeColorDark1
+        .TintAndShade = 0
+    End With
+    Selection.HorizontalAlignment = xlCenter
+    Columns("A:D").Select
+    Columns("A:D").EntireColumn.AutoFit
+    Range("A1").Select
+End Sub
+</pre>
+      <ol class="lx">
+        <li data-l="1,25">Името е това, което написа в „Име на макрос“.</li>
+        <li data-l="2-7">Коментари, които Excel добавя сам: описанието и клавишната комбинация.</li>
+        <li data-l="8">Маркирането на A1:D1. Рекордерът записва всяко маркиране със <code>.Select</code>.</li>
+        <li data-l="9"><code>Selection</code> – това, което е маркирано в момента. Удебеляване.</li>
+        <li data-l="10-16"><code>With … End With</code> – „с този обект направи следните неща“. Вместо да пише <code>Selection.Interior</code> пет пъти, записва го веднъж, а редовете отвътре започват с точка. <code>.Color = 4616993</code> е зеленият цвят като число (същото като <code>RGB(33, 115, 70)</code>).</li>
+        <li data-l="17-20">Бял текст – цвят от темата на документа.</li>
+        <li data-l="21">Центриране.</li>
+        <li data-l="22-23">Автоматична ширина на колоните A–D (двоен клик между заглавията на колоните).</li>
+        <li data-l="24">Последното щракване – върху A1. И то е записано!</li>
+      </ol>
+    </div>
+    <div>
+      <div class="walk green" data-walk="code" data-title="Отвори кода, промени цвета, пусни пак" style="margin-top:0"></div>
+      <div class="card" style="margin-top:20px"><h3>Как се пуска макрос в Excel</h3>
+        <ol><li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> – клавишната комбинация</li><li><kbd>Alt</kbd>+<kbd>F8</kbd> → избери → <b>Изпълни</b></li><li><b>Изглед → Макроси</b> или <b>Разработчик → Макроси</b></li><li>Бутон на листа (стъпка 4)</li><li>В редактора: курсорът в макроса → <kbd>F5</kbd></li></ol>
+        <p class="note">⚠️ И в Excel <kbd>Ctrl</kbd>+<kbd>Z</kbd> не отменя действията на макрос.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="buton">
+  <div class="wrap">
+    <h2>Стъпка 4. Бутон на листа</h2>
+    <p class="muted">В Excel бутонът е <b>контрола за формуляри</b>. Щом го нарисуваш, Excel сам пита кой макрос да пуска.</p>
+    <div class="walk green" data-walk="btn" data-title="Бутон „Оформи таблицата“"></div>
+    <div class="grid2" style="margin-top:22px">
+      <div class="tip" style="margin:0"><b>Как да редактирам бутона?</b> С обикновено щракване той пуска макроса. За да смениш текста, размера или макроса – щракни с <b>десния бутон</b> → <b>Редактиране на текст</b> / <b>Присвояване на макрос</b>. Или задръж <kbd>Ctrl</kbd> и щракни, за да го маркираш.</div>
+      <div class="tip" style="margin:0"><b>Фигура вместо бутон.</b> Може и всяка фигура (Вмъкване → Фигури): десен бутон → <b>Присвояване на макрос</b>. Фигурата може да е цветна и с икона – изглежда по-модерно.</div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="pochistvane">
+  <div class="wrap">
+    <h2>Стъпка 5. Почисти записания код</h2>
+    <p>Рекордерът записва всичко – и излишното. Кодът работи, но е дълъг и маркира клетки без нужда (екранът „мига“). Опитните програмисти го <b>почистват</b>: махат <code>.Select</code> / <code>Selection</code> и излишните редове.</p>
+    <div class="grid2" style="margin-top:16px">
+      <div>
+        <h3>Преди – 18 реда</h3>
+<pre class="vba" data-title="Записан">
+Range("A1:D1").Select
+Selection.Font.Bold = True
+With Selection.Interior
+    .Pattern = xlSolid
+    .PatternColorIndex = xlAutomatic
+    .Color = 4616993
+    .TintAndShade = 0
+    .PatternTintAndShade = 0
+End With
+With Selection.Font
+    .ThemeColor = xlThemeColorDark1
+    .TintAndShade = 0
+End With
+Selection.HorizontalAlignment = xlCenter
+Columns("A:D").Select
+Columns("A:D").EntireColumn.AutoFit
+Range("A1").Select
+</pre>
+      </div>
+      <div>
+        <h3>След – 8 реда, същият резултат</h3>
+<pre class="vba" data-title="Почистен">
+Sub FormatTablica()
+    With Range("A1:D1")
+        .Font.Bold = True
+        .Font.Color = RGB(255, 255, 255)
+        .Interior.Color = RGB(33, 115, 70)
+        .HorizontalAlignment = xlCenter
+    End With
+    Columns("A:D").AutoFit
+End Sub
+</pre>
+        <ol class="lx">
+          <li data-l="2,7">Вместо „маркирай A1:D1, после направи с маркираното“ – направо „с A1:D1 направи…“.</li>
+          <li data-l="4-5"><code>RGB</code> е по-разбираемо от числото 4616993.</li>
+          <li data-l="8">Без маркиране на колоните.</li>
+        </ol>
+        <div class="tip"><b>Правило:</b> <code>X.Select</code> + <code>Selection.Нещо</code> = <code>X.Нещо</code>.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="greshki">
+  <div class="wrap">
+    <h2>Чести грешки</h2>
+    <div class="scroll" style="margin-top:16px">
+    <table class="stack">
+      <thead><tr><th>Какво виждаш</th><th>Причина</th><th>Как се поправя</th></tr></thead>
+      <tbody>
+        <tr><td>„Следните функции не могат да бъдат записани в работни книги без макроси: VB проект“</td><td>Записваш като .xlsx</td><td>Натисни <b>Не</b> и избери <b>Работна книга на Excel с разрешени макроси (*.xlsm)</b>.</td></tr>
+        <tr><td>Ctrl+C спря да копира</td><td>Макросът е получил Ctrl+C</td><td>Разработчик → Макроси → избери → <b>Опции…</b> → смени на главна буква (Ctrl+Shift+…).</td></tr>
+        <tr><td>Макросът прави странни неща</td><td>Записани са грешни щраквания</td><td>Изтрий макроса (Alt+F8 → Изтриване) и го запиши отново – или изтрий излишните редове в кода.</td></tr>
+        <tr><td>Макросът винаги пише в същата клетка</td><td>Абсолютен запис</td><td>Запиши отново с <b>Използване на относителни препратки</b>.</td></tr>
+        <tr><td>Макросът не се вижда в другата книга</td><td>Съхранен е в „Тази работна книга“</td><td>Отвори и двете книги или го запиши в Личната работна книга с макроси.</td></tr>
+        <tr><td>Не намирам кода</td><td>Гледаш в Лист1 или ThisWorkbook</td><td>Записаният код е в <b>Modules → Module1</b> (или Module2…).</td></tr>
+        <tr><td>Не мога да върна промените</td><td>Ctrl+Z не отменя макрос</td><td>Пробвай макроса първо върху копие.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="zadacha">
+  <div class="wrap">
+    <h2>Задача за часа</h2>
+    <div class="goal"><h3>Бутони за оформяне на дневник</h3><p>Направи таблица „Дневник“ с 8 ученика. <b>Запиши</b> два макроса – за оформяне и за изчистване на оформлението, свържи ги с клавишни комбинации и бутони, после <b>почисти</b> кода на първия.</p>
+      <div class="time"><span>⏱ 1 учебен час</span><span>👤 индивидуално</span><span>🎯 20 точки</span></div></div>
+    <div class="grid2" style="margin-top:26px">
+      <div>
+        <h3>Изисквания – точно в този ред</h3>
+        <ol class="req">
+          <li><b>Файл</b> <b>Dnevnik-Ime-Familia.xlsm</b>. Лист с име <b>Оценки</b>: колони <b>№, Ученик, Оценка, Отсъствия</b> и 8 ученика.</li>
+          <li><b>Макрос FormatTablica</b> (записан): заглавният ред – удебелен, цветен фон, бял текст, центриран; рамки на цялата таблица; автоширина. Клавиш <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>, описание.</li>
+          <li><b>Макрос IzchistiFormat</b> (записан): маркира таблицата → <b>Начало → Изчистване → Изчистване на форматите</b>. Клавиш <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>.</li>
+          <li><b>Два бутона</b> на листа (Разработчик → Вмъкване → Бутон): „🎨 Оформи“ и „🧹 Изчисти“ със своите макроси.</li>
+          <li><b>Почистване:</b> копирай FormatTablica като <b>FormatTablica2</b> и го съкрати без <code>Select</code>/<code>Selection</code>, с <code>With</code> и <code>RGB</code>. Двата трябва да дават еднакъв резултат.</li>
+          <li><b>Относителен макрос</b> <code>Obshto</code>: записан с относителни препратки – пише „Общо:“ в текущата клетка и <code>=COUNTA(B2:B9)</code> вдясно от нея.</li>
+          <li><b>Проба:</b> Изчисти → Оформи → Изчисти с бутоните; Obshto от две различни клетки.</li>
+        </ol>
+      </div>
+      <div>
+        <div class="card"><h3>Какво предаваш</h3><ul><li>Файла <b>.xlsm</b></li><li>Снимка на листа с двата бутона</li><li>Снимка на FormatTablica и FormatTablica2 един до друг</li><li>1–2 изречения: с колко реда стана по-къс кодът и какво махна</li></ul></div>
+        <div class="card" style="margin-top:20px"><h3>Примерни данни</h3>
+          <table class="stack"><thead><tr><th>№</th><th>Ученик</th><th>Оценка</th><th>Отсъствия</th></tr></thead>
+          <tbody><tr><td>1</td><td>Ива Петрова</td><td>5,50</td><td>2</td></tr><tr><td>2</td><td>Мартин Колев</td><td>4,75</td><td>5</td></tr><tr><td>3</td><td>Ники Георгиев</td><td>2,80</td><td>12</td></tr><tr><td>4</td><td>Сара Иванова</td><td>6,00</td><td>0</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td></tr></tbody></table>
+        </div>
+        <div class="card" style="margin-top:20px"><h3>⭐ Бонус</h3><ul><li>Запиши макрос, който фиксира заглавния ред (<b>Изглед → Фиксиране на прозорците → Фиксиране на горния ред</b>) и сортира по Оценка (Данни → Сортиране). Разгледай кода.</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="kriterii">
+  <div class="wrap grid2">
+    <div>
+      <h2>Критерии за оценяване</h2>
+      <table class="crit">
+        <thead><tr><th>Критерий</th><th>Точки</th></tr></thead>
+        <tbody>
+          <tr><td><b>Файл и данни</b> – .xlsm, лист Оценки, 8 ученика</td><td>2</td></tr>
+          <tr><td><b>FormatTablica</b> – всички изисквания, клавиш, описание</td><td>4</td></tr>
+          <tr><td><b>IzchistiFormat</b> – работи, клавиш</td><td>2</td></tr>
+          <tr><td><b>Два бутона</b> с правилните макроси</td><td>3</td></tr>
+          <tr><td><b>FormatTablica2</b> – почистен, без Select, същия резултат</td><td>4</td></tr>
+          <tr><td><b>Obshto</b> – относителен, работи от всяка клетка</td><td>3</td></tr>
+          <tr><td><b>Снимки и извод</b></td><td>2</td></tr>
+          <tr><td><b>Общо</b></td><td><b>20</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3 style="margin-top:8px">Оценка</h3>
+      <table class="crit">
+        <thead><tr><th>Точки</th><th>Оценка</th></tr></thead>
+        <tbody><tr><td>18–20</td><td>Отличен 6</td></tr><tr><td>15–17</td><td>Много добър 5</td></tr><tr><td>12–14</td><td>Добър 4</td></tr><tr><td>9–11</td><td>Среден 3</td></tr><tr><td>0–8</td><td>Слаб 2</td></tr></tbody>
+      </table>
+      <div class="card" style="margin-top:20px"><h3>Провери се, преди да предадеш</h3>
+        <label class="chk"><input type="checkbox"> Файлът е .xlsm</label>
+        <label class="chk"><input type="checkbox"> Клавишите са с Shift</label>
+        <label class="chk"><input type="checkbox"> Двата бутона работят</label>
+        <label class="chk"><input type="checkbox"> FormatTablica2 няма Select</label>
+        <label class="chk"><input type="checkbox"> Obshto пише до текущата клетка</label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">10 въпроса. Избери отговор на всеки и натисни „Провери“.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check" type="button">Провери</button><button class="btn ghost" id="again" type="button">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<section class="band"><div class="wrap pager"><a href="index.html"><small>← Към модула</small>Макроси в Excel</a><a class="nx" href="urok-2-vba-kletki-i-cikli.html"><small>Урок 2 →</small>VBA в Excel: клетки, цикли, условия</a></div></section>
+
+<footer>IT Зона · Макроси в Excel · 10 клас. Изгледите на програмите са схематични – бутоните може леко да се различават според версията на Excel.</footer>
+
+<script>const CUR=0;</script>
+<script src="ex.js?v=20261128"></script>
+<script src="../../interaktivni/mk.js?v=20261128"></script>
+<script>
+{
+const M=MK,g=id=>document.getElementById(id);
+const DATA=[["№","Ученик","Оценка","Отсъствия"],[1,"Ива Петрова",5.5,2],[2,"Мартин Колев",4.75,5],[3,"Ники Георгиев",2.8,12],[4,"Сара Иванова",6,0],[5,"Петър Димов",3.9,7]];
+const F="Dnevnik.xlsm";
+const HEAD="font-weight:700;color:#fff;background:#217346;text-align:center";
+const hst=(extra)=>{const o={};["A1","B1","C1","D1"].forEach(a=>o[a]=extra);return o};
+const CW=[34,40,150,80,90,80];
+/* --- проста функция за Excel макет с колона № в A --- */
+const X=(o)=>M.xl(Object.assign({file:F,cells:DATA,cw:[40,150,80,90,80,80],nc:5,rows:9,sheets:["Оценки"],sheet:"Оценки"},o));
+
+/* ---------- рекордер ---------- */
+const ACTS=[
+ ["sel","1. Маркирай A1:D1",['    Range("A1:D1").Select'],s=>{s.sel="A1:D1"}],
+ ["bold","2. Удебели (Ctrl+B)",['    Selection.Font.Bold = True'],s=>{s.bold=1}],
+ ["fill","3. Запълни в зелено",['    With Selection.Interior','        .Pattern = xlSolid','        .Color = 4616993','    End With'],s=>{s.fill=1}],
+ ["white","4. Бял шрифт",['    With Selection.Font','        .ThemeColor = xlThemeColorDark1','    End With'],s=>{s.white=1}],
+ ["center","5. Центрирай",['    Selection.HorizontalAlignment = xlCenter'],s=>{s.center=1}],
+ ["border","6. Рамки на A1:D6",['    Range("A1:D6").Select','    Selection.Borders.LineStyle = xlContinuous'],s=>{s.sel="A1:D6";s.border=1}],
+ ["fit","7. Автоширина на колоните",['    Columns("A:D").EntireColumn.AutoFit'],s=>{s.fit=1}],
+ ["oops","😬 Случайно щракване в F9",['    Range("F9").Select'],s=>{s.sel="F9"}]];
+let R={recording:false,lines:[],state:{sel:"A1"},done:false};
+function styles(s){const o={};
+  ["A1","B1","C1","D1"].forEach(a=>{let c='';if(s.bold)c+='font-weight:700;';if(s.fill)c+='background:#217346;';if(s.white)c+='color:#fff;';if(s.center)c+='text-align:center;';o[a]=c});
+  if(s.border)for(let r=1;r<=6;r++)"ABCD".split('').forEach(c=>{o[c+r]=(o[c+r]||'')+'border:1px solid #555;'});
+  return o}
+function drawRec(){const s=R.state;M.put("recSheet",X({tab:"Разработчик",st:styles(s),sel:s.sel,rec:R.recording,cw:s.fit?[34,40,120,70,90,80]:[40,150,80,90,80,80]}));
+  const all=R.lines.length||R.done?['Sub FormatTablica()',...R.lines,...(R.done?['End Sub']:[])]:[];
+  g('rLog').innerHTML=all.length?all.map((l,i)=>`<div class="ln${R.fresh&&R.fresh.includes(i)?' new':''}"><b>${i+1}</b><span>${M.hl(l)||' '}</span></div>`).join(''):'<p class="muted" style="padding:10px 16px">Кодът ще се появи тук, докато записваш.</p>';
+  g('rLog').scrollTop=1e6;
+  g('rActs').querySelectorAll('button').forEach(b=>b.disabled=!R.recording)}
+g('rActs').innerHTML=ACTS.map((a,i)=>`<button type="button" data-i="${i}">${a[1]}</button>`).join('');
+g('rActs').querySelectorAll('button').forEach(b=>b.onclick=()=>{const a=ACTS[+b.dataset.i];a[3](R.state);const n=R.lines.length+1;R.lines.push(...a[2]);R.fresh=a[2].map((_,k)=>n+k);drawRec();
+  if(a[0]=="oops")g('rNote').textContent='Виж: и случайното щракване е записано! Рекордерът не знае кое е грешка.'});
+g('rStart').onclick=()=>{R={recording:true,lines:[],state:{sel:"A1"},done:false};g('rStart').disabled=true;g('rStop').disabled=false;g('rPlay').disabled=true;
+  g('rNote').innerHTML='<span class="recdot"></span>Записва се… Всяко действие става ред код.';drawRec()};
+g('rStop').onclick=()=>{R.recording=false;R.done=true;R.fresh=[R.lines.length+1];g('rStart').disabled=false;g('rStop').disabled=true;g('rPlay').disabled=!R.lines.length;g('rNote').textContent='Записът е спрян. Натисни „↺ Нова таблица“ и после „▶ Изпълни макроса“.';drawRec()};
+g('rReset').onclick=()=>{R.state={sel:"A1"};R.fresh=[];drawRec();g('rNote').textContent=R.done?'Таблицата е неоформена. Сега пусни макроса.':''};
+g('rPlay').onclick=async()=>{g('rPlay').disabled=true;R.state={sel:"A1"};drawRec();
+  const seq=[];let n=1;R.lines.forEach(l=>{n++;seq.push([n,l])});
+  for(const [ln,l] of seq){const a=ACTS.find(a=>a[2].includes(l));
+    if(a&&a[2][0]==l)a[3](R.state);drawRec();
+    g('rLog').querySelectorAll('.ln').forEach((e,i)=>e.style.background=i==ln-1?'#fff3b0':'');
+    await new Promise(r=>setTimeout(r,320))}
+  g('rLog').querySelectorAll('.ln').forEach(e=>e.style.background='');g('rPlay').disabled=false;g('rNote').textContent='Готово! Макросът повтори всички записани действия – за част от секундата в истинския Excel.'};
+drawRec();
+
+/* ---------- абсолютни / относителни ---------- */
+let cur={c:1,r:3},written=[];
+function drawRel(){const st={};written.forEach(a=>st[a]='background:#c9f0d6;font-weight:700');
+  const cells=DATA.map(r=>r.slice());written.forEach(a=>{const c=M.COLS.indexOf(a[0]),r=+a.slice(1);cells[r-1]=cells[r-1]||[];cells[r-1][c]="Общо:"});
+  M.put("relSheet",X({cells,st,sel:M.COLS[cur.c]+cur.r,rows:9,tab:"Начало"}));
+  g('relSheet').querySelectorAll('td').forEach((td,i)=>{td.style.cursor='pointer';const r=Math.floor(i/5)+1,c=i%5;td.onclick=()=>{cur={c,r};drawRel();g('relOut').className='out ok';g('relOut').textContent='Текуща клетка: '+M.COLS[c]+r}})}
+g('relRun').onclick=()=>{const rel=document.querySelector('[name=rel]:checked').value=='rel';
+  const t=rel?{c:cur.c,r:cur.r+1}:{c:1,r:8};if(t.r>9){g('relOut').className='out bad';g('relOut').textContent='Клетката отдолу е извън показаната част – избери по-горна.';return}
+  const a=M.COLS[t.c]+t.r;written.push(a);cur=t;drawRel();
+  g('relOut').className='out ok';g('relOut').textContent=rel?`Относително: една надолу от текущата → ${a}. Пусни пак – ще продължи надолу.`:`Абсолютно: винаги B8, където и да си бил. Пусни пак – пак B8.`};
+g('relClr').onclick=()=>{written=[];cur={c:1,r:3};drawRel();g('relOut').className='out ok';g('relOut').textContent='Текуща клетка: B3'};
+drawRel();
+
+/* ---------- пътеводители ---------- */
+const plain=X({tab:"Начало",sel:"A1"});
+M.walk("dev",[
+ {t:"Файл → Опции",m:M.xl({file:"Книга1",backstage:true,hot:"bs:Опции",dev:false}),c:"В Excel: <b>Файл → Опции</b> (Options)."},
+ {t:"Отметка „Разработчик“",m:M.xl({file:"Книга1",backstage:true,dev:false,ovl:M.options({hot:"cb:Разработчик"}).replace("Опции на PowerPoint","Опции на Excel")}),c:"<b>Персонализиране на лентата</b> → отметка на <b>Разработчик</b> (Developer) → OK."},
+ {t:"Разделът се появява",m:X({tab:"Начало",devNew:true,hot:"tab:Разработчик",file:"Книга1"}),c:"Разделът е последен в лентата. Щракни го."},
+ {t:"Групата „Код“",m:X({tab:"Разработчик",file:"Книга1",hot:["btn:rec","btn:rel","btn:vb"]}),c:"Тук са <b>Visual Basic</b>, <b>Макроси</b>, <b>Записване на макрос</b>, <b>Използване на относителни препратки</b> и <b>Защита на макросите</b> (провери: „Забрани VBA макросите с уведомяване“)."},
+ {t:"Запиши като .xlsm",m:X({tab:"Разработчик",file:"Книга1",ovl:M.save({name:"Dnevnik",types:M.TYPES_XL,open:true,hot:"ty:1",files:["📗 Оценки-9клас.xlsx","📗 Бюджет.xlsx"]})}),c:"<kbd>F12</kbd> → <b>Запиши като тип</b> → <b>Работна книга на Excel с разрешени макроси (*.xlsm)</b> → Запиши. Направи го още преди да записваш макроси."},
+ {t:"Готово",m:X({tab:"Разработчик"}),c:"В заглавната лента пише <b>Dnevnik.xlsm</b>. Таблицата с учениците е готова за макроси."}
+]);
+const recO=o=>X(Object.assign({tab:"Разработчик"},o));
+M.walk("rec",[
+ {t:"„Записване на макрос“",m:recO({sel:"A1",hot:"btn:rec"}),c:"<b>Разработчик → Записване на макрос</b> (Record Macro). Има и бутон в лентата на състоянието долу вляво."},
+ {t:"Име на макроса",m:recO({ovl:M.rec({name:"FormatTablica",typing:true,hot:"f:name"})}),c:"Напиши име: буква отпред, без интервали, за предпочитане на латиница."},
+ {t:"Клавиш с Shift",m:recO({ovl:M.rec({name:"FormatTablica",key:"F",hot:"f:key"})}),c:"В полето напиши <b>главно F</b> (със Shift). Комбинацията става <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>."},
+ {t:"Къде и описание",m:recO({ovl:M.rec({name:"FormatTablica",key:"F",desc:"Оформя заглавния ред на таблицата",hot:"f:store"})}),c:"<b>Съхраняване на макроса в: Тази работна книга</b>. Описанието е по желание – ще стане коментар в кода."},
+ {t:"OK – записът започва",m:recO({ovl:M.rec({name:"FormatTablica",key:"F",desc:"Оформя заглавния ред на таблицата",hot:"ok"})}),c:"От този момент <b>всяко</b> действие се записва. Не бързай, но и не щракай излишно."},
+ {t:"Маркирай заглавния ред",m:recO({rec:true,sel:"A1:D1",hot:"cell:B1"}),c:"Долу вляво се вижда ⏹ – записва се. Маркирай <b>A1:D1</b> с плъзгане."},
+ {t:"Оформи",m:X({tab:"Начало",rec:true,sel:"A1:D1",hot:["btn:bold","btn:fill"]}),c:"<b>Начало</b>: удебеляване (<kbd>Ctrl</kbd>+<kbd>B</kbd>), <b>Запълване</b> – зелено, <b>Цвят на шрифта</b> – бяло, <b>Центриране</b>."},
+ {t:"Автоширина",m:X({tab:"Начало",rec:true,sel:"A1:D1",st:hst(HEAD),hot:"cell:A1"}),c:"Маркирай колоните A–D (щракни и плъзни върху буквите) и щракни двойно между две заглавия на колони – ширината се нагласява. Накрая щракни A1."},
+ {t:"Спри записа",m:recO({rec:true,sel:"A1",st:hst(HEAD),hot:["btn:stop","recbtn"]}),c:"<b>Разработчик → Спиране на записа</b> (Stop Recording) или ⏹ долу вляво. Макросът е готов!"},
+ {t:"Пробвай",m:recO({sel:"A1",file:F,st:hst(HEAD),status:"Ctrl+Shift+F ✔"}),c:"Изчисти оформлението (Начало → Изчистване → Изчистване на форматите) и натисни <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> – заглавието се оформя за миг."}
+]);
+const recCode=['Sub FormatTablica()',"'","' FormatTablica Макрос","' Оформя заглавния ред на таблицата","'",'    Range("A1:D1").Select','    Selection.Font.Bold = True','    With Selection.Interior','        .Pattern = xlSolid','        .Color = 4616993','    End With'].join('\n');
+M.walk("code",[
+ {t:"Alt+F11 → Module1",m:M.vbe({file:F,objs:["Лист1 (Оценки)","ThisWorkbook"],module:true,code:recCode,proc:"FormatTablica",hot:"mod:Module1"}),c:"Вляво има <b>Microsoft Excel Objects</b> (листовете и книгата) и <b>Modules</b>. Записаният код е в <b>Module1</b> – двоен клик."},
+ {t:"Промени цвета",m:M.vbe({file:F,objs:["Лист1 (Оценки)","ThisWorkbook"],module:true,code:recCode.replace(".Color = 4616993",".Color = RGB(35, 71, 214)"),proc:"FormatTablica",cur:10,ln:10}),c:"Смени <code>.Color = 4616993</code> на <code>.Color = RGB(35, 71, 214)</code> – синьо. Да, записаният код може да се редактира като всеки друг!"},
+ {t:"Пусни",m:X({tab:"Разработчик",st:hst("font-weight:700;color:#fff;background:#2347d6;text-align:center"),sel:"A1"}),c:"<kbd>Ctrl</kbd>+<kbd>S</kbd>, обратно в Excel и <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>. Заглавието вече е синьо."}
+]);
+const bShape=(c='')=>`<div class="xbtn ${c}" style="left:470px;top:60px;width:150px;height:40px">🎨 Оформи таблицата</div>`;
+M.walk("btn",[
+ {t:"Разработчик → Вмъкване",m:X({tab:"Разработчик",hot:"btn:ins"}),c:"<b>Разработчик → Вмъкване</b> (Insert) в групата <b>Контроли</b>."},
+ {t:"Бутон (контрола за формуляри)",m:X({tab:"Разработчик",drop:{x:300,y:118,html:M.ctrlDrop({hot:"ctl:btn"})}}),c:"Първата иконка в <b>Контроли за формуляри</b> (Form Controls) е <b>Бутон</b>. ActiveX контролите са по-сложни – не ги ползвай засега."},
+ {t:"Нарисувай",m:X({tab:"Разработчик",shapes:`<div class="xbtn sel" style="left:470px;top:60px;width:150px;height:40px">Бутон 1</div>`}),c:"Курсорът става кръстче. Плъзни встрани от таблицата – например над колона F."},
+ {t:"Присвояване на макрос",m:X({tab:"Разработчик",shapes:`<div class="xbtn sel" style="left:470px;top:60px;width:150px;height:40px">Бутон 1</div>`,ovl:M.assign({names:["FormatTablica"],sel:"",hot:"m:FormatTablica"})}),c:"Прозорецът <b>Присвояване на макрос</b> (Assign Macro) се отваря сам. Избери <b>FormatTablica</b>."},
+ {t:"OK",m:X({tab:"Разработчик",shapes:`<div class="xbtn sel" style="left:470px;top:60px;width:150px;height:40px">Бутон 1</div>`,ovl:M.assign({names:["FormatTablica"],hot:"ok"})}),c:"Натисни <b>OK</b>."},
+ {t:"Смени текста",m:X({tab:"Разработчик",shapes:bShape('sel')}),c:"Докато бутонът е маркиран, маркирай текста „Бутон 1“ и напиши <b>🎨 Оформи таблицата</b>. Щракни в клетка, за да излезеш."},
+ {t:"Щракни бутона",m:X({tab:"Разработчик",shapes:bShape('hot')}),c:"Курсорът става ръчичка. Щракни!"},
+ {t:"Готово",m:X({tab:"Разработчик",shapes:bShape(),st:hst(HEAD)}),c:"Таблицата е оформена. Всеки, който отвори файла и разреши макросите, може да ползва бутона."}
+]);
+M.init();
+}
+</script>
+<script>
+const QUIZ=[
+ ["Какво прави „Записване на макрос“ в Excel?", ["Записва видео на екрана", "Превръща действията ти във VBA код", "Записва файла като PDF", "Изпраща файла по имейл"], 1, "Рекордерът пише кода вместо теб."],
+ ["В какъв файл се записва работна книга с макроси?", [".xlsx", ".xlsm", ".csv", ".pptm"], 1, "m = macro."],
+ ["Коя клавишна комбинация е най-добре да дадеш на макрос?", ["Ctrl+C", "Ctrl+S", "Ctrl+Shift+F", "Ctrl+Z"], 2, "С Shift не заменяш вградените комбинации."],
+ ["Какво НЕ може да запише рекордерът?", ["Удебеляване", "Цвят на запълване", "Условие „ако оценката е под 3“", "Ширина на колоните"], 2, "Условията и циклите се дописват на ръка."],
+ ["Записал си случайно щракване. Какво става?", ["Excel го пропуска", "Записва се в кода и ще се повтаря", "Макросът спира", "Файлът се поврежда"], 1, "Изтрий реда или запиши макроса отново."],
+ ["Какво значи ActiveCell.Offset(1, 0)?", ["Клетка A1", "Една клетка надясно", "Една клетка надолу от текущата", "Първата празна клетка"], 2, "(редове, колони)."],
+ ["Къде е записаният код в редактора на VBA?", ["В Лист1", "В ThisWorkbook", "В Modules → Module1", "Няма код"], 2, "Двоен клик върху Module1."],
+ ["Как се добавя бутон за макрос на листа?", ["Вмъкване → Действие", "Разработчик → Вмъкване → Бутон (контрола за формуляри)", "Данни → Бутон", "Изглед → Макроси"], 1, "След рисуването Excel пита кой макрос да присвои."],
+ ["Как се съкращава Range(\"A1:D1\").Select / Selection.Font.Bold = True?", ["Range(\"A1:D1\").Font.Bold = True", "Select.Bold", "Bold(A1:D1)", "Не може"], 0, "X.Select + Selection.Нещо = X.Нещо."],
+ ["Какво означава With Range(\"A1:D1\") … End With?", ["Цикъл", "Условие", "„С този обект направи следните неща“ – редовете вътре започват с точка", "Коментар"], 2, "Спестява повтаряне."]];
+</script>
+<script src="../../interaktivni/ip-urok.js?v=20261127"></script>
+<script src="../../totop.js?v=20261126" defer></script>
+</body>
+</html>
