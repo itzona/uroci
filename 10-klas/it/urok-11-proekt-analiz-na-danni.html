@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 11: Проект: „Анализ на реален набор от данни“ – Информационни технологии, 10 клас</title>
+<link rel="icon" type="image/svg+xml" href="../../icons/10-klas.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../interaktivni/ip-urok.css?v=20261127b">
+<link rel="stylesheet" href="../../interaktivni/mk.css?v=20261128">
+<link rel="stylesheet" href="it.css?v=20261128">
+</head>
+<body class="s2">
+
+<header class="hero s2">
+  <div class="wrap">
+    <div>
+      <span class="tag">Урок 11 · Програмиране и изкуствен интелект · 10 клас</span>
+      <h1>Проект: „Анализ на реален набор от данни“</h1>
+      <p>Като истински анализатори: въпрос, данни, почистване, анализ, диаграми, изводи и представяне – в екип, с критерии за оценяване.</p>
+    </div>
+    <div class="hart" aria-hidden="true"><div class="big">🔬</div><span class="w" style="left:8%;top:10%">Въпрос</span><span class="w" style="left:66%;top:4%">Данни</span><span class="w" style="left:2%;top:72%">Анализ</span><span class="w" style="left:70%;top:80%">Диаграми</span><span class="w" style="left:74%;top:40%">Изводи</span></div>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Проект</summary><div class="menu"><a href="#proekt">Накратко</a><a href="#plan">План и роли</a><a href="#primer">Пример</a></div></details><a href="#kriterii">Критерии</a><a href="#test">Тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="proekt">
+  <div class="wrap">
+    <h2>Проектът накратко</h2>
+    <div class="goal"><h3>„Анализ на реален набор от данни“</h3><p>В екип от 2–3 души изберете <b>реален набор от данни</b>, задайте <b>изследователски въпрос</b>, почистете и анализирайте данните с Python или електронна таблица, направете <b>диаграми</b> и представете <b>изводите</b> си пред класа.</p>
+      <div class="time"><span>⏱ 3 учебни часа + домашна работа</span><span>👥 екип 2–3</span><span>🎯 20 точки</span></div></div>
+    <h3 style="margin-top:26px">Етапи</h3>
+    <div class="flow" style="margin-top:22px">
+      <div class="card"><b>Въпрос</b><p class="note">Какво искаме да разберем?</p></div>
+      <div class="card"><b>Данни</b><p class="note">Откъде, колко, лиценз</p></div>
+      <div class="card"><b>Почистване</b><p class="note">липсващи, грешни, дубликати</p></div>
+      <div class="card"><b>Анализ</b><p class="note">средни, групи, корелация</p></div>
+    </div>
+    <div class="flow" style="margin-top:30px;counter-reset:s 4">
+      <div class="card"><b>Визуализация</b><p class="note">2–4 подходящи диаграми</p></div>
+      <div class="card"><b>Изводи</b><p class="note">отговор на въпроса</p></div>
+      <div class="card"><b>Ограничения</b><p class="note">какво не можем да кажем</p></div>
+      <div class="card"><b>Представяне</b><p class="note">5 минути пред класа</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="plan">
+  <div class="wrap grid2">
+    <div>
+      <h2>План по часове</h2>
+      <table class="stack"><thead><tr><th>Час</th><th>Какво правите</th></tr></thead><tbody>
+        <tr><td><b>1</b></td><td>Роли, избор на тема и набор от данни, изследователски въпрос, досие на данните (урок 7).</td></tr>
+        <tr><td><b>2</b></td><td>Почистване и анализ: средни стойности, групиране, сравнения, корелация (урок 8).</td></tr>
+        <tr><td><b>3</b></td><td>Диаграми, изводи, ограничения, подготовка на презентацията.</td></tr>
+        <tr><td><b>4</b></td><td>Представяне пред класа (5 мин) и въпроси.</td></tr>
+      </tbody></table>
+      <h3 style="margin-top:20px">Роли в екипа</h3>
+      <ul><li>🧭 <b>Координатор</b> – план, срокове, общият документ.</li><li>🧹 <b>Анализатор на данните</b> – зареждане, почистване, код.</li><li>🎨 <b>Визуализатор и говорител</b> – диаграми, презентация.</li></ul>
+      <p class="note">Всеки участва във всичко, ролите показват кой отговаря.</p>
+    </div>
+    <div>
+      <h2>Добрият изследователски въпрос</h2>
+      <table class="stack"><thead><tr><th>❌ Слаб</th><th>✅ Добър</th></tr></thead><tbody>
+        <tr><td>„Нещо за времето“</td><td>„Кой месец е най-топъл в София и с колко се различава от най-студения?“</td></tr>
+        <tr><td>„Учениците“</td><td>„Свързани ли са часовете с телефон и часовете сън при учениците от анкетата?“</td></tr>
+        <tr><td>„Колите“</td><td>„Как се е променил броят на новите електромобили в България от 2015 до днес?“</td></tr>
+      </tbody></table>
+      <p>Добрият въпрос е <b>конкретен</b>, <b>измерим</b> с данните и има отговор, който може да ни изненада.</p>
+      <h3 style="margin-top:16px">Идеи за данни</h3>
+      <ul><li>Нашата <a href="data/anketa.csv" download>anketa.csv</a> или <b>своя анкета</b> в класа (Google Формуляри → таблица).</li><li>data.egov.bg – качество на въздуха, транспорт, училища.</li><li>НСИ – население, образование по области.</li><li>Our World in Data – енергия, климат, здраве.</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="primer">
+  <div class="wrap">
+    <h2>Пример: целият анализ в един код</h2>
+    <p class="muted">Въпрос: <i>„Свързани ли са времето с телефона и сънят при учениците?“</i> Това е скелет – копирай го и го промени за своите данни.</p>
+<div class="py" data-files="data/anketa.csv" data-title="Скелет на анализа" data-img="img/70b5436e.png" data-out="Записи: 30
+След почистване: 29
+Средно телефон: 4.5 ч
+Средно сън: 7.6 ч
+Сън при 5+ ч телефон: 7.2 | при &lt; 5 ч: 7.8
+Корелация: -0.64">
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# 1. Данни
+df = pd.read_csv(&#x27;anketa.csv&#x27;)
+print(&quot;Записи:&quot;, len(df))
+
+# 2. Почистване
+df = df.dropna()
+print(&quot;След почистване:&quot;, len(df))
+
+# 3. Анализ
+print(&quot;Средно телефон:&quot;, round(df[&quot;telefon_chasa&quot;].mean(), 1), &quot;ч&quot;)
+print(&quot;Средно сън:&quot;, round(df[&quot;san_chasa&quot;].mean(), 1), &quot;ч&quot;)
+mnogo = df[df[&quot;telefon_chasa&quot;] &gt;= 5][&quot;san_chasa&quot;].mean()
+malko = df[df[&quot;telefon_chasa&quot;] &lt; 5][&quot;san_chasa&quot;].mean()
+print(&quot;Сън при 5+ ч телефон:&quot;, round(mnogo, 1), &quot;| при &lt; 5 ч:&quot;, round(malko, 1))
+print(&quot;Корелация:&quot;, round(df[&quot;telefon_chasa&quot;].corr(df[&quot;san_chasa&quot;]), 2))
+
+# 4. Визуализация
+plt.scatter(df[&quot;telefon_chasa&quot;], df[&quot;san_chasa&quot;])
+plt.title(&quot;Време с телефона и сън&quot;)
+plt.xlabel(&quot;Телефон, часове на ден&quot;)
+plt.ylabel(&quot;Сън, часове&quot;)
+plt.show()
+</div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="card"><h3>Примерен извод</h3><p>„При учениците от анкетата тези с 5 и повече часа телефон на ден спят средно по-малко от останалите. Корелацията е отрицателна и умерена до силна. <b>Не можем</b> да кажем, че телефонът причинява по-малко сън – може да има друга причина (например повече домашни). Данните са от само 30 души и са измислени за упражнение.“</p></div>
+      <div class="card"><h3>Структура на презентацията (6–8 слайда)</h3><ol><li>Заглавие, екип</li><li>Въпросът и защо е интересен</li><li>Данните – източник, размер, лиценз</li><li>Почистване – какво поправихме</li><li>2–4 диаграми с кратък коментар</li><li>Изводи</li><li>Ограничения и какво бихме изследвали още</li><li>Източници</li></ol></div>
+    </div>
+  </div>
+</section>
+<section class="band alt" id="kriterii">
+  <div class="wrap grid2">
+    <div><h2>Критерии за оценяване</h2><table class="crit"><thead><tr><th>Критерий</th><th>Точки</th></tr></thead><tbody><tr><td><b>Въпрос</b> – конкретен и измерим</td><td>2</td></tr><tr><td><b>Данни</b> – реални, с източник, дата и лиценз; описани колони</td><td>3</td></tr><tr><td><b>Почистване</b> – описано какво и защо</td><td>2</td></tr><tr><td><b>Анализ</b> – поне 3 изчисления (средни, групи, сравнение/корелация)</td><td>4</td></tr><tr><td><b>Диаграми</b> – 2–4, подходящ вид, заглавия и надписи на осите</td><td>4</td></tr><tr><td><b>Изводи и ограничения</b> – отговор на въпроса, без грешни причинни твърдения</td><td>3</td></tr><tr><td><b>Представяне</b> – ясно, в срок, всеки участва</td><td>2</td></tr><tr><td><b>Общо</b></td><td><b>20</b></td></tr></tbody></table></div>
+    <div><h3 style="margin-top:8px">Оценка</h3><table class="crit"><thead><tr><th>Точки</th><th>Оценка</th></tr></thead><tbody><tr><td>18–20</td><td>Отличен 6</td></tr><tr><td>15–17</td><td>Много добър 5</td></tr><tr><td>12–14</td><td>Добър 4</td></tr><tr><td>9–11</td><td>Среден 3</td></tr><tr><td>0–8</td><td>Слаб 2</td></tr></tbody></table>
+    <div class="card" style="margin-top:20px"><h3>Провери се, преди да предадеш</h3><label class="chk"><input type="checkbox"> Въпросът ни е конкретен</label><label class="chk"><input type="checkbox"> Посочихме източника и лиценза на данните</label><label class="chk"><input type="checkbox"> Описахме почистването</label><label class="chk"><input type="checkbox"> Диаграмите имат заглавия и надписи на осите</label><label class="chk"><input type="checkbox"> Различаваме корелация от причина</label><label class="chk"><input type="checkbox"> Всеки от екипа ще говори</label></div></div>
+  </div>
+</section>
+<section class="band alt" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">6 въпроса. Избери отговор на всеки и натисни „Провери“. Под всеки въпрос ще видиш обяснение.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check" type="button">Провери</button><button class="btn ghost" id="again" type="button">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<section class="band"><div class="wrap pager"><a href="urok-10-dannite-okolo-nas.html"><small>← Урок 10</small>Данните около нас и работата с ИИ</a><a class="nx" href="test-2-programirane-i-ii.html"><small>Тест →</small>Тест: Програмиране и изкуствен интелект</a></div></section>
+
+<footer>IT Зона · Информационни технологии · 10 клас. Изгледите на програмите и сайтовете са схематични – бутоните може леко да се различават.</footer>
+
+<script>const CUR=12;</script>
+<script src="it.js?v=20261128"></script>
+<script src="../../interaktivni/mk.js?v=20261128"></script>
+<script>
+{
+
+IT.init();MK.init();
+}
+</script>
+<script>
+const QUIZ=[["Кой е добър изследователски въпрос?", ["„Нещо за спорта“", "„Свързани ли са дните спорт седмично и успехът на учениците?“", "„Данни“", "„Всичко за климата“"], 1, "Конкретен и измерим."], ["Кой е правилният ред на етапите?", ["Изводи → данни → въпрос", "Въпрос → данни → почистване → анализ → визуализация → изводи", "Диаграми → въпрос → данни", "Представяне → анализ"], 1, ""], ["Защо се пишат „ограничения“?", ["За да се удължи докладът", "За да е ясно какво данните не могат да докажат", "Задължително е по закон", "Не се пишат"], 1, ""], ["Корелацията между две величини е −0,7. Кой извод е правилен?", ["Едната причинява другата", "Има обратна връзка, но причината не е доказана", "Няма връзка", "Данните са грешни"], 1, ""], ["Какво трябва да посочите за използвания набор от данни?", ["Само името на файла", "Източник, дата и лиценз", "Нищо", "Цвета на таблицата"], 1, ""], ["Какво е задачата на почистването?", ["Да изтрие всички данни", "Да поправи липсващи, грешни и повтарящи се стойности", "Да оцвети таблицата", "Да направи диаграма"], 1, ""]];
+</script>
+<script src="../../interaktivni/ip-urok.js?v=20261127"></script>
+<script src="../../totop.js?v=20261126" defer></script>
+</body>
+</html>

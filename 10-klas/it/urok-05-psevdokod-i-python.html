@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 5: Представяне на алгоритми чрез псевдокод и език за програмиране – Информационни технологии, 10 клас</title>
+<link rel="icon" type="image/svg+xml" href="../../icons/10-klas.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../interaktivni/ip-urok.css?v=20261127b">
+<link rel="stylesheet" href="../../interaktivni/mk.css?v=20261128">
+<link rel="stylesheet" href="it.css?v=20261128">
+</head>
+<body class="s2">
+
+<header class="hero s2">
+  <div class="wrap">
+    <div>
+      <span class="tag">Урок 5 · Програмиране и изкуствен интелект · 10 клас</span>
+      <h1>Представяне на алгоритми чрез псевдокод и език за програмиране</h1>
+      <p>От идеята към работеща програма: псевдокод с ключови думи и първите команди на Python – вход, изход, условия и цикли.</p>
+    </div>
+    <div class="hart" aria-hidden="true"><div class="big">🐍</div><span class="w" style="left:8%;top:10%">ВЪВЕДИ</span><span class="w" style="left:66%;top:4%">АКО … ТО</span><span class="w" style="left:2%;top:72%">for</span><span class="w" style="left:70%;top:80%">while</span><span class="w" style="left:74%;top:40%">print()</span></div>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Теория</summary><div class="menu"><a href="#psevdokod">Псевдокод</a><a href="#prosledi">Проследяване</a><a href="#python">Python – първи команди</a></div></details><details><summary>Практика</summary><div class="menu"><a href="#sravnenie">Псевдокод → Python</a><a href="#kade">Къде да пишеш</a></div></details><a href="#zadacha">Задача</a><a href="#test">Тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="psevdokod">
+  <div class="wrap grid2">
+    <div>
+      <h2>Псевдокод</h2>
+      <p><b>Псевдокодът</b> е запис на алгоритъм с думи и ключови думи, който прилича на програма, но не следва строго правилата на конкретен език. Пише се за хора – за да обмислиш решението, преди да програмираш.</p>
+      <table class="stack" style="margin-top:12px"><thead><tr><th>Псевдокод</th><th>Значение</th><th>Python</th></tr></thead><tbody>
+        <tr><td><code>ВЪВЕДИ x</code></td><td>вход от потребителя</td><td><code>x = input()</code></td></tr>
+        <tr><td><code>ИЗВЕДИ x</code></td><td>покажи на екрана</td><td><code>print(x)</code></td></tr>
+        <tr><td><code>x ← 5</code></td><td>присвояване („сложи 5 в x“)</td><td><code>x = 5</code></td></tr>
+        <tr><td><code>АКО … ТО … ИНАЧЕ … КРАЙ_АКО</code></td><td>условие</td><td><code>if … : … else: …</code></td></tr>
+        <tr><td><code>ЗА i ОТ 1 ДО n … КРАЙ_ЗА</code></td><td>цикъл с брояч</td><td><code>for i in range(1, n + 1):</code></td></tr>
+        <tr><td><code>ДОКАТО условие … КРАЙ_ДОКАТО</code></td><td>цикъл с условие</td><td><code>while условие:</code></td></tr>
+      </tbody></table>
+    </div>
+    <div>
+      <h3>Пример: сбор на числата от 1 до n</h3>
+<pre class="psc" data-title="Псевдокод">
+НАЧАЛО
+    ВЪВЕДИ n
+    s ← 0
+    ЗА i ОТ 1 ДО n
+        s ← s + i
+    КРАЙ_ЗА
+    ИЗВЕДИ s
+КРАЙ
+</pre>
+<pre class="pyc" data-title="Същото на Python">
+n = int(input("Въведи n: "))
+s = 0
+for i in range(1, n + 1):
+    s = s + i
+print(s)
+</pre>
+      <ol class="lx">
+        <li data-l="1"><code>input()</code> връща <b>текст</b>; <code>int()</code> го превръща в цяло число.</li>
+        <li data-l="2">Започваме сбора от 0.</li>
+        <li data-l="3-4"><code>range(1, n + 1)</code> дава 1, 2, …, n (горната граница не се включва!). Отстъпът (4 интервала) показва кои редове са в цикъла.</li>
+        <li data-l="5">След цикъла – без отстъп – извеждаме резултата.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="prosledi">
+  <div class="wrap">
+    <h2>🧪 Проследи псевдокода при n = 4</h2>
+    <div id="tr1" style="margin-top:14px"></div>
+  </div>
+</section>
+
+<section class="band" id="python">
+  <div class="wrap">
+    <h2>Python – първите команди</h2>
+    <div class="grid2" style="margin-top:10px">
+      <div>
+        <p><b>Python</b> е един от най-популярните езици в света – използва се за уеб, наука, анализ на данни и изкуствен интелект. Пише се кратко и четимо.</p>
+        <table class="stack"><thead><tr><th>Операция</th><th>Знак</th><th>Пример → резултат</th></tr></thead><tbody>
+          <tr><td>събиране, изваждане</td><td><code>+ -</code></td><td><code>7 + 2</code> → 9</td></tr>
+          <tr><td>умножение</td><td><code>*</code></td><td><code>7 * 2</code> → 14</td></tr>
+          <tr><td>деление</td><td><code>/</code></td><td><code>7 / 2</code> → 3.5</td></tr>
+          <tr><td>целочислено деление</td><td><code>//</code></td><td><code>7 // 2</code> → 3</td></tr>
+          <tr><td>остатък</td><td><code>%</code></td><td><code>7 % 2</code> → 1</td></tr>
+          <tr><td>степен</td><td><code>**</code></td><td><code>2 ** 3</code> → 8</td></tr>
+          <tr><td>сравнение</td><td><code>== != &lt; &gt; &lt;= &gt;=</code></td><td><code>5 &gt;= 3</code> → True</td></tr>
+        </tbody></table>
+        <div class="tip"><b>Отстъпът е задължителен.</b> В Python редовете вътре в <code>if</code>, <code>for</code> и <code>while</code> се пишат с 4 интервала навътре, а след условието има <b>двоеточие</b> <code>:</code>.</div>
+      </div>
+      <div>
+<div class="py" data-title="Първата програма – натисни ▶ Изпълни" data-out="Здравей, 10 клас!
+Сбор: 22
+Частно: 3.4
+Цяла част: 3 остатък: 2">
+print(&quot;Здравей, 10 клас!&quot;)
+a = 17
+b = 5
+print(&quot;Сбор:&quot;, a + b)
+print(&quot;Частно:&quot;, a / b)
+print(&quot;Цяла част:&quot;, a // b, &quot;остатък:&quot;, a % b)
+</div><div class="py" data-title="Условие – смени оценката и пусни пак" data-out="Издържал">
+ocenka = 5.25
+if ocenka &gt;= 5.5:
+    print(&quot;Отличен&quot;)
+elif ocenka &gt;= 3:
+    print(&quot;Издържал&quot;)
+else:
+    print(&quot;Слаб&quot;)
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="sravnenie">
+  <div class="wrap">
+    <h2>От псевдокод към Python – още примери</h2>
+    <div class="grid2" style="margin-top:12px">
+      <div>
+<pre class="psc" data-title="Псевдокод: по-голямото от две числа">
+ВЪВЕДИ a, b
+АКО a > b ТО
+    ИЗВЕДИ a
+ИНАЧЕ
+    ИЗВЕДИ b
+КРАЙ_АКО
+</pre>
+<div class="py" data-title="Python" data-out="19">
+a = 12
+b = 19
+if a &gt; b:
+    print(a)
+else:
+    print(b)
+</div>
+      </div>
+      <div>
+<pre class="psc" data-title="Псевдокод: обратно броене">
+i ← 5
+ДОКАТО i > 0
+    ИЗВЕДИ i
+    i ← i - 1
+КРАЙ_ДОКАТО
+ИЗВЕДИ „Старт!“
+</pre>
+<div class="py" data-title="Python" data-out="5
+4
+3
+2
+1
+Старт!">
+i = 5
+while i &gt; 0:
+    print(i)
+    i = i - 1
+print(&quot;Старт!&quot;)
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="kade">
+  <div class="wrap grid2">
+    <div>
+      <h2>Къде да пишеш Python</h2>
+      <ul>
+        <li><b>Тук, в урока</b> – полетата с бутон „▶ Изпълни“ пускат истински Python в браузъра (първия път се зарежда до 20 секунди).</li>
+        <li><b>Thonny</b> (thonny.org) – безплатна среда за начинаещи. Инсталираш, пишеш в горното поле, натискаш зеления бутон ▶ (<kbd>F5</kbd>). Долу в „Shell“ е резултатът.</li>
+        <li><b>IDLE</b> – идва с Python от python.org.</li>
+        <li><b>Онлайн</b> – online-python.com, replit.com, Google Colab (за анализ на данни).</li>
+      </ul>
+    </div>
+    <div class="card"><h3>Чести грешки</h3><table class="stack"><thead><tr><th>Съобщение</th><th>Причина</th></tr></thead><tbody>
+      <tr><td><code>SyntaxError: expected ':'</code></td><td>Липсва <code>:</code> след <code>if</code>, <code>for</code>, <code>while</code></td></tr>
+      <tr><td><code>IndentationError</code></td><td>Грешен отстъп – редът в блока трябва да е с 4 интервала</td></tr>
+      <tr><td><code>NameError: name 'x' is not defined</code></td><td>Сгрешено име или променливата не е създадена</td></tr>
+      <tr><td><code>TypeError: can only concatenate str…</code></td><td>Текст + число. <code>input()</code> дава текст – ползвай <code>int()</code></td></tr>
+    </tbody></table></div>
+  </div>
+</section>
+<section class="band" id="zadacha">
+  <div class="wrap">
+    <h2>Задача за часа</h2>
+    <div class="goal"><h3>Три алгоритъма – псевдокод и Python</h3><p>Реши три задачи: за всяка първо напиши <b>псевдокод</b>, после <b>програма на Python</b> и я провери с два примера.</p><div class="time"><span>⏱ 1 учебен час</span><span>👤 индивидуално</span><span>🎯 20 точки</span></div></div>
+    <div class="grid2" style="margin-top:26px">
+      <div><h3>Изисквания – точно в този ред</h3><ol class="req"><li><b>Задача 1 (линейна):</b> въведи цена на продукт и брой – изведи общата сума.</li><li><b>Задача 2 (разклонена):</b> въведи възраст – изведи „може да гласува“ (≥ 18) или колко години остават.</li><li><b>Задача 3 (циклична):</b> изведи таблицата за умножение с 7 (7 × 1 … 7 × 10).</li><li>За всяка – псевдокод, Python, два проверени примера.</li><li>Бонус: в задача 3 въведи число n и изведи таблицата за n.</li></ol></div>
+      <div><div class="card"><h3>Какво предаваш</h3><ul><li>Файл с псевдокода и кода (или връзка към online-python/replit)</li><li>Екранни снимки на изпълнението</li></ul><p class="note">Предаваш там, където каже учителят (напр. Google Classroom).</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="band alt" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">8 въпроса. Избери отговор на всеки и натисни „Провери“. Под всеки въпрос ще видиш обяснение.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check" type="button">Провери</button><button class="btn ghost" id="again" type="button">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<section class="band"><div class="wrap pager"><a href="urok-04-algoritam.html"><small>← Урок 4</small>Алгоритъм</a><a class="nx" href="urok-06-danni-v-python.html"><small>Урок 6 →</small>Първи стъпки с данни в Python</a></div></section>
+
+<footer>IT Зона · Информационни технологии · 10 клас. Изгледите на програмите и сайтовете са схематични – бутоните може леко да се различават.</footer>
+
+<script>const CUR=6;</script>
+<script src="it.js?v=20261128"></script>
+<script src="../../interaktivni/mk.js?v=20261128"></script>
+<script>
+{
+
+IT.trace("tr1",{pseudo:true,title:"Сбор от 1 до n",code:`НАЧАЛО
+    ВЪВЕДИ n
+    s ← 0
+    ЗА i ОТ 1 ДО n
+        s ← s + i
+    КРАЙ_ЗА
+    ИЗВЕДИ s
+КРАЙ`.split("\n"),steps:[
+ {l:1,t:"начало"},{l:2,v:{n:4},t:"въвеждаме n = 4"},{l:3,v:{n:4,s:0},t:"s започва от 0"},
+ {l:4,v:{n:4,s:0,i:1},t:"i = 1"},{l:5,v:{n:4,s:1,i:1},t:"s = 0 + 1"},
+ {l:4,v:{n:4,s:1,i:2},t:"i = 2"},{l:5,v:{n:4,s:3,i:2},t:"s = 1 + 2"},
+ {l:4,v:{n:4,s:3,i:3},t:"i = 3"},{l:5,v:{n:4,s:6,i:3},t:"s = 3 + 3"},
+ {l:4,v:{n:4,s:6,i:4},t:"i = 4"},{l:5,v:{n:4,s:10,i:4},t:"s = 6 + 4"},
+ {l:6,v:{n:4,s:10,i:4},t:"i стигна n – край на цикъла"},{l:7,v:{n:4,s:10},o:"10",t:"извеждаме"},{l:8,v:{n:4,s:10},t:"край"}],note:"1 + 2 + 3 + 4 = 10. Смятай заедно с програмата!"});
+
+IT.init();MK.init();
+}
+</script>
+<script>
+const QUIZ=[["Какво е псевдокод?", ["Програма, която не работи", "Запис на алгоритъм с думи и ключови думи, близък до програма, но без строг синтаксис", "Вирус", "Шифър"], 1, ""], ["Какво връща input() в Python?", ["Число", "Текст (str)", "Списък", "Нищо"], 1, "За число – int(input())."], ["Какви числа дава range(1, 5)?", ["1, 2, 3, 4, 5", "1, 2, 3, 4", "0, 1, 2, 3, 4", "5"], 1, "Горната граница не се включва."], ["Колко е 17 // 5 в Python?", ["3.4", "3", "2", "17"], 1, "Целочислено деление."], ["Какво липсва: if x > 3 print(x)", ["Скоби", "Двоеточие след условието", "Точка и запетая", "Кавички"], 1, "if x > 3:"], ["Защо отстъпът е важен в Python?", ["За красота", "Показва кои редове са вътре в if/for/while", "Не е важен", "Ускорява програмата"], 1, ""], ["Кой Python запис отговаря на „s ← s + i“?", ["s == s + i", "s = s + i", "s -> s + i", "s := i"], 1, "= е присвояване, == е сравнение."], ["Какво ще изведе: i = 3, докато i > 0: print(i), i = i - 1", ["3 2 1", "1 2 3", "3 2 1 0", "безкрайно"], 0, ""]];
+</script>
+<script src="../../interaktivni/ip-urok.js?v=20261127"></script>
+<script src="../../totop.js?v=20261126" defer></script>
+</body>
+</html>

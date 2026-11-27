@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 8: Обработка и визуализация на данни (упражнение) – Информационни технологии, 10 клас</title>
+<link rel="icon" type="image/svg+xml" href="../../icons/10-klas.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../interaktivni/ip-urok.css?v=20261127b">
+<link rel="stylesheet" href="../../interaktivni/mk.css?v=20261128">
+<link rel="stylesheet" href="it.css?v=20261128">
+</head>
+<body class="s2">
+
+<header class="hero s2">
+  <div class="wrap">
+    <div>
+      <span class="tag">Урок 8 · Програмиране и изкуствен интелект · 10 клас</span>
+      <h1>Обработка и визуализация на данни (упражнение)</h1>
+      <p>Филтриране, сортиране и групиране с pandas, избор на подходяща диаграма и рисуване с matplotlib – и изводи от данните.</p>
+    </div>
+    <div class="hart" aria-hidden="true"><div class="big">📊</div><span class="w" style="left:8%;top:10%">groupby</span><span class="w" style="left:66%;top:4%">filter</span><span class="w" style="left:2%;top:72%">matplotlib</span><span class="w" style="left:70%;top:80%">Корелация</span><span class="w" style="left:74%;top:40%">Диаграма</span></div>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Теория</summary><div class="menu"><a href="#obrabotka">Обработка</a><a href="#diagrami">Коя диаграма</a><a href="#matplotlib">matplotlib</a></div></details><a href="#uprazhnenie">Упражнение</a><a href="#zadacha">Задача</a><a href="#test">Тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="obrabotka">
+  <div class="wrap">
+    <h2>Обработка: филтриране, сортиране, групиране</h2>
+    <div class="grid2" style="margin-top:12px">
+      <div>
+<pre class="pyc" data-title="Основни операции с pandas">
+df["uspeh"].mean()                      # средно на колона
+df[df["telefon_chasa"] > 5]             # филтър: само редовете с > 5 ч
+df.sort_values("uspeh", ascending=False) # сортиране, най-високите отгоре
+df.groupby("klas")["uspeh"].mean()       # средно по групи
+df["lyubim_predmet"].value_counts()      # колко пъти се среща всяка стойност
+df = df.dropna()                         # махни редовете с липсващи стойности
+df["ekran_min"] = df["telefon_chasa"] * 60  # нова колона
+</pre>
+        <ol class="lx">
+          <li data-l="1">Колоната се избира с името ѝ в квадратни скоби.</li>
+          <li data-l="2">Условието дава „да/не“ за всеки ред – остават само „да“.</li>
+          <li data-l="3"><code>ascending=False</code> – низходящо.</li>
+          <li data-l="4">Разделя на групи по клас и смята средното за всяка.</li>
+          <li data-l="5">Брои – чудесно за кръгова или колонна диаграма.</li>
+          <li data-l="6-7">Почистване и изчисляване на нова колона.</li>
+        </ol>
+      </div>
+      <div>
+<div class="py" data-files="data/anketa.csv" data-title="Опитай: промени условието 6 на 3" data-out="Среден успех: 5.03
+С 6+ часа телефон: 7 ученици, среден успех 4.52
+
+klas
+10А    5.10
+10Б    4.89
+10В    5.11
+Name: uspeh, dtype: float64
+
+         ime  uspeh
+6     Георги    6.0
+24      Емил    6.0
+28  Кристиян    6.0">
+import pandas as pd
+df = pd.read_csv(&#x27;anketa.csv&#x27;)
+print(&quot;Среден успех:&quot;, round(df[&quot;uspeh&quot;].mean(), 2))
+mnogo = df[df[&quot;telefon_chasa&quot;] &gt;= 6]
+print(&quot;С 6+ часа телефон:&quot;, len(mnogo), &quot;ученици, среден успех&quot;, round(mnogo[&quot;uspeh&quot;].mean(), 2))
+print()
+print(df.groupby(&quot;klas&quot;)[&quot;uspeh&quot;].mean().round(2))
+print()
+print(df.sort_values(&quot;uspeh&quot;, ascending=False)[[&quot;ime&quot;, &quot;uspeh&quot;]].head(3))
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="diagrami">
+  <div class="wrap grid2">
+    <div>
+      <h2>Коя диаграма да избера</h2>
+      <table class="stack"><thead><tr><th>Диаграма</th><th>Кога</th></tr></thead><tbody>
+        <tr><td>📊 <b>Колонна / лентова</b></td><td>сравнение между категории (класове, предмети)</td></tr>
+        <tr><td>📈 <b>Линейна</b></td><td>промяна във времето (месеци, години)</td></tr>
+        <tr><td>🥧 <b>Кръгова</b></td><td>части от едно цяло, до 5–6 части</td></tr>
+        <tr><td>⚬ <b>Точкова</b></td><td>връзка между две числови величини</td></tr>
+        <tr><td>▥ <b>Хистограма</b></td><td>как са разпределени стойностите</td></tr>
+      </tbody></table>
+      <div class="tip"><b>Добрата диаграма</b> има заглавие, надписи на осите с единици, колоните започват от 0, цветовете са малко и ясни, а под нея е посочен източникът.</div>
+    </div>
+    <div><h3>🧪 Коя диаграма за кой въпрос?</h3><div id="clsChart" style="margin-top:10px"></div></div>
+  </div>
+</section>
+
+<section class="band" id="matplotlib">
+  <div class="wrap">
+    <h2>Визуализация с matplotlib</h2>
+    <p class="muted">Всеки пример рисува диаграма. Смени цветовете, заглавията или колоните и пусни пак.</p>
+    <div class="grid2" style="margin-top:12px">
+<div class="py" data-files="data/anketa.csv" data-title="Колонна диаграма" data-img="img/fb2ca5ad.png" data-out="">
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv(&#x27;anketa.csv&#x27;)
+sredno = df.groupby(&quot;klas&quot;)[&quot;uspeh&quot;].mean()
+plt.bar(sredno.index, sredno.values, color=&quot;#0b5cad&quot;)
+plt.title(&quot;Среден успех по класове&quot;)
+plt.ylabel(&quot;Успех&quot;)
+plt.ylim(0, 6)
+plt.show()
+</div><div class="py" data-files="data/temperaturi.csv" data-title="Линейна диаграма" data-img="img/782a3ec9.png" data-out="">
+import pandas as pd
+import matplotlib.pyplot as plt
+t = pd.read_csv(&#x27;temperaturi.csv&#x27;)
+plt.plot(t[&quot;mesec&quot;], t[&quot;temp&quot;], marker=&quot;o&quot;, color=&quot;#d97706&quot;)
+plt.title(&quot;Средна месечна температура (приблизително), София&quot;)
+plt.ylabel(&quot;°C&quot;)
+plt.grid(True)
+plt.show()
+</div><div class="py" data-files="data/anketa.csv" data-title="Кръгова диаграма" data-img="img/5ced31ed.png" data-out="">
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv(&#x27;anketa.csv&#x27;)
+broi = df[&quot;lyubim_predmet&quot;].value_counts()
+plt.pie(broi.values, labels=broi.index, autopct=&quot;%1.0f%%&quot;)
+plt.title(&quot;Любим предмет&quot;)
+plt.show()
+</div><div class="py" data-files="data/anketa.csv" data-title="Точкова диаграма + корелация" data-img="img/fbc5ca37.png" data-out="Корелация: -0.64">
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv(&#x27;anketa.csv&#x27;).dropna()
+plt.scatter(df[&quot;telefon_chasa&quot;], df[&quot;san_chasa&quot;], color=&quot;#6d2f8e&quot;)
+plt.title(&quot;Телефон и сън&quot;)
+plt.xlabel(&quot;Часове с телефон на ден&quot;)
+plt.ylabel(&quot;Часове сън&quot;)
+plt.show()
+print(&quot;Корелация:&quot;, round(df[&quot;telefon_chasa&quot;].corr(df[&quot;san_chasa&quot;]), 2))
+</div>
+    </div>
+    <div class="tip"><b>Корелация</b> – число от −1 до 1, което показва колко са свързани две величини. Близо до −1: когато едната расте, другата намалява. Близо до 0: няма връзка. <b>Внимание:</b> корелацията не доказва причина! Може да има трета причина.</div>
+  </div>
+</section>
+
+<section class="band alt" id="uprazhnenie">
+  <div class="wrap">
+    <h2>Упражнение – стъпка по стъпка</h2>
+    <p class="muted">Изпълни задачите с <code>anketa.csv</code> в полето отдолу, в Thonny или в Google Colab. Отметни всяка изпълнена.</p>
+    <div class="grid2" style="margin-top:12px">
+      <ol class="req">
+        <li>Зареди данните и изведи броя на учениците.</li>
+        <li>Махни реда с липсваща стойност (<code>dropna</code>). Колко реда остават?</li>
+        <li>Кой ученик има най-висок успех? (<code>sort_values</code> или <code>idxmax</code>)</li>
+        <li>Колко ученици спортуват поне 4 дни седмично?</li>
+        <li>Направи <b>колонна диаграма</b> на средните часове сън по класове.</li>
+        <li>Направи <b>хистограма</b> на часовете с телефон: <code>plt.hist(df["telefon_chasa"], bins=6)</code>.</li>
+        <li>Направи <b>точкова диаграма</b> „спорт – успех“ и изчисли корелацията. Какво забелязваш?</li>
+      </ol>
+      <div>
+<div class="py" data-files="data/anketa.csv" data-title="Твоето работно поле" data-out="Ученици: 30">
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv(&#x27;anketa.csv&#x27;)
+# 1.
+print(&quot;Ученици:&quot;, len(df))
+# 2. Твоят код тук ...
+</div>
+        <div class="card"><h3>Провери се</h3><label class="chk"><input type="checkbox"> Задачи 1–4 – числата са изведени</label><label class="chk"><input type="checkbox"> Задача 5 – колонна диаграма със заглавие</label><label class="chk"><input type="checkbox"> Задача 6 – хистограма</label><label class="chk"><input type="checkbox"> Задача 7 – точкова диаграма и корелация</label><label class="chk"><input type="checkbox"> Написах 3 извода с изречения</label></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="band" id="zadacha">
+  <div class="wrap">
+    <h2>Задача за часа</h2>
+    <div class="goal"><h3>Анализ с диаграми</h3><p>Използвай <b>anketa.csv</b> или набора, който описа в урок 7, и отговори с данни и диаграми на два въпроса.</p><div class="time"><span>⏱ 1 учебен час</span><span>👤 индивидуално</span><span>🎯 20 точки</span></div></div>
+    <div class="grid2" style="margin-top:26px">
+      <div><h3>Изисквания – точно в този ред</h3><ol class="req"><li>Формулирай 2 въпроса (напр. „В кой клас се спи най-много?“, „Свързани ли са спортът и успехът?“).</li><li>За всеки въпрос: код с <b>филтриране, групиране или сортиране</b>.</li><li>За всеки въпрос – <b>подходяща диаграма</b> със заглавие и надписи на осите.</li><li>Под всяка диаграма – <b>2 изречения извод</b>.</li><li>Отбележи едно <b>ограничение</b> на данните (малко записи, измислени данни, липсващи стойности).</li></ol></div>
+      <div><div class="card"><h3>Какво предаваш</h3><ul><li>Кода и диаграмите (или Google Colab връзка)</li><li>Изводите</li></ul><p class="note">Предаваш там, където каже учителят (напр. Google Classroom).</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="band alt" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">8 въпроса. Избери отговор на всеки и натисни „Провери“. Под всеки въпрос ще видиш обяснение.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check" type="button">Провери</button><button class="btn ghost" id="again" type="button">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<section class="band"><div class="wrap pager"><a href="urok-07-nabori-ot-danni.html"><small>← Урок 7</small>Набори от данни: откриване и зареждане</a><a class="nx" href="urok-09-obuchenie-na-ii.html"><small>Урок 9 →</small>Как се обучава изкуственият интелект</a></div></section>
+
+<footer>IT Зона · Информационни технологии · 10 клас. Изгледите на програмите и сайтовете са схематични – бутоните може леко да се различават.</footer>
+
+<script>const CUR=9;</script>
+<script src="it.js?v=20261128"></script>
+<script src="../../interaktivni/mk.js?v=20261128"></script>
+<script>
+{
+
+IT.classify("clsChart",{cats:["Колонна","Линейна","Кръгова","Точкова"],items:[
+ ["Кой клас има най-висок среден успех?",0,"Сравнение между категории."],["Колко ученици са избрали всеки спорт?",0,"Брой по категории."],
+ ["Как се е променял броят на учениците през последните 10 години?",1,"Време по хоризонталата."],["Как се променя температурата през денонощието?",1,"Промяна във времето."],
+ ["Каква част от бюджета отива за храна, транспорт и забавления?",2,"Части от цяло."],["Какъв процент от класа предпочита всеки браузър (4 варианта)?",2,"Малко части от цяло."],
+ ["Свързан ли е броят часове учене с оценката?",3,"Връзка между две числа."],["Свързани ли са ръстът и дължината на стъпката?",3,"Две числови величини."]]});
+
+IT.init();MK.init();
+}
+</script>
+<script>
+const QUIZ=[["Как избираш само редовете, в които uspeh е над 5?", ["df.uspeh > 5", "df[df[\"uspeh\"] > 5]", "df.filter(5)", "df.sort(5)"], 1, ""], ["Какво прави df.groupby(\"klas\")[\"uspeh\"].mean()?", ["Сортира по клас", "Средния успех за всеки клас", "Брои класовете", "Изтрива класовете"], 1, ""], ["Коя диаграма е подходяща за промяна във времето?", ["Кръгова", "Линейна", "Точкова", "Нито една"], 1, ""], ["Коя диаграма показва части от цяло?", ["Кръгова", "Линейна", "Точкова", "Хистограма"], 0, ""], ["Корелация −0,8 между часовете с телефон и съня означава:", ["Няма връзка", "Силна обратна връзка – повече телефон, по-малко сън", "Телефонът със сигурност причинява безсъние", "Грешка"], 1, "Корелацията не доказва причина."], ["Какво е задължително на добрата диаграма?", ["3D ефекти", "Заглавие и надписи на осите", "Много цветове", "Анимация"], 1, ""], ["Какво прави df.dropna()?", ["Добавя редове", "Маха редовете с липсващи стойности", "Сортира", "Рисува"], 1, ""], ["Какво прави value_counts()?", ["Брои колко пъти се среща всяка стойност", "Изтрива дубликатите", "Смята средното", "Сортира азбучно"], 0, ""]];
+</script>
+<script src="../../interaktivni/ip-urok.js?v=20261127"></script>
+<script src="../../totop.js?v=20261126" defer></script>
+</body>
+</html>
