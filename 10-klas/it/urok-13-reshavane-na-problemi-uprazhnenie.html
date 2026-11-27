@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 13: Решаване на проблеми, възникнали при използване на дигитални технологии (упражнение) – Информационни технологии, 10 клас</title>
+<link rel="icon" type="image/svg+xml" href="../../icons/10-klas.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../interaktivni/ip-urok.css?v=20261127b">
+<link rel="stylesheet" href="../../interaktivni/mk.css?v=20261128">
+<link rel="stylesheet" href="it.css?v=20261128">
+</head>
+<body class="s3">
+
+<header class="hero s3">
+  <div class="wrap">
+    <div>
+      <span class="tag">Урок 13 · Решаване на проблеми и безопасност · 10 клас</span>
+      <h1>Решаване на проблеми, възникнали при използване на дигитални технологии (упражнение)</h1>
+      <p>Три случая за диагностика, проверка на мрежата с ping и протокол за проблем – упражнение като в истински отдел за поддръжка.</p>
+    </div>
+    <div class="hart" aria-hidden="true"><div class="big">🧯</div><span class="w" style="left:8%;top:10%">Случай 1</span><span class="w" style="left:66%;top:4%">ping</span><span class="w" style="left:2%;top:72%">DNS</span><span class="w" style="left:70%;top:80%">Протокол</span><span class="w" style="left:74%;top:40%">Поддръжка</span></div>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Упражнение</summary><div class="menu"><a href="#sluchai">Три случая</a><a href="#ping">ping</a><a href="#dnevnik">Протокол</a></div></details><a href="#zadacha">Задача</a><a href="#test">Тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="sluchai">
+  <div class="wrap">
+    <h2>🧪 Три случая за диагностика</h2>
+    <p class="muted">Всеки случай е като в истинска поддръжка. Избирай стъпките – целта е правилно решение с възможно най-малко стъпки.</p>
+    <div class="grid" style="margin-top:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))">
+      <div><h3>Случай 1: Бавен лаптоп</h3><div id="c1"></div></div>
+      <div><h3>Случай 2: Няма звук в слушалките</h3><div id="c2"></div></div>
+      <div><h3>Случай 3: Сайтът не се отваря</h3><div id="c3"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="ping">
+  <div class="wrap grid2">
+    <div>
+      <h2>Стъпка по стъпка: проверка на връзката с ping</h2>
+      <div class="walk" data-walk="ping" data-title="Команден ред: ping" style="margin-top:8px"></div>
+    </div>
+    <div class="card"><h3>Как да четеш резултата</h3><ul><li><b>Reply from … time=15ms</b> – има връзка; времето е колко бързо отговаря сървърът (под 50 ms е добре).</li><li><b>Request timed out</b> – няма отговор.</li><li><code>ping 8.8.8.8</code> работи, а <code>ping google.com</code> – не? Тогава интернет има, но не работи <b>DNS</b> – „телефонният указател“, който превръща имената в адреси.</li><li><code>ipconfig</code> показва IP адреса на компютъра и адреса на рутера.</li></ul></div>
+  </div>
+</section>
+
+<section class="band" id="dnevnik">
+  <div class="wrap">
+    <h2>Шаблон: протокол за проблем</h2>
+    <p class="muted">Така записват проблемите в истинските отдели за поддръжка („тикети“). Използвай го в задачата.</p>
+    <table class="stack" style="margin-top:12px"><thead><tr><th>Поле</th><th>Пример</th></tr></thead><tbody>
+      <tr><td><b>Дата и устройство</b></td><td>12.03, лаптоп в кабинет 21, Windows 11</td></tr>
+      <tr><td><b>Описание</b></td><td>При отваряне на браузъра: „DNS_PROBE_FINISHED_NXDOMAIN“</td></tr>
+      <tr><td><b>Какво се е променило</b></td><td>Вчера е инсталирана VPN програма</td></tr>
+      <tr><td><b>Проверки и резултат</b></td><td>ping 8.8.8.8 – има отговор; ping google.com – няма → DNS</td></tr>
+      <tr><td><b>Решение</b></td><td>Изключена VPN програмата; рестарт → работи</td></tr>
+      <tr><td><b>Превенция</b></td><td>Инсталирането на програми – само с разрешение</td></tr>
+    </tbody></table>
+  </div>
+</section>
+<section class="band" id="zadacha">
+  <div class="wrap">
+    <h2>Задача за часа</h2>
+    <div class="goal"><h3>Служба за поддръжка</h3><p>Работете като отдел за поддръжка: решете трите случая от урока и поне един <b>истински</b> проблем, попълнете протоколи и направете кратко ръководство.</p><div class="time"><span>⏱ 1 учебен час</span><span>👥 по двойки</span><span>🎯 20 точки</span></div></div>
+    <div class="grid2" style="margin-top:26px">
+      <div><h3>Изисквания – точно в този ред</h3><ol class="req"><li>Минете трите случая в симулатора. Запишете стъпките, с които стигнахте до решението.</li><li>Изберете истински проблем (ваш, на роднина, на училищен компютър с разрешение) и попълнете <b>протокол</b> по шаблона.</li><li>Пуснете <code>ping</code> към google.com и 8.8.8.8 и обяснете резултата.</li><li>Направете <b>ръководство с екранни снимки</b> (документ или 3–4 слайда) за решаване на един чест проблем.</li><li>Разменете ръководствата с друг екип и проверете дали може да се следва.</li></ol></div>
+      <div><div class="card"><h3>Какво предаваш</h3><ul><li>Протоколите</li><li>Ръководството</li><li>Екранна снимка от ping</li></ul><p class="note">Предаваш там, където каже учителят (напр. Google Classroom).</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="band alt" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">6 въпроса. Избери отговор на всеки и натисни „Провери“. Под всеки въпрос ще видиш обяснение.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check" type="button">Провери</button><button class="btn ghost" id="again" type="button">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<section class="band"><div class="wrap pager"><a href="urok-12-reshavane-na-problemi.html"><small>← Урок 12</small>Решаване на проблеми, възникнали при използване на дигитални технологии</a><a class="nx" href="urok-14-chatbot-pomoshtnik.html"><small>Урок 14 →</small>Чатбот с изкуствен интелект като помощник при решаване на проблеми</a></div></section>
+
+<footer>IT Зона · Информационни технологии · 10 клас. Изгледите на програмите и сайтовете са схематични – бутоните може леко да се различават.</footer>
+
+<script>const CUR=15;</script>
+<script src="it.js?v=20261128"></script>
+<script src="../../interaktivni/mk.js?v=20261128"></script>
+<script>
+{
+
+function scen(id,S,start){const el=document.getElementById(id);let path=[],pts=0;
+ const show=k=>{const n=S[k];el.innerHTML=`<div class="src"><p style="font-weight:700;margin-top:0">${n.t}</p>${n.end?`<div class="fbk ${n.ok?'ok':'bad'}">${n.end}</div><p class="score">Стъпки: ${path.length}${n.ok?' · '+(path.length<=3?'🌟 Бързо и правилно!':'👍 Решено. Може ли с по-малко стъпки?'):''}</p><button type="button" class="btn ghost">↺ Отначало</button>`:n.o.map((o,i)=>`<button type="button" class="opt" data-i="${i}" style="display:block;width:100%;margin:6px 0">${o[0]}</button>`).join('')}${path.length&&!n.end?`<p class="note">Досега: ${path.join(' → ')}</p>`:''}</div>`;
+  if(n.end){el.querySelector('button').onclick=()=>{path=[];show(start)};return}
+  el.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const o=n.o[+b.dataset.i];path.push(o[0].replace(/<[^>]+>/g,'').slice(0,40));if(o[2]){const f=document.createElement('div');f.className='fbk '+(o[3]?'ok':'bad');f.innerHTML=o[2];el.querySelector('.src').append(f);setTimeout(()=>show(o[1]),1400)}else show(o[1])})};
+ show(start)}
+
+scen("c1",{s:{t:"„Лаптопът ми стана много бавен“ – казва съученик. Какво питаш/правиш първо?",o:[["Кога започна и какво е инсталирано наскоро?","a","Добре – информация преди действия.",1],["Форматирам диска","z","Прекалено! Губиш всичко.",0]]},
+ z:{t:"Да започнем отначало. Какво питаш?",o:[["Кога започна и какво е инсталирано?","a"]]},
+ a:{t:"„След като инсталирах нова игра и пускам компютъра, всичко е бавно.“ Следваща стъпка?",o:[["Диспечер на задачите → раздел „Стартиране“","b"],["Сменям мишката","z2","Няма връзка.",0]]},
+ z2:{t:"Отваряш Диспечера на задачите?",o:[["Да, раздел „Стартиране“","b"]]},
+ b:{t:"Виждаш, че играта и още 6 програми се пускат автоматично при стартиране, с високо влияние.",o:[["Забранявам ненужните при стартиране и рестартирам","ok"],["Трия Windows","z2"]]},
+ ok:{t:"След рестарта…",end:"✔ Компютърът стартира бързо. Причината: твърде много програми при стартиране. Съвет: провери и свободното място на диска.",ok:1}},"s");
+scen("c2",{s:{t:"Слушалките са включени, но звук няма. Първа проверка?",o:[["Иконата на високоговорителя – не е ли заглушен звукът?","a"],["Купувам нови слушалки","n","Първо простите проверки!",0]]},
+ n:{t:"Започни с иконата за звук.",o:[["Добре","a"]]},
+ a:{t:"Звукът не е заглушен, на 70%. Какво още?",o:[["Щраквам иконата и гледам кое изходно устройство е избрано","b"],["Обновявам BIOS","n2","Много сложно и рисковано за това.",0]]},
+ n2:{t:"Нека проверим изходното устройство.",o:[["Добре","b"]]},
+ b:{t:"Избрани са „Високоговорители (Realtek)“, а не слушалките.",o:[["Избирам слушалките","ok"]]},
+ ok:{t:"Пускаш видео…",end:"✔ Звукът е в слушалките. Ако ги нямаше в списъка – пробвай друг порт или кабел.",ok:1}},"s");
+scen("c3",{s:{t:"Един сайт не се отваря, а другите работят. Какво правиш?",o:[["Пробвам сайта на друго устройство или в друг браузър","a"],["Рестартирам рутера","r","Другите сайтове работят – рутерът едва ли е виновен.",0]]},
+ r:{t:"Рутерът е наред. Какво сега?",o:[["Пробвам на друго устройство","a"]]},
+ a:{t:"На телефона (мобилни данни) сайтът също не се отваря.",o:[["Проверявам в сайт от типа „down for everyone or just me“","b"],["Изчиствам кеша на браузъра 10 пъти","x","Щом не работи и на телефона, проблемът не е в браузъра.",0]]},
+ x:{t:"Провери дали сайтът работи за другите.",o:[["Добре","b"]]},
+ b:{t:"Сайтът е недостъпен за всички.",end:"✔ Проблемът е при сайта, не при теб. Изчакай и пробвай по-късно. Ти не можеш да го поправиш – и това е важен извод.",ok:1}},"s");
+const cmd=(t)=>`<div class="app" style="background:#0c0c0c;color:#ccc;font:13px Consolas,monospace;min-height:340px"><div class="bar" style="background:#1f1f1f;color:#fff">C:\\Windows\\System32\\cmd.exe</div><pre style="margin:0;padding:12px;white-space:pre-wrap">${t}</pre></div>`;
+MK.walk("ping",[
+ {t:"Отвори командния ред",m:cmd('Microsoft Windows [Version 10.0]\n\nC:\\Users\\Ученик> <span class="typing"> </span>'),c:"Натисни <kbd>Win</kbd>, напиши <b>cmd</b> и <kbd>Enter</kbd>."},
+ {t:"ping google.com",m:cmd('C:\\Users\\Ученик> ping google.com\n\nPinging google.com [142.250.185.78] with 32 bytes of data:\nReply from 142.250.185.78: bytes=32 time=18ms TTL=117\nReply from 142.250.185.78: bytes=32 time=17ms TTL=117\nReply from 142.250.185.78: bytes=32 time=19ms TTL=117\nReply from 142.250.185.78: bytes=32 time=18ms TTL=117\n\nPackets: Sent = 4, Received = 4, Lost = 0 (0% loss)'),c:"Напиши <code>ping google.com</code>. Четири отговора, 0% загуба – връзката е наред."},
+ {t:"Когато няма връзка",m:cmd('C:\\Users\\Ученик> ping google.com\nPing request could not find host google.com.\n\nC:\\Users\\Ученик> ping 8.8.8.8\nReply from 8.8.8.8: bytes=32 time=21ms TTL=116\nReply from 8.8.8.8: bytes=32 time=20ms TTL=116'),c:"Името не се намира, а адресът 8.8.8.8 отговаря → интернет има, но не работи DNS. Рестарт на рутера или смяна на DNS (с помощ от възрастен)."}]);
+
+IT.init();MK.init();
+}
+</script>
+<script>
+const QUIZ=[["Защо започваме от най-простите проверки?", ["Задължително е", "Те са бързи и най-често решават проблема", "По-интересно е", "За да мине времето"], 1, ""], ["ping 8.8.8.8 работи, ping google.com – не. Какъв е проблемът?", ["Няма ток", "DNS не превежда имената в адреси", "Счупена клавиатура", "Вирус в мишката"], 1, ""], ["Какво показва „Request timed out“ при ping?", ["Отличен отговор", "Няма отговор от адреса", "Грешна парола", "Пълен диск"], 1, ""], ["Слушалките са включени, но звукът е от високоговорителите. Какво проверяваш?", ["BIOS", "Избраното изходно устройство", "Монитора", "Wi-Fi"], 1, ""], ["Сайт не работи на нито едно устройство и в никоя мрежа. Изводът е:", ["Компютърът ми е развален", "Проблемът е при сайта", "Трябва нов рутер", "Трябва нов браузър"], 1, ""], ["Какво е „тикет“ в отдел за поддръжка?", ["Билет за кино", "Запис на проблема с описание, проверки и решение", "Вирус", "Парола"], 1, ""]];
+</script>
+<script src="../../interaktivni/ip-urok.js?v=20261127"></script>
+<script src="../../totop.js?v=20261126" defer></script>
+</body>
+</html>

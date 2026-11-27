@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 12: Решаване на проблеми, възникнали при използване на дигитални технологии – Информационни технологии, 10 клас</title>
+<link rel="icon" type="image/svg+xml" href="../../icons/10-klas.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../interaktivni/ip-urok.css?v=20261127b">
+<link rel="stylesheet" href="../../interaktivni/mk.css?v=20261128">
+<link rel="stylesheet" href="it.css?v=20261128">
+</head>
+<body class="s3">
+
+<header class="hero s3">
+  <div class="wrap">
+    <div>
+      <span class="tag">Урок 12 · Решаване на проблеми и безопасност · 10 клас</span>
+      <h1>Решаване на проблеми, възникнали при използване на дигитални технологии</h1>
+      <p>Метод в шест стъпки, чести проблеми и първите проверки, полезните инструменти на Windows и безопасността – като специалист по поддръжка.</p>
+    </div>
+    <div class="hart" aria-hidden="true"><div class="big">🛠️</div><span class="w" style="left:8%;top:10%">Рестарт</span><span class="w" style="left:66%;top:4%">Диагноза</span><span class="w" style="left:2%;top:72%">Ctrl+Shift+Esc</span><span class="w" style="left:70%;top:80%">ping</span><span class="w" style="left:74%;top:40%">Резервно копие</span></div>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Теория</summary><div class="menu"><a href="#metod">Метод в 6 стъпки</a><a href="#chesti">Чести проблеми</a><a href="#instrumenti">Инструменти</a></div></details><a href="#diagnoza">Практика</a><a href="#zadacha">Задача</a><a href="#test">Тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="metod">
+  <div class="wrap">
+    <h2>Метод в шест стъпки</h2>
+    <p>Когато нещо не работи, най-лошото е да щракаш напосоки. Специалистите по поддръжка следват <b>метод</b> – от простото към сложното.</p>
+    <div class="flow" style="margin-top:24px">
+      <div class="card"><b>Опиши проблема</b><p class="note">Какво точно не работи? Кога започна? Има ли съобщение за грешка – запиши го дословно.</p></div>
+      <div class="card"><b>Събери информация</b><p class="note">Какво се промени преди това – обновяване, нова програма, преместване?</p></div>
+      <div class="card"><b>Предположи причина</b><p class="note">Започни с най-простата и най-вероятната: кабел, захранване, Wi-Fi.</p></div>
+      <div class="card"><b>Провери</b><p class="note">Променяй само едно нещо наведнъж и гледай резултата.</p></div>
+    </div>
+    <div class="flow" style="margin-top:30px;counter-reset:s 4;grid-template-columns:repeat(2,minmax(0,1fr));max-width:620px">
+      <div class="card"><b>Реши и провери</b><p class="note">Работи ли наистина? Няма ли нов проблем?</p></div>
+      <div class="card"><b>Запиши</b><p class="note">Какво беше и как се реши – следващия път ще е по-бързо.</p></div>
+    </div>
+    <div class="tip"><b>Първото правило на поддръжката:</b> „Опитахте ли да го изключите и включите?“ Рестартът наистина решава много проблеми – изчиства паметта и спира „заседнали“ програми.</div>
+  </div>
+</section>
+
+<section class="band alt" id="chesti">
+  <div class="wrap">
+    <h2>Чести проблеми и първи стъпки</h2>
+    <div class="scroll" style="margin-top:14px"><table class="stack">
+      <thead><tr><th>Проблем</th><th>Първо провери</th><th>После</th></tr></thead><tbody>
+      <tr><td>🌐 Няма интернет</td><td>Свързан ли е Wi-Fi/кабелът? Работи ли интернет на друго устройство?</td><td>Рестарт на рутера (изключи за 30 сек). „Отстраняване на неизправности“ в Windows.</td></tr>
+      <tr><td>🐢 Компютърът е бавен</td><td>Колко програми и раздели са отворени? Диспечер на задачите – какво натоварва процесора и паметта?</td><td>Рестарт, премахване на ненужни програми при стартиране, свободно място на диска, проверка за вируси.</td></tr>
+      <tr><td>🧊 Програма „замръзна“</td><td>Изчакай малко. Има ли незаписана работа?</td><td>Диспечер на задачите → Край на задачата. Обнови програмата.</td></tr>
+      <tr><td>🔇 Няма звук</td><td>Звукът включен ли е, не е ли заглушен? Правилното устройство ли е избрано (слушалки/високоговорители)?</td><td>Друг кабел/порт, обновяване на драйвера.</td></tr>
+      <tr><td>🖨️ Принтерът не печата</td><td>Включен ли е, има ли хартия и мастило, свързан ли е? Има ли заседнала хартия?</td><td>Изчисти опашката за печат, рестартирай принтера, преинсталирай драйвера.</td></tr>
+      <tr><td>💾 „Няма достатъчно място“</td><td>Какво заема място (Настройки → Система → Съхранение)?</td><td>Изтрий временни файлове, изпразни кошчето, премести снимки в облака.</td></tr>
+      <tr><td>🔑 Забравена парола</td><td>Не опитвай много пъти – може да се заключи.</td><td>„Забравена парола“ → възстановяване по имейл или телефон.</td></tr>
+      <tr><td>🦠 Странни изскачащи прозорци</td><td>Не щраквай по тях! Не въвеждай данни.</td><td>Проверка с антивирусна програма (Защита на Windows), премахни подозрителни разширения на браузъра.</td></tr>
+    </tbody></table></div>
+  </div>
+</section>
+
+<section class="band" id="instrumenti">
+  <div class="wrap grid2">
+    <div>
+      <h2>Полезни инструменти в Windows</h2>
+      <table class="stack"><thead><tr><th>Инструмент</th><th>Как се отваря</th></tr></thead><tbody>
+        <tr><td><b>Диспечер на задачите</b></td><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Esc</kbd></td></tr>
+        <tr><td><b>Настройки</b></td><td><kbd>Win</kbd>+<kbd>I</kbd></td></tr>
+        <tr><td><b>Отстраняване на неизправности</b></td><td>Настройки → Система → Отстраняване на неизправности</td></tr>
+        <tr><td><b>Windows Update</b></td><td>Настройки → Windows Update</td></tr>
+        <tr><td><b>Съхранение</b></td><td>Настройки → Система → Съхранение</td></tr>
+        <tr><td><b>Защита на Windows</b> (антивирус)</td><td>Настройки → Поверителност и защита</td></tr>
+        <tr><td><b>Команден ред</b> – <code>ping</code></td><td><kbd>Win</kbd> → „cmd“ → <code>ping google.com</code></td></tr>
+      </tbody></table>
+    </div>
+    <div class="card"><h3>⚠️ Безопасност преди всичко</h3><ul><li>Не отваряй компютъра и зарядните – има опасност от ток.</li><li>Не теглиш „чистачки“ и „ускорители“ от непознати сайтове – често са вируси.</li><li>Преди сериозни промени – <b>резервно копие</b> на важните файлове.</li><li>Ако проблемът е в училищен компютър – кажи на учителя, не променяй системни настройки.</li><li>Мирис на изгоряло, подут батерия, искри – <b>изключи от тока</b> и потърси възрастен.</li></ul></div>
+  </div>
+</section>
+
+<section class="band alt" id="diagnoza">
+  <div class="wrap grid2">
+    <div>
+      <h2>🧪 Диагностика: „Няма интернет“</h2>
+      <p class="muted">Избирай следващата стъпка. Опитай да стигнеш до решението с възможно най-малко стъпки – от простото към сложното.</p>
+      <div id="sc1" style="margin-top:12px"></div>
+    </div>
+    <div>
+      <h2>Стъпка по стъпка: замръзнала програма</h2>
+      <div class="walk" data-walk="tm" data-title="Диспечер на задачите" style="margin-top:8px"></div>
+    </div>
+  </div>
+</section>
+<section class="band" id="zadacha">
+  <div class="wrap">
+    <h2>Задача за часа</h2>
+    <div class="goal"><h3>Дневник на проблемите</h3><p>Реши два проблема по метода от шест стъпки и ги запиши като специалист по поддръжка.</p><div class="time"><span>⏱ 1 учебен час</span><span>👥 по двойки</span><span>🎯 20 точки</span></div></div>
+    <div class="grid2" style="margin-top:26px">
+      <div><h3>Изисквания – точно в този ред</h3><ol class="req"><li>Изберете 2 проблема: истински (у дома, в училище) или от списъка вдясно.</li><li>За всеки попълнете таблица: <b>описание</b> (какво, кога, съобщение) · <b>какво се е променило</b> · <b>предположения</b> (поне 2, от простото към сложното) · <b>проверки</b> и резултат · <b>решение</b> · <b>как да се избегне</b> занапред.</li><li>Направете поне една екранна снимка на инструмент, който използвахте (Диспечер на задачите, Съхранение, ping).</li><li>Напишете кратка инструкция (5–6 стъпки) за един от проблемите за по-малки ученици.</li></ol></div>
+      <div><div class="card"><h3>Какво предаваш</h3><ul><li>Таблицата за двата проблема</li><li>Екранната снимка</li><li>Инструкцията</li></ul><p class="note">Предаваш там, където каже учителят (напр. Google Classroom).</p></div><div class="card" style="margin-top:20px"><h3>Примерни проблеми</h3><ul><li>Лаптопът се зарежда бавно и вентилаторът шуми.</li><li>Телефонът казва „Паметта е почти пълна“.</li><li>В Word не излиза кирилица от клавиатурата.</li><li>Слушалките са включени, но звукът идва от високоговорителите.</li></ul></div></div>
+    </div>
+  </div>
+</section>
+<section class="band alt" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">8 въпроса. Избери отговор на всеки и натисни „Провери“. Под всеки въпрос ще видиш обяснение.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check" type="button">Провери</button><button class="btn ghost" id="again" type="button">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<section class="band"><div class="wrap pager"><a href="test-2-programirane-i-ii.html"><small>← Тест</small>Тест: Програмиране и изкуствен интелект</a><a class="nx" href="urok-13-reshavane-na-problemi-uprazhnenie.html"><small>Урок 13 →</small>Решаване на проблеми (упражнение)</a></div></section>
+
+<footer>IT Зона · Информационни технологии · 10 клас. Изгледите на програмите и сайтовете са схематични – бутоните може леко да се различават.</footer>
+
+<script>const CUR=14;</script>
+<script src="it.js?v=20261128"></script>
+<script src="../../interaktivni/mk.js?v=20261128"></script>
+<script>
+{
+
+function scen(id,S,start){const el=document.getElementById(id);let path=[],pts=0;
+ const show=k=>{const n=S[k];el.innerHTML=`<div class="src"><p style="font-weight:700;margin-top:0">${n.t}</p>${n.end?`<div class="fbk ${n.ok?'ok':'bad'}">${n.end}</div><p class="score">Стъпки: ${path.length}${n.ok?' · '+(path.length<=3?'🌟 Бързо и правилно!':'👍 Решено. Може ли с по-малко стъпки?'):''}</p><button type="button" class="btn ghost">↺ Отначало</button>`:n.o.map((o,i)=>`<button type="button" class="opt" data-i="${i}" style="display:block;width:100%;margin:6px 0">${o[0]}</button>`).join('')}${path.length&&!n.end?`<p class="note">Досега: ${path.join(' → ')}</p>`:''}</div>`;
+  if(n.end){el.querySelector('button').onclick=()=>{path=[];show(start)};return}
+  el.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const o=n.o[+b.dataset.i];path.push(o[0].replace(/<[^>]+>/g,'').slice(0,40));if(o[2]){const f=document.createElement('div');f.className='fbk '+(o[3]?'ok':'bad');f.innerHTML=o[2];el.querySelector('.src').append(f);setTimeout(()=>show(o[1]),1400)}else show(o[1])})};
+ show(start)}
+
+scen("sc1",{
+ s:{t:"Отваряш браузъра – „Няма връзка с интернет“. Какво проверяваш първо?",o:[["Преинсталирам Windows","x","Твърде драстично! Започни от простото.",0],["Поглеждам иконата на Wi-Fi долу вдясно","w",""],["Купувам нов рутер","x","Рано е за това.",0]]},
+ x:{t:"Връщаш се към простите проверки. Иконата на Wi-Fi показва ли връзка?",o:[["Да, свързан съм","d"],["Не, Wi-Fi е изключен","f"]]},
+ w:{t:"Иконата показва, че си свързан към Wi-Fi. Следваща стъпка?",o:[["Проверявам дали интернет работи на телефона в същата мрежа","d",""],["Трия всички файлове","x2","Няма връзка с проблема.",0]]},
+ x2:{t:"Нека опитаме пак. Иконата показва връзка. Какво проверяваш?",o:[["Друго устройство в същата мрежа","d"]]},
+ f:{t:"Wi-Fi беше изключен (самолетен режим). Включваш го…",end:"✔ Решено! Самолетният режим беше включен. Най-простата причина.",ok:1},
+ d:{t:"На телефона в същата мрежа интернет също не работи. Значи проблемът е…",o:[["…в рутера или доставчика – рестартирам рутера","r","Точно! Проблемът не е в компютъра.",1],["…в компютъра – преинсталирам браузъра","b","Не – и телефонът няма интернет.",0]]},
+ b:{t:"Преинсталирането не помогна (и телефонът пак няма интернет). Какво сега?",o:[["Рестартирам рутера","r"]]},
+ r:{t:"Изключваш рутера за 30 секунди и го включваш. След 2 минути…",o:[["Интернет работи ✅","ok"],["Пак няма интернет","isp"]]},
+ ok:{t:"Готово.",end:"✔ Решено с рестарт на рутера. Запиши в дневника: дата, симптом, решение.",ok:1},
+ isp:{t:"Лампичката „Internet“ на рутера е червена.",end:"✔ Проблемът е при доставчика. Звъниш на поддръжката им с номера на договора и описание какво си проверил – ще помогнат по-бързо.",ok:1}},"s");
+const win=(inner,ov)=>`<div class="app" style="background:#f3f3f3"><div class="bar" style="background:#fff"><b>Диспечер на задачите</b></div>${inner}${ov?`<div class="ov">${ov}</div>`:''}</div>`;
+const rows=(h)=>`<table class="dtable" style="width:100%;background:#fff"><thead><tr><th>Име</th><th>Състояние</th><th>ЦП</th><th>Памет</th></tr></thead><tbody><tr class="${h==1?'hot nohand':''}"><td>🎮 SuperGame</td><td style="color:#c00">Не отговаря</td><td>48%</td><td>3 210 MB</td></tr><tr><td>🌐 Google Chrome (24)</td><td></td><td>12%</td><td>1 850 MB</td></tr><tr><td>📘 Microsoft Word</td><td></td><td>1%</td><td>220 MB</td></tr></tbody></table><div style="display:flex;justify-content:flex-end;padding:10px"><span class="pill2 ${h==2?'hot nohand':''}">Край на задачата</span></div>`;
+MK.walk("tm",[
+ {t:"Отвори диспечера",m:win('<div style="padding:40px;text-align:center;font-size:26px"><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Esc</kbd></div>'),c:"Натисни <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Esc</kbd> или десен бутон върху бутона „Старт“ → <b>Диспечер на задачите</b>."},
+ {t:"Намери програмата",m:win(rows(1)),c:"В раздел <b>Процеси</b> виждаш програмата със състояние „Не отговаря“ и колко процесор (ЦП) и памет използва."},
+ {t:"Край на задачата",m:win(rows(2)),c:"Маркирай я и натисни <b>Край на задачата</b>. Внимание: незаписаната работа в нея ще се загуби."},
+ {t:"Проверка",m:win('<table class="dtable" style="width:100%;background:#fff"><tr><th>Име</th><th>ЦП</th></tr><tr><td>🌐 Google Chrome (24)</td><td>12%</td></tr><tr><td>📘 Microsoft Word</td><td>1%</td></tr></table><p style="padding:10px">ЦП: 14% · Памет: 38%</p>'),c:"Натоварването падна. Ако програмата замръзва често – обнови я или провери дали компютърът отговаря на изискванията ѝ."}]);
+
+IT.init();MK.init();
+}
+</script>
+<script>
+const QUIZ=[["Коя е първата стъпка при решаване на технически проблем?", ["Преинсталиране", "Точно описание на проблема и съобщението за грешка", "Купуване на нов компютър", "Изтриване на файлове"], 1, ""], ["Защо се проверява само едно нещо наведнъж?", ["По-бързо е", "За да знаеш коя промяна е помогнала", "Задължително е", "Не е важно"], 1, ""], ["С кои клавиши се отваря Диспечерът на задачите?", ["Ctrl+Alt+P", "Ctrl+Shift+Esc", "Alt+F4", "Win+D"], 1, ""], ["Интернет не работи нито на компютъра, нито на телефона в същата мрежа. Къде е най-вероятно проблемът?", ["В компютъра", "В рутера или доставчика", "В клавиатурата", "В браузъра"], 1, ""], ["Какво правиш при подозрителен изскачащ прозорец „Компютърът ви е заразен, обадете се на…“?", ["Обаждам се", "Не щраквам, затварям и проверявам с антивирусна програма", "Въвеждам паролата", "Плащам"], 1, "Това е измама."], ["Защо е полезно да записваш решението?", ["За оценка", "Следващия път ще е по-бързо – и за теб, и за другите", "Не е полезно", "Заради закона"], 1, ""], ["Кое е безопасно?", ["Да отвориш зарядното", "Да изтеглиш „ускорител“ от непознат сайт", "Да направиш резервно копие преди сериозни промени", "Да използваш подута батерия"], 2, ""], ["Какво проверява командата ping google.com?", ["Скоростта на процесора", "Дали има връзка до сървъра и колко бързо отговаря", "Паролата", "Звука"], 1, ""]];
+</script>
+<script src="../../interaktivni/ip-urok.js?v=20261127"></script>
+<script src="../../totop.js?v=20261126" defer></script>
+</body>
+</html>

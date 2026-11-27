@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 7: Набори от данни: откриване и зареждане – Информационни технологии, 10 клас</title>
+<link rel="icon" type="image/svg+xml" href="../../icons/10-klas.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../interaktivni/ip-urok.css?v=20261127b">
+<link rel="stylesheet" href="../../interaktivni/mk.css?v=20261128">
+<link rel="stylesheet" href="it.css?v=20261128">
+</head>
+<body class="s2">
+
+<header class="hero s2">
+  <div class="wrap">
+    <div>
+      <span class="tag">Урок 7 · Програмиране и изкуствен интелект · 10 клас</span>
+      <h1>Набори от данни: откриване и зареждане</h1>
+      <p>Какво е набор от данни, къде се намират отворени данни, как се проверява качеството им и как се зареждат в Excel и Python (pandas).</p>
+    </div>
+    <div class="hart" aria-hidden="true"><div class="big">🗃️</div><span class="w" style="left:8%;top:10%">CSV</span><span class="w" style="left:66%;top:4%">data.egov.bg</span><span class="w" style="left:2%;top:72%">pandas</span><span class="w" style="left:70%;top:80%">Отворени данни</span><span class="w" style="left:74%;top:40%">NaN</span></div>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Теория</summary><div class="menu"><a href="#kakvo">Набор от данни</a><a href="#formati">Формати</a><a href="#kade">Къде има данни</a></div></details><details><summary>Практика</summary><div class="menu"><a href="#kachestvo">Качество на данните</a><a href="#pandas">pandas</a><a href="#stapki">От портала до таблицата</a></div></details><a href="#zadacha">Задача</a><a href="#test">Тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="kakvo">
+  <div class="wrap grid2">
+    <div>
+      <h2>Какво е набор от данни</h2>
+      <p><b>Набор от данни</b> (dataset) е подредена колекция от данни за една тема – най-често таблица.</p>
+      <ul><li>Всеки <b>ред</b> е един <b>запис</b> (наблюдение): един ученик, един ден, един град.</li><li>Всяка <b>колона</b> е един <b>признак</b> (атрибут): име, възраст, температура.</li><li>В клетката е <b>стойността</b> на признака за записа.</li></ul>
+      <p>Данните могат да са <b>числови</b> (часове сън, цена) или <b>категорийни</b> (клас, любим предмет). Таблиците са <b>структурирани</b> данни; текстове, снимки и видео са <b>неструктурирани</b>.</p>
+    </div>
+    <div class="card"><h3>Нашият примерен набор: anketa.csv</h3><p class="note">Измислена анкета сред 30 ученици от 10. клас – за упражнение.</p>
+      <div class="scroll"><table class="dtable"><thead><tr><th>ime</th><th>klas</th><th>telefon_chasa</th><th>san_chasa</th><th>sport_dni</th><th>lyubim_predmet</th><th>uspeh</th></tr></thead><tbody>
+      <tr><td>Ива</td><td>10А</td><td>5.0</td><td>7.0</td><td>3</td><td>Литература</td><td>4.53</td></tr><tr><td>Мартин</td><td>10Б</td><td>4.5</td><td>7.0</td><td>5</td><td>История</td><td>4.43</td></tr><tr><td>Никола</td><td>10В</td><td>3.5</td><td>7.5</td><td>6</td><td>ИТ</td><td>5.73</td></tr><tr><td colspan="7" class="muted">… още 27 реда</td></tr></tbody></table></div>
+      <p style="margin-top:10px"><a href="data/anketa.csv" download>⬇️ Свали anketa.csv</a></p></div>
+  </div>
+</section>
+
+<section class="band alt" id="formati">
+  <div class="wrap">
+    <h2>Формати на файловете с данни</h2>
+    <div class="grid" style="margin-top:14px">
+      <div class="card"><h3>📄 CSV</h3><p>Comma-Separated Values – обикновен текст, стойностите са разделени със запетая (понякога с точка и запетая). Отваря се навсякъде.</p><pre style="font:13px Consolas;background:var(--card);padding:8px;border-radius:8px;overflow:auto">ime,klas,uspeh
+Ива,10А,4.53
+Мартин,10Б,4.43</pre></div>
+      <div class="card"><h3>📗 XLSX</h3><p>Файл на Excel – може да има няколко листа, форматиране и формули. Удобен за хора, по-сложен за програми.</p></div>
+      <div class="card"><h3>🧩 JSON</h3><p>Текст със структура „ключ: стойност“ – използва се в уеб и приложенията.</p><pre style="font:13px Consolas;background:var(--card);padding:8px;border-radius:8px;overflow:auto">[{"ime": "Ива", "uspeh": 4.53},
+ {"ime": "Мартин", "uspeh": 4.43}]</pre></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="kade">
+  <div class="wrap grid2">
+    <div>
+      <h2>Къде се намират данни</h2>
+      <p><b>Отворените данни</b> са публични и могат да се използват свободно, обикновено при условие да посочиш източника.</p>
+      <table class="stack"><thead><tr><th>Източник</th><th>Какво има</th></tr></thead><tbody>
+        <tr><td><b>data.egov.bg</b> – Портал за отворени данни на България</td><td>данни на министерства, общини, агенции</td></tr>
+        <tr><td><b>nsi.bg</b> – Национален статистически институт</td><td>население, образование, икономика</td></tr>
+        <tr><td><b>Евростат</b> (ec.europa.eu/eurostat)</td><td>сравнения между държавите в ЕС</td></tr>
+        <tr><td><b>Our World in Data</b></td><td>световни теми с готови графики и CSV</td></tr>
+        <tr><td><b>Kaggle</b></td><td>хиляди набори за упражнения и машинно обучение</td></tr>
+      </tbody></table>
+      <div class="tip"><b>Лиценз.</b> Провери условията (напр. <b>CC BY</b> – свободно, но с посочване на автора). Винаги записвай <b>откъде</b> и <b>кога</b> си взел данните.</div>
+    </div>
+    <div class="card"><h3>Преди да използваш набор от данни, провери:</h3><ol><li>Кой го е създал и с каква цел?</li><li>Колко е актуален?</li><li>Какво точно означава всяка колона, в какви единици?</li><li>Има ли липсващи или странни стойности?</li><li>Достатъчно ли са записите за изводи?</li><li>Какъв е лицензът?</li></ol></div>
+  </div>
+</section>
+
+<section class="band alt" id="kachestvo">
+  <div class="wrap grid2">
+    <div>
+      <h2>🧪 Намери проблемите в данните</h2>
+      <p>В таблицата има <b>5 проблема</b>: липсваща стойност, невъзможна стойност, дубликат, различни единици и правописна разлика. Щракни върху клетките.</p>
+      <div class="scroll"><table class="dtable" id="dq"></table></div>
+      <div class="fbk" id="dqF"></div><p class="score" id="dqS"></p>
+    </div>
+    <div class="card"><h3>Почистване на данни</h3><p>Преди анализ данните се <b>почистват</b>: премахват се дубликати, поправят се грешки, уеднаквяват се единиците и записите („10а“ → „10А“), решава се какво да се прави с липсващите стойности (изтриване на реда или попълване). Анализаторите казват, че почистването отнема <b>повечето</b> от времето им!</p></div>
+  </div>
+</section>
+
+<section class="band" id="pandas">
+  <div class="wrap">
+    <h2>Зареждане на данни с Python (pandas)</h2>
+    <p><b>pandas</b> е библиотека за работа с таблици. Таблицата в pandas се нарича <b>DataFrame</b>. Обикновено се записва в променлива <code>df</code>.</p>
+    <div class="grid2" style="margin-top:12px">
+      <div>
+<div class="py" data-files="data/anketa.csv" data-title="Зареди и разгледай" data-out="      ime klas  telefon_chasa  san_chasa  sport_dni lyubim_predmet  uspeh
+0     Ива  10А            5.0        7.0          3     Литература   4.53
+1  Мартин  10Б            4.5        7.0          5        История   4.43
+2  Никола  10В            3.5        7.5          6             ИТ   5.73
+3    Сара  10А            4.0        7.0          2     Литература   4.94
+4   Петър  10Б            5.5        7.0          4     Математика   4.94
+Редове и колони: (30, 7)">
+import pandas as pd
+df = pd.read_csv(&#x27;anketa.csv&#x27;)
+print(df.head())
+print(&quot;Редове и колони:&quot;, df.shape)
+</div>
+      </div>
+      <div>
+<pre class="pyc" data-title="Какво прави всеки ред">
+import pandas as pd
+df = pd.read_csv('anketa.csv')
+df.head()        # първите 5 реда
+df.shape         # (редове, колони)
+df.columns       # имената на колоните
+df.describe()    # статистика на числовите колони
+df.isna().sum()  # колко липсващи стойности има
+</pre>
+        <ol class="lx">
+          <li data-l="1"><code>as pd</code> – кратко име, за да не пишем всеки път „pandas“.</li>
+          <li data-l="2">Чете CSV файла в таблица.</li>
+          <li data-l="3-5">Първи поглед: как изглежда, колко е голяма, какви колони има.</li>
+          <li data-l="6">Брой, средно, минимум, максимум… за всяка числова колона.</li>
+          <li data-l="7">Липсващите стойности (празни клетки) се показват като <code>NaN</code>.</li>
+        </ol>
+      </div>
+    </div>
+<div class="py" data-files="data/anketa.csv" data-title="Статистика и липсващи стойности" data-out="       telefon_chasa  san_chasa  uspeh
+count          30.00      29.00  30.00
+mean            4.52       7.55   5.03
+std             1.43       0.62   0.55
+min             1.50       6.00   4.12
+25%             4.00       7.00   4.71
+50%             4.50       7.50   4.94
+75%             5.50       8.00   5.37
+max             7.00       9.00   6.00
+
+Липсващи стойности:
+ime               0
+klas              0
+telefon_chasa     0
+san_chasa         1
+sport_dni         0
+lyubim_predmet    0
+uspeh             0
+dtype: int64">
+import pandas as pd
+df = pd.read_csv(&#x27;anketa.csv&#x27;)
+print(df[[&quot;telefon_chasa&quot;, &quot;san_chasa&quot;, &quot;uspeh&quot;]].describe().round(2))
+print()
+print(&quot;Липсващи стойности:&quot;)
+print(df.isna().sum())
+</div>
+  </div>
+</section>
+
+<section class="band alt" id="stapki">
+  <div class="wrap">
+    <h2>Стъпка по стъпка: от портала до таблицата</h2>
+    <div class="walk" data-walk="egov" data-title="Сваляне на CSV от data.egov.bg и отваряне в Excel"></div>
+  </div>
+</section>
+<section class="band" id="zadacha">
+  <div class="wrap">
+    <h2>Задача за часа</h2>
+    <div class="goal"><h3>Опиши набор от данни</h3><p>Намери на портал за отворени данни набор, който те интересува, и направи негово „досие“.</p><div class="time"><span>⏱ 1 учебен час</span><span>👤 индивидуално или по двойки</span><span>🎯 20 точки</span></div></div>
+    <div class="grid2" style="margin-top:26px">
+      <div><h3>Изисквания – точно в този ред</h3><ol class="req"><li>Намери набор на data.egov.bg, nsi.bg, Евростат или Our World in Data и го свали като CSV.</li><li>Запиши: <b>заглавие, източник (връзка), дата, лиценз</b>.</li><li>Опиши <b>какво е записът</b> (един ред) и <b>какво означава всяка колона</b> (с единиците).</li><li>Зареди го в Excel/Google Таблици или с pandas: колко са <b>редовете и колоните</b>?</li><li>Намери поне <b>два проблема на качеството</b> (липсващи стойности, странни стойности, различни записи).</li><li>Формулирай <b>два въпроса</b>, на които данните могат да отговорят (ще ти трябват в урок 8 и в проекта).</li></ol></div>
+      <div><div class="card"><h3>Какво предаваш</h3><ul><li>„Досието“ (документ)</li><li>Екранна снимка на заредената таблица</li></ul><p class="note">Предаваш там, където каже учителят (напр. Google Classroom).</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="band alt" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">8 въпроса. Избери отговор на всеки и натисни „Провери“. Под всеки въпрос ще видиш обяснение.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check" type="button">Провери</button><button class="btn ghost" id="again" type="button">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<section class="band"><div class="wrap pager"><a href="urok-06-danni-v-python.html"><small>← Урок 6</small>Първи стъпки с данни в Python</a><a class="nx" href="urok-08-obrabotka-i-vizualizacia.html"><small>Урок 8 →</small>Обработка и визуализация на данни (упражнение)</a></div></section>
+
+<footer>IT Зона · Информационни технологии · 10 клас. Изгледите на програмите и сайтовете са схематични – бутоните може леко да се различават.</footer>
+
+<script>const CUR=8;</script>
+<script src="it.js?v=20261128"></script>
+<script src="../../interaktivni/mk.js?v=20261128"></script>
+<script>
+{
+const br=(url,inner,ov)=>`<div class="app"><div class="bar"><i></i><i></i><i></i><span class="url">${url}</span></div>${inner}${ov?`<div class="ov">${ov}</div>`:''}</div>`;
+const D=[["Ива","10А","7.0","4.53",0],["Мартин","10Б","","4.43","Липсваща стойност – часовете сън не са попълнени."],["Никола","10В","75","5.73","Невъзможно: 75 часа сън на ден – вероятно 7.5."],["Сара","10а","7.0","4.94","Различен запис: „10а“ вместо „10А“ – за компютъра това са различни класове."],["Петър","10Б","420 мин","4.94","Различни единици – минути вместо часове."],["Ива","10А","7.0","4.53","Дубликат – същият ред като първия."]];
+const pos={"1,2":1,"2,2":2,"3,1":3,"4,2":4,"5,0":5,"5,1":5,"5,2":5,"5,3":5};
+let found=new Set();
+document.getElementById('dq').innerHTML='<thead><tr><th>ime</th><th>klas</th><th>san_chasa</th><th>uspeh</th></tr></thead><tbody>'+D.map((r,i)=>'<tr>'+r.slice(0,4).map((c,j)=>`<td data-k="${i},${j}" style="cursor:pointer">${c||'&nbsp;'}</td>`).join('')+'</tr>').join('')+'</tbody>';
+document.querySelectorAll('#dq td').forEach(td=>td.onclick=()=>{const p=pos[td.dataset.k],f=document.getElementById('dqF');
+ if(p){found.add(p);document.querySelectorAll('#dq td').forEach(x=>{if(pos[x.dataset.k]==p)x.style.background='#dff7e8'});f.className='fbk ok';f.textContent='✔ '+D[p][4]}else{td.style.background='#ffe3dc';f.className='fbk bad';f.textContent='✘ Тази клетка е наред.'}
+ document.getElementById('dqS').textContent=`Открити: ${found.size} от 5`+(found.size==5?' 🎉':'')});
+const portal=(inner)=>br("data.egov.bg",`<div class="tb2"><b style="color:#0b5cad">🇧🇬 Портал за отворени данни</b><span class="muted">Набори от данни · Организации</span></div>${inner}`);
+MK.walk("egov",[
+ {t:"Търсене",m:portal(`<div style="padding:20px"><div class="inp hot nohand" style="max-width:420px">🔍 училища<span class="typing"> </span></div><p class="muted">Напиши ключова дума и натисни Enter.</p></div>`),c:"Отвори <b>data.egov.bg</b> и потърси тема – напр. „училища“, „качество на въздуха“, „транспорт“."},
+ {t:"Избери набор",m:portal(`<div style="padding:20px"><div class="src" style="margin-bottom:8px"><b>Регистър на училищата</b><br><span class="muted">Министерство на образованието · CSV · обновен 2024</span></div><div class="src hot nohand"><b>Брой ученици по класове и области</b><br><span class="muted">Организация · CSV, XLSX · лиценз CC BY</span></div></div>`),c:"Прочети описанието: кой е издателят, кога е обновен, какъв е лицензът."},
+ {t:"Свали CSV",m:portal(`<div style="padding:20px"><h3 style="margin:0 0 8px">Брой ученици по класове и области</h3><p class="muted">Ресурси:</p><div class="row"><span class="pri hot nohand">⬇ Изтегляне CSV</span><span class="pill2">XLSX</span><span class="pill2">Преглед</span></div></div>`),c:"При ресурса избери <b>CSV</b> и го свали в папката за проекта."},
+ {t:"Excel: Данни → От текст/CSV",m:MK.xl({file:"Книга1",tab:"Данни",cells:[],nc:5,rows:8,hot:"btn:sortaz"}).replace('🔤</i>Сортиране','📄</i>От текст/CSV'),c:"В Excel: <b>Данни → От текст/CSV</b> (Data → From Text/CSV). Не отваряй CSV с двоен клик, ако кирилицата излиза като „Ð¡Ð¾…“."},
+ {t:"Кодировка и разделител",m:br("Excel",`<div style="padding:24px"><div class="card2" style="width:auto;box-shadow:none;border:1px solid #ccc"><h4>broi-uchenici.csv</h4><div class="row"><span>Произход на файла:</span><span class="pill2 hot nohand">65001: Unicode (UTF-8)</span><span>Разделител:</span><span class="pill2">Запетая</span></div><table class="dtable" style="margin-top:10px"><tr><th>oblast</th><th>klas</th><th>broi</th></tr><tr><td>София</td><td>10</td><td>…</td></tr></table><div class="row" style="justify-content:flex-end;margin-top:10px"><span class="pri">Зареждане</span></div></div></div>`),c:"Избери <b>UTF-8</b>, за да се чете кирилицата, и правилния <b>разделител</b>. Натисни <b>Зареждане</b>. В Google Таблици: <b>Файл → Импортиране</b>."}]);
+
+IT.init();MK.init();
+}
+</script>
+<script>
+const QUIZ=[["Какво е един ред в набор от данни?", ["Признак", "Запис (наблюдение)", "Файл", "Диаграма"], 1, ""], ["Какво е CSV?", ["Снимка", "Текстов файл със стойности, разделени със запетая", "Програма", "Видео"], 1, ""], ["Кое е категорийна стойност?", ["7.5 часа", "Любим предмет „ИТ“", "4.53", "25 °C"], 1, ""], ["Какво означава лиценз CC BY?", ["Забранено използване", "Свободно използване с посочване на автора", "Само за пари", "Само за учители"], 1, ""], ["Какво прави df.head() в pandas?", ["Изтрива таблицата", "Показва първите 5 реда", "Сортира", "Брои колоните"], 1, ""], ["Какво връща df.shape?", ["Цветовете", "(брой редове, брой колони)", "Средното", "Имената"], 1, ""], ["Как изглежда липсваща стойност в pandas?", ["0", "NaN", "-1", "„празно“"], 1, ""], ["„10а“ и „10А“ в колона „клас“ е проблем, защото:", ["няма проблем", "компютърът ги смята за различни стойности", "са твърде кратки", "са на кирилица"], 1, "Затова данните се уеднаквяват при почистване."]];
+</script>
+<script src="../../interaktivni/ip-urok.js?v=20261127"></script>
+<script src="../../totop.js?v=20261126" defer></script>
+</body>
+</html>

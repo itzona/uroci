@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Преговор: Преговор и входно ниво – Информационни технологии, 10 клас</title>
+<link rel="icon" type="image/svg+xml" href="../../icons/10-klas.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../interaktivni/ip-urok.css?v=20261127b">
+<link rel="stylesheet" href="../../interaktivni/mk.css?v=20261128">
+<link rel="stylesheet" href="it.css?v=20261128">
+</head>
+<body class="s0">
+
+<header class="hero s0">
+  <div class="wrap">
+    <div>
+      <span class="tag">Преговор · Информационни технологии · 10 клас</span>
+      <h1>Преговор и входно ниво</h1>
+      <p>Припомни си най-важното от 9. клас – мрежи, файлове, електронни таблици и безопасност – и провери какво знаеш с входния тест.</p>
+    </div>
+    <div class="hart" aria-hidden="true"><div class="big">🧭</div><span class="w" style="left:8%;top:10%">Мрежи</span><span class="w" style="left:66%;top:4%">Excel</span><span class="w" style="left:2%;top:72%">Пароли</span><span class="w" style="left:70%;top:80%">Облак</span><span class="w" style="left:74%;top:40%">Входен тест</span></div>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Преговор</summary><div class="menu"><a href="#pomnim">Какво научи в 9. клас</a><a href="#ustroystva">Устройства</a><a href="#tablici">Формули</a><a href="#parola">Пароли</a></div></details><a href="#test">Входен тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="pomnim">
+  <div class="wrap">
+    <h2>Какво научи в 9. клас</h2>
+    <p class="muted">Кратко припомняне. В 10. клас ще надграждаш точно тези умения.</p>
+    <div class="grid" style="margin-top:16px">
+      <div class="card"><h3>🌐 Компютърни мрежи</h3><p><b>LAN</b> – локална мрежа (класната стая, домът); <b>WAN</b> – глобална (интернет). Рутер, комутатор (switch), Wi-Fi точка за достъп. Всяко устройство в мрежата има <b>IP адрес</b>.</p></div>
+      <div class="card"><h3>📡 Устройства и среди</h3><p>Данните пътуват по <b>кабел</b> (усукана двойка, оптика) или <b>безжично</b> (Wi-Fi, Bluetooth, мобилна мрежа). Скоростта се мери в <b>Mbps</b> (мегабита в секунда).</p></div>
+      <div class="card"><h3>☁️ Файлове и облак</h3><p>Папки, разширения (.docx, .xlsx, .pdf, .png), архивиране (.zip). Облачно съхранение – Google Drive, OneDrive – файловете са достъпни от всяко устройство.</p></div>
+      <div class="card"><h3>📊 Електронни таблици</h3><p>Клетка (B3), обхват (B2:B10), формули с <code>=</code>, функции <code>SUM</code>, <code>AVERAGE</code>, <code>MAX</code>, <code>MIN</code>, <code>COUNT</code>, <code>IF</code>. Сортиране, филтър, диаграми.</p></div>
+      <div class="card"><h3>🖼️ Презентации</h3><p>Ясна структура, малко текст на слайд, едро и контрастно, картинки с право на използване, посочени източници.</p></div>
+      <div class="card"><h3>🔐 Безопасност</h3><p>Силна и различна парола за всеки профил, двуфакторна защита, разпознаване на фишинг, внимание с личните данни.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="ustroystva">
+  <div class="wrap">
+    <h2>🧪 Упражнение: устройства</h2>
+    <div id="clsDev" style="margin-top:12px"></div>
+  </div>
+</section>
+
+<section class="band" id="tablici">
+  <div class="wrap grid2">
+    <div>
+      <h2>🧪 Електронни таблици – пресметни наум</h2>
+      <p>Каква стойност ще покаже всяка формула? Напиши числото и натисни „Провери“.</p>
+      <table class="dtable" style="max-width:420px">
+        <thead><tr><th></th><th>A</th><th>B</th></tr></thead>
+        <tbody><tr><th>1</th><td>Ученик</td><td>Точки</td></tr><tr><th>2</th><td>Ива</td><td>18</td></tr><tr><th>3</th><td>Мартин</td><td>12</td></tr><tr><th>4</th><td>Ники</td><td>15</td></tr><tr><th>5</th><td>Сара</td><td>19</td></tr></tbody>
+      </table>
+    </div>
+    <div class="lab" id="frm"></div>
+  </div>
+</section>
+
+<section class="band alt" id="parola">
+  <div class="wrap grid2">
+    <div>
+      <h2>🧪 Колко силна е паролата?</h2>
+      <p>Напиши примерна парола (не истинската си!) и виж как се оценява. Проверката става само в браузъра ти – нищо не се изпраща.</p>
+      <div class="lab"><label for="pw">Примерна парола</label><input type="text" id="pw" value="ivan2009" autocomplete="off" spellcheck="false">
+        <div style="height:12px;border-radius:6px;background:var(--line);margin-top:12px;overflow:hidden"><div id="pwBar" style="height:100%;width:0;transition:width .3s,background .3s"></div></div>
+        <div class="out" id="pwOut" aria-live="polite"></div></div>
+    </div>
+    <div class="card"><h3>Добрата парола е…</h3><ul><li><b>дълга</b> – поне 12 знака; дължината е по-важна от сложността;</li><li><b>непредсказуема</b> – без име, рождена дата, „123456“, „qwerty“;</li><li><b>различна</b> за всеки профил;</li><li>удобна е <b>фраза от няколко думи</b>: <code>Kotka-Svir1-na-Pokriva!</code>;</li><li>пази се в <b>мениджър на пароли</b>, а не в тетрадка до компютъра.</li></ul></div>
+  </div>
+</section>
+<section class="band alt" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">12 въпроса. Избери отговор на всеки и натисни „Провери“. Под всеки въпрос ще видиш обяснение.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check" type="button">Провери</button><button class="btn ghost" id="again" type="button">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<section class="band"><div class="wrap pager"><a href="index.html"><small>← Към модула</small>Всички уроци</a><a class="nx" href="urok-01-validnost-na-informaciyata.html"><small>Урок 1 →</small>Оценяване на валидността и надеждността на информацията</a></div></section>
+
+<footer>IT Зона · Информационни технологии · 10 клас. Изгледите на програмите и сайтовете са схематични – бутоните може леко да се различават.</footer>
+
+<script>const CUR=0;</script>
+<script src="it.js?v=20261128"></script>
+<script src="../../interaktivni/mk.js?v=20261128"></script>
+<script>
+{
+
+IT.classify("clsDev",{cats:["Входни","Изходни","Входно-изходни","За съхранение"],items:[
+ ["Клавиатура",0,"Въвежда данни в компютъра."],["Мишка",0,"Посочване и щракване – вход."],["Микрофон",0,"Звукът влиза в компютъра."],["Скенер",0,"Превръща хартията в цифров образ."],
+ ["Монитор",1,"Показва резултата."],["Принтер",1,"Отпечатва – изход."],["Слушалки",1,"Звукът излиза от компютъра."],["Проектор",1,"Показва образа на стената."],
+ ["Сензорен екран",2,"И показва, и приема докосване."],["Мрежова карта",2,"Изпраща и приема данни."],["Слушалки с микрофон",2,"Звук навън и навътре."],
+ ["SSD диск",3,"Пази данните, когато компютърът е изключен."],["USB флаш памет",3,"Преносима памет."],["Облачно хранилище",3,"Съхранение на сървър в интернет."]]});
+const F=[["=SUM(B2:B5)",64],["=AVERAGE(B2:B5)",16],["=MAX(B2:B5)",19],["=COUNT(B2:B5)",4],["=IF(B3>=15;\"Да\";\"Не\")","Не"],["=B2+B4*2",48]];
+const fr=document.getElementById('frm');
+fr.innerHTML=F.map((f,i)=>`<label for="f${i}"><code>${f[0]}</code></label><input type="text" id="f${i}" autocomplete="off">`).join('')+`<div class="row" style="margin-top:12px"><button type="button" class="btn" id="fChk">Провери</button></div><div class="out" id="fOut" aria-live="polite" hidden></div>`;
+document.getElementById('fChk').onclick=()=>{let ok=0;F.forEach((f,i)=>{const el=document.getElementById('f'+i),v=el.value.trim().replace(',','.');const r=String(f[1]).toLowerCase()==v.toLowerCase();el.style.borderColor=r?'#1f9d6a':'#e0523f';if(r)ok++});
+  const o=document.getElementById('fOut');o.hidden=false;o.className='out '+(ok==F.length?'ok':'bad');
+  o.innerHTML=`Верни: ${ok} от ${F.length}. `+(ok<F.length?'Отговори: 64; 16; 19; 4; „Не“ (12 не е ≥ 15); 48 (първо се умножава: 18 + 15·2).':'Браво! 🎉')};
+const pw=document.getElementById('pw');
+const rate=()=>{const p=pw.value;let s=0,t=[];if(p.length>=8)s++;if(p.length>=12)s++;if(p.length>=16)s++;if(/[a-zа-я]/.test(p)&&/[A-ZА-Я]/.test(p))s++;if(/\d/.test(p))s++;if(/[^A-Za-zА-я0-9]/.test(p))s++;
+  if(/(123|qwerty|password|parola|1111|abc)/i.test(p)){s=Math.min(s,1);t.push('съдържа много известна поредица')}
+  if(/(19|20)\d\d/.test(p))t.push('прилича на година – лесно се отгатва');
+  if(p.length<12)t.push('по-кратка е от 12 знака');
+  const lv=s<=2?['Слаба','#e0523f',25]:s<=4?['Средна','#f59e0b',60]:['Силна','#1f9d6a',100];
+  document.getElementById('pwBar').style.cssText+=`;width:${lv[2]}%;background:${lv[1]}`;
+  const o=document.getElementById('pwOut');o.className='out '+(lv[0]=='Силна'?'ok':'bad');o.textContent=lv[0]+(t.length?' – '+t.join('; ')+'.':' – дълга и разнообразна. 👍')};
+pw.oninput=rate;rate();
+
+IT.init();MK.init();
+}
+</script>
+<script>
+const QUIZ=[["Каква е разликата между LAN и WAN?", ["Няма разлика", "LAN е локална мрежа (сграда), WAN е глобална (интернет)", "LAN е безжична, WAN – кабелна", "WAN е само за телефони"], 1, "LAN – Local Area Network, WAN – Wide Area Network."], ["Кое устройство свързва домашната мрежа с интернет?", ["Монитор", "Рутер", "Скенер", "Принтер"], 1, "Рутерът насочва данните между мрежите."], ["В какви единици обикновено се мери скоростта на интернет връзката?", ["GB", "Mbps (мегабита в секунда)", "°C", "dpi"], 1, "Бит в секунда; 1 байт = 8 бита."], ["Кое разширение е на електронна таблица?", [".mp3", ".xlsx", ".jpg", ".html"], 1, ".xlsx е файл на Excel."], ["Какво ще покаже =AVERAGE(4;6;8)?", ["18", "6", "8", "3"], 1, "(4+6+8)/3 = 6."], ["Как се записва обхватът от B2 до B10?", ["B2-B10", "B2:B10", "B2;B10", "B2..B10"], 1, "Двоеточие между първата и последната клетка."], ["Коя парола е най-сигурна?", ["123456", "ivan2009", "Kotka-Svir1-na-Pokriva!", "qwerty"], 2, "Дълга фраза, непредсказуема."], ["Получаваш имейл „Вашият профил ще бъде блокиран, въведете паролата си тук“. Какво е това най-вероятно?", ["Важно съобщение", "Фишинг", "Реклама", "Актуализация"], 1, "Създава паника и иска паролата – типичен фишинг."], ["Какво е двуфакторна защита?", ["Две пароли на един лист", "Вход с парола + втори код (напр. от телефона)", "Два антивируса", "Две мрежи"], 1, "Дори паролата да изтече, без втория фактор не може да се влезе."], ["Кое е добро правило за слайд в презентация?", ["Целият текст от учебника", "Малко текст, едър шрифт, ясна картинка", "Много анимации на всеки ред", "Светъл текст на светъл фон"], 1, "Слайдът подкрепя говорещия, не го замества."], ["Какво е облачно съхранение?", ["Файлове на флашка", "Файлове на сървър в интернет, достъпни от различни устройства", "Файлове, изтрити завинаги", "Архив .zip"], 1, "Google Drive, OneDrive, iCloud."], ["Кое от изброените е изходно устройство?", ["Микрофон", "Клавиатура", "Принтер", "Скенер"], 2, "Принтерът извежда резултата на хартия."]];
+</script>
+<script src="../../interaktivni/ip-urok.js?v=20261127"></script>
+<script src="../../totop.js?v=20261126" defer></script>
+</body>
+</html>

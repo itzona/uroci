@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 4: Алгоритъм – Информационни технологии, 10 клас</title>
+<link rel="icon" type="image/svg+xml" href="../../icons/10-klas.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../interaktivni/ip-urok.css?v=20261127b">
+<link rel="stylesheet" href="../../interaktivni/mk.css?v=20261128">
+<link rel="stylesheet" href="it.css?v=20261128">
+</head>
+<body class="s2">
+
+<header class="hero s2">
+  <div class="wrap">
+    <div>
+      <span class="tag">Урок 4 · Програмиране и изкуствен интелект · 10 клас</span>
+      <h1>Алгоритъм</h1>
+      <p>Какво е алгоритъм, какви свойства има и как се представя – словесно, с блок-схема, с псевдокод. Линейни, разклонени и циклични алгоритми.</p>
+    </div>
+    <div class="hart" aria-hidden="true"><div class="big">🧩</div><span class="w" style="left:8%;top:10%">Вход</span><span class="w" style="left:66%;top:4%">Изход</span><span class="w" style="left:2%;top:72%">Блок-схема</span><span class="w" style="left:70%;top:80%">Условие</span><span class="w" style="left:74%;top:40%">Цикъл</span></div>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Теория</summary><div class="menu"><a href="#kakvo">Какво е алгоритъм</a><a href="#nachini">Начини за представяне</a><a href="#strukturi">Три структури</a></div></details><details><summary>Практика</summary><div class="menu"><a href="#blokshema">Изпълни блок-схемата</a><a href="#podredi">Подреди алгоритъма</a></div></details><a href="#zadacha">Задача</a><a href="#test">Тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="kakvo">
+  <div class="wrap grid2">
+    <div>
+      <h2>Какво е алгоритъм</h2>
+      <p><b>Алгоритъмът</b> е точна, крайна последователност от стъпки, която от дадени входни данни води до търсения резултат. Рецептата за палачинки, упътването за сглобяване на шкаф и пътят до училище в навигацията са алгоритми.</p>
+      <p>Компютърът не „разбира“ какво искаме – той изпълнява само команди. Затова алгоритъмът за компютър трябва да е <b>съвсем ясен</b>: без „малко“, „на око“ и „ако ти се струва“.</p>
+      <div class="tip"><b>Вход → обработка → изход.</b> Всеки алгоритъм получава данни (вход), прави нещо с тях (обработка) и дава резултат (изход). Пример: числата 4, 6, 8 → събери ги и раздели на 3 → 6.</div>
+    </div>
+    <div>
+      <h3>Свойства на алгоритъма – щракни картата</h3>
+      <div class="flips" id="props" style="margin-top:10px"></div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="nachini">
+  <div class="wrap">
+    <h2>Начини за представяне</h2>
+    <div class="grid" style="margin-top:14px">
+      <div class="card"><h3>🗣️ Словесно</h3><p>С обикновени изречения, номерирани стъпки. Разбира се лесно, но може да е неточно.</p></div>
+      <div class="card"><h3>🔷 Блок-схема</h3><p>С геометрични фигури и стрелки. Нагледно показва разклоненията и повторенията.</p></div>
+      <div class="card"><h3>📝 Псевдокод</h3><p>Полуформален запис с ключови думи (АКО, ДОКАТО…). Близък до програмата, но без строг синтаксис (урок 5).</p></div>
+      <div class="card"><h3>🐍 Програма</h3><p>На език за програмиране (Python, C++, JavaScript) – компютърът може да я изпълни.</p></div>
+    </div>
+    <h3 style="margin-top:26px">Фигури в блок-схемата</h3>
+    <div class="grid" style="margin-top:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))">
+      <div class="card" style="text-align:center"><svg viewBox="0 0 160 70" style="width:150px"><rect x="10" y="12" width="140" height="46" rx="23" fill="#dcfce7" stroke="#15803d" stroke-width="2"/><text x="80" y="41" text-anchor="middle" font-size="16">Начало / Край</text></svg><p>Овал – начало и край</p></div>
+      <div class="card" style="text-align:center"><svg viewBox="0 0 160 70" style="width:150px"><path d="M30 12h120l-20 46H10z" fill="#e0f2fe" stroke="#0369a1" stroke-width="2"/><text x="80" y="41" text-anchor="middle" font-size="16">Въведи / Изведи</text></svg><p>Успоредник – вход и изход</p></div>
+      <div class="card" style="text-align:center"><svg viewBox="0 0 160 70" style="width:150px"><rect x="15" y="12" width="130" height="46" fill="#fef9c3" stroke="#a16207" stroke-width="2"/><text x="80" y="41" text-anchor="middle" font-size="16">s ← s + 1</text></svg><p>Правоъгълник – действие</p></div>
+      <div class="card" style="text-align:center"><svg viewBox="0 0 160 70" style="width:150px"><path d="M80 5l70 30-70 30-70-30z" fill="#fee2e2" stroke="#b91c1c" stroke-width="2"/><text x="80" y="41" text-anchor="middle" font-size="16">n &gt; 0 ?</text></svg><p>Ромб – условие (да/не)</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="strukturi">
+  <div class="wrap">
+    <h2>Три основни структури</h2>
+    <div class="grid" style="margin-top:14px">
+      <div class="card"><h3>➡️ Линейна (последователност)</h3><p>Стъпките се изпълняват една след друга, всяка точно веднъж.</p><p class="note">Пример: въведи цена и брой → умножи → изведи сумата.</p></div>
+      <div class="card"><h3>🔀 Разклонена (условие)</h3><p>Според условие се избира единият от два (или повече) пътя.</p><p class="note">Пример: АКО оценката ≥ 3 → „издържал“, ИНАЧЕ → „слаб“.</p></div>
+      <div class="card"><h3>🔁 Циклична (повторение)</h3><p>Група стъпки се повтаря определен брой пъти или докато е вярно условие.</p><p class="note">Пример: ДОКАТО има ученици → провери оценката.</p></div>
+    </div>
+    <h3 style="margin-top:24px">🧪 Каква е структурата?</h3>
+    <div id="clsStr" style="margin-top:10px"></div>
+  </div>
+</section>
+
+<section class="band alt" id="blokshema">
+  <div class="wrap">
+    <h2>🧪 Изпълни блок-схемата</h2>
+    <p class="muted">Алгоритъм „Четно или нечетно“. Въведи число и върви стъпка по стъпка – текущата фигура свети.</p>
+    <div class="sim" style="margin-top:14px">
+      <div><svg class="flowsvg" id="fc" viewBox="0 0 520 560" role="img" aria-label="Блок-схема четно или нечетно"></svg></div>
+      <div>
+        <div class="lab"><label for="fn">Число n</label><input type="number" id="fn" value="7">
+        <div class="row" style="margin-top:12px"><button type="button" class="btn" id="fStep">Стъпка ▶</button><button type="button" class="btn ghost" id="fRst">↺ Отначало</button></div>
+        <div class="watch"><div>n = <b id="fv">?</b></div><div>n % 2 = <b id="fm">?</b></div></div>
+        <div class="cons"><div class="ch">Изход</div><pre id="fo"></pre></div>
+        <p class="note" id="fi">Натисни „Стъпка ▶“.</p></div>
+        <div class="tip"><b>Знакът %</b> дава остатъка при деление: 7 % 2 = 1, 8 % 2 = 0. Ако остатъкът е 0, числото е четно.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="podredi">
+  <div class="wrap grid2">
+    <div><h2>🧪 Подреди алгоритъма</h2><p>Вход в профил с двуфакторна защита.</p><div id="ord1"></div></div>
+    <div><h2>🧪 И още един</h2><p>Намиране на най-високата оценка в списък.</p><div id="ord2"></div></div>
+  </div>
+</section>
+<section class="band" id="zadacha">
+  <div class="wrap">
+    <h2>Задача за часа</h2>
+    <div class="goal"><h3>Алгоритъм за моя проблем</h3><p>Опиши алгоритъм за задача от живота или от училище по <b>три начина</b>: словесно, с блок-схема и с кратко обяснение какви са входът и изходът.</p><div class="time"><span>⏱ 1 учебен час</span><span>👤 индивидуално</span><span>🎯 20 точки</span></div></div>
+    <div class="grid2" style="margin-top:26px">
+      <div><h3>Изисквания – точно в този ред</h3><ol class="req"><li>Избери задача: „Колко струва покупката с отстъпка 10% над 50 лв.“, „Издържал ли е ученикът (среден успех ≥ 3)“, „Колко пъти трябва да пълня бутилка 0,5 л, за да напълня кофа 10 л“ или своя.</li><li>Запиши <b>входа</b> и <b>изхода</b>.</li><li>Опиши алгоритъма <b>словесно</b> с номерирани стъпки.</li><li>Начертай <b>блок-схема</b> – на хартия или в <b>app.diagrams.net</b> (безплатно) – с поне едно <b>условие</b>.</li><li>Провери алгоритъма с <b>два различни примера</b> на входа и запиши какъв е резултатът.</li></ol></div>
+      <div><div class="card"><h3>Какво предаваш</h3><ul><li>Снимка или файл с блок-схемата</li><li>Словесното описание и двата проверени примера</li></ul><p class="note">Предаваш там, където каже учителят (напр. Google Classroom).</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="band alt" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">8 въпроса. Избери отговор на всеки и натисни „Провери“. Под всеки въпрос ще видиш обяснение.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check" type="button">Провери</button><button class="btn ghost" id="again" type="button">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<section class="band"><div class="wrap pager"><a href="test-1-informaciya.html"><small>← Тест</small>Тест: Обработка на информацията и комуникация</a><a class="nx" href="urok-05-psevdokod-i-python.html"><small>Урок 5 →</small>Представяне на алгоритми чрез псевдокод и език за програмиране</a></div></section>
+
+<footer>IT Зона · Информационни технологии · 10 клас. Изгледите на програмите и сайтовете са схематични – бутоните може леко да се различават.</footer>
+
+<script>const CUR=5;</script>
+<script src="it.js?v=20261128"></script>
+<script src="../../interaktivni/mk.js?v=20261128"></script>
+<script>
+{
+
+const PR=[["Дискретност","Разделен е на отделни стъпки, изпълнявани една след друга."],["Определеност","Всяка стъпка е ясна и еднозначна – всеки, който я изпълни, ще направи едно и също."],["Крайност","Завършва след краен брой стъпки – не продължава вечно."],["Резултатност","Дава резултат – отговор на поставената задача."],["Масовост","Решава цял клас подобни задачи, не само един пример (напр. за всяко число, не само за 7)."]];
+document.getElementById('props').innerHTML=PR.map(c=>`<button type="button" class="flip"><div class="in"><div class="f">${c[0]}</div><div class="b">${c[1]}</div></div></button>`).join('');
+document.querySelectorAll('.flip').forEach(f=>f.onclick=()=>f.classList.toggle('on'));
+IT.classify("clsStr",{cats:["Линейна","Разклонена","Циклична"],items:[
+ ["Изчисли лицето на правоъгълник: въведи a и b, умножи, изведи",0,"Стъпките са една след друга."],["Превърни градуси Целзий във Фаренхайт",0,"Една формула – линейно."],["Сметни цената на 3 тетрадки",0,"Без условия и повторения."],
+ ["Ако вали – вземи чадър, иначе – слънчеви очила",1,"Избор според условие."],["Покажи „отличен“, ако успехът е ≥ 5,50",1,"Условие."],["Провери дали паролата е поне 12 знака",1,"Да/не – разклонение."],
+ ["Събери оценките на всички 25 ученици",2,"Повтаряш събирането за всеки ученик."],["Мий зъбите 2 минути, докато таймерът спре",2,"Повторение до условие."],["Изпрати поканата на всеки от списъка",2,"За всеки – цикъл."]]});
+/* блок-схема */
+const N={st:[260,40,'o','Начало'],in:[260,120,'p','Въведи n'],if:[260,225,'d','n % 2 = 0 ?'],ev:[120,345,'p','Изведи „четно“'],od:[400,345,'p','Изведи „нечетно“'],en:[260,470,'o','Край']};
+const shape=(k,[x,y,t,s])=>{let g='';if(t=='o')g=`<rect class="nd" id="n_${k}" x="${x-80}" y="${y-24}" width="160" height="48" rx="24" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>`;
+ if(t=='p')g=`<path class="nd" id="n_${k}" d="M${x-70} ${y-24}h160l-20 48h-160z" fill="#e0f2fe" stroke="#0369a1" stroke-width="2"/>`;
+ if(t=='d')g=`<path class="nd" id="n_${k}" d="M${x} ${y-50}l100 50-100 50-100-50z" fill="#fee2e2" stroke="#b91c1c" stroke-width="2"/>`;
+ return g+`<text x="${x}" y="${y+6}" text-anchor="middle" font-family="Nunito Sans,sans-serif" font-size="17" font-weight="700">${s}</text>`};
+const ar=(d)=>`<path d="${d}" stroke="#475569" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>`;
+document.getElementById('fc').innerHTML=`<defs><marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0l10 5-10 5z" fill="#475569"/></marker></defs>`+
+ ar('M260 64v30')+ar('M260 144v30')+ar('M160 225H120v94')+ar('M360 225h40v94')+ar('M120 369v77h56')+ar('M400 369v77h-56')+
+ `<text x="135" y="215" font-size="16" font-weight="800" fill="#15803d">да</text><text x="368" y="215" font-size="16" font-weight="800" fill="#b91c1c">не</text>`+Object.entries(N).map(([k,v])=>shape(k,v)).join('');
+let fs=-1,seq=[];
+const fbuild=()=>{const n=parseInt(document.getElementById('fn').value)||0,ev=n%2==0;return[['st','Започваме.'],['in','Въвеждаме n = '+n+'.',{n}],['if',`Проверяваме: ${n} % 2 = ${Math.abs(n%2)} → условието е ${ev?'вярно (да)':'невярно (не)'}.`,{m:Math.abs(n%2)}],[ev?'ev':'od','Извеждаме резултата.',{o:ev?'четно':'нечетно'}],['en','Край на алгоритъма.']]};
+const fdraw=()=>{document.querySelectorAll('#fc .nd').forEach(e=>e.classList.remove('on'));const s=seq[fs];document.getElementById('fi').textContent=s?s[1]:'Натисни „Стъпка ▶“.';
+ let v='?',m='?',o='';seq.slice(0,fs+1).forEach(x=>{if(x[2]){if('n'in x[2])v=x[2].n;if('m'in x[2])m=x[2].m;if(x[2].o)o=x[2].o}});
+ document.getElementById('fv').textContent=v;document.getElementById('fm').textContent=m;document.getElementById('fo').textContent=o;if(s)document.getElementById('n_'+s[0]).classList.add('on');document.getElementById('fStep').disabled=seq.length&&fs>=seq.length-1};
+document.getElementById('fStep').onclick=()=>{if(fs<0)seq=fbuild();fs++;fdraw()};
+document.getElementById('fRst').onclick=()=>{fs=-1;seq=[];fdraw()};document.getElementById('fn').oninput=()=>{fs=-1;seq=[];fdraw()};fdraw();
+IT.order("ord1",{items:["Отвори сайта и натисни „Вход“","Въведи имейла си","Въведи паролата","Натисни „Напред“","Отвори приложението за удостоверяване на телефона","Въведи 6-цифрения код","Влез в профила"],ok:"Това е линеен алгоритъм."});
+IT.order("ord2",{items:["Вземи първата оценка и я запомни като „най-висока“","Премини към следващата оценка","Ако тя е по-висока от запомнената – запомни нея","Повтаряй предните две стъпки, докато има оценки","Изведи запомнената най-висока оценка"],ok:"Тук има и условие, и цикъл."});
+
+IT.init();MK.init();
+}
+</script>
+<script>
+const QUIZ=[["Какво е алгоритъм?", ["Вид компютър", "Крайна последователност от точни стъпки, която води до резултат", "Програма за рисуване", "Списък с файлове"], 1, ""], ["Кое свойство означава, че алгоритъмът завършва?", ["Масовост", "Крайност", "Дискретност", "Определеност"], 1, ""], ["Коя фигура в блок-схемата е за условие?", ["Овал", "Ромб", "Правоъгълник", "Успоредник"], 1, "От ромба излизат два пътя – да и не."], ["Коя фигура е за въвеждане и извеждане?", ["Успоредник", "Овал", "Ромб", "Кръг"], 0, ""], ["„Ако е събота – спи до късно, иначе – стани в 7“ е структура:", ["линейна", "разклонена", "циклична", "няма структура"], 1, ""], ["„Изпрати поздрав на всеки от 30-те приятели“ е най-вече:", ["линейна", "разклонена", "циклична", "случайна"], 2, ""], ["Колко е 17 % 5?", ["3", "2", "3,4", "12"], 1, "17 = 3·5 + 2, остатъкът е 2."], ["Какво означава „масовост“?", ["Алгоритъмът е много дълъг", "Решава цял клас подобни задачи, не само един пример", "Изпълнява се от много хора", "Тежи много"], 1, ""]];
+</script>
+<script src="../../interaktivni/ip-urok.js?v=20261127"></script>
+<script src="../../totop.js?v=20261126" defer></script>
+</body>
+</html>

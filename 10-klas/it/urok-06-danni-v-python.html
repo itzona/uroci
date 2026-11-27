@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 6: Първи стъпки с данни в Python – Информационни технологии, 10 клас</title>
+<link rel="icon" type="image/svg+xml" href="../../icons/10-klas.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../interaktivni/ip-urok.css?v=20261127b">
+<link rel="stylesheet" href="../../interaktivni/mk.css?v=20261128">
+<link rel="stylesheet" href="it.css?v=20261128">
+</head>
+<body class="s2">
+
+<header class="hero s2">
+  <div class="wrap">
+    <div>
+      <span class="tag">Урок 6 · Програмиране и изкуствен интелект · 10 клас</span>
+      <h1>Първи стъпки с данни в Python</h1>
+      <p>Типове данни, списъци и речници, сбор, средно, максимум и цикли по данните – основата на всеки анализ.</p>
+    </div>
+    <div class="hart" aria-hidden="true"><div class="big">📋</div><span class="w" style="left:8%;top:10%">int · float · str</span><span class="w" style="left:66%;top:4%">list</span><span class="w" style="left:2%;top:72%">sum()</span><span class="w" style="left:70%;top:80%">max()</span><span class="w" style="left:74%;top:40%">for</span></div>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Теория</summary><div class="menu"><a href="#tipove">Типове данни</a><a href="#spisatsi">Списъци</a><a href="#cikal">Цикъл по списък</a></div></details><a href="#zadacha">Задача</a><a href="#test">Тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="tipove">
+  <div class="wrap grid2">
+    <div>
+      <h2>Типове данни</h2>
+      <table class="stack"><thead><tr><th>Тип</th><th>Какво е</th><th>Пример</th></tr></thead><tbody>
+        <tr><td><code>int</code></td><td>цяло число</td><td><code>25</code>, <code>-3</code></td></tr>
+        <tr><td><code>float</code></td><td>дробно число (с точка!)</td><td><code>5.75</code></td></tr>
+        <tr><td><code>str</code></td><td>текст – в кавички</td><td><code>"Ива"</code></td></tr>
+        <tr><td><code>bool</code></td><td>истина / лъжа</td><td><code>True</code>, <code>False</code></td></tr>
+        <tr><td><code>list</code></td><td>списък от стойности</td><td><code>[5, 6, 4.5]</code></td></tr>
+        <tr><td><code>dict</code></td><td>речник: ключ → стойност</td><td><code>{"Ива": 5.5}</code></td></tr>
+      </tbody></table>
+      <p class="note">Функцията <code>type(x)</code> казва какъв е типът. С <code>int()</code>, <code>float()</code>, <code>str()</code> превръщаш от един тип в друг.</p>
+    </div>
+    <div><h3>🧪 Какъв е типът?</h3><div id="clsType" style="margin-top:10px"></div></div>
+  </div>
+</section>
+
+<section class="band alt" id="spisatsi">
+  <div class="wrap grid2">
+    <div>
+      <h2>Списъци – много данни в една променлива</h2>
+<pre class="pyc" data-title="Списък с оценки">
+ocenki = [5, 6, 4, 5.5, 3, 6]
+print(ocenki[0])      # първият елемент
+print(ocenki[-1])     # последният
+print(len(ocenki))    # брой елементи
+ocenki.append(5)      # добави в края
+print(sum(ocenki) / len(ocenki))
+</pre>
+      <ol class="lx">
+        <li data-l="1">Списъкът е в квадратни скоби, елементите – със запетая.</li>
+        <li data-l="2-3">Номерацията (<b>индексът</b>) започва от <b>0</b>. Индекс <code>-1</code> е последният елемент.</li>
+        <li data-l="4"><code>len()</code> – колко са елементите.</li>
+        <li data-l="5"><code>append()</code> добавя нов елемент.</li>
+        <li data-l="6">Средно аритметично = сбор / брой.</li>
+      </ol>
+      <table class="stack" style="margin-top:14px"><thead><tr><th>Функция</th><th>Дава</th></tr></thead><tbody>
+        <tr><td><code>sum(l)</code></td><td>сбор</td></tr><tr><td><code>max(l)</code>, <code>min(l)</code></td><td>най-голям, най-малък</td></tr><tr><td><code>sorted(l)</code></td><td>подреден нов списък</td></tr><tr><td><code>l.count(x)</code></td><td>колко пъти се среща x</td></tr><tr><td><code>round(x, 2)</code></td><td>закръгляне до 2 знака</td></tr>
+      </tbody></table>
+    </div>
+    <div>
+<div class="py" data-title="Пробвай – добави свои оценки" data-out="Брой: 6
+Най-висока: 6
+Най-ниска: 3
+Средно: 4.92
+Подредени: [3, 4, 5, 5.5, 6, 6]
+Шестици: 2">
+ocenki = [5, 6, 4, 5.5, 3, 6]
+print(&quot;Брой:&quot;, len(ocenki))
+print(&quot;Най-висока:&quot;, max(ocenki))
+print(&quot;Най-ниска:&quot;, min(ocenki))
+sredno = sum(ocenki) / len(ocenki)
+print(&quot;Средно:&quot;, round(sredno, 2))
+print(&quot;Подредени:&quot;, sorted(ocenki))
+print(&quot;Шестици:&quot;, ocenki.count(6))
+</div>
+      <div class="tip"><b>f-низове</b> – удобен начин да вмъкнеш стойности в текст: <code>print(f"Средно: {sredno:.2f}")</code>. Каквото е във <code>{}</code>, се изчислява; <code>:.2f</code> значи „2 знака след точката“.</div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="cikal">
+  <div class="wrap">
+    <h2>Цикъл по списък</h2>
+    <p>С <code>for елемент in списък:</code> обхождаш всички елементи. Така броиш, сумираш и търсиш.</p>
+    <div id="tr2" style="margin-top:14px"></div>
+    <div class="grid2" style="margin-top:18px">
+<div class="py" data-title="Броене с условие" data-out="Дни под нулата: 2
+Средна температура: 4.6 °C">
+temperaturi = [3, -1, 5, 8, 12, 7, -2]
+studeni = 0
+for t in temperaturi:
+    if t &lt; 0:
+        studeni = studeni + 1
+print(&quot;Дни под нулата:&quot;, studeni)
+print(f&quot;Средна температура: {sum(temperaturi) / len(temperaturi):.1f} °C&quot;)
+</div><div class="py" data-title="Речник: ден → брой стъпки" data-out="пон 6200 
+вт 8100 ✅
+ср 4300 
+чет 10250 ✅
+пет 7600 
+Най-активен ден: чет 10250">
+stapki = {&quot;пон&quot;: 6200, &quot;вт&quot;: 8100, &quot;ср&quot;: 4300, &quot;чет&quot;: 10250, &quot;пет&quot;: 7600}
+for den, broi in stapki.items():
+    print(den, broi, &quot;✅&quot; if broi &gt;= 8000 else &quot;&quot;)
+nai = max(stapki, key=stapki.get)
+print(&quot;Най-активен ден:&quot;, nai, stapki[nai])
+</div>
+    </div>
+  </div>
+</section>
+<section class="band" id="zadacha">
+  <div class="wrap">
+    <h2>Задача за часа</h2>
+    <div class="goal"><h3>Моите данни за седмицата</h3><p>Събери свои данни за 7 дни (стъпки, часове сън, минути учене, време пред екран…) и ги анализирай с Python.</p><div class="time"><span>⏱ 1 учебен час</span><span>👤 индивидуално</span><span>🎯 20 точки</span></div></div>
+    <div class="grid2" style="margin-top:26px">
+      <div><h3>Изисквания – точно в този ред</h3><ol class="req"><li>Запиши данните в <b>списък</b> (7 числа) и дните в друг списък или в <b>речник</b>.</li><li>Изведи <b>сбор</b>, <b>средно</b> (закръглено до 1 знак), <b>максимум</b> и <b>минимум</b>.</li><li>С цикъл и условие преброй дните над избрана цел (напр. над 8 часа сън).</li><li>Изведи кой е най-добрият ден.</li><li>Напиши 2–3 изречения извод: какво показват данните ти?</li></ol></div>
+      <div><div class="card"><h3>Какво предаваш</h3><ul><li>Кода (файл .py или връзка)</li><li>Изхода от програмата</li><li>Извода</li></ul><p class="note">Предаваш там, където каже учителят (напр. Google Classroom).</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="band alt" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">8 въпроса. Избери отговор на всеки и натисни „Провери“. Под всеки въпрос ще видиш обяснение.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check" type="button">Провери</button><button class="btn ghost" id="again" type="button">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<section class="band"><div class="wrap pager"><a href="urok-05-psevdokod-i-python.html"><small>← Урок 5</small>Представяне на алгоритми чрез псевдокод и език за програмиране</a><a class="nx" href="urok-07-nabori-ot-danni.html"><small>Урок 7 →</small>Набори от данни: откриване и зареждане</a></div></section>
+
+<footer>IT Зона · Информационни технологии · 10 клас. Изгледите на програмите и сайтовете са схематични – бутоните може леко да се различават.</footer>
+
+<script>const CUR=7;</script>
+<script src="it.js?v=20261128"></script>
+<script src="../../interaktivni/mk.js?v=20261128"></script>
+<script>
+{
+
+IT.classify("clsType",{cats:["int","float","str","bool","list"],items:[["42",0,"Цяло число."],["-7",0,"Цяло число."],["3.14",1,"С точка – float."],["5.0",1,"Дори .0 прави числото float."],['"Пловдив"',2,"В кавички – текст."],['"25"',2,"В кавички – това е текст, не число!"],["True",3,"Булева стойност."],["False",3,""],["[1, 2, 3]",4,"Квадратни скоби – списък."],['["Ива", "Иван"]',4,"Списък от текстове."]]});
+IT.trace("tr2",{title:"Сбор и максимум с цикъл",code:["ocenki = [4, 6, 5]","s = 0","nai = ocenki[0]","for o in ocenki:","    s = s + o","    if o > nai:","        nai = o","print(s, nai)"],steps:[
+ {l:1,v:{ocenki:"[4, 6, 5]"}},{l:2,v:{ocenki:"[4, 6, 5]",s:0}},{l:3,v:{ocenki:"[4, 6, 5]",s:0,nai:4},t:"започваме с първата"},
+ {l:4,v:{s:0,nai:4,o:4},t:"o = 4"},{l:5,v:{s:4,nai:4,o:4}},{l:6,v:{s:4,nai:4,o:4},t:"4 > 4? Не"},
+ {l:4,v:{s:4,nai:4,o:6},t:"o = 6"},{l:5,v:{s:10,nai:4,o:6}},{l:6,v:{s:10,nai:4,o:6},t:"6 > 4? Да"},{l:7,v:{s:10,nai:6,o:6}},
+ {l:4,v:{s:10,nai:6,o:5},t:"o = 5"},{l:5,v:{s:15,nai:6,o:5}},{l:6,v:{s:15,nai:6,o:5},t:"5 > 6? Не"},
+ {l:8,v:{s:15,nai:6},o:"15 6",t:"край на списъка"}]});
+
+IT.init();MK.init();
+}
+</script>
+<script>
+const QUIZ=[["Какъв е типът на „25“ (в кавички)?", ["int", "str", "float", "bool"], 1, "В кавички е текст."], ["Какъв е индексът на първия елемент в списък?", ["1", "0", "-1", "зависи"], 1, ""], ["Какво дава len([3, 5, 7, 9])?", ["9", "4", "24", "3"], 1, ""], ["Как добавяш 8 в края на списъка l?", ["l.add(8)", "l.append(8)", "l + 8", "add(l, 8)"], 1, ""], ["Какво е l[-1]?", ["Първият елемент", "Последният елемент", "Грешка", "Броят"], 1, ""], ["Как се пресмята средно аритметично на списък l?", ["max(l) / 2", "sum(l) / len(l)", "len(l) / sum(l)", "sorted(l)"], 1, ""], ["Какво е речник (dict)?", ["Списък с думи", "Двойки ключ → стойност", "Текстов файл", "Вид цикъл"], 1, "{\"Ива\": 5.5}"], ["Какво ще изведе print(round(4.567, 1))?", ["4.5", "4.6", "5", "4.57"], 1, ""]];
+</script>
+<script src="../../interaktivni/ip-urok.js?v=20261127"></script>
+<script src="../../totop.js?v=20261126" defer></script>
+</body>
+</html>
