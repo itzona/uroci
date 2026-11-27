@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Урок 6: Интерактивен тест с макроси в PowerPoint – Интерактивни презентации, 11 и 12 клас</title>
+<link rel="icon" type="image/svg+xml" href="../icons/interaktivni.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ip-urok.css?v=20261127b">
+<link rel="stylesheet" href="mk.css?v=20261127">
+</head>
+<body>
+
+<header class="hero ppt">
+  <div class="wrap">
+    <div>
+      <span class="tag">Урок 6 · Макроси в PowerPoint · 11 и 12 клас</span>
+      <h1>Интерактивен тест с макроси</h1>
+      <p>Бутони за отговорите, точки, име на играча и резултат на последния слайд – всичко с няколко кратки макроса. Ще научиш <b>променливи</b> и <b>условия</b> – основата на всяка програма.</p>
+    </div>
+    <svg viewBox="0 0 470 320" role="img" aria-label="Слайд с въпрос и четири бутона за отговор, брояч на точки">
+      <ellipse cx="235" cy="302" rx="210" ry="12" fill="#5a1c1e" opacity=".45"/>
+      <rect x="30" y="20" width="330" height="210" rx="14" fill="#5a1c1e"/>
+      <rect x="40" y="30" width="310" height="190" rx="8" fill="#fff"/>
+      <text x="195" y="70" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="18" fill="#1b2240">Кой порт ползва HTTPS?</text>
+      <rect x="60" y="92" width="128" height="44" rx="10" fill="#2347d6"/><text x="124" y="120" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="17" fill="#fff">80</text>
+      <rect x="202" y="92" width="128" height="44" rx="10" fill="#1f9d6a"/><text x="266" y="120" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="17" fill="#fff">443 ✓</text>
+      <rect x="60" y="148" width="128" height="44" rx="10" fill="#ff6a4d"/><text x="124" y="176" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="17" fill="#fff">21</text>
+      <rect x="202" y="148" width="128" height="44" rx="10" fill="#ffc23d"/><text x="266" y="176" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="17" fill="#1b2240">25</text>
+      <rect x="180" y="232" width="20" height="34" fill="#5a1c1e"/><rect x="140" y="262" width="100" height="10" rx="5" fill="#5a1c1e"/>
+      <g transform="translate(370 60)"><rect width="90" height="110" rx="14" fill="#fff"/><text x="45" y="26" text-anchor="middle" font-family="Consolas,monospace" font-size="13" fill="#566083">tochki</text><text class="bargrow" x="45" y="80" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="46" fill="#a4373a">4</text><text x="45" y="100" text-anchor="middle" font-family="Nunito,sans-serif" font-size="12" fill="#566083">от 5</text></g>
+      <g transform="translate(400 222)"><circle r="30" fill="#3ccf7e"/><path d="M-13 0l9 9 17-18" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+    </svg>
+  </div>
+</header>
+
+<nav aria-label="Съдържание">
+  <div class="wrap">
+    <details><summary>Теория</summary><div class="menu"><a href="#ideya">Как работи тестът</a><a href="#promenlivi">Променливи</a><a href="#uslovia">Условия If</a></div></details>
+    <details><summary>Пробвай</summary><div class="menu"><a href="#simulator">Тестът в действие</a><a href="#kod">Целият код с обяснения</a></div></details>
+    <details><summary>Стъпка по стъпка</summary><div class="menu"><a href="#stapki">Слайдове и имена</a><a href="#stapki-kod">Кодът</a><a href="#stapki-butoni">Бутони и павилион</a><a href="#greshki">Чести грешки</a></div></details>
+    <details><summary>Задача</summary><div class="menu"><a href="#zadacha">Задача за часа</a><a href="#kriterii">Критерии за оценяване</a></div></details>
+    <a href="#test">Тест</a>
+  </div>
+</nav>
+
+<main>
+<section class="band" id="ideya">
+  <div class="wrap">
+    <h2>Как работи тестът</h2>
+    <p>Тестът има <b>7 слайда</b> и <b>5 макроса</b>. Всеки бутон в слайдовете пуска един от тях. Макросите помнят името на играча и броя на верните отговори в две <b>променливи</b>.</p>
+    <div class="flowx" style="margin-top:20px">
+      <div class="card"><span class="sn">СЛАЙД 1 · СТАРТ</span><div class="sl" style="border:1px solid var(--line);margin:6px 0"><div class="t1" style="top:18%;font-size:15px">Тест: Компютърни мрежи</div><div class="ab" style="left:30%;top:60%;width:40%;height:22%;background:#a4373a;font-size:11px">▶ Започни</div></div><p style="margin:0">Бутон <b>Започни</b> → <code>Start</code>: нулира точките, пита за името, отива на слайд 2.</p></div>
+      <div class="card"><span class="sn">СЛАЙДОВЕ 2–6 · ВЪПРОСИ</span><div class="sl" style="border:1px solid var(--line);margin:6px 0"><div class="t1" style="top:8%;font-size:12px">Кой порт ползва HTTPS?</div><div class="ab" style="left:8%;top:40%;width:40%;height:20%;background:#2347d6;font-size:10px">80</div><div class="ab" style="left:52%;top:40%;width:40%;height:20%;background:#1f9d6a;font-size:10px">443</div><div class="ab" style="left:8%;top:68%;width:40%;height:20%;background:#ff6a4d;font-size:10px">21</div><div class="ab" style="left:52%;top:68%;width:40%;height:20%;background:#c99300;font-size:10px">25</div></div><p style="margin:0">Верният отговор → <code>Veren</code> (+1 точка). Грешните → <code>Greshen</code>. И двата отиват на следващия слайд.</p></div>
+      <div class="card"><span class="sn">СЛАЙД 7 · РЕЗУЛТАТ</span><div class="sl" style="border:1px solid var(--line);margin:6px 0"><div class="t1" style="top:8%;font-size:14px">Резултат</div><div class="t2" style="top:34%;font-size:11px;border:1px dashed #a19f9d;left:20%;right:20%">Мария: 4 от 5 точки</div><div class="ab" style="left:8%;top:66%;width:40%;height:20%;background:#a4373a;font-size:9px">Покажи резултата</div><div class="ab" style="left:52%;top:66%;width:40%;height:20%;background:#555;font-size:9px">↺ Отначало</div></div><p style="margin:0"><code>PokajiRezultat</code> пише резултата в текстовото поле и дава оценка. <code>Otnachalo</code> връща на слайд 1.</p></div>
+    </div>
+    <div class="tip"><b>Нови неща в този урок:</b> <b>променлива</b> (кутийка, която помни стойност), <b>условие</b> <code>If … Then … Else</code> (програмата избира какво да прави) и <b>промяна на текст в слайда</b> от макрос.</div>
+  </div>
+</section>
+
+<section class="band alt" id="promenlivi">
+  <div class="wrap grid2">
+    <div>
+      <h2>Променливи – кутийки с име</h2>
+      <p><b>Променливата</b> е място в паметта с <b>име</b>, в което програмата пази стойност. Представи си кутийка с етикет: на етикета пише <code>tochki</code>, а вътре е числото 3.</p>
+      <p>Променливата се създава (декларира) с <code>Dim</code>:</p>
+<pre class="vba" data-title="Деклариране">
+Dim tochki As Integer
+Dim ime As String
+</pre>
+      <ol class="lx">
+        <li data-l="1"><code>Dim</code> – „създай“; <code>tochki</code> – име; <code>As Integer</code> – вид: <b>цяло число</b>. Новата числова променлива започва от 0.</li>
+        <li data-l="2"><code>As String</code> – <b>текст</b>. Новата текстова променлива е празна: <code>""</code>.</li>
+      </ol>
+      <table class="stack" style="margin-top:18px">
+        <thead><tr><th>Вид</th><th>Какво пази</th><th>Пример</th></tr></thead>
+        <tbody>
+          <tr><td><code>Integer</code></td><td>цяло число (до 32 767)</td><td><code>tochki = 4</code></td></tr>
+          <tr><td><code>String</code></td><td>текст</td><td><code>ime = "Мария"</code></td></tr>
+          <tr><td><code>Boolean</code></td><td>да/не: <code>True</code> или <code>False</code></td><td><code>otgovoril = True</code></td></tr>
+          <tr><td><code>Shape</code></td><td>фигура от слайда</td><td><code>Set t = …Shapes("Rezultat")</code></td></tr>
+        </tbody>
+      </table>
+      <div class="tip"><b>Знакът „=“ тук не е „равно“, а „сложи в“.</b> <code>tochki = tochki + 1</code> се чете: „вземи старата стойност на tochki, добави 1 и <b>сложи</b> резултата обратно в tochki“.</div>
+    </div>
+    <div>
+      <div class="lab">
+        <h3>🧪 Пробвай: какво има в кутийките</h3>
+        <p class="muted">Натискай командите и гледай как се променят стойностите.</p>
+        <div style="text-align:center"><div class="box"><div class="bx" id="bxT">0</div><span>tochki</span></div><div class="box"><div class="bx" id="bxI" style="font-size:20px">""</div><span>ime</span></div></div>
+        <div class="row" style="justify-content:center;margin-top:8px">
+          <button type="button" class="btn ghost" data-v="t0"><code>tochki = 0</code></button>
+          <button type="button" class="btn ghost" data-v="t1"><code>tochki = tochki + 1</code></button>
+          <button type="button" class="btn ghost" data-v="i"><code>ime = "Мария"</code></button>
+          <button type="button" class="btn ghost" data-v="m"><code>MsgBox ime &amp; ": " &amp; tochki</code></button>
+        </div>
+        <div class="msgarea" id="bxMsg" style="min-height:120px"><span class="muted">Резултатът от MsgBox ще се покаже тук</span></div>
+      </div>
+      <div class="lab" style="margin-top:20px">
+        <h3>🧪 Къде пишем Dim? Горе или вътре?</h3>
+        <p>Ако <code>Dim tochki</code> е <b>вътре</b> в <code>Sub Veren()</code>, кутийката се създава <b>наново</b> при всяко щракване и изчезва в края на макроса. Точките не се натрупват! Ако е <b>горе в модула</b>, преди всички <code>Sub</code>, тя живее, докато презентацията е отворена, и всички макроси я виждат.</p>
+        <div class="row"><label class="chk"><input type="radio" name="dimw" value="top" checked> Горе в модула</label><label class="chk"><input type="radio" name="dimw" value="in"> Вътре в Sub Veren</label></div>
+        <div class="vba-box" style="margin-top:8px"><div class="lines" id="dimCode"></div></div>
+        <div class="row" style="margin-top:12px"><button type="button" class="btn coral" id="dimClick">✔ Щракни „верен отговор“</button><button type="button" class="btn ghost" id="dimReset">Нулирай</button></div>
+        <div class="watch"><div>Щраквания: <b id="dimN">0</b></div><div>tochki накрая: <b id="dimV">0</b></div></div>
+        <p class="note" id="dimNote" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="uslovia">
+  <div class="wrap grid2">
+    <div>
+      <h2>Условия: If … Then … Else</h2>
+      <p>С <b>условие</b> програмата сама избира какво да направи. Чете се като в живота: <i>„<b>Ако</b> имаш 5 точки, <b>тогава</b> пиши „Отлично“; <b>иначе ако</b> имаш поне 3, пиши „Много добре“; <b>иначе</b> – „Опитай пак“.“</i></p>
+<pre class="vba" data-title="Оценка според точките">
+If tochki = 5 Then
+    MsgBox "Отлично! Всичко е вярно!", vbInformation
+ElseIf tochki >= 3 Then
+    MsgBox "Много добре!", vbInformation
+Else
+    MsgBox "Прегледай урока и опитай пак.", vbExclamation
+End If
+</pre>
+      <ol class="lx">
+        <li data-l="1-2"><code>If условие Then</code> – ако условието е вярно, се изпълнява блокът под него и всичко останало до <code>End If</code> се прескача.</li>
+        <li data-l="3-4"><code>ElseIf</code> – проверява се, <b>само ако</b> горните условия не са верни. Може да има няколко.</li>
+        <li data-l="5-6"><code>Else</code> – „във всички останали случаи“. Не е задължителен.</li>
+        <li data-l="7"><code>End If</code> – край на условието. Задължителен, когато блокът е на няколко реда.</li>
+      </ol>
+      <table class="stack" style="margin-top:16px">
+        <thead><tr><th>Знак</th><th>Значение</th><th>Пример</th></tr></thead>
+        <tbody>
+          <tr><td><code>=</code></td><td>равно (в условие)</td><td><code>tochki = 5</code></td></tr>
+          <tr><td><code>&lt;&gt;</code></td><td>различно</td><td><code>ime &lt;&gt; ""</code></td></tr>
+          <tr><td><code>&gt;</code> <code>&lt;</code></td><td>по-голямо / по-малко</td><td><code>tochki &gt; 2</code></td></tr>
+          <tr><td><code>&gt;=</code> <code>&lt;=</code></td><td>по-голямо или равно / по-малко или равно</td><td><code>tochki &gt;= 3</code></td></tr>
+        </tbody>
+      </table>
+      <p class="note">Кратко условие на един ред няма нужда от <code>End If</code>: <code>If ime = "" Then ime = "Гост"</code></p>
+    </div>
+    <div>
+      <div class="lab">
+        <h3>🧪 Пробвай: кой клон се изпълнява?</h3>
+        <label for="ifR">tochki = <b id="ifV">4</b></label>
+        <input type="range" id="ifR" min="0" max="5" value="4" style="width:100%;accent-color:#a4373a">
+        <div class="vba-box" style="margin-top:10px"><div class="lines" id="ifCode"></div></div>
+        <div class="msgarea" id="ifMsg" style="min-height:130px"></div>
+        <p class="note">Зелено – проверено и вярно; сиво – проверено, но невярно; бледо – прескочено.</p>
+      </div>
+      <div class="card" style="margin-top:20px">
+        <h3>MsgBox с въпрос + If</h3>
+        <p>В урок 5 видя, че <code>MsgBox</code> с <code>vbYesNo</code> връща <code>vbYes</code> или <code>vbNo</code>. С <code>If</code> вече може да го използваш:</p>
+<pre class="vba" data-title="Потвърждение преди изход">
+Sub Kraj()
+    If MsgBox("Сигурен ли си?", vbYesNo + vbQuestion) = vbYes Then
+        ActivePresentation.SlideShowWindow.View.Exit
+    End If
+End Sub
+</pre>
+        <p class="note">Когато взимаш отговора от MsgBox, скобите са задължителни.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="simulator">
+  <div class="wrap">
+    <h2>🧪 Тестът в действие</h2>
+    <p class="muted">Това е слайдшоуто на готовия тест. Отговаряй на въпросите и гледай отдясно: <b>кой ред</b> от кода се изпълнява в момента (жълто) и <b>какво има в променливите</b>.</p>
+    <div class="sim" style="margin-top:16px">
+      <div>
+        <div class="screen" id="qShow"></div>
+        <div class="watch"><div>ime = <b id="wIme">""</b></div><div>tochki = <b id="wT">0</b></div><div>слайд: <b id="wS">1</b> от 7</div><div>макрос: <b id="wM">–</b></div></div>
+        <div class="row"><label class="chk"><input type="checkbox" id="qSlow" checked> Бавно изпълнение (за да виждаш редовете)</label></div>
+      </div>
+      <div>
+        <div class="vba-box"><div class="hd"><span>📄 Module1 (Code)</span></div><div class="lines" id="qCode" style="max-height:560px;overflow:auto"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="kod">
+  <div class="wrap grid2">
+    <div>
+      <h2>Целият код с обяснения</h2>
+      <p class="muted">Това е кодът от симулацията. Щракни върху обяснение, за да видиш редовете.</p>
+<pre class="vba" data-title="Test – Module1 (Code)" data-notes="kodLx">
+Dim tochki As Integer
+Dim ime As String
+
+Sub Start()
+    tochki = 0
+    ime = InputBox("Как се казваш?", "Тест")
+    If ime = "" Then ime = "Гост"
+    ActivePresentation.SlideShowWindow.View.Next
+End Sub
+
+Sub Veren()
+    tochki = tochki + 1
+    MsgBox "Браво! Верен отговор.", vbInformation, "Резултат"
+    ActivePresentation.SlideShowWindow.View.Next
+End Sub
+
+Sub Greshen()
+    MsgBox "Грешен отговор.", vbExclamation, "Резултат"
+    ActivePresentation.SlideShowWindow.View.Next
+End Sub
+
+Sub PokajiRezultat()
+    Dim t As Shape
+    Set t = ActivePresentation.SlideShowWindow.View.Slide.Shapes("Rezultat")
+    t.TextFrame.TextRange.Text = ime & ": " & tochki & " от 5 точки"
+    If tochki = 5 Then
+        MsgBox "Отлично! Всичко е вярно!", vbInformation
+    ElseIf tochki >= 3 Then
+        MsgBox "Много добре!", vbInformation
+    Else
+        MsgBox "Прегледай урока и опитай пак.", vbExclamation
+    End If
+End Sub
+
+Sub Otnachalo()
+    ActivePresentation.SlideShowWindow.View.GotoSlide 1
+End Sub
+</pre>
+    </div>
+    <div>
+      <ol class="lx" id="kodLx" style="position:sticky;top:90px;margin-top:0"></ol>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="stapki">
+  <div class="wrap">
+    <h2>Стъпка по стъпка: направи теста</h2>
+    <p class="muted">Три пътеводителя: слайдовете, кодът, бутоните. Нова презентация, записана като <b>.pptm</b> (виж урок 5).</p>
+    <div class="walk" data-walk="slides" data-title="А. Слайдовете и името на текстовото поле"></div>
+  </div>
+</section>
+<section class="band" id="stapki-kod">
+  <div class="wrap">
+    <div class="walk" data-walk="code" data-title="Б. Кодът в модула"></div>
+  </div>
+</section>
+<section class="band alt" id="stapki-butoni">
+  <div class="wrap">
+    <div class="walk" data-walk="links" data-title="В. Свържи бутоните и включи режим „павилион“"></div>
+    <div class="grid2" style="margin-top:22px">
+      <div class="tip" style="margin:0"><b>Бърз начин за въпросите.</b> Направи слайд 2 докрай – с действията на четирите бутона. После <b>Ctrl+D</b> (дублиране на слайд) 4 пъти. Действията се копират с бутоните. Смени само текстовете и <b>размести бутоните</b> – действието остава закачено за бутона, така че верният отговор е на различно място.</div>
+      <div class="tip" style="margin:0"><b>Защо павилион?</b> В обикновено слайдшоу щракване по фона или <kbd>→</kbd> минава на следващия слайд – играчът може да прескочи въпрос без отговор. В режим <b>„Разглеждане в павилион“</b> слайдовете се сменят <b>само</b> от бутоните (и макросите). Изход: <kbd>Esc</kbd>.</div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="greshki">
+  <div class="wrap">
+    <h2>Чести грешки</h2>
+    <div class="scroll" style="margin-top:16px">
+    <table class="stack">
+      <thead><tr><th>Какво виждаш</th><th>Причина</th><th>Как се поправя</th></tr></thead>
+      <tbody>
+        <tr><td>„Item Rezultat not found in the Shapes collection“</td><td>Текстовото поле не се казва точно <code>Rezultat</code> или си на друг слайд</td><td>Провери името в <b>Екран за селекция</b> (<kbd>Alt</kbd>+<kbd>F10</kbd>) – буква по буква, без интервали.</td></tr>
+        <tr><td>Точките се натрупват от предишния играч</td><td>Тестът е започнат от слайд 2 или <code>Start</code> не нулира</td><td>Започвай винаги от слайд 1 с бутона; провери <code>tochki = 0</code> в <code>Start</code>.</td></tr>
+        <tr><td>Точките са винаги 0 или 1</td><td><code>Dim tochki</code> е <b>вътре</b> в Sub</td><td>Премести <code>Dim</code> най-горе в модула, преди всички Sub.</td></tr>
+        <tr><td>Играчът прескача въпроси</td><td>Обикновено слайдшоу – щракване по фона сменя слайда</td><td>Слайдшоу → Настройка на слайдшоуто → <b>Разглеждане в павилион</b>.</td></tr>
+        <tr><td>Името е празно</td><td>Играчът е натиснал „Отказ“ в InputBox</td><td>Редът <code>If ime = "" Then ime = "Гост"</code>.</td></tr>
+        <tr><td>След промяна в кода точките са 0</td><td>При редакция на кода VBA нулира променливите</td><td>Пусни теста отначало.</td></tr>
+        <tr><td>Верен отговор дава грешно съобщение</td><td>На бутона е зададен грешен макрос</td><td>Маркирай бутона → <b>Вмъкване → Действие</b> и провери.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h3 style="margin-top:30px">🧪 Намери грешката</h3>
+    <div class="grid" style="margin-top:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr))">
+      <div class="bug" data-bad="2" data-ok="Dim е вътре в Sub – при всяко щракване tochki започва от 0 и става 1. Dim трябва да е горе в модула.">
+<pre class="vba" data-title="Грешка 1 – точките са винаги 1">
+Sub Veren()
+    Dim tochki As Integer
+    tochki = tochki + 1
+    ActivePresentation.SlideShowWindow.View.Next
+End Sub
+</pre>
+        <div class="res" aria-live="polite"></div>
+      </div>
+      <div class="bug" data-bad="4" data-ok="Липсва End If. Многоредовото If трябва да завършва с End If, иначе: „Compile error: Block If without End If“.">
+<pre class="vba" data-title="Грешка 2 – не се компилира">
+Sub Ocenka()
+    If tochki >= 3 Then
+        MsgBox "Много добре!"
+End Sub
+</pre>
+        <div class="res" aria-live="polite"></div>
+      </div>
+      <div class="bug" data-bad="2" data-ok="Името на фигурата е с интервал („Rez ultat“), а в слайда е Rezultat. Имената трябва да съвпадат точно.">
+<pre class="vba" data-title="Грешка 3 – „not found“">
+Sub PokajiRezultat()
+    ActivePresentation.SlideShowWindow.View.Slide.Shapes("Rez ultat").TextFrame.TextRange.Text = tochki
+End Sub
+</pre>
+        <div class="res" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="zadacha">
+  <div class="wrap">
+    <h2>Задача за часа</h2>
+    <div class="goal"><h3>Тест-игра по ИТ тема</h3><p>Направи в PowerPoint <b>тест от 5 въпроса</b> с макроси: пита за името на играча, брои точките, показва резултата в слайда и дава оценка. Тествай го със съученик.</p>
+      <div class="time"><span>⏱ 1–2 учебни часа</span><span>👤 индивидуално или по двойки</span><span>🎯 20 точки</span></div></div>
+    <div class="grid2" style="margin-top:26px">
+      <div>
+        <h3>Изисквания – точно в този ред</h3>
+        <ol class="req">
+          <li><b>Файл</b> <b>Test-Tema-Ime-Familia.pptm</b>, 7 слайда: старт, 5 въпроса, резултат.</li>
+          <li><b>5 въпроса</b> по една от темите вдясно, всеки с <b>4 отговора</b>. Верният е на различно място в различните въпроси.</li>
+          <li><b>Променливи</b> <code>tochki</code> (Integer) и <code>ime</code> (String), декларирани <b>горе в модула</b>.</li>
+          <li><b>Макроси</b>: <code>Start</code>, <code>Veren</code>, <code>Greshen</code>, <code>PokajiRezultat</code>, <code>Otnachalo</code> – с коментар над всеки.</li>
+          <li><b>Start</b> нулира точките, пита за името (с „Гост“, ако е празно) и отива на слайд 2.</li>
+          <li><b>Текстово поле</b> на слайд 7 с име <b>Rezultat</b>; <code>PokajiRezultat</code> пише в него <b>името и точките</b>.</li>
+          <li><b>Оценка с If / ElseIf / Else</b> – поне 3 различни съобщения според точките.</li>
+          <li><b>Режим павилион</b> – слайдовете се сменят само от бутоните.</li>
+          <li><b>Проба</b> – съученик минава теста два пъти: веднъж с всички верни, веднъж с грешки.</li>
+        </ol>
+      </div>
+      <div>
+        <div class="card"><h3>Какво предаваш</h3><ul><li>Файла <b>.pptm</b></li><li>Екранна снимка на слайд 7 с резултата на съученика</li><li>Екранна снимка на кода</li><li>2–3 изречения: какво направи <code>If</code> в твоя тест и коя грешка поправи</li></ul></div>
+        <div class="card" style="margin-top:20px"><h3>Избери тема</h3>
+          <table class="stack">
+            <thead><tr><th>Тема</th><th>Примерен въпрос</th></tr></thead>
+            <tbody>
+              <tr><td>Компютърни мрежи</td><td>„Кой порт ползва HTTPS?“</td></tr>
+              <tr><td>Хардуер</td><td>„Кой компонент изпълнява командите на програмите?“</td></tr>
+              <tr><td>Киберсигурност</td><td>„Как се нарича писмо, което иска паролата ти?“</td></tr>
+              <tr><td>HTML и CSS</td><td>„Кой таг прави хипервръзка?“</td></tr>
+              <tr><td>Единици за информация</td><td>„Колко бита има един байт?“</td></tr>
+              <tr><td>Авторско право</td><td>„Какво означава лицензът CC BY?“</td></tr>
+              <tr><td>Своя тема</td><td>Съгласувай с учителя</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card" style="margin-top:20px"><h3>⭐ Бонус за желаещите</h3>
+          <ul>
+            <li>Процент: <code>MsgBox "Успеваемост: " &amp; tochki * 100 / 5 &amp; "%"</code></li>
+            <li>Потвърждение с <code>vbYesNo</code> преди „Отначало“.</li>
+            <li>Брой грешки в отделна променлива <code>greshki</code> и показване и на нея.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="kriterii">
+  <div class="wrap grid2">
+    <div>
+      <h2>Критерии за оценяване</h2>
+      <table class="crit">
+        <thead><tr><th>Критерий</th><th>Точки</th></tr></thead>
+        <tbody>
+          <tr><td><b>Слайдове</b> – 7 слайда, 5 въпроса по 4 отговора, верният на различни места</td><td>3</td></tr>
+          <tr><td><b>Променливи</b> – правилно декларирани горе в модула</td><td>2</td></tr>
+          <tr><td><b>Start</b> – нулиране, InputBox, „Гост“, слайд 2</td><td>3</td></tr>
+          <tr><td><b>Veren / Greshen</b> – точки, съобщение, следващ слайд</td><td>3</td></tr>
+          <tr><td><b>PokajiRezultat</b> – текст в поле Rezultat с името и точките</td><td>3</td></tr>
+          <tr><td><b>If / ElseIf / Else</b> – поне 3 съобщения</td><td>2</td></tr>
+          <tr><td><b>Павилион и Otnachalo</b></td><td>2</td></tr>
+          <tr><td><b>Проба, снимки и извод</b></td><td>2</td></tr>
+          <tr><td><b>Общо</b></td><td><b>20</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3 style="margin-top:8px">Оценка</h3>
+      <table class="crit">
+        <thead><tr><th>Точки</th><th>Оценка</th></tr></thead>
+        <tbody><tr><td>18–20</td><td>Отличен 6</td></tr><tr><td>15–17</td><td>Много добър 5</td></tr><tr><td>12–14</td><td>Добър 4</td></tr><tr><td>9–11</td><td>Среден 3</td></tr><tr><td>0–8</td><td>Слаб 2</td></tr></tbody>
+      </table>
+      <div class="card" style="margin-top:20px"><h3>Провери се, преди да предадеш</h3>
+        <label class="chk"><input type="checkbox"> Dim tochki и Dim ime са най-горе</label>
+        <label class="chk"><input type="checkbox"> Текстовото поле се казва точно Rezultat</label>
+        <label class="chk"><input type="checkbox"> Верните отговори са на различни места</label>
+        <label class="chk"><input type="checkbox"> Всички 20 бутона за отговор имат действие</label>
+        <label class="chk"><input type="checkbox"> Режим павилион е включен</label>
+        <label class="chk"><input type="checkbox"> Тестът е минат два пъти от съученик</label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="test">
+  <div class="wrap" style="max-width:820px">
+    <h2>Тест: провери знанията си</h2>
+    <p class="muted">10 въпроса. Избери отговор на всеки и натисни „Провери“.</p>
+    <form id="quiz" style="margin-top:18px"></form>
+    <div class="row"><button class="btn" id="check" type="button">Провери</button><button class="btn ghost" id="again" type="button">Започни отначало</button><span id="score" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<section class="band"><div class="wrap pager"><a href="urok-5-makrosi-parvi-stapki.html"><small>← Урок 5</small>Макроси: първи стъпки</a><a class="nx" href="urok-7-makrosi-avtomatizacia.html"><small>Урок 7 →</small>Макроси за автоматизация</a></div></section>
+
+<footer>IT Зона · Интерактивни презентации · 11 и 12 клас. Изгледите на програмите са схематични – бутоните може леко да се различават според версията на PowerPoint.</footer>
+
+<script>const CUR=5;</script>
+<script src="ip.js?v=20261127b"></script>
+<script src="mk.js?v=20261127"></script>
+<script>
+{
+const M=MK,g=id=>document.getElementById(id),F="Test-Mreji-Ime-Familia.pptm";
+const lines=(src,cls={})=>src.map((l,i)=>`<div class="ln${cls[i+1]?' '+cls[i+1]:''}"><b>${i+1}</b><span>${M.hl(l)||' '}</span></div>`).join('');
+
+/* ---- кутийки ---- */
+let T=0,I='';
+const pop=el=>{el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');setTimeout(()=>el.classList.remove('pop'),300)};
+document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{const v=b.dataset.v;
+  if(v=='t0'){T=0;g('bxT').textContent=T;pop(g('bxT'))}
+  if(v=='t1'){T++;g('bxT').textContent=T;pop(g('bxT'))}
+  if(v=='i'){I='Мария';g('bxI').textContent='"Мария"';pop(g('bxI'))}
+  if(v=='m')g('bxMsg').innerHTML=M.msg({text:I+': '+T})});
+
+/* ---- Dim горе / вътре ---- */
+const dimTop=['Dim tochki As Integer','','Sub Veren()','    tochki = tochki + 1','End Sub'],dimIn=['','','Sub Veren()','    Dim tochki As Integer','    tochki = tochki + 1','End Sub'];
+let dn=0,dv=0;
+const dimDraw=()=>{const top=document.querySelector('[name=dimw]:checked').value=='top';g('dimCode').innerHTML=lines(top?dimTop:dimIn,top?{1:'on'}:{4:'on'});g('dimN').textContent=dn;g('dimV').textContent=dv};
+document.querySelectorAll('[name=dimw]').forEach(r=>r.onchange=()=>{dn=dv=0;g('dimNote').textContent='';dimDraw()});
+g('dimClick').onclick=()=>{const top=document.querySelector('[name=dimw]:checked').value=='top';dn++;dv=top?dv+1:1;dimDraw();
+  g('dimNote').textContent=top?'Кутийката е една и съща – точките се натрупват. ✔':'Всеки път се създава нова кутийка от 0 → след +1 винаги е 1. ✘';
+  const el=g('dimV').parentElement;el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash')};
+g('dimReset').onclick=()=>{dn=dv=0;g('dimNote').textContent='';dimDraw()};dimDraw();
+
+/* ---- If ---- */
+const ifSrc=['If tochki = 5 Then','    MsgBox "Отлично! Всичко е вярно!", vbInformation','ElseIf tochki >= 3 Then','    MsgBox "Много добре!", vbInformation','Else','    MsgBox "Прегледай урока и опитай пак.", vbExclamation','End If'];
+const ifDraw=()=>{const t=+g('ifR').value;g('ifV').textContent=t;let c={},m;
+  if(t==5){c={1:'good',2:'on',3:'dim',4:'dim',5:'dim',6:'dim'};m={icon:'inf',text:'Отлично! Всичко е вярно!'}}
+  else if(t>=3){c={1:'no',3:'good',4:'on',5:'dim',6:'dim'};m={icon:'inf',text:'Много добре!'}}
+  else{c={1:'no',3:'no',5:'good',6:'on'};m={icon:'exc',text:'Прегледай урока и опитай пак.'}}
+  g('ifCode').innerHTML=lines(ifSrc,c);g('ifMsg').innerHTML=M.msg(m)};
+g('ifR').oninput=ifDraw;ifDraw();
+
+/* ---- симулатор на теста ---- */
+const SRC=document.querySelector('pre.vba[data-title^="Test"]').textContent.replace(/^\n+/,'').replace(/\s+$/,'').split('\n');
+const Q=[["Кой порт ползва HTTPS?",["80","443","21","25"],1],["Колко бита има един байт?",["8","4","16","10"],0],["Какво е IP адресът?",["Име на сайт","Парола за Wi-Fi","Адрес на устройство в мрежата","Вид кабел"],2],["Кое устройство свързва домашната мрежа с интернет?",["Монитор","Рутер","Принтер","Скенер"],1],["Какво значи „s“ в https?",["speed","simple","site","secure"],3]];
+const COL=["#2347d6","#1f9d6a","#ff6a4d","#c99300"];
+let st={slide:1,ime:'',t:0,busy:false,rez:''};
+const sh=g('qShow');
+function slideHTML(){const s=st.slide;
+  if(s==1)return `<div class="t1" style="top:16%">Тест: Компютърни мрежи</div><div class="t2" style="top:38%">5 въпроса · по 1 точка</div><button class="qbtn" data-m="Start" style="left:34%;top:60%;width:32%;height:20%;background:#a4373a">▶ Започни</button>`;
+  if(s<=6){const q=Q[s-2];return `<div class="t2" style="top:5%;color:#999;font-size:12px">Въпрос ${s-1} от 5</div><div class="t1" style="top:12%;font-size:clamp(14px,2.2vw,24px)">${q[0]}</div>`+q[1].map((a,i)=>`<button class="qbtn" data-m="${i==q[2]?'Veren':'Greshen'}" style="left:${i%2?52:8}%;top:${i<2?42:68}%;width:40%;height:20%;background:${COL[i]}">${a}</button>`).join('')}
+  return `<div class="t1" style="top:6%">Резултат</div><div class="t2" style="top:30%;left:18%;right:18%;border:1px dashed #a19f9d;padding:6px;color:#1b2240;font-size:clamp(12px,1.8vw,18px);font-weight:700">${st.rez||'Тук ще се появи резултатът'}</div><button class="qbtn" data-m="PokajiRezultat" style="left:8%;top:66%;width:40%;height:20%;background:#a4373a">Покажи резултата</button><button class="qbtn" data-m="Otnachalo" style="left:52%;top:66%;width:40%;height:20%;background:#555">↺ Отначало</button>`}
+function draw(cur){sh.innerHTML=`<div class="sl">${slideHTML()}</div>`;g('wS').textContent=st.slide;g('wIme').textContent='"'+st.ime+'"';g('wT').textContent=st.t;
+  g('qCode').innerHTML=lines(SRC,cur?{[cur]:'on'}:{});
+  if(cur){const l=g('qCode').children[cur-1];const box=g('qCode');box.scrollTop=Math.max(0,l.offsetTop-box.offsetTop-box.clientHeight/2)}
+  sh.querySelectorAll('.qbtn').forEach(b=>b.onclick=()=>run(b.dataset.m))}
+const wait=ms=>new Promise(r=>setTimeout(r,g('qSlow').checked?ms:60));
+const flash=id=>{const el=g(id).parentElement;el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash')};
+async function L(n,ms=650){draw(n);await wait(ms)}
+function overlay(html,input){return new Promise(res=>{const o=document.createElement('div');o.className='ovl';o.innerHTML=html;sh.append(o);
+  const inp=o.querySelector('input');if(inp)inp.focus();else o.querySelector('.bt').focus();
+  o.querySelectorAll('.bt').forEach(b=>{b.tabIndex=0;b.style.cursor='pointer';const f=()=>{const v=inp?inp.value:'';o.remove();res(b.textContent=='OK'?v:'')};b.onclick=f;b.onkeydown=e=>{if(e.key=='Enter'||e.key==' '){e.preventDefault();f()}}});
+  if(inp)inp.onkeydown=e=>{if(e.key=='Enter'){const v=inp.value;o.remove();res(v)}}})}
+const msgW=o=>overlay(M.msg(o));
+async function run(m){if(st.busy)return;st.busy=true;g('wM').textContent=m;
+  try{
+  if(m=='Start'){await L(4,400);st.t=0;await L(5);flash('wT');
+    await L(6,200);const v=await overlay(M.msg({title:"Тест",text:"Как се казваш?",input:"",buttons:["OK","Отказ"]}).replace('<div class="fld">','<div class="fld" style="padding:0"><input type="text" aria-label="Име" style="border:0;width:100%;font:13px Segoe UI,sans-serif;padding:4px 8px;min-height:24px">').replace(/<span class="typing"> <\/span>/,''),true);
+    st.ime=v;await L(6,300);flash('wIme');await L(7);if(st.ime==''){st.ime='Гост';draw(7);flash('wIme');await wait(500)}
+    await L(8);st.slide++;await L(9,300)}
+  if(m=='Veren'){await L(11,400);st.t++;await L(12);flash('wT');await L(13,200);await msgW({icon:"inf",title:"Резултат",text:"Браво! Верен отговор."});await L(14);st.slide++;await L(15,300)}
+  if(m=='Greshen'){await L(17,400);await L(18,200);await msgW({icon:"exc",title:"Резултат",text:"Грешен отговор."});await L(19);st.slide++;await L(20,300)}
+  if(m=='PokajiRezultat'){await L(22,400);await L(23,400);await L(24);st.rez=`${st.ime}: ${st.t} от 5 точки`;await L(25);
+    await L(26);if(st.t==5){await L(27,200);await msgW({icon:"inf",text:"Отлично! Всичко е вярно!"})}
+    else{await L(28);if(st.t>=3){await L(29,200);await msgW({icon:"inf",text:"Много добре!"})}else{await L(30);await L(31,200);await msgW({icon:"exc",text:"Прегледай урока и опитай пак."})}}
+    await L(32,300);await L(33,300)}
+  if(m=='Otnachalo'){await L(35,400);await L(36);st.slide=1;st.rez='';await L(37,300)}
+  }finally{st.busy=false;g('wM').textContent='–';draw()}}
+draw();
+
+/* обяснения към целия код (генерират се, за да не се повтаря кодът) */
+g('kodLx').innerHTML=[
+ ["1-2","<b>Променливите</b> са горе, извън всички Sub. Затова всички макроси ги виждат и стойностите се пазят между щракванията."],
+ ["4-9","<b>Start</b>: нулира точките (иначе ще останат от предишния играч), пита за името, слага „Гост“ при празно име и отива на следващия слайд."],
+ ["11-15","<b>Veren</b>: +1 точка, съобщение с икона „i“, следващ слайд."],
+ ["17-20","<b>Greshen</b>: само съобщение и следващ слайд – точките не се променят."],
+ ["22-24","<code>Dim t As Shape</code> – променлива за <b>фигура</b>. За обекти се пише <code>Set</code>. <code>View.Slide</code> е слайдът, който се показва в момента, а <code>Shapes(\"Rezultat\")</code> – фигурата с това име."],
+ ["25","Сменя текста в полето. <code>&amp;</code> залепя: <i>Мария</i> + <i>: </i> + <i>4</i> + <i> от 5 точки</i>."],
+ ["26-32","<b>Оценка</b> с If / ElseIf / Else – изпълнява се само един от трите MsgBox."],
+ ["35-37","<b>Otnachalo</b> – връща на слайд 1, където играчът пак натиска „Започни“."]
+].map(([l,t])=>`<li data-l="${l}">${t}</li>`).join('');
+
+/* ---- пътеводители ---- */
+const sStart=`<div class="t1" style="top:18%">Тест: Компютърни мрежи</div><div class="t2" style="top:40%">5 въпроса · по 1 точка</div>`;
+const startBtn=(c='')=>`<div class="ab ${c}" style="left:34%;top:62%;width:32%;height:20%;background:#a4373a">▶ Започни</div>`;
+const qS=(c=['','','',''])=>`<div class="t1" style="top:10%;font-size:22px">Кой порт ползва HTTPS?</div>`+["80","443","21","25"].map((a,i)=>`<div class="ab ${c[i]}" style="left:${i%2?52:8}%;top:${i<2?40:66}%;width:40%;height:20%;background:${COL[i]}">${a}</div>`).join('');
+const rS=(c='',txt='Тук ще се появи резултатът')=>`<div class="t1" style="top:6%">Резултат</div><div class="t2 ${c}" style="top:30%;left:18%;right:18%;border:1px dashed #a19f9d;padding:6px;color:#1b2240;font-weight:600;position:absolute">${txt}</div><div class="ab" style="left:8%;top:66%;width:40%;height:20%;background:#a4373a">Покажи резултата</div><div class="ab" style="left:52%;top:66%;width:40%;height:20%;background:#555">↺ Отначало</div>`;
+const th=[sStart+startBtn(),qS(),qS(),qS(),qS(),qS(),rS()];
+const arrDrop=`<div style="min-width:200px"><div style="padding:4px 8px">⬆ Изнеси отпред</div><div style="padding:4px 8px">⬇ Изпрати отзад</div><div style="padding:4px 8px;border-bottom:1px solid #edebe9">↔ Подравняване ▸</div><div style="padding:4px 8px" class="hot nohand">🗂 Екран за селекция…</div></div>`;
+const pane=(sel,ren)=>[[(sel?'*':'')+(ren?'Rezultat':'TextBox 3'),'pn'],["Rounded Rectangle 5"],["Rounded Rectangle 4"],["Заглавие 1"]];
+M.walk("slides",[
+ {t:"Слайд 1 – старт",m:M.pp({file:F,dev:true,tab:"Начало",thumbs:th,cur:0,slide:sStart+startBtn()}),c:"Направи 7 слайда. На слайд 1: заглавие на теста и голяма фигура <b>„▶ Започни“</b> (Вмъкване → Фигури, както в урок 5)."},
+ {t:"Слайдове 2–6 – въпросите",m:M.pp({file:F,dev:true,tab:"Начало",thumbs:th,cur:1,slide:qS()}),c:"Въпросът е заглавието. Четирите отговора са <b>четири отделни фигури</b> с текст – всяка ще пусне свой макрос."},
+ {t:"Слайд 7 – резултат",m:M.pp({file:F,dev:true,tab:"Вмъкване",thumbs:th,cur:6,slide:rS('shape-sel'),hot:"btn:tbox"}),c:"Заглавие „Резултат“, <b>текстово поле</b> (Вмъкване → Текстово поле) с временен текст и два бутона: <b>„Покажи резултата“</b> и <b>„↺ Отначало“</b>."},
+ {t:"Отвори „Подреди“",m:M.pp({file:F,dev:true,tab:"Начало",thumbs:th,cur:6,slide:rS('shape-sel'),hot:"btn:arr"}),c:"Макросът трябва да намери текстовото поле <b>по име</b>. Маркирай го и отвори <b>Начало → Подреди</b> (Arrange)."},
+ {t:"„Екран за селекция“",m:M.pp({file:F,dev:true,tab:"Начало",thumbs:th,cur:6,slide:rS('shape-sel'),drop:{x:452,y:118,html:arrDrop}}),c:"Избери <b>Екран за селекция</b> (Selection Pane). По-бързо: <kbd>Alt</kbd>+<kbd>F10</kbd>."},
+ {t:"Имената на фигурите",m:M.pp({file:F,dev:true,tab:"Начало",thumbs:th,cur:6,slide:rS('shape-sel'),pane:pane(1,0),hot:"pn"}),c:"Вдясно са всички фигури на слайда. PowerPoint им дава имена като <b>TextBox 3</b>. Маркираното поле е осветено. <b>Двоен клик</b> върху името."},
+ {t:"Преименувай на Rezultat",m:M.pp({file:F,dev:true,tab:"Начало",thumbs:th,cur:6,slide:rS('shape-sel'),pane:pane(1,1)}),c:"Напиши <b>Rezultat</b> и натисни <kbd>Enter</kbd>. Името трябва да е <b>точно</b> като в кода – латиница, без интервали. Главните и малките букви също е добре да съвпадат."}
+]);
+const codeTop=SRC.slice(0,15).join('\n');
+M.walk("code",[
+ {t:"Нов модул",m:M.vbe({file:F,menu:"Insert",hot:"mi:Module"}),c:"<kbd>Alt</kbd>+<kbd>F11</kbd> → <b>Insert → Module</b>, както в урок 5."},
+ {t:"Променливите – най-горе",m:M.vbe({file:F,module:true,code:"Dim tochki As Integer\nDim ime As String",proc:"(Declarations)",ln:2,cur:1}),c:"Първо напиши двата реда с <code>Dim</code> – <b>преди</b> всички <code>Sub</code>. Падащото меню горе вдясно показва <b>(Declarations)</b> – тази част е общата за модула."},
+ {t:"Макросите под тях",m:M.vbe({file:F,module:true,code:codeTop,proc:"Veren",ln:12}),c:"Под тях напиши макросите един след друг: <code>Start</code>, <code>Veren</code>, <code>Greshen</code>, <code>PokajiRezultat</code>, <code>Otnachalo</code>. Редакторът слага линия между тях."},
+ {t:"Провери за грешки",m:M.vbe({file:F,module:true,code:codeTop,menu:"Debug",hot:"mi:Compile VBAProject"}),c:"<b>Debug → Compile VBAProject</b> проверява целия код, без да го пуска. Ако не излезе съобщение – няма правописни грешки. Ако има – редът се маркира."},
+ {t:"Пример за грешка",m:M.vbe({file:F,module:true,code:"Sub PokajiRezultat()\n    If tochki >= 3 Then\n        MsgBox \"Много добре!\"\nEnd Sub",err:4,ovl:M.vbErr("Compile error:\n\nBlock If without End If",{hot:"mb:OK"})}),c:"Забравен <code>End If</code>. Натисни OK, добави реда и компилирай пак."},
+ {t:"Запиши",m:M.vbe({file:F,module:true,code:codeTop,menu:"File",hot:"mi:Save"}),c:"<kbd>Ctrl</kbd>+<kbd>S</kbd>. Навигационните макроси и <code>PokajiRezultat</code> работят само по време на слайдшоу, затова ги тестваш от бутоните, не с F5."}
+]);
+const names=["Start","Veren","Greshen","PokajiRezultat","Otnachalo"];
+M.walk("links",[
+ {t:"Бутон „Започни“ → Start",m:M.pp({file:F,dev:true,tab:"Вмъкване",thumbs:th,cur:0,slide:sStart+startBtn('shape-sel'),ovl:M.action({choice:3,macro:"Start",names,hot:"ok"})}),c:"Маркирай бутона на слайд 1 → <b>Вмъкване → Действие → Изпълнение на макрос → Start</b> → OK."},
+ {t:"Верният отговор → Veren",m:M.pp({file:F,dev:true,tab:"Вмъкване",thumbs:th,cur:1,slide:qS(['','shape-sel','','']),ovl:M.action({choice:3,picked:false,open:true,names,hot:"m:Veren"})}),c:"На слайд 2 маркирай <b>верния</b> отговор (443) → Действие → <b>Veren</b>."},
+ {t:"Грешните отговори → Greshen",m:M.pp({file:F,dev:true,tab:"Вмъкване",thumbs:th,cur:1,slide:qS(['shape-sel','','','']),ovl:M.action({choice:3,picked:false,open:true,names,hot:"m:Greshen"})}),c:"Всеки от трите <b>грешни</b> отговора → Действие → <b>Greshen</b>. После дублирай слайда с <kbd>Ctrl</kbd>+<kbd>D</kbd> (виж съвета под пътеводителя)."},
+ {t:"Слайд 7 – двата бутона",m:M.pp({file:F,dev:true,tab:"Вмъкване",thumbs:th,cur:6,slide:rS(),ovl:M.action({choice:3,picked:false,open:true,names,hot:"m:PokajiRezultat"})}),c:"„Покажи резултата“ → <b>PokajiRezultat</b>; „↺ Отначало“ → <b>Otnachalo</b>."},
+ {t:"Настройка на слайдшоуто",m:M.pp({file:F,dev:true,tab:"Слайдшоу",thumbs:th,cur:0,slide:sStart+startBtn(),hot:"btn:setup"}),c:"<b>Слайдшоу → Настройка на слайдшоуто</b> (Set Up Slide Show)."},
+ {t:"Разглеждане в павилион",m:M.pp({file:F,dev:true,tab:"Слайдшоу",thumbs:th,cur:0,slide:sStart+startBtn(),ovl:M.setup({choice:0,hot:"st:2"})}),c:"Избери <b>Разглеждане в павилион (на цял екран)</b> (Browsed at a kiosk)."},
+ {t:"OK",m:M.pp({file:F,dev:true,tab:"Слайдшоу",thumbs:th,cur:0,slide:sStart+startBtn(),ovl:M.setup({choice:2,hot:"ok"})}),c:"Отметката „Непрекъснато до натискане на Esc“ се слага сама. Натисни <b>OK</b>."},
+ {t:"Пробвай",m:M.show({slide:sStart+startBtn('hot')}),c:"<kbd>F5</kbd> и натисни „Започни“. Изпробвай верни и грешни отговори и накрая „Покажи резултата“."},
+ {t:"Резултатът",m:M.show({slide:rS('',"Мария: 4 от 5 точки"),ovl:M.msg({icon:"inf",text:"Много добре!",hot:"mb:OK"})}),c:"Текстът в полето се сменя и излиза оценка. 🎉 Изход от павилион: <kbd>Esc</kbd>."}
+]);
+
+M.init();
+}
+</script>
+<script>
+const QUIZ=[
+ ["Какво е променлива?", ["Бутон в слайда", "Място в паметта с име, в което се пази стойност", "Вид анимация", "Име на слайд"], 1, "Като кутийка с етикет."],
+ ["Как се декларира променлива за цяло число?", ["Dim tochki As Integer", "Set tochki = Integer", "Integer tochki", "tochki As Number"], 0, "Dim име As вид."],
+ ["Какъв вид е подходящ за името на играча?", ["Integer", "Boolean", "String", "Shape"], 2, "String пази текст."],
+ ["Какво прави tochki = tochki + 1?", ["Сравнява tochki с tochki + 1", "Увеличава стойността на tochki с 1", "Нулира tochki", "Показва tochki"], 1, "„=“ тук означава „сложи в“."],
+ ["Къде трябва да е Dim tochki, за да се натрупват точките от различни макроси?", ["Вътре във всеки Sub", "Най-горе в модула, преди всички Sub", "В слайда", "След End Sub на последния макрос"], 1, "Тогава всички макроси виждат една и съща променлива."],
+ ["С какво задължително завършва многоредово условие?", ["End Sub", "End If", "Next", "Else"], 1, "Иначе: Block If without End If."],
+ ["tochki = 4. Какво ще покаже кодът от урока (If =5 / ElseIf >=3 / Else)?", ["Отлично!", "Много добре!", "Прегледай урока и опитай пак.", "Нищо"], 1, "4 не е 5, но е >= 3."],
+ ["Как се дава име на фигура, за да я намери макросът?", ["Двоен клик върху фигурата", "Екран за селекция (Alt+F10) → двоен клик върху името", "Вмъкване → Действие", "Изглед → Образец"], 1, "Името трябва да съвпада точно с това в кода."],
+ ["Защо се използва режим „Разглеждане в павилион“?", ["За да е по-голям шрифтът", "Слайдовете се сменят само от бутоните и играчът не може да прескочи въпрос", "За да се записва видео", "За да работи без макроси"], 1, "Изход – с Esc."],
+ ["Защо Start прави tochki = 0?", ["За да изтрие кода", "За да не останат точките от предишния играч", "Задължително е във всеки макрос", "За да покаже 0 на екрана"], 1, "Променливите се пазят, докато презентацията е отворена."]];
+</script>
+<script src="ip-urok.js?v=20261127"></script>
+<script src="../totop.js?v=20261126" defer></script>
+</body>
+</html>

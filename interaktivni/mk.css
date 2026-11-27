@@ -1,0 +1,273 @@
+/* Допълнителен стил за уроците „Макроси в PowerPoint“ (урок 5–7).
+   Зарежда се след ip-urok.css. Макетите на прозорците се рисуват от mk.js. */
+.hero.ppt{background:#a4373a}
+.hero.ppt .tag{background:#ffd8c2}
+
+/* ---------- стъпков пътеводител (.walk) ---------- */
+.walk{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 10px 30px rgba(20,30,80,.08);margin-top:18px}
+.walk .wbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.walk .wbar h3{margin:0;font-size:19px}
+.walk .wnum{font-weight:900;color:#a4373a;font-size:14px;white-space:nowrap}
+.walk .wdots{display:flex;gap:6px;flex-wrap:wrap}
+.walk .wdots button{width:30px;height:30px;border-radius:50%;border:2px solid var(--line);background:var(--card);font:800 13px Nunito,sans-serif;color:var(--muted);cursor:pointer;padding:0}
+.walk .wdots button.on{background:#a4373a;border-color:#a4373a;color:#fff}
+.walk .wdots button.done{border-color:#a4373a;color:#a4373a}
+.walk .wscr{border-radius:12px;overflow:hidden;background:#e9ebf2}
+.walk .wcap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;margin:14px 2px 4px}
+.walk .wcap .n{width:34px;height:34px;border-radius:50%;background:#a4373a;color:#fff;font:900 17px/34px Nunito,sans-serif;text-align:center}
+.walk .wcap h4{margin:2px 0 4px;font:800 17px Nunito,sans-serif}
+.walk .wcap p{margin:0;max-width:none}
+.walk .wnav{display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:12px;flex-wrap:wrap}
+.walk .wnav .hint{font-size:13.5px;color:var(--muted)}
+.walk .btn{background:#a4373a}
+.walk .btn.ghost{background:transparent}
+
+/* ---------- сцена: макет с фиксирана ширина, който се мащабира ---------- */
+.stage{width:760px;margin:0 auto;font:13px/1.35 "Segoe UI",system-ui,sans-serif;color:#222;position:relative;user-select:none}
+.stage *{box-sizing:border-box}
+.hot{outline:3px solid #ff6a4d!important;outline-offset:2px;border-radius:4px;position:relative;z-index:3;animation:hot 1.3s ease-in-out infinite;cursor:pointer}
+@keyframes hot{50%{outline-color:#ffc23d;box-shadow:0 0 0 8px rgba(255,106,77,.25)}}
+@media(prefers-reduced-motion:reduce){.hot{animation:none}}
+.hot::after{content:"👆";position:absolute;right:-12px;bottom:-16px;font-size:20px;pointer-events:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+.nohand::after{display:none}
+.typing{border-right:2px solid #222;animation:caret 1s steps(1) infinite}
+@keyframes caret{50%{border-color:transparent}}
+
+/* PowerPoint прозорец */
+.pp{background:#f3f2f1;border:1px solid #c8c6c4;position:relative;min-height:440px}
+.pp .tb{background:#b7472a;color:#fff;display:flex;align-items:center;gap:10px;padding:5px 10px;font-size:12px}
+.pp .tb .lg{background:#fff;color:#b7472a;font-weight:900;border-radius:3px;width:18px;height:18px;text-align:center;line-height:18px;font-size:12px}
+.pp .tb .ttl{flex:1;text-align:center}
+.pp .tb .wb{letter-spacing:12px;opacity:.9}
+.pp .tabs{display:flex;background:#b7472a;padding:0 6px;gap:2px}
+.pp .tabs span{color:#fff;padding:5px 9px;font-size:12px;border-radius:3px 3px 0 0;white-space:nowrap}
+.pp .tabs span.on{background:#f3f2f1;color:#b7472a;font-weight:600}
+.pp .tabs span.new{background:#ffd34d;color:#3b2a00;font-weight:700}
+.pp .rib{display:flex;gap:0;background:#f3f2f1;border-bottom:1px solid #d2d0ce;min-height:86px;padding:4px 4px 0}
+.pp .grp{display:flex;flex-direction:column;border-right:1px solid #d2d0ce;padding:0 6px}
+.pp .grp .bs{display:flex;gap:2px;flex:1;align-items:flex-start}
+.pp .grp .gl{font-size:11px;color:#605e5c;text-align:center;padding:2px 0 3px}
+.pp .rb{display:flex;flex-direction:column;align-items:center;width:64px;padding:3px 2px;font-size:11px;text-align:center;line-height:1.15;border-radius:3px}
+.pp .rb i{font-style:normal;font-size:22px;line-height:28px}
+.pp .rbs{display:flex;flex-direction:column;gap:2px;font-size:11px;padding-top:2px}
+.pp .rbs span{padding:2px 6px;border-radius:3px;white-space:nowrap}
+.pp .body{display:grid;grid-template-columns:110px minmax(0,1fr);min-height:300px}
+.pp .thumbs{padding:8px 6px;display:flex;flex-direction:column;gap:8px;border-right:1px solid #d2d0ce}
+.pp .th{display:grid;grid-template-columns:14px 1fr;gap:4px;font-size:10px;color:#605e5c}
+.pp .th div{aspect-ratio:16/9;background:#fff;border:1px solid #c8c6c4;padding:4px;font-size:6px;color:#333;overflow:hidden}
+.pp .th.on div{border:2px solid #b7472a}
+.pp .cv{display:flex;align-items:center;justify-content:center;padding:18px}
+.sl{width:100%;max-width:520px;aspect-ratio:16/9;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.15);position:relative;overflow:hidden;font-family:"Segoe UI",system-ui,sans-serif}
+.sl .t1{position:absolute;left:8%;right:8%;top:30%;text-align:center;font-size:28px;font-weight:600}
+.sl .t2{position:absolute;left:8%;right:8%;top:56%;text-align:center;font-size:15px;color:#666}
+.sl .ph{position:absolute;border:1px dashed #a19f9d;color:#a19f9d;display:flex;align-items:center;justify-content:center}
+.sl .ab{position:absolute;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;border-radius:8px;font-size:14px}
+.pp .stb{display:flex;justify-content:space-between;background:#f3f2f1;border-top:1px solid #d2d0ce;padding:3px 10px;font-size:11px;color:#605e5c}
+.pp .warn{display:flex;align-items:center;gap:10px;background:#fff4ce;border-bottom:1px solid #e8d48a;padding:6px 10px;font-size:12px}
+.pp .warn b{color:#7a5b00}
+.pp .warn .wbtn{border:1px solid #8a8886;background:#fff;padding:3px 10px;border-radius:2px}
+.pp .ovl{position:absolute;inset:0;background:rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;z-index:5}
+.pp .ovl.top{align-items:flex-start;padding-top:60px}
+.pp .shape-sel{outline:1px solid #6b8ee8;box-shadow:0 0 0 4px rgba(107,142,232,.15)}
+.dropdown{position:absolute;background:#fff;border:1px solid #c8c6c4;box-shadow:0 6px 16px rgba(0,0,0,.18);padding:6px;z-index:6;font-size:12px}
+.dropdown .dh{font-weight:600;color:#605e5c;font-size:11px;padding:4px 4px 2px}
+.dropdown .dg{display:flex;flex-wrap:wrap;gap:3px;padding:2px 4px 6px;max-width:260px}
+.dropdown .dg span{width:22px;height:22px;border:1px solid #c8c6c4;display:flex;align-items:center;justify-content:center;font-size:12px;background:#fafafa}
+
+/* backstage (Файл) */
+.bks{display:grid;grid-template-columns:150px minmax(0,1fr);min-height:400px}
+.bks .side{background:#b7472a;color:#fff;padding:10px 0;display:flex;flex-direction:column}
+.bks .side span{padding:7px 18px;font-size:13px}
+.bks .side span.sep{border-top:1px solid rgba(255,255,255,.3);margin:6px 12px;padding:0}
+.bks .side .grow{flex:1}
+.bks .main{background:#fff;padding:22px 26px}
+.bks .main h2{font:300 28px "Segoe UI",sans-serif;margin:0 0 16px;color:#222}
+
+/* диалогов прозорец */
+.dlg{background:#fff;border:1px solid #8a8886;box-shadow:0 10px 30px rgba(0,0,0,.3);font-size:12px;min-width:300px}
+.dlg .dt{display:flex;justify-content:space-between;padding:6px 10px;border-bottom:1px solid #e1dfdd;font-size:12px}
+.dlg .dt b{font-weight:400}
+.dlg .db{padding:12px 14px}
+.dlg .df{display:flex;justify-content:flex-end;gap:8px;padding:10px 14px;border-top:1px solid #edebe9;background:#faf9f8}
+.dlg .bt{border:1px solid #8a8886;background:#fff;padding:4px 16px;min-width:72px;text-align:center;border-radius:2px}
+.dlg .bt.pr{background:#b7472a;color:#fff;border-color:#b7472a}
+.dlg .two{display:grid;grid-template-columns:170px minmax(0,1fr);min-height:300px}
+.dlg .lst{border-right:1px solid #e1dfdd;padding:6px 0;background:#faf9f8}
+.dlg .lst span{display:block;padding:5px 12px;font-size:12px}
+.dlg .lst span.on{background:#e1dfdd;font-weight:600;border-left:3px solid #b7472a;padding-left:9px}
+.dlg .rad{display:flex;gap:8px;align-items:flex-start;padding:5px 4px;margin:2px 0}
+.dlg .rad i{width:13px;height:13px;border-radius:50%;border:1px solid #605e5c;flex:none;margin-top:2px;background:#fff}
+.dlg .rad.on i{border:4px solid #b7472a}
+.dlg .cb{display:flex;gap:7px;align-items:center;padding:3px 4px}
+.dlg .cb i{width:13px;height:13px;border:1px solid #605e5c;flex:none;background:#fff;font-style:normal;font-size:10px;line-height:11px;text-align:center}
+.dlg .cb.on i{background:#b7472a;border-color:#b7472a;color:#fff}
+.dlg .cb.on i::before{content:"✓"}
+.dlg .fld{border:1px solid #8a8886;padding:4px 8px;background:#fff;min-height:24px}
+.dlg .sel{border:1px solid #8a8886;padding:4px 8px;background:#fff;display:flex;justify-content:space-between}
+.dlg .sel::after{content:"▾";color:#605e5c}
+.dlg .tree{border:1px solid #c8c6c4;padding:4px;height:220px;overflow:hidden;background:#fff}
+.dlg .tree div{padding:1px 4px}
+.dlg .gtabs{display:flex;gap:2px;border-bottom:1px solid #c8c6c4;margin-bottom:10px}
+.dlg .gtabs span{padding:4px 10px;border:1px solid #c8c6c4;border-bottom:0;background:#f3f2f1}
+.dlg .gtabs span.on{background:#fff;margin-bottom:-1px}
+.dlg .mlist{border:1px solid #8a8886;height:110px;background:#fff;padding:2px}
+.dlg .mlist div{padding:2px 6px}
+.dlg .mlist div.on{background:#cce4f7}
+.dlg .vbtn{display:flex;flex-direction:column;gap:6px}
+
+/* MsgBox / InputBox */
+.msg{background:#fff;border:1px solid #8a8886;box-shadow:0 10px 30px rgba(0,0,0,.35);min-width:260px;max-width:380px;font:13px "Segoe UI",system-ui,sans-serif;color:#222}
+.msg .dt{display:flex;justify-content:space-between;padding:6px 10px;font-size:12px}
+.msg .mb{display:flex;gap:14px;align-items:flex-start;padding:16px 18px 18px}
+.msg .ic{width:32px;height:32px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font:900 18px Nunito,sans-serif}
+.msg .ic.inf{background:#2b6cd4}.msg .ic.exc{background:#f2b600;color:#222;border-radius:4px;clip-path:polygon(50% 0,100% 100%,0 100%);padding-top:10px}.msg .ic.que{background:#2b6cd4}.msg .ic.cri{background:#d13438}
+.msg .mf{display:flex;justify-content:flex-end;gap:8px;padding:10px 14px;background:#f3f2f1}
+.msg .bt{border:1px solid #8a8886;background:#fff;padding:4px 18px;min-width:76px;text-align:center;border-radius:2px}
+.msg .bt.pr{border:2px solid #0067c0}
+.msg .fld{border:1px solid #8a8886;padding:4px 8px;margin:0 18px 6px;min-height:26px}
+
+/* VBA редактор */
+.vbe{background:#f0f0f0;border:1px solid #a0a0a0;min-height:440px;position:relative;font:12px "Segoe UI",system-ui,sans-serif}
+.vbe .tb{background:#fff;display:flex;align-items:center;gap:8px;padding:5px 10px;border-bottom:1px solid #ddd;font-size:12px}
+.vbe .tb .ttl{flex:1}
+.vbe .mnu{display:flex;gap:0;padding:2px 4px;background:#f5f5f5;border-bottom:1px solid #ddd;position:relative}
+.vbe .mnu span{padding:3px 8px}
+.vbe .mnu span.on{background:#cce4f7}
+.vbe .tool{display:flex;gap:4px;padding:3px 6px;border-bottom:1px solid #ddd;background:#f5f5f5;align-items:center}
+.vbe .tool span{min-width:24px;height:22px;display:flex;align-items:center;justify-content:center;font-size:13px;border-radius:2px;padding:0 4px}
+.vbe .tool .sp{width:1px;min-width:1px;background:#ccc;padding:0;margin:0 3px}
+.vbe .run{color:#1a8f3a}.vbe .brk{color:#2b6cd4}.vbe .rst{color:#2b6cd4}
+.vbe .wk{display:grid;grid-template-columns:190px minmax(0,1fr);min-height:370px}
+.vbe .prj{border-right:1px solid #bbb;background:#fff;display:flex;flex-direction:column}
+.vbe .ph{background:#dfe7f3;padding:3px 6px;font-size:11px;border-bottom:1px solid #bbb}
+.vbe .pt{padding:6px;font-size:11.5px;line-height:1.7}
+.vbe .pt div{white-space:nowrap}
+.vbe .pt .on{background:#cce4f7}
+.vbe .props{border-top:1px solid #bbb;flex:1;font-size:11px}
+.vbe .props table{width:100%;border-collapse:collapse;background:#fff}
+.vbe .props td{padding:2px 6px;border:1px solid #e5e5e5;color:#222;background:#fff}
+.vbe .cw{background:#fff;display:flex;flex-direction:column;margin:6px;border:1px solid #999}
+.vbe .cw .ch{display:flex;justify-content:space-between;background:#dfe7f3;padding:3px 8px;font-size:11px}
+.vbe .cw .cc{display:flex;gap:6px;padding:4px 6px;border-bottom:1px solid #ddd}
+.vbe .cw .cc span{flex:1;border:1px solid #aaa;padding:1px 6px;font-size:11px;background:#fff}
+.vbe .cw .cc span::after{content:" ▾";float:right;color:#666}
+.vbe .code{font:13px/1.55 Consolas,"Courier New",monospace;padding:8px 10px;flex:1;white-space:pre;color:#000;min-height:250px;overflow:hidden}
+.vbe .code .cl{display:block;padding-left:16px;position:relative;min-height:1.55em}
+.vbe .code .cl.cur{background:#ffff7a}
+.vbe .code .cl.cur::before{content:"➡";position:absolute;left:-2px;color:#c9a500;font-size:12px}
+.vbe .code .cl.err{background:#ffd7d7}
+.vbe .code .cl.bp{background:#9b2b2b;color:#fff}
+.vbe .code .cl.bp::before{content:"●";position:absolute;left:0;color:#9b2b2b;font-size:12px}
+.vbe .code .cl.bp .k,.vbe .code .cl.bp .s,.vbe .code .cl.bp .c{color:#fff}
+.vbe .dd{position:absolute;background:#f9f9f9;border:1px solid #999;box-shadow:2px 4px 10px rgba(0,0,0,.2);z-index:6;padding:3px 0;min-width:170px}
+.vbe .dd div{padding:3px 22px;display:flex;justify-content:space-between;gap:20px}
+.vbe .dd div.on{background:#cce4f7}
+.vbe .dd hr{border:0;border-top:1px solid #ddd;margin:3px 0}
+.vbe .imm{margin:0 6px 6px;border:1px solid #999;background:#fff}
+.vbe .imm .ch{background:#dfe7f3;padding:3px 8px;font-size:11px}
+.vbe .imm pre{margin:0;padding:6px 10px;font:12px Consolas,monospace;min-height:44px}
+.vbe .ovl{position:absolute;inset:0;background:rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;z-index:5}
+.vbe .err{font-family:"Segoe UI",sans-serif}
+
+/* слайдшоу */
+.show{background:#000;min-height:440px;display:flex;align-items:center;justify-content:center;position:relative;padding:20px}
+.show .sl{max-width:680px}
+.show .ovl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:5}
+
+/* оцветяване на VBA код (като в редактора) */
+.k{color:#00008b}.s{color:#a31515}.c{color:#008000}
+
+/* ---------- блок с код и обяснения ---------- */
+.cb-wrap{margin:18px 0}
+.vba-box{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 6px 18px rgba(20,30,80,.07)}
+.vba-box .hd{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#dfe7f3;color:#1b2240;padding:6px 8px 6px 14px;font:700 13px "Nunito Sans",sans-serif}
+.vba-box .hd button{font:700 13px "Nunito Sans",sans-serif;border:1px solid #9fb0d0;background:#fff;color:#1b2240;border-radius:8px;padding:5px 12px;min-height:32px;cursor:pointer}
+.vba-box .lines{font:14.5px/1.6 Consolas,"Courier New",monospace;overflow-x:auto;padding:8px 0;color:#000}
+.vba-box .ln{display:grid;grid-template-columns:3.2em max-content;white-space:pre;cursor:default;padding-right:14px}
+.vba-box .ln b{color:#8a93b3;font-weight:400;text-align:right;padding-right:14px;user-select:none}
+.vba-box.has-notes .ln{cursor:pointer}
+.vba-box .ln.on{background:#fff3b0}
+.vba-box .ln.on b{color:#7a5b00;font-weight:700}
+ol.lx{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px;counter-reset:lx}
+ol.lx li{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--line);border-radius:10px;padding:9px 12px;cursor:pointer;margin:0}
+ol.lx li::before{content:"ред " attr(data-l);display:inline-block;font:800 12px Nunito,sans-serif;color:#a4373a;background:#fde9e2;border-radius:99px;padding:1px 9px;margin-right:8px}
+ol.lx li.on{border-left-color:#ffc23d;background:#fffbea}
+ol.lx code,p code,li code,td code{font:13.5px Consolas,monospace;background:var(--card);border:1px solid var(--line);border-radius:5px;padding:0 5px}
+
+/* малки интерактивни упражнения */
+.lab{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px}
+.lab label{font-weight:700;display:block;margin:10px 0 4px}
+.lab select,.lab input[type=text],.lab input[type=number]{font:16px "Nunito Sans",sans-serif;padding:9px 12px;border-radius:10px;border:2px solid var(--line);background:var(--paper);color:var(--ink);min-height:44px;width:100%}
+.lab .out{margin-top:12px;padding:12px 14px;border-radius:12px;font-weight:700}
+.lab .out.ok{background:#dff7e8;color:#0b4d27}.lab .out.bad{background:#ffe3dc;color:#7a1d08}
+.msgarea{background:#e7eaf3;border-radius:14px;min-height:190px;display:flex;align-items:center;justify-content:center;padding:18px;margin-top:12px}
+.levels{display:grid;gap:8px}
+.levels button{text-align:left;font:600 15px "Nunito Sans",sans-serif;padding:11px 14px;border-radius:12px;border:2px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;min-height:44px}
+.levels button.on{border-color:#a4373a;background:#fdf1ec}
+.levels button small{display:block;font-weight:400;color:var(--muted)}
+.bug{margin-bottom:22px}
+.bug .vba-box .ln{cursor:pointer}
+.bug .vba-box .ln:hover{background:#eef2ff}
+.bug .vba-box .ln.good{background:#dff7e8}
+.bug .vba-box .ln.badl{background:#ffe3dc}
+.bug .res{margin-top:8px;font-weight:700;min-height:1.6em}
+
+/* йерархия на обектите */
+.om{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.om button{font:800 14px Consolas,monospace;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:8px 12px;min-height:44px;cursor:pointer}
+.om button.on{background:#a4373a;border-color:#a4373a;color:#fff}
+.om i{font-style:normal;color:var(--muted);font-weight:900}
+
+/* симулатори */
+.sim{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start}
+@media(max-width:900px){.sim{grid-template-columns:minmax(0,1fr)}}
+.watch{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.watch div{background:var(--paper);border:2px solid var(--line);border-radius:12px;padding:6px 12px;font:700 14px Consolas,monospace}
+.watch div b{color:#a4373a}
+.watch div.flash{animation:flash .6s}
+@keyframes flash{30%{background:#fff3b0;border-color:#ffc23d}}
+.screen{background:#111;border-radius:14px;padding:14px;display:flex;align-items:center;justify-content:center;position:relative;min-height:250px}
+.screen .sl{max-width:none}
+.screen .ovl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25);border-radius:14px;padding:10px}
+.qbtn{position:absolute;border:0;border-radius:10px;color:#fff;font:700 clamp(11px,1.6vw,15px) "Segoe UI",sans-serif;cursor:pointer;padding:4px 8px}
+.qbtn:hover{filter:brightness(1.1)}
+.qbtn:focus-visible{outline:3px solid #ffc23d}
+.minis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mini-sl{aspect-ratio:16/9;background:#fff;border:2px solid var(--line);border-radius:8px;position:relative;overflow:hidden;transition:background .4s,border-color .3s;padding:8% 8% 4%}
+.mini-sl .mt{font-weight:800;font-size:clamp(10px,1.6vw,15px);line-height:1.15;transition:font-family .2s,color .3s}
+.mini-sl .mb{font-size:clamp(8px,1.1vw,11px);margin-top:4px;color:#555;transition:color .3s}
+.mini-sl .ft{position:absolute;left:6%;bottom:5%;font-size:clamp(7px,1vw,10px);color:#333;background:#fff3b0;padding:0 4px;border-radius:3px}
+.mini-sl .no{position:absolute;right:5%;top:4%;font-size:10px;color:#999}
+.mini-sl.cur{border-color:#ffc23d;box-shadow:0 0 0 4px rgba(255,194,61,.35)}
+.mini-sl.gone{opacity:.15;transform:scale(.92);transition:opacity .4s,transform .4s}
+.flowx{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:14px;align-items:stretch}
+.flowx .card{position:relative}
+.flowx .card .sn{font:900 12px Nunito,sans-serif;color:#a4373a}
+.box{display:inline-flex;flex-direction:column;align-items:center;margin:8px}
+.box .bx{width:110px;height:76px;border:3px solid #13246e;border-top-width:10px;border-radius:6px;background:#fff;display:flex;align-items:center;justify-content:center;font:900 30px Nunito,sans-serif;color:#13246e;transition:transform .3s}
+.box .bx.pop{transform:scale(1.15)}
+.box span{font:700 14px Consolas,monospace;margin-top:4px}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:15px}
+.pp .th div *{font-size:4.5px!important;line-height:1.2}
+.pp .th div .ab{border-radius:2px}
+.pp .th div .t1,.pp .th div .t2{left:4%;right:4%}
+.pp .pane{border-left:1px solid #d2d0ce;background:#fff;font-size:12px;padding:0 0 8px}
+.pp .pnh{display:flex;justify-content:space-between;padding:8px 10px;font-weight:600;font-size:13px}
+.pp .pnb{display:flex;gap:6px;padding:0 10px 8px;font-size:11px;color:#605e5c;border-bottom:1px solid #edebe9;margin-bottom:4px}
+.pp .pnb span{border:1px solid #c8c6c4;padding:1px 6px}
+.pp .pni{display:flex;justify-content:space-between;padding:4px 10px;margin:1px 4px}
+.pp .pni.on{background:#e1dfdd}
+.vtip{position:absolute;background:#ffffe1;border:1px solid #777;padding:2px 6px;font:12px "Segoe UI",sans-serif;z-index:6;box-shadow:1px 2px 4px rgba(0,0,0,.2);white-space:nowrap}
+/* визуализация на обектния модел */
+.omv{border:3px solid var(--line);border-radius:14px;padding:12px;background:var(--paper);transition:border-color .25s,background .25s;position:relative}
+.omv>.lb{position:absolute;top:-11px;left:12px;background:var(--paper);padding:0 6px;font:800 12px Consolas,monospace;color:var(--muted)}
+.omv .ss{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:6px}
+.omv .s{border:2px solid var(--line);border-radius:10px;padding:14px 8px 8px;position:relative;aspect-ratio:16/10;background:#fff}
+.omv .s>.lb{position:absolute;top:-10px;left:8px;background:#fff;padding:0 4px;font:700 11px Consolas,monospace;color:var(--muted)}
+.omv .sh{border:2px dashed #c8cfe8;border-radius:6px;padding:3px 6px;margin-bottom:6px;font-size:12px;position:relative}
+.omv .tx{border-radius:4px;padding:0 3px}
+.omv .lit{border-color:#a4373a!important;background:#fdf1ec!important}
+.omv .tx.lit{background:#ffd8c2!important;outline:2px solid #a4373a}
+.vba-box .ln.good{background:#dff7e8}.vba-box .ln.no{background:#eceef4;color:#777}.vba-box .ln.dim{opacity:.35}
+.pp .th div{position:relative}.pp .th div *{padding:0!important;border-width:1px!important}
+[hidden]{display:none!important}
